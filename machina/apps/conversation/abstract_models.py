@@ -46,16 +46,16 @@ class AbstractTopic(DatedModel):
     views_count = models.PositiveIntegerField(verbose_name=_('Views count'), blank=True, default=0)
 
     # A topic references the last post associated to it
-    last_post = models.ForeignKey('conversation.Post', verbose_name=_('Last post'), blank=True, null=True)
+    last_post = models.ForeignKey('conversation.Post', related_name='last_topic_post', verbose_name=_('Last post'), blank=True, null=True)
 
     # ... and the first post associated to it
-    first_post = models.ForeignKey('conversation.Post', verbose_name=_('First post'))
+    first_post = models.ForeignKey('conversation.Post', related_name='first_topic_post', verbose_name=_('First post'))
 
     # Many users can subscribe to this post
     subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True, null=True)
 
     class Meta:
-        asbtract = True
+        abstract = True
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
         app_label = 'conversation'
@@ -66,7 +66,7 @@ class AbstractPost(DatedModel):
     Represents a forum post. A forum post is always linked to a topic.
     """
     topic = models.ForeignKey('conversation.Topic', verbose_name=_('Topic'), related_name='posts')
-    poster = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Poster'))
+    poster = models.ForeignKey(AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'))
 
     # Content
     content = MarkupTextField(verbose_name=_('Content'))
@@ -75,6 +75,7 @@ class AbstractPost(DatedModel):
     updated_by = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Lastly updated by'), blank=True, null=True)
 
     class Meta:
+        abstract = True
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
         app_label = 'conversation'

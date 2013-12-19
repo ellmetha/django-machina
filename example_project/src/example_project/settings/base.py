@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
 import gettext
-from machina import get_core_apps
+from machina import get_vanilla_apps
 import os
 PROJECT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../..')
 
@@ -130,7 +130,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'example_project',
-] + get_core_apps()
+] + get_vanilla_apps()
 
 
 # Django pipeline setings

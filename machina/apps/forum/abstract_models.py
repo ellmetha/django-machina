@@ -12,7 +12,6 @@ from mptt.models import TreeForeignKey
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
-from machina.core.compat import AUTH_USER_MODEL
 from machina.models import ActiveModel
 from machina.models.fields import ExtendedImageField
 
@@ -50,7 +49,6 @@ class AbstractForum(MPTTModel, ActiveModel):
     posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), blank=True, default=0)
     topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), blank=True, default=0)
     real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'), blank=True, default=0)
-    last_post = models.ForeignKey('conversation.Post', verbose_name=_('Last post'), blank=True, null=True)
 
     # Display options
     display_on_index = models.BooleanField(verbose_name=_('Display on index'))

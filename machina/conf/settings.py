@@ -8,7 +8,7 @@ from django.conf import settings
 
 
 # General
-MACHINA_MARKUP_LANGUAGE = getattr(settings, 'MACHINA_MARKUP_LANGUAGE', ('precise_bbcode.utils.bbcode.render_bbcodes'), {})
+MACHINA_MARKUP_LANGUAGE = getattr(settings, 'MACHINA_MARKUP_LANGUAGE', (('precise_bbcode.utils.bbcode.render_bbcodes'), {}))
 
 
 # Forum

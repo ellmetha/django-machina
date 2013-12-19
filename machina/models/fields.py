@@ -24,7 +24,7 @@ from machina.conf import settings as machina_settings
 _rendered_field_name = lambda name: '_{}_rendered'.format(name)
 
 
-def _get_render_function(dotted_path, **kwargs):
+def _get_render_function(dotted_path, kwargs):
     module, func = dotted_path.rsplit('.', 1)
     func = getattr(__import__(module, {}, {}, [func]), func)
     return curry(func, **kwargs)

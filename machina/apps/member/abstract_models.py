@@ -26,7 +26,7 @@ class AbstractProfile(models.Model):
                                 **machina_settings.DEFAULT_AVATAR_SETTINGS)
 
     # The user's signature
-    signature = MarkupTextField(verbose_name=_('Signature'), max_length=machina_settings.SIGNATURE_MAX_LENGTH, blank=True, null=True)
+    signature = MarkupTextField(verbose_name=_('Signature'), max_length=machina_settings.PROFILE_SIGNATURE_MAX_LENGTH, blank=True, null=True)
 
     # The user's rank
     rank = models.ForeignKey('member.Rank', verbose_name=_('Rank'), blank=True, null=True)
@@ -48,14 +48,14 @@ class AbstractRank(models.Model):
     """
     Represents a rank that can be associated with any forum profile.
     """
-    title = models.ChareField(max_length=100, verbose_name=_('Title'))
+    title = models.CharField(max_length=100, verbose_name=_('Title'))
     image = models.ImageField(verbose_name=_('Rank image'), null=True, blank=True, upload_to=machina_settings.PROFILE_RANK_IMAGE_UPLOAD_TO)
 
     # Number of posts necessary to reach the rank
     min_posts = models.PositiveIntegerField(verbose_name=_('Minimum post count required'), blank=True, null=True)
 
     # A rank can be special ; if so only administrators will be able to add users to this rank manually
-    is_special = models.BooleanField(verbose_name=_('Special rank'), default=False, blank=True, null=True)
+    is_special = models.NullBooleanField(verbose_name=_('Special rank'), default=False, blank=True, null=True)
 
     class Meta:
         abstract = True
