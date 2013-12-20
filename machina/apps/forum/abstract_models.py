@@ -33,6 +33,7 @@ class AbstractForum(MPTTModel, ActiveModel):
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     description = models.TextField(verbose_name=_('Description'), null=True, blank=True)
+    # TODO: This should be a MarkupTextField
 
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(verbose_name=_('Forum image'), null=True, blank=True,

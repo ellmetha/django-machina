@@ -3,10 +3,17 @@
 # Standard library imports
 # Third party imports
 from django.contrib import admin
+from django.db.models import get_model
 from mptt.admin import MPTTModelAdmin
 
 # Local application / specific library imports
-from machina.apps.forum.models import Forum
 
 
-admin.site.register(Forum, MPTTModelAdmin)
+Forum = get_model('forum', 'Forum')
+
+
+class ForumAdmin(MPTTModelAdmin):
+    list_display = ('name', 'type', 'topics_count', 'posts_count')
+
+
+admin.site.register(Forum, ForumAdmin)
