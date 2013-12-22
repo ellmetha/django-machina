@@ -47,9 +47,10 @@ class AbstractForum(MPTTModel, ActiveModel):
     type = models.PositiveSmallIntegerField(choices=FORUM_TYPES, verbose_name=_('Forum type'), db_index=True)
 
     # Tracking data
-    posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), blank=True, default=0)
-    topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), blank=True, default=0)
-    real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'), blank=True, default=0)
+    posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
+    topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
+    real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'),
+                                                    editable=False, blank=True, default=0)
 
     # Display options
     display_on_index = models.BooleanField(verbose_name=_('Display on index'))
@@ -57,6 +58,7 @@ class AbstractForum(MPTTModel, ActiveModel):
 
     class Meta:
         abstract = True
+        ordering = ['tree_id', 'lft']
         verbose_name = _('Forum')
         verbose_name_plural = _('Forums')
         app_label = 'forum'
