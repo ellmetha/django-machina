@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
@@ -14,6 +15,7 @@ from mptt.models import TreeForeignKey
 from machina.conf import settings as machina_settings
 from machina.models import ActiveModel
 from machina.models.fields import ExtendedImageField
+from machina.models.fields import MarkupTextField
 
 
 FORUM_TYPES = Choices(
@@ -32,8 +34,7 @@ class AbstractForum(MPTTModel, ActiveModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=_('Parent'))
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
-    description = models.TextField(verbose_name=_('Description'), null=True, blank=True)
-    # TODO: This should be a MarkupTextField
+    description = MarkupTextField(verbose_name=_('Description'), null=True, blank=True)
 
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(verbose_name=_('Forum image'), null=True, blank=True,
@@ -42,6 +43,9 @@ class AbstractForum(MPTTModel, ActiveModel):
 
     # Forums can be simple links (eg. wiki, documentation, etc)
     link = models.URLField(verbose_name=_('Forum link'), null=True, blank=True)
+    link_redirects = models.BooleanField(verbose_name=_('Track link redirects count'),
+                                         help_text=_('Records the number of times a forum link was clicked'),
+                                         default=False)
 
     # Category, Default forum or Link ; that's what a forum can be
     type = models.PositiveSmallIntegerField(choices=FORUM_TYPES, verbose_name=_('Forum type'), db_index=True)
@@ -51,6 +55,8 @@ class AbstractForum(MPTTModel, ActiveModel):
     topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
     real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'),
                                                     editable=False, blank=True, default=0)
+    link_redirects_count = models.PositiveIntegerField(verbose_name=_('Track link redirects count'),
+                                                       editable=False, blank=True, default=0)
 
     # Display options
     display_on_index = models.BooleanField(verbose_name=_('Display on index'))
@@ -73,3 +79,10 @@ class AbstractForum(MPTTModel, ActiveModel):
         a forum from their parents.
         """
         return self.level * 2
+
+    def clean(self):
+        if self.parent:
+            if self.type == self.parent.type == FORUM_TYPES.forum_link:
+                raise ValidationError(_('A link forum can not have another link forum as parent'))
+
+        super(AbstractForum, self).clean()
