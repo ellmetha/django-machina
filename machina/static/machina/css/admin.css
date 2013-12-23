@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'machina-admin-icons';
+  src: url('../fonts/machina-admin-icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "machina-admin-icons";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+}
+.icon-trash-circled:before {
+  content: '\e802';
+}
+.icon-down-circle:before {
+  content: '\e800';
+}
+.icon-up-circle:before {
+  content: '\e801';
+}
+.danger {
+  color: #b82010;
+}
+a.danger {
+  color: #b82010;
+}
+a.danger:hover {
+  color: #9d261d;
+}
+#forum-table-dnd .quick-actions-cell {
+  width: 5%;
+  text-align: center;
+}
+#forum-table-dnd .quick-actions-cell .disabled {
+  color: #eeeeee;
+}

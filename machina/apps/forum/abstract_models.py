@@ -65,3 +65,11 @@ class AbstractForum(MPTTModel, ActiveModel):
 
     def __unicode__(self):
         return '{}'.format(self.name)
+
+    @property
+    def margin_level(self):
+        """
+        Used in templates or menus to create an easy-to-see left margin to contrast
+        a forum from their parents.
+        """
+        return self.level * 2
