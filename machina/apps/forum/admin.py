@@ -21,9 +21,14 @@ class ForumAdmin(admin.ModelAdmin):
         [None, {
             'fields': ('type', 'parent', 'name', 'description', 'image',)
         }],
-        [_('General'), {
-            'fields': ('display_on_index', 'display_sub_forum_list',)
-        }]
+        [_('Forum settings'), {
+            'fields': ('display_on_index', 'display_sub_forum_list',),
+            'classes': ('collapse',)
+        }],
+        [_('Link forum settings'), {
+            'fields': ('link', 'link_redirects',),
+            'classes': ('collapse',)
+        }],
     )
     list_display = ('name', 'type', 'topics_count', 'posts_count',)
     search_fields = ('name',)
@@ -58,10 +63,6 @@ class ForumAdmin(admin.ModelAdmin):
             pass
         self.message_user(request, _("{} successfully moved").format(forum.name))
         return HttpResponseRedirect(reverse('admin:forum_forum_changelist'))
-
-
-# class ForumAdmin(MPTTModelAdmin):
-#     list_display = ('name', 'type', 'topics_count', 'posts_count')
 
 
 admin.site.register(Forum, ForumAdmin)
