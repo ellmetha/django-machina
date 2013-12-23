@@ -66,7 +66,7 @@ class MarkupText(SafeData):
 
     # Allows display via templates to work without safe filter
     def __unicode__(self):
-        return mark_safe(self.rendered)
+        return self.raw
 
     # Return the length of the rendered string so that bool tests work as expected
     def __len__(self):
@@ -94,7 +94,7 @@ class MarkupTextDescriptor(object):
         return MarkupText(instance, self.field.name, self.rendered_field_name)
 
     def __set__(self, instance, value):
-        if isinstance(value, MarkupTextDescriptor):
+        if isinstance(value, MarkupText):
             instance.__dict__[self.field.name] = value.raw
             setattr(instance, self.rendered_field_name, value.rendered)
         else:
