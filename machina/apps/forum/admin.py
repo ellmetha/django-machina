@@ -61,7 +61,7 @@ class ForumAdmin(admin.ModelAdmin):
             forum.move_to(target, position)
         except (InvalidMove, AssertionError):
             pass
-        self.message_user(request, _("{} successfully moved").format(forum.name))
+        self.message_user(request, _("'{}' forum successfully moved").format(forum.name))
         return HttpResponseRedirect(reverse('admin:forum_forum_changelist'))
 
 
