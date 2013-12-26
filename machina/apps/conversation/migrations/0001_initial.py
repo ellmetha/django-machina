@@ -18,9 +18,8 @@ class Migration(SchemaMigration):
             ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
             ('status', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+            ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
             ('views_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('last_post', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name=u'last_topic_post', null=True, to=orm['conversation.Post'])),
-            ('first_post', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'first_topic_post', to=orm['conversation.Post'])),
         ))
         db.send_create_signal(u'conversation', ['Topic'])
 
@@ -41,7 +40,9 @@ class Migration(SchemaMigration):
             ('topic', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'posts', to=orm['conversation.Topic'])),
             ('poster', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'posts', to=orm['auth.User'])),
             ('content', self.gf('machina.models.fields.MarkupTextField')(no_rendered_field=True)),
+            ('update_reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('updated_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('updates_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
             (u'_content_rendered', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
         db.send_create_signal(u'conversation', ['Post'])
@@ -96,24 +97,25 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'conversation.post': {
-            'Meta': {'object_name': 'Post'},
+            'Meta': {'ordering': "[u'created']", 'object_name': 'Post'},
             u'_content_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'content': ('machina.models.fields.MarkupTextField', [], {u'no_rendered_field': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'poster': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'posts'", 'to': u"orm['auth.User']"}),
             'topic': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'posts'", 'to': u"orm['conversation.Topic']"}),
+            'update_reason': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'})
+            'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'updates_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'})
         },
         u'conversation.topic': {
-            'Meta': {'object_name': 'Topic'},
+            'Meta': {'ordering': "[u'-updated']", 'object_name': 'Topic'},
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'first_post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'first_topic_post'", 'to': u"orm['conversation.Post']"}),
             'forum': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'topics'", 'to': u"orm['forum.Forum']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_post': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "u'last_topic_post'", 'null': 'True', 'to': u"orm['conversation.Post']"}),
             'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'status': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'subscriptions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
@@ -122,17 +124,19 @@ class Migration(SchemaMigration):
             'views_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'})
         },
         u'forum.forum': {
-            'Meta': {'object_name': 'Forum'},
-            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'Meta': {'ordering': "[u'tree_id', u'lft']", 'object_name': 'Forum'},
+            u'_description_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'description': ('machina.models.fields.MarkupTextField', [], {'blank': 'True', 'null': 'True', u'no_rendered_field': 'True'}),
             'display_on_index': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'display_sub_forum_list': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('machina.models.fields.ExtendedImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'db_index': 'True'}),
-            'last_post': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['conversation.Post']", 'null': 'True', 'blank': 'True'}),
             u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'link_redirects': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'link_redirects_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "u'children'", 'null': 'True', 'to': u"orm['forum.Forum']"}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),

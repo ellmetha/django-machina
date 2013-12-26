@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.conf import settings
 
@@ -20,6 +22,11 @@ DEFAULT_FORUM_IMAGE_SETTINGS = {
     'width': FORUM_IMAGE_WIDTH,
     'height': FORUM_IMAGE_HEIGHT
 }
+
+
+# Conversation
+TOPIC_ANSWER_SUBJECT_PREFIX = 'Re: '
+
 
 # Member
 PROFILE_AVATAR_UPLOAD_TO = getattr(settings, 'PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')
