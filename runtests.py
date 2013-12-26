@@ -12,6 +12,9 @@ from django.conf import global_settings as default_settings
 from django.conf import settings
 import django
 
+# Local application / specific library imports
+from machina import get_vanilla_apps
+
 
 # Give feedback on used versions
 sys.stderr.write('Using Python version {0} from {1}\n'.format(sys.version[:5], sys.executable))
@@ -40,15 +43,13 @@ settings.configure(
     TEMPLATE_CONTEXT_PROCESSORS = default_settings.TEMPLATE_CONTEXT_PROCESSORS + (
         'django.core.context_processors.request',
     ),
-    INSTALLED_APPS = (
+    INSTALLED_APPS = [
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.messages',
         'django.contrib.sites',
         'django.contrib.admin',
-
-        # TODO
-    ),
+    ] + get_vanilla_apps(),
     SITE_ID = 3,
 )
 

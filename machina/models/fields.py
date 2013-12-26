@@ -12,7 +12,6 @@ from django.db.models import signals
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.functional import curry
-from django.utils.safestring import mark_safe
 from django.utils.safestring import SafeData
 from django.utils.six import StringIO
 from django.utils.translation import ugettext_lazy as _
@@ -70,7 +69,7 @@ class MarkupText(SafeData):
 
     # Return the length of the rendered string so that bool tests work as expected
     def __len__(self):
-        return len(self.rendered)
+        return len(self.raw)
 
 
 class MarkupTextDescriptor(object):
@@ -116,7 +115,7 @@ class MarkupTextField(models.TextField):
 
     def contribute_to_class(self, cls, name):
         if self.add_rendered_field and not cls._meta.abstract:
-            rendered_field = models.TextField(editable=False, blank=True)
+            rendered_field = models.TextField(editable=False, blank=True, null=True)
             cls.add_to_class(_rendered_field_name(name), rendered_field)
 
         # The data will be rendered before each save
@@ -141,7 +140,11 @@ class MarkupTextField(models.TextField):
 
     def render_data(self, signal, sender, instance=None, **kwargs):
         value = getattr(instance, self.attname)
-        rendered = render_func(value.raw)
+
+        rendered = None
+        if hasattr(value, 'raw'):
+            rendered = render_func(value.raw)
+
         setattr(instance, _rendered_field_name(self.attname), rendered)
 
 
@@ -261,5 +264,5 @@ try:
             },
         ),
     ], ['^machina\.models\.fields\.ExtendedImageField'])
-except ImportError:
+except ImportError:  # pragma: no cover
     pass
