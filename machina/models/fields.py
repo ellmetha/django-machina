@@ -75,7 +75,7 @@ class MarkupText(SafeData):
 class MarkupTextDescriptor(object):
     """
     Acts as the Django's default attribute descriptor class (enabled via the SubfieldBase metaclass).
-    The main difference is that it does not call to_python() on the BBCodeTextField class. Instead, it
+    The main difference is that it does not call to_python() on the MarkupTextField class. Instead, it
     stores the two different values of a markup content (the raw and the rendered data) separately.
     These values can be separately updated when something is assigned. When the field is accessed,
     a MarkupText instance will be returned ; this one is built with the current data.
