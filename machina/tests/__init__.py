@@ -11,6 +11,11 @@ from machina.models.fields import MarkupTextField
 
 RESIZED_IMAGE_WIDTH = 100
 RESIZED_IMAGE_HEIGHT = 100
+VALIDATED_IMAGE_MIN_WIDTH = 100
+VALIDATED_IMAGE_MAX_WIDTH = 120
+VALIDATED_IMAGE_MIN_HEIGHT = 100
+VALIDATED_IMAGE_MAX_HEIGHT = 120
+VALIDATED_IMAGE_MAX_SIZE = 12000
 
 
 class TestableModel(models.Model):
@@ -21,10 +26,10 @@ class TestableModel(models.Model):
     resized_image = ExtendedImageField(upload_to='machina/test_images',
                                        width=RESIZED_IMAGE_WIDTH, height=RESIZED_IMAGE_HEIGHT,
                                        null=True, blank=True)
-    validaded_image = ExtendedImageField(upload_to='machina/test_images',
-                                         min_width=100, max_width=120,
-                                         min_height=100, max_height=120,
-                                         max_upload_size=20000,
+    validated_image = ExtendedImageField(upload_to='machina/test_images',
+                                         min_width=VALIDATED_IMAGE_MIN_WIDTH, max_width=VALIDATED_IMAGE_MAX_WIDTH,
+                                         min_height=VALIDATED_IMAGE_MIN_HEIGHT, max_height=VALIDATED_IMAGE_MAX_HEIGHT,
+                                         max_upload_size=VALIDATED_IMAGE_MAX_SIZE,
                                          null=True, blank=True)
 
 
