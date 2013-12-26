@@ -1,5 +1,5 @@
 coverage:
-		coverage --source=machina run ./runtests.py
+		coverage run --source=machina ./runtests.py
 		coverage report -m
 
 css:
