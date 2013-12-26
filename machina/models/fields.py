@@ -34,7 +34,7 @@ try:
     render_func = _get_render_function(dotted_path, kwargs)
 except ImportError as e:
     raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_LANGUAGE {}: {}').format(
-        machina_settings.MARKITUP_FILTER,
+        machina_settings.MACHINA_MARKUP_LANGUAGE,
         e))
 except AttributeError as e:
     raise ImproperlyConfigured(_('MACHINA_MARKUP_LANGUAGE setting is required'))
@@ -156,8 +156,10 @@ class ExtendedImageField(models.ImageField):
     def __init__(self, *args, **kwargs):
         self.width = kwargs.pop('width', None)
         self.height = kwargs.pop('height', None)
+        # Both min_width and max_width must be provided in order to be used
         self.min_width = kwargs.pop('min_width', None)
         self.max_width = kwargs.pop('max_width', None)
+        # Both min_height and max_height must be provided in order to be used
         self.min_height = kwargs.pop('min_height', None)
         self.max_height = kwargs.pop('max_height', None)
         self.max_upload_size = kwargs.pop("max_upload_size", 0)
@@ -184,26 +186,10 @@ class ExtendedImageField(models.ImageField):
             raise ValidationError(
                 _('Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px').format(
                     self.min_width, self.max_width, image_width))
-        elif self.min_width and not self.min_width <= image_width:
-            raise ValidationError(
-                _('Images of width lesser than {}px are not allowed. The width of your image is {}px').format(
-                    self.min_width, image_width))
-        elif self.max_width and not image_width <= self.max_width:
-            raise ValidationError(
-                _('Images of width greater than {}px or are not allowed. The width of your image is {}px').format(
-                    self.max_width, image_width))
         if self.min_height and self.max_height and not self.min_height <= image_height <= self.max_height:
             raise ValidationError(
                 _('Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px').format(
                     self.min_height, self.max_height, image_height))
-        elif self.min_height and not self.min_height <= image_height:
-            raise ValidationError(
-                _('Images of height lesser than {}px are not allowed. The height of your image is {}px').format(
-                    self.min_height, image_height))
-        elif self.max_height and not image_height <= self.max_height:
-            raise ValidationError(
-                _('Images of height greater than {}px or are not allowed. The height of your image is {}px').format(
-                    self.max_height, image_height))
 
         return data
 
