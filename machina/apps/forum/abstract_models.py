@@ -82,7 +82,7 @@ class AbstractForum(MPTTModel, ActiveModel):
 
     def clean(self):
         if self.parent:
-            if self.type == self.parent.type == FORUM_TYPES.forum_link:
-                raise ValidationError(_('A link forum can not have another link forum as parent'))
+            if self.parent.type == FORUM_TYPES.forum_link:
+                raise ValidationError(_('A forum can not have a link forum as parent'))
 
         super(AbstractForum, self).clean()
