@@ -44,10 +44,10 @@ class AbstractTopic(DatedModel):
     status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
     # The number of posts included in this topic
-    posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), blank=True, default=0)
+    posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), editable=False, blank=True, default=0)
 
     # The number of time the topic has been viewed
-    views_count = models.PositiveIntegerField(verbose_name=_('Views count'), blank=True, default=0)
+    views_count = models.PositiveIntegerField(verbose_name=_('Views count'), editable=False, blank=True, default=0)
 
     # Many users can subscribe to this topic
     subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True, null=True)
@@ -85,6 +85,13 @@ class AbstractTopic(DatedModel):
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
 
+    def update_trackers(self):
+        self.posts_count = self.posts.count()
+        posts = self.posts.all().order_by('-created')
+        self._last_post = posts[0] if posts.exists() else None
+        self.updated = self._last_post.updated or self._last_post.created
+        self.save()
+
 
 class AbstractPost(DatedModel):
     """
@@ -116,3 +123,7 @@ class AbstractPost(DatedModel):
         if self.topic.first_post != self:
             return machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX + subject
         return subject
+
+    def save(self, *args, **kwargs):
+        super(AbstractPost, self).save(*args, **kwargs)
+        self.topic.update_trackers()
