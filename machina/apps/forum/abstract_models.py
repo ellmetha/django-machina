@@ -59,8 +59,8 @@ class AbstractForum(MPTTModel, ActiveModel):
                                                        editable=False, blank=True, default=0)
 
     # Display options
-    display_on_index = models.BooleanField(verbose_name=_('Display on index'))
-    display_sub_forum_list = models.BooleanField(verbose_name=_('Display sub forum list'))
+    display_on_index = models.BooleanField(verbose_name=_('Display on index'), default=True)
+    display_sub_forum_list = models.BooleanField(verbose_name=_('Display sub forum list'), default=True)
 
     class Meta:
         abstract = True

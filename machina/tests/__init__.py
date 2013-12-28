@@ -34,6 +34,6 @@ class TestableModel(models.Model):
 
 
 # Sub-packages imports
-from test_conversation import *
-from test_fields import *
-from test_forum import *
+from .test_conversation import *
+from .test_fields import *
+from .test_forum import *

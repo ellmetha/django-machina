@@ -2,6 +2,10 @@
 
 # Standard library imports
 from __future__ import unicode_literals
+try:
+    from imp import reload
+except ImportError:
+    pass
 import os
 
 # Third party imports
@@ -10,7 +14,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.test import TestCase
-from django.utils.six import StringIO
+from django.utils.six import BytesIO
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -71,7 +75,7 @@ class MarkupTextFieldTestCase(TestCase):
         self.assertEqual(test.content.rendered, '<strong>hello world!</strong>')
         self.assertEqual(len(test.content), markup_content_len)
         with self.assertRaises(AttributeError):
-            print TestableModel.content.rendered
+            print(TestableModel.content.rendered)
 
     def test_bad_markup_language_config_should_raise(self):
         # Run & check
@@ -131,7 +135,7 @@ class ExtendedImageFieldTestCase(TestCase):
         test.full_clean()
         test.save()
         # Check
-        image = Image.open(StringIO(test.resized_image.read()))
+        image = Image.open(BytesIO(test.resized_image.read()))
         self.assertEqual(image.size, (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT))
 
     def test_image_cleaning(self):

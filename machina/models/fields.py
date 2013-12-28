@@ -13,7 +13,7 @@ from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.functional import curry
 from django.utils.safestring import SafeData
-from django.utils.six import StringIO
+from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
@@ -210,12 +210,12 @@ class ExtendedImageField(models.ImageField):
         Resizes the given image to fit inside a box of the given size
         """
         from machina.core.compat import PILImage as Image
-        image = Image.open(StringIO(data))
+        image = Image.open(BytesIO(data))
 
         # Resize!
         image.thumbnail(size, Image.ANTIALIAS)
 
-        string = StringIO()
+        string = BytesIO()
         image.save(string, format='PNG')
         return string.getvalue()
 
