@@ -56,3 +56,13 @@ class TopicTestCase(TestCase):
         new_last_post = Post.objects.create(topic=self.topic, poster=self.u1, content='last')
         self.assertEqual(self.topic.last_post, new_last_post)
         self.assertIsNone(new_topic.last_post)
+
+    def test_topic_tracker_data_update(self):
+        """
+        Tests that the number of posts included in a given topic is correctly saved
+        in the 'post_count' field associated with any topic.
+        """
+        # Run
+        Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
+        # Check
+        self.assertEqual(self.topic.posts.count(), self.topic.posts_count)
