@@ -18,6 +18,7 @@ class Migration(SchemaMigration):
             ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
             ('status', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+            ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
             ('views_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
         ))
@@ -43,7 +44,7 @@ class Migration(SchemaMigration):
             ('update_reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('updated_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
             ('updates_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            (u'_content_rendered', self.gf('django.db.models.fields.TextField')(blank=True)),
+            (u'_content_rendered', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'conversation', ['Post'])
 
@@ -98,7 +99,7 @@ class Migration(SchemaMigration):
         },
         u'conversation.post': {
             'Meta': {'ordering': "[u'created']", 'object_name': 'Post'},
-            u'_content_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            u'_content_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'content': ('machina.models.fields.MarkupTextField', [], {u'no_rendered_field': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -111,6 +112,7 @@ class Migration(SchemaMigration):
         },
         u'conversation.topic': {
             'Meta': {'ordering': "[u'-updated']", 'object_name': 'Topic'},
+            'approved': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'forum': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'topics'", 'to': u"orm['forum.Forum']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -125,10 +127,10 @@ class Migration(SchemaMigration):
         },
         u'forum.forum': {
             'Meta': {'ordering': "[u'tree_id', u'lft']", 'object_name': 'Forum'},
-            u'_description_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            u'_description_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'description': ('machina.models.fields.MarkupTextField', [], {'blank': 'True', 'null': 'True', u'no_rendered_field': 'True'}),
-            'display_on_index': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'display_sub_forum_list': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'display_on_index': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'display_sub_forum_list': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('machina.models.fields.ExtendedImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'db_index': 'True'}),

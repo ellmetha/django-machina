@@ -86,3 +86,11 @@ class AbstractForum(MPTTModel, ActiveModel):
                 raise ValidationError(_('A forum can not have a link forum as parent'))
 
         super(AbstractForum, self).clean()
+
+    def update_trackers(self):
+        self.real_topics_count = self.topics.count()
+        self.topics_count = self.topics.filter(approved=True).count()
+        # Compute the forum level posts count
+        posts_count = sum(topic.posts_count for topic in self.topics.all())
+        self.posts_count = posts_count
+        self.save()

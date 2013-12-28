@@ -43,6 +43,9 @@ class AbstractTopic(DatedModel):
     # A topic can be locked, unlocked or moved
     status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
+    # A topic can be approved before publishing ; defaults to True
+    approved = models.BooleanField(verbose_name=_('Approved'), default=True)
+
     # The number of posts included in this topic
     posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), editable=False, blank=True, default=0)
 
@@ -86,11 +89,17 @@ class AbstractTopic(DatedModel):
         return self._last_post
 
     def update_trackers(self):
+        """
+        Updates the posts count, the update date and the link toward the last post
+        associated with the current topic.
+        """
         self.posts_count = self.posts.count()
         posts = self.posts.all().order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
         self.updated = self._last_post.updated or self._last_post.created
         self.save()
+        # Trigger the forum-level trackers update
+        self.forum.update_trackers()
 
 
 class AbstractPost(DatedModel):
@@ -126,4 +135,5 @@ class AbstractPost(DatedModel):
 
     def save(self, *args, **kwargs):
         super(AbstractPost, self).save(*args, **kwargs)
+        # Trigger the topic-level trackers update
         self.topic.update_trackers()
