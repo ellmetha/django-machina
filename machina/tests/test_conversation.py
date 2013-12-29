@@ -57,12 +57,25 @@ class TopicTestCase(TestCase):
         self.assertEqual(self.topic.last_post, new_last_post)
         self.assertIsNone(new_topic.last_post)
 
-    def test_topic_tracker_data_update(self):
+    def test_topic_posts_counter_update(self):
         """
         Tests that the number of posts included in a given topic is correctly saved
-        in the 'post_count' field associated with any topic.
+        in the 'posts_count' field associated with any topic.
         """
         # Run
         Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
         # Check
         self.assertEqual(self.topic.posts.count(), self.topic.posts_count)
+
+    def test_topic_updated_date_update(self):
+        """
+        Tests that the update date is correctly updated when a post is added to
+        a topic or when a post is updated. The 'updated' date associated with the
+        considered post must be equal to the one defined in its associated topic.
+        """
+        # Run & check
+        Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
+        self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))
+        self.topic.last_post.content = 'updated'
+        self.topic.last_post.save()
+        self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))
