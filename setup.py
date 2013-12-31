@@ -30,6 +30,9 @@ setup(
         "django>=1.4",
         "south>=0.8.4",
 
+        # Django-mptt is required to handle the tree hierarchy of nested forums
+        "django-mptt==0.6.0",
+
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
     ],
