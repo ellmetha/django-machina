@@ -15,7 +15,7 @@ Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
 
 
-class TopicTestCase(TestCase):
+class TestTopic(TestCase):
     def setUp(self):
         self.u1 = User.objects.create(username='user1')
 
@@ -32,21 +32,13 @@ class TopicTestCase(TestCase):
         post = Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
         self.post = post
 
-    def test_topic_first_post(self):
-        """
-        Tests that the first post returned by a topic is realy the oldest post associated
-        with the considered topic and that it remains even if new posts are added to the topic.
-        """
+    def test_has_a_first_post(self):
         # Run & check
         self.assertEqual(self.topic.first_post, self.post)
         Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
         self.assertEqual(self.topic.first_post, self.post)
 
-    def test_topic_last_post(self):
-        """
-        Tests that the last post returned by a topic is realy the youngest post associated
-        with the considered topic and that it is updated if a new post is added to the topic.
-        """
+    def test_has_a_last_post(self):
         # Setup
         new_topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
                                          type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
@@ -57,22 +49,13 @@ class TopicTestCase(TestCase):
         self.assertEqual(self.topic.last_post, new_last_post)
         self.assertIsNone(new_topic.last_post)
 
-    def test_topic_posts_counter_update(self):
-        """
-        Tests that the number of posts included in a given topic is correctly saved
-        in the 'posts_count' field associated with any topic.
-        """
+    def test_saves_its_number_of_posts(self):
         # Run
         Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
         # Check
         self.assertEqual(self.topic.posts.count(), self.topic.posts_count)
 
-    def test_topic_updated_date_update(self):
-        """
-        Tests that the update date is correctly updated when a post is added to
-        a topic or when a post is updated. The 'updated' date associated with the
-        considered post must be equal to the one defined in its associated topic.
-        """
+    def test_has_an_update_date(self):
         # Run & check
         Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
         self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))

@@ -16,7 +16,7 @@ Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
 
 
-class ForumTestCase(TestCase):
+class TestForum(TestCase):
     def setUp(self):
         self.u1 = User.objects.create(username='user1')
 
@@ -32,11 +32,7 @@ class ForumTestCase(TestCase):
         top_level_link = Forum.objects.create(name='top_level_link', type=FORUM_TYPES.forum_link)
         self.top_level_link = top_level_link
 
-    def test_forum_margin_level(self):
-        """
-        Tests that the 'margin_level' property which comes with each forum is twice the level
-        associated with it.
-        """
+    def test_has_a_margin_level_two_times_greater_than_its_real_level(self):
         # Run
         sub_level_forum = Forum(parent=self.top_level_forum,
                                 name='sub_level_forum', type=FORUM_TYPES.forum_post)
@@ -46,22 +42,14 @@ class ForumTestCase(TestCase):
         self.assertEqual(self.top_level_forum.margin_level, 0)
         self.assertEqual(sub_level_forum.margin_level, 2)
 
-    def test_forum_link_with_childs_should_raise(self):
-        """
-        Tests that a forum can not have a forum link as parent and that doing so raises a
-        ValidationError exception.
-        """
+    def test_can_not_be_the_child_of_a_forum_link(self):
         # Run & check
         for forum_type, _ in FORUM_TYPES:
             with self.assertRaises(ValidationError):
                 forum = Forum(parent=self.top_level_link, name='sub_forum', type=forum_type)
                 forum.full_clean()
 
-    def test_forum_counters_update(self):
-        """
-        Tests that the number of posts and topics included in a given forum is correctly
-        saved in the 'posts_count', 'topics_count' and 'real_topics_count' fields.
-        """
+    def test_saves_its_numbers_of_posts_and_topics(self):
         # Run & check
         topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
                                      type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)

@@ -31,9 +31,3 @@ class TestableModel(models.Model):
                                          min_height=VALIDATED_IMAGE_MIN_HEIGHT, max_height=VALIDATED_IMAGE_MAX_HEIGHT,
                                          max_upload_size=VALIDATED_IMAGE_MAX_SIZE,
                                          null=True, blank=True)
-
-
-# Sub-packages imports
-from .test_conversation import *
-from .test_fields import *
-from .test_forum import *

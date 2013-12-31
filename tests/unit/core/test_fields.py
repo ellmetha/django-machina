@@ -6,7 +6,6 @@ try:
     from imp import reload
 except ImportError:
     pass
-import os
 
 # Third party imports
 from django.conf import settings
@@ -20,12 +19,12 @@ from django.utils.six import BytesIO
 from machina.conf import settings as machina_settings
 from machina.core.compat import PILImage as Image
 from machina.models import fields
-from machina.tests import RESIZED_IMAGE_HEIGHT
-from machina.tests import RESIZED_IMAGE_WIDTH
-from machina.tests import TestableModel
+from tests.models import RESIZED_IMAGE_HEIGHT
+from tests.models import RESIZED_IMAGE_WIDTH
+from tests.models import TestableModel
 
 
-class MarkupTextFieldTestCase(TestCase):
+class TestMarkupTextField(TestCase):
     # The following tests involve the django-precise-bbcode
     # app. This one can be used with Machina in order to
     # provide a support for the BBCode syntax. But instead
@@ -38,7 +37,7 @@ class MarkupTextFieldTestCase(TestCase):
         ('[b]안녕하세요[/b]', '<strong>안녕하세요</strong>'),
     )
 
-    def test_markup_text_field_accept_none_values(self):
+    def test_can_accept_none_values(self):
         # Setup
         test = TestableModel()
         test.content = None
@@ -49,7 +48,7 @@ class MarkupTextFieldTestCase(TestCase):
         rendered = hasattr(test.content, 'rendered')
         self.assertFalse(rendered)
 
-    def test_markup_text_field_saving(self):
+    def test_correctly_saves_its_data(self):
         # Run & check
         for markup_text, expected_html_text in self.MARKUP_TEXT_FIELD_TESTS:
             test = TestableModel()
@@ -57,7 +56,7 @@ class MarkupTextFieldTestCase(TestCase):
             test.save()
             self.assertEqual(test.content.rendered, expected_html_text)
 
-    def test_markup_text_field_descriptor_protocol(self):
+    def test_provides_access_to_the_raw_text_and_to_the_rendered_text(self):
         # Setup
         test = TestableModel()
         test.content = '[b]hello[/b]'
@@ -77,7 +76,7 @@ class MarkupTextFieldTestCase(TestCase):
         with self.assertRaises(AttributeError):
             print(TestableModel.content.rendered)
 
-    def test_bad_markup_language_config_should_raise(self):
+    def test_should_not_allow_non_accessible_markup_languages(self):
         # Run & check
         machina_settings.MACHINA_MARKUP_LANGUAGE = (('it.will.fail'), {})
         with self.assertRaises(ImproperlyConfigured):
@@ -87,11 +86,9 @@ class MarkupTextFieldTestCase(TestCase):
             reload(fields)
 
 
-class ExtendedImageFieldTestCase(TestCase):
+class TestExtendedImageField(TestCase):
     def setUp(self):
         # Set up some images used for doing image tests
-        TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
-        settings.MEDIA_ROOT = os.path.join(TEST_ROOT, 'testdata/media/')
         images_dict = {}
 
         # Fetch an image aimed to be resized
@@ -126,7 +123,7 @@ class ExtendedImageFieldTestCase(TestCase):
             except:
                 pass
 
-    def test_resized_image_saving(self):
+    def test_can_resize_images_before_saving_them(self):
         # Setup
         test = TestableModel()
         # Run
@@ -138,7 +135,7 @@ class ExtendedImageFieldTestCase(TestCase):
         image = Image.open(BytesIO(test.resized_image.read()))
         self.assertEqual(image.size, (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT))
 
-    def test_image_cleaning(self):
+    def test_should_not_accept_images_with_incorrect_sizes_or_dimensions(self):
         # Setup
         test = TestableModel()
         field = test._meta.get_field('validated_image')
