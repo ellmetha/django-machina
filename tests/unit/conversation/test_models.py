@@ -50,10 +50,12 @@ class TestTopic(TestCase):
         self.assertIsNone(new_topic.last_post)
 
     def test_saves_its_number_of_posts(self):
-        # Run
-        Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
-        # Check
-        self.assertEqual(self.topic.posts.count(), self.topic.posts_count)
+        # Run & check
+        post = Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
+        initial_count = self.topic.posts.count()
+        self.assertEqual(initial_count, self.topic.posts_count)
+        post.delete()
+        self.assertEqual(initial_count - 1, self.topic.posts_count)
 
     def test_has_an_update_date(self):
         # Run & check
@@ -62,3 +64,43 @@ class TestTopic(TestCase):
         self.topic.last_post.content = 'updated'
         self.topic.last_post.save()
         self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))
+
+
+class TestPost(TestCase):
+    def setUp(self):
+        self.u1 = User.objects.create(username='user1')
+
+        # Set up a top-level forum
+        top_level_forum = Forum.objects.create(name='top_level_forum', type=FORUM_TYPES.forum_post)
+        self.top_level_forum = top_level_forum
+
+        # Set up a topic
+        topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
+                                     type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
+        self.topic = topic
+        self.topic_pk = topic.pk
+
+        # Set up a post
+        post = Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
+        self.post = post
+
+    def test_knows_if_it_is_the_topic_head(self):
+        # Check
+        self.assertEqual(self.post.is_topic_head, self.post.topic.posts.count() == 1)
+
+    def test_knows_if_it_is_the_topic_tail(self):
+        # Run & check
+        post = Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
+        self.assertTrue(post.is_topic_tail)
+
+    def test_is_both_topic_head_and_tail_if_it_is_alone_in_the_topic(self):
+        # Check
+        self.assertTrue(self.post.is_topic_head)
+        self.assertTrue(self.post.is_topic_tail)
+
+    def test_deletion_should_result_in_the_topic_deletion_if_it_is_alone_in_the_topic(self):
+        # Run
+        self.post.delete()
+        # Check
+        with self.assertRaises(Topic.DoesNotExist):
+            Topic.objects.get(pk=self.topic_pk)
