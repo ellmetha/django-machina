@@ -88,6 +88,10 @@ class AbstractTopic(DatedModel):
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
 
+    def delete(self, using=None):
+        super(AbstractTopic, self).delete(using)
+        self.forum.update_trackers()
+
     def update_trackers(self):
         """
         Updates the posts count, the update date and the link toward the last post
@@ -133,7 +137,24 @@ class AbstractPost(DatedModel):
             return machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX + subject
         return subject
 
+    @property
+    def is_topic_head(self):
+        return self.topic.first_post.id == self.id
+
+    @property
+    def is_topic_tail(self):
+        return self.topic.last_post.id == self.id
+
     def save(self, *args, **kwargs):
         super(AbstractPost, self).save(*args, **kwargs)
         # Trigger the topic-level trackers update
         self.topic.update_trackers()
+
+    def delete(self, using=None):
+        if self.is_topic_head and self.is_topic_tail:
+            # The default way of operating is to trigger the deletion of the associated topic
+            # only if the considered post is the only post embedded in the topic
+            self.topic.delete()
+        else:
+            super(AbstractPost, self).delete(using)
+            self.topic.update_trackers()
