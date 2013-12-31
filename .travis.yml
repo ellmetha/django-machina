@@ -1,0 +1,27 @@
+language: python
+python:
+  - "2.7"
+  - "3.2"
+  - "3.3"
+env:
+  - DJANGO=django==1.4.2
+  - DJANGO=django==1.5
+  - DJANGO=django==1.6
+
+matrix:
+  exclude:
+  - python: "3.2"
+    env: DJANGO=django==1.4.2
+  - python: "3.3"
+    env: DJANGO=django==1.4.2
+install:
+  - "pip install $DJANGO django-nose==1.2 coverage pillow --use-mirrors"
+script:
+  - coverage run --source=machina ./runtests.py
+  - coverage report -m
+after_success:
+  - "pip install coveralls==0.2 --use-mirrors"
+  - coveralls
+branches:
+  only:
+    - master
