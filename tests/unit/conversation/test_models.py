@@ -57,14 +57,6 @@ class TestTopic(TestCase):
         post.delete()
         self.assertEqual(initial_count - 1, self.topic.posts_count)
 
-    def test_has_an_update_date(self):
-        # Run & check
-        Post.objects.create(topic=self.topic, poster=self.u1, content='hello')
-        self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))
-        self.topic.last_post.content = 'updated'
-        self.topic.last_post.save()
-        self.assertEqual(self.topic.updated.replace(microsecond=0), self.topic.last_post.created.replace(microsecond=0))
-
 
 class TestPost(TestCase):
     def setUp(self):
