@@ -27,18 +27,30 @@ TEST_SETTINGS = {
         'django.template.loaders.app_directories.Loader',
     ),
     'TEMPLATE_CONTEXT_PROCESSORS': default_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+        'django.contrib.auth.context_processors.auth',
+        'django.contrib.messages.context_processors.messages',
         'django.core.context_processors.request',
+        'django.core.context_processors.media',
+        'django.core.context_processors.static',
     ),
     'INSTALLED_APPS': [
         'django.contrib.auth',
+        'django.contrib.admin',
         'django.contrib.contenttypes',
         'django.contrib.messages',
+        'django.contrib.sessions',
         'django.contrib.sites',
-        'django.contrib.admin',
         'tests',
     ] + get_vanilla_apps(),
-    'SITE_ID': 3,
+    'ROOT_URLCONF': 'tests._testsite.urls',
+    'MIDDLEWARE_CLASSES': default_settings.MIDDLEWARE_CLASSES,
+    'SITE_ID': 1,
+    'ADMINS': ('admin@example.com',),
     'MEDIA_ROOT': os.path.join(TEST_ROOT, '_testdata/media/'),
+    'PASSWORD_HASHERS': ['django.contrib.auth.hashers.MD5PasswordHasher'],
+    'LOGIN_REDIRECT_URL': '/accounts/',
+    'STATIC_URL': '/static/',
+    'ADMINS': ('admin@example.com',),
 }
 
 
