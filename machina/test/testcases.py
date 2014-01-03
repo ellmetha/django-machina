@@ -59,5 +59,13 @@ class BaseClientTestCase(TestCase):
     def assertIsOk(self, response):
         self.assertEqual(200, response.status_code)
 
-    def assertNoAccess(self, response):
+    def assertIsNotOk(self, response):
         self.assertTrue(response.status_code in (404, 403))
+
+    def assertIsRedirect(self, response):
+        self.assertTrue(response.status_code in (302, 301))
+
+
+class AdminClientTestCase(BaseClientTestCase):
+    is_staff = True
+    is_superuser = True

@@ -10,12 +10,10 @@ from django.core.urlresolvers import NoReverseMatch
 
 class AdminClientMixin(object):
     """
-    Mixin that can be used to append a test to WebClientTestCase in order to
+    Mixin that can be used to append a test to an AdminClientTestCase in order to
     test that the admin base views associated with a given model are accessible
     and so avoid some boilerplate code.
-    It is assumed to be used with a WebClientTestCase subclass.
     """
-    is_staff = True
     model = None
 
     def test_has_accessible_base_views(self):
