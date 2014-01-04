@@ -7,12 +7,12 @@ from django.db.models import get_model
 
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import FORUM_TYPES
-from machina.test.mixins import AdminClientMixin
+from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 Forum = get_model('forum', 'Forum')
 
 
-class TestForumAdmin(AdminClientTestCase, AdminClientMixin):
+class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     model = Forum
 
     def setUp(self):
