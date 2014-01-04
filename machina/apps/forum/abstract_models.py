@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 # Third party imports
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 from mptt.models import MPTTModel
@@ -25,6 +26,7 @@ FORUM_TYPES = Choices(
 )
 
 
+@python_2_unicode_compatible
 class AbstractForum(MPTTModel, ActiveModel):
     """
     The main forum model.
@@ -69,7 +71,7 @@ class AbstractForum(MPTTModel, ActiveModel):
         verbose_name_plural = _('Forums')
         app_label = 'forum'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}'.format(self.name)
 
     @property

@@ -16,7 +16,7 @@ class PostInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'topic', 'poster', 'updated',)
+    list_display = ('__str__', 'topic', 'poster', 'updated',)
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', )
     search_fields = ('content',)

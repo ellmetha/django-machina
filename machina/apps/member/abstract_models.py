@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
@@ -14,6 +15,7 @@ from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
 
+@python_2_unicode_compatible
 class AbstractProfile(models.Model):
     """
     Represents the profile associated with each forum user.
@@ -40,10 +42,11 @@ class AbstractProfile(models.Model):
         verbose_name_plural = _('Profiles')
         app_label = 'member'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{} profile'.format(self.user.username)
 
 
+@python_2_unicode_compatible
 class AbstractRank(models.Model):
     """
     Represents a rank that can be associated with any forum profile.
@@ -63,5 +66,5 @@ class AbstractRank(models.Model):
         verbose_name_plural = _('Ranks')
         app_label = 'member'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{} rank'.format(self.title)

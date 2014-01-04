@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
@@ -29,6 +30,7 @@ TOPIC_STATUSES = Choices(
 )
 
 
+@python_2_unicode_compatible
 class AbstractTopic(DatedModel):
     """
     Represents a forum topic.
@@ -63,7 +65,7 @@ class AbstractTopic(DatedModel):
         verbose_name_plural = _('Topics')
         app_label = 'conversation'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}'.format(self.subject)
 
     @property
@@ -106,6 +108,7 @@ class AbstractTopic(DatedModel):
         self.forum.update_trackers()
 
 
+@python_2_unicode_compatible
 class AbstractPost(DatedModel):
     """
     Represents a forum post. A forum post is always linked to a topic.
@@ -131,7 +134,7 @@ class AbstractPost(DatedModel):
         verbose_name_plural = _('Posts')
         app_label = 'conversation'
 
-    def __unicode__(self):
+    def __str__(self):
         subject = '{}'.format(self.topic.subject)
         if self.topic.first_post != self:
             return machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX + subject
