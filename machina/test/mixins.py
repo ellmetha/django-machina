@@ -8,7 +8,7 @@ from django.core.urlresolvers import NoReverseMatch
 # Local application / specific library imports
 
 
-class AdminClientMixin(object):
+class AdminBaseViewTestMixin(object):
     """
     Mixin that can be used to append a test to an AdminClientTestCase in order to
     test that the admin base views associated with a given model are accessible
