@@ -50,7 +50,6 @@ TEST_SETTINGS = {
     'PASSWORD_HASHERS': ['django.contrib.auth.hashers.MD5PasswordHasher'],
     'LOGIN_REDIRECT_URL': '/accounts/',
     'STATIC_URL': '/static/',
-    'ADMINS': ('admin@example.com',),
 }
 
 
