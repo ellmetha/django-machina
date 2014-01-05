@@ -82,6 +82,18 @@ class AbstractForum(MPTTModel, ActiveModel):
         """
         return self.level * 2
 
+    @property
+    def is_category(self):
+        return self.type == FORUM_TYPES.forum_cat
+
+    @property
+    def is_forum(self):
+        return self.type == FORUM_TYPES.forum_post
+
+    @property
+    def is_link(self):
+        return self.type == FORUM_TYPES.forum_link
+
     def clean(self):
         if self.parent:
             if self.parent.type == FORUM_TYPES.forum_link:
@@ -89,10 +101,52 @@ class AbstractForum(MPTTModel, ActiveModel):
 
         super(AbstractForum, self).clean()
 
+    def save(self, *args, **kwargs):
+        # It is vital to track the changes of the parent associated with a forum in order to
+        # maintain counters up-to-date and to trigger other operations such as permissions updates.
+        old_instance = None
+        if self.pk:
+            old_instance = self.__class__._default_manager.get(pk=self.pk)
+
+        # Do the save
+        super(AbstractForum, self).save(*args, **kwargs)
+
+        # If any change has been made to the forum parent, trigger the update of the counters
+        if old_instance and old_instance.parent != self.parent:
+            self.update_trackers()
+            # TODO: trigger a 'post_forum_parent_update' signal
+
+    def _simple_save(self, *args, **kwargs):
+        """
+        Calls the parent save method in order to avoid the checks for forum parent changes
+        which can result in triggering a new update of the counters associated with the
+        current forum.
+        This allow the database to not be hit by such checks during very common and regular
+        operations such as those provided by the update_tracker function; indeed these operations
+        will never result in an update of a forum parent.
+        """
+        super(AbstractForum, self).save(*args, **kwargs)
+
     def update_trackers(self):
-        self.real_topics_count = self.topics.count()
-        self.topics_count = self.topics.filter(approved=True).count()
+        # Fetch the list of ids of all descendant forums including the current one
+        forum_ids = self.get_descendants(include_self=True).values_list('id', flat=True)
+
+        # Determine the list of the associated topics, that is the list of topics
+        # associated with the current forum plus the list of all topics associated
+        # with the descendant forums.
+        Topic = models.get_model('conversation', 'Topic')
+        topics = Topic.objects.filter(forum__id__in=forum_ids)
+
+        self.real_topics_count = topics.count()
+        self.topics_count = topics.filter(approved=True).count()
         # Compute the forum level posts count
-        posts_count = sum(topic.posts_count for topic in self.topics.all())
+        posts_count = sum(topic.posts_count for topic in topics)
         self.posts_count = posts_count
-        self.save()
+
+        # Any save of a forum triggered from the update_tracker process will not result
+        # in checking for a change of the forum's parent.
+        self._simple_save()
+
+        # Trigger the parent trackers update if necessary
+        if self.parent:
+            self.parent.update_trackers()

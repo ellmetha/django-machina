@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -89,6 +90,11 @@ class AbstractTopic(DatedModel):
             posts = self.posts.all().order_by('-created')
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
+
+    def clean(self):
+        super(AbstractTopic, self).clean()
+        if self.forum.is_category or self.forum.is_link:
+            raise ValidationError(_('A topic can not be associated with a category or a link forum'))
 
     def delete(self, using=None):
         super(AbstractTopic, self).delete(using)
