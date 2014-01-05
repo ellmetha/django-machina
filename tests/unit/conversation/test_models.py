@@ -3,6 +3,7 @@
 # Standard library imports
 # Third party imports
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db.models import get_model
 from django.test import TestCase
 
@@ -56,6 +57,20 @@ class TestTopic(TestCase):
         self.assertEqual(initial_count, self.topic.posts_count)
         post.delete()
         self.assertEqual(initial_count - 1, self.topic.posts_count)
+
+    def test_can_not_be_associated_with_a_forum_link_or_a_forum_category(self):
+        # Setup
+        top_level_cat = Forum.objects.create(name='top_level_cat', type=FORUM_TYPES.forum_cat)
+        top_level_link = Forum.objects.create(name='top_level_link', type=FORUM_TYPES.forum_link)
+        # Run & check
+        with self.assertRaises(ValidationError):
+            new_topic = Topic(subject='Test topic', forum=top_level_cat, poster=self.u1,
+                              type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
+            new_topic.full_clean()
+        with self.assertRaises(ValidationError):
+            new_topic = Topic(subject='Test topic', forum=top_level_link, poster=self.u1,
+                              type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
+            new_topic.full_clean()
 
 
 class TestPost(TestCase):
