@@ -72,6 +72,18 @@ class TestTopic(TestCase):
                               type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
             new_topic.full_clean()
 
+    def test_can_trigger_the_update_of_the_counters_of_a_new_forum(self):
+        # Setup
+        new_top_level_forum = Forum.objects.create(name='new_top_level_forum', type=FORUM_TYPES.forum_post)
+        # Run
+        self.topic.forum = new_top_level_forum
+        self.topic.save()
+        # Check
+        self.assertEqual(self.topic.forum, new_top_level_forum)
+        self.assertEqual(new_top_level_forum.topics_count, 1)
+        self.assertEqual(new_top_level_forum.real_topics_count, 1)
+        self.assertEqual(new_top_level_forum.posts_count, self.topic.posts_count)
+
 
 class TestPost(TestCase):
     def setUp(self):
