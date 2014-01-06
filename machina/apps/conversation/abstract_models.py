@@ -96,6 +96,31 @@ class AbstractTopic(DatedModel):
         if self.forum.is_category or self.forum.is_link:
             raise ValidationError(_('A topic can not be associated with a category or a link forum'))
 
+    def save(self, *args, **kwargs):
+        # It is vital to track the changes of the forum associated with a topic in order to
+        # maintain counters up-to-date.
+        old_instance = None
+        if self.pk:
+            old_instance = self.__class__._default_manager.get(pk=self.pk)
+
+        # Do the save
+        super(AbstractTopic, self).save(*args, **kwargs)
+
+        # If any change has been made to the forum parent, trigger the update of the counters
+        if old_instance and old_instance.forum != self.forum:
+            self.update_trackers()
+
+    def _simple_save(self, *args, **kwargs):
+        """
+        Calls the parent save method in order to avoid the checks for topic forum changes
+        which can result in triggering a new update of the counters associated with the
+        current topic.
+        This allow the database to not be hit by such checks during very common and regular
+        operations such as those provided by the update_trackers function; indeed these operations
+        will never result in an update of a topic's forum.
+        """
+        super(AbstractTopic, self).save(*args, **kwargs)
+
     def delete(self, using=None):
         super(AbstractTopic, self).delete(using)
         self.forum.update_trackers()
@@ -109,7 +134,7 @@ class AbstractTopic(DatedModel):
         posts = self.posts.all().order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
         self.updated = self._last_post.updated or self._last_post.created
-        self.save()
+        self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
 

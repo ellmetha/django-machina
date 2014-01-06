@@ -122,7 +122,7 @@ class AbstractForum(MPTTModel, ActiveModel):
         which can result in triggering a new update of the counters associated with the
         current forum.
         This allow the database to not be hit by such checks during very common and regular
-        operations such as those provided by the update_tracker function; indeed these operations
+        operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a forum parent.
         """
         super(AbstractForum, self).save(*args, **kwargs)
