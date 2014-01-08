@@ -34,6 +34,9 @@ setup(
         # Django-mptt is required to handle the tree hierarchy of nested forums
         "django-mptt==0.6.0",
 
+        # Django-guardian is used to provide a powerful per-forum object permission system
+        "django-guardian==1.1.1",
+
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
     ],
