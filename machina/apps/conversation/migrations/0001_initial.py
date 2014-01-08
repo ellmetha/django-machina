@@ -48,8 +48,24 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'conversation', ['Post'])
 
+        # Adding model 'TopicReadTrack'
+        db.create_table(u'conversation_topicreadtrack', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'topic_tracks', to=orm['auth.User'])),
+            ('topic', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'tracks', to=orm['conversation.Topic'])),
+        ))
+        db.send_create_signal(u'conversation', ['TopicReadTrack'])
+
+        # Adding unique constraint on 'TopicReadTrack', fields ['user', 'topic']
+        db.create_unique(u'conversation_topicreadtrack', ['user_id', 'topic_id'])
+
 
     def backwards(self, orm):
+        # Removing unique constraint on 'TopicReadTrack', fields ['user', 'topic']
+        db.delete_unique(u'conversation_topicreadtrack', ['user_id', 'topic_id'])
+
         # Deleting model 'Topic'
         db.delete_table(u'conversation_topic')
 
@@ -58,6 +74,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Post'
         db.delete_table(u'conversation_post')
+
+        # Deleting model 'TopicReadTrack'
+        db.delete_table(u'conversation_topicreadtrack')
 
 
     models = {
@@ -124,6 +143,14 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'views_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'})
+        },
+        u'conversation.topicreadtrack': {
+            'Meta': {'unique_together': "([u'user', u'topic'],)", 'object_name': 'TopicReadTrack'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'topic': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'tracks'", 'to': u"orm['conversation.Topic']"}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'topic_tracks'", 'to': u"orm['auth.User']"})
         },
         u'forum.forum': {
             'Meta': {'ordering': "[u'tree_id', u'lft']", 'object_name': 'Forum'},

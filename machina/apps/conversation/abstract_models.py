@@ -192,3 +192,22 @@ class AbstractPost(DatedModel):
         else:
             super(AbstractPost, self).delete(using)
             self.topic.update_trackers()
+
+
+@python_2_unicode_compatible
+class AbstractTopicReadTrack(DatedModel):
+    """
+    Represents a track which records which topics have been read by a given user.
+    """
+    user = models.ForeignKey(AUTH_USER_MODEL, related_name='topic_tracks', verbose_name=_('User'))
+    topic = models.ForeignKey('conversation.Topic', verbose_name=_('Topic'), related_name='tracks')
+
+    class Meta:
+        abstract = True
+        unique_together = ['user', 'topic', ]
+        verbose_name = _('Topic track')
+        verbose_name_plural = _('Topic tracks')
+        app_label = 'conversation'
+
+    def __str__(self):
+        return '{} - {}'.format(self.user, self.topic)

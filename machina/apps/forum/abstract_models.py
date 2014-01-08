@@ -14,7 +14,9 @@ from mptt.models import TreeForeignKey
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
+from machina.core.compat import AUTH_USER_MODEL
 from machina.models import ActiveModel
+from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
@@ -150,3 +152,22 @@ class AbstractForum(MPTTModel, ActiveModel):
         # Trigger the parent trackers update if necessary
         if self.parent:
             self.parent.update_trackers()
+
+
+@python_2_unicode_compatible
+class AbstractForumReadTrack(DatedModel):
+    """
+    Represents a track which records which forums have been read by a given user.
+    """
+    user = models.ForeignKey(AUTH_USER_MODEL, related_name='forum_tracks', verbose_name=_('User'))
+    forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), related_name='tracks')
+
+    class Meta:
+        abstract = True
+        unique_together = ['user', 'forum', ]
+        verbose_name = _('Forum track')
+        verbose_name_plural = _('Forum tracks')
+        app_label = 'forum'
+
+    def __str__(self):
+        return '{} - {}'.format(self.user, self.topic)
