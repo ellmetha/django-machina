@@ -125,7 +125,7 @@ INSTALLED_APPS = [
     'south',
     'pipeline',
     'crispy_forms',
-
+    'guardian',
     'mptt',
 
     # Local apps
@@ -153,3 +153,10 @@ PIPELINE_COMPILERS = (
 # Crispy forms settings
 # --------------------------------------
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+# Specific machina settings
+# --------------------------------------
+
+# Django guardian
+ANONYMOUS_USER_ID = -1

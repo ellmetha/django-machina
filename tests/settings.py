@@ -40,6 +40,8 @@ TEST_SETTINGS = {
         'django.contrib.messages',
         'django.contrib.sessions',
         'django.contrib.sites',
+        'mptt',
+        'guardian',
         'tests',
     ] + get_vanilla_apps(),
     'ROOT_URLCONF': 'tests._testsite.urls',
@@ -50,6 +52,7 @@ TEST_SETTINGS = {
     'PASSWORD_HASHERS': ['django.contrib.auth.hashers.MD5PasswordHasher'],
     'LOGIN_REDIRECT_URL': '/accounts/',
     'STATIC_URL': '/static/',
+    'ANONYMOUS_USER_ID': -1,
 }
 
 

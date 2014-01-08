@@ -12,6 +12,7 @@ MACHINA_VANILLA_APPS = [
     'machina.apps.forum',
     'machina.apps.conversation',
     'machina.apps.member',
+    'machina.apps.permission',
 ]
 
 
