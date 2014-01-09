@@ -49,6 +49,12 @@ class TestForum(TestCase):
                 forum = Forum(parent=self.top_level_link, name='sub_forum', type=forum_type)
                 forum.full_clean()
 
+    def test_must_have_a_link_in_case_of_a_link_forum(self):
+        # Run & check
+        with self.assertRaises(ValidationError):
+            forum = Forum(parent=self.top_level_forum, name='sub_link_forum', type=FORUM_TYPES.forum_link)
+            forum.full_clean()
+
     def test_saves_its_numbers_of_posts_and_topics(self):
         # Run & check
         topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
