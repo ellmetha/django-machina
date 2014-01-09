@@ -13,6 +13,7 @@ from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
 
 # Local application / specific library imports
+from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
 from machina.models import ActiveModel
@@ -97,9 +98,13 @@ class AbstractForum(MPTTModel, ActiveModel):
         return self.type == FORUM_TYPES.forum_link
 
     def clean(self):
-        if self.parent:
-            if self.parent.type == FORUM_TYPES.forum_link:
+        super(AbstractForum, self).clean()
+
+        if self.parent and self.parent.is_link:
                 raise ValidationError(_('A forum can not have a link forum as parent'))
+
+        if self.is_link and self.link is None:
+            raise ValidationError(_('A link forum must have a link associated with it'))
 
         super(AbstractForum, self).clean()
 
@@ -116,7 +121,11 @@ class AbstractForum(MPTTModel, ActiveModel):
         # If any change has been made to the forum parent, trigger the update of the counters
         if old_instance and old_instance.parent != self.parent:
             self.update_trackers()
-            # TODO: trigger a 'post_forum_parent_update' signal
+            # The previous parent trackers should also be updated
+            if old_instance.parent:
+                old_instance.parent.update_trackers()
+            # Trigger the 'forum_moved' signal
+            signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
 
     def _simple_save(self, *args, **kwargs):
         """
