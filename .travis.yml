@@ -15,7 +15,7 @@ matrix:
   - python: "3.3"
     env: DJANGO=django==1.4.2
 install:
-  - "pip install $DJANGO django-nose==1.2 coverage pillow django-precise-bbcode django-mptt==0.6.0 django-model-utils==1.5.0 --use-mirrors"
+  - "pip install $DJANGO django-nose==1.2 coverage pillow django-precise-bbcode django-mptt==0.6.0 django-guardian==1.1.1 django-model-utils==1.5.0 --use-mirrors"
 script:
   - coverage run --source=machina ./runtests.py
   - coverage report -m
