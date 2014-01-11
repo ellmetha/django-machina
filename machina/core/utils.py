@@ -16,3 +16,11 @@ def get_object_or_none(klass, *args, **kwargs):
         return queryset.get(*args, **kwargs)
     except:
         return None
+
+
+def refresh(instance):
+    """
+    Select and return instance from database.
+    Usage: instance = refresh(instance)
+    """
+    return instance.__class__.objects.get(pk=instance.pk)

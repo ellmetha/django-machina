@@ -16,6 +16,7 @@ from mptt.models import TreeForeignKey
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
+from machina.core.utils import refresh
 from machina.models import ActiveModel
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
@@ -123,7 +124,8 @@ class AbstractForum(MPTTModel, ActiveModel):
             self.update_trackers()
             # The previous parent trackers should also be updated
             if old_instance.parent:
-                old_instance.parent.update_trackers()
+                old_parent = refresh(old_instance.parent)
+                old_parent.update_trackers()
             # Trigger the 'forum_moved' signal
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
 

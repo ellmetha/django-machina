@@ -13,6 +13,7 @@ from model_utils import Choices
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
+from machina.core.utils import refresh
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
 
@@ -106,9 +107,13 @@ class AbstractTopic(DatedModel):
         # Do the save
         super(AbstractTopic, self).save(*args, **kwargs)
 
-        # If any change has been made to the forum parent, trigger the update of the counters
+        # If any change has been made to the parent forum, trigger the update of the counters
         if old_instance and old_instance.forum != self.forum:
             self.update_trackers()
+            # The previous parent forum counters should also be updated
+            if old_instance.forum:
+                old_forum = refresh(old_instance.forum)
+                old_forum.update_trackers()
 
     def _simple_save(self, *args, **kwargs):
         """
