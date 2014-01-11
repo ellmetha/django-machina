@@ -84,6 +84,19 @@ class TestTopic(TestCase):
         self.assertEqual(new_top_level_forum.real_topics_count, 1)
         self.assertEqual(new_top_level_forum.posts_count, self.topic.posts_count)
 
+    def test_can_trigger_the_update_of_the_counters_of_a_previous_forum(self):
+        # Setup
+        new_top_level_forum = Forum.objects.create(name='new_top_level_forum', type=FORUM_TYPES.forum_post)
+        # Run
+        self.topic.forum = new_top_level_forum
+        self.topic.save()
+        # Check
+        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
+        self.assertEqual(self.topic.forum, new_top_level_forum)
+        self.assertEqual(self.top_level_forum.topics_count, 0)
+        self.assertEqual(self.top_level_forum.real_topics_count, 0)
+        self.assertEqual(self.top_level_forum.posts_count, 0)
+
 
 class TestPost(TestCase):
     def setUp(self):

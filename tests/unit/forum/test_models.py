@@ -92,3 +92,20 @@ class TestForum(TestCase):
         self.assertEqual(self.top_level_cat.posts_count, self.top_level_forum.posts_count)
         self.assertEqual(self.top_level_cat.topics_count, self.top_level_forum.topics_count)
         self.assertEqual(self.top_level_cat.real_topics_count, self.top_level_forum.real_topics_count)
+
+    def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
+        # Setup
+        sub_level_forum = Forum.objects.create(parent=self.top_level_forum,
+                                               name='sub_level_forum', type=FORUM_TYPES.forum_post)
+        topic = Topic.objects.create(subject='Test topic', forum=sub_level_forum, poster=self.u1,
+                                     type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
+        Post.objects.create(topic=topic, poster=self.u1, content='hello')
+        Post.objects.create(topic=topic, poster=self.u1, content='hello2')
+        # Run
+        sub_level_forum.parent = self.top_level_cat
+        sub_level_forum.save()
+        # Check
+        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
+        self.assertEqual(self.top_level_forum.posts_count, 0)
+        self.assertEqual(self.top_level_forum.topics_count, 0)
+        self.assertEqual(self.top_level_forum.real_topics_count, 0)
