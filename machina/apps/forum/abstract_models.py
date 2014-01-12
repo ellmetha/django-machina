@@ -104,10 +104,8 @@ class AbstractForum(MPTTModel, ActiveModel):
         if self.parent and self.parent.is_link:
                 raise ValidationError(_('A forum can not have a link forum as parent'))
 
-        if self.is_link and self.link is None:
+        if self.is_link and not self.link:
             raise ValidationError(_('A link forum must have a link associated with it'))
-
-        super(AbstractForum, self).clean()
 
     def save(self, *args, **kwargs):
         # It is vital to track the changes of the parent associated with a forum in order to
