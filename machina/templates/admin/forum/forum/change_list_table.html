@@ -10,8 +10,7 @@
             <th class="title-cell" scope="col"><div class="text"><span>{% trans "Name" %}</span></div></th>
             <th class="quick-actions-cell" scope="col"><div class="text"><span>{% trans "Quick actions" %}</span></div></th>
             <th class="type-cell" scope="col"><div class="text"><span>{% trans "Type" %}</span></div></th>
-            <th class="topics-count-cell" scope="col"><div class="text"><span>{% trans "Topics count" %}</span></div></th>
-            <th class="posts-count-cell" scope="col"><div class="text"><span>{% trans "Posts count" %}</span></div></th>
+            <th class="forum-details-cell" scope="col"><div class="text"><span>{% trans "Details" %}</span></div></th>
         </tr>
     </thead>
     <tbody>
@@ -27,31 +26,28 @@
                 </th>
                 <td class="quick-actions-cell">
                     {% if forum.get_previous_sibling %}
-                        <a href="{% url 'admin:forum_forum_move' forum.id 'up' %}"><i class="icon-up-circle"></i></a>
+                        <a href="{% url 'admin:forum_forum_move' forum.id 'up' %}" title="{% trans "Move up" %}"><i class="icon-up-circle"></i></a>
                     {% else %}
                         <i class="icon-up-circle disabled"></i>
                     {% endif %}
                     {% if forum.get_next_sibling %}
-                        <a href="{% url 'admin:forum_forum_move' forum.id 'down' %}"><i class="icon-down-circle"></i></a>
+                        <a href="{% url 'admin:forum_forum_move' forum.id 'down' %}" title="{% trans "Move down" %}"><i class="icon-down-circle"></i></a>
                     {% else %}
                         <i class="icon-down-circle disabled"></i>
                     {% endif %}
-                    <a href="{% url 'admin:forum_forum_delete' forum.id %}" class="danger"><i class="icon-trash-circled"></i></a>
+                    <a href="{% url 'admin:forum_forum_delete' forum.id %}" class="danger" title="{% trans "Delete" %}"><i class="icon-trash-circled"></i></a>
                 </td>
                 <td class="type-cell">
                     <div class="type-cell-container">
                         {{ forum.get_type_display }}
                     </div>
                 </td>
-                <td class="topics-count-cell">
-                    <div class="topics-count-cell-container">
-                        {{ forum.topics_count }}
-                    </div>
-                </td>
-                <td class="posts-count-cell">
-                    <div class="posts-count-cell-container">
-                        {{ forum.posts_count }}
-                    </div>
+                <td class="forum-details-cell">
+                    {% if forum.is_category or forum.is_forum %}
+                        {% trans "Topics:" %} <b>{{ forum.topics_count }}</b> / {% trans "Posts:" %} <b>{{ forum.posts_count }}</b>
+                    {% elif forum.is_link %}
+                        {% trans "Link:" %} <a href="{{ forum.link }}">{{ forum.link|truncatechars:60 }}</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
