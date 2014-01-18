@@ -10,13 +10,19 @@ from django.db.models import get_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
+from guardian.admin import GuardedModelAdmin
 from mptt.exceptions import InvalidMove
 
 # Local application / specific library imports
 Forum = get_model('forum', 'Forum')
 
 
-class ForumAdmin(admin.ModelAdmin):
+class ForumAdmin(GuardedModelAdmin):
+    """
+    The ForumAdmin class is a subclass of GuardedModelAdmin and so provides common tools for
+    assigning user permissions or group permissions to any forums.
+    This class also provides a specific view for moving up or down any forums.
+    """
     fieldsets = (
         [None, {
             'fields': ('type', 'parent', 'name', 'description', 'image',)
@@ -32,6 +38,8 @@ class ForumAdmin(admin.ModelAdmin):
     )
     list_display = ('name', 'type', 'topics_count', 'posts_count',)
     search_fields = ('name',)
+    # Permissions specific attributes
+    obj_perms_manage_template = 'admin/forum/forum/obj_perms_manage.html'
 
     def get_urls(self):
         urls = super(ForumAdmin, self).get_urls()

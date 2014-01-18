@@ -71,6 +71,32 @@ class AbstractForum(MPTTModel, ActiveModel):
     class Meta:
         abstract = True
         ordering = ['tree_id', 'lft']
+        permissions = [
+            # Forums
+            ('can_see_forum', _('Can see forum')),
+            ('can_read_forum', _('Can read forum')),
+            # Topics & posts
+            ('can_start_new_topics', _('Can start new topics')),
+            ('can_reply_to_topics', _('Can reply to topics')),
+            ('can_post_announcements', _('Can post announcements')),
+            ('can_post_stickies', _('Can post stickies')),
+            ('can_delete_own_posts', _('Can delete own posts')),
+            ('can_edit_own_posts', _('Can edit own posts')),
+            ('can_attach_file', _('Can attach file')),
+            ('can_download_file', _('Can download file')),
+            ('can_post_without_approval', _('Can post without approval')),
+            # Polls
+            ('can_create_poll', _('Can create poll')),
+            ('can_vote_in_polls', _('Can vote in polls')),
+            ('can_change_existing_vote', ('Can change existing vote')),
+            # Moderation
+            ('can_edit_topics', _('Can edit topics')),
+            ('can_close_topics', _('Can close topics')),
+            ('can_move_topics', _('Can move topics')),
+            ('can_edit_posts', _('Can edit posts')),
+            ('can_delete_posts', _('Can delete posts')),
+            ('can_move_posts', _('Can move posts')),
+        ]
         verbose_name = _('Forum')
         verbose_name_plural = _('Forums')
         app_label = 'forum'
