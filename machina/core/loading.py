@@ -22,7 +22,7 @@ def get_class(module_label, classname):
 
 def get_classes(module_label, classnames):
     """
-    Imports a list of classes from a given module.
+    Imports a set of classes from a given module.
 
     Usage::
 
