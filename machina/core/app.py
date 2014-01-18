@@ -12,6 +12,10 @@ class Application(object):
     This process is directly inspired from the one provided by django-oscar.
     """
     name = None
+    # Default permission for any view not in permissions_map
+    default_permissions = None
+    # Maps view names to a tuple or list of permissions
+    permissions_map = {}
 
     def __init__(self, app_name=None, **kwargs):
         self.app_name = app_name
