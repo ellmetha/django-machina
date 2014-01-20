@@ -54,7 +54,8 @@ class AbstractForum(MPTTModel, ActiveModel):
                                          default=False)
 
     # Category, Default forum or Link ; that's what a forum can be
-    type = models.PositiveSmallIntegerField(choices=FORUM_TYPES, verbose_name=_('Forum type'), db_index=True)
+    TYPE_CHOICES = FORUM_TYPES
+    type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
     # Tracking data
     posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
