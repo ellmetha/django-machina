@@ -1336,19 +1336,3 @@
 .fa-plus-square-o:before {
   content: "\f196";
 }
-.danger {
-  color: #b82010;
-}
-a.danger {
-  color: #b82010;
-}
-a.danger:hover {
-  color: #9d261d;
-}
-#forum-table-dnd .quick-actions-cell {
-  width: 5%;
-  text-align: center;
-}
-#forum-table-dnd .quick-actions-cell .disabled {
-  color: #eeeeee;
-}
