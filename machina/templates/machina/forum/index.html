@@ -1,0 +1,77 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% load mptt_tags %}
+
+{% block sub-title %}{% trans "Index" %}{% endblock sub-title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% recursetree forums %}
+                {% if node.level == 0 %}
+                    {% if node.is_category %}
+                        <div class="panel panel-default forumlist">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ node.name }}</h3>
+                            </div>
+                            <div class="paner-body">
+                                <table class="table">
+                                    {{ children }}
+                                </table>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% if node.get_previous_sibling and node.get_previous_sibling.is_category or not node.get_previous_sibling.is_category %}
+                            <div class="panel panel-default forumlist">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{% trans "Forums" %}</h3>
+                                </div>
+                                <div class="paner-body">
+                                    <table class="table">
+                        {% endif %}
+                        <tr>
+                            <td><i class="fa fa-circle-o fa-2x"></i></td>
+                            <td>
+                                <h6>{{ node.name }}</h6>
+                                {{ children }}
+                            </td>
+                            <td>{{ node.topics_count }}</td>
+                            <td>{{ node.posts_count }}</td>
+                            <td>{% trans "Last post" %}</td>
+                        </tr>
+                        {% if node.get_next_sibling and node.get_next_sibling.is_category or not node.get_next_sibling.is_category %}
+                                    </table>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% elif node.level == 1 %}
+                    {% if node.parent.is_category %}
+                        <tr>
+                            <td><i class="fa fa-circle-o fa-2x"></i></td>
+                            <td>
+                                <h6>{{ node.name }}</h6>
+                                {{ children }}
+                            </td>
+                            <td>{{ node.topics_count }}</td>
+                            <td>{{node.posts_count }}</td>
+                            <td>{% trans "Last post" %}</td>
+                        </tr>
+                    {% else %}
+                        {% if not node.get_previous_sibling %}
+                            <b>{% trans "Subforums:" %}</b>
+                        {% endif %}
+                        <a href="#">{{ node.name }}</a>{% if node.get_next_sibling %},&nbsp;{% endif %}
+                    {% endif %}
+                {% elif node.level == 2 %}
+                    {% if not node.get_previous_sibling %}
+                        <b>{% trans "Subforums:" %}</b>
+                    {% endif %}
+                    <a href="#">{{ node.name }}</a>{% if node.get_next_sibling %},&nbsp;{% endif %}
+                {% endif %}
+            {% endrecursetree %}
+        </div>
+    </div>
+
+{% endblock content %}

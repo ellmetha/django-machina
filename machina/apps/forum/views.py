@@ -21,6 +21,15 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return perm_handler.forum_list_filter(
-            Forum.objects.filter(Q(parent__isnull=True) | Q(parent__parent__isnull=True, display_on_index=True)),
+            Forum.objects.filter(
+                # Category, top-level forums and links
+                Q(parent__isnull=True, display_on_index=True) |
+                # Sub-level categories, forums and links
+                Q(parent__parent__isnull=True, display_on_index=True) |
+                # Children of forums that have a category as parent
+                Q(parent__parent__parent__isnull=True,
+                    parent__parent__type=Forum.TYPE_CHOICES.forum_cat,
+                    parent__type=Forum.TYPE_CHOICES.forum_post,
+                    display_on_index=True)),
             self.request.user
         )

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+import os
 
 # Third party imports
-
 # Local application / specific library imports
 
 
@@ -14,6 +14,11 @@ MACHINA_VANILLA_APPS = [
     'machina.apps.member',
     'machina.apps.permission',
 ]
+
+
+# Main Machina template directory
+MACHINA_MAIN_TEMPLATE_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'templates/machina')
 
 
 def get_vanilla_apps(overrides=None):
@@ -31,7 +36,5 @@ def get_vanilla_apps(overrides=None):
                 return override
         return app_label
 
-    apps = []
-    for app_label in MACHINA_VANILLA_APPS:
-        apps.append(get_app_label(app_label, overrides))
+    apps = [get_app_label(app_label, overrides) for app_label in MACHINA_VANILLA_APPS]
     return apps

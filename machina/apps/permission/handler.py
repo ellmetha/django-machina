@@ -16,6 +16,10 @@ class PermissionHandler(object):
         """
         checker = ObjectPermissionChecker(user)
 
+        # Any superuser should see all the forums
+        if user.is_superuser:
+            return qs
+
         # Isolates the top-level forums and check whether they can
         # be viewed by the given user.
         toplevel_forums = qs.filter(parent__isnull=True)
