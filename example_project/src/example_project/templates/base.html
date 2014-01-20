@@ -22,7 +22,6 @@
         
         {% block css %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
             {% compressed_css 'theme' %}
         {% endblock css %}
         
@@ -34,20 +33,19 @@
         {% block js %}
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         {% endblock js %}
-        <div id="wrap">
+        <div class="container">
             {% block header %}
-                <div class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="/">django-precise-bbcode</a>
-                        </div>
-                        <div class="collapse navbar-collapse"></div><!--/.nav-collapse -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">django-machina</a>
                     </div>
+                    <div class="collapse navbar-collapse"></div>
                 </div>
             {% endblock header %}
         	<br />
@@ -59,8 +57,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div id="push"></div>
         </div>
         
         {% block extra-js %}

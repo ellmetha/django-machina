@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import gettext
 from machina import get_vanilla_apps
+from machina import MACHINA_MAIN_TEMPLATE_DIR
 import os
 PROJECT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../..')
 
@@ -93,6 +94,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    # Machina
+    'machina.core.context_processors.metadata',
+)
+
+TEMPLATE_DIRS = (
+    MACHINA_MAIN_TEMPLATE_DIR,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -139,6 +146,7 @@ PIPELINE_CSS = {
     'theme': {
         'source_filenames': (
           'less/theme.less',
+          'machina/less/styles.less',
         ),
         'output_filename': 'css/theme.css',
     },
