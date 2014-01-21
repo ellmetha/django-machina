@@ -42,6 +42,12 @@ class TestForum(TestCase):
         self.assertEqual(self.top_level_forum.margin_level, 0)
         self.assertEqual(sub_level_forum.margin_level, 2)
 
+    def test_category_cannot_be_the_child_of_another_category(self):
+        # Run & check
+        with self.assertRaises(ValidationError):
+            cat = Forum(parent=self.top_level_cat, name='sub_forum', type=FORUM_TYPES.forum_cat)
+            cat.full_clean()
+
     def test_can_not_be_the_child_of_a_forum_link(self):
         # Run & check
         for forum_type, _ in FORUM_TYPES:

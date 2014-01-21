@@ -131,6 +131,9 @@ class AbstractForum(MPTTModel, ActiveModel):
         if self.parent and self.parent.is_link:
                 raise ValidationError(_('A forum can not have a link forum as parent'))
 
+        if self.is_category and self.parent.is_category:
+                raise ValidationError(_('A category can not have another category as parent'))
+
         if self.is_link and not self.link:
             raise ValidationError(_('A link forum must have a link associated with it'))
 
