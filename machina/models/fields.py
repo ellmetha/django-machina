@@ -12,6 +12,7 @@ from django.db.models import signals
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.functional import curry
+from django.utils.safestring import mark_safe
 from django.utils.safestring import SafeData
 from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
@@ -59,7 +60,7 @@ class MarkupText(SafeData):
 
     # rendered is a read only property
     def _get_rendered(self):
-        return getattr(self.instance, self.rendered_field_name)
+        return mark_safe(getattr(self.instance, self.rendered_field_name))
 
     rendered = property(_get_rendered)
 
