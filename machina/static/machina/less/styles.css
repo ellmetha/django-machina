@@ -1336,3 +1336,39 @@
 .fa-plus-square-o:before {
   content: "\f196";
 }
+.forumlist table {
+  margin: 0 auto;
+}
+.forumlist table td {
+  vertical-align: middle !important;
+}
+.forumlist table td.forum-icon {
+  width: 5%;
+}
+.forumlist table td.forum-name {
+  width: 50%;
+}
+.forumlist table td.forum-count {
+  width: 10%;
+}
+.forumlist table td.forum-last-post {
+  width: 15%;
+}
+.forumlist .forum-icon {
+  padding-left: 20px;
+  color: #999999;
+}
+.forumlist .forum-name a.forum-name-link {
+  display: block;
+}
+.forumlist .forum-name .forum-description {
+  font-size: 11px;
+}
+.forumlist .forum-name .sub-forums {
+  font-size: 12px;
+}
+.forumlist .forum-count,
+.forumlist .forum-last-post,
+.forumlist .forum-link-redirects {
+  font-size: 13px;
+}
