@@ -10,6 +10,23 @@ from django.test.client import Client
 # Local application / specific library imports
 
 
+class BaseUnitTestCase(TestCase):
+    """
+    Shortcut TestCase providing some useful assertion method that can
+    be used for unit testing models, backend protocols, etc.
+    """
+
+    def assertQuerysetEqual(self, qs1, qs2):
+        """
+        Check whether the two querysets are equal.
+        """
+        pk = lambda obj: obj.pk
+        return self.assertEqual(
+            list(sorted(qs1, key=pk)),
+            list(sorted(qs2, key=pk))
+        )
+
+
 def add_permissions(user, permissions):
     """
     Add a set of permissions to a given user.
