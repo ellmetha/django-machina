@@ -38,7 +38,7 @@ def add_permissions(user, permissions):
         user.user_permissions.add(perm)
 
 
-class BaseClientTestCase(TestCase):
+class BaseClientTestCase(BaseUnitTestCase):
     """
     Shortcut TestCase for using Django's test client and avoid boilerplate code
     such as user login or user creation.
