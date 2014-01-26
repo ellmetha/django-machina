@@ -47,7 +47,6 @@ class PermissionHandler(object):
         # Only non-superusers permissions are checked against the considered forums
         if not user.is_superuser:
             hidden_forums = self._get_hidden_forum_ids(forums, checker)
-            forums = forums.exclude(id__in=hidden_forums)
 
         forums = forums.exclude(id__in=hidden_forums)
         posts = Post.objects.filter(topic__forum__in=forums).order_by('-created')
