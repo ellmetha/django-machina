@@ -63,7 +63,15 @@ class PermissionHandler(object):
         hidden_forums = []
         for forum in forums:
             if forum.id not in hidden_forums:
-                if not checker.has_perm('can_see_forum', forum) and not checker.has_perm('can_read_forum', forum):
+                # First cheks if any of the forum ancestors is hidden
+                ancestors_visible = True
+                for ancestor in forum.get_ancestors():
+                    if not checker.has_perm('can_see_forum', ancestor) and not checker.has_perm('can_read_forum', ancestor):
+                        ancestors_visible = False
+                        break
+
+                if (ancestors_visible is False) or (not checker.has_perm('can_see_forum', forum) and
+                                                    not checker.has_perm('can_read_forum', forum)):
                     # If one forum can not be seen by a given user, all of its descendant
                     # should also be hidden.
                     forum_and_descendants = forum.get_descendants(include_self=True)
