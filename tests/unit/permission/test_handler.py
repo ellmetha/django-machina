@@ -38,6 +38,7 @@ class TestPermissionHandler(BaseUnitTestCase):
         self.top_level_link = top_level_link
 
         # Assign some permissions
+        assign_perm('can_see_forum', self.u1, self.top_level_cat)
         assign_perm('can_see_forum', self.u1, self.forum_1)
         assign_perm('can_read_forum', self.u1, self.forum_3)
 
