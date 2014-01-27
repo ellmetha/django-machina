@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.db.models import get_model
-from django.db.models import Q
 from guardian.core import ObjectPermissionChecker
 
 # Local application / specific library imports
@@ -30,7 +29,7 @@ class PermissionHandler(object):
         # Check whether the forums can be viewed by the given user
         forums_to_hide = self._get_hidden_forum_ids(qs, checker)
 
-        return qs.exclude(Q(id__in=forums_to_hide) | Q(parent__id__in=forums_to_hide))
+        return qs.exclude(id__in=forums_to_hide)
 
     # Filtering on topics
     # --

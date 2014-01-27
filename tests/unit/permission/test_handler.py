@@ -58,7 +58,7 @@ class TestPermissionHandler(BaseUnitTestCase):
         assign_perm('can_see_forum', self.u1, self.forum_1)
         assign_perm('can_read_forum', self.g1, self.forum_3)
 
-    def test_show_a_forum_if_it_is_visible(self):
+    def test_shows_a_forum_if_it_is_visible(self):
         # Setup
         forums = Forum.objects.filter(pk=self.top_level_cat.pk)
         # Run
@@ -74,7 +74,7 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Check
         self.assertQuerysetEqual(filtered_forums, [self.top_level_cat, ])
 
-    def test_show_a_forum_if_all_of_its_ancestors_are_visible(self):
+    def test_shows_a_forum_if_all_of_its_ancestors_are_visible(self):
         # Setup
         forums = Forum.objects.filter(parent=self.top_level_cat)
         # Run
@@ -105,3 +105,12 @@ class TestPermissionHandler(BaseUnitTestCase):
         remove_perm('can_see_forum', self.u1, self.forum_1)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertIsNone(last_post)
+
+    def test_shows_all_forums_to_a_superuser(self):
+        # Setup
+        u2 = User.objects.create(username='superuser1', is_superuser=True)
+        forums = Forum.objects.filter(parent=self.top_level_cat)
+        # Run
+        filtered_forums = self.perm_handler.forum_list_filter(forums, u2)
+        # Check
+        self.assertQuerysetEqual(filtered_forums, [self.forum_1, self.forum_2, self.forum_3])
