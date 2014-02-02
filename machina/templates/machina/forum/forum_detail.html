@@ -3,12 +3,12 @@
 {% load mptt_tags %}
 {% load forum_tags %}
 
-{% block sub-title %}{% trans "Index" %}{% endblock sub-title %}
+{% block sub-title %}{{ forum.name }}{% endblock sub-title %}
 
 {% block content %}
 
     <div class="container">
-        {% forum_list forums request %}
+        
     </div>
 
 {% endblock content %}

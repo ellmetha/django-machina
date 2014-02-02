@@ -30,3 +30,16 @@ def get_forum_last_post(forum, user):
     # Retrieve the last post link associated with the current forum
     last_post = perm_handler.get_forum_last_post(forum, user)
     return last_post
+
+
+@register.inclusion_tag('machina/forum/forum_list.html')
+def forum_list(forums, request):
+    """
+    This will render the given list of forums by respecting the order and the depth of each
+    forum in the forums tree.
+
+    Usage::
+
+        {% forum_list my_forums request %}
+    """
+    return {'forums': forums, 'user': request.user}

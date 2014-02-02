@@ -1,0 +1,123 @@
+{% load i18n %}
+{% load mptt_tags %}
+{% load forum_tags %}
+
+<div class="row">
+    {% recursetree forums %}
+        {% if node.level == 0 %}
+            {% if node.is_category %}
+                <div class="panel panel-default forumlist">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><a href="#" class="brand">{{ node.name }}</a></h3>
+                    </div>
+                    <div class="paner-body">
+                        <table class="table">
+                            {{ children }}
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                {% if node.get_previous_sibling and node.get_previous_sibling.is_category or not node.get_previous_sibling %}
+                    <div class="panel panel-default forumlist">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{% trans "Forums" %}</h3>
+                        </div>
+                        <div class="paner-body">
+                            <table class="table">
+                {% endif %}
+                <tr>
+                    {% if not node.is_link %}
+                        <td class="forum-icon"><i class="fa fa-circle-o fa-2x"></i></td>
+                        <td class="forum-name">
+                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <div class="forum-description">
+                                {{ node.description.rendered }}
+                            </div>
+                            <div class="sub-forums">{{ children }}</div>
+                        </td>
+                        <td class="forum-count">{{ node.topics_count }} {% trans "topic" %}{{ node.topics_count|pluralize }}</td>
+                        <td class="forum-count">{{ node.posts_count }} {% trans "post" %}{{ node.posts_count|pluralize }}</td>
+                        <td class="forum-last-post">
+                            {% get_forum_last_post node user as last_post %}
+                            {% if last_post %}
+                                {{ last_post.created }}<br />
+                                <a href="#">{{ last_post.poster }}</a>
+                                &nbsp;<a href="#"><i class="fa fa-arrow-circle-o-right "></i></a>
+                            {% else %}
+                                {% trans "No posts" %}
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
+                        <td class="forum-name">
+                            <a href="{{ node.link }}" class="forum-name-link">{{ node.name }}</a>
+                            <div class="forum-description">
+                                {{ node.description.rendered }}
+                            </div>
+                        </td>
+                        <td class="forum-link-redirects" colspan="3">
+                            {% if node.link_redirects %}
+                                {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+                {% if node.get_next_sibling and node.get_next_sibling.is_category or not node.get_next_sibling %}
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% elif node.level == 1 %}
+            {% if node.parent.is_category %}
+                <tr>
+                    {% if not node.is_link %}
+                        <td class="forum-icon"><i class="fa fa-circle-o fa-2x"></i></td>
+                        <td class="forum-name">
+                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <div class="forum-description">
+                                {{ node.description.rendered }}
+                            </div>
+                            <div class="sub-forums">{{ children }}</div>
+                        </td>
+                        <td class="forum-count">{{ node.topics_count }} {% trans "topic" %}{{ node.topics_count|pluralize }}</td>
+                        <td class="forum-count">{{ node.posts_count }} {% trans "post" %}{{ node.posts_count|pluralize }}</td>
+                        <td class="forum-last-post">
+                            {% get_forum_last_post node user as last_post %}
+                            {% if last_post %}
+                                {{ last_post.created }}<br />
+                                <a href="#">{{ last_post.poster }}</a>
+                                &nbsp;<a href="#"><i class="fa fa-arrow-circle-o-right "></i></a>
+                            {% else %}
+                                {% trans "No posts" %}
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
+                        <td class="forum-name">
+                            <a href="{{ node.link }}" class="forum-name-link">{{ node.name }}</a>
+                            <div class="forum-description">
+                                {{ node.description.rendered }}
+                            </div>
+                        </td>
+                        <td class="forum-link-redirects" colspan="3">
+                            {% if node.link_redirects %}
+                                {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% else %}
+                {% if not node.get_previous_sibling %}
+                    <b>{% trans "Subforums:" %}</b>&nbsp;
+                {% endif %}
+                <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+            {% endif %}
+        {% elif node.level == 2 %}
+            {% if not node.get_previous_sibling %}
+                <b>{% trans "Subforums:" %}</b>&nbsp;
+            {% endif %}
+            <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+        {% endif %}
+    {% endrecursetree %}
+</div>
