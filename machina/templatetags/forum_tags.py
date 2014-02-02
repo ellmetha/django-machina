@@ -42,4 +42,16 @@ def forum_list(forums, request):
 
         {% forum_list my_forums request %}
     """
-    return {'forums': forums, 'user': request.user}
+    data_dict = {
+        'forums': forums,
+        'user': request.user,
+    }
+
+    forums_copy = sorted(forums, key=lambda forum: forum.level)
+    if forums_copy:
+        root_level = forums_copy[0].level
+        data_dict['root_level'] = root_level
+        data_dict['root_level_middle'] = root_level + 1
+        data_dict['root_level_sub'] = root_level + 2
+
+    return data_dict
