@@ -66,8 +66,9 @@ class AbstractForum(MPTTModel, ActiveModel):
                                                        editable=False, blank=True, default=0)
 
     # Display options
-    display_on_index = models.BooleanField(verbose_name=_('Display on index'), default=True)
-    display_sub_forum_list = models.BooleanField(verbose_name=_('Display sub forum list'), default=True)
+    display_sub_forum_list = models.BooleanField(verbose_name=_('Display in parent-forums legend'),
+                                                 help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
+                                                 default=True)
 
     class Meta:
         abstract = True
@@ -131,7 +132,7 @@ class AbstractForum(MPTTModel, ActiveModel):
         if self.parent and self.parent.is_link:
                 raise ValidationError(_('A forum can not have a link forum as parent'))
 
-        if self.is_category and self.parent.is_category:
+        if self.is_category and self.parent and self.parent.is_category:
                 raise ValidationError(_('A category can not have another category as parent'))
 
         if self.is_link and not self.link:

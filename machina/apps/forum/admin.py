@@ -28,7 +28,7 @@ class ForumAdmin(GuardedModelAdmin):
             'fields': ('type', 'parent', 'name', 'description', 'image',)
         }],
         [_('Forum settings'), {
-            'fields': ('display_on_index', 'display_sub_forum_list',),
+            'fields': ('display_sub_forum_list',),
             'classes': ('collapse',)
         }],
         [_('Link forum settings'), {
