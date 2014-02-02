@@ -1336,39 +1336,156 @@
 .fa-plus-square-o:before {
   content: "\f196";
 }
-.forumlist table {
+.forumlist .panel-heading {
+  padding-top: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 8px;
+}
+.forumlist .panel-heading table.table {
   margin: 0 auto;
 }
-.forumlist table td {
-  vertical-align: middle !important;
+.forumlist .panel-heading table.table td {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border: none;
 }
-.forumlist table td.forum-icon {
-  width: 5%;
+.forumlist .panel-heading table.table td.forum-name-col {
+  width: 55%;
 }
-.forumlist table td.forum-name {
-  width: 50%;
-}
-.forumlist table td.forum-count {
+.forumlist .panel-heading table.table td.forum-count-col {
   width: 10%;
 }
-.forumlist table td.forum-last-post {
+.forumlist .panel-heading table.table td.forum-last-post-col {
   width: 15%;
 }
-.forumlist .forum-icon {
+.forumlist .panel-heading table.table td.forum-name-col {
+  padding-left: 14px;
+}
+.forumlist .panel-heading table.table .forum-count-col {
+  text-align: center;
+}
+.forumlist .panel-heading table.table .forum-count-col,
+.forumlist .panel-heading table.table .forum-last-post-col {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #555555;
+}
+.forumlist .panel-body {
+  padding: 0;
+}
+.forumlist .panel-body table.table {
+  margin: 0 auto;
+}
+.forumlist .panel-body table.table td {
+  vertical-align: middle !important;
+}
+.forumlist .panel-body table.table td.forum-icon {
+  width: 5%;
+}
+.forumlist .panel-body table.table td.forum-name {
+  width: 50%;
+}
+.forumlist .panel-body table.table td.forum-count {
+  width: 10%;
+}
+.forumlist .panel-body table.table td.forum-last-post {
+  width: 15%;
+}
+.forumlist .panel-body .forum-icon {
   padding-left: 20px;
   color: #999999;
 }
-.forumlist .forum-name a.forum-name-link {
+.forumlist .panel-body .forum-name a.forum-name-link {
   display: block;
 }
-.forumlist .forum-name .forum-description {
+.forumlist .panel-body .forum-name .forum-description {
   font-size: 11px;
 }
-.forumlist .forum-name .sub-forums {
+.forumlist .panel-body .forum-name .sub-forums {
   font-size: 12px;
 }
-.forumlist .forum-count,
-.forumlist .forum-last-post,
-.forumlist .forum-link-redirects {
+.forumlist .panel-body .forum-count {
+  text-align: center;
+}
+.forumlist .panel-body .forum-count,
+.forumlist .panel-body .forum-last-post,
+.forumlist .panel-body .forum-link-redirects {
+  font-size: 13px;
+}
+.topiclist .panel-heading {
+  padding-top: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 8px;
+}
+.topiclist .panel-heading table.table {
+  margin: 0 auto;
+}
+.topiclist .panel-heading table.table td {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border: none;
+}
+.topiclist .panel-heading table.table td.topic-name-col {
+  width: 55%;
+}
+.topiclist .panel-heading table.table td.topic-count-col {
+  width: 10%;
+}
+.topiclist .panel-heading table.table td.topic-last-post-col {
+  width: 15%;
+}
+.topiclist .panel-heading table.table td.topic-name-col {
+  padding-left: 14px;
+}
+.topiclist .panel-heading table.table .topic-count-col {
+  text-align: center;
+}
+.topiclist .panel-heading table.table .topic-count-col,
+.topiclist .panel-heading table.table .topic-last-post-col {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #555555;
+}
+.topiclist .panel-body {
+  padding: 0;
+}
+.topiclist .panel-body table.table {
+  margin: 0 auto;
+}
+.topiclist .panel-body table.table td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  vertical-align: middle !important;
+}
+.topiclist .panel-body table.table td.topic-icon {
+  width: 5%;
+}
+.topiclist .panel-body table.table td.topic-name {
+  width: 50%;
+}
+.topiclist .panel-body table.table td.topic-count {
+  width: 10%;
+}
+.topiclist .panel-body table.table td.topic-last-post {
+  width: 15%;
+}
+.topiclist .panel-body .topic-icon {
+  padding-left: 20px;
+  color: #999999;
+}
+.topiclist .panel-body .topic-name a.topic-name-link {
+  display: block;
+}
+.topiclist .panel-body .topic-name .topic-created {
+  font-size: 11px;
+  color: #666;
+}
+.topiclist .panel-body .topic-count {
+  text-align: center;
+}
+.topiclist .panel-body .topic-count,
+.topiclist .panel-body .topic-last-post {
   font-size: 13px;
 }

@@ -1,9 +1,9 @@
 // Forum_lists.less
-// Variables to customize the look and feel of machina forum lists
+// Variables to customize the look and feel of machina topic lists
 // ---------------------------------------------------------------
 
 
-.forumlist{
+.topiclist{
     .panel-heading{
         padding-top: 10px;
         padding-left: 0;
@@ -19,19 +19,19 @@
                 border: none;
             }
 
-            td.forum-name-col{width: 55%;}
-            td.forum-count-col{width: 10%;}
-            td.forum-last-post-col{width: 15%;}
+            td.topic-name-col{width: 55%;}
+            td.topic-count-col{width: 10%;}
+            td.topic-last-post-col{width: 15%;}
 
-            td.forum-name-col{
+            td.topic-name-col{
                 padding-left: 14px;
             }
 
-            .forum-count-col{
+            .topic-count-col{
                 text-align: center;
             }
 
-            .forum-count-col, .forum-last-post-col{
+            .topic-count-col, .topic-last-post-col{
                 font-size: 13px;
                 text-transform: uppercase;
                 color: @gray;
@@ -46,34 +46,38 @@
             margin: 0 auto;
 
             td{
+                padding-top: 2px;
+                padding-bottom: 2px;
                 vertical-align: middle !important;
             }
 
-            td.forum-icon{width: 5%;}
-            td.forum-name{width: 50%;}
-            td.forum-count{width: 10%;}
-            td.forum-last-post{width: 15%;}
+            td.topic-icon{width: 5%;}
+            td.topic-name{width: 50%;}
+            td.topic-count{width: 10%;}
+            td.topic-last-post{width: 15%;}
         }
 
-        .forum-icon{
+        .topic-icon{
             padding-left: 20px;
             color: @grayLight;
         }
 
-        .forum-name{
-            a.forum-name-link{
+        .topic-name{
+            a.topic-name-link{
                 display: block;
             }
 
-            .forum-description{font-size: 11px;}
-            .sub-forums{font-size: 12px;}
+            .topic-created{
+                font-size: 11px;
+                color: #666;
+            }
         }
 
-        .forum-count{
+        .topic-count{
             text-align: center;
         }
 
-        .forum-count, .forum-last-post, .forum-link-redirects{
+        .topic-count, .topic-last-post{
             font-size: 13px;
         }
     }
