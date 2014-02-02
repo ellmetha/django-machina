@@ -4,13 +4,22 @@
 
 <div class="row">
     {% recursetree forums %}
-        {% if node.level == 0 %}
+        {% if node.level == root_level %}
             {% if node.is_category %}
                 <div class="panel panel-default forumlist">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><a href="#" class="brand">{{ node.name }}</a></h3>
+                        <table class="table">
+                            <tr>
+                                <td class="forum-name-col" colspan="2">
+                                    <h3 class="panel-title"><a href="{% url 'forum:forum' node.id %}" class="brand">{{ node.name }}</a></h3>
+                                </td>
+                                <td class="forum-count-col">{% trans "Topics" %}</td>
+                                <td class="forum-count-col">{% trans "Posts" %}</td>
+                                <td class="forum-last-post-col">{% trans "Last post" %}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="paner-body">
+                    <div class="panel-body">
                         <table class="table">
                             {{ children }}
                         </table>
@@ -20,9 +29,18 @@
                 {% if node.get_previous_sibling and node.get_previous_sibling.is_category or not node.get_previous_sibling %}
                     <div class="panel panel-default forumlist">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{% trans "Forums" %}</h3>
+                            <table class="table">
+                                <tr>
+                                    <td class="forum-name-col" colspan="2">
+                                        <h3 class="panel-title">{% trans "Forums" %}</h3>
+                                    </td>
+                                    <td class="forum-count-col">{% trans "Topics" %}</td>
+                                    <td class="forum-count-col">{% trans "Posts" %}</td>
+                                    <td class="forum-last-post-col">{% trans "Last post" %}</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="paner-body">
+                        <div class="panel-body">
                             <table class="table">
                 {% endif %}
                 <tr>
@@ -68,7 +86,7 @@
                     </div>
                 {% endif %}
             {% endif %}
-        {% elif node.level == 1 %}
+        {% elif node.level == root_level_middle %}
             {% if node.parent.is_category %}
                 <tr>
                     {% if not node.is_link %}
@@ -113,7 +131,7 @@
                 {% endif %}
                 <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
             {% endif %}
-        {% elif node.level == 2 %}
+        {% elif node.level == root_level_sub %}
             {% if not node.get_previous_sibling %}
                 <b>{% trans "Subforums:" %}</b>&nbsp;
             {% endif %}

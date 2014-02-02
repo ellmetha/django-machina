@@ -5,10 +5,58 @@
 
 {% block sub-title %}{{ forum.name }}{% endblock sub-title %}
 
+{% block breadcrumb %}
+    {% include "machina/breadcrumb.html" %}
+{% endblock breadcrumb %}
+
 {% block content %}
-
     <div class="container">
-        
+        {% forum_list sub_forums request %}
+        {% if forum.is_forum %}
+            <div class="row">
+                <div class="panel panel-default topiclist">
+                    <div class="panel-heading">
+                        <table class="table">
+                            <tr>
+                                <td class="topic-name-col" colspan="2">
+                                    <h3 class="panel-title"><i class="fa fa-comment"></i> {% trans "Topics" %}</h3>
+                                </td>
+                                <td class="topic-count-col">{% trans "Replies" %}</td>
+                                <td class="topic-count-col">{% trans "Views" %}</td>
+                                <td class="topic-last-post-col">{% trans "Last post" %}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            {% for topic in topics %}
+                                <tr>
+                                    <td class="topic-icon"><i class="fa fa-dot-circle-o fa-2x"></i></td>
+                                    <td class="topic-name">
+                                        <a href="#" class="topic-name-link">{{ topic.subject }}</a>
+                                        <div class="topic-created">
+                                            {% trans "By:" %} <a href="#">{{ topic.poster.username }}</a> {% trans "on" %} {{ topic.created }}
+                                        </div>
+                                    </td>
+                                    <td class="topic-count">{{ topic.posts_count }}</td>
+                                    <td class="topic-count">{{ topic.views_count }}</td>
+                                    <td class="topic-last-post">
+                                        {% trans "By:" %} <a href="#">{{ topic.last_post.poster.username }}</a>&nbsp;<a href="#"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                        <br />
+                                        {{ topic.last_post.created }}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td>
+                                        {% trans "There are no topics in this forum." %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
-
 {% endblock content %}

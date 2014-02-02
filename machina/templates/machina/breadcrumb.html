@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<ul class="breadcrumb">
+    <li><a href="{% url 'forum:index' %}"><i class="fa fa-home"></i> {% trans "Forum index" %}</a></li>
+    {% if forum %}
+        {% for ancestor in forum.get_ancestors %}
+            <li><a href="{% url 'forum:forum' ancestor.id %}">{{ ancestor.name }}</a></li>
+        {% endfor %}
+        <li><a href="{% url 'forum:forum' forum.id %}">{{ forum.name }}</a></li>
+    {% endif %}
+</ul>
