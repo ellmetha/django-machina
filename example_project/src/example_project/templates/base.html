@@ -52,6 +52,10 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span12">
+                        {% block breadcrumb %}
+                        {% endblock breadcrumb %}
+                    </div>
+                    <div class="span12">
                     	{% block content %}
                     	{% endblock content %}
                     </div>
