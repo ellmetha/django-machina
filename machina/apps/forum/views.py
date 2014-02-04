@@ -4,6 +4,7 @@
 # Third party imports
 from django.db.models import get_model
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
@@ -84,3 +85,9 @@ class ForumView(PermissionRequiredMixin, ListView):
         context['sub_forums'] = perm_handler.forum_list_filter(sub_forums, self.request.user)
 
         return context
+
+    def dispatch(self, request, *args, **kwargs):
+        forum = self.get_object()
+        if forum.is_link:
+            return HttpResponseRedirect(forum.link)
+        return super(ForumView, self).dispatch(request, *args, **kwargs)
