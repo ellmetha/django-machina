@@ -68,7 +68,7 @@
                     {% else %}
                         <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{{ node.link }}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
@@ -113,12 +113,14 @@
                     {% else %}
                         <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{{ node.link }}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
                         </td>
-                        <td class="forum-link-redirects" colspan="3">
+                        <td class="forum-count"></td>
+                        <td class="forum-count"></td>
+                        <td class="forum-last-post forum-link-redirects">
                             {% if node.link_redirects %}
                                 {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
                             {% endif %}
