@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
 # Local application / specific library imports
+from machina.apps.forum.signals import forum_viewed
 from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
@@ -46,6 +47,16 @@ class ForumView(PermissionRequiredMixin, ListView):
     context_object_name = 'topics'
     permission_required = ['can_read_forum', ]
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
+    view_signal = forum_viewed
+
+    def get(self, request, **kwargs):
+        forum = self.get_object()
+        if forum.is_link:
+            response = HttpResponseRedirect(forum.link)
+        else:
+            response = super(ForumView, self).get(request, **kwargs)
+        self.send_signal(request, response, forum)
+        return response
 
     def get_forum(self):
         return get_object_or_404(Forum, pk=self.kwargs['pk'])
@@ -86,8 +97,7 @@ class ForumView(PermissionRequiredMixin, ListView):
 
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        forum = self.get_object()
-        if forum.is_link:
-            return HttpResponseRedirect(forum.link)
-        return super(ForumView, self).dispatch(request, *args, **kwargs)
+    def send_signal(self, request, response, forum):
+        self.view_signal.send(
+            sender=self, forum=forum, user=request.user,
+            request=request, response=response)

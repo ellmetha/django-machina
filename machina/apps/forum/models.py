@@ -13,3 +13,6 @@ class Forum(AbstractForum):
 
 class ForumReadTrack(AbstractForumReadTrack):
     pass
+
+
+from receivers import *
