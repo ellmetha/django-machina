@@ -25,7 +25,7 @@ PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 
 class TestForumLastPostTag(TestCase):
     def setUp(self):
-        self.loadstatement = '{% load forum_tags %}'
+        self.loadstatement = '{% load url from future %}{% load forum_tags %}'
         self.user = User.objects.create(username='testuser')
 
         # Permission handler
