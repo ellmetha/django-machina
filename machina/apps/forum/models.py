@@ -15,4 +15,4 @@ class ForumReadTrack(AbstractForumReadTrack):
     pass
 
 
-from receivers import *
+from .receivers import *
