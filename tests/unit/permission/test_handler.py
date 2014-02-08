@@ -2,18 +2,21 @@
 
 # Standard library imports
 # Third party imports
-from django.contrib.auth.models import Group
-from django.contrib.auth.models import User
 from django.db.models import get_model
 from guardian.shortcuts import assign_perm
 from guardian.shortcuts import remove_perm
 
 # Local application / specific library imports
-from machina.apps.conversation.abstract_models import TOPIC_STATUSES
-from machina.apps.conversation.abstract_models import TOPIC_TYPES
-from machina.apps.forum.abstract_models import FORUM_TYPES
 from machina.core.loading import get_class
+from machina.test.factories import create_category_forum
+from machina.test.factories import create_forum
+from machina.test.factories import create_link_forum
+from machina.test.factories import create_topic
+from machina.test.factories import GroupFactory
+from machina.test.factories import PostFactory
+from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
+
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
@@ -23,35 +26,31 @@ PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 
 class TestPermissionHandler(BaseUnitTestCase):
     def setUp(self):
-        self.u1 = User.objects.create(username='user1')
-        self.g1 = Group.objects.create(name='group1')
+        self.u1 = UserFactory.create()
+        self.g1 = GroupFactory.create()
         self.u1.groups.add(self.g1)
 
         # Permission handler
         self.perm_handler = PermissionHandler()
 
         # Set up a top-level category
-        top_level_cat = Forum.objects.create(name='top_level_cat', type=FORUM_TYPES.forum_cat)
-        self.top_level_cat = top_level_cat
+        self.top_level_cat = create_category_forum()
 
         # Set up some forums
-        self.forum_1 = Forum.objects.create(parent=top_level_cat, name='forum_1', type=FORUM_TYPES.forum_post)
-        self.forum_2 = Forum.objects.create(parent=top_level_cat, name='forum_2', type=FORUM_TYPES.forum_post)
-        self.forum_3 = Forum.objects.create(parent=top_level_cat, name='forum_3', type=FORUM_TYPES.forum_link)
+        self.forum_1 = create_forum(parent=self.top_level_cat)
+        self.forum_2 = create_forum(parent=self.top_level_cat)
+        self.forum_3 = create_link_forum(parent=self.top_level_cat)
 
         # Set up a top-level forum link
-        top_level_link = Forum.objects.create(name='top_level_link', type=FORUM_TYPES.forum_link)
-        self.top_level_link = top_level_link
+        self.top_level_link = create_link_forum()
 
         # Set up some topics
-        self.forum_1_topic = Topic.objects.create(subject='Test topic 1', forum=self.forum_1, poster=self.u1,
-                                                  type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
-        self.forum_3_topic = Topic.objects.create(subject='Test topic 2', forum=self.forum_3, poster=self.u1,
-                                                  type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
+        self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
+        self.forum_3_topic = create_topic(forum=self.forum_3, poster=self.u1)
 
         # Set up some posts
-        self.post_1 = Post.objects.create(topic=self.forum_1_topic, poster=self.u1, content='hello 1')
-        self.post_2 = Post.objects.create(topic=self.forum_3_topic, poster=self.u1, content='hello 2')
+        self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
+        self.post_2 = PostFactory.create(topic=self.forum_3_topic, poster=self.u1)
 
         # Assign some permissions
         assign_perm('can_see_forum', self.u1, self.top_level_cat)
@@ -108,7 +107,7 @@ class TestPermissionHandler(BaseUnitTestCase):
 
     def test_shows_all_forums_to_a_superuser(self):
         # Setup
-        u2 = User.objects.create(username='superuser1', is_superuser=True)
+        u2 = UserFactory.create(is_superuser=True)
         forums = Forum.objects.filter(parent=self.top_level_cat)
         # Run
         filtered_forums = self.perm_handler.forum_list_filter(forums, u2)

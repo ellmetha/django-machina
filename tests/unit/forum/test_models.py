@@ -2,15 +2,20 @@
 
 # Standard library imports
 # Third party imports
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
 from django.test import TestCase
 
 # Local application / specific library imports
-from machina.apps.conversation.abstract_models import TOPIC_STATUSES
-from machina.apps.conversation.abstract_models import TOPIC_TYPES
-from machina.apps.forum.abstract_models import FORUM_TYPES
+from machina.test.factories import build_category_forum
+from machina.test.factories import build_link_forum
+from machina.test.factories import create_category_forum
+from machina.test.factories import create_forum
+from machina.test.factories import create_link_forum
+from machina.test.factories import create_topic
+from machina.test.factories import PostFactory
+from machina.test.factories import UserFactory
+
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
@@ -18,26 +23,16 @@ Topic = get_model('conversation', 'Topic')
 
 class TestForum(TestCase):
     def setUp(self):
-        self.u1 = User.objects.create(username='user1')
+        self.u1 = UserFactory.create()
 
-        # Set up a top-level category
-        top_level_cat = Forum.objects.create(name='top_level_cat', type=FORUM_TYPES.forum_cat)
-        self.top_level_cat = top_level_cat
-
-        # Set up a top-level forum
-        top_level_forum = Forum.objects.create(name='top_level_forum', type=FORUM_TYPES.forum_post)
-        self.top_level_forum = top_level_forum
-
-        # Set up a top-level forum link
-        top_level_link = Forum.objects.create(name='top_level_link', type=FORUM_TYPES.forum_link)
-        self.top_level_link = top_level_link
+        # Set up top-level forums: a category, a default forum and a link forum
+        self.top_level_cat = create_category_forum()
+        self.top_level_forum = create_forum()
+        self.top_level_link = create_link_forum()
 
     def test_has_a_margin_level_two_times_greater_than_its_real_level(self):
         # Run
-        sub_level_forum = Forum(parent=self.top_level_forum,
-                                name='sub_level_forum', type=FORUM_TYPES.forum_post)
-        sub_level_forum.full_clean()
-        sub_level_forum.save()
+        sub_level_forum = create_forum(parent=self.top_level_forum)
         # Check
         self.assertEqual(self.top_level_forum.margin_level, 0)
         self.assertEqual(sub_level_forum.margin_level, 2)
@@ -45,35 +40,33 @@ class TestForum(TestCase):
     def test_category_cannot_be_the_child_of_another_category(self):
         # Run & check
         with self.assertRaises(ValidationError):
-            cat = Forum(parent=self.top_level_cat, name='sub_forum', type=FORUM_TYPES.forum_cat)
+            cat = build_category_forum(parent=self.top_level_cat)
             cat.full_clean()
 
     def test_can_not_be_the_child_of_a_forum_link(self):
         # Run & check
-        for forum_type, _ in FORUM_TYPES:
+        for forum_type, _ in Forum.TYPE_CHOICES:
             with self.assertRaises(ValidationError):
-                forum = Forum(parent=self.top_level_link, name='sub_forum', type=forum_type)
+                forum = build_link_forum(parent=self.top_level_link)
                 forum.full_clean()
 
     def test_must_have_a_link_in_case_of_a_link_forum(self):
         # Run & check
         with self.assertRaises(ValidationError):
-            forum = Forum(parent=self.top_level_forum, name='sub_link_forum', type=FORUM_TYPES.forum_link)
+            forum = Forum(parent=self.top_level_forum, name='sub_link_forum', type=Forum.TYPE_CHOICES.forum_link)
             forum.full_clean()
 
     def test_saves_its_numbers_of_posts_and_topics(self):
         # Run & check
-        topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
-                                     type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
-        Post.objects.create(topic=topic, poster=self.u1, content='hello')
-        Post.objects.create(topic=topic, poster=self.u1, content='hello2')
+        topic = create_topic(forum=self.top_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
         self.assertEqual(self.top_level_forum.posts_count, topic.posts.count())
         self.assertEqual(self.top_level_forum.topics_count, self.top_level_forum.topics.count())
         self.assertEqual(self.top_level_forum.real_topics_count, self.top_level_forum.topics.count())
-        topic2 = Topic.objects.create(subject='Test topic 2', forum=self.top_level_forum, poster=self.u1,
-                                      type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked,
-                                      approved=False)
-        Post.objects.create(topic=topic2, poster=self.u1, content='hello')
+
+        topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
+        PostFactory.create(topic=topic2, poster=self.u1)
         self.assertEqual(self.top_level_forum.posts_count, topic.posts.count() + topic2.posts.count())
         self.assertEqual(self.top_level_forum.topics_count,
                          self.top_level_forum.topics.filter(approved=True).count())
@@ -87,10 +80,9 @@ class TestForum(TestCase):
 
     def test_can_trigger_the_update_of_the_counters_of_a_new_parent(self):
         # Setup
-        topic = Topic.objects.create(subject='Test topic', forum=self.top_level_forum, poster=self.u1,
-                                     type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
-        Post.objects.create(topic=topic, poster=self.u1, content='hello')
-        Post.objects.create(topic=topic, poster=self.u1, content='hello2')
+        topic = create_topic(forum=self.top_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
         # Run
         self.top_level_forum.parent = self.top_level_cat
         self.top_level_forum.save()
@@ -101,12 +93,10 @@ class TestForum(TestCase):
 
     def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
         # Setup
-        sub_level_forum = Forum.objects.create(parent=self.top_level_forum,
-                                               name='sub_level_forum', type=FORUM_TYPES.forum_post)
-        topic = Topic.objects.create(subject='Test topic', forum=sub_level_forum, poster=self.u1,
-                                     type=TOPIC_TYPES.topic_post, status=TOPIC_STATUSES.topic_unlocked)
-        Post.objects.create(topic=topic, poster=self.u1, content='hello')
-        Post.objects.create(topic=topic, poster=self.u1, content='hello2')
+        sub_level_forum = create_forum(parent=self.top_level_forum)
+        topic = create_topic(forum=sub_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
         # Run
         sub_level_forum.parent = self.top_level_cat
         sub_level_forum.save()
