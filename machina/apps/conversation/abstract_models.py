@@ -42,9 +42,11 @@ class AbstractTopic(DatedModel):
     subject = models.CharField(verbose_name=_('Subject'), max_length=255)
 
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
+    TYPE_CHOICES = TOPIC_TYPES
     type = models.PositiveSmallIntegerField(choices=TOPIC_TYPES, verbose_name=_('Topic type'), db_index=True)
 
     # A topic can be locked, unlocked or moved
+    STATUS_CHOICES = TOPIC_STATUSES
     status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
     # A topic can be approved before publishing ; defaults to True
