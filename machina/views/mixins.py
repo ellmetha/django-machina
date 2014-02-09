@@ -33,7 +33,10 @@ class PermissionRequiredMixin(object):
         page.
 
     The permissions will be tested against a specific instance provided either by a
-    `get_object()` method or by an `object` attribute.
+    `get_object()` method or by an `object` attribute. In the case where the permissions
+    should be checked against an instance that is not the one associated with a specific
+    DetailView, it is possible to write a `get_controlled_object` method to which it will
+    be given priority over the methods and attributes mentioned previously.
     """
     login_url = settings.LOGIN_URL
     permission_required = None
@@ -53,7 +56,8 @@ class PermissionRequiredMixin(object):
         return perms
 
     def check_permissions(self, request):
-        obj = (hasattr(self, 'get_object') and self.get_object()
+        obj = (hasattr(self, 'get_controlled_object') and self.get_controlled_object()
+               or hasattr(self, 'get_object') and self.get_object()
                or getattr(self, 'object', None))
         user = request.user
 
