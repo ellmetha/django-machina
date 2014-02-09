@@ -14,6 +14,13 @@
         {% forum_list sub_forums request %}
         {% if forum.is_forum %}
             <div class="row">
+                <div class="text-right">
+                    {% with "pagination-sm" as pagination_size %}
+                        {% include "machina/pagination.html" %}
+                    {% endwith %}
+                </div>
+            </div>
+            <div class="row">
                 <div class="panel panel-default topiclist">
                     <div class="panel-heading">
                         <table class="table">
