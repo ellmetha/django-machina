@@ -11,6 +11,11 @@
 
 {% block content %}
     <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>{{ forum.name }}</h1>
+            </div>
+        </div>
         {% forum_list sub_forums request %}
         {% if forum.is_forum %}
             <div class="row">
