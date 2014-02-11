@@ -4,7 +4,7 @@ css:
 		lessc machina/static/machina/less/styles.less > machina/static/machina/css/styles.css
 
 
-.PHONY: install upgrade coverage
+.PHONY: install upgrade coverage travis
 
 install:
 		pip install -r requirements.txt --use-mirrors
