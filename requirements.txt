@@ -3,3 +3,4 @@ django-nose==1.2
 spec==0.11.1
 coverage>=3.7,<3.8
 factory-boy>=2.3,<2.4
+coveralls==0.2
