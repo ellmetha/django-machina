@@ -1410,6 +1410,9 @@
 .forumlist .panel-body .forum-link-redirects {
   font-size: 13px;
 }
+.pagination {
+  margin: 4px 0;
+}
 .topiclist .panel-heading {
   padding-top: 10px;
   padding-left: 0;
