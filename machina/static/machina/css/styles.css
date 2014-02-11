@@ -1396,9 +1396,6 @@
   padding-left: 20px;
   color: #999999;
 }
-.forumlist .panel-body .forum-name a.forum-name-link {
-  display: block;
-}
 .forumlist .panel-body .forum-name .forum-description {
   font-size: 11px;
 }
@@ -1474,9 +1471,6 @@
 .topiclist .panel-body .topic-icon {
   padding-left: 20px;
   color: #999999;
-}
-.topiclist .panel-body .topic-name a.topic-name-link {
-  display: block;
 }
 .topiclist .panel-body .topic-name .topic-created {
   font-size: 11px;
