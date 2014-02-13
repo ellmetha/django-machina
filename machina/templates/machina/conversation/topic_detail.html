@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load i18n %}
+
+{% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
+
+{% block breadcrumb %}
+    {% include "machina/breadcrumb.html" %}
+{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>{{ topic.subject }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right">
+                {% with "pagination-sm" as pagination_size %}
+                    {% include "machina/pagination.html" %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="row">
+        {% for post in posts %}
+            <div class="panel panel-default post">
+                <div class="panel-body">
+                    <div class="row">
+                    <div class="col-md-10 post-content-wrapper">
+                        <div class="pull-right post-controls">
+                            <a href="#" class="btn btn-primary btn-xs" title="{% trans "Edit" %}">{% trans "Edit" %}</a>
+                            <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                            <a href="#" class="btn btn-primary btn-xs" title="{% trans "Quote" %}"><i class="fa fa-quote-left"></i>&nbsp;{% trans "Quote" %}</a>
+                        </div>
+                        <h4 class="subject">{{ post }}</h4>
+                        <p><small class="text-muted">
+                            <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                        </small></p>
+                        <div class="post-content">
+                            {{ post.content.rendered }}
+                        </div>
+                    </div>
+                    <div class="col-md-2 post-sidebar">
+                        <div class="avatar">
+                            <i class="fa fa-user fa-4x"></i>
+                        </div>
+                        <div class="username"><a href="#">{{ post.poster.username }}</a></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

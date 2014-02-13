@@ -54,8 +54,8 @@
                             </div>
                             <div class="sub-forums">{{ children }}</div>
                         </td>
-                        <td class="forum-count">{{ node.topics_count }} {% trans "topic" %}{{ node.topics_count|pluralize }}</td>
-                        <td class="forum-count">{{ node.posts_count }} {% trans "post" %}{{ node.posts_count|pluralize }}</td>
+                        <td class="forum-count">{{ node.topics_count }}</td>
+                        <td class="forum-count">{{ node.posts_count }}</td>
                         <td class="forum-last-post">
                             {% get_forum_last_post node user as last_post %}
                             {% if last_post %}
@@ -74,7 +74,9 @@
                                 {{ node.description.rendered }}
                             </div>
                         </td>
-                        <td class="forum-link-redirects" colspan="3">
+                        <td class="forum-count"></td>
+                        <td class="forum-count"></td>
+                        <td class="forum-link-redirects">
                             {% if node.link_redirects %}
                                 {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
                             {% endif %}
@@ -99,8 +101,8 @@
                             </div>
                             <div class="sub-forums">{{ children }}</div>
                         </td>
-                        <td class="forum-count">{{ node.topics_count }} {% trans "topic" %}{{ node.topics_count|pluralize }}</td>
-                        <td class="forum-count">{{ node.posts_count }} {% trans "post" %}{{ node.posts_count|pluralize }}</td>
+                        <td class="forum-count">{{ node.topics_count }}</td>
+                        <td class="forum-count">{{ node.posts_count }}</td>
                         <td class="forum-last-post">
                             {% get_forum_last_post node user as last_post %}
                             {% if last_post %}

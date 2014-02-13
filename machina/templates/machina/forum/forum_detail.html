@@ -45,7 +45,7 @@
                                 <tr>
                                     <td class="topic-icon"><i class="fa fa-dot-circle-o fa-2x"></i></td>
                                     <td class="topic-name">
-                                        <a href="#" class="topic-name-link">{{ topic.subject }}</a>
+                                        <a href="{% url 'conversation:topic' forum_pk=forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                                         <div class="topic-created">
                                             {% trans "By:" %} <a href="#">{{ topic.poster.username }}</a> {% trans "on" %} {{ topic.created }}
                                         </div>

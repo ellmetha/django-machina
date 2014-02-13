@@ -1396,9 +1396,6 @@
   padding-left: 20px;
   color: #999999;
 }
-.forumlist .panel-body .forum-name a.forum-name-link {
-  display: block;
-}
 .forumlist .panel-body .forum-name .forum-description {
   font-size: 11px;
 }
@@ -1412,6 +1409,9 @@
 .forumlist .panel-body .forum-last-post,
 .forumlist .panel-body .forum-link-redirects {
   font-size: 13px;
+}
+.pagination {
+  margin: 4px 0;
 }
 .topiclist .panel-heading {
   padding-top: 10px;
@@ -1475,9 +1475,6 @@
   padding-left: 20px;
   color: #999999;
 }
-.topiclist .panel-body .topic-name a.topic-name-link {
-  display: block;
-}
 .topiclist .panel-body .topic-name .topic-created {
   font-size: 11px;
   color: #666;
@@ -1488,4 +1485,16 @@
 .topiclist .panel-body .topic-count,
 .topiclist .panel-body .topic-last-post {
   font-size: 13px;
+}
+.pagination {
+  margin: 4px 0;
+}
+.post {
+  margin-bottom: 8px;
+}
+.post .panel-body .post-content-wrapper h4.subject {
+  margin: 0;
+}
+.post .panel-body .post-sidebar {
+  border-left: 1px solid #eeeeee;
 }
