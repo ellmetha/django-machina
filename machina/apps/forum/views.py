@@ -27,8 +27,6 @@ class IndexView(ListView):
     def get_queryset(self):
         return perm_handler.forum_list_filter(
             Forum.objects.filter(
-                # Category, top-level forums and links
-                Q(parent__isnull=True) |
                 # Forums that have a top-level category has parent
                 Q(parent__parent__isnull=True, parent__type=Forum.TYPE_CHOICES.forum_cat) |
                 # Sub forums that can be displayed
@@ -37,7 +35,9 @@ class IndexView(ListView):
                 Q(parent__parent__parent__isnull=True,
                     parent__parent__type=Forum.TYPE_CHOICES.forum_cat,
                     parent__type=Forum.TYPE_CHOICES.forum_post,
-                    display_sub_forum_list=True)),
+                    display_sub_forum_list=True) |
+                # Category, top-level forums and links
+                Q(parent__isnull=True)),
             self.request.user
         )
 
@@ -50,7 +50,7 @@ class ForumView(PermissionRequiredMixin, ListView):
     view_signal = forum_viewed
 
     def get(self, request, **kwargs):
-        forum = self.get_object()
+        forum = self.get_forum()
         if forum.is_link:
             response = HttpResponseRedirect(forum.link)
         else:
@@ -59,40 +59,41 @@ class ForumView(PermissionRequiredMixin, ListView):
         return response
 
     def get_forum(self):
-        return get_object_or_404(Forum, pk=self.kwargs['pk'])
+        if not hasattr(self, 'forum'):
+            self.forum = get_object_or_404(Forum, pk=self.kwargs['pk'])
+        return self.forum
 
     def get_queryset(self):
         self.forum = self.get_forum()
         qs = self.forum.topics.all()
         return qs
 
-    def get_object(self):
+    def get_controlled_object(self):
         """
         Return the considered forum in order to allow permission checks.
         """
-        if not hasattr(self, 'forum'):
-            self.forum = self.get_forum()
-        return self.forum
+        return self.get_forum()
 
     def get_context_data(self, **kwargs):
         context = super(ForumView, self).get_context_data(**kwargs)
 
         # Insert the considered forum into the context
-        context['forum'] = self.forum
+        context['forum'] = self.get_forum()
 
         # Get the list of forums that have the current forum as parent
         sub_forums = Forum.objects.filter(
-            # Category, top-level forums and links
-            Q(parent=self.forum) |
             # Forums that have a top-level category has parent
-            Q(parent__parent=self.forum, parent__type=Forum.TYPE_CHOICES.forum_cat) |
+            Q(parent__parent__pk=self.forum.pk, parent__type=Forum.TYPE_CHOICES.forum_cat) |
             # Sub forums that can be displayed
-            Q(parent__parent=self.forum, display_sub_forum_list=True) |
+            Q(parent__parent__pk=self.forum.pk, display_sub_forum_list=True) |
             # Children of forums that have a category as parent
             Q(parent__parent__parent=self.forum,
                 parent__parent__type=Forum.TYPE_CHOICES.forum_cat,
                 parent__type=Forum.TYPE_CHOICES.forum_post,
-                display_sub_forum_list=True))
+                display_sub_forum_list=True) |
+            # Category, top-level forums and links
+            Q(parent=self.forum))
+
         context['sub_forums'] = perm_handler.forum_list_filter(sub_forums, self.request.user)
 
         return context

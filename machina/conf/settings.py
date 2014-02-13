@@ -31,6 +31,8 @@ FORUM_TOPICS_NUMBER_PER_PAGE = getattr(settings, 'FORUM_TOPICS_BUMBER_PER_PAGE',
 # Conversation
 TOPIC_ANSWER_SUBJECT_PREFIX = getattr(settings, 'TOPIC_ANSWER_SUBJECT_PREFIX', 'Re: ')
 
+TOPIC_POSTS_NUMBER_PER_PAGE = getattr(settings, 'TOPIC_POSTS_NUMBER_PER_PAGE', 15)
+
 
 # Member
 PROFILE_AVATAR_UPLOAD_TO = getattr(settings, 'PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')

@@ -15,10 +15,12 @@ class BoardApp(Application):
     name = None
 
     forum_app = get_class('forum.app', 'application')
+    conversation_app = get_class('conversation.app', 'application')
 
     def get_urls(self):
         urls = [
             url(r'', include(self.forum_app.urls)),
+            url(r'', include(self.conversation_app.urls)),
         ]
         return patterns('', *urls)
 
