@@ -193,6 +193,10 @@ class AbstractForum(MPTTModel, ActiveModel):
         if self.parent:
             self.parent.update_trackers()
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('forum:forum', kwargs={'pk': str(self.id)})
+
 
 @python_2_unicode_compatible
 class AbstractForumReadTrack(DatedModel):
