@@ -16,11 +16,14 @@ from mptt.models import TreeForeignKey
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
+from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.models import ActiveModel
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
+
+ForumManager = get_class('forum.managers', 'ForumManager')
 
 
 FORUM_TYPES = Choices(
@@ -69,6 +72,8 @@ class AbstractForum(MPTTModel, ActiveModel):
     display_sub_forum_list = models.BooleanField(verbose_name=_('Display in parent-forums legend'),
                                                  help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
                                                  default=True)
+
+    objects = ForumManager()
 
     class Meta:
         abstract = True

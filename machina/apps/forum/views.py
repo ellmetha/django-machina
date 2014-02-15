@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.db.models import get_model
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
@@ -26,18 +25,7 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return perm_handler.forum_list_filter(
-            Forum.objects.filter(
-                # Forums that have a top-level category has parent
-                Q(parent__parent__isnull=True, parent__type=Forum.TYPE_CHOICES.forum_cat) |
-                # Sub forums that can be displayed
-                Q(parent__parent__isnull=True, display_sub_forum_list=True) |
-                # Children of forums that have a category as parent
-                Q(parent__parent__parent__isnull=True,
-                    parent__parent__type=Forum.TYPE_CHOICES.forum_cat,
-                    parent__type=Forum.TYPE_CHOICES.forum_post,
-                    display_sub_forum_list=True) |
-                # Category, top-level forums and links
-                Q(parent__isnull=True)),
+            Forum.objects.displayable_subforums(),
             self.request.user
         )
 
@@ -81,18 +69,7 @@ class ForumView(PermissionRequiredMixin, ListView):
         context['forum'] = self.get_forum()
 
         # Get the list of forums that have the current forum as parent
-        sub_forums = Forum.objects.filter(
-            # Forums that have a top-level category has parent
-            Q(parent__parent__pk=self.forum.pk, parent__type=Forum.TYPE_CHOICES.forum_cat) |
-            # Sub forums that can be displayed
-            Q(parent__parent__pk=self.forum.pk, display_sub_forum_list=True) |
-            # Children of forums that have a category as parent
-            Q(parent__parent__parent=self.forum,
-                parent__parent__type=Forum.TYPE_CHOICES.forum_cat,
-                parent__type=Forum.TYPE_CHOICES.forum_post,
-                display_sub_forum_list=True) |
-            # Category, top-level forums and links
-            Q(parent=self.forum))
+        sub_forums = Forum.objects.displayable_subforums(start_from=self.forum)
 
         context['sub_forums'] = perm_handler.forum_list_filter(sub_forums, self.request.user)
 
