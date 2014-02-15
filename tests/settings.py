@@ -9,9 +9,13 @@ from django.conf import settings
 
 # Local application / specific library imports
 from machina import get_vanilla_apps
+from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+# Helper function to extract absolute path
+location = lambda x: os.path.join(TEST_ROOT, x)
 
 
 TEST_SETTINGS = {
@@ -23,15 +27,20 @@ TEST_SETTINGS = {
             'NAME': ':memory:'
         }
     },
-    'TEMPLATE_LOADERS': (
-        'django.template.loaders.app_directories.Loader',
-    ),
-    'TEMPLATE_CONTEXT_PROCESSORS': default_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'TEMPLATE_CONTEXT_PROCESSORS': (
         'django.contrib.auth.context_processors.auth',
-        'django.contrib.messages.context_processors.messages',
-        'django.core.context_processors.request',
+        'django.core.context_processors.debug',
+        'django.core.context_processors.i18n',
         'django.core.context_processors.media',
         'django.core.context_processors.static',
+        'django.contrib.messages.context_processors.messages',
+        'django.core.context_processors.request',
+        # Machina
+        'machina.core.context_processors.metadata',
+    ),
+    'TEMPLATE_DIRS': (
+        location('_testsite/templates'),
+        MACHINA_MAIN_TEMPLATE_DIR,
     ),
     'INSTALLED_APPS': [
         'django.contrib.auth',
