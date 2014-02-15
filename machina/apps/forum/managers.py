@@ -11,7 +11,7 @@ from mptt.managers import TreeManager
 class ForumManager(TreeManager):
     def displayable_subforums(self, start_from=None):
         """
-        Returns all the forums that can be seen from a forum at agiven level in the tree
+        Returns all the forums that can be seen from a forum at a given level in the tree
         of forums. A forum can be seen if one of the following statements is true:
 
             The forum is a direct child of the starting forum for the considered level.
