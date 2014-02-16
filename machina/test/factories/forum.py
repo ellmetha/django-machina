@@ -15,6 +15,9 @@ class ForumFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Forum
     name = factory.LazyAttribute(lambda t: random_string(length=15))
 
+    # Link forum specific
+    link = factory.LazyAttribute(lambda obj: 'http://www.goto{}.com'.format(obj.name))
+
 
 def build_forum(**attrs):
     """Create a new forum but do not save it."""
