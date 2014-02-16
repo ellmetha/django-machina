@@ -74,7 +74,7 @@ class BaseClientTestCase(BaseUnitTestCase):
         return user
 
     def assertIsOk(self, response):
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, 200)
 
     def assertIsNotOk(self, response):
         self.assertTrue(response.status_code in (404, 403))
