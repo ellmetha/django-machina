@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load i18n %}
+{% load conversation_tags %}
 
 {% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
 
@@ -28,8 +29,12 @@
                     <div class="row">
                     <div class="col-md-10 post-content-wrapper">
                         <div class="pull-right post-controls">
-                            <a href="#" class="btn btn-primary btn-xs" title="{% trans "Edit" %}">{% trans "Edit" %}</a>
-                            <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                            {% if post|can_be_edited_by:user %}
+                                <a href="#" class="btn btn-warning btn-xs" title="{% trans "Edit" %}">{% trans "Edit" %}</a>
+                            {% endif %}
+                            {% if post|can_be_deleted_by:user %}
+                                <a href="#" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                            {% endif %}
                             <a href="#" class="btn btn-primary btn-xs" title="{% trans "Quote" %}"><i class="fa fa-quote-left"></i>&nbsp;{% trans "Quote" %}</a>
                         </div>
                         <h4 class="subject">{{ post }}</h4>
