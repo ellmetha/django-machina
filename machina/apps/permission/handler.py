@@ -12,7 +12,7 @@ Post = get_model('conversation', 'Post')
 
 class PermissionHandler(object):
 
-    # Filtering on forums
+    # Filtering methods
     # --
 
     def forum_list_filter(self, qs, user):
@@ -30,9 +30,6 @@ class PermissionHandler(object):
         forums_to_hide = self._get_hidden_forum_ids(qs, checker)
 
         return qs.exclude(id__in=forums_to_hide)
-
-    # Filtering on topics
-    # --
 
     def get_forum_last_post(self, forum, user):
         """
@@ -53,6 +50,39 @@ class PermissionHandler(object):
         if not posts.exists():
             return None
         return posts[0]
+
+    # Verification methods
+    # --
+
+    def can_edit_post(self, post, user):
+        """
+        Given a forum post, checks whether the user can edit the latter.
+        """
+        checker = ObjectPermissionChecker(user)
+
+        # A user can edit a post if...
+        #     he is a superuser
+        #     he is the original poster of the forum post
+        #     he belongs to the forum moderators
+        can_edit = (user.is_superuser
+                    or (post.poster == user and checker.has_perm('can_edit_own_posts', post.topic.forum))
+                    or checker.has_perm('can_edit_posts', post.topic.forum))
+        return can_edit
+
+    def can_delete_post(self, post, user):
+        """
+        Given a forum post, checks whether the user can delete the latter.
+        """
+        checker = ObjectPermissionChecker(user)
+
+        # A user can delete a post if...
+        #     he is a superuser
+        #     he is the original poster of the forum post
+        #     he belongs to the forum moderators
+        can_edit = (user.is_superuser
+                    or (post.poster == user and checker.has_perm('can_delete_own_posts', post.topic.forum))
+                    or checker.has_perm('can_delete_posts', post.topic.forum))
+        return can_edit
 
     # Common
     # --
