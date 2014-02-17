@@ -97,7 +97,6 @@ class AbstractForum(MPTTModel, ActiveModel):
             ('can_vote_in_polls', _('Can vote in polls')),
             ('can_change_existing_vote', ('Can change existing vote')),
             # Moderation
-            ('can_edit_topics', _('Can edit topics')),
             ('can_close_topics', _('Can close topics')),
             ('can_move_topics', _('Can move topics')),
             ('can_edit_posts', _('Can edit posts')),
