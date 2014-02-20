@@ -26,7 +26,7 @@ class AbstractForumReadTrack(models.Model):
         unique_together = ['user', 'forum', ]
         verbose_name = _('Forum track')
         verbose_name_plural = _('Forum tracks')
-        app_label = 'forum'
+        app_label = 'tracking'
 
     def __str__(self):
         return '{} - {}'.format(self.user, self.topic)
@@ -46,7 +46,7 @@ class AbstractTopicReadTrack(models.Model):
         unique_together = ['user', 'topic', ]
         verbose_name = _('Topic track')
         verbose_name_plural = _('Topic tracks')
-        app_label = 'conversation'
+        app_label = 'tracking'
 
     def __str__(self):
         return '{} - {}'.format(self.user, self.topic)
