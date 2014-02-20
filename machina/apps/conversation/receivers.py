@@ -10,7 +10,7 @@ from machina.apps.conversation.signals import topic_viewed
 
 
 @receiver(topic_viewed)
-def update_topic_counter(sender, topic, request, response, **kwargs):
+def update_topic_counter(sender, topic, user, request, response, **kwargs):
     """
     Receiver to handle the update of the views counter associated with topics.
     """
