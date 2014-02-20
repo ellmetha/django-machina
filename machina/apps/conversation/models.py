@@ -5,7 +5,6 @@
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import AbstractPost
 from machina.apps.conversation.abstract_models import AbstractTopic
-from machina.apps.conversation.abstract_models import AbstractTopicReadTrack
 
 
 class Topic(AbstractTopic):
@@ -13,10 +12,6 @@ class Topic(AbstractTopic):
 
 
 class Post(AbstractPost):
-    pass
-
-
-class TopicReadTrack(AbstractTopicReadTrack):
     pass
 
 

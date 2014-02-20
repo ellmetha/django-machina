@@ -15,11 +15,9 @@ from mptt.models import TreeForeignKey
 # Local application / specific library imports
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
-from machina.core.compat import AUTH_USER_MODEL
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.models import ActiveModel
-from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
@@ -200,22 +198,3 @@ class AbstractForum(MPTTModel, ActiveModel):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('forum:forum', kwargs={'pk': str(self.id)})
-
-
-@python_2_unicode_compatible
-class AbstractForumReadTrack(DatedModel):
-    """
-    Represents a track which records which forums have been read by a given user.
-    """
-    user = models.ForeignKey(AUTH_USER_MODEL, related_name='forum_tracks', verbose_name=_('User'))
-    forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), related_name='tracks')
-
-    class Meta:
-        abstract = True
-        unique_together = ['user', 'forum', ]
-        verbose_name = _('Forum track')
-        verbose_name_plural = _('Forum tracks')
-        app_label = 'forum'
-
-    def __str__(self):
-        return '{} - {}'.format(self.user, self.topic)

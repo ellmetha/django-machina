@@ -11,6 +11,7 @@ MACHINA_VANILLA_APPS = [
     'machina',
     'machina.apps.forum',
     'machina.apps.conversation',
+    'machina.apps.tracking',
     'machina.apps.member',
     'machina.apps.permission',
 ]
