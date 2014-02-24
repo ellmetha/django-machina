@@ -12,6 +12,8 @@ class Migration(SchemaMigration):
         db.create_table(u'forum_forum', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True, db_index=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('parent', self.gf('mptt.fields.TreeForeignKey')(blank=True, related_name=u'children', null=True, to=orm['forum.Forum'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('description', self.gf('machina.models.fields.MarkupTextField')(blank=True, null=True, no_rendered_field=True)),
@@ -42,6 +44,7 @@ class Migration(SchemaMigration):
         u'forum.forum': {
             'Meta': {'ordering': "[u'tree_id', u'lft']", 'object_name': 'Forum'},
             u'_description_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('machina.models.fields.MarkupTextField', [], {'blank': 'True', 'null': 'True', u'no_rendered_field': 'True'}),
             'display_sub_forum_list': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -59,7 +62,8 @@ class Migration(SchemaMigration):
             u'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'topics_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             u'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'})
+            'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         }
     }
 
