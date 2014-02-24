@@ -10,6 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.core.compat import AUTH_USER_MODEL
+from machina.core.loading import get_class
+
+ForumReadTrackManager = get_class('tracking.managers', 'ForumReadTrackManager')
 
 
 @python_2_unicode_compatible
@@ -21,6 +24,8 @@ class AbstractForumReadTrack(models.Model):
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), related_name='tracks')
     mark_time = models.DateTimeField(auto_now=True)
 
+    objects = ForumReadTrackManager()
+
     class Meta:
         abstract = True
         unique_together = ['user', 'forum', ]
@@ -29,7 +34,7 @@ class AbstractForumReadTrack(models.Model):
         app_label = 'tracking'
 
     def __str__(self):
-        return '{} - {}'.format(self.user, self.topic)
+        return '{} - {}'.format(self.user, self.forum)
 
 
 @python_2_unicode_compatible
