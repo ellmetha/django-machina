@@ -1394,6 +1394,12 @@
 }
 .forumlist .panel-body .forum-icon {
   padding-left: 20px;
+  color: #3497ff;
+}
+.forumlist .panel-body .forum-icon.unread {
+  color: #dc4e44;
+}
+.forumlist .panel-body .forum-icon.link {
   color: #999999;
 }
 .forumlist .panel-body .forum-name .forum-description {
@@ -1485,4 +1491,16 @@
 .topiclist .panel-body .topic-count,
 .topiclist .panel-body .topic-last-post {
   font-size: 13px;
+}
+.pagination {
+  margin: 4px 0;
+}
+.post {
+  margin-bottom: 8px;
+}
+.post .panel-body .post-content-wrapper h4.subject {
+  margin: 0;
+}
+.post .panel-body .post-sidebar {
+  border-left: 1px solid #eeeeee;
 }
