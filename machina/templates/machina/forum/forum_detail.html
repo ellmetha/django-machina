@@ -16,7 +16,9 @@
                 <h1>{{ forum.name }}</h1>
             </div>
         </div>
-        {% forum_list sub_forums request %}
+        {% if sub_forums %}
+            {% forum_list sub_forums request %}
+        {% endif %}
         {% if forum.is_forum %}
             <div class="row">
                 <div class="text-right">

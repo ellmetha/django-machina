@@ -2,8 +2,10 @@
 {% load i18n %}
 {% load mptt_tags %}
 {% load forum_tags %}
+{% load tracking_tags %}
 
 <div class="row">
+    {% get_unread_forums root_level user as unread_forums %}
     {% recursetree forums %}
         {% if node.level == root_level %}
             {% if node.is_category %}
@@ -46,7 +48,7 @@
                 {% endif %}
                 <tr>
                     {% if not node.is_link %}
-                        <td class="forum-icon"><i class="fa fa-circle-o fa-2x"></i></td>
+                        <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
                         <td class="forum-name">
                             <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
@@ -93,7 +95,7 @@
             {% if node.parent.is_category %}
                 <tr>
                     {% if not node.is_link %}
-                        <td class="forum-icon"><i class="fa fa-circle-o fa-2x"></i></td>
+                        <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
                         <td class="forum-name">
                             <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
