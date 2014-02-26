@@ -5,7 +5,7 @@
 {% load tracking_tags %}
 
 <div class="row">
-    {% get_unread_forums root_level user as unread_forums %}
+    {% get_unread_forums forums user as unread_forums %}
     {% recursetree forums %}
         {% if node.level == root_level %}
             {% if node.is_category %}
