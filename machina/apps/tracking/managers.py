@@ -12,6 +12,8 @@ class ForumReadTrackManager(models.Manager):
         """
         Given a list of forums find and returns the list of forums that are unread
         for the passed user.
+        If a forum is unread all of its ancestors are also unread and will be
+        included in the final list.
         """
         unread_forums = []
 
@@ -21,7 +23,7 @@ class ForumReadTrackManager(models.Manager):
         tracked_forums = []
 
         for track in tracks:
-            if track.mark_time < track.forum.updated:
+            if track.mark_time < track.forum.updated and track.forum not in unread_forums:
                 unread_forums.extend(track.forum.get_ancestors(include_self=True))
             tracked_forums.append(track.forum)
 
