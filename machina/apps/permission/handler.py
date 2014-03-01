@@ -79,10 +79,10 @@ class PermissionHandler(object):
         #     he is a superuser
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
-        can_edit = (user.is_superuser
-                    or (post.poster == user and checker.has_perm('can_delete_own_posts', post.topic.forum))
-                    or checker.has_perm('can_delete_posts', post.topic.forum))
-        return can_edit
+        can_delete = (user.is_superuser
+                      or (post.poster == user and checker.has_perm('can_delete_own_posts', post.topic.forum))
+                      or checker.has_perm('can_delete_posts', post.topic.forum))
+        return can_delete
 
     # Common
     # --
