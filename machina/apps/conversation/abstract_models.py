@@ -145,6 +145,10 @@ class AbstractTopic(DatedModel):
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('conversation:topic', kwargs={'pk': str(self.id)})
+
 
 @python_2_unicode_compatible
 class AbstractPost(DatedModel):
