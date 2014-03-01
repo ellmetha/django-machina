@@ -113,3 +113,51 @@ class TestPermissionHandler(BaseUnitTestCase):
         filtered_forums = self.perm_handler.forum_list_filter(forums, u2)
         # Check
         self.assertQuerysetEqual(filtered_forums, [self.forum_1, self.forum_2, self.forum_3])
+
+    def test_knows_that_a_superuser_can_edit_all_posts(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_edit_post(self.post_1, u2))
+
+    def test_knows_if_an_owner_of_a_post_can_edit_it(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_edit_own_posts', self.u1, self.forum_1)
+        assign_perm('can_edit_own_posts', u2, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_edit_post(self.post_1, self.u1))
+        self.assertFalse(self.perm_handler.can_edit_post(self.post_2, self.u1))
+        self.assertFalse(self.perm_handler.can_edit_post(self.post_1, u2))
+
+    def test_knows_if_a_moderator_can_edit_a_post(self):
+        # Setup
+        moderator = UserFactory.create()
+        assign_perm('can_edit_posts', moderator, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_edit_post(self.post_1, moderator))
+        self.assertFalse(self.perm_handler.can_edit_post(self.post_2, moderator))
+
+    def test_knows_that_a_superuser_can_delete_all_posts(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_delete_post(self.post_1, u2))
+
+    def test_knows_if_an_owner_of_a_post_can_delete_it(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_delete_own_posts', self.u1, self.forum_1)
+        assign_perm('can_delete_own_posts', u2, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_delete_post(self.post_1, self.u1))
+        self.assertFalse(self.perm_handler.can_delete_post(self.post_2, self.u1))
+        self.assertFalse(self.perm_handler.can_delete_post(self.post_1, u2))
+
+    def test_knows_if_a_moderator_can_delete_a_post(self):
+        # Setup
+        moderator = UserFactory.create()
+        assign_perm('can_delete_posts', moderator, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_delete_post(self.post_1, moderator))
+        self.assertFalse(self.perm_handler.can_delete_post(self.post_2, moderator))
