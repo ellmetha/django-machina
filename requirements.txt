@@ -5,3 +5,4 @@ coverage>=3.7,<3.8
 factory-boy>=2.3,<2.4
 coveralls==0.2
 mock>=1.0.1,<1.1
+tox==1.7.0
