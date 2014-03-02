@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load mptt_tags %}
 {% load forum_tags %}
+{% load tracking_tags %}
 
 {% block sub-title %}{{ forum.name }}{% endblock sub-title %}
 
@@ -28,6 +29,7 @@
                 </div>
             </div>
             <div class="row">
+                {% get_unread_topics topics request.user as unread_topics %}
                 <div class="panel panel-default topiclist">
                     <div class="panel-heading">
                         <table class="table">
@@ -45,7 +47,7 @@
                         <table class="table">
                             {% for topic in topics %}
                                 <tr>
-                                    <td class="topic-icon"><i class="fa fa-dot-circle-o fa-2x"></i></td>
+                                    <td class="topic-icon {% if topic in unread_topics %}unread{% endif %}"><i class="fa fa-dot-circle-o fa-2x"></i></td>
                                     <td class="topic-name">
                                         <a href="{% url 'conversation:topic' forum_pk=forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                                         <div class="topic-created">
