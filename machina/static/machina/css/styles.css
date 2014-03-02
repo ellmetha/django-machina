@@ -1479,7 +1479,10 @@
 }
 .topiclist .panel-body .topic-icon {
   padding-left: 20px;
-  color: #999999;
+  color: #3497ff;
+}
+.topiclist .panel-body .topic-icon.unread {
+  color: #dc4e44;
 }
 .topiclist .panel-body .topic-name .topic-created {
   font-size: 11px;

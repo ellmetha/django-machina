@@ -62,7 +62,11 @@
 
         .topic-icon{
             padding-left: 20px;
-            color: @grayLight;
+            color: lighten(@blueDark, 20%);
+
+            &.unread{
+                color: lighten(@red, 20%);
+            }
         }
 
         .topic-name{
