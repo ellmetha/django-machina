@@ -80,3 +80,11 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
         # Check
         self.assertNotIn(self.forum_3, unread_forums)
+
+    def test_says_that_all_topics_are_read_for_users_that_are_not_authenticated(self):
+        # Setup
+        u3 = get_user(Client())
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), u3)
+        # Check
+        self.assertFalse(len(unread_topics))
