@@ -91,4 +91,4 @@ class TrackingHandler(object):
             if topic.forum.pk not in tracked_forums and topic.pk not in tracked_topics:
                 unread_topics.append(topic)
 
-        return unread_topics
+        return list(set(unread_topics))
