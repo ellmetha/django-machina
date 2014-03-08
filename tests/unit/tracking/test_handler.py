@@ -88,3 +88,20 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), u3)
         # Check
         self.assertFalse(len(unread_topics))
+
+    def test_says_that_a_topic_with_a_creation_date_greater_than_the_forum_mark_time_is_unread(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
+        # Check
+        self.assertEqual(unread_topics, [new_topic, ])
+
+    def test_says_that_a_topic_with_an_update_date_greater_than_the_forum_mark_time_is_unread(self):
+        # Setup
+        PostFactory.create(topic=self.topic, poster=self.u1)
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
+        # Check
+        self.assertEqual(unread_topics, [self.topic, ])
