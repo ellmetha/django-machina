@@ -16,6 +16,7 @@ from machina.test.factories import create_topic
 from machina.test.factories import GroupFactory
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
+from machina.test.factories import TopicReadTrackFactory
 from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
 
@@ -105,3 +106,21 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
         self.assertEqual(unread_topics, [self.topic, ])
+
+    def test_says_that_a_topic_with_an_update_date_greater_than_its_mark_time_is_unread(self):
+        # Setup
+        TopicReadTrackFactory.create(topic=self.topic, user=self.u2)
+        PostFactory.create(topic=self.topic, poster=self.u1)
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
+        # Check
+        self.assertEqual(unread_topics, [self.topic, ])
+
+    def test_says_that_a_topic_is_unread_if_the_related_forum_is_not_marked(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_3, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_3.topics.all(), self.u2)
+        # Check
+        self.assertEqual(unread_topics, [new_topic, ])
