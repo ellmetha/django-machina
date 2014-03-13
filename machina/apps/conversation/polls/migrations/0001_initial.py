@@ -32,7 +32,7 @@ class Migration(SchemaMigration):
         db.create_table(u'polls_topicpollvote', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('poll_option', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'votes', to=orm['polls.TopicPollOption'])),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'poll_votes', to=orm['auth.User'])),
+            ('voter', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'poll_votes', to=orm['auth.User'])),
             ('timestamp', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'polls', ['TopicPollVote'])
@@ -146,7 +146,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'poll_option': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'votes'", 'to': u"orm['polls.TopicPollOption']"}),
             'timestamp': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'poll_votes'", 'to': u"orm['auth.User']"})
+            'voter': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'poll_votes'", 'to': u"orm['auth.User']"})
         }
     }
 

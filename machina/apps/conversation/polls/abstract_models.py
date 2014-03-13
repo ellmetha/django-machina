@@ -65,7 +65,7 @@ class AbstractTopicPollVote(models.Model):
     Represents a poll vote.
     """
     poll_option = models.ForeignKey('polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
-    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes')
+    voter = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes')
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Vote\'s date'))
 
     class Meta:
@@ -75,4 +75,4 @@ class AbstractTopicPollVote(models.Model):
         app_label = 'polls'
 
     def __str__(self):
-        return '{} - {}'.format(self.poll_option, self.user)
+        return '{} - {}'.format(self.poll_option, self.voter)
