@@ -59,7 +59,7 @@ class TestTopic(TestCase):
         top_level_link = create_link_forum()
         # Run & check
         with self.assertRaises(ValidationError):
-            new_topic = new_topic = build_topic(forum=top_level_cat, poster=self.u1)
+            new_topic = build_topic(forum=top_level_cat, poster=self.u1)
             new_topic.full_clean()
         with self.assertRaises(ValidationError):
             new_topic = new_topic = build_topic(forum=top_level_link, poster=self.u1)
