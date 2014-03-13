@@ -16,4 +16,5 @@ def random_string(length=10):
 from .auth import *
 from .conversation import *
 from .forum import *
+from .polls import *
 from .tracking import *
