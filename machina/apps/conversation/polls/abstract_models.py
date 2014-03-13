@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.apps.conversation.polls import validators
 from machina.core.compat import AUTH_USER_MODEL
 from machina.models.abstract_models import DatedModel
 
@@ -24,7 +25,9 @@ class AbstractTopicPoll(DatedModel):
     duration = models.PositiveIntegerField(verbose_name=_('Poll duration, in days'), blank=True, null=True)
 
     # Users can possibly select more than one option associated with a poll
-    max_options = models.PositiveSmallIntegerField(verbose_name=_('Maximum number of poll options per user'), default=1)
+    max_options = models.PositiveSmallIntegerField(
+        verbose_name=_('Maximum number of poll options per user'),
+        validators=[validators.validate_poll_max_options, ], default=1)
 
     # Are users allowed to change their votes ?
     user_changes = models.BooleanField(verbose_name=_('Allow vote changes'), default=False)
