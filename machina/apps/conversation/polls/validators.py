@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
-from __future__ import unicode_literals
-
 # Third party imports
 from django.core import validators
 
