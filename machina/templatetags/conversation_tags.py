@@ -64,3 +64,27 @@ def can_be_deleted_by(post, user):
         {% if post|can_be_deleted_by:user %}...{% endif %}
     """
     return perm_handler.can_delete_post(post, user)
+
+
+@register.inclusion_tag('machina/conversation/topic_pages_inline_list.html')
+def topic_pages_inline_list(topic):
+    """
+    This will render an inline pagination for the posts related to the
+    given topic.
+
+    Usage::
+
+        {% topic_pages_inline_list my_topic %}
+    """
+    data_dict = {
+        'topic': topic,
+    }
+
+    pages_number = (topic.posts.count() // settings.TOPIC_POSTS_NUMBER_PER_PAGE) + 1
+    if pages_number > 5:
+        data_dict['first_pages'] = range(1, 5)
+        data_dict['last_page'] = pages_number
+    elif pages_number > 1:
+        data_dict['first_pages'] = range(1, pages_number + 1)
+
+    return data_dict
