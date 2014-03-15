@@ -9,3 +9,6 @@ dist
 docs/_build/
 public/
 .tox
+
+# If pipeline is used, don't commit generated CSS files
+machina/static/machina/less/*.css
