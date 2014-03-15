@@ -51,8 +51,13 @@
                                     <td class="topic-icon {% if topic in unread_topics %}unread{% endif %}"><i class="fa fa-dot-circle-o fa-2x"></i></td>
                                     <td class="topic-name">
                                         <a href="{% url 'conversation:topic' forum_pk=forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
-                                        <div class="topic-created">
-                                            {% trans "By:" %} <a href="#">{{ topic.poster.username }}</a> {% trans "on" %} {{ topic.created }}
+                                        <div>
+                                            <div class="topic-inline-pagination pull-right">
+                                                {% topic_pages_inline_list topic %}
+                                            </div>
+                                            <div class="topic-created">
+                                                {% trans "By:" %} <a href="#">{{ topic.poster.username }}</a> {% trans "on" %} {{ topic.created }}
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="topic-count">{{ topic.posts_count }}</td>
