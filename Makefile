@@ -7,11 +7,11 @@ css:
 .PHONY: install upgrade coverage travis
 
 install:
-		pip install -r requirements.txt --use-mirrors
+		pip install -r requirements.txt
 		python setup.py develop
 
 upgrade:
-		pip install --upgrade -r requirements.txt --use-mirrors
+		pip install --upgrade -r requirements.txt
 		python setup.py develop --upgrade
 
 coverage:
