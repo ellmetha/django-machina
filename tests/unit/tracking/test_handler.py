@@ -124,3 +124,13 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_3.topics.all(), self.u2)
         # Check
         self.assertEqual(unread_topics, [new_topic, ])
+
+    def test_cannot_say_that_a_topic_is_unread_if_it_has_been_marked(self):
+        # Setup
+        PostFactory.create(topic=self.topic, poster=self.u1)
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        TopicReadTrackFactory.create(topic=self.topic, user=self.u2)
+        # Run
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
+        # Check
+        self.assertEqual(unread_topics, [new_topic, ])

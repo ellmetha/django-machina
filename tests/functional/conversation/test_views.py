@@ -39,6 +39,9 @@ class TestTopicView(BaseClientTestCase):
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
         # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
 
@@ -70,6 +73,9 @@ class TestTopicView(BaseClientTestCase):
 
     def test_marks_the_related_forum_as_read_if_no_other_unread_topics_are_present(self):
         # Setup
+        new_topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        PostFactory.create(topic=new_topic, poster=self.user)
+        TopicReadTrackFactory.create(topic=new_topic, user=self.user)
         TopicReadTrackFactory.create(topic=self.topic, user=self.user)
         PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
@@ -77,13 +83,14 @@ class TestTopicView(BaseClientTestCase):
         self.client.get(correct_url)
         # Check
         forum_tracks = ForumReadTrack.objects.all()
+        topic_tracks = TopicReadTrack.objects.all()
         self.assertEqual(forum_tracks.count(), 1)
+        self.assertFalse(len(topic_tracks))
         self.assertEqual(forum_tracks[0].forum, self.topic.forum)
         self.assertEqual(forum_tracks[0].user, self.user)
 
     def test_marks_the_related_topic_as_read_if_other_unread_topics_are_present(self):
         # Setup
-        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
         new_topic = create_topic(forum=self.top_level_forum, poster=self.user)
         PostFactory.create(topic=new_topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
@@ -97,6 +104,7 @@ class TestTopicView(BaseClientTestCase):
 
     def test_cannot_create_any_track_if_the_user_is_not_authenticated(self):
         # Setup
+        ForumReadTrack.objects.all().delete()
         assign_perm('can_read_forum', get_anonymous_user(), self.top_level_forum)
         self.client.logout()
         correct_url = self.topic.get_absolute_url()
