@@ -10,6 +10,7 @@ from django.test.client import RequestFactory
 from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
+from machina.conf import settings
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -67,6 +68,27 @@ class BaseConversationTagsTestCase(TestCase):
         assign_perm('can_delete_own_posts', self.moderators, self.forum_1)
         assign_perm('can_edit_posts', self.moderators, self.forum_1)
         assign_perm('can_delete_posts', self.moderators, self.forum_1)
+
+
+class TestPageNumberTag(BaseConversationTagsTestCase):
+    def test_knows_the_page_associated_with_a_topic_post(self):
+        # Setup
+        def get_rendered(post):
+            request = self.request_factory.get('/')
+            t = Template(self.loadstatement + '{{ post|page_number }}')
+            c = Context({'post': post, 'request': request})
+            rendered = t.render(c)
+
+            return rendered
+
+        settings.TOPIC_POSTS_NUMBER_PER_PAGE = 10
+        for i in range(20):
+            post = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
+            setattr(self, 'new_post_' + str(i), post)
+
+        # Run & check
+        self.assertEqual(get_rendered(self.new_post_5), '1')
+        self.assertEqual(get_rendered(self.new_post_12), '2')
 
 
 class TestPostedByTag(BaseConversationTagsTestCase):

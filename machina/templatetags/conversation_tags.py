@@ -7,12 +7,26 @@ from __future__ import unicode_literals
 from django import template
 
 # Local application / specific library imports
+from machina.conf import settings
 from machina.core.loading import get_class
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
 register = template.Library()
+
+
+@register.filter
+def page_number(post):
+    """
+    This will return the page number at which the given post can be seen
+    inside its related topic.
+
+    Usage::
+
+        {{ post|page_number }}
+    """
+    return (post.position // settings.TOPIC_POSTS_NUMBER_PER_PAGE) + 1
 
 
 @register.filter
