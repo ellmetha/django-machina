@@ -40,7 +40,7 @@ def update_user_trackers(sender, topic, user, request, response, **kwargs):
         # be marked as read.
         unread_topics = forum.topics.filter(
             Q(tracks__user=user, tracks__mark_time__lt=F('updated')) |
-            Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('updated'))).exclude(id=topic.id)
+            Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('updated'), tracks__isnull=True)).exclude(id=topic.id)
 
         if not unread_topics.exists():
             # The topics that are marked as read inside the forum for the given user

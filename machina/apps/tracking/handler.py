@@ -60,21 +60,10 @@ class TrackingHandler(object):
         if not user.is_authenticated():
             return unread_topics
 
-        # A topic can be unread if a track for its associated forum exists with
-        # a mark time that is less important than its creation or update date.
-        forums = [topic.forum for topic in topics]
-        forum_tracks = ForumReadTrack.objects.filter(forum__in=forums, user=user)
-
-        if forum_tracks.exists():
-            tracks_dict = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
-            for topic in topics:
-                topic_last_modification_date = topic.updated or topic.created
-                if (topic.forum.id in tracks_dict.keys() and topic_last_modification_date > tracks_dict[topic.forum.id]):
-                    unread_topics.append(topic)
-
         # A topic can be unread if a track for itself exists with a mark time that
         # is less important than its update date.
         topic_tracks = TopicReadTrack.objects.filter(topic__in=topics, user=user)
+        tracked_topics = topic_tracks.values_list('topic__pk', flat=True)
 
         if topic_tracks.exists():
             tracks_dict = dict(topic_tracks.values_list('topic__pk', 'mark_time'))
@@ -83,10 +72,21 @@ class TrackingHandler(object):
                 if topic.id in tracks_dict.keys() and topic_last_modification_date > tracks_dict[topic.id]:
                     unread_topics.append(topic)
 
-        # A topic can be unread if no tracks exists for it
+        # A topic can be unread if a track for its associated forum exists with
+        # a mark time that is less important than its creation or update date.
+        forums = [topic.forum for topic in topics]
+        forum_tracks = ForumReadTrack.objects.filter(forum__in=forums, user=user)
         tracked_forums = forum_tracks.values_list('forum__pk', flat=True)
-        tracked_topics = topic_tracks.values_list('topic__pk', flat=True)
 
+        if forum_tracks.exists():
+            tracks_dict = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
+            for topic in topics:
+                topic_last_modification_date = topic.updated or topic.created
+                if ((topic.forum.id in tracks_dict.keys() and topic.id not in tracked_topics) and
+                        topic_last_modification_date > tracks_dict[topic.forum.id]):
+                    unread_topics.append(topic)
+
+        # A topic can be unread if no tracks exists for it
         for topic in topics:
             if topic.forum.pk not in tracked_forums and topic.pk not in tracked_topics:
                 unread_topics.append(topic)
