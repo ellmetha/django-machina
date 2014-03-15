@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 # Third party imports
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
@@ -189,6 +190,11 @@ class AbstractPost(DatedModel):
     @property
     def is_topic_tail(self):
         return self.topic.last_post.id == self.id
+
+    @property
+    def position(self):
+        position = self.topic.posts.filter(Q(created__lt=self.created) | Q(id=self.id)).count()
+        return position
 
     def save(self, *args, **kwargs):
         super(AbstractPost, self).save(*args, **kwargs)

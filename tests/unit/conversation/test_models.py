@@ -111,6 +111,15 @@ class TestPost(TestCase):
         post = PostFactory.create(topic=self.topic, poster=self.u1)
         self.assertTrue(post.is_topic_tail)
 
+    def test_knows_its_position_inside_the_topic(self):
+        # Setup
+        post_2 = PostFactory.create(topic=self.topic, poster=self.u1)
+        post_3 = PostFactory.create(topic=self.topic, poster=self.u1)
+        # Run & check
+        self.assertEqual(self.post.position, 1)
+        self.assertEqual(post_2.position, 2)
+        self.assertEqual(post_3.position, 3)
+
     def test_is_both_topic_head_and_tail_if_it_is_alone_in_the_topic(self):
         # Check
         self.assertTrue(self.post.is_topic_head)
