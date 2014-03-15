@@ -1484,7 +1484,8 @@
 .topiclist .panel-body .topic-icon.unread {
   color: #dc4e44;
 }
-.topiclist .panel-body .topic-name .topic-created {
+.topiclist .panel-body .topic-name .topic-created,
+.topiclist .panel-body .topic-name .topic-inline-pagination {
   font-size: 11px;
   color: #666;
 }
