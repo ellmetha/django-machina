@@ -71,6 +71,16 @@ class TestTopicView(BaseClientTestCase):
         topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
         self.assertEqual(topic.views_count, initial_views_count + 1)
 
+    def test_cannot_change_the_updated_date_of_the_topic(self):
+        # Setup
+        correct_url = self.topic.get_absolute_url()
+        initial_updated_date = self.topic.updated
+        # Run
+        self.client.get(correct_url)
+        # Check
+        topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
+        self.assertEqual(topic.updated, initial_updated_date)
+
     def test_marks_the_related_forum_as_read_if_no_other_unread_topics_are_present(self):
         # Setup
         new_topic = create_topic(forum=self.top_level_forum, poster=self.user)
@@ -93,6 +103,7 @@ class TestTopicView(BaseClientTestCase):
         # Setup
         new_topic = create_topic(forum=self.top_level_forum, poster=self.user)
         PostFactory.create(topic=new_topic, poster=self.user)
+        PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
         # Run
         self.client.get(correct_url)
