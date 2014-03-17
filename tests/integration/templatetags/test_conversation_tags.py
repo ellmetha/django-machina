@@ -5,6 +5,7 @@
 from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
+from django.template.loader import render_to_string
 from django.test import TestCase
 from django.test.client import RequestFactory
 from guardian.shortcuts import assign_perm
@@ -144,3 +145,43 @@ class TestCanBeDeleteddByTag(BaseConversationTagsTestCase):
         self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_DELETE')
         self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_DELETE')
         self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_DELETE')
+
+
+class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
+    def test_provides_the_number_of_pages_of_a_topic(self):
+        # Setup
+        def get_rendered(topic):
+            t = Template(self.loadstatement + '{% topic_pages_inline_list topic %}')
+            c = Context({'topic': topic})
+            rendered = t.render(c)
+
+            return rendered
+
+        for i in range(0, 35):
+            PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
+        expected_out_small = render_to_string(
+            'machina/conversation/topic_pages_inline_list.html',
+            {
+                'topic': self.forum_1_topic,
+                'first_pages': [1, 2, 3, 4, ],
+            }
+        )
+
+        for i in range(0, 120):
+            PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
+        expected_out_huge = render_to_string(
+            'machina/conversation/topic_pages_inline_list.html',
+            {
+                'topic': self.forum_2_topic,
+                'first_pages': [1, 2, 3, 4, ],
+                'last_page': 13,
+            }
+        )
+
+        # Run
+        rendered_small = get_rendered(self.forum_1_topic)
+        rendered_huge = get_rendered(self.forum_2_topic)
+
+        # Check
+        self.assertEqual(rendered_small, expected_out_small)
+        self.assertEqual(rendered_huge, expected_out_huge)
