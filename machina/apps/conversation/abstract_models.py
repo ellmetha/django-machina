@@ -12,7 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
 # Local application / specific library imports
-from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
 from machina.core.utils import refresh
 from machina.models.abstract_models import DatedModel
@@ -40,7 +39,6 @@ class AbstractTopic(DatedModel):
     """
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Topic forum'), related_name='topics')
     poster = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Poster'))
-    subject = models.CharField(verbose_name=_('Subject'), max_length=255)
 
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
     TYPE_CHOICES = TOPIC_TYPES
@@ -71,7 +69,10 @@ class AbstractTopic(DatedModel):
         app_label = 'conversation'
 
     def __str__(self):
-        return '{}'.format(self.subject)
+        if self.posts.exists():
+            return '{}'.format(self.posts.all().order_by('-created')[0].subject)
+        else:
+            return '{}'.format(self.id)
 
     @property
     def first_post(self):
@@ -94,6 +95,14 @@ class AbstractTopic(DatedModel):
             posts = self.posts.all().order_by('-created')
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
+
+    @property
+    def subject(self):
+        """
+        The subject of the thread corresponds to the one associated with the first post.
+        """
+        if self.first_post:
+            return self.first_post.subject
 
     def clean(self):
         super(AbstractTopic, self).clean()
@@ -159,6 +168,10 @@ class AbstractPost(DatedModel):
     topic = models.ForeignKey('conversation.Topic', verbose_name=_('Topic'), related_name='posts')
     poster = models.ForeignKey(AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'))
 
+    # Each post can have its own subject. The subject of the thread corresponds to the
+    # one associated with the first post
+    subject = models.CharField(verbose_name=_('Subject'), max_length=255)
+
     # Content
     content = MarkupTextField(verbose_name=_('Content'))
 
@@ -178,10 +191,7 @@ class AbstractPost(DatedModel):
         app_label = 'conversation'
 
     def __str__(self):
-        subject = '{}'.format(self.topic.subject)
-        if self.topic.first_post != self:
-            return machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX + subject
-        return subject
+        return '{}'.format(self.subject)
 
     @property
     def is_topic_head(self):

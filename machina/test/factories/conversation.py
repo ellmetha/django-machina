@@ -19,7 +19,6 @@ class TopicFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Topic
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
-    subject = factory.LazyAttribute(lambda t: random_string(length=20))
     status = Topic.STATUS_CHOICES.topic_unlocked
 
 
@@ -27,6 +26,7 @@ class PostFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Post
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
+    subject = factory.LazyAttribute(lambda t: random_string(length=20))
     content = fuzzy.FuzzyText(length=255)
 
 

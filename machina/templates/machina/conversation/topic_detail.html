@@ -37,7 +37,7 @@
                             {% endif %}
                             <a href="#" class="btn btn-primary btn-xs" title="{% trans "Quote" %}"><i class="fa fa-quote-left"></i>&nbsp;{% trans "Quote" %}</a>
                         </div>
-                        <h4 class="subject">{{ post }}</h4>
+                        <h4 class="subject">{{ post.subject }}</h4>
                         <p><small class="text-muted">
                             <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
                         </small></p>
