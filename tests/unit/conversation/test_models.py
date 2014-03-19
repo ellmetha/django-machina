@@ -45,6 +45,10 @@ class TestTopic(TestCase):
         self.assertEqual(self.topic.last_post, new_last_post)
         self.assertIsNone(new_topic.last_post)
 
+    def test_has_the_first_post_name_as_subject(self):
+        # Run & check
+        self.assertEqual(self.topic.subject, self.post.subject)
+
     def test_saves_its_number_of_posts(self):
         # Run & check
         post = PostFactory.create(topic=self.topic, poster=self.u1)
