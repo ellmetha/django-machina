@@ -66,7 +66,7 @@ class TestTopic(TestCase):
             new_topic = build_topic(forum=top_level_cat, poster=self.u1)
             new_topic.full_clean()
         with self.assertRaises(ValidationError):
-            new_topic = new_topic = build_topic(forum=top_level_link, poster=self.u1)
+            new_topic = build_topic(forum=top_level_link, poster=self.u1)
             new_topic.full_clean()
 
     def test_can_trigger_the_update_of_the_counters_of_a_new_forum(self):
