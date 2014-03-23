@@ -27,21 +27,21 @@ setup(
     long_description=open('README.rst').read(),
     zip_safe=False,
     install_requires=[
-        "django>=1.4",
-        "django-model-utils==1.5.0",
-        "south>=0.8.4",
+        'django>=1.4.2',
+        'django-model-utils==1.5.0',
+        'south>=0.8.4',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
-        "django-mptt==0.6.0",
+        'django-mptt>=0.6.0,<0.7',
 
         # Django-guardian is used to provide a powerful per-forum object permission system
-        "django-guardian==1.1.1",
+        'django-guardian==1.1.1',
 
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
 
         # Machina uses BBCode by default as a syntax for forum messages (can be configured)
-        'django-precise-bbcode==0.4.1',
+        'django-precise-bbcode>=0.4.1,<0.5',
     ],
     classifiers=[
         'Development Status :: 1 - Planning',
