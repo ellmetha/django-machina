@@ -43,8 +43,7 @@ setup(
         # Machina uses BBCode by default as a syntax for forum messages (can be configured)
         'django-precise-bbcode>=0.4.1,<0.5',
 
-        # Machina's default templates use django-bootstrap3 to render bootstrap forms ; but
-        # you can override this
+        # Machina's default templates use django-bootstrap3 to render forms ; but you can override this
         'django-bootstrap3>=3.3.0,<3.4',
     ],
     classifiers=[
