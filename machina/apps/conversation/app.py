@@ -20,7 +20,8 @@ class ConversationApp(Application):
         urls = [
             url(r'^topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
-            url(r'^forum/(?P<forum_pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
+            url(r'^forum/(?P<forum_pk>\d+)/topic/create/$', self.post_create_view.as_view(), name='topic-create'),
+            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
         ]
         return patterns('', *urls)
 

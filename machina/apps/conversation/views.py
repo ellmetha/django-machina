@@ -14,7 +14,10 @@ from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
+Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+
+PostForm = get_class('conversation.forms', 'PostForm')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -67,7 +70,8 @@ class TopicView(PermissionRequiredMixin, ListView):
 
 class PostCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'conversation/topic_create.html'
-    permmission_required = ['can_start_new_topics', ]
+    permission_required = ['can_start_new_topics', ]
+    form_class = PostForm
 
     def get_controlled_object(self):
         """
@@ -75,3 +79,12 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
         """
         forum_pk = self.kwargs['forum_pk']
         return Forum.objects.get(pk=forum_pk)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostCreateView, self).get_context_data(**kwargs)
+
+        # Insert the considered forum into the context
+        forum_pk = self.kwargs['forum_pk']
+        context['forum'] = Forum.objects.get(pk=forum_pk)
+
+        return context
