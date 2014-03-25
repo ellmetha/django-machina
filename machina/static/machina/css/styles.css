@@ -1416,8 +1416,14 @@
 .forumlist .panel-body .forum-link-redirects {
   font-size: 13px;
 }
+.post-edit {
+  margin-bottom: 8px;
+}
 .pagination {
   margin: 4px 0;
+}
+.forum-actions {
+  padding-top: 3px;
 }
 .topiclist .panel-heading {
   padding-top: 10px;
