@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% load conversation_tags %}
+
+{% block sub-title %}{% if topic %}{% trans "Post a reply" %}{% else %}{% trans "Post a new topic" %}{% endif %}{% endblock sub-title %}
+
+{% block breadcrumb %}
+    {% include "machina/breadcrumb.html" %}
+{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>{{ forum.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="panel panel-default post-edit">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% if topic %}{% trans "Post a reply" %}{% else %}{% trans "Post a new topic" %}{% endif %}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post" action="." class="form">
+                            {% include 'partials/form_fields.html' %}
+                            <div class="form-actions">
+                                <button class="btn btn-large btn-primary" type="submit">{% trans "Submit" %}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
