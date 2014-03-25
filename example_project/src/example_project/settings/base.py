@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'guardian',
     'mptt',
+    'bootstrap3',
 
     # Local apps
     'example_project',
