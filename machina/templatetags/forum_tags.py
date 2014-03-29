@@ -55,3 +55,16 @@ def forum_list(forums, request):
         data_dict['root_level_sub'] = root_level + 2
 
     return data_dict
+
+
+@register.filter
+def can_be_filled_by(forum, user):
+    """
+    This will return a boolean indicating if the considered user can append topics
+    to the passed forum.
+
+    Usage::
+
+        {% if forum|can_be_filled_by:user %}...{% endif %}
+    """
+    return perm_handler.can_add_topic(forum, user)
