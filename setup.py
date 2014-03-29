@@ -35,7 +35,7 @@ setup(
         'django-mptt>=0.6.0,<0.7',
 
         # Django-guardian is used to provide a powerful per-forum object permission system
-        'django-guardian==1.1.1',
+        'django-guardian>=1.2,<1.3',
 
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
