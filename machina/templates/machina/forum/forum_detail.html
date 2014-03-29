@@ -23,13 +23,13 @@
         {% endif %}
         {% if forum.is_forum %}
             <div class="row">
-                <div class="pull-right">
+                <div class="col-xs-6 col-md-4 forum-actions-block">
+                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                </div>
+                <div class="col-xs-12 col-md-8 pagination-block">
                     {% with "pagination-sm" as pagination_size %}
                         {% include "machina/pagination.html" %}
                     {% endwith %}
-                </div>
-                <div class="forum-actions">
-                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 </div>
             </div>
             <div class="row">
@@ -80,6 +80,16 @@
                             {% endfor %}
                         </table>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-4 forum-actions-block">
+                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                </div>
+                <div class="col-xs-12 col-md-8 pagination-block">
+                    {% with "pagination-sm" as pagination_size %}
+                        {% include "machina/pagination.html" %}
+                    {% endwith %}
                 </div>
             </div>
         {% endif %}
