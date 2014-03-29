@@ -18,6 +18,7 @@ Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
 
 PostForm = get_class('conversation.forms', 'PostForm')
+TopicForm = get_class('conversation.forms', 'TopicForm')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -71,7 +72,12 @@ class TopicView(PermissionRequiredMixin, ListView):
 class PostCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'conversation/topic_create.html'
     permission_required = ['can_start_new_topics', ]
-    form_class = PostForm
+
+    def get_form_class(self):
+        new_topic = 'pk' not in self.kwargs
+        if new_topic:
+            return TopicForm
+        return PostForm
 
     def get_controlled_object(self):
         """
