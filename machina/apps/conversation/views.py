@@ -79,18 +79,27 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
             return TopicForm
         return PostForm
 
-    def get_controlled_object(self):
-        """
-        Returns the forum associated with the post being created.
-        """
-        forum_pk = self.kwargs['forum_pk']
-        return Forum.objects.get(pk=forum_pk)
+    def get_form_kwargs(self):
+        kwargs = super(PostCreateView, self).get_form_kwargs()
+        kwargs['forum'] = self.get_forum()
+        kwargs['poster'] = self.request.user
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
 
         # Insert the considered forum into the context
-        forum_pk = self.kwargs['forum_pk']
-        context['forum'] = Forum.objects.get(pk=forum_pk)
+        context['forum'] = self.get_forum()
 
         return context
+
+    def get_controlled_object(self):
+        """
+        Returns the forum associated with the post being created.
+        """
+        return self.get_forum()
+
+    def get_forum(self):
+        if not hasattr(self, 'forum'):
+            self.forum = get_object_or_404(Forum, pk=self.kwargs['forum_pk'])
+        return self.forum

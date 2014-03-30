@@ -18,8 +18,19 @@ class PostForm(forms.ModelForm):
         fields = ['subject', 'content', ]
 
     def __init__(self, *args, **kwargs):
+        self.poster = kwargs.pop('poster', None)
         super(PostForm, self).__init__(*args, **kwargs)
 
 
 class TopicForm(PostForm):
     topic_type = forms.ChoiceField(label=_('Post topic as'), choices=Topic.TYPE_CHOICES)
+
+    def __init__(self, *args, **kwargs):
+        self.forum = kwargs.pop('forum', None)
+        super(TopicForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        if self.forum:
+            topic = Topic(
+                forum=self.forum,
+                poster=self.poster)
