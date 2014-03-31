@@ -8,4 +8,6 @@ django-machina
 
 A Django forum engine for building powerful and pretty community driven websites.
 
+**This application is in heavy development. It is not yet suitable for production environments.**
+
 *WIP*
