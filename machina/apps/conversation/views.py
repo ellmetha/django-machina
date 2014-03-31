@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
@@ -92,6 +93,11 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
         context['forum'] = self.get_forum()
 
         return context
+
+    def get_success_url(self):
+        return reverse('conversation:topic', kwargs={
+            'forum_pk': self.get_forum().pk,
+            'pk': self.object.topic.pk})
 
     def get_controlled_object(self):
         """
