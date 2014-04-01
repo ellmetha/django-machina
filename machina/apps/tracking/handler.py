@@ -56,8 +56,9 @@ class TrackingHandler(object):
         """
         unread_topics = []
 
-        # A user which is not authenticated will never see a topic as unread
-        if not user.is_authenticated():
+        # A user which is not authenticated will never see a topic as unread.
+        # If there are no topics to consider, we stop here.
+        if not user.is_authenticated() or topics is None or not len(topics):
             return unread_topics
 
         # A topic can be unread if a track for itself exists with a mark time that

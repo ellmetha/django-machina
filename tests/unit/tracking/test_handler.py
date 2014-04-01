@@ -90,6 +90,11 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Check
         self.assertFalse(len(unread_topics))
 
+    def test_returns_an_empty_list_of_topics_if_the_forum_has_no_topics(self):
+        # Run & check
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.u2)
+        self.assertFalse(len(unread_topics))
+
     def test_says_that_a_topic_with_a_creation_date_greater_than_the_forum_mark_time_is_unread(self):
         # Setup
         new_topic = create_topic(forum=self.forum_2, poster=self.u1)
