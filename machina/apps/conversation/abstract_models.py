@@ -167,6 +167,7 @@ class AbstractPost(DatedModel):
     """
     topic = models.ForeignKey('conversation.Topic', verbose_name=_('Topic'), related_name='posts')
     poster = models.ForeignKey(AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'))
+    poster_ip = models.GenericIPAddressField(verbose_name=_('Poster IP address'), blank=True, default='2002::0')
 
     # Each post can have its own subject. The subject of the thread corresponds to the
     # one associated with the first post

@@ -19,6 +19,7 @@ class PostForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.poster = kwargs.pop('poster', None)
+        self.poster_ip = kwargs.pop('poster_ip', None)
         self.topic = kwargs.pop('topic', None)
         super(PostForm, self).__init__(*args, **kwargs)
 
@@ -54,6 +55,7 @@ class TopicForm(PostForm):
         post = Post(
             topic=topic,
             poster=self.poster,
+            poster_ip=self.poster_ip,
             subject=self.cleaned_data['subject'],
             content=self.cleaned_data['content'])
 

@@ -10,6 +10,7 @@ from django.views.generic import ListView
 
 # Local application / specific library imports
 from machina.apps.conversation.signals import topic_viewed
+from machina.apps.conversation.utils import get_client_ip
 from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
@@ -84,6 +85,7 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
         kwargs = super(PostCreateView, self).get_form_kwargs()
         kwargs['forum'] = self.get_forum()
         kwargs['poster'] = self.request.user
+        kwargs['poster_ip'] = get_client_ip(self.request)
         return kwargs
 
     def get_context_data(self, **kwargs):
