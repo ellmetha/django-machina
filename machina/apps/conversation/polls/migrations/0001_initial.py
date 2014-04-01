@@ -95,7 +95,6 @@ class Migration(SchemaMigration):
             'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'status': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'subject': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'subscriptions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),

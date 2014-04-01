@@ -136,6 +136,8 @@ INSTALLED_APPS = [
     'mptt',
     'bootstrap3',
 
+    'precise_bbcode',
+
     # Local apps
     'example_project',
 ] + get_vanilla_apps()

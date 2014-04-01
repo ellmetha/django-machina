@@ -16,7 +16,7 @@ class Migration(SchemaMigration):
             ('signature', self.gf('machina.models.fields.MarkupTextField')(blank=True, max_length=255, null=True, no_rendered_field=True)),
             ('rank', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['member.Rank'], null=True, blank=True)),
             ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            (u'_signature_rendered', self.gf('django.db.models.fields.TextField')(blank=True)),
+            (u'_signature_rendered', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'member', ['Profile'])
 
@@ -78,7 +78,7 @@ class Migration(SchemaMigration):
         },
         u'member.profile': {
             'Meta': {'object_name': 'Profile'},
-            u'_signature_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            u'_signature_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'avatar': ('machina.models.fields.ExtendedImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
