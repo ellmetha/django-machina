@@ -75,6 +75,6 @@ def _get_app_module_path(module_label):
     """
     app_name = module_label.rsplit(".", 1)[0]
     for app in settings.INSTALLED_APPS:
-        if app.endswith(app_name):
+        if app.endswith('.' + app_name) or app == app_name:
             return app
     return None
