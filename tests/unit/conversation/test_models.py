@@ -29,6 +29,26 @@ class TestTopic(TestCase):
         self.topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         self.post = PostFactory.create(topic=self.topic, poster=self.u1)
 
+    def test_knows_if_it_is_a_default_topic(self):
+        # Run & check
+        self.assertTrue(self.topic.is_topic)
+
+    def test_knows_if_it_is_sticky(self):
+        # Setup
+        sticky_topic = create_topic(
+            forum=self.top_level_forum, poster=self.u1,
+            type=Topic.TYPE_CHOICES.topic_sticky)
+        # Run & check
+        self.assertTrue(sticky_topic.is_sticky)
+
+    def test_knows_if_it_is_an_announce(self):
+        # Setup
+        announce = create_topic(
+            forum=self.top_level_forum, poster=self.u1,
+            type=Topic.TYPE_CHOICES.topic_announce)
+        # Run & check
+        self.assertTrue(announce.is_announce)
+
     def test_has_a_first_post(self):
         # Run & check
         self.assertEqual(self.topic.first_post, self.post)

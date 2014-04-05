@@ -74,6 +74,18 @@ class AbstractTopic(DatedModel):
             return '{}'.format(self.id)
 
     @property
+    def is_topic(self):
+        return self.type == self.TYPE_CHOICES.topic_post
+
+    @property
+    def is_sticky(self):
+        return self.type == self.TYPE_CHOICES.topic_sticky
+
+    @property
+    def is_announce(self):
+        return self.type == self.TYPE_CHOICES.topic_announce
+
+    @property
     def first_post(self):
         """
         Try to fetch the first post associated with the current topic and caches it to
