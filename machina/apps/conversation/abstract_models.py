@@ -20,9 +20,8 @@ from machina.models.fields import MarkupTextField
 
 TOPIC_TYPES = Choices(
     (0, 'topic_post', _('Default topic')),
-    (1, 'topic_global', _('Global topic')),
+    (1, 'topic_sticky', _('Sticky')),
     (2, 'topic_announce', _('Announce')),
-    (3, 'topic_sticky', _('Sticky')),
 )
 
 TOPIC_STATUSES = Choices(
