@@ -61,7 +61,7 @@ class AbstractTopic(DatedModel):
 
     class Meta:
         abstract = True
-        ordering = ['-updated', ]
+        ordering = ['-type', '-updated', ]
         get_latest_by = 'updated'
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
@@ -69,7 +69,7 @@ class AbstractTopic(DatedModel):
 
     def __str__(self):
         if self.posts.exists():
-            return '{}'.format(self.posts.all().order_by('-created')[0].subject)
+            return '{}'.format(self.posts.all().order_by('created')[0].subject)
         else:
             return '{}'.format(self.id)
 
