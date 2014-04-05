@@ -21,7 +21,7 @@
             <table class="table">
                 {% for topic in topics %}
                     <tr>
-                        <td class="topic-icon {% if topic in unread_topics %}unread{% endif %}"><i class="fa fa-dot-circle-o fa-2x"></i></td>
+                        <td class="topic-icon {% if topic in unread_topics %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i></td>
                         <td class="topic-name">
                             <a href="{% url 'conversation:topic' forum_pk=forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                             <div>
