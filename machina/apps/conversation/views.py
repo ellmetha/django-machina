@@ -35,6 +35,18 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get(self, request, **kwargs):
         topic = self.get_topic()
+
+        # Handle pagination
+        requested_post = request.GET.get('post', None)
+        if requested_post:
+            try:
+                post = topic.posts.get(pk=requested_post)
+                requested_page = (post.position // machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE) + 1
+                request.GET = request.GET.copy()  # A QueryDict is immutable
+                request.GET.update({'page': requested_page})
+            except Post.DoesNotExist:
+                pass
+
         response = super(TopicView, self).get(request, **kwargs)
         self.send_signal(request, response, topic)
         return response

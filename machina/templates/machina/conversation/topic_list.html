@@ -36,7 +36,9 @@
                         <td class="topic-count">{{ topic.posts_count }}</td>
                         <td class="topic-count">{{ topic.views_count }}</td>
                         <td class="topic-last-post">
-                            {% trans "By:" %} <a href="#">{{ topic.last_post.poster.username }}</a>&nbsp;<a href="{% url 'conversation:topic' topic.forum.pk topic.pk %}?page={{ topic.last_post|page_number }}#{{ topic.last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                            {% with last_post_pk=topic.last_post.pk last_poster_name=topic.last_post.poster.username %}
+                                {% trans "By:" %} <a href="#">{{ last_poster_name }}</a>&nbsp;<a href="{% url 'conversation:topic' topic.forum.pk topic.pk %}?post={{ last_post_pk }}#{{ last_post_pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                            {% endwith %}
                             <br />
                             {{ topic.last_post.created }}
                         </td>
