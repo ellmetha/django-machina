@@ -92,7 +92,7 @@ class AbstractTopic(DatedModel):
         lighten the next request.
         """
         if not hasattr(self, '_first_post'):
-            posts = self.posts.all().order_by('created')
+            posts = self.posts.all().order_by('created').select_related('poster')
             self._first_post = posts[0] if posts.exists() else None
         return self._first_post
 
@@ -102,8 +102,8 @@ class AbstractTopic(DatedModel):
         Try to fetch the last post associated with the current topic and caches it to
         lighten the next request.
         """
-        if not getattr(self, '_last_post', None):
-            posts = self.posts.all().order_by('-created')
+        if not hasattr(self, '_last_post'):
+            posts = self.posts.all().order_by('-created').select_related('poster')
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
 
@@ -112,8 +112,7 @@ class AbstractTopic(DatedModel):
         """
         The subject of the thread corresponds to the one associated with the first post.
         """
-        if self.first_post:
-            return self.first_post.subject
+        return self.first_post.subject
 
     def clean(self):
         super(AbstractTopic, self).clean()
