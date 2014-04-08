@@ -45,6 +45,7 @@ class TopicForm(PostForm):
             topic = Topic(
                 forum=self.forum,
                 poster=self.poster,
+                subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
                 status=Topic.STATUS_CHOICES.topic_unlocked)
             if commit:
