@@ -39,6 +39,9 @@ class AbstractTopic(DatedModel):
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Topic forum'), related_name='topics')
     poster = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Poster'))
 
+    # The subject of the thread should correspond to the one associated with the first post
+    subject = models.CharField(verbose_name=_('Subject'), max_length=255)
+
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
     TYPE_CHOICES = TOPIC_TYPES
     type = models.PositiveSmallIntegerField(choices=TOPIC_TYPES, verbose_name=_('Topic type'), db_index=True)
@@ -106,13 +109,6 @@ class AbstractTopic(DatedModel):
             posts = self.posts.all().order_by('-created').select_related('poster')
             self._last_post = posts[0] if posts.exists() else None
         return self._last_post
-
-    @property
-    def subject(self):
-        """
-        The subject of the thread corresponds to the one associated with the first post.
-        """
-        return self.first_post.subject
 
     def clean(self):
         super(AbstractTopic, self).clean()
@@ -221,6 +217,12 @@ class AbstractPost(DatedModel):
         super(AbstractPost, self).save(*args, **kwargs)
         # Trigger the topic-level trackers update
         self.topic.update_trackers()
+
+        # Ensures that the subject of the thread corresponds to the one associated
+        # with the first post.
+        if self.is_topic_head and self.subject != self.topic.subject:
+            self.topic.subject = self.subject
+            self.save()
 
     def delete(self, using=None):
         if self.is_topic_head and self.is_topic_tail:

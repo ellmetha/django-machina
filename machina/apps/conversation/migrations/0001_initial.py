@@ -15,6 +15,7 @@ class Migration(SchemaMigration):
             ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('forum', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'topics', to=orm['forum.Forum'])),
             ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
             ('status', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
             ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
@@ -114,7 +115,7 @@ class Migration(SchemaMigration):
             'updates_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'})
         },
         u'conversation.topic': {
-            'Meta': {'ordering': "[u'-updated']", 'object_name': 'Topic'},
+            'Meta': {'ordering': "[u'-type', u'-updated']", 'object_name': 'Topic'},
             'approved': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'forum': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'topics'", 'to': u"orm['forum.Forum']"}),
@@ -122,6 +123,7 @@ class Migration(SchemaMigration):
             'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'status': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'subject': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'subscriptions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
