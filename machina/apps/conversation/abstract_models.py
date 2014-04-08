@@ -95,8 +95,8 @@ class AbstractTopic(DatedModel):
         lighten the next request.
         """
         if not hasattr(self, '_first_post'):
-            posts = self.posts.all().order_by('created').select_related('poster')
-            self._first_post = posts[0] if posts.exists() else None
+            posts = self.posts.select_related('poster').all().order_by('created')
+            self._first_post = posts[0] if len(posts) else None
         return self._first_post
 
     @property
@@ -106,8 +106,8 @@ class AbstractTopic(DatedModel):
         lighten the next request.
         """
         if not hasattr(self, '_last_post'):
-            posts = self.posts.all().order_by('-created').select_related('poster')
-            self._last_post = posts[0] if posts.exists() else None
+            posts = self.posts.select_related('poster').all().order_by('-created')
+            self._last_post = posts[0] if len(posts) else None
         return self._last_post
 
     def clean(self):
