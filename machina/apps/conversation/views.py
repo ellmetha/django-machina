@@ -83,30 +83,34 @@ class TopicView(PermissionRequiredMixin, ListView):
             request=request, response=response)
 
 
-class PostCreateView(PermissionRequiredMixin, CreateView):
+class TopicCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'conversation/topic_create.html'
     permission_required = ['can_start_new_topics', ]
-
-    def get_form_class(self):
-        new_topic = 'pk' not in self.kwargs
-        if new_topic:
-            return TopicForm
-        return PostForm
+    form_class = TopicForm
 
     def get_form_kwargs(self):
-        kwargs = super(PostCreateView, self).get_form_kwargs()
+        kwargs = super(TopicCreateView, self).get_form_kwargs()
         kwargs['forum'] = self.get_forum()
         kwargs['poster'] = self.request.user
         kwargs['poster_ip'] = get_client_ip(self.request)
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(PostCreateView, self).get_context_data(**kwargs)
+        context = super(TopicCreateView, self).get_context_data(**kwargs)
 
         # Insert the considered forum into the context
         context['forum'] = self.get_forum()
 
+        if hasattr(self, 'preview'):
+            context['preview'] = self.preview
+
         return context
+
+    def form_valid(self, form):
+        if 'preview' in self.request.POST:
+            self.preview = True
+            return self.render_to_response(self.get_context_data(form=form))
+        return super(TopicCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('conversation:topic', kwargs={
