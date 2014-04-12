@@ -1394,6 +1394,7 @@
 }
 .forumlist .panel-body .forum-icon {
   padding-left: 20px;
+  text-align: center;
   color: #3497ff;
 }
 .forumlist .panel-body .forum-icon.unread {
@@ -1493,6 +1494,7 @@
 }
 .topiclist .panel-body .topic-icon {
   padding-left: 20px;
+  text-align: center;
   color: #3497ff;
 }
 .topiclist .panel-body .topic-icon.unread {
@@ -1509,6 +1511,10 @@
 .topiclist .panel-body .topic-count,
 .topiclist .panel-body .topic-last-post {
   font-size: 13px;
+}
+.preview .post-preview .post-content-wrapper hr {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 .post-edit {
   margin-bottom: 8px;
