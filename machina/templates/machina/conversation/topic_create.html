@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load i18n %}
 {% load conversation_tags %}
+{% load markup_tags %}
 
 {% block sub-title %}{% if topic %}{% trans "Post a reply" %}{% else %}{% trans "Post a new topic" %}{% endif %}{% endblock sub-title %}
 
@@ -15,6 +16,23 @@
                 <h1>{{ forum.name }}</h1>
             </div>
         </div>
+        {% if preview %}
+            <div class="row preview">
+                <div class="panel panel-default post post-preview">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 post-content-wrapper">
+                                <h4 class="subject">{% trans "Preview:" %}&nbsp;{{ form.subject.value }}</h4>
+                                <hr />
+                                <div class="post-content">
+                                    {{ form.content.value|safe|rendered }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="span12">
                 <div class="panel panel-default post-edit">
@@ -25,8 +43,8 @@
                         <form method="post" action="." class="form">
                             {% include 'partials/form_fields.html' %}
                             <div class="form-actions">
-                                <button class="btn btn-large btn-default" type="submit">{% trans "Preview" %}</button>&nbsp;
-                                <button class="btn btn-large btn-primary" type="submit">{% trans "Submit" %}</button>
+                                <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+                                <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
                             </div>
                         </form>
                     </div>
