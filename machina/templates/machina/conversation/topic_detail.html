@@ -16,7 +16,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="text-right">
+            <div class="col-xs-6 col-md-4 topic-actions-block">
+                {% if topic|can_be_enriched_by:user %}
+                    <a href="{% url 'conversation:post-create' forum.pk topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-md-8 pagination-block">
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/pagination.html" %}
                 {% endwith %}

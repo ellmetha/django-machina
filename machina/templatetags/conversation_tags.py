@@ -53,6 +53,19 @@ def can_be_deleted_by(post, user):
     return perm_handler.can_delete_post(post, user)
 
 
+@register.filter
+def can_be_enriched_by(topic, user):
+    """
+    This will return a boolean indicating if the considered user can append answers
+    to the passed topic.
+
+    Usage::
+
+        {% if topic|can_be_enriched_by:user %}...{% endif %}
+    """
+    return perm_handler.can_add_post(topic, user)
+
+
 @register.inclusion_tag('machina/conversation/topic_pages_inline_list.html')
 def topic_pages_inline_list(topic):
     """

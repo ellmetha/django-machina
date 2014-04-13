@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load markup_tags %}
+
+<div class="row preview">
+    <div class="panel panel-default post post-preview">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 post-content-wrapper">
+                    <h4 class="subject">{% trans "Preview:" %}&nbsp;{{ form.subject.value }}</h4>
+                    <hr />
+                    <div class="post-content">
+                        {{ form.content.value|safe|rendered }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
