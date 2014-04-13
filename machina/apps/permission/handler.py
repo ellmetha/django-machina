@@ -67,6 +67,19 @@ class PermissionHandler(object):
                           or checker.has_perm('can_start_new_topics', forum))
         return can_add_topics
 
+    def can_add_post(self, topic, user):
+        """
+        Given a topic, checks whether the user can append posts to it.
+        """
+        checker = ObjectPermissionChecker(user)
+
+        # A user can add replies if...
+        #     he is the superuser
+        #     he has the permission to do so
+        can_add_posts = (user.is_superuser
+                         or checker.has_perm('can_reply_to_topics', topic.forum))
+        return can_add_posts
+
     def can_edit_post(self, post, user):
         """
         Given a forum post, checks whether the user can edit the latter.
