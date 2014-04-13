@@ -63,7 +63,7 @@ class TrackingHandler(object):
 
         # A topic can be unread if a track for itself exists with a mark time that
         # is less important than its update date.
-        topic_tracks = TopicReadTrack.objects.filter(topic__in=topics, user=user)
+        topic_tracks = TopicReadTrack.objects.filter(topic__pk__in=topics, user=user)
         tracked_topics = topic_tracks.values_list('topic__pk', flat=True)
 
         if topic_tracks.exists():
