@@ -83,43 +83,30 @@ class TopicView(PermissionRequiredMixin, ListView):
             request=request, response=response)
 
 
-class TopicCreateView(PermissionRequiredMixin, CreateView):
-    template_name = 'conversation/topic_create.html'
-    permission_required = ['can_start_new_topics', ]
-    form_class = TopicForm
-
+class PostEditMixin(object):
     def get_form_kwargs(self):
-        kwargs = super(TopicCreateView, self).get_form_kwargs()
-        kwargs['forum'] = self.get_forum()
+        kwargs = super(PostEditMixin, self).get_form_kwargs()
         kwargs['poster'] = self.request.user
         kwargs['poster_ip'] = get_client_ip(self.request)
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(TopicCreateView, self).get_context_data(**kwargs)
-
-        # Insert the considered forum into the context
-        context['forum'] = self.get_forum()
-
+        context = super(PostEditMixin, self).get_context_data(**kwargs)
         if hasattr(self, 'preview'):
             context['preview'] = self.preview
-
+        # Insert the considered forum into the context
+        context['forum'] = self.get_forum()
         return context
 
     def form_valid(self, form):
         if 'preview' in self.request.POST:
             self.preview = True
             return self.render_to_response(self.get_context_data(form=form))
-        return super(TopicCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        return reverse('conversation:topic', kwargs={
-            'forum_pk': self.get_forum().pk,
-            'pk': self.object.topic.pk})
+        return super(PostEditMixin, self).form_valid(form)
 
     def get_controlled_object(self):
         """
-        Returns the forum associated with the post being created.
+        Returns the forum associated with the topic being created.
         """
         return self.get_forum()
 
@@ -127,3 +114,56 @@ class TopicCreateView(PermissionRequiredMixin, CreateView):
         if not hasattr(self, 'forum'):
             self.forum = get_object_or_404(Forum, pk=self.kwargs['forum_pk'])
         return self.forum
+
+
+class TopicCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
+    template_name = 'conversation/topic_create.html'
+    permission_required = ['can_start_new_topics', ]
+    form_class = TopicForm
+
+    def get_form_kwargs(self):
+        kwargs = super(TopicCreateView, self).get_form_kwargs()
+        kwargs['forum'] = self.get_forum()
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('conversation:topic', kwargs={
+            'forum_pk': self.get_forum().pk,
+            'pk': self.object.topic.pk})
+
+
+class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
+    template_name = 'conversation/post_create.html'
+    permission_required = ['can_reply_to_topics', ]
+    form_class = PostForm
+
+    def get_form_kwargs(self):
+        kwargs = super(PostCreateView, self).get_form_kwargs()
+        # Insert the considered topic into the context
+        kwargs['topic'] = self.get_topic()
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(PostCreateView, self).get_context_data(**kwargs)
+        # Insert the considered forum into the context
+        context['topic'] = self.get_topic()
+
+        return context
+
+    def form_valid(self, form):
+        if 'preview' in self.request.POST:
+            self.preview = True
+            return self.render_to_response(self.get_context_data(form=form))
+        return super(PostCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return '{0}?post={1}#{1}'.format(
+            reverse('conversation:topic', kwargs={
+                'forum_pk': self.get_forum().pk,
+                'pk': self.object.topic.pk}),
+            self.object.pk)
+
+    def get_topic(self):
+        if not hasattr(self, 'topic'):
+            self.topic = get_object_or_404(Topic, pk=self.kwargs['pk'])
+        return self.topic

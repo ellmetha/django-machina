@@ -23,6 +23,23 @@ class PostForm(forms.ModelForm):
         self.topic = kwargs.pop('topic', None)
         super(PostForm, self).__init__(*args, **kwargs)
 
+    def save(self, commit=True):
+        # First handle updates
+        if self.instance.pk:
+            pass
+
+        post = Post(
+            topic=self.topic,
+            poster=self.poster,
+            poster_ip=self.poster_ip,
+            subject=self.cleaned_data['subject'],
+            content=self.cleaned_data['content'])
+
+        if commit:
+            post.save()
+
+        return post
+
 
 class TopicForm(PostForm):
     topic_type = forms.ChoiceField(label=_('Post topic as'), choices=Topic.TYPE_CHOICES, required=False)
@@ -48,19 +65,8 @@ class TopicForm(PostForm):
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
                 status=Topic.STATUS_CHOICES.topic_unlocked)
+            self.topic = topic
             if commit:
                 topic.save()
-        else:
-            topic = self.topic
 
-        post = Post(
-            topic=topic,
-            poster=self.poster,
-            poster_ip=self.poster_ip,
-            subject=self.cleaned_data['subject'],
-            content=self.cleaned_data['content'])
-
-        if commit:
-            post.save()
-
-        return post
+        return super(TopicForm, self).save(commit)
