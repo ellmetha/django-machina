@@ -58,27 +58,25 @@ class PermissionHandler(object):
         """
         Given a forum, checks whether the user can append topics to it.
         """
-        checker = ObjectPermissionChecker(user)
+        return self._perform_basic_permission_check(forum, user, 'can_start_new_topics')
 
-        # A user can post a new topic if...
-        #     he is the superuser
-        #     he has the permission to do so
-        can_add_topics = (user.is_superuser
-                          or checker.has_perm('can_start_new_topics', forum))
-        return can_add_topics
+    def can_add_stickies(self, forum, user):
+        """
+        Given a forum, checks whether the user can append stickies to it.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_post_stickies')
+
+    def can_add_announcements(self, forum, user):
+        """
+        Given a forum, checks whether the user can append announcements to it.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_post_announcements')
 
     def can_add_post(self, topic, user):
         """
         Given a topic, checks whether the user can append posts to it.
         """
-        checker = ObjectPermissionChecker(user)
-
-        # A user can add replies if...
-        #     he is the superuser
-        #     he has the permission to do so
-        can_add_posts = (user.is_superuser
-                         or checker.has_perm('can_reply_to_topics', topic.forum))
-        return can_add_posts
+        return self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_topics')
 
     def can_edit_post(self, post, user):
         """
@@ -114,6 +112,10 @@ class PermissionHandler(object):
     # --
 
     def _get_hidden_forum_ids(self, forums, checker):
+        """
+        Given a set of forums and an initialized checker, returns the list of forums
+        that are nto visible by the user or the group associated with this checker.
+        """
         hidden_forums = []
         for forum in forums:
             if forum.id not in hidden_forums:
@@ -131,3 +133,21 @@ class PermissionHandler(object):
                     forum_and_descendants = forum.get_descendants(include_self=True)
                     hidden_forums.extend(forum_and_descendants.values_list('id', flat=True))
         return hidden_forums
+
+    def _perform_basic_permission_check(self, forum, user, permission):
+        """
+        Given a forum and a user, checks whether the latter has the passed
+        permission.
+        The workflow is:
+
+            1. The permission is granted if the user is a superuser
+            2. If not, a check is performed with the given permission
+        """
+        checker = ObjectPermissionChecker(user)
+
+        # The action is granted if...
+        #     the user is the superuser
+        #     the user has the permission to do so
+        check = (user.is_superuser
+                 or checker.has_perm(permission, forum))
+        return check
