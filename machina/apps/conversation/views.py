@@ -2,9 +2,11 @@
 
 # Standard library imports
 # Third party imports
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import ListView
 
@@ -103,6 +105,7 @@ class PostEditMixin(object):
         if 'preview' in self.request.POST:
             self.preview = True
             return self.render_to_response(self.get_context_data(form=form))
+        messages.success(self.request, _('This message has been posted successfully.'))
         return super(PostEditMixin, self).form_valid(form)
 
     def get_controlled_object(self):
@@ -150,12 +153,6 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
         context['topic'] = self.get_topic()
 
         return context
-
-    def form_valid(self, form):
-        if 'preview' in self.request.POST:
-            self.preview = True
-            return self.render_to_response(self.get_context_data(form=form))
-        return super(PostCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
