@@ -88,6 +88,7 @@ class PostEditMixin(object):
         kwargs = super(PostEditMixin, self).get_form_kwargs()
         kwargs['poster'] = self.request.user
         kwargs['poster_ip'] = get_client_ip(self.request)
+        kwargs['forum'] = self.get_forum()
         return kwargs
 
     def get_context_data(self, **kwargs):

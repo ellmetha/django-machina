@@ -7,9 +7,13 @@ from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.core.loading import get_class
 
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+
+PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+perm_handler = PermissionHandler()
 
 
 class PostForm(forms.ModelForm):
@@ -20,7 +24,9 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.poster = kwargs.pop('poster', None)
         self.poster_ip = kwargs.pop('poster_ip', None)
+        self.forum = kwargs.pop('forum', None)
         self.topic = kwargs.pop('topic', None)
+
         super(PostForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -45,8 +51,22 @@ class TopicForm(PostForm):
     topic_type = forms.ChoiceField(label=_('Post topic as'), choices=Topic.TYPE_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
-        self.forum = kwargs.pop('forum', None)
         super(TopicForm, self).__init__(*args, **kwargs)
+
+        # Perform some checks before doing anything
+        self.can_add_stickies = perm_handler.can_add_stickies(self.forum, self.poster)
+        self.can_add_announcements = perm_handler.can_add_announcements(self.forum, self.poster)
+
+        if not self.can_add_stickies:
+            choices = filter(
+                lambda t: t[0] != Topic.TYPE_CHOICES.topic_sticky,
+                self.fields['topic_type'].choices)
+            self.fields['topic_type'].choices = choices
+        if not self.can_add_announcements:
+            choices = filter(
+                lambda t: t[0] != Topic.TYPE_CHOICES.topic_announce,
+                self.fields['topic_type'].choices)
+            self.fields['topic_type'].choices = choices
 
     def save(self, commit=True):
         # First, handle updates
