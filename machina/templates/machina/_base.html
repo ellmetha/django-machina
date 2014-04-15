@@ -4,4 +4,12 @@
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
 
+{% block breadcrumb %}
+    {% include "machina/partials/breadcrumb.html" %}
+{% endblock breadcrumb %}
+
+{% block messages %}
+    {% include "machina/partials/messages.html" %}
+{% endblock messages %}
+
 {% block content %}{% endblock content %}

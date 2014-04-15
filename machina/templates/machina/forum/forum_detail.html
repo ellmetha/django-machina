@@ -7,51 +7,45 @@
 
 {% block sub-title %}{{ forum.name }}{% endblock sub-title %}
 
-{% block breadcrumb %}
-    {% include "machina/breadcrumb.html" %}
-{% endblock breadcrumb %}
-
 {% block content %}
-    <div class="container">
+    <div class="row">
+        <div class="span12">
+            <h1>{{ forum.name }}</h1>
+        </div>
+    </div>
+    {% if sub_forums %}
+        {% forum_list sub_forums request %}
+    {% endif %}
+    {% if forum.is_forum %}
         <div class="row">
-            <div class="span12">
-                <h1>{{ forum.name }}</h1>
+            <div class="col-xs-6 col-md-4 forum-actions-block">
+                {% if forum|can_be_filled_by:user %}
+                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-md-8 pagination-block">
+                {% with "pagination-sm" as pagination_size %}
+                    {% include "machina/partials/pagination.html" %}
+                {% endwith %}
             </div>
         </div>
-        {% if sub_forums %}
-            {% forum_list sub_forums request %}
-        {% endif %}
-        {% if forum.is_forum %}
-            <div class="row">
-                <div class="col-xs-6 col-md-4 forum-actions-block">
-                    {% if forum|can_be_filled_by:user %}
-                        <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
-                    {% endif %}
-                </div>
-                <div class="col-xs-12 col-md-8 pagination-block">
-                    {% with "pagination-sm" as pagination_size %}
-                        {% include "machina/pagination.html" %}
-                    {% endwith %}
-                </div>
+        {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
+            {% include "machina/conversation/topic_list.html" %}
+        {% endwith %}
+        {% with "Topics" as topic_list_title %}
+            {% include "machina/conversation/topic_list.html" %}
+        {% endwith %}
+        <div class="row">
+            <div class="col-xs-6 col-md-4 forum-actions-block">
+                {% if forum|can_be_filled_by:user %}
+                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                {% endif %}
             </div>
-            {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
-                {% include "machina/conversation/topic_list.html" %}
-            {% endwith %}
-            {% with "Topics" as topic_list_title %}
-                {% include "machina/conversation/topic_list.html" %}
-            {% endwith %}
-            <div class="row">
-                <div class="col-xs-6 col-md-4 forum-actions-block">
-                    {% if forum|can_be_filled_by:user %}
-                        <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
-                    {% endif %}
-                </div>
-                <div class="col-xs-12 col-md-8 pagination-block">
-                    {% with "pagination-sm" as pagination_size %}
-                        {% include "machina/pagination.html" %}
-                    {% endwith %}
-                </div>
+            <div class="col-xs-12 col-md-8 pagination-block">
+                {% with "pagination-sm" as pagination_size %}
+                    {% include "machina/partials/pagination.html" %}
+                {% endwith %}
             </div>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 {% endblock content %}

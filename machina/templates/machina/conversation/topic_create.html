@@ -4,35 +4,29 @@
 
 {% block sub-title %}{% trans "Post a new topic" %}{% endblock sub-title %}
 
-{% block breadcrumb %}
-    {% include "machina/breadcrumb.html" %}
-{% endblock breadcrumb %}
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <h1>{{ forum.name }}</h1>
-            </div>
+    <div class="row">
+        <div class="span12">
+            <h1>{{ forum.name }}</h1>
         </div>
-        {% if preview %}
-            {% include "machina/conversation/post_preview.html" %}
-        {% endif %}
-        <div class="row">
-            <div class="span12">
-                <div class="panel panel-default post-edit">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{% trans "Post a new topic" %}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form method="post" action="." class="form">
-                            {% include 'partials/form_fields.html' %}
-                            <div class="form-actions">
-                                <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
-                                <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
-                            </div>
-                        </form>
-                    </div>
+    </div>
+    {% if preview %}
+        {% include "machina/conversation/post_preview.html" %}
+    {% endif %}
+    <div class="row">
+        <div class="span12">
+            <div class="panel panel-default post-edit">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Post a new topic" %}</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="." class="form">
+                        {% include 'partials/form_fields.html' %}
+                        <div class="form-actions">
+                            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
