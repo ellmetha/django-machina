@@ -15,6 +15,7 @@ class ConversationApp(Application):
 
     topic_view = views.TopicView
     topic_create_view = views.TopicCreateView
+    topic_update_view = views.TopicUpdateView
     post_create_view = views.PostCreateView
     post_update_view = views.PostUpdateView
 
@@ -23,7 +24,8 @@ class ConversationApp(Application):
             url(r'^topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/create/$', self.topic_create_view.as_view(), name='topic-create'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
+            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/update/$', self.topic_update_view.as_view(), name='topic-update'),
+            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$', self.post_update_view.as_view(), name='post-update'),
         ]
         return patterns('', *urls)

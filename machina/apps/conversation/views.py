@@ -139,6 +139,39 @@ class TopicCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
             'pk': self.object.topic.pk})
 
 
+class TopicUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
+    success_message = _('This message has been edited successfully.')
+    template_name = 'conversation/topic_update.html'
+    permission_required = []  # Defined in the 'perform_permissions_check()' method
+    form_class = TopicForm
+    model = Topic
+
+    def get_object(self, queryset=None):
+        topic = super(TopicUpdateView, self).get_object(queryset)
+        return topic.first_post
+
+    def get_form_kwargs(self):
+        kwargs = super(TopicUpdateView, self).get_form_kwargs()
+        kwargs['forum'] = self.get_forum()
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('conversation:topic', kwargs={
+            'forum_pk': self.get_forum().pk,
+            'pk': self.object.topic.pk})
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object()
+
+    def perform_permissions_check(self, user, obj, perms):
+        return perm_handler.can_edit_post(obj, user)
+
+
 class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
     template_name = 'conversation/post_create.html'
     permission_required = ['can_reply_to_topics', ]
@@ -165,7 +198,7 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
 
     def get_topic(self):
         if not hasattr(self, 'topic'):
-            self.topic = get_object_or_404(Topic, pk=self.kwargs['pk'])
+            self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
         return self.topic
 
 
@@ -199,6 +232,8 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
         if not hasattr(self, 'topic'):
             self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
         return self.topic
+
+    # Permissions checks
 
     def get_controlled_object(self):
         """

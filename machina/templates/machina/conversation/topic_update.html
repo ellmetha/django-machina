@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% load conversation_tags %}
+
+{% block sub-title %}{% trans "Edit post" %}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="span12">
+            <h1>{{ forum.name }}</h1>
+        </div>
+    </div>
+    {% if preview %}
+        {% include "machina/conversation/post_preview.html" %}
+    {% endif %}
+    <div class="row">
+        <div class="span12">
+            <div class="panel panel-default post-edit">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Edit post" %}</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="." class="form">
+                        {% include 'partials/form_fields.html' %}
+                        <div class="form-actions">
+                            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -81,10 +81,7 @@ class TopicForm(PostForm):
 
     def save(self, commit=True):
         # First, handle updates
-        if self.instance.pk:
-            pass
-
-        if self.forum and self.topic is None:
+        if not self.instance.pk:
             if 'topic_type' in self.cleaned_data:
                 topic_type = self.cleaned_data['topic_type']
             else:
