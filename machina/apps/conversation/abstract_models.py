@@ -68,7 +68,6 @@ class AbstractTopic(DatedModel):
         get_latest_by = 'updated'
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
-        app_label = 'conversation'
 
     def __str__(self):
         if self.posts.exists():
@@ -195,7 +194,6 @@ class AbstractPost(DatedModel):
         get_latest_by = 'created'
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
-        app_label = 'conversation'
 
     def __str__(self):
         return '{}'.format(self.subject)

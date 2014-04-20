@@ -40,7 +40,6 @@ class AbstractProfile(models.Model):
         abstract = True
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
-        app_label = 'member'
 
     def __str__(self):
         return '{} profile'.format(self.user.username)
@@ -64,7 +63,6 @@ class AbstractRank(models.Model):
         abstract = True
         verbose_name = _('Rank')
         verbose_name_plural = _('Ranks')
-        app_label = 'member'
 
     def __str__(self):
         return '{} rank'.format(self.title)

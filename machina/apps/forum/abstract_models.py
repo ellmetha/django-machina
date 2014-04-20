@@ -104,7 +104,6 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         ]
         verbose_name = _('Forum')
         verbose_name_plural = _('Forums')
-        app_label = 'forum'
 
     def __str__(self):
         return '{}'.format(self.name)

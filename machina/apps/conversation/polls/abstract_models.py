@@ -38,7 +38,6 @@ class AbstractTopicPoll(DatedModel):
         get_latest_by = 'updated'
         verbose_name = _('Topic poll')
         verbose_name_plural = _('Topic polls')
-        app_label = 'polls'
 
     def __str__(self):
         return '{}'.format(self.topic.subject)
@@ -56,7 +55,6 @@ class AbstractTopicPollOption(models.Model):
         abstract = True
         verbose_name = _('Topic poll option')
         verbose_name_plural = _('Topic poll options')
-        app_label = 'polls'
 
     def __str__(self):
         return '{} - {}'.format(self.poll, self.text)
@@ -75,7 +73,6 @@ class AbstractTopicPollVote(models.Model):
         abstract = True
         verbose_name = _('Topic poll vote')
         verbose_name_plural = _('Topic poll votes')
-        app_label = 'polls'
 
     def __str__(self):
         return '{} - {}'.format(self.poll_option, self.voter)

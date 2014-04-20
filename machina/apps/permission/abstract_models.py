@@ -25,7 +25,6 @@ class AbstractForumUserObjectPermission(UserObjectPermissionBase):
         abstract = True
         verbose_name = _('User forum object permission')
         verbose_name_plural = _('User forum object permissions')
-        app_label = 'permission'
 
     def __str__(self):
         return '{} - {}'.format(self.permission, self.content_object)
@@ -43,7 +42,6 @@ class AbstractForumGroupObjectPermission(GroupObjectPermissionBase):
         abstract = True
         verbose_name = _('Group forum object permission')
         verbose_name_plural = _('Group forum object permissions')
-        app_label = 'permission'
 
     def __str__(self):
         return '{} - {}'.format(self.permission, self.content_object)
