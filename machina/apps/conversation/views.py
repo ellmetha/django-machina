@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import ListView
+from django.views.generic import UpdateView
 
 # Local application / specific library imports
 from machina.apps.conversation.signals import topic_viewed
@@ -86,10 +87,12 @@ class TopicView(PermissionRequiredMixin, ListView):
 
 
 class PostEditMixin(object):
+    success_message = _('This message has been posted successfully.')
+
     def get_form_kwargs(self):
         kwargs = super(PostEditMixin, self).get_form_kwargs()
-        kwargs['poster'] = self.request.user
-        kwargs['poster_ip'] = get_client_ip(self.request)
+        kwargs['user'] = self.request.user
+        kwargs['user_ip'] = get_client_ip(self.request)
         kwargs['forum'] = self.get_forum()
         return kwargs
 
@@ -105,7 +108,7 @@ class PostEditMixin(object):
         if 'preview' in self.request.POST:
             self.preview = True
             return self.render_to_response(self.get_context_data(form=form))
-        messages.success(self.request, _('This message has been posted successfully.'))
+        messages.success(self.request, self.success_message)
         return super(PostEditMixin, self).form_valid(form)
 
     def get_controlled_object(self):
@@ -143,13 +146,12 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(PostCreateView, self).get_form_kwargs()
-        # Insert the considered topic into the context
         kwargs['topic'] = self.get_topic()
         return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
-        # Insert the considered forum into the context
+        # Insert the considered topic into the context
         context['topic'] = self.get_topic()
 
         return context
@@ -165,3 +167,44 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
         if not hasattr(self, 'topic'):
             self.topic = get_object_or_404(Topic, pk=self.kwargs['pk'])
         return self.topic
+
+
+class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
+    success_message = _('This message has been edited successfully.')
+    template_name = 'conversation/post_update.html'
+    permission_required = []  # Defined in the 'perform_permissions_check()' method
+    form_class = PostForm
+    model = Post
+
+    def get_form_kwargs(self):
+        kwargs = super(PostUpdateView, self).get_form_kwargs()
+        kwargs['topic'] = self.get_topic()
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(PostUpdateView, self).get_context_data(**kwargs)
+        # Insert the considered topic into the context
+        context['topic'] = self.get_topic()
+
+        return context
+
+    def get_success_url(self):
+        return '{0}?post={1}#{1}'.format(
+            reverse('conversation:topic', kwargs={
+                'forum_pk': self.get_forum().pk,
+                'pk': self.object.topic.pk}),
+            self.object.pk)
+
+    def get_topic(self):
+        if not hasattr(self, 'topic'):
+            self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
+        return self.topic
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object()
+
+    def perform_permissions_check(self, user, obj, perms):
+        return perm_handler.can_edit_post(obj, user)

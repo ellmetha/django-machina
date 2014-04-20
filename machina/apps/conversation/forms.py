@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django import forms
+from django.db.models import F
 from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 
 Post = get_model('conversation', 'Post')
@@ -22,24 +26,31 @@ class PostForm(forms.ModelForm):
         fields = ['subject', 'content', ]
 
     def __init__(self, *args, **kwargs):
-        self.poster = kwargs.pop('poster', None)
-        self.poster_ip = kwargs.pop('poster_ip', None)
+        self.user = kwargs.pop('user', None)
+        self.user_ip = kwargs.pop('user_ip', None)
         self.forum = kwargs.pop('forum', None)
         self.topic = kwargs.pop('topic', None)
 
         super(PostForm, self).__init__(*args, **kwargs)
 
-    def save(self, commit=True):
-        # First handle updates
-        if self.instance.pk:
-            pass
+        if not self.instance.pk and self.topic:
+            self.fields['subject'].initial = '{} {}'.format(
+                machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
+                self.topic.subject)
 
-        post = Post(
-            topic=self.topic,
-            poster=self.poster,
-            poster_ip=self.poster_ip,
-            subject=self.cleaned_data['subject'],
-            content=self.cleaned_data['content'])
+    def save(self, commit=True):
+        if self.instance.pk:
+            # First handle updates
+            post = super(PostForm, self).save(commit=False)
+            post.updated_by = self.user
+            post.updates_count = F('updates_count') + 1
+        else:
+            post = Post(
+                topic=self.topic,
+                poster=self.user,
+                poster_ip=self.user_ip,
+                subject=self.cleaned_data['subject'],
+                content=self.cleaned_data['content'])
 
         if commit:
             post.save()
@@ -54,8 +65,8 @@ class TopicForm(PostForm):
         super(TopicForm, self).__init__(*args, **kwargs)
 
         # Perform some checks before doing anything
-        self.can_add_stickies = perm_handler.can_add_stickies(self.forum, self.poster)
-        self.can_add_announcements = perm_handler.can_add_announcements(self.forum, self.poster)
+        self.can_add_stickies = perm_handler.can_add_stickies(self.forum, self.user)
+        self.can_add_announcements = perm_handler.can_add_announcements(self.forum, self.user)
 
         if not self.can_add_stickies:
             choices = filter(
@@ -81,7 +92,7 @@ class TopicForm(PostForm):
 
             topic = Topic(
                 forum=self.forum,
-                poster=self.poster,
+                poster=self.user,
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
                 status=Topic.STATUS_CHOICES.topic_unlocked)
