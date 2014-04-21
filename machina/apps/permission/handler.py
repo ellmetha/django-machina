@@ -72,6 +72,12 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_post_announcements')
 
+    def can_post_without_approval(self, forum, user):
+        """
+        Given a forum, checks whether the user can add a topic without approval.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_post_without_approval')
+
     def can_add_post(self, topic, user):
         """
         Given a topic, checks whether the user can append posts to it.

@@ -50,7 +50,8 @@ class AbstractTopic(DatedModel):
     STATUS_CHOICES = TOPIC_STATUSES
     status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
-    # A topic can be approved before publishing ; defaults to True
+    # A topic can be approved before publishing ; defaults to True. The value of this flag
+    # should correspond to the one associated with the first post
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
     # The number of posts included in this topic
@@ -181,7 +182,10 @@ class AbstractPost(DatedModel):
     # Content
     content = MarkupTextField(verbose_name=_('Content'))
 
-    # A topic can be edited for several reason (eg. moderation) ; the reason why it has been updated can be specified
+    # A post can be approved before publishing ; defaults to True
+    approved = models.BooleanField(verbose_name=_('Approved'), default=True)
+
+    # A post can be edited for several reason (eg. moderation) ; the reason why it has been updated can be specified
     update_reason = models.CharField(max_length=255, verbose_name=_('Update reason'), blank=True, null=True)
 
     # Tracking data
@@ -217,10 +221,12 @@ class AbstractPost(DatedModel):
         self.topic.update_trackers()
 
         # Ensures that the subject of the thread corresponds to the one associated
-        # with the first post.
-        if self.is_topic_head and self.subject != self.topic.subject:
-            self.topic.subject = self.subject
-            self.save()
+        # with the first post. Do the same with the 'approved' flag.
+        if self.is_topic_head:
+            if self.subject != self.topic.subject or self.approved != self.topic.approved:
+                self.topic.subject = self.subject
+                self.topic.approved = self.approved
+                self.topic.save()
 
     def delete(self, using=None):
         if self.is_topic_head and self.is_topic_tail:

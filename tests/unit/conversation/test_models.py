@@ -69,6 +69,13 @@ class TestTopic(TestCase):
         # Run & check
         self.assertEqual(self.topic.subject, self.post.subject)
 
+    def test_has_the_same_approved_status_as_its_first_post(self):
+        # Run & check
+        self.assertEqual(self.topic.approved, self.post.approved)
+        self.post.approved = False
+        self.post.save()
+        self.assertEqual(self.topic.approved, self.post.approved)
+
     def test_saves_its_number_of_posts(self):
         # Run & check
         post = PostFactory.create(topic=self.topic, poster=self.u1)
