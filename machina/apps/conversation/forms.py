@@ -50,6 +50,7 @@ class PostForm(forms.ModelForm):
                 poster=self.user,
                 poster_ip=self.user_ip,
                 subject=self.cleaned_data['subject'],
+                approved=perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'])
 
         if commit:
@@ -92,7 +93,6 @@ class TopicForm(PostForm):
                 poster=self.user,
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
-                approved=perm_handler.can_post_without_approval(self.forum, self.user),
                 status=Topic.STATUS_CHOICES.topic_unlocked)
             self.topic = topic
             if commit:
