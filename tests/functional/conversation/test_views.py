@@ -126,3 +126,31 @@ class TestTopicView(BaseClientTestCase):
         topic_tracks = TopicReadTrack.objects.all()
         self.assertFalse(len(forum_tracks))
         self.assertFalse(len(topic_tracks))
+
+    def test_can_paginate_based_on_a_post_id(self):
+        # Setup
+        for _ in range(0, 40):
+            # 15 posts per page
+            PostFactory.create(topic=self.topic, poster=self.user)
+        correct_url = self.topic.get_absolute_url()
+        # Run & check
+        first_post_pk = self.topic.first_post.pk
+        response = self.client.get(correct_url, {'post': first_post_pk}, follow=True)
+        self.assertEqual(response.context_data['page_obj'].number, 1)
+        mid_post_pk = self.topic.first_post.pk + 18
+        response = self.client.get(correct_url, {'post': mid_post_pk}, follow=True)
+        self.assertEqual(response.context_data['page_obj'].number, 2)
+        last_post_pk = self.topic.last_post.pk
+        response = self.client.get(correct_url, {'post': last_post_pk}, follow=True)
+        self.assertEqual(response.context_data['page_obj'].number, 3)
+
+    def test_properly_handles_a_bad_post_id_in_parameters(self):
+        # Setup
+        for _ in range(0, 40):
+            # 15 posts per page
+            PostFactory.create(topic=self.topic, poster=self.user)
+        correct_url = self.topic.get_absolute_url()
+        # Run & check
+        bad_post_pk = self.topic.first_post.pk + 50000
+        response = self.client.get(correct_url, {'post': bad_post_pk}, follow=True)
+        self.assertEqual(response.context_data['page_obj'].number, 1)
