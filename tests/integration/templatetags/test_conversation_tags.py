@@ -62,6 +62,7 @@ class BaseConversationTagsTestCase(TestCase):
         assign_perm('can_read_forum', self.g1, self.forum_1)
         assign_perm('can_edit_own_posts', self.g1, self.forum_1)
         assign_perm('can_delete_own_posts', self.g1, self.forum_1)
+        assign_perm('can_reply_to_topics', self.g1, self.forum_1)
         assign_perm('can_see_forum', self.moderators, self.forum_1)
         assign_perm('can_read_forum', self.moderators, self.forum_1)
         assign_perm('can_edit_own_posts', self.moderators, self.forum_1)
@@ -71,7 +72,7 @@ class BaseConversationTagsTestCase(TestCase):
 
 
 class TestPostedByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_logged_in_user_is_the_owner_of_a_post(self):
+    def test_can_tell_if_the_user_is_the_owner_of_a_post(self):
         # Setup
         def get_rendered(post, user):
             request = self.request_factory.get('/')
@@ -88,7 +89,7 @@ class TestPostedByTag(BaseConversationTagsTestCase):
 
 
 class TestCanBeEditedByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_logged_in_user_can_edit_a_post(self):
+    def test_can_tell_if_the_user_can_edit_a_post(self):
         # Setup
         def get_rendered(post, user):
             request = self.request_factory.get('/')
@@ -107,7 +108,7 @@ class TestCanBeEditedByTag(BaseConversationTagsTestCase):
 
 
 class TestCanBeDeleteddByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_logged_in_user_can_edit_a_post(self):
+    def test_can_tell_if_the_user_can_edit_a_post(self):
         # Setup
         def get_rendered(post, user):
             request = self.request_factory.get('/')
@@ -123,6 +124,25 @@ class TestCanBeDeleteddByTag(BaseConversationTagsTestCase):
         self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_DELETE')
         self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_DELETE')
         self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_DELETE')
+
+
+class TestCanBeEnrichedByTag(BaseConversationTagsTestCase):
+    def test_can_tell_if_the_user_can_reply_to_topics(self):
+        # Setup
+        def get_rendered(topic, user):
+            request = self.request_factory.get('/')
+            request.user = user
+            t = Template(self.loadstatement + '{% if topic|can_be_enriched_by:request.user %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}')
+            c = Context({'topic': topic, 'request': request})
+            rendered = t.render(c)
+
+            return rendered
+
+        # Run & check
+        self.assertEqual(get_rendered(self.forum_1_topic, self.u1), 'CAN_ADD_POST')
+        self.assertEqual(get_rendered(self.forum_2_topic, self.u1), 'CANNOT_ADD_POST')
+        self.assertEqual(get_rendered(self.forum_1_topic, self.superuser), 'CAN_ADD_POST')
+        self.assertEqual(get_rendered(self.forum_2_topic, self.superuser), 'CAN_ADD_POST')
 
 
 class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
