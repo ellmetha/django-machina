@@ -161,3 +161,45 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Run & check
         self.assertTrue(self.perm_handler.can_delete_post(self.post_1, moderator))
         self.assertFalse(self.perm_handler.can_delete_post(self.post_2, moderator))
+
+    def test_knows_if_a_user_can_add_stickies(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_post_stickies', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_stickies(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_add_stickies(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_add_stickies(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_stickies(self.forum_1, u2))
+
+    def test_knows_if_a_user_can_add_announces(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_post_announcements', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_announcements(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_add_announcements(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_add_announces(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_announcements(self.forum_1, u2))
+
+    def test_knows_if_a_user_can_post_without_approval(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_post_without_approval', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_post_without_approval(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_post_without_approval(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_post_without_approval(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_post_without_approval(self.forum_1, u2))
