@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from guardian.shortcuts import assign_perm
 from guardian.utils import get_anonymous_user
@@ -154,3 +155,43 @@ class TestTopicView(BaseClientTestCase):
         bad_post_pk = self.topic.first_post.pk + 50000
         response = self.client.get(correct_url, {'post': bad_post_pk}, follow=True)
         self.assertEqual(response.context_data['page_obj'].number, 1)
+        response = self.client.get(correct_url, {'post': 'I\'m a post'}, follow=True)
+        self.assertEqual(response.context_data['page_obj'].number, 1)
+
+
+class TestTopicCreateView(BaseClientTestCase):
+    def setUp(self):
+        super(TestTopicCreateView, self).setUp()
+
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Set up a top-level forum and a link forum
+        self.top_level_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_start_new_topics', self.user, self.top_level_forum)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        self.assertIsOk(response)
+
+    def test_pembed_the_current_forum_into_the_context(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        self.assertEqual(response.context_data['forum'], self.top_level_forum)
