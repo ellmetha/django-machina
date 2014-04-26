@@ -115,6 +115,21 @@ class TestTopicView(BaseClientTestCase):
         self.assertEqual(topic_tracks[0].topic, self.topic)
         self.assertEqual(topic_tracks[0].user, self.user)
 
+    def test_marks_the_related_topic_as_read_even_if_no_track_is_registered_for_the_related_forum(self):
+        # Setup
+        top_level_forum_alt = create_forum()
+        topic_alt = create_topic(forum=top_level_forum_alt, poster=self.user)
+        PostFactory.create(topic=topic_alt, poster=self.user)
+        assign_perm('can_read_forum', self.user, top_level_forum_alt)
+        correct_url = topic_alt.get_absolute_url()
+        # Run
+        self.client.get(correct_url)
+        # Check
+        forum_tracks = ForumReadTrack.objects.filter(forum=top_level_forum_alt)
+        topic_tracks = TopicReadTrack.objects.all()
+        self.assertEqual(forum_tracks.count(), 1)
+        self.assertEqual(topic_tracks.count(), 0)
+
     def test_cannot_create_any_track_if_the_user_is_not_authenticated(self):
         # Setup
         ForumReadTrack.objects.all().delete()
