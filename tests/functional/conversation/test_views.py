@@ -210,3 +210,21 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         self.assertTrue(response.context_data['preview'])
+
+    def test_redirects_to_topic_view_on_success(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': 'My topic',
+            'content': '[b]This is my topic[/b]',
+            'topic_type': TOPIC_TYPES.topic_post,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic_url = reverse(
+            'conversation:topic',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': response.context_data['topic'].pk})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(topic_url, last_url)
