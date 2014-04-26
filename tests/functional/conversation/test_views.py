@@ -8,6 +8,7 @@ from guardian.shortcuts import assign_perm
 from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
+from machina.apps.conversation.abstract_models import TOPIC_TYPES
 from machina.apps.conversation.signals import topic_viewed
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
@@ -188,10 +189,24 @@ class TestTopicCreateView(BaseClientTestCase):
         # Check
         self.assertIsOk(response)
 
-    def test_pembed_the_current_forum_into_the_context(self):
+    def test_embed_the_current_forum_into_the_context(self):
         # Setup
         correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertEqual(response.context_data['forum'], self.top_level_forum)
+
+    def test_can_detect_that_a_preview_should_be_done(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': 'My topic',
+            'content': '[b]This is my topic[/b]',
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertTrue(response.context_data['preview'])
