@@ -10,6 +10,7 @@ from guardian.shortcuts import assign_perm
 from machina.apps.conversation.forms import PostForm
 from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
+from machina.core.utils import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
@@ -76,3 +77,25 @@ class TestPostForm(TestCase):
             machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
             self.topic.subject)
         self.assertEqual(form.fields['subject'].initial, default_subject)
+
+    def test_increments_the_post_updates_counter_in_case_of_post_edition(self):
+        # Setup
+        form_data = {
+            'subject': 'My new topic subject',
+            'content': '[b]This is a revolution[/b]',
+        }
+        initial_updates_count = self.post.updates_count
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post,
+        )
+        # Check
+        self.assertTrue(form.is_valid())
+        form.save()
+        self.post = refresh(self.post)
+        self.assertEqual(self.post.updates_count, initial_updates_count + 1)
