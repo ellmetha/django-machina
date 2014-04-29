@@ -92,10 +92,30 @@ class TestPostForm(TestCase):
             user_ip='127.0.0.1',
             forum=self.top_level_forum,
             topic=self.topic,
-            instance=self.post,
-        )
+            instance=self.post)
         # Check
         self.assertTrue(form.is_valid())
         form.save()
         self.post = refresh(self.post)
         self.assertEqual(self.post.updates_count, initial_updates_count + 1)
+
+    def test_set_the_topic_as_unapproved_if_the_user_has_not_the_required_permission(self):
+        # Setup
+        form_data = {
+            'subject': 'My new topic subject',
+            'content': '[b]This is a revolution[/b]',
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum,
+            topic=self.topic)
+        # Check
+        self.assertTrue(form.is_valid())
+        post = form.save()
+        self.assertFalse(post.approved)
+        assign_perm('can_post_without_approval', self.user, self.top_level_forum)
+        post = form.save()
+        self.assertTrue(post.approved)
