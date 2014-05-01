@@ -4,11 +4,13 @@
 # Third party imports
 from django.db.models import get_model
 import factory
+from faker import Factory as FakerFactory
 
 # Local application / specific library imports
-from machina.test.factories import random_string
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.conversation import TopicFactory
+
+faker = FakerFactory.create()
 
 TopicPoll = get_model('polls', 'TopicPoll')
 TopicPollOption = get_model('polls', 'TopicPollOption')
@@ -23,7 +25,7 @@ class TopicPollFactory(factory.DjangoModelFactory):
 class TopicPollOptionFactory(factory.DjangoModelFactory):
     FACTORY_FOR = TopicPollOption
     poll = factory.SubFactory(TopicPollFactory)
-    text = subject = factory.LazyAttribute(lambda t: random_string(length=30))
+    text = subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=100))
 
 
 class TopicPollVoteFactory(factory.DjangoModelFactory):

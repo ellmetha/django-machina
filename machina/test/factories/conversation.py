@@ -5,11 +5,13 @@
 from django.db.models import get_model
 import factory
 from factory import fuzzy
+from faker import Factory as FakerFactory
 
 # Local application / specific library imports
-from machina.test.factories import random_string
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.forum import ForumFactory
+
+faker = FakerFactory.create()
 
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
@@ -26,7 +28,7 @@ class PostFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Post
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
-    subject = factory.LazyAttribute(lambda t: random_string(length=20))
+    subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
     content = fuzzy.FuzzyText(length=255)
 
 

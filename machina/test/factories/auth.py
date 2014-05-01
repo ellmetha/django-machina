@@ -5,14 +5,16 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 import factory
+from faker import Factory as FakerFactory
 
 # Local application / specific library imports
-from machina.test.factories import random_string
+
+faker = FakerFactory.create()
 
 
 class UserFactory(factory.DjangoModelFactory):
     FACTORY_FOR = User
-    username = factory.LazyAttribute(lambda t: random_string(length=15))
+    username = factory.LazyAttribute(lambda t: faker.user_name())
     email = factory.Sequence(lambda n: 'test{0}@example.com'.format(n))
     password = '1234'
     is_active = True
@@ -30,4 +32,4 @@ class UserFactory(factory.DjangoModelFactory):
 
 class GroupFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Group
-    name = factory.LazyAttribute(lambda t: random_string())
+    name = factory.LazyAttribute(lambda t: faker.job())

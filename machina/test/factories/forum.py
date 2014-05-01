@@ -4,19 +4,21 @@
 # Third party imports
 from django.db.models import get_model
 import factory
+from faker import Factory as FakerFactory
 
 # Local application / specific library imports
-from machina.test.factories import random_string
+
+faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 
 
 class ForumFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Forum
-    name = factory.LazyAttribute(lambda t: random_string(length=15))
+    name = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=150))
 
     # Link forum specific
-    link = factory.LazyAttribute(lambda obj: 'http://www.goto{}.com'.format(obj.name))
+    link = factory.LazyAttribute(lambda obj: faker.uri())
 
 
 def build_forum(**attrs):
