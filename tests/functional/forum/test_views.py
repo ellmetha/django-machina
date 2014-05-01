@@ -50,7 +50,7 @@ class TestForumView(BaseClientTestCase):
         # Run & check
         for url in [forum_url, link_url]:
             with mock_signal_receiver(forum_viewed) as receiver:
-                self.client.get(url, follow=True)
+                self.client.get(url)
                 self.assertEqual(receiver.call_count, 1)
 
     def test_redirects_to_the_link_of_a_link_forum(self):
