@@ -8,6 +8,7 @@ from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.apps.conversation.forms import PostForm
+from machina.apps.conversation.forms import TopicForm
 from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.core.utils import refresh
@@ -32,7 +33,7 @@ class TestPostForm(TestCase):
         # Create a basic user
         self.user = UserFactory.create()
 
-        # Set up a top-level forum and a link forum
+        # Set up a top-level forum
         self.top_level_forum = create_forum()
 
         # Set up a topic and some posts
@@ -119,3 +120,76 @@ class TestPostForm(TestCase):
         assign_perm('can_post_without_approval', self.user, self.top_level_forum)
         post = form.save()
         self.assertTrue(post.approved)
+
+
+class TestTopicForm(TestCase):
+    def setUp(self):
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Create a basic user
+        self.user = UserFactory.create()
+
+        # Set up a top-level forum
+        self.top_level_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_start_new_topics', self.user, self.top_level_forum)
+
+    def test_can_valid_a_basic_topic(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+            'topic_type': Topic.TYPE_CHOICES.topic_post,
+        }
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum)
+        valid = form.is_valid()
+        # Check
+        self.assertTrue(valid)
+
+    def test_can_valid_a_basic_sticky_post(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        assign_perm('can_post_stickies', self.user, self.top_level_forum)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum)
+        valid = form.is_valid()
+        # Check
+        self.assertTrue(valid)
+
+    def test_can_valid_a_basic_announce(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+            'topic_type': Topic.TYPE_CHOICES.topic_announce,
+        }
+        assign_perm('can_post_announcements', self.user, self.top_level_forum)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum)
+        valid = form.is_valid()
+        # Check
+        self.assertTrue(valid)
