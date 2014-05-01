@@ -193,3 +193,69 @@ class TestTopicForm(TestCase):
         valid = form.is_valid()
         # Check
         self.assertTrue(valid)
+
+    def test_creates_a_post_topic_if_no_topic_type_is_provided(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+        }
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip='127.0.0.1',
+            forum=self.top_level_forum)
+        valid = form.is_valid()
+        # Check
+        self.assertTrue(valid)
+        post = form.save()
+        self.assertEqual(post.topic.type, Topic.TYPE_CHOICES.topic_post)
+
+    def test_allows_the_creation_of_stickies_if_the_user_has_required_permission(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        form_kwargs = {
+            'data': form_data,
+            'user': self.user,
+            'user_ip': '127.0.0.1',
+            'forum': self.top_level_forum,
+        }
+        #  Run & check
+        form = TopicForm(**form_kwargs)
+        self.assertFalse(form.is_valid())
+        choices = [ch[0] for ch in form.fields['topic_type'].choices]
+        self.assertNotIn(Topic.TYPE_CHOICES.topic_sticky, choices)
+        assign_perm('can_post_stickies', self.user, self.top_level_forum)
+        form = TopicForm(**form_kwargs)
+        self.assertTrue(form.is_valid())
+        choices = [ch[0] for ch in form.fields['topic_type'].choices]
+        self.assertIn(Topic.TYPE_CHOICES.topic_sticky, choices)
+
+    def test_allows_the_creation_of_announces_if_the_user_has_required_permission(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: topic',
+            'content': '[b]This is a revolution[/b]',
+            'topic_type': Topic.TYPE_CHOICES.topic_announce,
+        }
+        form_kwargs = {
+            'data': form_data,
+            'user': self.user,
+            'user_ip': '127.0.0.1',
+            'forum': self.top_level_forum,
+        }
+        #  Run & check
+        form = TopicForm(**form_kwargs)
+        self.assertFalse(form.is_valid())
+        choices = [ch[0] for ch in form.fields['topic_type'].choices]
+        self.assertNotIn(Topic.TYPE_CHOICES.topic_announce, choices)
+        assign_perm('can_post_announcements', self.user, self.top_level_forum)
+        form = TopicForm(**form_kwargs)
+        self.assertTrue(form.is_valid())
+        choices = [ch[0] for ch in form.fields['topic_type'].choices]
+        self.assertIn(Topic.TYPE_CHOICES.topic_announce, choices)
