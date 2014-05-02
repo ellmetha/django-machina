@@ -4,6 +4,7 @@
 # Third party imports
 from django.db.models import get_model
 from django.test import TestCase
+from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
@@ -16,6 +17,8 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
+
+faker = FakerFactory.create()
 
 ForumReadTrack = get_model('tracking', 'ForumReadTrack')
 Post = get_model('conversation', 'Post')
@@ -47,14 +50,14 @@ class TestPostForm(TestCase):
     def test_can_valid_a_basic_post(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         valid = form.is_valid()
@@ -64,13 +67,13 @@ class TestPostForm(TestCase):
     def test_can_affect_a_default_subject_to_the_post(self):
         # Setup
         form_data = {
-            'content': '[b]This is a revolution[/b]',
+            'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         # Check
@@ -82,15 +85,15 @@ class TestPostForm(TestCase):
     def test_increments_the_post_updates_counter_in_case_of_post_edition(self):
         # Setup
         form_data = {
-            'subject': 'My new topic subject',
-            'content': '[b]This is a revolution[/b]',
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
         }
         initial_updates_count = self.post.updates_count
         # Run
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -103,14 +106,14 @@ class TestPostForm(TestCase):
     def test_set_the_topic_as_unapproved_if_the_user_has_not_the_required_permission(self):
         # Setup
         form_data = {
-            'subject': 'My new topic subject',
-            'content': '[b]This is a revolution[/b]',
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         # Check
@@ -144,15 +147,15 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_topic(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_post,
         }
         # Run
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -161,8 +164,8 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_sticky_post(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
         assign_perm('can_post_stickies', self.user, self.top_level_forum)
@@ -170,7 +173,7 @@ class TestTopicForm(TestCase):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -179,8 +182,8 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_announce(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_announce,
         }
         assign_perm('can_post_announcements', self.user, self.top_level_forum)
@@ -188,7 +191,7 @@ class TestTopicForm(TestCase):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -197,14 +200,14 @@ class TestTopicForm(TestCase):
     def test_creates_a_post_topic_if_no_topic_type_is_provided(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip='127.0.0.1',
+            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -215,14 +218,14 @@ class TestTopicForm(TestCase):
     def test_allows_the_creation_of_stickies_if_the_user_has_required_permission(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
         form_kwargs = {
             'data': form_data,
             'user': self.user,
-            'user_ip': '127.0.0.1',
+            'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
         #  Run & check
@@ -239,14 +242,14 @@ class TestTopicForm(TestCase):
     def test_allows_the_creation_of_announces_if_the_user_has_required_permission(self):
         # Setup
         form_data = {
-            'subject': 'Re: topic',
-            'content': '[b]This is a revolution[/b]',
+            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_announce,
         }
         form_kwargs = {
             'data': form_data,
             'user': self.user,
-            'user_ip': '127.0.0.1',
+            'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
         #  Run & check
