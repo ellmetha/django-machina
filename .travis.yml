@@ -4,9 +4,9 @@ python:
   - "3.2"
   - "3.3"
 env:
-  - DJANGO=django==1.4.2
-  - DJANGO=django==1.5
-  - DJANGO=django==1.6
+  - DJANGO="django>=1.4.2,<1.5"
+  - DJANGO="django>=1.5,<1.6"
+  - DJANGO="django>=1.6,<1.7"
 
 matrix:
   exclude:
