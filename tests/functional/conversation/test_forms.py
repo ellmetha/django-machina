@@ -106,7 +106,7 @@ class TestPostForm(TestCase):
     def test_set_the_topic_as_unapproved_if_the_user_has_not_the_required_permission(self):
         # Setup
         form_data = {
-            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
@@ -147,7 +147,7 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_topic(self):
         # Setup
         form_data = {
-            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_post,
         }
@@ -164,7 +164,7 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_sticky_post(self):
         # Setup
         form_data = {
-            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
@@ -182,7 +182,7 @@ class TestTopicForm(TestCase):
     def test_can_valid_a_basic_announce(self):
         # Setup
         form_data = {
-            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_announce,
         }
@@ -218,7 +218,7 @@ class TestTopicForm(TestCase):
     def test_allows_the_creation_of_stickies_if_the_user_has_required_permission(self):
         # Setup
         form_data = {
-            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
@@ -242,7 +242,7 @@ class TestTopicForm(TestCase):
     def test_allows_the_creation_of_announces_if_the_user_has_required_permission(self):
         # Setup
         form_data = {
-            'subject': '{}'.format(faker.text(max_nb_chars=200)),
+            'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_announce,
         }
