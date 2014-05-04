@@ -80,6 +80,10 @@ class TopicForm(PostForm):
                 self.fields['topic_type'].choices)
             self.fields['topic_type'].choices = choices
 
+        # Set the initial value for the topic type
+        if hasattr(self.instance, 'topic'):
+            self.fields['topic_type'].initial = self.instance.topic.type
+
     def save(self, commit=True):
         if not self.instance.pk:
              # First, handle topic creation
