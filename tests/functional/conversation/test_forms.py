@@ -262,3 +262,25 @@ class TestTopicForm(TestCase):
         self.assertTrue(form.is_valid())
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
         self.assertIn(Topic.TYPE_CHOICES.topic_announce, choices)
+
+    def test_can_be_used_to_update_the_topic_type(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        assign_perm('can_post_stickies', self.user, self.top_level_forum)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        self.assertTrue(form.is_valid())
+        form.save()
+        self.topic = refresh(self.topic)
+        self.assertEqual(self.topic.type, Topic.TYPE_CHOICES.topic_sticky)

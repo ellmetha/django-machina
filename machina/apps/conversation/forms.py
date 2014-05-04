@@ -81,8 +81,8 @@ class TopicForm(PostForm):
             self.fields['topic_type'].choices = choices
 
     def save(self, commit=True):
-        # First, handle updates
         if not self.instance.pk:
+             # First, handle topic creation
             if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
                 topic_type = self.cleaned_data['topic_type']
             else:
@@ -97,5 +97,10 @@ class TopicForm(PostForm):
             self.topic = topic
             if commit:
                 topic.save()
+        else:
+            if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
+                if self.instance.topic.type != self.cleaned_data['topic_type']:
+                    self.instance.topic.type = self.cleaned_data['topic_type']
+                    self.instance.topic._simple_save()
 
         return super(TopicForm, self).save(commit)
