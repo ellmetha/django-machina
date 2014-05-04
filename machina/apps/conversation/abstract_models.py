@@ -141,8 +141,12 @@ class AbstractTopic(DatedModel):
         This allow the database to not be hit by such checks during very common and regular
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a topic's forum.
+        This save is done without triggering the update of the 'updated' field by disabling the
+        'auto_now' behavior.
         """
+        self._meta.get_field_by_name('updated')[0].auto_now = False
         super(AbstractTopic, self).save(*args, **kwargs)
+        self._meta.get_field_by_name('updated')[0].auto_now = True
 
     def delete(self, using=None):
         super(AbstractTopic, self).delete(using)
@@ -156,7 +160,7 @@ class AbstractTopic(DatedModel):
         self.posts_count = self.posts.count()
         posts = self.posts.all().order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
-        self.updated = self._last_post.updated or self._last_post.created
+        self.updated = self._last_post.created
         self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
@@ -217,8 +221,6 @@ class AbstractPost(DatedModel):
 
     def save(self, *args, **kwargs):
         super(AbstractPost, self).save(*args, **kwargs)
-        # Trigger the topic-level trackers update
-        self.topic.update_trackers()
 
         # Ensures that the subject of the thread corresponds to the one associated
         # with the first post. Do the same with the 'approved' flag.
@@ -226,7 +228,9 @@ class AbstractPost(DatedModel):
             if self.subject != self.topic.subject or self.approved != self.topic.approved:
                 self.topic.subject = self.subject
                 self.topic.approved = self.approved
-                self.topic.save()
+
+        # Trigger the topic-level trackers update
+        self.topic.update_trackers()
 
     def delete(self, using=None):
         if self.is_topic_head and self.is_topic_tail:

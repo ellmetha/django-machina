@@ -5,8 +5,10 @@
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
 from django.test import TestCase
+from faker import Factory as FakerFactory
 
 # Local application / specific library imports
+from machina.core.utils import refresh
 from machina.test.factories import build_topic
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -14,6 +16,8 @@ from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
+
+faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
@@ -162,3 +166,13 @@ class TestPost(TestCase):
         # Check
         with self.assertRaises(Topic.DoesNotExist):
             Topic.objects.get(pk=self.topic_pk)
+
+    def test_update_should_not_result_in_the_update_of_the_updated_date_of_the_topic(self):
+        # Setup
+        topic_updated_date = self.topic.updated
+        self.post.content = faker.text()
+        # Run
+        self.post.save()
+        # Check
+        topic = refresh(self.topic)
+        self.assertEqual(topic.updated, topic_updated_date)
