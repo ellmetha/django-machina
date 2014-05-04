@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
@@ -81,8 +82,11 @@ class TopicForm(PostForm):
             self.fields['topic_type'].choices = choices
 
         # Set the initial value for the topic type
-        if hasattr(self.instance, 'topic'):
-            self.fields['topic_type'].initial = self.instance.topic.type
+        try:
+            if hasattr(self.instance, 'topic'):
+                self.fields['topic_type'].initial = self.instance.topic.type
+        except ObjectDoesNotExist:
+            pass
 
     def save(self, commit=True):
         if not self.instance.pk:
