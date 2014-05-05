@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 from mptt.models import MPTTModel
@@ -168,8 +169,12 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         This allow the database to not be hit by such checks during very common and regular
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a forum parent.
+        This save is done without triggering the update of the 'updated' field by disabling the
+        'auto_now' behavior.
         """
+        self._meta.get_field_by_name('updated')[0].auto_now = False
         super(AbstractForum, self).save(*args, **kwargs)
+        self._meta.get_field_by_name('updated')[0].auto_now = True
 
     def update_trackers(self):
         # Fetch the list of ids of all descendant forums including the current one
@@ -179,13 +184,17 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # associated with the current forum plus the list of all topics associated
         # with the descendant forums.
         Topic = models.get_model('conversation', 'Topic')
-        topics = Topic.objects.filter(forum__id__in=forum_ids)
+        topics = Topic.objects.filter(forum__id__in=forum_ids).order_by('-updated')
+        approved_topics = topics.filter(approved=True)
 
         self.real_topics_count = topics.count()
-        self.topics_count = topics.filter(approved=True).count()
+        self.topics_count = approved_topics.count()
         # Compute the forum level posts count
         posts_count = sum(topic.posts_count for topic in topics)
         self.posts_count = posts_count
+
+        # Force the forum 'updated' date to the one associated with the last topic updated
+        self.updated = approved_topics[0].updated if len(approved_topics) else now()
 
         # Any save of a forum triggered from the update_tracker process will not result
         # in checking for a change of the forum's parent.

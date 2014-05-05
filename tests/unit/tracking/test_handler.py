@@ -5,6 +5,7 @@
 from django.contrib.auth import get_user
 from django.db.models import get_model
 from django.test.client import Client
+from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
@@ -19,6 +20,8 @@ from machina.test.factories import PostFactory
 from machina.test.factories import TopicReadTrackFactory
 from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
+
+faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('tracking', 'ForumReadTrack')
@@ -139,3 +142,16 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
         self.assertEqual(unread_topics, [new_topic, ])
+
+    def test_cannot_say_that_a_topic_is_unread_if_it_has_been_edited(self):
+        # Setup
+        TopicReadTrackFactory.create(topic=self.topic, user=self.u2)
+        post = self.topic.posts.all()[0]
+        post.content = faker.text()
+        post.save()
+        # Run
+        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
+        unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
+        # Check
+        self.assertFalse(len(unread_forums))
+        self.assertFalse(len(unread_topics))
