@@ -34,6 +34,13 @@ class PostForm(forms.ModelForm):
 
         super(PostForm, self).__init__(*args, **kwargs)
 
+        # Updates the 'subject' and 'content' fields attributes
+        self.fields['subject'].widget.attrs['placeholder'] = _('Enter your subject')
+        self.fields['content'].label = _('Message')
+        self.fields['content'].widget.attrs['placeholder'] = _('Enter your message')
+
+        # Handles the definition of a default subject if we are
+        # considering an answer
         if not self.instance.pk and self.topic:
             self.fields['subject'].initial = '{} {}'.format(
                 machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
