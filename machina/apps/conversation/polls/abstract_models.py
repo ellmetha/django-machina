@@ -21,6 +21,9 @@ class AbstractTopicPoll(DatedModel):
     """
     topic = models.OneToOneField('conversation.Topic', verbose_name=_('Topic'), related_name='poll')
 
+    # A poll is defined by a single question
+    question = models.CharField(max_length=255, verbose_name=_('Poll question'))
+
     # A poll can have a duration
     duration = models.PositiveIntegerField(verbose_name=_('Poll duration, in days'), blank=True, null=True)
 
