@@ -16,6 +16,7 @@ from machina.core.loading import get_class
 
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+TopicPoll = get_model('polls', 'TopicPoll')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -76,6 +77,7 @@ class TopicForm(PostForm):
         # Perform some checks before doing anything
         self.can_add_stickies = perm_handler.can_add_stickies(self.forum, self.user)
         self.can_add_announcements = perm_handler.can_add_announcements(self.forum, self.user)
+        self.can_create_polls = perm_handler.can_create_polls(self.forum, self.user)
 
         if not self.can_add_stickies:
             choices = filter(
@@ -87,6 +89,20 @@ class TopicForm(PostForm):
                 lambda t: t[0] != Topic.TYPE_CHOICES.topic_announce,
                 self.fields['topic_type'].choices)
             self.fields['topic_type'].choices = choices
+
+        # Append polls fields to the form if the user is allowed to create such things
+        if self.can_create_polls:
+            self.fields['poll_question'] = forms.CharField(
+                label=_('Poll question'), required=False,
+                max_length=TopicPoll._meta.get_field('question').max_length)
+            self.fields['poll_max_options'] = forms.IntegerField(
+                label=_('Maximum number of poll options per user'), required=False,
+                help_text=_('This is the number of options each user may select when voting.'),
+                initial=1)
+            self.fields['poll_duration'] = forms.IntegerField(
+                label=_('For how many days the poll should be run?'), required=False,
+                help_text=_('Enter 0 or leave blank for a never ending poll.'),
+                initial=0)
 
         # Set the initial value for the topic type
         try:
