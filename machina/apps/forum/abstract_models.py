@@ -89,13 +89,14 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             ('can_post_stickies', _('Can post stickies')),
             ('can_delete_own_posts', _('Can delete own posts')),
             ('can_edit_own_posts', _('Can edit own posts')),
-            ('can_attach_file', _('Can attach file')),
-            ('can_download_file', _('Can download file')),
             ('can_post_without_approval', _('Can post without approval')),
             # Polls
             ('can_create_poll', _('Can create poll')),
             ('can_vote_in_polls', _('Can vote in polls')),
             ('can_change_existing_vote', ('Can change existing vote')),
+            # Attachments
+            ('can_attach_file', _('Can attach file')),
+            ('can_download_file', _('Can download file')),
             # Moderation
             ('can_close_topics', _('Can close topics')),
             ('can_move_topics', _('Can move topics')),

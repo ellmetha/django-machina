@@ -54,6 +54,8 @@ class PermissionHandler(object):
     # Verification methods
     # --
 
+    # Posts and topics
+
     def can_add_topic(self, forum, user):
         """
         Given a forum, checks whether the user can append topics to it.
@@ -113,6 +115,14 @@ class PermissionHandler(object):
                       or (post.poster == user and checker.has_perm('can_delete_own_posts', post.topic.forum))
                       or checker.has_perm('can_delete_posts', post.topic.forum))
         return can_delete
+
+    # Polls
+
+    def can_create_polls(self, forum, user):
+        """
+        Given a forum, checks whether the user can add a topic with an embedded poll.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_create_poll')
 
     # Common
     # --
