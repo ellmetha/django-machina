@@ -27,3 +27,9 @@ class TestTopicPoll(TestCase):
         with self.assertRaises(ValidationError):
             poll = TopicPollFactory.build(topic=self.topic, max_options=0)
             poll.full_clean()
+
+    def test_cannot_save_a_poll_for_which_the_users_can_choose_too_many_options(self):
+        # Run & Check
+        with self.assertRaises(ValidationError):
+            poll = TopicPollFactory.build(topic=self.topic, max_options=50)
+            poll.full_clean()

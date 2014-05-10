@@ -30,7 +30,7 @@ class AbstractTopicPoll(DatedModel):
     # Users can possibly select more than one option associated with a poll
     max_options = models.PositiveSmallIntegerField(
         verbose_name=_('Maximum number of poll options per user'),
-        validators=[validators.validate_poll_max_options, ], default=1)
+        validators=validators.poll_max_options, default=1)
 
     # Are users allowed to change their votes ?
     user_changes = models.BooleanField(verbose_name=_('Allow vote changes'), default=False)

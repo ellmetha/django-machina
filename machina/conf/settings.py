@@ -34,6 +34,10 @@ TOPIC_ANSWER_SUBJECT_PREFIX = getattr(settings, 'TOPIC_ANSWER_SUBJECT_PREFIX', '
 TOPIC_POSTS_NUMBER_PER_PAGE = getattr(settings, 'TOPIC_POSTS_NUMBER_PER_PAGE', 15)
 
 
+# Polls
+POLL_MAX_OPTIONS_PER_USER = getattr(settings, 'POLL_MAX_OPTIONS_PER_USER', 10)
+
+
 # Member
 PROFILE_AVATAR_UPLOAD_TO = getattr(settings, 'PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')
 
