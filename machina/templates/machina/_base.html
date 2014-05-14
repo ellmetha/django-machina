@@ -1,5 +1,6 @@
 {% extends MACHINA_BASE_TEMPLATE|default:"base.html" %}
 {% load url from future %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
@@ -13,3 +14,15 @@
 {% endblock messages %}
 
 {% block content %}{% endblock content %}
+
+{# Block for body onload functions #}
+{% block extra-js %}
+    {{ block.super }}
+    <script src="{% static "machina/js/ui.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function() {
+            machina.init();
+            {% block onbodyload %}{% endblock onbodyload %}
+        });
+    </script>
+{% endblock extra-js %}

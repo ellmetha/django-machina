@@ -5,6 +5,7 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
+from django.forms.forms import NON_FIELD_ERRORS
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
@@ -21,9 +22,11 @@ from machina.views.mixins import PermissionRequiredMixin
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+TopicPollOption = get_model('polls', 'TopicPollOption')
 
 PostForm = get_class('conversation.forms', 'PostForm')
 TopicForm = get_class('conversation.forms', 'TopicForm')
+TopicPollOptionFormset = get_class('polls.forms', 'TopicPollOptionFormset')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -124,10 +127,71 @@ class PostEditMixin(object):
         return self.forum
 
 
-class TopicCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
+class TopicEditMixin(PostEditMixin):
+    poll_option_formset_class = TopicPollOptionFormset
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicEditMixin, self).get_context_data(**kwargs)
+
+        topic = self.object.topic if self.object is not None else None
+        poll_option_queryset = TopicPollOption.objects.filter(poll__topic=topic)
+
+        if perm_handler.can_create_polls(self.get_forum(), self.request.user):
+            # Add the poll option formset to the context
+            if self.request.method == 'POST':
+                context['poll_option_formset'] = self.poll_option_formset_class(
+                    data=self.request.POST, topic=topic)
+            else:
+                context['poll_option_formset'] = self.poll_option_formset_class(
+                    queryset=poll_option_queryset, topic=topic)
+
+            # Handles the preview of the poll
+            if hasattr(self, 'poll_preview'):
+                context['poll_preview'] = self.poll_preview
+
+        return context
+
+    def form_valid(self, form):
+        preview = 'preview' in self.request.POST
+        save_poll_option_formset = False
+
+        if perm_handler.can_create_polls(self.get_forum(), self.request.user):
+            if len(form.cleaned_data['poll_question']):
+                poll_option_formset = self.poll_option_formset_class(data=self.request.POST)
+                if poll_option_formset.is_valid():
+                    save_poll_option_formset = not preview
+                    self.poll_preview = True
+                else:
+                    save_poll_option_formset = False
+                    errors = list()
+                    for error in poll_option_formset.errors:
+                        if error:
+                            errors += [v[0] for _, v in error.items()]
+                    if not len(errors) and poll_option_formset._non_form_errors:
+                        form._errors[NON_FIELD_ERRORS] = poll_option_formset._non_form_errors
+                        messages.error(self.request, form._errors[NON_FIELD_ERRORS])
+                    return self.form_invalid(form)
+
+        valid = super(TopicEditMixin, self).form_valid(form)
+
+        if save_poll_option_formset:
+            poll_option_formset.topic = self.object.topic
+            poll_option_formset.save(
+                poll_question=form.cleaned_data.pop('poll_question', None),
+                poll_max_options=form.cleaned_data.pop('poll_max_options', None),
+                poll_duration=form.cleaned_data.pop('poll_duration', None),
+                poll_user_changes=form.cleaned_data.pop('poll_user_changes', None),
+            )
+
+        return valid
+
+
+class TopicCreateView(PermissionRequiredMixin, TopicEditMixin, CreateView):
     template_name = 'conversation/topic_create.html'
     permission_required = ['can_start_new_topics', ]
     form_class = TopicForm
+
+    poll_option_formset_class = TopicPollOptionFormset
 
     def get_form_kwargs(self):
         kwargs = super(TopicCreateView, self).get_form_kwargs()
@@ -140,7 +204,7 @@ class TopicCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
             'pk': self.object.topic.pk})
 
 
-class TopicUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
+class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
     success_message = _('This message has been edited successfully.')
     template_name = 'conversation/topic_update.html'
     permission_required = []  # Defined in the 'perform_permissions_check()' method

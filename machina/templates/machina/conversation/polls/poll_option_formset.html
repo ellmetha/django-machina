@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load bootstrap3 %}
+
+
+<label>{% trans "Poll options" %}</label>
+{{ poll_option_formset.management_form }}
+{% for form in poll_option_formset.forms %}
+	<div class="poll-option-form row">
+		{% for field in form.visible_fields %}
+			<div class="col-md-6">
+				{% if forloop.first %}
+					{{ form.id }}
+				{% endif %}
+				{% bootstrap_field field %}
+			</div>
+		{% endfor %}
+	</div>
+{% endfor %}
+<a id="add_more_poll_option" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add a poll option" %}</a>

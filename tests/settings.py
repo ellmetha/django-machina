@@ -51,6 +51,7 @@ TEST_SETTINGS = {
         'django.contrib.sites',
         'mptt',
         'guardian',
+        'bootstrap3',
         'tests',
     ] + get_vanilla_apps(),
     'ROOT_URLCONF': 'tests._testsite.urls',

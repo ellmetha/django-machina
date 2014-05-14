@@ -1,8 +1,11 @@
 {% extends '_base.html' %}
 {% load i18n %}
+{% load bootstrap3 %}
 {% load conversation_tags %}
 
 {% block sub-title %}{% trans "Post a new topic" %}{% endblock sub-title %}
+
+{% block messages %}{# Messages will be rendered inside the form #}{% endblock messages %}
 
 {% block content %}
     <div class="row">
@@ -10,6 +13,9 @@
             <h1>{{ forum.name }}</h1>
         </div>
     </div>
+    {% if poll_preview %}
+        {% include "machina/conversation/polls/poll_preview.html" %}
+    {% endif %}
     {% if preview %}
         {% include "machina/conversation/post_preview.html" %}
     {% endif %}
@@ -20,15 +26,13 @@
                     <h3 class="panel-title">{% trans "Post a new topic" %}</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="." class="form">
-                        {% include 'partials/form_fields.html' %}
-                        <div class="form-actions">
-                            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
-                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
-                        </div>
-                    </form>
+                    {% include "machina/conversation/topic_form.html" %}
                 </div>
             </div>
         </div>
     </div>
 {% endblock content %}
+
+{% block onbodyload %}
+    machina.poll.init();
+{% endblock onbodyload %}

@@ -94,20 +94,32 @@ class TopicForm(PostForm):
         if self.can_create_polls:
             self.fields['poll_question'] = forms.CharField(
                 label=_('Poll question'), required=False,
+                help_text=_('Enter a question to associate a poll with the topic or leave blank to not create a poll.'),
                 max_length=TopicPoll._meta.get_field('question').max_length)
             self.fields['poll_max_options'] = forms.IntegerField(
                 label=_('Maximum number of poll options per user'), required=False,
                 help_text=_('This is the number of options each user may select when voting.'),
+                validators=TopicPoll._meta.get_field('max_options').validators,
                 initial=1)
             self.fields['poll_duration'] = forms.IntegerField(
                 label=_('For how many days the poll should be run?'), required=False,
                 help_text=_('Enter 0 or leave blank for a never ending poll.'),
                 initial=0)
+            self.fields['poll_user_changes'] = forms.BooleanField(
+                label=_('Allow re-voting?'), required=False,
+                help_text=_('If enabled users are able to change their vote.'),
+                initial=False)
 
-        # Set the initial value for the topic type
+        # Set the initial values
         try:
             if hasattr(self.instance, 'topic'):
                 self.fields['topic_type'].initial = self.instance.topic.type
+
+                if self.can_create_polls and self.instance.topic.poll is not None:
+                    self.fields['poll_question'].initial = self.instance.topic.poll.question
+                    self.fields['poll_max_options'].initial = self.instance.topic.poll.max_options
+                    self.fields['poll_duration'].initial = self.instance.topic.poll.duration
+                    self.fields['poll_user_changes'].initial = self.instance.topic.poll.user_changes
         except ObjectDoesNotExist:
             pass
 
