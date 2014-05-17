@@ -1,10 +1,10 @@
 var machina = (function(m, $) {
 
 	function cloneFormset(selector, type) {
-		var newElement = $(selector).clone(true);
+		var new_element = $(selector).clone(true);
 		var total = $('#id_' + type + '-TOTAL_FORMS').val();
 
-		newElement.find(':input').each(function() {
+		new_element.find(':input').each(function() {
 			// update the name and id of the input field
 			var new_name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
 			$(this).attr('name', new_name);
@@ -18,7 +18,7 @@ var machina = (function(m, $) {
 			}
 		});
 		$('#id_' + type + '-TOTAL_FORMS').val(parseInt(total)+1);
-		$(selector).after(newElement);
+		$(selector).after(new_element);
 	}
 
 	m.poll = {
