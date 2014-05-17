@@ -1516,10 +1516,6 @@
   margin-top: 5px;
   margin-bottom: 10px;
 }
-.preview .poll-preview .poll-content-wrapper hr {
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
 .post-edit {
   margin-bottom: 8px;
 }
@@ -1554,6 +1550,10 @@
 }
 .poll .panel-body .poll-content-wrapper h4.question {
   margin: 0;
+}
+.poll .panel-body .poll-content-wrapper hr {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 .poll .panel-body .poll-content-wrapper .poll-options {
   margin-top: 16px;
