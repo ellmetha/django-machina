@@ -8,14 +8,12 @@ from django.db.models import get_model
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic.edit import ModelFormMixin
 
 # Local application / specific library imports
-from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 
