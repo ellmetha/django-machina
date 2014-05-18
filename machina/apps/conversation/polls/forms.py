@@ -107,7 +107,7 @@ class TopicPollVoteForm(forms.Form):
         self.poll = poll
         super(TopicPollVoteForm, self).__init__(*args, **kwargs)
 
-        if poll.max_options > 1:
+        if poll.max_options == 1:
             self.fields['options'] = forms.ModelChoiceField(
                 label='', queryset=poll.options.all(), empty_label=None,
                 widget=forms.RadioSelect())
@@ -118,6 +118,7 @@ class TopicPollVoteForm(forms.Form):
 
     def clean_options(self):
         options = self.cleaned_data['options']
+        print options
         if isinstance(options, TopicPollOption):
             options = [options, ]
         return options
