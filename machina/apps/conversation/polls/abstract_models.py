@@ -45,6 +45,16 @@ class AbstractTopicPoll(DatedModel):
     def __str__(self):
         return '{}'.format(self.topic.subject)
 
+    @property
+    def votes(self):
+        """
+        Returns all the votes related to this topic poll.
+        """
+        votes = []
+        for option in self.options.all():
+            votes += option.votes.all()
+        return votes
+
 
 @python_2_unicode_compatible
 class AbstractTopicPollOption(models.Model):

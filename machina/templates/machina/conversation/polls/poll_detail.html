@@ -1,0 +1,93 @@
+{% load url from future %}
+{% load i18n %}
+
+<div class="panel panel-default poll">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12 poll-content-wrapper">
+				<h4 class="question">{{ poll.question }}</h4>
+				<hr />
+				<div class="max-options-indication">
+					{% if poll.max_options == 1 %}
+						{% blocktrans %}
+							You may select <b>1</b> option
+						{% endblocktrans %}
+					{% else %}
+						{% blocktrans with max_options=poll.max_options %}
+							You may select up to <b>{{ max_options }}</b> options
+						{% endblocktrans %}
+					{% endif %}
+				</div>
+				<div class="poll-options">
+					<form method="post" action="{% url 'conversation:topic-poll-vote' forum_pk=poll.topic.forum.pk topic_pk=poll.topic.pk pk=poll.pk %}" class="form" novalidate>
+						{% csrf_token %}
+
+						{% for option in poll_form.options.field.queryset %}
+							{% if forloop.first or not forloop.counter|divisibleby:2 %}
+								<div class="row">
+							{% endif %}
+							<div class="col-md-6">
+								<div class="well well-sm">
+									{% if poll.max_options == 1 %}
+										<div class="radio">
+											<label>
+												<input type="radio" name="options" value="{{ option.id }}">
+												{{ option.text }}
+											</label>
+										</div>
+									{% else %}
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="options" value="{{ option.id }}">
+												{{ option.text }}
+											</label>
+										</div>
+									{% endif %}
+								</div>
+							</div>
+							{% if forloop.last or forloop.counter|divisibleby:2 %}
+								</div>
+							{% endif %}
+						{% endfor %}
+
+						<div class="form-actions">
+							<input type="submit" class="btn btn-sm btn-info" value="{% trans "Submit" %}" />
+							<button type="button" class="btn btn-link">{% trans "View results" %}</button>
+						</div>
+
+					{% comment %}
+					{% for option in poll.options.all %}
+						{% if forloop.first or not forloop.counter|divisibleby:2 %}
+							<div class="row">
+						{% endif %}
+						<div class="col-md-6">
+							<div class="well well-sm">
+								{% if poll.max_options == 1 %}
+									<div class="radio">
+										<label>
+											<input type="radio" value="">
+											{{ option.text }}
+										</label>
+									</div>
+								{% else %}
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="">
+											{{ option.text }}
+										</label>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+						{% if forloop.last or forloop.counter|divisibleby:2 %}
+							</div>
+						{% endif %}
+					{% endfor %}
+					{% endcomment %}
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

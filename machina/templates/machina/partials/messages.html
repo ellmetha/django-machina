@@ -1,7 +1,7 @@
 <div id="messages">
 {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} fade in">
+    <div class="alert alert-{{ message.tags }} {% if 'error' in message.tags %}alert-danger{% endif %} fade in">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {% if 'noicon' not in message.tags %}
                 {# Include an icon by default #}

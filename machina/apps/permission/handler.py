@@ -124,6 +124,22 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_create_poll')
 
+    def can_vote_in_poll(self, poll, user):
+        """
+        Given a poll, checks whether the user can answer to it.
+        """
+        # Is this user allowed to vote in polls in the current forum ?
+        can_vote = self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls')
+
+        # Retrieve the user votes for the considered poll
+        user_votes = user.poll_votes.filter(poll_option__poll=poll)
+
+        # If the user has already voted, he can vote again if the vote changes are allowed
+        if user_votes.exists() and can_vote:
+            can_vote = poll.user_changes
+
+        return can_vote
+
     # Common
     # --
 

@@ -21,10 +21,10 @@ class Application(object):
 
     def get_urls(self):
         """
-        Return the url patterns for the considered app. It must be implemented in
+        Return the url patterns for the considered app. It should be implemented in
         any subclass.
         """
-        raise NotImplementedError
+        return []
 
     @property
     def urls(self):

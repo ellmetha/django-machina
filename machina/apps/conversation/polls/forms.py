@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms.formsets import TOTAL_FORM_COUNT
 from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
@@ -82,10 +83,14 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         poll_user_changes = kwargs.pop('poll_user_changes', False)
 
         if self.poll is None:
-            poll, _ = TopicPoll.objects.get_or_create(
-                topic=self.topic, question=poll_question,
-                duration=poll_duration, max_options=poll_max_options,
-                user_changes=poll_user_changes)
+            poll, _ = TopicPoll.objects.get_or_create(topic=self.topic)
+
+            poll.question = poll_question
+            poll.duration = poll_duration
+            poll.max_options = poll_max_options
+            poll.user_changes = poll_user_changes
+            poll.save()
+
             for form in self.forms:
                 form.instance.poll = poll
         super(BaseTopicPollOptionFormset, self).save(commit)
@@ -95,3 +100,31 @@ TopicPollOptionFormset = modelformset_factory(
     TopicPollOption, TopicPollOptionForm,
     formset=BaseTopicPollOptionFormset,
     can_delete=True, extra=2)
+
+
+class TopicPollVoteForm(forms.Form):
+    def __init__(self, poll, *args, **kwargs):
+        self.poll = poll
+        super(TopicPollVoteForm, self).__init__(*args, **kwargs)
+
+        if poll.max_options > 1:
+            self.fields['options'] = forms.ModelChoiceField(
+                label='', queryset=poll.options.all(), empty_label=None,
+                widget=forms.RadioSelect())
+        else:
+            self.fields['options'] = forms.ModelMultipleChoiceField(
+                label='', queryset=poll.options.all(),
+                widget=forms.CheckboxSelectMultiple())
+
+    def clean_options(self):
+        options = self.cleaned_data['options']
+        if isinstance(options, TopicPollOption):
+            options = [options, ]
+        return options
+
+    def clean(self):
+        cleaned_data = super(TopicPollVoteForm, self).clean()
+        if 'options' not in cleaned_data:
+            msg = _('You must specify an option when voting.')
+            raise ValidationError(msg)
+        return cleaned_data

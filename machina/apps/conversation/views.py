@@ -27,6 +27,7 @@ TopicPollOption = get_model('polls', 'TopicPollOption')
 PostForm = get_class('conversation.forms', 'PostForm')
 TopicForm = get_class('conversation.forms', 'TopicForm')
 TopicPollOptionFormset = get_class('polls.forms', 'TopicPollOptionFormset')
+TopicPollVoteForm = get_class('polls.forms', 'TopicPollVoteForm')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -38,6 +39,8 @@ class TopicView(PermissionRequiredMixin, ListView):
     permission_required = ['can_read_forum', ]
     paginate_by = machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE
     view_signal = topic_viewed
+
+    poll_form_class = TopicPollVoteForm
 
     def get(self, request, **kwargs):
         topic = self.get_topic()
@@ -81,6 +84,11 @@ class TopicView(PermissionRequiredMixin, ListView):
         topic = self.get_topic()
         context['topic'] = topic
         context['forum'] = topic.forum
+
+        # Handles the case when a poll is associated to the topic
+        if hasattr(topic, 'poll'):
+            context['poll'] = topic.poll
+            context['poll_form'] = self.poll_form_class(poll=topic.poll)
 
         return context
 
