@@ -118,7 +118,6 @@ class TopicPollVoteForm(forms.Form):
 
     def clean_options(self):
         options = self.cleaned_data['options']
-        print options
         if isinstance(options, TopicPollOption):
             options = [options, ]
         return options
