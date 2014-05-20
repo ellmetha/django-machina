@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+import datetime
+
 # Third party imports
 from django.db.models import get_model
 from guardian.shortcuts import assign_perm
@@ -14,6 +16,9 @@ from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 from machina.test.factories import GroupFactory
 from machina.test.factories import PostFactory
+from machina.test.factories import TopicPollFactory
+from machina.test.factories import TopicPollOptionFactory
+from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
 
@@ -217,3 +222,49 @@ class TestPermissionHandler(BaseUnitTestCase):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         self.assertTrue(self.perm_handler.can_create_polls(self.forum_1, u2))
+
+    def test_knows_if_a_user_can_vote_in_polls(self):
+        # Setup
+        poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
+        poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        assign_perm('can_vote_in_polls', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_vote_in_poll(poll_1, self.u1))
+        self.assertFalse(self.perm_handler.can_vote_in_poll(poll_2, self.u1))
+
+    def test_knows_that_a_superuser_can_vote_in_polls(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.forum_1_topic)
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_vote_in_poll(poll, u2))
+
+    def test_knows_that_a_user_should_no_vote_in_a_completed_poll(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.forum_1_topic, duration=2)
+        poll._meta.get_field_by_name('updated')[0].auto_now = False
+        poll.created = datetime.datetime(2000, 1, 12)
+        poll.save()
+        poll._meta.get_field_by_name('updated')[0].auto_now = True
+        assign_perm('can_vote_in_polls', self.u1, self.forum_1)
+        # Run & check
+        self.assertFalse(self.perm_handler.can_vote_in_poll(poll, self.u1))
+
+    def test_knows_if_a_user_can_vote_again_in_a_poll(self):
+        # Setup
+        poll_1 = TopicPollFactory.create(topic=self.forum_1_topic, user_changes=True)
+        poll_option_1 = TopicPollOptionFactory.create(poll=poll_1)
+        TopicPollOptionFactory.create(poll=poll_1)
+
+        poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        poll_option_2 = TopicPollOptionFactory.create(poll=poll_2)
+        TopicPollOptionFactory.create(poll=poll_2)
+
+        TopicPollVoteFactory.create(poll_option=poll_option_1, voter=self.u1)
+        TopicPollVoteFactory.create(poll_option=poll_option_2, voter=self.u1)
+
+        assign_perm('can_vote_in_polls', self.u1, self.forum_1)
+        assign_perm('can_vote_in_polls', self.u1, self.forum_3)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_vote_in_poll(poll_1, self.u1))
+        self.assertFalse(self.perm_handler.can_vote_in_poll(poll_2, self.u1))
