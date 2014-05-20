@@ -24,6 +24,8 @@
 				<div class="poll-options">
 					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user and not view_results_action %}
 						{% include "conversation/polls/poll_vote_form.html" %}
+					{% elif poll|can_be_completed_by:request.user and poll|has_been_completed_by:request.user and change_vote_action %}
+						{% include "conversation/polls/poll_vote_form.html" %}
 					{% else %}
 						{% include "conversation/polls/poll_results.html" %}
 					{% endif %}
@@ -31,7 +33,11 @@
 				{% if view_results_action %}
 					<div class="form-actions">
 						<br />
-						<a href="." class="btn btn-link">{% trans "Vote" %}</a>
+						<a href="."><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Vote" %}</a></div>
+				{% elif poll|can_be_completed_by:request.user and poll|has_been_completed_by:request.user and not change_vote_action %}
+					<div class="form-actions">
+						<br />
+						<a href="?change_vote=true"><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Change your vote" %}</a>
 					</div>
 				{% endif %}
 			</div>
