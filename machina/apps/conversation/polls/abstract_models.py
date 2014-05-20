@@ -75,7 +75,7 @@ class AbstractTopicPollOption(models.Model):
 
     @property
     def percentage(self):
-        return (self.votes.count() / len(self.poll.votes)) * 100
+        return (self.votes.count() / (len(self.poll.votes) or 1)) * 100
 
 
 @python_2_unicode_compatible
