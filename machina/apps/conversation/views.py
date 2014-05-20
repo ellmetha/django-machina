@@ -91,6 +91,7 @@ class TopicView(PermissionRequiredMixin, ListView):
             if hasattr(topic, 'poll'):
                 context['poll'] = topic.poll
                 context['poll_form'] = self.poll_form_class(poll=topic.poll)
+                context['view_results_action'] = self.request.GET.get('view_results', None)
         except ObjectDoesNotExist:
             pass
 

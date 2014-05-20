@@ -9,7 +9,7 @@
 				<h4 class="question">{{ poll.question }}</h4>
 				<hr />
 				<div class="max-options-indication">
-					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user %}
+					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user and not view_results_action %}
 						{% if poll.max_options == 1 %}
 							{% blocktrans %}
 								You may select <b>1</b> option
@@ -22,12 +22,18 @@
 					{% endif %}
 				</div>
 				<div class="poll-options">
-					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user %}
+					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user and not view_results_action %}
 						{% include "conversation/polls/poll_vote_form.html" %}
 					{% else %}
 						{% include "conversation/polls/poll_results.html" %}
 					{% endif %}
 				</div>
+				{% if view_results_action %}
+					<div class="form-actions">
+						<br />
+						<a href="." class="btn btn-link">{% trans "Vote" %}</a>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
