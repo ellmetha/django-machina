@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from datetime import timedelta
+
 # Third party imports
 from django.db.models import get_model
+from django.utils.timezone import now
 from guardian.core import ObjectPermissionChecker
 
 # Local application / specific library imports
@@ -128,6 +131,12 @@ class PermissionHandler(object):
         """
         Given a poll, checks whether the user can answer to it.
         """
+        # First we have to check if the poll is curently open
+        if poll.duration:
+            poll_dtend = poll.created + timedelta(days=poll.duration)
+            if poll_dtend < now():
+                return False
+
         # Is this user allowed to vote in polls in the current forum ?
         can_vote = self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls')
 
