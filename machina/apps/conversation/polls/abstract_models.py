@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import division
 from __future__ import unicode_literals
 
 # Third party imports
@@ -71,6 +72,10 @@ class AbstractTopicPollOption(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.poll, self.text)
+
+    @property
+    def percentage(self):
+        return (self.votes.count() / len(self.poll.votes)) * 100
 
 
 @python_2_unicode_compatible

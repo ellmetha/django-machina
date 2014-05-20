@@ -39,4 +39,4 @@ def has_been_completed_by(poll, user):
         {% if poll|has_been_completed_by:user %}...{% endif %}
     """
     user_votes = user.poll_votes.filter(poll_option__poll=poll)
-    return user_votes.exist()
+    return user_votes.exists()
