@@ -32,4 +32,4 @@ class UserFactory(factory.DjangoModelFactory):
 
 class GroupFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Group
-    name = factory.LazyAttribute(lambda t: faker.job())
+    name = factory.Sequence(lambda n: '{}-{}'.format(str(n) + faker.job()))
