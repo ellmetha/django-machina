@@ -93,7 +93,6 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             # Polls
             ('can_create_poll', _('Can create poll')),
             ('can_vote_in_polls', _('Can vote in polls')),
-            ('can_change_existing_vote', ('Can change existing vote')),
             # Attachments
             ('can_attach_file', _('Can attach file')),
             ('can_download_file', _('Can download file')),
