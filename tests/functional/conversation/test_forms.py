@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django import forms
 from django.db.models import get_model
 from django.test import TestCase
 from faker import Factory as FakerFactory
@@ -16,6 +17,7 @@ from machina.core.utils import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
+from machina.test.factories import TopicPollFactory
 from machina.test.factories import UserFactory
 
 faker = FakerFactory.create()
@@ -284,3 +286,77 @@ class TestTopicForm(TestCase):
         form.save()
         self.topic = refresh(self.topic)
         self.assertEqual(self.topic.type, Topic.TYPE_CHOICES.topic_sticky)
+
+    def test_can_append_poll_fields_if_the_user_is_allowed_to_create_polls(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        self.assertIn('poll_question', form.fields)
+        self.assertIn('poll_max_options', form.fields)
+        self.assertIn('poll_duration', form.fields)
+        self.assertIn('poll_user_changes', form.fields)
+        self.assertTrue(isinstance(form.fields['poll_question'], forms.CharField))
+        self.assertTrue(isinstance(form.fields['poll_max_options'], forms.IntegerField))
+        self.assertTrue(isinstance(form.fields['poll_duration'], forms.IntegerField))
+        self.assertTrue(isinstance(form.fields['poll_user_changes'], forms.BooleanField))
+
+    def test_cannot_append_poll_fields_if_the_user_is_not_allowed_to_create_polls(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        self.assertNotIn('poll_question', form.fields)
+        self.assertNotIn('poll_max_options', form.fields)
+        self.assertNotIn('poll_duration', form.fields)
+        self.assertNotIn('poll_user_changes', form.fields)
+
+    def test_can_initialize_poll_fields_from_topic_related_poll_object(self):
+        # Setup
+        form_data = {
+            'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TYPE_CHOICES.topic_sticky,
+        }
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        poll = TopicPollFactory.create(topic=self.post.topic)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        self.assertIn('poll_question', form.fields)
+        self.assertIn('poll_max_options', form.fields)
+        self.assertIn('poll_duration', form.fields)
+        self.assertIn('poll_user_changes', form.fields)
+        self.assertEqual(form.fields['poll_question'].initial, poll.question)
+        self.assertEqual(form.fields['poll_max_options'].initial, poll.max_options)
+        self.assertEqual(form.fields['poll_duration'].initial, poll.duration)
+        self.assertEqual(form.fields['poll_user_changes'].initial, poll.user_changes)
