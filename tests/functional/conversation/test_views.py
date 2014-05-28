@@ -10,12 +10,15 @@ from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import TOPIC_TYPES
+from machina.apps.conversation.polls.forms import TopicPollVoteForm
 from machina.apps.conversation.signals import topic_viewed
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
+from machina.test.factories import TopicPollFactory
+from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicReadTrackFactory
 from machina.test.testcases import BaseClientTestCase
 from machina.test.utils import mock_signal_receiver
@@ -176,6 +179,17 @@ class TestTopicView(BaseClientTestCase):
         self.assertEqual(response.context_data['page_obj'].number, 1)
         response = self.client.get(correct_url, {'post': 'I\'m a post'}, follow=True)
         self.assertEqual(response.context_data['page_obj'].number, 1)
+
+    def test_embed_poll_data_into_the_context_if_a_poll_is_associated_to_the_topic(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.topic)
+        TopicPollOptionFactory.create(poll=poll)
+        TopicPollOptionFactory.create(poll=poll)
+        correct_url = self.topic.get_absolute_url()
+        # Run & check
+        response = self.client.get(correct_url)
+        self.assertEqual(response.context_data['poll'], poll)
+        self.assertTrue(isinstance(response.context_data['poll_form'], TopicPollVoteForm))
 
 
 class TestTopicCreateView(BaseClientTestCase):
