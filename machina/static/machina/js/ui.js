@@ -15,6 +15,7 @@ var machina = (function(m, $) {
 			}
 			else {
 				$(this).attr('value', '');
+				$(this).val('');
 			}
 		});
 		$('#id_' + type + '-TOTAL_FORMS').val(parseInt(total)+1);
