@@ -7,7 +7,7 @@
 	<div class="col-md-6">
 		<b>{{ option.text }}</b>
 		<div class="progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="{{ option.percentage|floatformat }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ option.percentage|floatformat }}%;">
+			<div class="progress-bar" role="progressbar" aria-valuenow="{{ option.percentage|floatformat }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ option.percentage|stringformat:"f" }}%;">
 				{{ option.percentage|floatformat }}%
 			</div>
 		</div>
