@@ -124,7 +124,14 @@ class TopicPollVoteForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(TopicPollVoteForm, self).clean()
+
         if 'options' not in cleaned_data:
             msg = _('You must specify an option when voting.')
             raise ValidationError(msg)
+
+        options = cleaned_data['options']
+        if len(options) > self.poll.max_options:
+            msg = _('You have tried to vote for too many options.')
+            raise ValidationError(msg)
+
         return cleaned_data
