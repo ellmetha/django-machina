@@ -9,15 +9,17 @@
 				<h4 class="question">{{ poll.question }}</h4>
 				<hr />
 				<div class="max-options-indication">
-					{% if poll|can_be_completed_by:request.user and not poll|has_been_completed_by:request.user and not view_results_action %}
-						{% if poll.max_options == 1 %}
-							{% blocktrans %}
-								You may select <b>1</b> option
-							{% endblocktrans %}
-						{% else %}
-							{% blocktrans with max_options=poll.max_options %}
-								You may select up to <b>{{ max_options }}</b> options
-							{% endblocktrans %}
+					{% if poll|can_be_completed_by:request.user and not view_results_action %}
+						{% if not poll|has_been_completed_by:request.user or change_vote_action %}
+							{% if poll.max_options == 1 %}
+								{% blocktrans %}
+									You may select <b>1</b> option
+								{% endblocktrans %}
+							{% else %}
+								{% blocktrans with max_options=poll.max_options %}
+									You may select up to <b>{{ max_options }}</b> options
+								{% endblocktrans %}
+							{% endif %}
 						{% endif %}
 					{% endif %}
 				</div>
