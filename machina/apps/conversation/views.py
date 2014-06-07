@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.forms.forms import NON_FIELD_ERRORS
@@ -87,14 +86,11 @@ class TopicView(PermissionRequiredMixin, ListView):
         context['forum'] = topic.forum
 
         # Handles the case when a poll is associated to the topic
-        try:
-            if hasattr(topic, 'poll'):
-                context['poll'] = topic.poll
-                context['poll_form'] = self.poll_form_class(poll=topic.poll)
-                context['view_results_action'] = self.request.GET.get('view_results', None)
-                context['change_vote_action'] = self.request.GET.get('change_vote', None)
-        except ObjectDoesNotExist:
-            pass
+        if hasattr(topic, 'poll'):
+            context['poll'] = topic.poll
+            context['poll_form'] = self.poll_form_class(poll=topic.poll)
+            context['view_results_action'] = self.request.GET.get('view_results', None)
+            context['change_vote_action'] = self.request.GET.get('change_vote', None)
 
         return context
 
