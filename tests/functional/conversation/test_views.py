@@ -10,6 +10,7 @@ from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import TOPIC_TYPES
+from machina.apps.conversation.polls.forms import TopicPollOptionFormset
 from machina.apps.conversation.polls.forms import TopicPollVoteForm
 from machina.apps.conversation.signals import topic_viewed
 from machina.core.loading import get_class
@@ -260,6 +261,15 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(topic_url, last_url)
+
+    def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_create_polls(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertIn('poll_option_formset', response.context_data)
+        self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
 
 
 class TestTopicUpdateView(BaseClientTestCase):
