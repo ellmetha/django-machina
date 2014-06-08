@@ -2,35 +2,29 @@
 
 # Standard library imports
 # Third party imports
-from django.contrib.messages import constants as MSG
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
-from guardian.utils import get_anonymous_user
+from guardian.shortcuts import remove_perm
 
 # Local application / specific library imports
-from machina.apps.conversation.abstract_models import TOPIC_TYPES
-from machina.apps.conversation.polls.forms import TopicPollOptionFormset
-from machina.apps.conversation.polls.forms import TopicPollVoteForm
-from machina.apps.conversation.signals import topic_viewed
 from machina.core.loading import get_class
-from machina.core.utils import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
-from machina.test.factories import TopicReadTrackFactory
+from machina.test.factories import TopicPollVoteFactory
 from machina.test.testcases import BaseClientTestCase
-from machina.test.utils import mock_signal_receiver
 
 faker = FakerFactory.create()
 
 ForumReadTrack = get_model('tracking', 'ForumReadTrack')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+TopicPollVote = get_model('polls', 'TopicPollVote')
 TopicReadTrack = get_model('tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
@@ -71,3 +65,49 @@ class TestTopicPollVoteView(BaseClientTestCase):
         response = self.client.post(correct_url, follow=True)
         # Check
         self.assertIsOk(response)
+
+    def test_cannot_be_used_by_unauthorized_users(self):
+        # Setup
+        remove_perm('can_vote_in_polls', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-poll-vote', kwargs={
+            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'pk': self.poll.pk})
+        # Run
+        response = self.client.post(correct_url, follow=True)
+        # Check
+        self.assertIsNotOk(response)
+
+    def test_can_be_used_to_vote(self):
+        # Setup
+        correct_url = reverse('conversation:topic-poll-vote', kwargs={
+            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'pk': self.poll.pk})
+        post_data = {
+            'options': self.option_1.pk,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertIsOk(response)
+        votes = TopicPollVote.objects.filter(voter=self.user)
+        self.assertEqual(votes.count(), 1)
+        self.assertEqual(votes[0].poll_option, self.option_1)
+
+    def test_can_be_used_to_change_a_vote(self):
+        # Setup
+        self.poll.user_changes = True
+        self.poll.save()
+        TopicPollVoteFactory.create(voter=self.user, poll_option=self.option_2)
+        correct_url = reverse('conversation:topic-poll-vote', kwargs={
+            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'pk': self.poll.pk})
+        post_data = {
+            'options': self.option_1.pk,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertIsOk(response)
+        votes = TopicPollVote.objects.filter(voter=self.user)
+        self.assertEqual(votes.count(), 1)
+        self.assertEqual(votes[0].poll_option, self.option_1)
