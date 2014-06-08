@@ -87,14 +87,14 @@ class TopicView(PermissionRequiredMixin, ListView):
         context['forum'] = topic.forum
 
         # Handles the case when a poll is associated to the topic
-        if hasattr(topic, 'poll'):
-            try:
+        try:
+            if hasattr(topic, 'poll'):
                 context['poll'] = topic.poll
                 context['poll_form'] = self.poll_form_class(poll=topic.poll)
                 context['view_results_action'] = self.request.GET.get('view_results', None)
                 context['change_vote_action'] = self.request.GET.get('change_vote', None)
-            except ObjectDoesNotExist:
-                pass
+        except ObjectDoesNotExist:
+            pass
 
         return context
 
