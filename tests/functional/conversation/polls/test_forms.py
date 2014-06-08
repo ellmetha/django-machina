@@ -2,7 +2,6 @@
 
 # Standard library imports
 # Third party imports
-from django import forms
 from django.db.models import get_model
 from django.test import TestCase
 from faker import Factory as FakerFactory
