@@ -14,6 +14,7 @@ from machina.apps.conversation.polls.forms import TopicPollOptionFormset
 from machina.apps.conversation.polls.forms import TopicPollVoteForm
 from machina.apps.conversation.signals import topic_viewed
 from machina.core.loading import get_class
+from machina.core.utils import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
@@ -271,6 +272,69 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertIn('poll_option_formset', response.context_data)
         self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
 
+    def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_create_polls(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertFalse('poll_option_formset' in response.context_data)
+
+    def test_can_handle_poll_previews(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-1-id': '',
+            'form-1-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertTrue(response.context_data['poll_preview'])
+
+    def test_can_create_a_poll_and_its_options_if_the_user_is_allowed_to_do_it(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-1-id': '',
+            'form-1-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic = Topic.objects.get(pk=response.context_data['topic'].pk)
+        self.assertTrue(topic.poll is not None)
+        self.assertEqual(topic.poll.question, post_data['poll_question'])
+        self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
+        self.assertEqual(topic.poll.duration, post_data['poll_duration'])
+        self.assertEqual(topic.poll.options.count(), 2)
+        self.assertEqual(topic.poll.options.all()[0].text, post_data['form-0-text'])
+        self.assertEqual(topic.poll.options.all()[1].text, post_data['form-1-text'])
+
 
 class TestTopicUpdateView(BaseClientTestCase):
     def setUp(self):
@@ -348,6 +412,118 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(topic_url, last_url)
+
+    def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_add_polls(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertIn('poll_option_formset', response.context_data)
+        self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
+
+    def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_add_polls(self):
+        # Setup
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertFalse('poll_option_formset' in response.context_data)
+
+    def test_can_handle_poll_previews(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-1-id': '',
+            'form-1-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertTrue(response.context_data['poll_preview'])
+
+    def test_allows_poll_updates(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.topic)
+        option_1 = TopicPollOptionFactory.create(poll=poll)
+        option_2 = TopicPollOptionFactory.create(poll=poll)
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'poll_question': faker.text(max_nb_chars=155),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': option_1.pk,
+            'form-0-text': option_1.text,
+            'form-1-id': option_2.pk,
+            'form-1-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 2,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        option_2 = refresh(option_2)
+        self.assertEqual(option_2.text, post_data['form-1-text'])
+        poll = refresh(poll)
+        self.assertEqual(poll.question, post_data['poll_question'])
+
+    def test_allows_poll_creations(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-1-id': '',
+            'form-1-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic = Topic.objects.get(pk=response.context_data['topic'].pk)
+        self.assertTrue(topic.poll is not None)
+        self.assertEqual(topic.poll.question, post_data['poll_question'])
+        self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
+        self.assertEqual(topic.poll.duration, post_data['poll_duration'])
+        self.assertEqual(topic.poll.options.count(), 2)
+        self.assertEqual(topic.poll.options.all()[0].text, post_data['form-0-text'])
+        self.assertEqual(topic.poll.options.all()[1].text, post_data['form-1-text'])
 
 
 class TestPostCreateView(BaseClientTestCase):
