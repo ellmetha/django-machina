@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django.contrib.messages import constants as MSG
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
@@ -334,6 +335,49 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertEqual(topic.poll.options.count(), 2)
         self.assertEqual(topic.poll.options.all()[0].text, post_data['form-0-text'])
         self.assertEqual(topic.poll.options.all()[1].text, post_data['form-1-text'])
+
+    def test_cannot_create_polls_with_invalid_options(self):
+        # Setup
+        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={'forum_pk': self.top_level_forum.pk})
+        post_data_1 = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 1,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        post_data_2 = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'poll_question': faker.text(max_nb_chars=100),
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'form-0-id': '',
+            'form-0-text': faker.text(max_nb_chars=100),
+            'form-1-id': '',
+            'form-1-text': faker.text(max_nb_chars=100) * 1000,
+            'form-INITIAL_FORMS': 0,
+            'form-TOTAL_FORMS': 2,
+            'form-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response_1 = self.client.post(correct_url, post_data_1, follow=True)
+        response_2 = self.client.post(correct_url, post_data_2, follow=True)
+        # Check
+        messages_1 = list(response_1.context['messages'])
+        self.assertEqual(len(messages_1), 1)
+        self.assertEqual(messages_1[0].level, MSG.ERROR)
+        messages_2 = list(response_2.context['messages'])
+        self.assertEqual(len(messages_2), 1)
+        self.assertEqual(messages_2[0].level, MSG.ERROR)
 
 
 class TestTopicUpdateView(BaseClientTestCase):
