@@ -155,7 +155,7 @@ class PermissionHandler(object):
     def _get_hidden_forum_ids(self, forums, checker):
         """
         Given a set of forums and an initialized checker, returns the list of forums
-        that are nto visible by the user or the group associated with this checker.
+        that are not visible by the user or the group associated with this checker.
         """
         hidden_forums = []
         for forum in forums:
