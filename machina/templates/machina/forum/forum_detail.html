@@ -14,6 +14,13 @@
         </div>
     </div>
     {% if sub_forums %}
+        <div class="row">
+            <div class="forumlist-top-controls col-xs-12">
+                <div class="pull-right">
+                    <a href="{% url 'tracking:mark-subforums-read' forum.pk %}"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
+                </div>
+            </div>
+        </div>
         {% forum_list sub_forums request %}
     {% endif %}
     {% if forum.is_forum %}
