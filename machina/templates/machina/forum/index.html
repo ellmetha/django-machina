@@ -6,5 +6,12 @@
 {% block sub-title %}{% trans "Index" %}{% endblock sub-title %}
 
 {% block content %}
+	<div class="row">
+		<div class="forumlist-top-controls col-xs-12">
+			<div class="pull-right">
+				<a href="{% url 'tracking:mark-all-forums-read' %}"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark forums read" %}</a>
+			</div>
+		</div>
+	</div>
     {% forum_list forums request %}
 {% endblock content %}

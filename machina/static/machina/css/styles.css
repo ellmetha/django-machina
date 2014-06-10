@@ -1336,6 +1336,9 @@
 .fa-plus-square-o:before {
   content: "\f196";
 }
+.forumlist-top-controls {
+  margin-bottom: 6px;
+}
 .forumlist .panel-heading {
   padding-top: 10px;
   padding-left: 0;
