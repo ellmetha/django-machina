@@ -17,7 +17,7 @@
         <div class="row">
             <div class="forumlist-top-controls col-xs-12">
                 <div class="pull-right">
-                    <a href="{% url 'tracking:mark-subforums-read' forum.pk %}"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
+                    <a href="{% url 'tracking:mark-subforums-read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
                 </div>
             </div>
         </div>
@@ -34,6 +34,7 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
+                <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
             </div>
         </div>
         {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
@@ -52,6 +53,7 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
+                <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
             </div>
         </div>
     {% endif %}
