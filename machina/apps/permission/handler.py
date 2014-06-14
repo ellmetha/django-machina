@@ -57,6 +57,14 @@ class PermissionHandler(object):
     # Verification methods
     # --
 
+    # Forums
+
+    def can_read_forum(self, forum, user):
+        """
+        Given a forum, checks whther the user can read its content.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_read_forum')
+
     # Posts and topics
 
     def can_add_topic(self, forum, user):

@@ -268,3 +268,17 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Run & check
         self.assertTrue(self.perm_handler.can_vote_in_poll(poll_1, self.u1))
         self.assertFalse(self.perm_handler.can_vote_in_poll(poll_2, self.u1))
+
+    def test_knows_if_a_user_can_read_a_forum(self):
+        # Setup
+        u2 = UserFactory.create()
+        # Run & check
+        self.assertFalse(self.perm_handler.can_read_forum(self.forum_1, u2))
+        self.assertTrue(self.perm_handler.can_read_forum(self.forum_3, self.u1))
+
+    def test_knows_that_a_superuser_can_read_a_forum(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_read_forum(self.forum_1, u2))
+        self.assertTrue(self.perm_handler.can_read_forum(self.forum_3, u2))
