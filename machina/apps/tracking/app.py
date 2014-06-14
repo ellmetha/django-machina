@@ -14,11 +14,13 @@ class TrackingApp(Application):
     name = 'tracking'
 
     mark_forums_read_view = views.MarkForumsReadView
+    mark_topics_read_view = views.MarkTopicsReadView
 
     def get_urls(self):
         urls = [
             url(r'^mark/forums/$', self.mark_forums_read_view.as_view(), name='mark-all-forums-read'),
             url(r'^mark/forums/(?P<pk>\d+)/$', self.mark_forums_read_view.as_view(), name='mark-subforums-read'),
+            url(r'^mark/forum/(?P<pk>\d+)/topics/$', self.mark_topics_read_view.as_view(), name='mark-topics-read'),
         ]
         return patterns('', *urls)
 
