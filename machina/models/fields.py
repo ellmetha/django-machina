@@ -24,6 +24,18 @@ from machina.conf import settings as machina_settings
 _rendered_field_name = lambda name: '_{}_rendered'.format(name)
 
 
+def _get_markup_widget():
+    dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
+    try:
+        module, widget = dotted_path.rsplit('.', 1)
+        widget = getattr(__import__(module, {}, {}, [widget]), widget)
+        return widget
+    except ImportError as e:
+        raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
+            machina_settings.MACHINA_MARKUP_WIDGET,
+            e))
+
+
 def _get_render_function(dotted_path, kwargs):
     module, func = dotted_path.rsplit('.', 1)
     func = getattr(__import__(module, {}, {}, [func]), func)
@@ -147,6 +159,17 @@ class MarkupTextField(models.TextField):
             rendered = render_func(value.raw)
 
         setattr(instance, _rendered_field_name(self.attname), rendered)
+
+    def formfield(self, **kwargs):
+        if machina_settings.MACHINA_MARKUP_WIDGET:
+            widget = _get_markup_widget()
+            defaults = {'widget': widget}
+            defaults.update(kwargs)
+        else:
+            defaults = kwargs
+
+        field = super(MarkupTextField, self).formfield(**defaults)
+        return field
 
 
 class ExtendedImageField(models.ImageField):
