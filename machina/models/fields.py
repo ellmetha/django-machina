@@ -163,7 +163,7 @@ class ExtendedImageField(models.ImageField):
         # Both min_height and max_height must be provided in order to be used
         self.min_height = kwargs.pop('min_height', None)
         self.max_height = kwargs.pop('max_height', None)
-        self.max_upload_size = kwargs.pop("max_upload_size", 0)
+        self.max_upload_size = kwargs.pop('max_upload_size', 0)
         super(ExtendedImageField, self).__init__(*args, **kwargs)
 
     def clean(self, *args, **kwargs):
@@ -200,7 +200,7 @@ class ExtendedImageField(models.ImageField):
 
             # Handle the filename because the image will be converted to PNG
             filename = path.splitext(path.split(data.name)[-1])[0]
-            filename = "%s.png" % filename
+            filename = '{}.png'.format(filename)
 
             # Regenerate a File object
             data = SimpleUploadedFile(filename, content)
@@ -229,27 +229,35 @@ try:
     # which means that the no_rendered_field arg will always be True in a frozen MarkupTextField,
     # which is what we want. The use of this flag will tell South not to make the _rendered
     # fields again.
-    add_introspection_rules(rules=[((MarkupTextField,),
-                                    [],
-                                    {'no_rendered_field': ('add_rendered_field',
-                                                           {})})],
-                            patterns=['^machina\.models\.fields\.MarkupTextField'])
+    add_introspection_rules(
+        rules=[
+            (
+                (MarkupTextField, ),
+                [],
+                {
+                    'no_rendered_field': ('add_rendered_field', {}),
+                },
+            ),
+        ],
+        patterns=['^machina\.models\.fields\.MarkupTextField'])
 
     # ExtendedImageField
-    add_introspection_rules([
-        (
-            [ExtendedImageField],
-            [],
-            {
-                "width": ["width", {"default": None}],
-                "height": ["height", {"default": None}],
-                "min_width": ["min_width", {"default": None}],
-                "max_width": ["max_width", {"default": None}],
-                "min_height": ["min_height", {"default": None}],
-                "max_height": ["max_height", {"default": None}],
-                "max_upload_size": ["max_upload_size", {"default": 0}],
-            },
-        ),
-    ], ['^machina\.models\.fields\.ExtendedImageField'])
+    add_introspection_rules(
+        rules=[
+            (
+                (ExtendedImageField, ),
+                [],
+                {
+                    'width': ['width', {'default': None}],
+                    'height': ['height', {'default': None}],
+                    'min_width': ['min_width', {'default': None}],
+                    'max_width': ['max_width', {'default': None}],
+                    'min_height': ['min_height', {'default': None}],
+                    'max_height': ['max_height', {'default': None}],
+                    'max_upload_size': ['max_upload_size', {'default': 0}],
+                },
+            ),
+        ],
+        patterns=['^machina\.models\.fields\.ExtendedImageField'])
 except ImportError:  # pragma: no cover
     pass
