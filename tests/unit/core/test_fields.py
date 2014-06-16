@@ -8,6 +8,7 @@ except ImportError:
     pass
 
 # Third party imports
+from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
@@ -84,6 +85,39 @@ class TestMarkupTextField(TestCase):
         del machina_settings.MACHINA_MARKUP_LANGUAGE
         with self.assertRaises(ImproperlyConfigured):
             reload(fields)
+
+    def test_should_use_a_default_text_input_widget_with_formfields(self):
+        # Setup
+        class TestableForm(forms.ModelForm):
+            class Meta:
+                model = TestableModel
+        # Run
+        form = TestableForm()
+        # Check
+        self.assertTrue(isinstance(form.fields['content'].widget, forms.Textarea))
+
+    def test_can_use_a_custom_form_widget(self):
+        # Setup
+        machina_settings.MACHINA_MARKUP_WIDGET = 'django.forms.HiddenInput'
+
+        class TestableForm(forms.ModelForm):
+            class Meta:
+                model = TestableModel
+        # Run
+        form = TestableForm()
+        # Check
+        self.assertTrue(isinstance(form.fields['content'].widget, forms.HiddenInput))
+        machina_settings.MACHINA_MARKUP_WIDGET = None
+
+    def test_should_not_allow_non_accessible_custom_form_widgets(self):
+        # Setup
+        machina_settings.MACHINA_MARKUP_WIDGET = 'it.will.fail'
+        # Run & check
+        with self.assertRaises(ImproperlyConfigured):
+            class TestableForm(forms.ModelForm):
+                class Meta:
+                    model = TestableModel
+        machina_settings.MACHINA_MARKUP_WIDGET = None
 
 
 class TestExtendedImageField(TestCase):
