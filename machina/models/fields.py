@@ -11,7 +11,7 @@ from django.db import models
 from django.db.models import signals
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
-from django.utils.encoding import force_str
+from django.utils.encoding import smart_str
 from django.utils.functional import curry
 from django.utils.safestring import mark_safe
 from django.utils.safestring import SafeData
@@ -29,7 +29,7 @@ def _get_markup_widget():
     dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
     try:
         module, widget = dotted_path.rsplit('.', 1)
-        module, widget = force_str(module), force_str(widget)
+        module, widget = smart_str(module), smart_str(widget)
         widget = getattr(__import__(module, {}, {}, [widget]), widget)
         return widget
     except ImportError as e:
@@ -40,7 +40,7 @@ def _get_markup_widget():
 
 def _get_render_function(dotted_path, kwargs):
     module, func = dotted_path.rsplit('.', 1)
-    module, func = force_str(module), force_str(func)
+    module, func = smart_str(module), smart_str(func)
     func = getattr(__import__(module, {}, {}, [func]), func)
     return curry(func, **kwargs)
 
