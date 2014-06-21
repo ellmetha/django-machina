@@ -82,6 +82,9 @@ class BaseClientTestCase(BaseUnitTestCase):
     def assertIsRedirect(self, response):
         self.assertTrue(response.status_code in (302, 301))
 
+    def assertIsForbidden(self, response):
+        self.assertEqual(response.status_code, 403)
+
 
 class AdminClientTestCase(BaseClientTestCase):
     is_staff = True
