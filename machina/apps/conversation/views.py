@@ -162,6 +162,9 @@ class TopicEditMixin(PostEditMixin):
             # Handles the preview of the poll
             if hasattr(self, 'poll_preview'):
                 context['poll_preview'] = self.poll_preview
+                context['poll_options_previews'] = filter(
+                    lambda f: f['text'].value() and not f['DELETE'].value(),
+                    context['poll_option_formset'].forms)
 
         return context
 
@@ -174,7 +177,7 @@ class TopicEditMixin(PostEditMixin):
                 poll_option_formset = self.poll_option_formset_class(data=self.request.POST)
                 if poll_option_formset.is_valid():
                     save_poll_option_formset = not preview
-                    self.poll_preview = True
+                    self.poll_preview = preview
                 else:
                     save_poll_option_formset = False
                     errors = list()
