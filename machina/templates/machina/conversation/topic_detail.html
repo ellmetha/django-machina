@@ -24,10 +24,8 @@
     </div>
     <div class="row">
     {% for post in posts %}
-        {% if forloop.first and post.is_topic_head and post.topic.poll %}
-            {% with post.topic.poll as poll %}
-                {% include "machina/conversation/polls/poll_detail.html" %}
-            {% endwith %}
+        {% if forloop.first and post.is_topic_head and poll %}
+            {% include "machina/conversation/polls/poll_detail.html" %}
         {% endif %}
         <div id="{{ post.id }}" class="panel panel-default post">
             <div class="panel-body">
