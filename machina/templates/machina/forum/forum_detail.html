@@ -34,7 +34,9 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
-                <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+                {% if topics|length > 0 %}
+                    <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+                {% endif %}
             </div>
         </div>
         {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
@@ -53,7 +55,9 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
-                <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+                {% if topics|length > 0 %}
+                    <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+                {% endif %}
             </div>
         </div>
     {% endif %}
