@@ -15,6 +15,7 @@ from django.views.generic import View
 # Local application / specific library imports
 from machina.core.loading import get_class
 from machina.core.loading import get_classes
+from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
 ForumReadTrack, TopicReadTrack = get_classes('tracking.models',
@@ -58,22 +59,26 @@ class MarkForumsReadView(View):
         return super(MarkForumsReadView, self).dispatch(request, *args, **kwargs)
 
 
-class MarkTopicsReadView(View):
+class MarkTopicsReadView(PermissionRequiredMixin, View):
     success_message = _('Topics have been marked read.')
+    permission_required = ['can_read_forum', ]
 
     def get(self, request, pk):
         forum = get_object_or_404(Forum, pk=pk)
 
-        if perm_handler.can_read_forum(forum, request.user):
-            # Update the track related to the considered forum to the current date
-            forum_track = ForumReadTrack.objects.get_or_create(forum=forum, user=request.user)[0]
-            forum_track.save()
-            # Delete all the topic tracks associated with this forum
-            TopicReadTrack.objects.filter(topic__forum=forum, user=request.user).delete()
+        # Update the track related to the considered forum to the current date
+        forum_track = ForumReadTrack.objects.get_or_create(forum=forum, user=request.user)[0]
+        forum_track.save()
+        # Delete all the topic tracks associated with this forum
+        TopicReadTrack.objects.filter(topic__forum=forum, user=request.user).delete()
 
-            messages.success(request, self.success_message)
-            redirect_to = reverse('forum:forum', kwargs={'pk': pk})
-        else:
-            redirect_to = reverse('forum:index')
+        messages.success(request, self.success_message)
+        redirect_to = reverse('forum:forum', kwargs={'pk': pk})
 
         return HttpResponseRedirect(redirect_to)
+
+    def get_controlled_object(self):
+        """
+        Return the considered forum in order to allow permission checks.
+        """
+        return Forum.objects.get(pk=self.kwargs['pk'])
