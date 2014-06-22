@@ -1531,6 +1531,12 @@
 .post-edit form #poll_formset .poll-option-form div.checkbox {
   margin-top: 6px;
 }
+.post-delete {
+  margin-bottom: 8px;
+}
+.post-delete .warning-message {
+  margin-bottom: 10px;
+}
 .pagination-block {
   padding-right: 0;
   text-align: right;
