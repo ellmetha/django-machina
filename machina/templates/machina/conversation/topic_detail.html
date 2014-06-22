@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="span12">
+        <div>
             <h1>{{ topic.subject }}</h1>
         </div>
     </div>
@@ -36,7 +36,7 @@
                             <a href="{% if post.is_topic_head %}{% url 'conversation:topic-update' forum.pk topic.pk %}{% else %}{% url 'conversation:post-update' forum.pk topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
                         {% endif %}
                         {% if post|can_be_deleted_by:user %}
-                            <a href="#" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                            <a href="{% url 'conversation:post-delete' forum.pk topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                         {% endif %}
                         <a href="#" class="btn btn-primary btn-xs" title="{% trans "Quote" %}"><i class="fa fa-quote-left"></i>&nbsp;{% trans "Quote" %}</a>
                     </div>

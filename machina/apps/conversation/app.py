@@ -20,6 +20,7 @@ class BaseConversationApp(Application):
     topic_update_view = views.TopicUpdateView
     post_create_view = views.PostCreateView
     post_update_view = views.PostUpdateView
+    post_delete_view = views.PostDeleteView
 
     def get_urls(self):
         urls = super(BaseConversationApp, self).get_urls()
@@ -30,6 +31,7 @@ class BaseConversationApp(Application):
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/update/$', self.topic_update_view.as_view(), name='topic-update'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
             url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$', self.post_update_view.as_view(), name='post-update'),
+            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$', self.post_delete_view.as_view(), name='post-delete'),
         ]
         return patterns('', *urls)
 

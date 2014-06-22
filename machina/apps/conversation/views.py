@@ -10,6 +10,7 @@ from django.forms.forms import NON_FIELD_ERRORS
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
@@ -325,3 +326,38 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
 
     def perform_permissions_check(self, user, obj, perms):
         return perm_handler.can_edit_post(obj, user)
+
+
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
+    template_name = 'conversation/post_delete.html'
+    success_message = _('This message has been deleted successfully.')
+    permission_required = []  # Defined in the 'perform_permissions_check()' method
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDeleteView, self).get_context_data(**kwargs)
+
+        # Append the topic and the forum associated with the post being deleted
+        # to the context
+        post = self.get_object()
+        context['topic'] = post.topic
+        context['forum'] = post.topic.forum
+
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse('conversation:topic', kwargs={
+            'forum_pk': self.kwargs['forum_pk'],
+            'pk': self.kwargs['topic_pk']})
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object()
+
+    def perform_permissions_check(self, user, obj, perms):
+        return perm_handler.can_delete_post(obj, user)
