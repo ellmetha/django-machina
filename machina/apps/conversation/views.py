@@ -347,6 +347,12 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
+        post = Post.objects.get(pk=self.kwargs['pk'])
+
+        if post.is_topic_head and post.is_topic_tail:
+            return reverse('forum:forum', kwargs={
+                'pk': self.kwargs['forum_pk']})
+
         return reverse('conversation:topic', kwargs={
             'forum_pk': self.kwargs['forum_pk'],
             'pk': self.kwargs['topic_pk']})
