@@ -82,3 +82,7 @@ class MarkTopicsReadView(PermissionRequiredMixin, View):
         Return the considered forum in order to allow permission checks.
         """
         return Forum.objects.get(pk=self.kwargs['pk'])
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MarkTopicsReadView, self).dispatch(request, *args, **kwargs)
