@@ -12,6 +12,7 @@
 				<div class="pull-right">
 					<a href="{% url 'tracking:mark-all-forums-read' %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark forums read" %}</a>
 				</div>
+				<a href="{% url 'tracking:unread-topics' %}" class="btn btn-link">{% trans "View unread topics" %}</a>
 			{% endif %}
 		</div>
 	</div>

@@ -18,13 +18,15 @@
                 </table>
             </div>
             <div class="panel-body">
-                {% get_unread_topics topics request.user as unread_topics %}
+                {% if not force_all_unread %}
+                    {% get_unread_topics topics request.user as unread_topics %}
+                {% endif %}
                 <table class="table">
                     {% for topic in topics %}
                         <tr>
-                            <td class="topic-icon {% if topic in unread_topics %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i></td>
+                            <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i></td>
                             <td class="topic-name">
-                                <a href="{% url 'conversation:topic' forum_pk=forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
+                                <a href="{% url 'conversation:topic' forum_pk=topic.forum.pk pk=topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                                 <div>
                                     <div class="topic-inline-pagination pull-right">
                                         {% topic_pages_inline_list topic %}

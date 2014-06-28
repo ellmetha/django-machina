@@ -1337,7 +1337,12 @@
   content: "\f196";
 }
 .forumlist-top-controls {
+  padding-left: 0;
   padding-right: 0;
+}
+.forumlist-top-controls p {
+  margin: 0;
+  padding: 6px 12px;
 }
 .forumlist .panel-heading {
   padding-top: 10px;
@@ -1439,6 +1444,10 @@
   padding-top: 3px;
   padding-left: 0;
   padding-bottom: 9px;
+}
+.forum-actions-block p {
+  margin: 0;
+  padding: 6px 12px;
 }
 .topiclist {
   margin-bottom: 6px;

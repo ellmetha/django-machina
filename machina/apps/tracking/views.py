@@ -10,9 +10,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
 from django.views.generic import View
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.core.loading import get_classes
 from machina.views.mixins import PermissionRequiredMixin
@@ -20,9 +22,13 @@ from machina.views.mixins import PermissionRequiredMixin
 Forum = get_model('forum', 'Forum')
 ForumReadTrack, TopicReadTrack = get_classes('tracking.models',
                                              ['ForumReadTrack', 'TopicReadTrack'])
+Topic = get_model('conversation', 'Topic')
 
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
+
+TrackingHandler = get_class('tracking.handler', 'TrackingHandler')
+track_handler = TrackingHandler()
 
 
 class MarkForumsReadView(View):
@@ -86,3 +92,20 @@ class MarkTopicsReadView(PermissionRequiredMixin, View):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(MarkTopicsReadView, self).dispatch(request, *args, **kwargs)
+
+
+class UnreadTopicsView(ListView):
+    template_name = 'tracking/unread_topic_list.html'
+    context_object_name = 'topics'
+    paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
+
+    def get_queryset(self):
+        forums = perm_handler.forum_list_filter(
+            Forum.objects.all(), self.request.user)
+        topics = Topic.objects.filter(forum__in=forums)
+        topics_pk = map(lambda t: t.pk, track_handler.get_unread_topics(topics, self.request.user))
+        return Topic.objects.filter(pk__in=topics_pk).order_by('-updated')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UnreadTopicsView, self).dispatch(request, *args, **kwargs)
