@@ -16,9 +16,11 @@
     {% if sub_forums %}
         <div class="row">
             <div class="forumlist-top-controls col-xs-12">
-                <div class="pull-right">
-                    <a href="{% url 'tracking:mark-subforums-read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <div class="pull-right">
+                        <a href="{% url 'tracking:mark-subforums-read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         {% forum_list sub_forums request %}
@@ -34,7 +36,7 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
-                {% if topics|length > 0 %}
+                {% if topics|length > 0 and request.user.is_authenticated %}
                     <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
                 {% endif %}
             </div>
@@ -55,7 +57,7 @@
                 {% with "pagination-sm" as pagination_size %}
                     {% include "machina/partials/pagination.html" %}
                 {% endwith %}
-                {% if topics|length > 0 %}
+                {% if topics|length > 0 and request.user.is_authenticated %}
                     <a href="{% url 'tracking:mark-topics-read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
                 {% endif %}
             </div>
