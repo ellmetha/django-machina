@@ -5,6 +5,7 @@
 from django.conf.urls import include
 from django.conf.urls import patterns
 from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.apps.conversation import views
@@ -25,13 +26,13 @@ class BaseConversationApp(Application):
     def get_urls(self):
         urls = super(BaseConversationApp, self).get_urls()
         urls += [
-            url(r'^topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/$', self.topic_view.as_view(), name='topic'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/create/$', self.topic_create_view.as_view(), name='topic-create'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/update/$', self.topic_update_view.as_view(), name='topic-update'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/post/create/$', self.post_create_view.as_view(), name='post-create'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$', self.post_update_view.as_view(), name='post-update'),
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$', self.post_delete_view.as_view(), name='post-delete'),
+            url(_(r'^topic/(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/create/$'), self.topic_create_view.as_view(), name='topic-create'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/update/$'), self.topic_update_view.as_view(), name='topic-update'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/post/create/$'), self.post_create_view.as_view(), name='post-create'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$'), self.post_update_view.as_view(), name='post-update'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$'), self.post_delete_view.as_view(), name='post-delete'),
         ]
         return patterns('', *urls)
 
@@ -43,7 +44,7 @@ class PollsApp(Application):
     def get_urls(self):
         urls = super(PollsApp, self).get_urls()
         urls += [
-            url(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/',
+            url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/'),
                 include(self.polls_app.urls)),
         ]
         return patterns('', *urls)

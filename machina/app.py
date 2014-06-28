@@ -5,6 +5,7 @@
 from django.conf.urls import include
 from django.conf.urls import patterns
 from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.core.app import Application
@@ -22,7 +23,7 @@ class BoardApp(Application):
         urls = [
             url(r'', include(self.forum_app.urls)),
             url(r'', include(self.conversation_app.urls)),
-            url(r'^tracking/', include(self.tracking_app.urls)),
+            url(_(r'^tracking/'), include(self.tracking_app.urls)),
         ]
         return patterns('', *urls)
 

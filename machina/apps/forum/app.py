@@ -4,6 +4,7 @@
 # Third party imports
 from django.conf.urls import patterns
 from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.apps.forum import views
@@ -19,7 +20,7 @@ class ForumApp(Application):
     def get_urls(self):
         urls = [
             url(r'^$', self.index_view.as_view(), name='index'),
-            url(r'^forum/(?P<pk>\d+)/$', self.forum_view.as_view(), name='forum'),
+            url(_(r'^forum/(?P<pk>\d+)/$'), self.forum_view.as_view(), name='forum'),
         ]
         return patterns('', *urls)
 
