@@ -47,7 +47,11 @@
                     {% empty %}
                         <tr>
                             <td>
-                                {% trans "There are no topics in this forum." %}
+                                {% if empty_message %}
+                                    {{ empty_message }}
+                                {% else %}
+                                    {% trans "There are no topics in this forum." %}
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
