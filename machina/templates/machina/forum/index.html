@@ -8,9 +8,11 @@
 {% block content %}
 	<div class="row">
 		<div class="forumlist-top-controls col-xs-12">
-			<div class="pull-right">
-				<a href="{% url 'tracking:mark-all-forums-read' %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark forums read" %}</a>
-			</div>
+			{% if request.user.is_authenticated %}
+				<div class="pull-right">
+					<a href="{% url 'tracking:mark-all-forums-read' %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark forums read" %}</a>
+				</div>
+			{% endif %}
 		</div>
 	</div>
     {% forum_list forums request %}
