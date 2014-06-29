@@ -30,8 +30,6 @@ LOCALE_PATHS = (
     os.path.join(PROJECT_PATH, 'src/locale/example_project'),
 )
 
-SITE_ID = 1
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -110,6 +108,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'example_project.urls'
@@ -129,7 +128,6 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     # Third party apps
-    'south',
     'pipeline',
     'crispy_forms',
     'guardian',

@@ -14,8 +14,13 @@ from tests.settings import configure
 
 
 def run(verbosity, *args):
-    from django_nose import NoseTestSuiteRunner
-    runner = NoseTestSuiteRunner(verbosity=verbosity)
+    try:
+        from django.test.runner import DiscoverRunner
+    except ImportError:
+        from django_nose import NoseTestSuiteRunner
+        runner = NoseTestSuiteRunner(verbosity=verbosity)
+    else:
+        runner = DiscoverRunner(verbosity=verbosity)
     if not args:
         args = ['tests']
     num_failures = runner.run_tests(args)
@@ -52,6 +57,11 @@ if __name__ == '__main__':
 
     # Configure Django and machina
     configure()
+    if hasattr(django, 'setup'):
+        # As outlined in the Django 1.7 release notes, it is now required
+        # to explicitly initialize Django at the beginning if any standalone
+        # script in order to properly support the Django "app registry".
+        django.setup()
 
     # To infinity... and beyond!
     run(verbosity, *args)

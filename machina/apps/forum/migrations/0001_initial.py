@@ -1,70 +1,49 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import mptt.fields
+import machina.models.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Forum'
-        db.create_table(u'forum_forum', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True, db_index=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('parent', self.gf('mptt.fields.TreeForeignKey')(blank=True, related_name=u'children', null=True, to=orm['forum.Forum'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('description', self.gf('machina.models.fields.MarkupTextField')(blank=True, null=True, no_rendered_field=True)),
-            ('image', self.gf('machina.models.fields.ExtendedImageField')(max_length=100, null=True, blank=True)),
-            ('link', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
-            ('link_redirects', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
-            ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('topics_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('real_topics_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('link_redirects_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('display_sub_forum_list', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            (u'lft', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            (u'rght', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            (u'tree_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            (u'level', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            (u'_description_rendered', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'forum', ['Forum'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'Forum'
-        db.delete_table(u'forum_forum')
-
-
-    models = {
-        u'forum.forum': {
-            'Meta': {'ordering': "[u'tree_id', u'lft']", 'object_name': 'Forum'},
-            u'_description_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('machina.models.fields.MarkupTextField', [], {'blank': 'True', 'null': 'True', u'no_rendered_field': 'True'}),
-            'display_sub_forum_list': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('machina.models.fields.ExtendedImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'db_index': 'True'}),
-            u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'link_redirects': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'link_redirects_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "u'children'", 'null': 'True', 'to': u"orm['forum.Forum']"}),
-            'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'real_topics_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
-            u'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'topics_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
-            u'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
-        }
-    }
-
-    complete_apps = ['forum']
+    operations = [
+        migrations.CreateModel(
+            name='Forum',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('is_active', models.BooleanField(default=True, db_index=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Creation date')),
+                ('updated', models.DateTimeField(auto_now=True, verbose_name='Update date')),
+                ('name', models.CharField(max_length=100, verbose_name='Name')),
+                ('description', machina.models.fields.MarkupTextField(no_rendered_field=True, null=True, verbose_name='Description', blank=True)),
+                ('image', machina.models.fields.ExtendedImageField(upload_to='machina/forum_images', null=True, verbose_name='Forum image', blank=True)),
+                ('link', models.URLField(null=True, verbose_name='Forum link', blank=True)),
+                ('link_redirects', models.BooleanField(default=False, help_text='Records the number of times a forum link was clicked', verbose_name='Track link redirects count')),
+                ('type', models.PositiveSmallIntegerField(db_index=True, verbose_name='Forum type', choices=[(0, 'Default forum'), (1, 'Category forum'), (2, 'Link forum')])),
+                ('posts_count', models.PositiveIntegerField(default=0, verbose_name='Number of posts', editable=False, blank=True)),
+                ('topics_count', models.PositiveIntegerField(default=0, verbose_name='Number of topics', editable=False, blank=True)),
+                ('real_topics_count', models.PositiveIntegerField(default=0, verbose_name='Number of topics (includes unapproved topics)', editable=False, blank=True)),
+                ('link_redirects_count', models.PositiveIntegerField(default=0, verbose_name='Track link redirects count', editable=False, blank=True)),
+                ('display_sub_forum_list', models.BooleanField(default=True, help_text='Displays this forum on the legend of its parent-forum (sub forums list)', verbose_name='Display in parent-forums legend')),
+                ('lft', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('level', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('_description_rendered', models.TextField(null=True, editable=False, blank=True)),
+                ('parent', mptt.fields.TreeForeignKey(verbose_name='Parent', blank=True, to='forum.Forum', null=True)),
+            ],
+            options={
+                'ordering': ['tree_id', 'lft'],
+                'abstract': False,
+                'verbose_name': 'Forum',
+                'verbose_name_plural': 'Forums',
+                'permissions': [('can_see_forum', 'Can see forum'), ('can_read_forum', 'Can read forum'), ('can_start_new_topics', 'Can start new topics'), ('can_reply_to_topics', 'Can reply to topics'), ('can_post_announcements', 'Can post announcements'), ('can_post_stickies', 'Can post stickies'), ('can_delete_own_posts', 'Can delete own posts'), ('can_edit_own_posts', 'Can edit own posts'), ('can_post_without_approval', 'Can post without approval'), ('can_create_poll', 'Can create poll'), ('can_vote_in_polls', 'Can vote in polls'), ('can_attach_file', 'Can attach file'), ('can_download_file', 'Can download file'), ('can_close_topics', 'Can close topics'), ('can_move_topics', 'Can move topics'), ('can_edit_posts', 'Can edit posts'), ('can_delete_posts', 'Can delete posts'), ('can_move_posts', 'Can move posts')],
+            },
+            bases=(models.Model,),
+        ),
+    ]

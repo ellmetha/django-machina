@@ -2,7 +2,7 @@
 
 # Standard library imports
 # Third party imports
-from django.conf import settings
+from django import VERSION
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -35,11 +35,11 @@ class TestClassLoadingFunctions(TestCase):
         with self.assertRaises(ClassNotFoundError):
             get_classes('forum.models', 'Foo')
 
-    def test_raises_in_case_of_import_error(self):
-        # Setup
-        installed_apps = settings.INSTALLED_APPS
-        installed_apps.append('it.is.bad')
+    def test_raises_in_case_of_import_error_with_django_less_than_1_dot_7(self):
         # Run & check
-        with override_settings(INSTALLED_APPS=installed_apps):
-            with self.assertRaises(AppNotFoundError):
-                get_class('bad', 'Foo')
+        if VERSION[:2] < (1, 7):
+            # We do not check anything with Django 1.7 or greater because any
+            # dummy installed app will be detected by the Django app registry
+            with override_settings(INSTALLED_APPS=('it.is.bad', )):
+                with self.assertRaises(AppNotFoundError):
+                    get_class('bad', 'Foo')
