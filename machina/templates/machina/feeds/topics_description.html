@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{{ obj.first_post.content.rendered|safe }}
+<br /><br />
+<i>{% trans "Posted by" %} {{ obj.poster.username }} - {{ obj.created }}</i>
