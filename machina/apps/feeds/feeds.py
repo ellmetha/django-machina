@@ -5,6 +5,7 @@
 from django.contrib.syndication.views import Feed
 from django.db.models import get_model
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
@@ -28,9 +29,18 @@ class LastTopicsFeed(Feed):
     description_template = 'feeds/topics_description.html'
 
     def get_object(self, request, *args, **kwargs):
+        forum_pk = kwargs.get('forum_pk', None)
+        descendants = kwargs.get('descendants', None)
         self.user = request.user
-        self.forums = perm_handler.forum_list_filter(
-            Forum.objects.all(), request.user)
+
+        if forum_pk:
+            forum = get_object_or_404(Forum, pk=forum_pk)
+            forums_qs = forum.get_descendants(include_self=True) if descendants else [forum, ]
+            self.forums = perm_handler.forum_list_filter(
+                forums_qs, request.user)
+        else:
+            self.forums = perm_handler.forum_list_filter(
+                Forum.objects.all(), request.user)
 
     def items(self):
         return Topic.objects.filter(forum__in=self.forums).order_by('-updated')

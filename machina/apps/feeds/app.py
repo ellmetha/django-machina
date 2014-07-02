@@ -18,7 +18,9 @@ class FeedsApp(Application):
 
     def get_urls(self):
         urls = [
-            url(_(r'^topics/$'), self.latest_topics_feed()),
+            url(_(r'^topics/$'), self.latest_topics_feed(), name='latest-topics'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topics/$'), self.latest_topics_feed(), name='forum-latest-topics'),
+            url(_(r'^forum/(?P<forum_pk>\d+)/topics/all/$'), self.latest_topics_feed(), {'descendants': True}, name='forum-latest-topics-with-descendants'),
         ]
         return patterns('', *urls)
 
