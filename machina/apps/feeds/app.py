@@ -7,14 +7,14 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.apps.feeds import feeds
 from machina.core.app import Application
+from machina.core.loading import get_class
 
 
 class FeedsApp(Application):
     name = 'forum'
 
-    latest_topics_feed = feeds.LastTopicsFeed
+    latest_topics_feed = get_class('feeds.feeds', 'LastTopicsFeed')
 
     def get_urls(self):
         urls = [

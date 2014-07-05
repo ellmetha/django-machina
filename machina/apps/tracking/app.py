@@ -7,16 +7,16 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.apps.tracking import views
 from machina.core.app import Application
+from machina.core.loading import get_class
 
 
 class TrackingApp(Application):
     name = 'tracking'
 
-    mark_forums_read_view = views.MarkForumsReadView
-    mark_topics_read_view = views.MarkTopicsReadView
-    unread_topics_view = views.UnreadTopicsView
+    mark_forums_read_view = get_class('tracking.views', 'MarkForumsReadView')
+    mark_topics_read_view = get_class('tracking.views', 'MarkTopicsReadView')
+    unread_topics_view = get_class('tracking.views', 'UnreadTopicsView')
 
     def get_urls(self):
         urls = [

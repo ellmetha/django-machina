@@ -6,14 +6,14 @@ from django.conf.urls import patterns
 from django.conf.urls import url
 
 # Local application / specific library imports
-from machina.apps.conversation.polls import views
 from machina.core.app import Application
+from machina.core.loading import get_class
 
 
 class PollsApp(Application):
     name = None
 
-    poll_vote_view = views.TopicPollVoteView
+    poll_vote_view = get_class('conversation.polls.views', 'TopicPollVoteView')
 
     def get_urls(self):
         urls = [

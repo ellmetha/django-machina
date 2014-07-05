@@ -8,20 +8,20 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.apps.conversation import views
 from machina.apps.conversation.polls.app import application as polls_app
 from machina.core.app import Application
+from machina.core.loading import get_class
 
 
 class BaseConversationApp(Application):
     name = 'conversation'
 
-    topic_view = views.TopicView
-    topic_create_view = views.TopicCreateView
-    topic_update_view = views.TopicUpdateView
-    post_create_view = views.PostCreateView
-    post_update_view = views.PostUpdateView
-    post_delete_view = views.PostDeleteView
+    topic_view = get_class('conversation.views', 'TopicView')
+    topic_create_view = get_class('conversation.views', 'TopicCreateView')
+    topic_update_view = get_class('conversation.views', 'TopicUpdateView')
+    post_create_view = get_class('conversation.views', 'PostCreateView')
+    post_update_view = get_class('conversation.views', 'PostUpdateView')
+    post_delete_view = get_class('conversation.views', 'PostDeleteView')
 
     def get_urls(self):
         urls = super(BaseConversationApp, self).get_urls()

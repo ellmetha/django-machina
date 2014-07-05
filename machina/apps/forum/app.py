@@ -7,15 +7,15 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.apps.forum import views
 from machina.core.app import Application
+from machina.core.loading import get_class
 
 
 class ForumApp(Application):
     name = 'forum'
 
-    index_view = views.IndexView
-    forum_view = views.ForumView
+    index_view = get_class('forum.views', 'IndexView')
+    forum_view = get_class('forum.views', 'ForumView')
 
     def get_urls(self):
         urls = [
