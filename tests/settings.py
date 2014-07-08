@@ -51,6 +51,7 @@ TEST_SETTINGS = {
         'django.contrib.sites',
         'mptt',
         'guardian',
+        'haystack',
         'bootstrap3',
         'precise_bbcode',
         'tests',
@@ -71,6 +72,11 @@ TEST_SETTINGS = {
     'LOGIN_REDIRECT_URL': '/accounts/',
     'STATIC_URL': '/static/',
     'ANONYMOUS_USER_ID': -1,
+    'HAYSTACK_CONNECTIONS': {
+        'default': {
+            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        },
+    },
 }
 
 
