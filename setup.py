@@ -36,6 +36,9 @@ setup(
         # Django-guardian is used to provide a powerful per-forum object permission system
         'django-guardian>=1.2,<1.3',
 
+        # Machina uses Django-haystack to provide search support
+        'django-haystack>=2.1.0',
+
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
 

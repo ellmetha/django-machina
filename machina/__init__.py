@@ -13,6 +13,7 @@ MACHINA_VANILLA_APPS = [
     'machina.apps.conversation',
     'machina.apps.conversation.polls',
     'machina.apps.feeds',
+    'machina.apps.search',
     'machina.apps.tracking',
     'machina.apps.member',
     'machina.apps.permission',

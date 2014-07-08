@@ -18,6 +18,7 @@ class BoardApp(Application):
     forum_app = get_class('forum.app', 'application')
     conversation_app = get_class('conversation.app', 'application')
     feeds_app = get_class('feeds.app', 'application')
+    search_app = get_class('search.app', 'application')
     tracking_app = get_class('tracking.app', 'application')
 
     def get_urls(self):
@@ -25,6 +26,7 @@ class BoardApp(Application):
             url(r'', include(self.forum_app.urls)),
             url(r'', include(self.conversation_app.urls)),
             url(_(r'^feeds/'), include(self.feeds_app.urls)),
+            url(_(r'^search/'), include(self.search_app.urls)),
             url(_(r'^tracking/'), include(self.tracking_app.urls)),
         ]
         return patterns('', *urls)

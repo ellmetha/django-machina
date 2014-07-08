@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'guardian',
     'mptt',
+    'haystack',
     'bootstrap3',
 
     'precise_bbcode',
@@ -164,6 +165,16 @@ PIPELINE_COMPILERS = (
 # Crispy forms settings
 # --------------------------------------
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+# Haystack settings
+# --------------------------------------
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_PATH, 'whoosh_index'),
+    },
+}
 
 
 # Specific machina settings

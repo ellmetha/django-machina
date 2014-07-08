@@ -8,6 +8,7 @@ __pycache__
 dist
 docs/_build/
 public/
+whoosh_index/
 .tox
 
 # If pipeline is used, don't commit generated CSS files
