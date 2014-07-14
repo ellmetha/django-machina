@@ -42,13 +42,30 @@ def get_classes(module_label, classnames):
         base_package = app_module_path.rsplit('.' + app_label, 1)[0]
         module_path = '{}.{}'.format(base_package, module_label)
 
-    # Try to import this module
+    # Try to import this module from the related app that is specified
+    # in the Django settings.
+    local_imported_module = _import_module(module_path)
+
+    # If the previous import failed and if the module we tried to import
+    # was not located inside the machina vanilla apps, try to import it
+    # from the corresponding machina app.
+    machina_imported_module = None
+    if local_imported_module is None and not app_module_path.startwith('machina.apps'):
+        machina_imported_module = _import_module('{}.{}'.format('machina.apps', module_label))
+
+    if local_imported_module is None and machina_imported_module is None:
+        raise AppNotFoundError('Error importing \'{}\''.format(module_path))
+
+    imported_module = local_imported_module or machina_imported_module
+    return _pick_up_classes(imported_module, classnames)
+
+
+def _import_module(module_path):
     try:
         imported_module = import_module(module_path)
-    except ImportError as e:
-        raise AppNotFoundError('Error importing \'{}\': {}'.format(module_path, e))
-
-    return _pick_up_classes(imported_module, classnames)
+        return imported_module
+    except ImportError:
+        return None
 
 
 def _pick_up_classes(module, classnames):
@@ -73,7 +90,7 @@ def _get_app_module_path(module_label):
     Given a module label, loop over the apps specified in the INSTALLED_APPS
     to find the corresponding application module path.
     """
-    app_name = module_label.rsplit(".", 1)[0]
+    app_name = module_label.rsplit('.', 1)[0]
     for app in settings.INSTALLED_APPS:
         if app.endswith('.' + app_name) or app == app_name:
             return app
