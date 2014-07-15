@@ -46,23 +46,24 @@ def get_classes(module_label, classnames):
     # in the Django settings.
     local_imported_module = _import_module(module_path)
 
-    # If the previous import failed and if the module we tried to import
-    # was not located inside the machina vanilla apps, try to import it
-    # from the corresponding machina app.
+    # If the module we tried to import is not located inside the machina
+    # vanilla apps, try to import it from the corresponding machina app.
     machina_imported_module = None
-    if local_imported_module is None and not app_module_path.startwith('machina.apps'):
+    if not app_module_path.startswith('machina.apps'):
         machina_imported_module = _import_module('{}.{}'.format('machina.apps', module_label))
 
     if local_imported_module is None and machina_imported_module is None:
         raise AppNotFoundError('Error importing \'{}\''.format(module_path))
 
-    imported_module = local_imported_module or machina_imported_module
-    return _pick_up_classes(imported_module, classnames)
+    # Any local module is prioritized over the corresponding machina module
+    imported_modules = [m for m in (local_imported_module, machina_imported_module) if
+                        m is not None]
+    return _pick_up_classes(imported_modules, classnames)
 
 
 def _import_module(module_path):
     """
-    Import the given Python module path.
+    Tries to import the given Python module path.
     """
     try:
         imported_module = import_module(module_path)
@@ -71,19 +72,22 @@ def _import_module(module_path):
         return None
 
 
-def _pick_up_classes(module, classnames):
+def _pick_up_classes(modules, classnames):
     """
     Given a list of class names to retrieve, try to fetch them from the specified
-    module.
-    Returns the list of fetched classes.
+    list of modules.
+    Returns the list of the fetched classes.
     """
     klasses = []
     for classname in classnames:
         klass = None
-        if hasattr(module, classname):
-            klass = getattr(module, classname)
+        for module in modules:
+            if hasattr(module, classname):
+                klass = getattr(module, classname)
+                break
         if not klass:
-            raise ClassNotFoundError('Error fetching \'{}\' in {}'.format(classname, module.__name__))
+            raise ClassNotFoundError('Error fetching \'{}\' in {}'.format(
+                classname, str([module.__name__ for module in modules])))
         klasses.append(klass)
     return klasses
 
