@@ -61,6 +61,9 @@ def get_classes(module_label, classnames):
 
 
 def _import_module(module_path):
+    """
+    Import the given Python module path.
+    """
     try:
         imported_module = import_module(module_path)
         return imported_module
