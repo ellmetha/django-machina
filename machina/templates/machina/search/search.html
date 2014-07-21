@@ -35,7 +35,14 @@
         <div class="row">
             <div class="panel panel-default resultslist">
                 <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-search"></i> {% trans "Search results" %}</h3>
+                        <h3 class="panel-title">
+                            <i class="fa fa-search"></i>&nbsp;
+                            {% blocktrans count number_of_results=page.object_list|length %}
+                                Your search as returned <b>{{ number_of_results }}</b> result
+                            {% plural %}
+                                Your search as returned <b>{{ number_of_results }}</b> results
+                            {% endblocktrans %}
+                        </h3>
                     </table>
                 </div>
                 <div class="panel-body">
