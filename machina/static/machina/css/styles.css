@@ -1586,3 +1586,36 @@
 .poll .panel-body .poll-content-wrapper .poll-options .checkbox {
   margin: 0;
 }
+.resultslist {
+  margin-bottom: 6px;
+}
+.resultslist .panel-heading {
+  padding-top: 10px;
+  padding-left: 14px;
+  padding-right: 0;
+  padding-bottom: 8px;
+}
+.resultslist .panel-body {
+  padding: 0;
+}
+.resultslist .panel-body table.table {
+  margin: 0 auto;
+}
+.resultslist .panel-body table.table td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  vertical-align: middle !important;
+}
+.resultslist .panel-body table.table td.post-name {
+  width: 40%;
+}
+.resultslist .panel-body table.table td.post-content {
+  width: 60%;
+}
+.resultslist .panel-body .post-name .post-created {
+  font-size: 11px;
+  color: #666;
+}
+.resultslist .panel-body .post-content .highlighted {
+  font-weight: bold;
+}
