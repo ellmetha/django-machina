@@ -1,0 +1,63 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% load highlight %}
+
+{% block sub-title %}{% trans "Search" %}{% endblock sub-title %}
+
+
+{% block content %}
+    <div class="row">
+        <div>
+            <h1>{% trans "Search" %}</h1>
+        </div>
+    </div>
+    {% if not query %}
+        <div class="row">
+            <div>
+                <div class="panel panel-default post-edit">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "Search forums" %}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="get" action="." class="form">
+                            {% with remove_csrf=True %}
+                                {% include 'partials/form_fields.html' %}
+                            {% endwith %}
+                            <div class="form-actions">
+                                <input type="submit" class="btn btn-large btn-primary" value="{% trans "Search" %}" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="panel panel-default resultslist">
+                <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-search"></i> {% trans "Search results" %}</h3>
+                    </table>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        {% for result in page.object_list %}
+                            <tr>
+                                <td class="post-name">
+                                    <a href="{% url 'conversation:topic' forum_pk=result.forum pk=result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
+                                    <div>
+                                        <div class="post-created">
+                                            {% trans "By:" %} <a href="#">{{ result.poster_name }}</a> {% trans "on" %} {{ result.created }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="post-content">
+                                    {% highlight result.text with request.GET.q max_lenght 800 %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
