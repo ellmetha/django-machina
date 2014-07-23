@@ -8,4 +8,6 @@ from haystack import views
 
 
 class FacetedSearchView(views.FacetedSearchView):
-    pass
+    def build_form(self):
+        form = super(self.__class__, self).build_form(form_kwargs={'user': self.request.user})
+        return form
