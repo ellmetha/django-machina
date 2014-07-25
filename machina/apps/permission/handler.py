@@ -61,7 +61,7 @@ class PermissionHandler(object):
 
     def can_read_forum(self, forum, user):
         """
-        Given a forum, checks whther the user can read its content.
+        Given a forum, checks whether the user can read its content.
         """
         return self._perform_basic_permission_check(forum, user, 'can_read_forum')
 
