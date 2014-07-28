@@ -43,6 +43,8 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=_('Parent'))
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
+    slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
+
     description = MarkupTextField(verbose_name=_('Description'), null=True, blank=True)
 
     # A forum can come with an image (eg. a small logo)

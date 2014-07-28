@@ -28,7 +28,7 @@ class ForumAdmin(GuardedModelAdmin):
             'fields': ('type', 'parent', 'name', 'description', 'image',)
         }],
         [_('Forum settings'), {
-            'fields': ('display_sub_forum_list',),
+            'fields': ('slug', 'display_sub_forum_list',),
             'classes': ('collapse',)
         }],
         [_('Link forum settings'), {
@@ -38,6 +38,7 @@ class ForumAdmin(GuardedModelAdmin):
     )
     list_display = ('name', 'type', 'topics_count', 'posts_count',)
     search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name', )}
     # Permissions specific attributes
     obj_perms_manage_template = 'admin/forum/forum/obj_perms_manage.html'
 
