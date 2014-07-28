@@ -15,7 +15,7 @@
                         <table class="table">
                             <tr>
                                 <td class="forum-name-col" colspan="2">
-                                    <h3 class="panel-title"><a href="{% url 'forum:forum' node.id %}" class="brand">{{ node.name }}</a></h3>
+                                    <h3 class="panel-title"><a href="{% url 'forum:forum' node.slug node.id %}" class="brand">{{ node.name }}</a></h3>
                                 </td>
                                 <td class="forum-count-col">{% trans "Topics" %}</td>
                                 <td class="forum-count-col">{% trans "Posts" %}</td>
@@ -51,7 +51,7 @@
                     {% if not node.is_link %}
                         <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
@@ -72,7 +72,7 @@
                     {% else %}
                         <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
@@ -98,7 +98,7 @@
                     {% if not node.is_link %}
                         <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
@@ -119,7 +119,7 @@
                     {% else %}
                         <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
                         <td class="forum-name">
-                            <a href="{% url 'forum:forum' node.id %}" class="forum-name-link">{{ node.name }}</a>
+                            <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                             <div class="forum-description">
                                 {{ node.description.rendered }}
                             </div>
@@ -137,13 +137,13 @@
                 {% if not node.get_previous_sibling %}
                     <b>{% trans "Subforums:" %}</b>&nbsp;
                 {% endif %}
-                <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+                <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.slug node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
             {% endif %}
         {% elif node.level == root_level_sub %}
             {% if not node.get_previous_sibling %}
                 <b>{% trans "Subforums:" %}</b>&nbsp;
             {% endif %}
-            <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+            <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.slug node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
         {% endif %}
     {% endrecursetree %}
 </div>
