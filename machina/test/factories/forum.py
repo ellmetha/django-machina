@@ -3,11 +3,11 @@
 # Standard library imports
 # Third party imports
 from django.db.models import get_model
-from django.utils.text import slugify
 import factory
 from faker import Factory as FakerFactory
 
 # Local application / specific library imports
+from machina.core.compat import slugify
 
 faker = FakerFactory.create()
 

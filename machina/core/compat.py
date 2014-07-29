@@ -2,8 +2,14 @@
 
 # Standard library imports
 # Third party imports
+import django
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext_lazy as _
 
+# Local application / specific library imports
+
+# PILImage
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
@@ -17,7 +23,12 @@ except ImportError as err:
             _("Neither Pillow nor PIL could be imported: %s") % err
         )
 
-# Local application / specific library imports
+
+# Django slugify
+if django.VERSION > (1, 4):
+    from django.utils.text import slugify
+else:
+    from django.template.defaultfilters import slugify
 
 
 # A settings that can be used in foreign key declarations to ensure backwards compatibility
