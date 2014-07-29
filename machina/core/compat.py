@@ -2,7 +2,6 @@
 
 # Standard library imports
 # Third party imports
-import django
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
@@ -25,9 +24,9 @@ except ImportError as err:
 
 
 # Django slugify
-if django.VERSION > (1, 4):
+try:
     from django.utils.text import slugify
-else:
+except ImportError:
     from django.template.defaultfilters import slugify
 
 
