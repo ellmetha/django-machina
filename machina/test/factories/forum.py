@@ -3,6 +3,7 @@
 # Standard library imports
 # Third party imports
 from django.db.models import get_model
+from django.utils.text import slugify
 import factory
 from faker import Factory as FakerFactory
 
@@ -16,6 +17,7 @@ Forum = get_model('forum', 'Forum')
 class ForumFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Forum
     name = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=150))
+    slug = factory.LazyAttribute(lambda t: slugify(t.name))
 
     # Link forum specific
     link = factory.LazyAttribute(lambda obj: faker.uri())
