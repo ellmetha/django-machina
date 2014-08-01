@@ -27,7 +27,9 @@ class BaseConversationApp(Application):
         urls = super(BaseConversationApp, self).get_urls()
         urls += [
             url(_(r'^topic/(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
             url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
+            url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
             url(_(r'^forum/(?P<forum_pk>\d+)/topic/create/$'), self.topic_create_view.as_view(), name='topic-create'),
             url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<pk>\d+)/update/$'), self.topic_update_view.as_view(), name='topic-update'),
             url(_(r'^forum/(?P<forum_pk>\d+)/topic/(?P<topic_pk>\d+)/post/create/$'), self.post_create_view.as_view(), name='post-create'),
