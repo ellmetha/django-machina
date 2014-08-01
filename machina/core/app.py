@@ -28,5 +28,5 @@ class Application(object):
 
     @property
     def urls(self):
-        # We set the application and instance namespace here
+        # We set the application and instance namespaces here
         return self.get_urls(), self.app_name, self.name
