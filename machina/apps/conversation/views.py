@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.forms.forms import NON_FIELD_ERRORS
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
@@ -345,11 +346,23 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
 
         return context
 
+    def delete(self, request, *args, **kwargs):
+        """
+        Calls the delete() method on the fetched object and then
+        redirects to the success URL.
+        This is a workaround for versions of Django prior 1.6
+        where the get_success_url() method was called after
+        the delete() method.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
+
     def get_success_url(self):
         messages.success(self.request, self.success_message)
-        post = Post.objects.get(pk=self.kwargs['pk'])
 
-        if post.is_topic_head and post.is_topic_tail:
+        if self.object.is_topic_head and self.object.is_topic_tail:
             return reverse('forum:forum', kwargs={
                 'pk': self.kwargs['forum_pk']})
 

@@ -659,7 +659,7 @@ class TestPostUpdateView(BaseClientTestCase):
 
         # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
-        self.firsst_post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
         # Mark the forum as read
@@ -724,6 +724,74 @@ class TestPostUpdateView(BaseClientTestCase):
         topic_url = reverse(
             'conversation:topic',
             kwargs={'forum_pk': self.top_level_forum.pk, 'pk': response.context_data['topic'].pk})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(topic_url, last_url)
+
+
+class TestPostDeleteView(BaseClientTestCase):
+    def setUp(self):
+        super(TestPostDeleteView, self).setUp()
+
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Set up a top-level forum
+        self.top_level_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
+        assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse(
+            'conversation:post-delete',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+                    'pk': self.post.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        self.assertIsOk(response)
+
+    def test_redirects_to_the_topic_view_if_posts_remain(self):
+        # Setup
+        correct_url = reverse(
+            'conversation:post-delete',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+                    'pk': self.post.pk})
+        # Run
+        response = self.client.post(correct_url, follow=True)
+        # Check
+        topic_url = reverse(
+            'conversation:topic',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'pk': self.topic.pk})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(topic_url, last_url)
+
+    def test_redirects_to_the_topic_view_if_no_posts_remain(self):
+        # Setup
+        correct_url = reverse(
+            'conversation:post-delete',
+            kwargs={'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+                    'pk': self.post.pk})
+        # Run
+        response = self.client.post(correct_url, follow=True)
+        # Check
+        topic_url = reverse(
+            'forum:forum',
+            kwargs={'pk': self.top_level_forum.pk, })
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(topic_url, last_url)
