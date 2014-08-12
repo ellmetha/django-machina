@@ -782,16 +782,17 @@ class TestPostDeleteView(BaseClientTestCase):
 
     def test_redirects_to_the_topic_view_if_no_posts_remain(self):
         # Setup
+        self.post.delete()
         correct_url = reverse(
             'conversation:post-delete',
             kwargs={'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
-                    'pk': self.post.pk})
+                    'pk': self.first_post.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
-        topic_url = reverse(
+        forum_url = reverse(
             'forum:forum',
             kwargs={'pk': self.top_level_forum.pk, })
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        self.assertIn(forum_url, last_url)
