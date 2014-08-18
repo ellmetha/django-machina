@@ -13,6 +13,7 @@ from model_utils import Choices
 
 # Local application / specific library imports
 from machina.core.compat import AUTH_USER_MODEL
+from machina.core.compat import slugify
 from machina.core.utils import refresh
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
@@ -122,6 +123,9 @@ class AbstractTopic(DatedModel):
         old_instance = None
         if self.pk:
             old_instance = self.__class__._default_manager.get(pk=self.pk)
+
+        # Update the slug field
+        self.slug = slugify(self.subject)
 
         # Do the save
         super(AbstractTopic, self).save(*args, **kwargs)
