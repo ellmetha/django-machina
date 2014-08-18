@@ -64,7 +64,7 @@
                             {% if last_post %}
                                 {{ last_post.created }}<br />
                                 <a href="#">{{ last_post.poster }}</a>
-                                &nbsp;<a href="{% url 'conversation:topic' last_post.topic.forum.pk last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                &nbsp;<a href="{% url 'conversation:topic' last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                             {% else %}
                                 {% trans "No posts" %}
                             {% endif %}
@@ -111,7 +111,7 @@
                             {% if last_post %}
                                 {{ last_post.created }}<br />
                                 <a href="#">{{ last_post.poster }}</a>
-                                &nbsp;<a href="{% url 'conversation:topic' last_post.topic.forum.pk last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                &nbsp;<a href="{% url 'conversation:topic' last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                             {% else %}
                                 {% trans "No posts" %}
                             {% endif %}
