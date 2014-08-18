@@ -16,6 +16,7 @@ from mptt.models import TreeForeignKey
 # Local application / specific library imports
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
+from machina.core.compat import slugify
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.models import ActiveModel
@@ -149,6 +150,9 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         old_instance = None
         if self.pk:
             old_instance = self.__class__._default_manager.get(pk=self.pk)
+
+        # Update the slug field
+        self.slug = slugify(self.name)
 
         # Do the save
         super(AbstractForum, self).save(*args, **kwargs)
