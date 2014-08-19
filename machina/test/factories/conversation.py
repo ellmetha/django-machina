@@ -8,6 +8,7 @@ from factory import fuzzy
 from faker import Factory as FakerFactory
 
 # Local application / specific library imports
+from machina.core.compat import slugify
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.forum import ForumFactory
 
@@ -22,6 +23,8 @@ class TopicFactory(factory.DjangoModelFactory):
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
     status = Topic.STATUS_CHOICES.topic_unlocked
+    subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
+    slug = factory.LazyAttribute(lambda t: slugify(t.subject))
 
 
 class PostFactory(factory.DjangoModelFactory):
