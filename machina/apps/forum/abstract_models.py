@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 # Third party imports
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -152,7 +153,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
         # Update the slug field
-        self.slug = slugify(self.name)
+        self.slug = slugify(force_text(self.name))
 
         # Do the save
         super(AbstractForum, self).save(*args, **kwargs)

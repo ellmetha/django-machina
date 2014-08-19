@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
+from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
@@ -125,7 +126,7 @@ class AbstractTopic(DatedModel):
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
         # Update the slug field
-        self.slug = slugify(self.subject)
+        self.slug = slugify(force_text(self.subject))
 
         # Do the save
         super(AbstractTopic, self).save(*args, **kwargs)
