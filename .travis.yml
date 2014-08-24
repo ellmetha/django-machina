@@ -7,7 +7,7 @@ env:
   - DJANGO="django>=1.4.2,<1.5"
   - DJANGO="django>=1.5,<1.6"
   - DJANGO="django>=1.6,<1.7"
-  - DJANGO="https://www.djangoproject.com/download/1.7c2/tarball/"
+  - DJANGO="https://www.djangoproject.com/download/1.7c3/tarball/"
 
 matrix:
   exclude:
