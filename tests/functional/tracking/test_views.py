@@ -233,3 +233,14 @@ class TestUnreadTopicsView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)
+
+    def test_insert_unred_topics_in_context(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_4, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        correct_url = reverse('tracking:unread-topics')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        self.assertIsOk(response)
+        self.assertQuerysetEqual(response.context_data['topics'], [new_topic, ])
