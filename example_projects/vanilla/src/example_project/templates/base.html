@@ -45,7 +45,10 @@
                         </button>
                         <a class="navbar-brand" href="/">django-machina</a>
                     </div>
-                    <div class="collapse navbar-collapse"></div>
+                    <div class="collapse navbar-collapse">
+                        {% block header_collapse %}
+                        {% endblock header_collapse %}
+                    </div>
                 </div>
                 <br /><br />
             {% endblock header %}

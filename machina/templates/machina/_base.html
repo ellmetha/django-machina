@@ -5,6 +5,24 @@
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
 
+{% block header_collapse %}
+    <div class="col-sm-4 col-md-4">
+        <form class="navbar-form form-inline" role="search" action="{% url 'search:search' %}">
+            <div class="form-group col-md-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="{% trans 'Search...' %}" name="q">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="{% url 'search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
+            </div>
+        </form>
+    </div>
+{% endblock header_collapse %}
+
 {% block breadcrumb %}
     {% include "machina/partials/breadcrumb.html" %}
 {% endblock breadcrumb %}
