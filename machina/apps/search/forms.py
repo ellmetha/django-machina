@@ -6,6 +6,7 @@ from django import forms
 from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import FacetedSearchForm
+from haystack.inputs import AutoQuery
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -17,6 +18,9 @@ perm_handler = PermissionHandler()
 
 
 class SearchForm(FacetedSearchForm):
+    search_topics = forms.BooleanField(
+        label=_('Search only in topic subjects'), required=False)
+
     search_poster_name = forms.CharField(
         label=_('Search for poster'), help_text=_('Enter a user name to limit the search to a specific user.'),
         max_length=255, required=False)
@@ -39,6 +43,10 @@ class SearchForm(FacetedSearchForm):
 
         if not self.is_valid():
             return self.no_query_found()
+
+        # Handles topic-based searches
+        if self.cleaned_data['search_topics']:
+            sqs = sqs.filter(topic_subject=AutoQuery(self.cleaned_data['q']))
 
         # Handles searches by poster name
         if self.cleaned_data['search_poster_name']:
