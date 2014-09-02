@@ -45,5 +45,8 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_topic_subject(self, obj):
         return obj.topic.subject
 
+    def index_queryset(self, using=None):
+        return Post.objects.all().exclude(approved=False)
+
     def read_queryset(self, using=None):
-        return Post.objects.all().select_related('topic', 'poster')
+        return Post.objects.all().exclude(approved=False).select_related('topic', 'poster')
