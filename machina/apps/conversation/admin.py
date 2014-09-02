@@ -16,18 +16,20 @@ class PostInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'topic', 'poster', 'updated',)
+    list_display = ('__str__', 'topic', 'poster', 'updated', 'approved')
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', )
     search_fields = ('content',)
+    list_editable = ('approved',)
 
 
 class TopicAdmin(admin.ModelAdmin):
     inlines = (PostInline,)
-    list_display = ('subject', 'forum', 'created', 'first_post', 'last_post', 'posts_count',)
+    list_display = ('subject', 'forum', 'created', 'first_post', 'last_post', 'posts_count', 'approved')
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', 'subscribers', )
     search_fields = ('subject',)
+    list_editable = ('approved',)
 
 
 admin.site.register(Topic, TopicAdmin)
