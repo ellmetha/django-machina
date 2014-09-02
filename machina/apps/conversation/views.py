@@ -239,6 +239,11 @@ class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
         kwargs['forum'] = self.get_forum()
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super(TopicUpdateView, self).get_context_data(**kwargs)
+        context['topic'] = self.object.topic
+        return context
+
     def get_success_url(self):
         return reverse('conversation:topic', kwargs={
             'forum_pk': self.get_forum().pk,
