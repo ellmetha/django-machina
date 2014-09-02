@@ -136,7 +136,8 @@ class TopicForm(PostForm):
                 poster=self.user,
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
-                status=Topic.STATUS_CHOICES.topic_unlocked)
+                status=Topic.STATUS_CHOICES.topic_unlocked,
+                approved=perm_handler.can_post_without_approval(self.forum, self.user))
             self.topic = topic
             if commit:
                 topic.save()

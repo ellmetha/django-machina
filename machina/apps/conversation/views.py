@@ -71,7 +71,7 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         self.topic = self.get_topic()
-        qs = self.topic.posts.all()
+        qs = self.topic.posts.all().exclude(approved=False)
         return qs
 
     def get_controlled_object(self):
