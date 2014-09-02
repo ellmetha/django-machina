@@ -38,7 +38,6 @@
                         {% if post|can_be_deleted_by:user %}
                             <a href="{% url 'conversation:post-delete' forum.pk topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                         {% endif %}
-                        <a href="#" class="btn btn-primary btn-xs" title="{% trans "Quote" %}"><i class="fa fa-quote-left"></i>&nbsp;{% trans "Quote" %}</a>
                     </div>
                     <h4 class="subject">{{ post.subject }}</h4>
                     <p><small class="text-muted">
