@@ -37,7 +37,7 @@ setup(
         'django-guardian>=1.2,<1.3',
 
         # Machina uses Django-haystack to provide search support
-        'django-haystack>=2.1.0',
+        'django-haystack>=2.1.0,<2.2.1',
 
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
