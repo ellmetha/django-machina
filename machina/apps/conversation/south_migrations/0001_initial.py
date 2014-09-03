@@ -16,6 +16,7 @@ class Migration(SchemaMigration):
             ('forum', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'topics', to=orm['forum.Forum'])),
             ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=300)),
             ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
             ('status', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
             ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
@@ -51,6 +52,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'conversation', ['Post'])
 
+        # Adding model 'Attachment'
+        db.create_table(u'conversation_attachment', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('post', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'attachments', to=orm['conversation.Post'])),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
+            ('comment', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'conversation', ['Attachment'])
+
 
     def backwards(self, orm):
         # Deleting model 'Topic'
@@ -61,6 +71,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Post'
         db.delete_table(u'conversation_post')
+
+        # Deleting model 'Attachment'
+        db.delete_table(u'conversation_attachment')
 
 
     models = {
@@ -100,6 +113,13 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'conversation.attachment': {
+            'Meta': {'object_name': 'Attachment'},
+            'comment': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'attachments'", 'to': u"orm['conversation.Post']"})
+        },
         u'conversation.post': {
             'Meta': {'ordering': "[u'created']", 'object_name': 'Post'},
             u'_content_rendered': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -124,6 +144,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '300'}),
             'status': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'subscriptions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
@@ -150,6 +171,7 @@ class Migration(SchemaMigration):
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'real_topics_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             u'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
             'topics_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             u'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'type': ('django.db.models.fields.PositiveSmallIntegerField', [], {'db_index': 'True'}),

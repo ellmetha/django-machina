@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Creation date')),
                 ('updated', models.DateTimeField(auto_now=True, verbose_name='Update date')),
                 ('name', models.CharField(max_length=100, verbose_name='Name')),
+                ('slug', models.SlugField(max_length=255, verbose_name='Slug')),
                 ('description', machina.models.fields.MarkupTextField(no_rendered_field=True, null=True, verbose_name='Description', blank=True)),
                 ('image', machina.models.fields.ExtendedImageField(upload_to='machina/forum_images', null=True, verbose_name='Forum image', blank=True)),
                 ('link', models.URLField(null=True, verbose_name='Forum link', blank=True)),
@@ -35,7 +36,7 @@ class Migration(migrations.Migration):
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('_description_rendered', models.TextField(null=True, editable=False, blank=True)),
-                ('parent', mptt.fields.TreeForeignKey(verbose_name='Parent', blank=True, to='forum.Forum', null=True)),
+                ('parent', mptt.fields.TreeForeignKey(related_name='children', verbose_name='Parent', blank=True, to='forum.Forum', null=True)),
             ],
             options={
                 'ordering': ['tree_id', 'lft'],
