@@ -21,7 +21,6 @@ class Migration(migrations.Migration):
                 ('signature', machina.models.fields.MarkupTextField(max_length=255, no_rendered_field=True, null=True, verbose_name='Signature', blank=True)),
                 ('posts_count', models.PositiveIntegerField(default=0, verbose_name='Total posts', blank=True)),
                 ('_signature_rendered', models.TextField(null=True, editable=False, blank=True)),
-                ('user', models.OneToOneField(verbose_name='User', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -50,6 +49,12 @@ class Migration(migrations.Migration):
             model_name='profile',
             name='rank',
             field=models.ForeignKey(verbose_name='Rank', blank=True, to='member.Rank', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='profile',
+            name='user',
+            field=models.OneToOneField(related_name='forum_profile', verbose_name='User', to=settings.AUTH_USER_MODEL),
             preserve_default=True,
         ),
     ]
