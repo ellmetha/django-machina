@@ -6,8 +6,20 @@ from django.contrib import admin
 from django.db.models import get_model
 
 # Local application / specific library imports
+Attachment = get_model('conversation', 'Attachment')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
+
+
+class AttachmentInline(admin.TabularInline):
+    model = Attachment
+    extra = 1
+
+
+class AttachmentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post', 'comment', 'file', )
+    list_display_links = ('id', 'post', 'comment', )
+    raw_id_fields = ('post', )
 
 
 class PostInline(admin.TabularInline):
@@ -16,6 +28,7 @@ class PostInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
+    inlines = [AttachmentInline, ]
     list_display = ('__str__', 'topic', 'poster', 'updated', 'approved')
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', )
@@ -34,3 +47,4 @@ class TopicAdmin(admin.ModelAdmin):
 
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Attachment, AttachmentAdmin)
