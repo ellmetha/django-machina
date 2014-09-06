@@ -250,6 +250,9 @@ class AbstractPost(DatedModel):
 
 
 class AbstractAttachment(models.Model):
+    """
+    Represents a post attachment. An attachment post is always linked to a post.
+    """
     post = models.ForeignKey('conversation.Post', verbose_name=_('Post'), related_name='attachments')
     file = models.FileField(verbose_name=_('File'), upload_to=machina_settings.ATTACHMENT_FILE_UPLOAD_TO)
     comment = models.CharField(max_length=255, verbose_name=_('Comment'), blank=True, null=True)
