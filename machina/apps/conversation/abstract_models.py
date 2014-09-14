@@ -260,4 +260,4 @@ class AbstractAttachment(models.Model):
     class Meta:
         abstract = True
         verbose_name = _('Attachment')
-        verbose_name_plural = _('Attachment')
+        verbose_name_plural = _('Attachments')
