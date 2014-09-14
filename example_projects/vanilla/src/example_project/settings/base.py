@@ -144,6 +144,9 @@ INSTALLED_APPS = [
 ] + get_vanilla_apps()
 
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+
 # Django pipeline setings
 # --------------------------------------
 PIPELINE_CSS = {
