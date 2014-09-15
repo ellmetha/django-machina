@@ -1,6 +1,6 @@
 css:
 		# Compile CSS files from LESS
-		lessc machina/static/machina/less/admin.less > machina/static/machina/css/admin.css
+		lessc machina/static/machina/less/admin_styles.less > machina/static/machina/css/admin_styles.css
 		lessc machina/static/machina/less/styles.less > machina/static/machina/css/styles.css
 
 

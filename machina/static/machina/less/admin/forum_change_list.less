@@ -1,0 +1,35 @@
+// Forum_change_list.less
+// Variables to customize the look and feel of admin forum topic lists
+// -------------------------------------------------------------------
+
+
+.danger{
+    color: @redLight;
+}
+a.danger{
+    color: @redLight;
+    &:hover{
+        color: @red;
+    }
+}
+
+.success{
+    color: @greenLight;
+}
+a.success{
+    color: @greenLight;
+    &:hover{
+        color: @green;
+    }
+}
+
+#forum-table-dnd{
+    .quick-actions-cell{
+        width: 5%;
+        text-align: center;
+
+        .disabled{
+            color: @grayLighter;
+        }
+    }
+}
