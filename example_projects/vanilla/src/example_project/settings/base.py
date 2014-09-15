@@ -131,6 +131,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'pipeline',
+    'loginas',
     'crispy_forms',
     'guardian',
     'mptt',

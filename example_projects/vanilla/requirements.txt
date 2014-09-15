@@ -3,3 +3,4 @@ south
 django-pipeline
 django-debug-toolbar
 django-crispy-forms
+django-loginas
