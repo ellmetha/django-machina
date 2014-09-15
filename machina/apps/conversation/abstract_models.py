@@ -13,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
 # Local application / specific library imports
-from machina.conf import settings as machina_settings
 from machina.core.compat import AUTH_USER_MODEL
 from machina.core.compat import slugify
 from machina.core.utils import refresh
@@ -247,17 +246,3 @@ class AbstractPost(DatedModel):
         else:
             super(AbstractPost, self).delete(using)
             self.topic.update_trackers()
-
-
-class AbstractAttachment(models.Model):
-    """
-    Represents a post attachment. An attachment post is always linked to a post.
-    """
-    post = models.ForeignKey('conversation.Post', verbose_name=_('Post'), related_name='attachments')
-    file = models.FileField(verbose_name=_('File'), upload_to=machina_settings.ATTACHMENT_FILE_UPLOAD_TO)
-    comment = models.CharField(max_length=255, verbose_name=_('Comment'), blank=True, null=True)
-
-    class Meta:
-        abstract = True
-        verbose_name = _('Attachment')
-        verbose_name_plural = _('Attachments')

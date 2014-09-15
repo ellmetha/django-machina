@@ -48,6 +48,7 @@ SOUTH_MIGRATION_MODULES = dict(SOUTH_MIGRATION_MODULES.items() + MACHINA_SOUTH_M
 MACHINA_SOUTH_MIGRATION_MODULES = {
     'conversation': 'machina.apps.conversation.south_migrations',
     'polls': 'machina.apps.conversation.polls.south_migrations',
+    'attachments': 'machina.apps.conversation.attachments.south_migrations',
     'forum': 'machina.apps.forum.south_migrations',
     'member': 'machina.apps.member.south_migrations',
     'permission': 'machina.apps.permission.south_migrations',

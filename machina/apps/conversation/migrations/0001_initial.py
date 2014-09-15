@@ -15,20 +15,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Attachment',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('file', models.FileField(upload_to='machina/attachments', verbose_name='File')),
-                ('comment', models.CharField(max_length=255, null=True, verbose_name='Comment', blank=True)),
-            ],
-            options={
-                'abstract': False,
-                'verbose_name': 'Attachment',
-                'verbose_name_plural': 'Attachment',
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='Post',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -88,12 +74,6 @@ class Migration(migrations.Migration):
             model_name='post',
             name='updated_by',
             field=models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Lastly updated by'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='attachment',
-            name='post',
-            field=models.ForeignKey(related_name='attachments', verbose_name='Post', to='conversation.Post'),
             preserve_default=True,
         ),
     ]

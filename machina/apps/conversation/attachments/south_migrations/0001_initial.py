@@ -8,63 +8,29 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Topic'
-        db.create_table(u'conversation_topic', (
+        # Adding model 'Attachment'
+        db.create_table(u'attachments_attachment', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('forum', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'topics', to=orm['forum.Forum'])),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=300)),
-            ('type', self.gf('django.db.models.fields.PositiveSmallIntegerField')(db_index=True)),
-            ('status', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('views_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
+            ('post', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'attachments', to=orm['conversation.Post'])),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
+            ('comment', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
-        db.send_create_signal(u'conversation', ['Topic'])
-
-        # Adding M2M table for field subscribers on 'Topic'
-        m2m_table_name = db.shorten_name(u'conversation_topic_subscribers')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('topic', models.ForeignKey(orm[u'conversation.topic'], null=False)),
-            ('user', models.ForeignKey(orm[u'auth.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['topic_id', 'user_id'])
-
-        # Adding model 'Post'
-        db.create_table(u'conversation_post', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('topic', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'posts', to=orm['conversation.Topic'])),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'posts', to=orm['auth.User'])),
-            ('poster_ip', self.gf('django.db.models.fields.GenericIPAddressField')(default=u'2002::0', max_length=39, null=True, blank=True)),
-            ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('content', self.gf('machina.models.fields.MarkupTextField')(no_rendered_field=True)),
-            ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('update_reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('updated_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('updates_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            (u'_content_rendered', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'conversation', ['Post'])
+        db.send_create_signal(u'attachments', ['Attachment'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Topic'
-        db.delete_table(u'conversation_topic')
-
-        # Removing M2M table for field subscribers on 'Topic'
-        db.delete_table(db.shorten_name(u'conversation_topic_subscribers'))
-
-        # Deleting model 'Post'
-        db.delete_table(u'conversation_post')
+        # Deleting model 'Attachment'
+        db.delete_table(u'attachments_attachment')
 
 
     models = {
+        u'attachments.attachment': {
+            'Meta': {'object_name': 'Attachment'},
+            'comment': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'attachments'", 'to': u"orm['conversation.Post']"})
+        },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -160,4 +126,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['conversation']
+    complete_apps = ['attachments']

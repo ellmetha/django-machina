@@ -11,6 +11,7 @@ MACHINA_VANILLA_APPS = [
     'machina',
     'machina.apps.forum',
     'machina.apps.conversation',
+    'machina.apps.conversation.attachments',
     'machina.apps.conversation.polls',
     'machina.apps.feeds',
     'machina.apps.search',
