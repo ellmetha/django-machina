@@ -282,3 +282,31 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Run & check
         self.assertTrue(self.perm_handler.can_read_forum(self.forum_1, u2))
         self.assertTrue(self.perm_handler.can_read_forum(self.forum_3, u2))
+
+    def test_knows_if_a_user_can_attach_files(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_attach_file', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_attach_files(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_attach_files(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_attach_files(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_attach_files(self.forum_1, u2))
+
+    def test_knows_if_a_user_can_download_files(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_download_file', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_download_files(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_download_files(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_download_files(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_download_files(self.forum_1, u2))

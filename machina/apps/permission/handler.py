@@ -157,6 +157,20 @@ class PermissionHandler(object):
 
         return can_vote
 
+    # Attachments
+
+    def can_attach_files(self, forum, user):
+        """
+        Given a forum, checks whether the user can add attachments to posts.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_attach_file')
+
+    def can_download_files(self, forum, user):
+        """
+        Given a forum, checks whether the user can download files attached to posts.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_download_file')
+
     # Common
     # --
 
