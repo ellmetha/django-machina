@@ -1,0 +1,17 @@
+{% load i18n %}
+{% load bootstrap3 %}
+
+{{ attachment_formset.management_form }}
+{% for form in attachment_formset.forms %}
+	<div class="attachment-form row">
+		{% for field in form.visible_fields %}
+			<div class="col-md-4">
+				{% if forloop.first %}
+					{{ form.id }}
+				{% endif %}
+				{% bootstrap_field field %}
+			</div>
+		{% endfor %}
+	</div>
+{% endfor %}
+<a id="add_more_attachment" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add another file" %}</a>

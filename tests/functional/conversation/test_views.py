@@ -292,13 +292,13 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-1-id': '',
-            'form-1-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -316,13 +316,13 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-1-id': '',
-            'form-1-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -333,8 +333,8 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
         self.assertEqual(topic.poll.duration, post_data['poll_duration'])
         self.assertEqual(topic.poll.options.count(), 2)
-        self.assertEqual(topic.poll.options.all()[0].text, post_data['form-0-text'])
-        self.assertEqual(topic.poll.options.all()[1].text, post_data['form-1-text'])
+        self.assertEqual(topic.poll.options.all()[0].text, post_data['poll-0-text'])
+        self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
 
     def test_cannot_create_polls_with_invalid_options(self):
         # Setup
@@ -347,11 +347,11 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 1,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 1,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         post_data_2 = {
             'subject': faker.text(max_nb_chars=200),
@@ -360,13 +360,13 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-1-id': '',
-            'form-1-text': faker.text(max_nb_chars=100) * 1000,
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100) * 1000,
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         response_1 = self.client.post(correct_url, post_data_1, follow=True)
@@ -491,13 +491,13 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-1-id': '',
-            'form-1-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -520,19 +520,19 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=155),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': option_1.pk,
-            'form-0-text': option_1.text,
-            'form-1-id': option_2.pk,
-            'form-1-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 2,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': option_1.pk,
+            'poll-0-text': option_1.text,
+            'poll-1-id': option_2.pk,
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 2,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
         option_2 = refresh(option_2)
-        self.assertEqual(option_2.text, post_data['form-1-text'])
+        self.assertEqual(option_2.text, post_data['poll-1-text'])
         poll = refresh(poll)
         self.assertEqual(poll.question, post_data['poll_question'])
 
@@ -549,13 +549,13 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
-            'form-0-id': '',
-            'form-0-text': faker.text(max_nb_chars=100),
-            'form-1-id': '',
-            'form-1-text': faker.text(max_nb_chars=100),
-            'form-INITIAL_FORMS': 0,
-            'form-TOTAL_FORMS': 2,
-            'form-MAX_NUM_FORMS': 1000,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -566,8 +566,8 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
         self.assertEqual(topic.poll.duration, post_data['poll_duration'])
         self.assertEqual(topic.poll.options.count(), 2)
-        self.assertEqual(topic.poll.options.all()[0].text, post_data['form-0-text'])
-        self.assertEqual(topic.poll.options.all()[1].text, post_data['form-1-text'])
+        self.assertEqual(topic.poll.options.all()[0].text, post_data['poll-0-text'])
+        self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
 
 
 class TestPostCreateView(BaseClientTestCase):

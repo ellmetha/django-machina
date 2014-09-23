@@ -28,7 +28,18 @@ var machina = (function(m, $) {
 			if(typeof(last_form_selector) === 'undefined') last_form_selector = '#poll_formset div.poll-option-form:last';
 
 			$(add_more_selector).click(function(ev) {
-				cloneFormset(last_form_selector, 'form');
+				cloneFormset(last_form_selector, 'poll');
+			});
+		}
+	};
+
+	m.attachment = {
+		init: function(add_more_selector, last_form_selector) {
+			if(typeof(add_more_selector) === 'undefined') add_more_selector = '#add_more_attachment';
+			if(typeof(last_form_selector) === 'undefined') last_form_selector = '#attachment_formset div.attachment-form:last';
+
+			$(add_more_selector).click(function(ev) {
+				cloneFormset(last_form_selector, 'attachment');
 			});
 		}
 	};

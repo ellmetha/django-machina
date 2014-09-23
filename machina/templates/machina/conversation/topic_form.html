@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 
-<form method="post" action="." class="form" novalidate>
+<form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
 	{% bootstrap_messages %}
 
 	{% csrf_token %}
@@ -15,6 +15,9 @@
 		<li class="active"><a href="#options" data-toggle="tab">{% trans "Options" %}</a></li>
 		{% if poll_option_formset %}
 			<li><a href="#poll" data-toggle="tab">{% trans "Poll" %}</a></li>
+		{% endif %}
+		{% if attachment_formset %}
+			<li><a href="#attachments" data-toggle="tab">{% trans "Attachments" %}</a></li>
 		{% endif %}
 	</ul>
 
@@ -43,6 +46,18 @@
 						</div>
 						<div id="poll_formset" class="col-md-6">
 							{% include "machina/conversation/polls/poll_option_formset.html" %}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		{% if attachment_formset %}
+			<div class="tab-pane" id="attachments">
+				<div class="form-group">
+					<br />
+					<div class="row">
+						<div id="attachment_formset" class="col-md-12">
+							{% include "machina/conversation/attachments/attachment_formset.html" %}
 						</div>
 					</div>
 				</div>

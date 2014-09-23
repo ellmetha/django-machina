@@ -22,11 +22,13 @@ from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 
+Attachment = get_model('attachments', 'Attachment')
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')
 TopicPollOption = get_model('polls', 'TopicPollOption')
 
+AttachmentFormset = get_class('attachments.forms', 'AttachmentFormset')
 PostForm = get_class('conversation.forms', 'PostForm')
 TopicForm = get_class('conversation.forms', 'TopicForm')
 TopicPollOptionFormset = get_class('polls.forms', 'TopicPollOptionFormset')
@@ -108,6 +110,8 @@ class TopicView(PermissionRequiredMixin, ListView):
 
 class PostEditMixin(object):
     success_message = _('This message has been posted successfully.')
+    attachment_formset_class = AttachmentFormset
+    attachment_formset_general_error_message = _('There are some errors in the attachments you submitted.')
 
     def get_form_kwargs(self):
         kwargs = super(PostEditMixin, self).get_form_kwargs()
@@ -118,18 +122,54 @@ class PostEditMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(PostEditMixin, self).get_context_data(**kwargs)
+
         if hasattr(self, 'preview'):
             context['preview'] = self.preview
+
         # Insert the considered forum into the context
         context['forum'] = self.get_forum()
+
+        post = self.object if self.object else None
+        attachment_queryset = Attachment.objects.filter(post=post)
+
+        if perm_handler.can_attach_files(self.get_forum(), self.request.user):
+            # Add the attachment formset to the context
+            if self.request.method == 'POST':
+                context['attachment_formset'] = self.attachment_formset_class(
+                    self.request.POST, self.request.FILES, prefix='attachment')
+            else:
+                context['attachment_formset'] = self.attachment_formset_class(
+                    queryset=attachment_queryset, prefix='attachment')
+
         return context
 
     def form_valid(self, form):
-        if 'preview' in self.request.POST:
+        preview = 'preview' in self.request.POST
+
+        if perm_handler.can_attach_files(self.get_forum(), self.request.user):
+            attachment_formset = self.attachment_formset_class(
+                self.request.POST, self.request.FILES, prefix='attachment')
+            if attachment_formset.is_valid():
+                save_attachment_formset = not preview
+                self.attachment_preview = preview
+            else:
+                save_attachment_formset = False
+                if len(attachment_formset.errors):
+                    messages.error(self.request, self.attachment_formset_general_error_message)
+                return self.form_invalid(form)
+
+        if preview:
             self.preview = True
             return self.render_to_response(self.get_context_data(form=form))
+
+        valid = super(PostEditMixin, self).form_valid(form)
+
+        if save_attachment_formset:
+            attachment_formset.post = self.object
+            attachment_formset.save()
+
         messages.success(self.request, self.success_message)
-        return super(PostEditMixin, self).form_valid(form)
+        return valid
 
     def get_controlled_object(self):
         """
@@ -156,10 +196,10 @@ class TopicEditMixin(PostEditMixin):
             # Add the poll option formset to the context
             if self.request.method == 'POST':
                 context['poll_option_formset'] = self.poll_option_formset_class(
-                    data=self.request.POST, topic=topic)
+                    data=self.request.POST, topic=topic, prefix='poll')
             else:
                 context['poll_option_formset'] = self.poll_option_formset_class(
-                    queryset=poll_option_queryset, topic=topic)
+                    queryset=poll_option_queryset, topic=topic, prefix='poll')
 
             # Handles the preview of the poll
             if hasattr(self, 'poll_preview'):
@@ -176,7 +216,8 @@ class TopicEditMixin(PostEditMixin):
 
         if perm_handler.can_create_polls(self.get_forum(), self.request.user):
             if len(form.cleaned_data['poll_question']):
-                poll_option_formset = self.poll_option_formset_class(data=self.request.POST)
+                poll_option_formset = self.poll_option_formset_class(
+                    data=self.request.POST, prefix='poll')
                 if poll_option_formset.is_valid():
                     save_poll_option_formset = not preview
                     self.poll_preview = preview
