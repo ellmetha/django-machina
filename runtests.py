@@ -14,13 +14,9 @@ from tests.settings import configure
 
 
 def run(verbosity, *args):
-    try:
-        from django.test.runner import DiscoverRunner
-    except ImportError:
-        from django_nose import NoseTestSuiteRunner
-        runner = NoseTestSuiteRunner(verbosity=verbosity)
-    else:
-        runner = DiscoverRunner(verbosity=verbosity)
+    from django_nose import NoseTestSuiteRunner
+    runner = NoseTestSuiteRunner(verbosity=verbosity)
+
     if not args:
         args = ['tests']
     num_failures = runner.run_tests(args)
