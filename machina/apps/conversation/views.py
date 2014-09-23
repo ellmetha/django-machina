@@ -73,7 +73,7 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         self.topic = self.get_topic()
-        qs = self.topic.posts.all().exclude(approved=False)
+        qs = self.topic.posts.all().exclude(approved=False).prefetch_related('attachments')
         return qs
 
     def get_controlled_object(self):
@@ -145,6 +145,7 @@ class PostEditMixin(object):
 
     def form_valid(self, form):
         preview = 'preview' in self.request.POST
+        save_attachment_formset = False
 
         if perm_handler.can_attach_files(self.get_forum(), self.request.user):
             attachment_formset = self.attachment_formset_class(
