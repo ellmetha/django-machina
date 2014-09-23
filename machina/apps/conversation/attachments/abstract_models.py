@@ -2,6 +2,7 @@
 
 # Standard library imports
 from __future__ import unicode_literals
+import os
 
 # Third party imports
 from django.db import models
@@ -28,3 +29,7 @@ class AbstractAttachment(models.Model):
 
     def __str__(self):
         return '{}'.format(self.post.subject)
+
+    @property
+    def filename(self):
+        return os.path.basename(self.file.name)
