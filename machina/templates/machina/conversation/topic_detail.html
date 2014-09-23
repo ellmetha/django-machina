@@ -30,29 +30,30 @@
         <div id="{{ post.id }}" class="panel panel-default post">
             <div class="panel-body">
                 <div class="row">
-                <div class="col-md-10 post-content-wrapper">
-                    <div class="pull-right post-controls">
-                        {% if post|can_be_edited_by:user %}
-                            <a href="{% if post.is_topic_head %}{% url 'conversation:topic-update' forum.pk topic.pk %}{% else %}{% url 'conversation:post-update' forum.pk topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
-                        {% endif %}
-                        {% if post|can_be_deleted_by:user %}
-                            <a href="{% url 'conversation:post-delete' forum.pk topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
-                        {% endif %}
+                    <div class="col-md-10 post-content-wrapper">
+                        <div class="pull-right post-controls">
+                            {% if post|can_be_edited_by:user %}
+                                <a href="{% if post.is_topic_head %}{% url 'conversation:topic-update' forum.pk topic.pk %}{% else %}{% url 'conversation:post-update' forum.pk topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
+                            {% endif %}
+                            {% if post|can_be_deleted_by:user %}
+                                <a href="{% url 'conversation:post-delete' forum.pk topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                            {% endif %}
+                        </div>
+                        <h4 class="subject">{{ post.subject }}</h4>
+                        <p><small class="text-muted">
+                            <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                        </small></p>
+                        <div class="post-content">
+                            {{ post.content.rendered }}
+                        </div>
+                        {% include "machina/conversation/attachments/attachments_detail.html" %}
                     </div>
-                    <h4 class="subject">{{ post.subject }}</h4>
-                    <p><small class="text-muted">
-                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
-                    </small></p>
-                    <div class="post-content">
-                        {{ post.content.rendered }}
+                    <div class="col-md-2 post-sidebar">
+                        <div class="avatar">
+                            <i class="fa fa-user fa-4x"></i>
+                        </div>
+                        <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
                     </div>
-                </div>
-                <div class="col-md-2 post-sidebar">
-                    <div class="avatar">
-                        <i class="fa fa-user fa-4x"></i>
-                    </div>
-                    <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
-                </div>
                 </div>
             </div>
         </div>
