@@ -9,7 +9,7 @@
         </div>
         {% for attachment in post.attachments.all %}
             <div class="col-md-12 attachment">
-                <a href=""><i class="fa fa-file"></i>&nbsp;{{ attachment.filename }}</a>
+                <a href="{% url 'conversation:attachment' pk=attachment.id %}"><i class="fa fa-file"></i>&nbsp;{{ attachment.filename }}</a>
                 {% if attachment.comment %}
                     <p class="text-muted"><em>{{ attachment.comment }}</em></p>
                 {% endif %}

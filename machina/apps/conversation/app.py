@@ -8,6 +8,7 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.apps.conversation.attachments.app import application as attachments_app
 from machina.apps.conversation.polls.app import application as polls_app
 from machina.core.app import Application
 from machina.core.loading import get_class
@@ -51,9 +52,21 @@ class PollsApp(Application):
         return patterns('', *urls)
 
 
-class ConversationApp(BaseConversationApp, PollsApp):
+class AttachmentsApp(Application):
+    name = None
+    attachments_app = attachments_app
+
+    def get_urls(self):
+        urls = super(AttachmentsApp, self).get_urls()
+        urls += [
+            url(_(r'^'), include(self.attachments_app.urls)),
+        ]
+        return patterns('', *urls)
+
+
+class ConversationApp(BaseConversationApp, PollsApp, AttachmentsApp):
     """
-    Composite class combining Conversation views with Polls views.
+    Composite class combining Conversation views with Polls views and Attachments views.
     """
 
 
