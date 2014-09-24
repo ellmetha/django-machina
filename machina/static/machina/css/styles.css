@@ -1540,6 +1540,9 @@
 .post-edit form #poll_formset .poll-option-form div.checkbox {
   margin-top: 6px;
 }
+.post-edit form #attachment_formset .attachments-title {
+  margin-bottom: 10px;
+}
 .post-edit form #attachment_formset .attachment-form div.checkbox {
   margin-top: 30px;
 }
