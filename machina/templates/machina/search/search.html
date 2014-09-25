@@ -70,7 +70,7 @@
                         {% for result in page.object_list %}
                             <tr>
                                 <td class="post-name">
-                                    <a href="{% url 'conversation:topic' result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
+                                    <a href="{% url 'conversation:topic' result.forum_slug result.forum result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
                                     <div>
                                         <div class="post-created">
                                             {% trans "By:" %} <a href="#">{{ result.poster_name }}</a> {% trans "on" %} {{ result.created }}

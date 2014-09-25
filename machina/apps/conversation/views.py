@@ -261,7 +261,9 @@ class TopicCreateView(PermissionRequiredMixin, TopicEditMixin, CreateView):
 
     def get_success_url(self):
         return reverse('conversation:topic', kwargs={
-            'forum_pk': self.get_forum().pk,
+            'forum_slug': self.object.topic.forum.slug,
+            'forum_pk': self.object.topic.forum.pk,
+            'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
 
@@ -288,7 +290,9 @@ class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('conversation:topic', kwargs={
-            'forum_pk': self.get_forum().pk,
+            'forum_slug': self.object.topic.forum.slug,
+            'forum_pk': self.object.topic.forum.pk,
+            'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
     # Permissions checks
@@ -323,7 +327,9 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
             reverse('conversation:topic', kwargs={
-                'forum_pk': self.get_forum().pk,
+                'forum_slug': self.object.topic.forum.slug,
+                'forum_pk': self.object.topic.forum.pk,
+                'slug': self.object.topic.slug,
                 'pk': self.object.topic.pk}),
             self.object.pk)
 
@@ -355,7 +361,9 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
             reverse('conversation:topic', kwargs={
-                'forum_pk': self.get_forum().pk,
+                'forum_slug': self.object.topic.forum.slug,
+                'forum_pk': self.object.topic.forum.pk,
+                'slug': self.object.topic.slug,
                 'pk': self.object.topic.pk}),
             self.object.pk)
 
@@ -411,11 +419,14 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
 
         if self.object.is_topic_head and self.object.is_topic_tail:
             return reverse('forum:forum', kwargs={
-                'pk': self.kwargs['forum_pk']})
+                'slug': self.object.topic.forum.slug,
+                'pk': self.object.topic.forum.pk})
 
         return reverse('conversation:topic', kwargs={
-            'forum_pk': self.kwargs['forum_pk'],
-            'pk': self.kwargs['topic_pk']})
+            'forum_slug': self.object.topic.forum.slug,
+            'forum_pk': self.object.topic.forum.pk,
+            'slug': self.object.topic.slug,
+            'pk': self.object.topic.pk})
 
     # Permissions checks
 

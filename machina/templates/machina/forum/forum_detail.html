@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
                 {% if forum|can_be_filled_by:user %}
-                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                    <a href="{% url 'conversation:topic-create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 {% endif %}
             </div>
             <div class="col-xs-12 col-md-8 pagination-block">
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
                 {% if forum|can_be_filled_by:user %}
-                    <a href="{% url 'conversation:topic-create' forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+                    <a href="{% url 'conversation:topic-create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 {% endif %}
             </div>
             <div class="col-xs-12 col-md-8 pagination-block">

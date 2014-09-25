@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
             {% if topic|can_be_enriched_by:user %}
-                <a href="{% url 'conversation:post-create' forum.pk topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+                <a href="{% url 'conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">
@@ -33,10 +33,10 @@
                     <div class="col-md-10 post-content-wrapper">
                         <div class="pull-right post-controls">
                             {% if post|can_be_edited_by:user %}
-                                <a href="{% if post.is_topic_head %}{% url 'conversation:topic-update' forum.pk topic.pk %}{% else %}{% url 'conversation:post-update' forum.pk topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
+                                <a href="{% if post.is_topic_head %}{% url 'conversation:topic-update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'conversation:post-update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
                             {% endif %}
                             {% if post|can_be_deleted_by:user %}
-                                <a href="{% url 'conversation:post-delete' forum.pk topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                <a href="{% url 'conversation:post-delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                             {% endif %}
                         </div>
                         <h4 class="subject">{{ post.subject }}</h4>
@@ -62,7 +62,7 @@
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
             {% if topic|can_be_enriched_by:user %}
-                <a href="{% url 'conversation:post-create' forum.pk topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+                <a href="{% url 'conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">

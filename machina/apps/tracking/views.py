@@ -41,7 +41,7 @@ class MarkForumsReadView(View):
             top_level_forum = get_object_or_404(Forum, pk=pk)
             forums = perm_handler.forum_list_filter(
                 top_level_forum.get_descendants(include_self=True), request.user)
-            redirect_to = reverse('forum:forum', kwargs={'pk': pk})
+            redirect_to = reverse('forum:forum', kwargs={'slug': top_level_forum.slug, 'pk': pk})
         else:
             forums = perm_handler.forum_list_filter(
                 Forum.objects.all(), request.user)
@@ -79,7 +79,7 @@ class MarkTopicsReadView(PermissionRequiredMixin, View):
         TopicReadTrack.objects.filter(topic__forum=forum, user=request.user).delete()
 
         messages.success(request, self.success_message)
-        redirect_to = reverse('forum:forum', kwargs={'pk': pk})
+        redirect_to = reverse('forum:forum', kwargs={'slug': forum.slug, 'pk': pk})
 
         return HttpResponseRedirect(redirect_to)
 

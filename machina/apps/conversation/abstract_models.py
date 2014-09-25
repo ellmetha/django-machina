@@ -173,7 +173,9 @@ class AbstractTopic(DatedModel):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('conversation:topic', kwargs={'pk': str(self.id)})
+        return reverse('conversation:topic', kwargs={
+            'forum_slug': self.forum.slug, 'forum_pk': self.forum.pk,
+            'slug': self.slug, 'pk': str(self.id)})
 
 
 @python_2_unicode_compatible

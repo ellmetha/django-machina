@@ -213,4 +213,4 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('forum:forum', kwargs={'pk': str(self.id)})
+        return reverse('forum:forum', kwargs={'slug': self.slug, 'pk': str(self.id)})

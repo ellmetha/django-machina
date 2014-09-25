@@ -59,7 +59,8 @@ class TestTopicPollVoteView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse('conversation:topic-poll-vote', kwargs={
-            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
             'pk': self.poll.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
@@ -70,7 +71,8 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Setup
         remove_perm('can_vote_in_polls', self.user, self.top_level_forum)
         correct_url = reverse('conversation:topic-poll-vote', kwargs={
-            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
             'pk': self.poll.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
@@ -80,7 +82,8 @@ class TestTopicPollVoteView(BaseClientTestCase):
     def test_can_be_used_to_vote(self):
         # Setup
         correct_url = reverse('conversation:topic-poll-vote', kwargs={
-            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
             'pk': self.poll.pk})
         post_data = {
             'options': self.option_1.pk,
@@ -99,7 +102,8 @@ class TestTopicPollVoteView(BaseClientTestCase):
         self.poll.save()
         TopicPollVoteFactory.create(voter=self.user, poll_option=self.option_2)
         correct_url = reverse('conversation:topic-poll-vote', kwargs={
-            'forum_pk': self.top_level_forum.pk, 'topic_pk': self.topic.pk,
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
             'pk': self.poll.pk})
         post_data = {
             'options': self.option_1.pk,

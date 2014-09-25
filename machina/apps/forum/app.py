@@ -20,7 +20,6 @@ class ForumApp(Application):
     def get_urls(self):
         urls = [
             url(r'^$', self.index_view.as_view(), name='index'),
-            url(_(r'^forum/(?P<pk>\d+)/$'), self.forum_view.as_view(), name='forum'),
             url(_(r'^forum/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.forum_view.as_view(), name='forum'),
         ]
         return patterns('', *urls)

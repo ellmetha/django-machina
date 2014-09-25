@@ -58,13 +58,17 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, form.errors[NON_FIELD_ERRORS])
         return redirect(reverse('conversation:topic', kwargs={
+            'forum_slug': self.object.topic.forum.slug,
             'forum_pk': self.object.topic.forum.pk,
+            'slug': self.object.topic.slug,
             'pk': self.object.topic.pk}))
 
     def get_success_url(self):
         messages.success(self.request, _('Your vote has been cast.'))
         return reverse('conversation:topic', kwargs={
+            'forum_slug': self.object.topic.forum.slug,
             'forum_pk': self.object.topic.forum.pk,
+            'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
     # Permissions checks
