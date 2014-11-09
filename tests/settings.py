@@ -4,7 +4,6 @@
 import os
 
 # Third party imports
-from django.conf import global_settings as default_settings
 from django.conf import settings
 
 # Local application / specific library imports
@@ -76,6 +75,15 @@ TEST_SETTINGS = {
         'default': {
             'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
         },
+    },
+    'CACHES': {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        },
+        'machina_attachments': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': '/tmp',
+        }
     },
 }
 

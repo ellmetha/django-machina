@@ -186,3 +186,15 @@ HAYSTACK_CONNECTIONS = {
 
 # Django guardian
 ANONYMOUS_USER_ID = -1
+
+# Attachment cache backend
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'machina_attachments': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/tmp',
+    }
+}

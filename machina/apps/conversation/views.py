@@ -34,6 +34,8 @@ TopicForm = get_class('conversation.forms', 'TopicForm')
 TopicPollOptionFormset = get_class('polls.forms', 'TopicPollOptionFormset')
 TopicPollVoteForm = get_class('polls.forms', 'TopicPollVoteForm')
 
+attachments_cache = get_class('attachments.cache', 'cache')
+
 PermissionHandler = get_class('permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
@@ -112,6 +114,31 @@ class PostEditMixin(object):
     success_message = _('This message has been posted successfully.')
     attachment_formset_class = AttachmentFormset
     attachment_formset_general_error_message = _('There are some errors in the attachments you submitted.')
+
+    def get(self, request, *args, **kwargs):
+        # Invalidates previous attachments
+        attachments_cache.delete(self.get_attachments_cache_key(request))
+        return super(PostEditMixin, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        attachments_cache_key = self.get_attachments_cache_key(request)
+        restored_attachments_dict = attachments_cache.get(attachments_cache_key)
+
+        if restored_attachments_dict:
+            restored_attachments_dict.update(request.FILES)
+            request._files = restored_attachments_dict
+
+        if request.FILES:
+            attachments_cache.set(attachments_cache_key, request.FILES)
+
+        return super(PostEditMixin, self).post(request, *args, **kwargs)
+
+    def get_attachments_cache_key(self, request):
+        """
+        Returns the key used to store attachment files states into the
+        file based cache.
+        """
+        return 'attachments_{}'.format(request.session.session_key)
 
     def get_form_kwargs(self):
         kwargs = super(PostEditMixin, self).get_form_kwargs()
