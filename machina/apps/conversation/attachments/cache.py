@@ -31,7 +31,8 @@ class AttachmentCache(object):
     that the states (name, size, content type, charset and content) of all files
     from any request.FILES dict are saved inside the considered backend when calling
     the 'set' method. Conversely, the 'get' method will populate a dictionary of
-    InMemoryUploadedFile instances by using these states.
+    InMemoryUploadedFile instances or TemporaryUploadedFile instancesby using these
+    states.
     """
     def __init__(self):
         self.backend = self.get_backend()
