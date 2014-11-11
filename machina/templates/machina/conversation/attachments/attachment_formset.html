@@ -9,7 +9,19 @@
 				{% if forloop.first %}
 					{{ form.id }}
 				{% endif %}
-				{% bootstrap_field field %}
+				{% if field.html_name in form.files.keys %}
+					{% for key, file in form.files.items %}
+						{% if key == field.html_name %}
+							<br />
+							<i class="fa fa-file"></i>&nbsp;&nbsp;{{ file.name }}
+						{% endif %}
+					{% endfor %}
+					<div class="hidden">
+						{% bootstrap_field field %}
+					</div>
+				{% else %}
+					{% bootstrap_field field %}
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>
