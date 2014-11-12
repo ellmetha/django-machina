@@ -18,6 +18,7 @@ var machina = (function(m, $) {
 				$(this).val('');
 			}
 		});
+		new_element.find('.initial').remove();
 		$('#id_' + type + '-TOTAL_FORMS').val(parseInt(total)+1);
 		$(selector).after(new_element);
 	}
