@@ -16,5 +16,5 @@ Attachment = get_model('attachments', 'Attachment')
 
 class AttachmentFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Attachment
-    topic = factory.SubFactory(PostFactory)
+    post = factory.SubFactory(PostFactory)
     comment = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=255))
