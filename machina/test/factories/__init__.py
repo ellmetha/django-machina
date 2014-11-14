@@ -5,6 +5,7 @@
 # Local application / specific library imports
 
 
+from .attachments import *
 from .auth import *
 from .conversation import *
 from .forum import *
