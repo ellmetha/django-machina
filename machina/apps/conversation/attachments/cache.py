@@ -17,13 +17,6 @@ from django.utils.six import StringIO
 from machina.conf import settings as machina_settings
 
 
-try:
-    _cache = get_cache(machina_settings.ATTACHMENT_CACHE_NAME)
-except InvalidCacheBackendError:
-    raise ImproperlyConfigured(
-        'The attachment cache backend ({}) is not configured'.format(machina_settings.ATTACHMENT_CACHE_NAME))
-
-
 class AttachmentCache(object):
     """
     The attachments cache. This one should be used with a FileBasedCache backend.
@@ -38,7 +31,12 @@ class AttachmentCache(object):
         self.backend = self.get_backend()
 
     def get_backend(self):
-        return _cache
+        try:
+            cache = get_cache(machina_settings.ATTACHMENT_CACHE_NAME)
+        except InvalidCacheBackendError:
+            raise ImproperlyConfigured(
+                'The attachment cache backend ({}) is not configured'.format(machina_settings.ATTACHMENT_CACHE_NAME))
+        return cache
 
     def set(self, key, files):
         """
