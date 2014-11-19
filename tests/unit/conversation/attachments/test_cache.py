@@ -5,7 +5,9 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.core.exceptions import ImproperlyConfigured
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.test import TestCase
 
 # Local application / specific library imports
@@ -44,3 +46,24 @@ class TestAttachmentCache(TestCase):
         self.assertEqual(states['f2']['charset'], 'iso-8859-1')
         self.assertEqual(states['f2']['content_type'], 'text/plain')
         self.assertEqual(states['f2']['size'], 19)
+
+    def test_is_able_to_regenerate_the_request_files_dict(self):
+        # Setup
+        original_f1 = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        original_f2 = SimpleUploadedFile('file2.txt', force_bytes('file_content_2_long' * 300000))
+        original_f2.charset = 'iso-8859-1'
+        original_files = {'f1': original_f1, 'f2': original_f2}
+        cache.set('mykey', original_files)
+        # Run
+        files = cache.get('mykey')
+        self.assertIn('f1', files)
+        self.assertIn('f2', files)
+        f1 = files['f1']
+        f2 = files['f2']
+        self.assertTrue(isinstance(f1, InMemoryUploadedFile))
+        self.assertEqual(f1.name, 'file1.txt')
+        self.assertEqual(f1.file.read(), force_bytes('file_content_1'))
+        self.assertTrue(isinstance(f2, TemporaryUploadedFile))  # because of the size of the content of f2
+        self.assertEqual(f2.name, 'file2.txt')
+        self.assertEqual(f2.file.read(), force_bytes('file_content_2_long' * 300000))
+        self.assertEqual(f2.charset, 'iso-8859-1')
