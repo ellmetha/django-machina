@@ -30,6 +30,13 @@ except ImportError:
     from django.template.defaultfilters import slugify
 
 
+# force_bytes
+try:
+    from django.utils.encoding import force_bytes
+except ImportError:
+    from django.utils.encoding import smart_str as force_bytes
+
+
 # A settings that can be used in foreign key declarations to ensure backwards compatibility
 # with Django 1.4
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
