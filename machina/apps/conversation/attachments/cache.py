@@ -11,7 +11,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.utils.datastructures import MultiValueDict
-from django.utils.six import StringIO
+from django.utils.six import BytesIO
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -85,6 +85,9 @@ class AttachmentCache(object):
         files = MultiValueDict()
         if files_states:
             for name, state in files_states.items():
+                f = BytesIO()
+                f.write(state['content'])
+
                 # If the post is too large, we cannot use a
                 # InMemoryUploadedFile instance.
                 if state['size'] > settings.FILE_UPLOAD_MAX_MEMORY_SIZE:
@@ -93,9 +96,9 @@ class AttachmentCache(object):
                         state['content_type'],
                         state['size'],
                         state['charset'])
-                    upload.file.write(state['content'])
+                    upload.file = f
                 else:
-                    f = StringIO()
+                    f = BytesIO()
                     f.write(state['content'])
                     upload = InMemoryUploadedFile(
                         file=f,
