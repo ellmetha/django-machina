@@ -19,6 +19,7 @@ from machina.apps.conversation.signals import topic_viewed
 from machina.core.compat import force_bytes
 from machina.core.loading import get_class
 from machina.core.utils import refresh
+from machina.test.factories import AttachmentFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
@@ -720,13 +721,69 @@ class TestTopicUpdateView(BaseClientTestCase):
             'attachment-0-file': f,
             'attachment-0-comment': '',
             'attachment-INITIAL_FORMS': 0,
-            'attachment-TOTAL_FORMS': 2,
+            'attachment-TOTAL_FORMS': 1,
             'attachment-MAX_NUM_FORMS': 1000,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         self.assertTrue(response.context_data['attachment_preview'])
+
+    def test_allows_attachment_updates(self):
+        # Setup
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'attachment-0-id': attachment.pk,
+            'attachment-0-file': attachment.file,
+            'attachment-0-comment': 'new comment',
+            'attachment-INITIAL_FORMS': 1,
+            'attachment-TOTAL_FORMS': 1,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        attachment = refresh(attachment)
+        self.assertEqual(attachment.comment, post_data['attachment-0-comment'])
+
+    def test_allows_attachment_creations(self):
+        # Setup
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        new_file = SimpleUploadedFile('file2.txt', force_bytes('file_content_2'))
+        attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'attachment-0-id': attachment.pk,
+            'attachment-0-file': attachment.file,
+            'attachment-0-comment': 'new comment',
+            'attachment-1-id': '',
+            'attachment-1-file': new_file,
+            'attachment-1-comment': '',
+            'attachment-INITIAL_FORMS': 1,
+            'attachment-TOTAL_FORMS': 2,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        attachments = self.topic.first_post.attachments
+        self.assertEqual(attachments.count(), 2)
 
 
 class TestPostCreateView(BaseClientTestCase):
