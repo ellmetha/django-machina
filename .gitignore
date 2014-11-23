@@ -10,6 +10,7 @@ docs/_build/
 public/
 whoosh_index/
 .tox
+tests/_testdata/media/machina
 
 # If pipeline is used, don't commit generated CSS files
 machina/static/machina/less/*.css
