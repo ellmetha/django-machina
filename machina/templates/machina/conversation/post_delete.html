@@ -15,7 +15,7 @@
 			    <form action="" method="post">{% csrf_token %}
 			        <input type="hidden" name="post" value="yes" />
 			        <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
-			        <a href="{% url 'conversation:topic' topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
+			        <a href="{% url 'conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
 			    </form>
             </div>
 		</div>
