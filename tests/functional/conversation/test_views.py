@@ -3,6 +3,7 @@
 # Standard library imports
 # Third party imports
 from django.contrib.messages import constants as MSG
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
@@ -11,9 +12,11 @@ from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import TOPIC_TYPES
+from machina.apps.conversation.attachments.forms import AttachmentFormset
 from machina.apps.conversation.polls.forms import TopicPollOptionFormset
 from machina.apps.conversation.polls.forms import TopicPollVoteForm
 from machina.apps.conversation.signals import topic_viewed
+from machina.core.compat import force_bytes
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.test.factories import create_forum
@@ -389,6 +392,95 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertEqual(len(messages_2), 1)
         self.assertEqual(messages_2[0].level, MSG.ERROR)
 
+    def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertIn('attachment_formset', response.context_data)
+        self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
+
+    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
+        # Setup
+        correct_url = reverse('conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertFalse('attachment_formset' in response.context_data)
+
+    def test_can_handle_attachment_previews(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'attachment-0-id': '',
+            'attachment-0-file': f,
+            'attachment-0-comment': '',
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 2,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertTrue(response.context_data['attachment_preview'])
+
+    def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'attachment-0-id': '',
+            'attachment-0-file': f,
+            'attachment-0-comment': '',
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 2,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        post = Topic.objects.get(pk=response.context_data['topic'].pk).first_post
+        self.assertTrue(post.attachments.exists())
+        self.assertEqual(post.attachments.count(), 1)
+
+    def test_cannot_create_attachments_with_invalid_options(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse('conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'attachment-0-id': '',
+            'attachment-0-file': f,
+            'attachment-0-comment': faker.text(max_nb_chars=100) * 1000,
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 2,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        messages = list(response.context['messages'])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(messages[0].level, MSG.ERROR)
+
 
 class TestTopicUpdateView(BaseClientTestCase):
     def setUp(self):
@@ -588,6 +680,53 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.assertEqual(topic.poll.options.count(), 2)
         self.assertEqual(topic.poll.options.all()[0].text, post_data['poll-0-text'])
         self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
+
+    def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertIn('attachment_formset', response.context_data)
+        self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
+
+    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
+        # Setup
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        self.assertFalse('attachment_formset' in response.context_data)
+
+    def test_can_handle_attachment_previews(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'conversation:topic-update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'attachment-0-id': '',
+            'attachment-0-file': f,
+            'attachment-0-comment': '',
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 2,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        self.assertTrue(response.context_data['attachment_preview'])
 
 
 class TestPostCreateView(BaseClientTestCase):
