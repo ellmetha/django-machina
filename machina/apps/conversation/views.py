@@ -168,6 +168,16 @@ class PostEditMixin(object):
                 context['attachment_formset'] = self.attachment_formset_class(
                     queryset=attachment_queryset, prefix='attachment')
 
+            # Handles the preview of the attachments
+            if hasattr(self, 'attachment_preview'):
+                context['attachment_preview'] = self.attachment_preview
+                attachments = []
+                for form in context['attachment_formset'].forms:
+                    if form['DELETE'].value() or not form['file'].html_name in self.request._files:
+                        continue
+                    attachments.append((form, self.request._files[form['file'].html_name]))
+                context['attachment_file_previews'] = attachments
+
         return context
 
     def form_valid(self, form):

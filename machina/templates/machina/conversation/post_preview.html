@@ -11,6 +11,7 @@
                     <div class="post-content">
                         {{ form.content.value|safe|rendered }}
                     </div>
+                    {% include "machina/conversation/attachments/attachments_preview.html" %}
                 </div>
             </div>
         </div>
