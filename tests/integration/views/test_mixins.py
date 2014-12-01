@@ -5,6 +5,7 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import PermissionDenied
 from django.db.models import get_model
 from django.test import RequestFactory
 from django.test import TestCase
@@ -64,10 +65,9 @@ class TestPermissionRequiredMixin(TestCase):
         self.mixin.permission_required = ['can_read_forum', ]
         request = self.factory.get('/')
         request.user = self.user
-        # Run
-        response = self.mixin.dispatch(request)
-        # Check
-        self.assertEqual(response.status_code, 403)  # Forbidden
+        # Run & check
+        with self.assertRaises(PermissionDenied):
+            self.mixin.dispatch(request)
 
     def test_should_return_a_valid_response_if_access_is_granted(self):
         # Setup

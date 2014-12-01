@@ -6,8 +6,8 @@ from collections import Iterable
 # Third party imports
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
-from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.utils.six import string_types
@@ -94,7 +94,7 @@ class PermissionRequiredMixin(object):
                 urlquote(request.get_full_path())
             ))
         elif not has_permissions:
-            return HttpResponseForbidden()
+            raise PermissionDenied
 
     def dispatch(self, request, *args, **kwargs):
         self.request = request
