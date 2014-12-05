@@ -7,9 +7,9 @@ from __future__ import unicode_literals
 from django import forms
 from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
-from django.db.models import get_model
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 
 Attachment = get_model('attachments', 'Attachment')
 

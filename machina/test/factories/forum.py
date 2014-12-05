@@ -4,12 +4,12 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.db.models import get_model
 import factory
 from faker import Factory as FakerFactory
 
 # Local application / specific library imports
 from machina.core.compat import slugify
+from machina.core.db.models import get_model
 
 faker = FakerFactory.create()
 

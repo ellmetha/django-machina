@@ -144,7 +144,6 @@ INSTALLED_APPS = [
     'example_project',
 ] + get_vanilla_apps()
 
-
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 

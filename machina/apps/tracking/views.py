@@ -5,7 +5,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import get_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -15,6 +14,7 @@ from django.views.generic import View
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.loading import get_classes
 from machina.views.mixins import PermissionRequiredMixin

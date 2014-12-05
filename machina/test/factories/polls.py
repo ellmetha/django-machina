@@ -2,11 +2,11 @@
 
 # Standard library imports
 # Third party imports
-from django.db.models import get_model
 import factory
 from faker import Factory as FakerFactory
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.conversation import TopicFactory
 

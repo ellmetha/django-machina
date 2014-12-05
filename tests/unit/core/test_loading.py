@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+import unittest
+
 # Third party imports
-from django import VERSION
+from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.test import TestCase
 from django.test.utils import override_settings
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import AppNotFoundError
 from machina.core.loading import ClassNotFoundError
 from machina.core.loading import get_class
@@ -17,14 +20,14 @@ from machina.core.loading import get_classes
 class TestClassLoadingFunctions(TestCase):
     def test_can_load_a_single_class(self):
         # Run & check
-        Forum = get_class('forum.models', 'Forum')
-        self.assertEqual('machina.apps.forum.models', Forum.__module__)
+        LastTopicsFeed = get_class('feeds.feeds', 'LastTopicsFeed')
+        self.assertEqual('machina.apps.feeds.feeds', LastTopicsFeed.__module__)
 
     def test_can_load_many_classes(self):
         # Run & check
-        Topic, Post = get_classes('conversation.models', ['Topic', 'Post', ])
-        self.assertEqual('machina.apps.conversation.models', Topic.__module__)
-        self.assertEqual('machina.apps.conversation.models', Post.__module__)
+        PostForm, TopicForm = get_classes('conversation.forms', ['PostForm', 'TopicForm', ])
+        self.assertEqual('machina.apps.conversation.forms', PostForm.__module__)
+        self.assertEqual('machina.apps.conversation.forms', TopicForm.__module__)
 
     def test_raises_if_the_module_label_is_incorrect(self):
         # Run & check
@@ -36,14 +39,13 @@ class TestClassLoadingFunctions(TestCase):
         with self.assertRaises(ClassNotFoundError):
             get_classes('forum.models', 'Foo')
 
+    @unittest.skipIf(DJANGO_VERSION >= (1, 7),
+        'not required with Django >= 1.7 because dummy installed apps) will be detected by the app registry')
     def test_raises_in_case_of_import_error_with_django_less_than_1_dot_7(self):
         # Run & check
-        if VERSION[:2] < (1, 7):
-            # We do not check anything with Django 1.7 or greater because any
-            # dummy installed app will be detected by the Django app registry
-            with override_settings(INSTALLED_APPS=('it.is.bad', )):
-                with self.assertRaises(AppNotFoundError):
-                    get_class('bad', 'Foo')
+        with override_settings(INSTALLED_APPS=('it.is.bad', )):
+            with self.assertRaises(AppNotFoundError):
+                get_class('bad', 'Foo')
 
 
 class TestClassLoadingFunctionsWithOverrides(TestCase):
@@ -72,3 +74,9 @@ class TestClassLoadingFunctionsWithOverrides(TestCase):
                 'forum.views', ('ForumView', 'MyNewForumView'))
             self.assertEqual('machina.apps.forum.views', ForumView.__module__)
             self.assertEqual('tests._testsite.apps.forum.views', MyNewForumView.__module__)
+
+
+class TestModelOverrides(TestCase):
+    def test_are_registered_before_vanilla_models(self):
+        klass = get_model('conversation', 'Topic')
+        self.assertEqual('tests._testsite.apps.conversation.models', klass.__module__)

@@ -4,10 +4,10 @@
 # Third party imports
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import AbstractForum
+from machina.core.db.models import model_factory
 
 
-class Forum(AbstractForum):
-    pass
+Forum = model_factory(AbstractForum)
 
 
 from .receivers import *

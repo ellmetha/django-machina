@@ -8,3 +8,4 @@ fake-factory>=0.4.0,<0.5
 coveralls==0.2
 mock>=1.0.1,<1.1
 tox==1.7.0
+flake8==2.2.5

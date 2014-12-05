@@ -28,6 +28,7 @@ class AbstractForumReadTrack(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'tracking'
         unique_together = ['user', 'forum', ]
         verbose_name = _('Forum track')
         verbose_name_plural = _('Forum tracks')
@@ -47,6 +48,7 @@ class AbstractTopicReadTrack(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'tracking'
         unique_together = ['user', 'topic', ]
         verbose_name = _('Topic track')
         verbose_name_plural = _('Topic tracks')

@@ -2,7 +2,6 @@
 
 # Standard library imports
 # Third party imports
-from django.db.models import get_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
@@ -10,6 +9,7 @@ from django.views.generic import ListView
 # Local application / specific library imports
 from machina.apps.forum.signals import forum_viewed
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 

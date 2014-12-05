@@ -54,7 +54,7 @@ TEST_SETTINGS = {
         'bootstrap3',
         'precise_bbcode',
         'tests',
-    ] + get_vanilla_apps(),
+    ] + get_vanilla_apps(['tests._testsite.apps.conversation', ]),
     'ROOT_URLCONF': 'tests._testsite.urls',
     'MIDDLEWARE_CLASSES': (
         'django.middleware.common.CommonMiddleware',

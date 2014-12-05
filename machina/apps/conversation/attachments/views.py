@@ -5,11 +5,11 @@ import mimetypes
 import os
 
 # Third party imports
-from django.db.models import get_model
 from django.http import HttpResponse
 from django.views.generic import DetailView
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 

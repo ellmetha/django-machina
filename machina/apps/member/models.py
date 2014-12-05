@@ -5,11 +5,8 @@
 # Local application / specific library imports
 from machina.apps.member.abstract_models import AbstractProfile
 from machina.apps.member.abstract_models import AbstractRank
+from machina.core.db.models import model_factory
 
 
-class Profile(AbstractProfile):
-    pass
-
-
-class Rank(AbstractRank):
-    pass
+Profile = model_factory(AbstractProfile)
+Rank = model_factory(AbstractRank)

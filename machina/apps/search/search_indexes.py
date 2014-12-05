@@ -2,10 +2,10 @@
 
 # Standard library imports
 # Third party imports
-from django.db.models import get_model
 from haystack import indexes
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 
 Post = get_model('conversation', 'Post')
 

@@ -9,10 +9,10 @@ from django.core.exceptions import ValidationError
 from django.forms.formsets import TOTAL_FORM_COUNT
 from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
-from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.utils import get_object_or_none
 
 TopicPoll = get_model('polls', 'TopicPoll')

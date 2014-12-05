@@ -3,9 +3,10 @@
 # Standard library imports
 # Third party imports
 from django.contrib import admin
-from django.db.models import get_model
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
+
 TopicPoll = get_model('polls', 'TopicPoll')
 TopicPollOption = get_model('polls', 'TopicPollOption')
 TopicPollVote = get_model('polls', 'TopicPollVote')

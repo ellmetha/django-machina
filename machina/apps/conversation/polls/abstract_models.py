@@ -38,6 +38,7 @@ class AbstractTopicPoll(DatedModel):
 
     class Meta:
         abstract = True
+        app_label = 'polls'
         ordering = ['-updated', ]
         get_latest_by = 'updated'
         verbose_name = _('Topic poll')
@@ -67,6 +68,7 @@ class AbstractTopicPollOption(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'polls'
         verbose_name = _('Topic poll option')
         verbose_name_plural = _('Topic poll options')
 
@@ -89,6 +91,7 @@ class AbstractTopicPollVote(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'polls'
         verbose_name = _('Topic poll vote')
         verbose_name_plural = _('Topic poll votes')
 

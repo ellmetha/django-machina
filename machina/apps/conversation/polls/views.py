@@ -4,7 +4,6 @@
 # Third party imports
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.db.models import get_model
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
@@ -14,6 +13,7 @@ from django.views.generic import UpdateView
 from django.views.generic.edit import ModelFormMixin
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 

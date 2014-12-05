@@ -3,12 +3,12 @@
 # Standard library imports
 # Third party imports
 from django.contrib.syndication.views import Feed
-from django.db.models import get_model
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')

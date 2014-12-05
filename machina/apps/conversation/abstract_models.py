@@ -68,6 +68,7 @@ class AbstractTopic(DatedModel):
 
     class Meta:
         abstract = True
+        app_label = 'conversation'
         ordering = ['-type', '-updated', ]
         get_latest_by = 'updated'
         verbose_name = _('Topic')
@@ -206,6 +207,7 @@ class AbstractPost(DatedModel):
 
     class Meta:
         abstract = True
+        app_label = 'conversation'
         ordering = ['created', ]
         get_latest_by = 'created'
         verbose_name = _('Post')

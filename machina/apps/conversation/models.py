@@ -5,14 +5,11 @@
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import AbstractPost
 from machina.apps.conversation.abstract_models import AbstractTopic
+from machina.core.db.models import model_factory
 
 
-class Topic(AbstractTopic):
-    pass
-
-
-class Post(AbstractPost):
-    pass
+Topic = model_factory(AbstractTopic)
+Post = model_factory(AbstractPost)
 
 
 from .receivers import *

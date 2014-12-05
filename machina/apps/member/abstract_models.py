@@ -38,6 +38,7 @@ class AbstractProfile(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'member'
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
 
@@ -61,6 +62,7 @@ class AbstractRank(models.Model):
 
     class Meta:
         abstract = True
+        app_label = 'member'
         verbose_name = _('Rank')
         verbose_name_plural = _('Ranks')
 

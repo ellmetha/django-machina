@@ -81,6 +81,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
     class Meta:
         abstract = True
+        app_label = 'forum'
         ordering = ['tree_id', 'lft']
         permissions = [
             # Forums

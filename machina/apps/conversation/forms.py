@@ -7,11 +7,11 @@ from __future__ import unicode_literals
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
-from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
 Post = get_model('conversation', 'Post')

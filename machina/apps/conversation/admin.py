@@ -3,9 +3,10 @@
 # Standard library imports
 # Third party imports
 from django.contrib import admin
-from django.db.models import get_model
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
+
 Attachment = get_model('attachments', 'Attachment')
 Post = get_model('conversation', 'Post')
 Topic = get_model('conversation', 'Topic')

@@ -5,14 +5,11 @@
 # Local application / specific library imports
 from machina.apps.tracking.abstract_models import AbstractForumReadTrack
 from machina.apps.tracking.abstract_models import AbstractTopicReadTrack
+from machina.core.db.models import model_factory
 
 
-class ForumReadTrack(AbstractForumReadTrack):
-    pass
-
-
-class TopicReadTrack(AbstractTopicReadTrack):
-    pass
+ForumReadTrack = model_factory(AbstractForumReadTrack)
+TopicReadTrack = model_factory(AbstractTopicReadTrack)
 
 
 from .receivers import *

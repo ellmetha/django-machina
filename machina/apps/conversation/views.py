@@ -5,7 +5,6 @@
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.db.models import get_model
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -19,6 +18,7 @@ from django.views.generic import UpdateView
 from machina.apps.conversation.signals import topic_viewed
 from machina.apps.conversation.utils import get_client_ip
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 

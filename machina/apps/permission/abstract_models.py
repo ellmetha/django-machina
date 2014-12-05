@@ -23,6 +23,7 @@ class AbstractForumUserObjectPermission(UserObjectPermissionBase):
 
     class Meta:
         abstract = True
+        app_label = 'permission'
         verbose_name = _('User forum object permission')
         verbose_name_plural = _('User forum object permissions')
 
@@ -40,6 +41,7 @@ class AbstractForumGroupObjectPermission(GroupObjectPermissionBase):
 
     class Meta:
         abstract = True
+        app_label = 'permission'
         verbose_name = _('Group forum object permission')
         verbose_name_plural = _('Group forum object permissions')
 
