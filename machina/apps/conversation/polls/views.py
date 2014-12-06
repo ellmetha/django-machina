@@ -71,7 +71,7 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
             'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
-    # Permissions checks
+    # Permissions checks
 
     def get_controlled_object(self):
         """

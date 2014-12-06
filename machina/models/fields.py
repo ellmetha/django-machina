@@ -58,8 +58,8 @@ except AttributeError as e:
 
 class MarkupText(SafeData):
     def __init__(self, instance, field_name, rendered_field_name):
-        # Stores a reference to the instance along with field names
-        # to make assignment possible.
+        # Stores a reference to the instance along with field names
+        # to make assignment possible.
         self.instance = instance
         self.field_name = field_name
         self.rendered_field_name = rendered_field_name
@@ -113,7 +113,7 @@ class MarkupTextDescriptor(object):
             instance.__dict__[self.field.name] = value.raw
             setattr(instance, self.rendered_field_name, value.rendered)
         else:
-            # Set only the raw field
+            # Set only the raw field
             instance.__dict__[self.field.name] = value
 
 
@@ -125,7 +125,7 @@ class MarkupTextField(models.TextField):
     """
     def __init__(self, *args, **kwargs):
         # For South FakeORM / Django 1.7 migration serializer compatibility: the frozen version of a
-        # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field itself
+        # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field itself
         # is frozen / serialized as well.
         self.add_rendered_field = not kwargs.pop('no_rendered_field', False)
         super(MarkupTextField, self).__init__(*args, **kwargs)
@@ -147,14 +147,14 @@ class MarkupTextField(models.TextField):
             rendered_field = models.TextField(editable=False, blank=True, null=True)
             cls.add_to_class(_rendered_field_name(name), rendered_field)
 
-        # The data will be rendered before each save
+        # The data will be rendered before each save
         signals.pre_save.connect(self.render_data, sender=cls)
 
         # Add the default text field
         super(MarkupTextField, self).contribute_to_class(cls, name)
 
-        # Associates the name of this field to a special descriptor that will return
-        # an appropriate Markup object each time the field is accessed
+        # Associates the name of this field to a special descriptor that will return
+        # an appropriate Markup object each time the field is accessed
         setattr(cls, name, MarkupTextDescriptor(self))
 
     def value_to_string(self, obj):
@@ -241,7 +241,7 @@ class ExtendedImageField(models.ImageField):
             filename = path.splitext(path.split(data.name)[-1])[0]
             filename = '{}.png'.format(filename)
 
-            # Regenerate a File object
+            # Regenerate a File object
             data = SimpleUploadedFile(filename, content)
         super(ExtendedImageField, self).save_form_data(instance, data)
 

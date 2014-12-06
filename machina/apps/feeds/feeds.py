@@ -19,12 +19,12 @@ perm_handler = PermissionHandler()
 
 
 class LastTopicsFeed(Feed):
-    # Standard RSS elements
+    # Standard RSS elements
     title = _('Latest topics')
     description = _('Latest topics updated on the forums')
     link = reverse_lazy('forum:index')
 
-    # Item elements
+    # Item elements
     title_template = 'feeds/topics_title.html'
     description_template = 'feeds/topics_description.html'
 

@@ -39,7 +39,7 @@ class ForumAdmin(GuardedModelAdmin):
     )
     list_display = ('name', 'type', 'topics_count', 'posts_count',)
     search_fields = ('name',)
-    # Permissions specific attributes
+    # Permissions specific attributes
     obj_perms_manage_template = 'admin/forum/forum/obj_perms_manage.html'
 
     def get_urls(self):
@@ -57,14 +57,14 @@ class ForumAdmin(GuardedModelAdmin):
         """
         forum = get_object_or_404(Forum, pk=forum_id)
 
-        # Fetch the target
+        # Fetch the target
         target, position = None, None
         if direction == 'up':
             target, position = forum.get_previous_sibling(), 'left'
         elif direction == 'down':
             target, position = forum.get_next_sibling(), 'right'
 
-        # Do the move
+        # Do the move
         try:
             assert target is not None
             forum.move_to(target, position)

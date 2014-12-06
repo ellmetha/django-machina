@@ -10,4 +10,4 @@ from machina.core.db.models import model_factory
 Forum = model_factory(AbstractForum)
 
 
-from .receivers import *
+from .receivers import *  # noqa

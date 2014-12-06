@@ -47,12 +47,12 @@ class MarkForumsReadView(View):
                 Forum.objects.all(), request.user)
             redirect_to = reverse('forum:index')
 
-        # Update all forum tracks to the current date for the considered forums
+        # Update all forum tracks to the current date for the considered forums
         for forum in forums:
             forum_track = ForumReadTrack.objects.get_or_create(forum=forum, user=request.user)[0]
             forum_track.save()
 
-        # Delete all the unnecessary topic tracks
+        # Delete all the unnecessary topic tracks
         TopicReadTrack.objects.filter(topic__forum__in=forums, user=request.user).delete()
 
         if len(forums):
@@ -75,7 +75,7 @@ class MarkTopicsReadView(PermissionRequiredMixin, View):
         # Update the track related to the considered forum to the current date
         forum_track = ForumReadTrack.objects.get_or_create(forum=forum, user=request.user)[0]
         forum_track.save()
-        # Delete all the topic tracks associated with this forum
+        # Delete all the topic tracks associated with this forum
         TopicReadTrack.objects.filter(topic__forum=forum, user=request.user).delete()
 
         messages.success(request, self.success_message)

@@ -12,4 +12,4 @@ Topic = model_factory(AbstractTopic)
 Post = model_factory(AbstractPost)
 
 
-from .receivers import *
+from .receivers import *  # noqa

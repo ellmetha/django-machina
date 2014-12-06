@@ -52,7 +52,7 @@ class SearchForm(FacetedSearchForm):
         if self.cleaned_data['search_poster_name']:
             sqs = sqs.filter(poster_name__icontains=self.cleaned_data['search_poster_name'])
 
-        # Handles searches in specific forums
+        # Handles searches in specific forums
         if self.cleaned_data['search_forums']:
             sqs = sqs.filter(forum__in=self.cleaned_data['search_forums'])
 

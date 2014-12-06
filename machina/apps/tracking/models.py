@@ -12,4 +12,4 @@ ForumReadTrack = model_factory(AbstractForumReadTrack)
 TopicReadTrack = model_factory(AbstractTopicReadTrack)
 
 
-from .receivers import *
+from .receivers import *  # noqa

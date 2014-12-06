@@ -54,10 +54,10 @@ class AbstractTopic(DatedModel):
     status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
     # A topic can be approved before publishing ; defaults to True. The value of this flag
-    # should correspond to the one associated with the first post
+    # should correspond to the one associated with the first post
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
-    # The number of posts included in this topic
+    # The number of posts included in this topic
     posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), editable=False, blank=True, default=0)
 
     # The number of time the topic has been viewed
@@ -121,12 +121,12 @@ class AbstractTopic(DatedModel):
 
     def save(self, *args, **kwargs):
         # It is vital to track the changes of the forum associated with a topic in order to
-        # maintain counters up-to-date.
+        # maintain counters up-to-date.
         old_instance = None
         if self.pk:
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
-        # Update the slug field
+        # Update the slug field
         self.slug = slugify(force_text(self.subject))
 
         # Do the save
@@ -189,7 +189,7 @@ class AbstractPost(DatedModel):
     poster_ip = models.GenericIPAddressField(verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0')
 
     # Each post can have its own subject. The subject of the thread corresponds to the
-    # one associated with the first post
+    # one associated with the first post
     subject = models.CharField(verbose_name=_('Subject'), max_length=255)
 
     # Content
@@ -198,7 +198,7 @@ class AbstractPost(DatedModel):
     # A post can be approved before publishing ; defaults to True
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
-    # A post can be edited for several reason (eg. moderation) ; the reason why it has been updated can be specified
+    # A post can be edited for several reason (eg. moderation) ; the reason why it has been updated can be specified
     update_reason = models.CharField(max_length=255, verbose_name=_('Update reason'), blank=True, null=True)
 
     # Tracking data
@@ -233,7 +233,7 @@ class AbstractPost(DatedModel):
         super(AbstractPost, self).save(*args, **kwargs)
 
         # Ensures that the subject of the thread corresponds to the one associated
-        # with the first post. Do the same with the 'approved' flag.
+        # with the first post. Do the same with the 'approved' flag.
         if self.is_topic_head:
             if self.subject != self.topic.subject or self.approved != self.topic.approved:
                 self.topic.subject = self.subject

@@ -5,4 +5,4 @@
 # Local application / specific library imports
 
 
-from .abstract_models import *
+from .abstract_models import *  # noqa

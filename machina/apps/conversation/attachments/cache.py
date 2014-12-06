@@ -61,7 +61,7 @@ class AttachmentCache(object):
         files_states = {}
 
         for name, upload in files.items():
-            # Generates the state of the file
+            # Generates the state of the file
             state = {
                 'name': upload.name,
                 'size': upload.size,

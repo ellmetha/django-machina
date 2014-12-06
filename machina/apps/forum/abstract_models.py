@@ -49,7 +49,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
     description = MarkupTextField(verbose_name=_('Description'), null=True, blank=True)
 
-    # A forum can come with an image (eg. a small logo)
+    # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(verbose_name=_('Forum image'), null=True, blank=True,
                                upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
                                **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS)
@@ -64,7 +64,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
     TYPE_CHOICES = FORUM_TYPES
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
-    # Tracking data
+    # Tracking data
     posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
     topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
     real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'),
@@ -84,7 +84,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         app_label = 'forum'
         ordering = ['tree_id', 'lft']
         permissions = [
-            # Forums
+            # Forums
             ('can_see_forum', _('Can see forum')),
             ('can_read_forum', _('Can read forum')),
             # Topics & posts
@@ -95,10 +95,10 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             ('can_delete_own_posts', _('Can delete own posts')),
             ('can_edit_own_posts', _('Can edit own posts')),
             ('can_post_without_approval', _('Can post without approval')),
-            # Polls
+            # Polls
             ('can_create_poll', _('Can create poll')),
             ('can_vote_in_polls', _('Can vote in polls')),
-            # Attachments
+            # Attachments
             ('can_attach_file', _('Can attach file')),
             ('can_download_file', _('Can download file')),
             # Moderation
@@ -148,12 +148,12 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
     def save(self, *args, **kwargs):
         # It is vital to track the changes of the parent associated with a forum in order to
-        # maintain counters up-to-date and to trigger other operations such as permissions updates.
+        # maintain counters up-to-date and to trigger other operations such as permissions updates.
         old_instance = None
         if self.pk:
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
-        # Update the slug field
+        # Update the slug field
         self.slug = slugify(force_text(self.name))
 
         # Do the save
@@ -166,7 +166,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             if old_instance.parent:
                 old_parent = refresh(old_instance.parent)
                 old_parent.update_trackers()
-            # Trigger the 'forum_moved' signal
+            # Trigger the 'forum_moved' signal
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
 
     def _simple_save(self, *args, **kwargs):
@@ -205,7 +205,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         self.updated = approved_topics[0].updated if len(approved_topics) else now()
 
         # Any save of a forum triggered from the update_tracker process will not result
-        # in checking for a change of the forum's parent.
+        # in checking for a change of the forum's parent.
         self._simple_save()
 
         # Trigger the parent trackers update if necessary

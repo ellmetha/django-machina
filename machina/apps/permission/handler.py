@@ -15,7 +15,7 @@ Post = get_model('conversation', 'Post')
 
 class PermissionHandler(object):
 
-    # Filtering methods
+    # Filtering methods
     # --
 
     def forum_list_filter(self, qs, user):
@@ -25,11 +25,11 @@ class PermissionHandler(object):
         """
         checker = ObjectPermissionChecker(user)
 
-        # Any superuser should see all the forums
+        # Any superuser should see all the forums
         if user.is_superuser:
             return qs
 
-        # Check whether the forums can be viewed by the given user
+        # Check whether the forums can be viewed by the given user
         forums_to_hide = self._get_hidden_forum_ids(qs, checker)
 
         return qs.exclude(id__in=forums_to_hide)
@@ -54,7 +54,7 @@ class PermissionHandler(object):
             return None
         return posts[0]
 
-    # Verification methods
+    # Verification methods
     # --
 
     # Forums
@@ -104,7 +104,7 @@ class PermissionHandler(object):
         checker = ObjectPermissionChecker(user)
 
         # A user can edit a post if...
-        #     he is a superuser
+        #     he is a superuser
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
         can_edit = (user.is_superuser
@@ -119,7 +119,7 @@ class PermissionHandler(object):
         checker = ObjectPermissionChecker(user)
 
         # A user can delete a post if...
-        #     he is a superuser
+        #     he is a superuser
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
         can_delete = (user.is_superuser
@@ -171,7 +171,7 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_download_file')
 
-    # Common
+    # Common
     # --
 
     def _get_hidden_forum_ids(self, forums, checker):
@@ -191,7 +191,7 @@ class PermissionHandler(object):
 
                 if (ancestors_visible is False) or (not checker.has_perm('can_see_forum', forum) and
                                                     not checker.has_perm('can_read_forum', forum)):
-                    # If one forum can not be seen by a given user, all of its descendant
+                    # If one forum can not be seen by a given user, all of its descendant
                     # should also be hidden.
                     forum_and_descendants = forum.get_descendants(include_self=True)
                     hidden_forums.extend(forum_and_descendants.values_list('id', flat=True))

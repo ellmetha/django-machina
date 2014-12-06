@@ -8,7 +8,7 @@ import mock
 # Local application / specific library imports
 
 
-# Originaly comes from mock-django (https://github.com/dcramer/mock-django)
+# Originaly comes from mock-django (https://github.com/dcramer/mock-django)
 @contextlib.contextmanager
 def mock_signal_receiver(signal, wraps=None, **kwargs):
     """

@@ -36,7 +36,7 @@ def update_user_trackers(sender, topic, user, request, response, **kwargs):
         if not created:
             topic_track.save()  # mark_time filled
 
-        # If no other topic is unread inside the considered forum, the latter should also
+        # If no other topic is unread inside the considered forum, the latter should also
         # be marked as read.
         unread_topics = forum.topics.filter(
             Q(tracks__user=user, tracks__mark_time__lt=F('updated')) |

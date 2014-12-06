@@ -69,7 +69,7 @@ class PermissionRequiredMixin(object):
         """
         # Initializes a permission checker
         checker = ObjectPermissionChecker(user)
-        # Check permissions
+        # Check permissions
         return all(checker.has_perm(perm, obj) for perm in perms)
 
     def check_permissions(self, request):
@@ -81,7 +81,7 @@ class PermissionRequiredMixin(object):
                or getattr(self, 'object', None))
         user = request.user
 
-        # Get the permissions to check
+        # Get the permissions to check
         perms = self.get_required_permissions(self)
 
         # Check permissions

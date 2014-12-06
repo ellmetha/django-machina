@@ -37,7 +37,7 @@ class ForumManager(TreeManager):
         return super(ForumManager, self).get_query_set().filter(
             # Forums that have a top-level category has parent
             Q(parent__type=self.model.TYPE_CHOICES.forum_cat, **{parent_selector(2): parent_value}) |
-            # Sub forums that can be displayed
+            # Sub forums that can be displayed
             Q(display_sub_forum_list=True, **{parent_selector(2): parent_value}) |
             # Children of forums that have a category as parent
             Q(parent__parent__type=self.model.TYPE_CHOICES.forum_cat,

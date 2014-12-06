@@ -160,7 +160,7 @@ class PostEditMixin(object):
         attachment_queryset = Attachment.objects.filter(post=post)
 
         if perm_handler.can_attach_files(self.get_forum(), self.request.user):
-            # Add the attachment formset to the context
+            # Add the attachment formset to the context
             if self.request.method == 'POST':
                 context['attachment_formset'] = self.attachment_formset_class(
                     self.request.POST, self.request.FILES, prefix='attachment')
@@ -231,7 +231,7 @@ class TopicEditMixin(PostEditMixin):
         poll_option_queryset = TopicPollOption.objects.filter(poll__topic=topic)
 
         if perm_handler.can_create_polls(self.get_forum(), self.request.user):
-            # Add the poll option formset to the context
+            # Add the poll option formset to the context
             if self.request.method == 'POST':
                 context['poll_option_formset'] = self.poll_option_formset_class(
                     data=self.request.POST, topic=topic, prefix='poll')
@@ -332,7 +332,7 @@ class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
             'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
-    # Permissions checks
+    # Permissions checks
 
     def get_controlled_object(self):
         """
@@ -409,7 +409,7 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
             self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
         return self.topic
 
-    # Permissions checks
+    # Permissions checks
 
     def get_controlled_object(self):
         """
@@ -430,7 +430,7 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super(PostDeleteView, self).get_context_data(**kwargs)
 
-        # Append the topic and the forum associated with the post being deleted
+        # Append the topic and the forum associated with the post being deleted
         # to the context
         post = self.get_object()
         context['topic'] = post.topic
@@ -465,7 +465,7 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
             'slug': self.object.topic.slug,
             'pk': self.object.topic.pk})
 
-    # Permissions checks
+    # Permissions checks
 
     def get_controlled_object(self):
         """

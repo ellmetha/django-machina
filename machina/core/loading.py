@@ -36,14 +36,14 @@ def get_classes(module_label, classnames):
         raise AppNotFoundError('No app found matching \'{}\''.format(module_label))
 
     # Determines the full module path by appending the module label
-    # to the base package path of the considered application.
+    # to the base package path of the considered application.
     module_path = app_module_path
     if '.' in app_module_path:
         base_package = app_module_path.rsplit('.' + app_label, 1)[0]
         module_path = '{}.{}'.format(base_package, module_label)
 
-    # Try to import this module from the related app that is specified
-    # in the Django settings.
+    # Try to import this module from the related app that is specified
+    # in the Django settings.
     local_imported_module = _import_module(module_path)
 
     # If the module we tried to import is not located inside the machina
@@ -55,7 +55,7 @@ def get_classes(module_label, classnames):
     if local_imported_module is None and machina_imported_module is None:
         raise AppNotFoundError('Error importing \'{}\''.format(module_path))
 
-    # Any local module is prioritized over the corresponding machina module
+    # Any local module is prioritized over the corresponding machina module
     imported_modules = [m for m in (local_imported_module, machina_imported_module) if
                         m is not None]
     return _pick_up_classes(imported_modules, classnames)

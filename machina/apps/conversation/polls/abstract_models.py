@@ -25,7 +25,7 @@ class AbstractTopicPoll(DatedModel):
     # A poll is defined by a single question
     question = models.CharField(max_length=255, verbose_name=_('Poll question'))
 
-    # A poll can have a duration
+    # A poll can have a duration
     duration = models.PositiveIntegerField(verbose_name=_('Poll duration, in days'), blank=True, null=True)
 
     # Users can possibly select more than one option associated with a poll

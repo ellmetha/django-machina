@@ -40,8 +40,8 @@ class PostForm(forms.ModelForm):
         self.fields['content'].label = _('Message')
         self.fields['content'].widget.attrs['placeholder'] = _('Enter your message')
 
-        # Handles the definition of a default subject if we are
-        # considering an answer
+        # Handles the definition of a default subject if we are
+        # considering an answer
         if not self.instance.pk and self.topic:
             self.fields['subject'].initial = '{} {}'.format(
                 machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
@@ -90,7 +90,7 @@ class TopicForm(PostForm):
                 self.fields['topic_type'].choices)
             self.fields['topic_type'].choices = choices
 
-        # Append polls fields to the form if the user is allowed to create such things
+        # Append polls fields to the form if the user is allowed to create such things
         if self.can_create_polls:
             self.fields['poll_question'] = forms.CharField(
                 label=_('Poll question'), required=False,
@@ -110,7 +110,7 @@ class TopicForm(PostForm):
                 help_text=_('If enabled users are able to change their vote.'),
                 initial=False)
 
-        # Set the initial values
+        # Set the initial values
         try:
             if hasattr(self.instance, 'topic'):
                 self.fields['topic_type'].initial = self.instance.topic.type
@@ -125,7 +125,7 @@ class TopicForm(PostForm):
 
     def save(self, commit=True):
         if not self.instance.pk:
-             # First, handle topic creation
+            # First, handle topic creation
             if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
                 topic_type = self.cleaned_data['topic_type']
             else:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+# Standard library imports
 # Third party imports
 from django import template
 

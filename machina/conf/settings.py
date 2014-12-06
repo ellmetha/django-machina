@@ -16,7 +16,7 @@ MACHINA_MARKUP_WIDGET = getattr(settings, 'MACHINA_MARKUP_WIDGET', None)
 MACHINA_BASE_TEMPLATE = getattr(settings, 'MACHINA_BASE_TEMPLATE', 'base.html')
 
 
-# Forum
+# Forum
 FORUM_IMAGE_UPLOAD_TO = getattr(settings, 'MACHINA_FORUM_IMAGE_UPLOAD_TO', 'machina/forum_images')
 FORUM_IMAGE_WIDTH = getattr(settings, 'MACHINA_FORUM_IMAGE_WIDTH', None)
 FORUM_IMAGE_HEIGHT = getattr(settings, 'MACHINA_FORUM_IMAGE_HEIGHT', None)
@@ -37,11 +37,11 @@ TOPIC_POSTS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_TOPIC_POSTS_NUMBER_PER_
 ATTACHMENT_FILE_UPLOAD_TO = getattr(settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments')
 
 
-# Polls
+# Polls
 POLL_MAX_OPTIONS_PER_USER = getattr(settings, 'MACHINA_POLL_MAX_OPTIONS_PER_USER', 10)
 
 
-# Attachments
+# Attachments
 ATTACHMENT_CACHE_NAME = getattr(settings, 'MACHINA_ATTACHMENT_CACHE_NAME', 'machina_attachments')
 
 

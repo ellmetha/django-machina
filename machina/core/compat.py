@@ -8,14 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 
-# PILImage
+# PILImage
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
 except ImportError as err:
     try:
         # If that failed, try the alternate import syntax for PIL.
-        import Image as PILImage
+        import Image as PILImage  # noqa
     except ImportError as err:
         # Neither worked, so it's likely not installed.
         raise ImproperlyConfigured(
@@ -23,20 +23,20 @@ except ImportError as err:
         )
 
 
-# Django slugify
+# Django slugify
 try:
     from django.utils.text import slugify
 except ImportError:
-    from django.template.defaultfilters import slugify
+    from django.template.defaultfilters import slugify  # noqa
 
 
 # force_bytes
 try:
     from django.utils.encoding import force_bytes
 except ImportError:
-    from django.utils.encoding import smart_str as force_bytes
+    from django.utils.encoding import smart_str as force_bytes  # noqa
 
 
-# A settings that can be used in foreign key declarations to ensure backwards compatibility
-# with Django 1.4
+# A settings that can be used in foreign key declarations to ensure backwards compatibility
+# with Django 1.4
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
