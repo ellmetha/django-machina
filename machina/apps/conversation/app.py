@@ -52,8 +52,7 @@ class PollsApp(Application):
     def get_urls(self):
         urls = super(PollsApp, self).get_urls()
         urls += [
-            url(_(r'forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/'),
-                include(self.polls_app.urls)),
+            url(_(r'^'), include(self.polls_app.urls)),
         ]
         return patterns('', *urls)
 
