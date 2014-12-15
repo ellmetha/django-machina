@@ -15,9 +15,14 @@ class ForumReadTrackManager(models.Manager):
         If a forum is unread all of its ancestors are also unread and will be
         included in the final list.
         """
+        super_self = super(ForumReadTrackManager, self)
+        get_queryset = (super_self.get_query_set
+                        if hasattr(super_self, 'get_query_set')
+                        else super_self.get_queryset)
+
         unread_forums = []
 
-        tracks = super(ForumReadTrackManager, self).get_query_set().filter(
+        tracks = get_queryset().filter(
             user=user,
             forum__in=forums)
         tracked_forums = []
