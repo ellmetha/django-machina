@@ -12,3 +12,6 @@ class ForumRegistryConfig(AppConfig):
     label = 'forum'
     name = 'machina.apps.forum'
     verbose_name = _('Forum')
+
+    def ready(self):
+        from . import receivers  # noqa

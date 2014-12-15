@@ -12,3 +12,6 @@ class ConversationRegistryConfig(AppConfig):
     label = 'conversation'
     name = 'machina.apps.conversation'
     verbose_name = _('Forum conversations')
+
+    def ready(self):
+        from . import receivers  # noqa

@@ -12,3 +12,6 @@ class TrackingRegistryConfig(AppConfig):
     label = 'tracking'
     name = 'machina.apps.tracking'
     verbose_name = _('Forum tracking')
+
+    def ready(self):
+        from . import receivers  # noqa

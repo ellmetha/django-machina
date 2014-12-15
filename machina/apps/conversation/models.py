@@ -2,6 +2,8 @@
 
 # Standard library imports
 # Third party imports
+import django
+
 # Local application / specific library imports
 from machina.apps.conversation.abstract_models import AbstractPost
 from machina.apps.conversation.abstract_models import AbstractTopic
@@ -12,4 +14,5 @@ Topic = model_factory(AbstractTopic)
 Post = model_factory(AbstractPost)
 
 
-from .receivers import *  # noqa
+if django.VERSION < (1, 7):
+    from .receivers import *  # noqa
