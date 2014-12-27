@@ -47,6 +47,14 @@ class TestClassLoadingFunctions(TestCase):
             with self.assertRaises(AppNotFoundError):
                 get_class('bad', 'Foo')
 
+    def test_raise_importerror_if_app_raises_importerror(self):
+        # Setup
+        apps = list(settings.INSTALLED_APPS)
+        apps[apps.index('machina.apps.forum')] = 'tests._testsite.importerror_app.forum'
+        with override_settings(INSTALLED_APPS=apps):
+            with self.assertRaises(ImportError):
+                get_class('forum.dummy', 'Dummy')
+
 
 class TestClassLoadingFunctionsWithOverrides(TestCase):
     def setUp(self):
