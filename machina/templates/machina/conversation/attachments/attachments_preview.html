@@ -4,9 +4,11 @@
 
 {% if attachment_preview %}
     <div class="row attachments">
-        <div class="col-md-12">
-            <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
-        </div>
+        {% if attachment_file_previews or post.attachments.all %}
+            <div class="col-md-12">
+                <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
+            </div>
+        {% endif %}
         {% if post %}
             {% for attachment in post.attachments.all %}
                 <div class="col-md-12 attachment">
