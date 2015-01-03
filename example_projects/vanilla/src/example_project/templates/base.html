@@ -55,12 +55,16 @@
         	<br />
             <div class="container">
                 <div class="row">
-                    {% block breadcrumb %}
-                    {% endblock breadcrumb %}
+                    <div class="col-xs-12">
+                        {% block breadcrumb %}
+                        {% endblock breadcrumb %}
+                    </div>
                 </div>
                 <div class="row">
-                    {% block messages %}
-                    {% endblock messages %}
+                    <div class="col-xs-12">
+                        {% block messages %}
+                        {% endblock messages %}
+                    </div>
                 </div>
             	{% block content %}
             	{% endblock content %}
