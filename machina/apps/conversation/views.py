@@ -356,8 +356,15 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
+        topic = self.get_topic()
+
         # Insert the considered topic into the context
-        context['topic'] = self.get_topic()
+        context['topic'] = topic
+
+        # Add the previous posts to the context
+        previous_posts = topic.posts.order_by('-created')
+        previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
+        context['previous_posts'] = previous_posts
 
         return context
 
