@@ -85,6 +85,11 @@ TEST_SETTINGS = {
             'LOCATION': '/tmp',
         }
     },
+
+    # Setting this explicitly prevents Django 1.7+ from showing a
+    # warning regarding a changed default test runner. The test
+    # suite is run with nose, so it does not matter.
+    'SILENCED_SYSTEM_CHECKS': ['1_6.W001'],
 }
 
 
