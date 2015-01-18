@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django import VERSION as DJANGO_VERSION
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,8 +13,16 @@ class ActiveManager(models.Manager):
     """
     Returns only active objects.
     """
-    def get_query_set(self):
-        return super(ActiveManager, self).get_query_set().filter(is_active__exact=True)
+    def get_queryset(self):
+        super_self = super(ActiveManager, self)
+        get_queryset = (super_self.get_query_set
+                        if hasattr(super_self, 'get_query_set')
+                        else super_self.get_queryset)
+
+        return get_queryset().filter(is_active__exact=True)
+
+    if DJANGO_VERSION < (1, 6):
+        get_query_set = get_queryset
 
 
 class ActiveModel(models.Model):
