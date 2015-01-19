@@ -41,6 +41,34 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default topic-review">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Topic review" %}&nbsp;&ndash;&nbsp;{{ topic.subject }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% for post in previous_posts %}
+                        <div class="row post-review">
+                            <div class="col-md-10 post-content-wrapper">
+                                <h4 class="subject">{{ post.subject }}</h4>
+                                <p><small class="text-muted">
+                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                                </small></p>
+                                <div class="post-content">
+                                    {{ post.content.rendered }}
+                                </div>
+                                {% include "machina/conversation/attachments/attachments_detail.html" %}
+                            </div>
+                            <div class="col-md-2 post-sidebar">
+                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 
 {% block onbodyload %}
