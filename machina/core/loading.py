@@ -6,7 +6,6 @@ import traceback
 
 # Third party imports
 from django.conf import settings
-from django.utils.importlib import import_module
 
 # Local application / specific library imports
 
@@ -75,13 +74,13 @@ def _import_module(module_path, classnames):
     except ImportError:
         # In case of an ImportError, the module being loaded generally does not
         # exist. But an ImportError can occur if the module being loaded exists
-        # and another import located inside it failed.
+        # and another import located inside it failed.
         #
         # In order to provide a meaningfull traceback, the execution information
-        # can be inspected in order to determine which case to consider. If the
+        # can be inspected in order to determine which case to consider. If the
         # execution information provides more than a certain amount of frames,
         # this means that an ImportError occured while loading the initial
-        # Python module.
+        # Python module.
         __, __, exc_traceback = sys.exc_info()
         frames = traceback.extract_tb(exc_traceback)
         if len(frames) > 1:
