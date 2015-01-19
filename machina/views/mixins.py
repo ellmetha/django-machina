@@ -47,6 +47,11 @@ class PermissionRequiredMixin(object):
         """
         Returns the required permissions to access the considered object.
         """
+        perms = []
+
+        if not self.permission_required:
+            return perms
+
         if isinstance(self.permission_required, string_types):
             perms = [self.permission_required, ]
         elif isinstance(self.permission_required, Iterable):

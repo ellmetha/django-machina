@@ -307,7 +307,6 @@ class TopicCreateView(PermissionRequiredMixin, TopicEditMixin, CreateView):
 class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
     success_message = _('This message has been edited successfully.')
     template_name = 'conversation/topic_update.html'
-    permission_required = []  # Defined in the 'perform_permissions_check()' method
     form_class = TopicForm
     model = Topic
 
@@ -386,7 +385,6 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
 class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
     success_message = _('This message has been edited successfully.')
     template_name = 'conversation/post_update.html'
-    permission_required = []  # Defined in the 'perform_permissions_check()' method
     form_class = PostForm
     model = Post
 
@@ -431,7 +429,6 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
 class PostDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'conversation/post_delete.html'
     success_message = _('This message has been deleted successfully.')
-    permission_required = []  # Defined in the 'perform_permissions_check()' method
     model = Post
 
     def get_context_data(self, **kwargs):

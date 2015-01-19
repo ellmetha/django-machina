@@ -28,7 +28,6 @@ perm_handler = PermissionHandler()
 
 class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
     model = TopicPoll
-    permission_required = []  # Defined in the 'perform_permissions_check()' method
     form_class = TopicPollVoteForm
     http_method_names = ['post', ]
 

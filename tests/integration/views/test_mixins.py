@@ -39,9 +39,10 @@ class TestPermissionRequiredMixin(TestCase):
 
         self.mixin = PermissionRequiredMixin()
 
-    def test_should_raise_if_the_permission_required_attribute_is_not_set(self):
+    def test_should_raise_if_the_permission_required_attribute_is_set_with_an_incorrect_value(self):
         # Setup
         self.mixin.object = self.forum
+        self.mixin.permission_required = 10
         request = self.factory.get('/')
         request.user = self.user
         # Run & check

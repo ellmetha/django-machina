@@ -21,7 +21,6 @@ perm_handler = PermissionHandler()
 
 class AttachmentView(PermissionRequiredMixin, DetailView):
     model = Attachment
-    permission_required = []  # Defined in the 'perform_permissions_check()' method
 
     def render_to_response(self, context, **response_kwargs):
         filename = os.path.basename(self.object.file.name)
