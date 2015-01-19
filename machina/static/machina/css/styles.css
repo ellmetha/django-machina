@@ -1546,6 +1546,31 @@
 .post-delete .warning-message {
   margin-bottom: 10px;
 }
+.topic-review .panel-body {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.topic-review .panel-body .post-review {
+  padding: 8px 0;
+  border-bottom: 3px solid #eeeeee;
+}
+.topic-review .panel-body .post-review .post-content-wrapper h4.subject {
+  margin: 0;
+}
+.topic-review .panel-body .post-review .post-content-wrapper .attachments .attachments-title {
+  margin-top: 10px;
+  display: inline-block;
+  border-bottom: 1px solid #999999;
+}
+.topic-review .panel-body .post-review .post-content-wrapper .attachments .attachment {
+  margin-top: 4px;
+}
+.topic-review .panel-body .post-review .post-content-wrapper .attachments .attachment p {
+  margin: 0;
+}
+.topic-review .panel-body .post-review .post-sidebar {
+  border-left: 1px solid #eeeeee;
+}
 .pagination-block {
   text-align: right;
 }
