@@ -58,6 +58,7 @@
                                 </div>
                                 <div class="sub-forums">{{ children }}</div>
                             </td>
+                            <td class="forum-syndication"><a href="{% url 'feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
                             <td class="forum-count">{{ node.topics_count }}</td>
                             <td class="forum-count">{{ node.posts_count }}</td>
                             <td class="forum-last-post">
@@ -72,7 +73,7 @@
                             </td>
                         {% else %}
                             <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
-                            <td class="forum-name">
+                            <td class="forum-name" colspan="2">
                                 <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                                 <div class="forum-description">
                                     {{ node.description.rendered }}
@@ -105,6 +106,7 @@
                                 </div>
                                 <div class="sub-forums">{{ children }}</div>
                             </td>
+                            <td class="forum-syndication"><a href="{% url 'feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
                             <td class="forum-count">{{ node.topics_count }}</td>
                             <td class="forum-count">{{ node.posts_count }}</td>
                             <td class="forum-last-post">
@@ -119,7 +121,7 @@
                             </td>
                         {% else %}
                             <td class="forum-icon link"><i class="fa fa-link fa-2x"></i></td>
-                            <td class="forum-name">
+                            <td class="forum-name" colspan="2">
                                 <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                                 <div class="forum-description">
                                     {{ node.description.rendered }}
