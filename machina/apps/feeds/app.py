@@ -12,7 +12,7 @@ from machina.core.loading import get_class
 
 
 class FeedsApp(Application):
-    name = 'forum'
+    name = 'feeds'
 
     latest_topics_feed = get_class('feeds.feeds', 'LastTopicsFeed')
 
