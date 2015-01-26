@@ -1355,7 +1355,7 @@
   border: none;
 }
 .forumlist .panel-heading table.table td.forum-name-col {
-  width: 55%;
+  width: 65%;
 }
 .forumlist .panel-heading table.table td.forum-count-col {
   width: 10%;
@@ -1388,7 +1388,10 @@
   width: 5%;
 }
 .forumlist .panel-body table.table td.forum-name {
-  width: 50%;
+  width: 55%;
+}
+.forumlist .panel-body table.table td.forum-syndication {
+  width: 5%;
 }
 .forumlist .panel-body table.table td.forum-count {
   width: 10%;
@@ -1413,7 +1416,8 @@
 .forumlist .panel-body .forum-name .sub-forums {
   font-size: 12px;
 }
-.forumlist .panel-body .forum-count {
+.forumlist .panel-body .forum-count,
+.forumlist .panel-body .forum-syndication {
   text-align: center;
 }
 .forumlist .panel-body .forum-count,
