@@ -42,8 +42,8 @@ setup(
         # Pillow is required for image fields
         'pillow>=1.7.8,<2.3',
 
-        # Machina uses BBCode by default as a syntax for forum messages ; but you can change this
-        'django-precise-bbcode>=1.0,<2.0',
+        # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
+        'django-markdown>=0.7.0,<1.0',
 
         # Machina's default templates use django-bootstrap3 to render forms ; but you can override this
         'django-bootstrap3>=3.3.0,<3.4',

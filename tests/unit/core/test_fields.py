@@ -26,16 +26,15 @@ from tests.models import TestableModel
 
 
 class TestMarkupTextField(TestCase):
-    # The following tests involve the django-precise-bbcode
+    # The following tests involve the django-markdown
     # app. This one can be used with Machina in order to
-    # provide a support for the BBCode syntax. But instead
+    # provide a support for the Markdown syntax. But instead
     # we can use another Django app providing support for
-    # other syntax (eg. Markdown).
+    # other syntax (eg. BBCode).
     MARKUP_TEXT_FIELD_TESTS = (
-        ('[b]hello [u]world![/u][/b]', '<strong>hello <u>world!</u></strong>'),
-        ('[url=http://google.com]goto google[/url]', '<a href="http://google.com">goto google</a>'),
-        ('[b]hello [u]worlsd![/u][/b]', '<strong>hello <u>worlsd!</u></strong>'),
-        ('[b]안녕하세요[/b]', '<strong>안녕하세요</strong>'),
+        ('**hello _world!_**', '<p><strong>hello <em>world!</em></strong></p>'),
+        ('[goto google](http://google.com)', '<p><a href="http://google.com">goto google</a></p>'),
+        ('**안녕하세요**', '<p><strong>안녕하세요</strong></p>'),
     )
 
     def test_can_accept_none_values(self):
@@ -60,10 +59,10 @@ class TestMarkupTextField(TestCase):
     def test_provides_access_to_the_raw_text_and_to_the_rendered_text(self):
         # Setup
         test = TestableModel()
-        test.content = '[b]hello[/b]'
+        test.content = '**hello**'
         test.save()
         field = test._meta.get_field('content')
-        markup_content = '[b]hello world![/b]'
+        markup_content = '**hello world!**'
         markup_content_len = len(markup_content)
         # Run
         test.content.raw = markup_content
@@ -72,7 +71,7 @@ class TestMarkupTextField(TestCase):
         test.save()
         # Check
         self.assertEqual(field.value_to_string(test), markup_content)
-        self.assertEqual(test.content.rendered, '<strong>hello world!</strong>')
+        self.assertEqual(test.content.rendered, '<p><strong>hello world!</strong></p>')
         self.assertEqual(len(test.content), markup_content_len)
         with self.assertRaises(AttributeError):
             print(TestableModel.content.rendered)

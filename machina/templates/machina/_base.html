@@ -34,7 +34,7 @@
 {% block content %}{% endblock content %}
 
 {# Block for body onload functions #}
-{% block extra-js %}
+{% block extra_js %}
     {{ block.super }}
     <script src="{% static "machina/js/ui.js" %}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -43,4 +43,4 @@
             {% block onbodyload %}{% endblock onbodyload %}
         });
     </script>
-{% endblock extra-js %}
+{% endblock extra_js %}

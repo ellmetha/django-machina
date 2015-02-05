@@ -74,3 +74,11 @@
 {% block onbodyload %}
     machina.attachment.init();
 {% endblock onbodyload %}
+
+{% block extra_css %}
+    {{ form.media.css }}
+{% endblock extra_css %}
+
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock extra_js %}

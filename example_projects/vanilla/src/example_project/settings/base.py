@@ -137,8 +137,7 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'bootstrap3',
-
-    'precise_bbcode',
+    'django_markdown',
 
     # Local apps
     'example_project',

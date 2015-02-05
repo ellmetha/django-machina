@@ -23,6 +23,7 @@ urlpatterns = patterns(
     # Admin
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^account/', include('django.contrib.auth.urls')),
+    url('^markdown/', include( 'django_markdown.urls')),
 
     # Apps
     url(r'', include(board.urls)),

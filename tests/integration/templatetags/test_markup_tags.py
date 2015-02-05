@@ -25,4 +25,4 @@ class TestRenderedTag(TestCase):
 
             return rendered
 
-        self.assertEqual(get_rendered('[b]This is a test[/b]'), '<strong>This is a test</strong>')
+        self.assertEqual(get_rendered('**This is a test**'), '<p><strong>This is a test</strong></p>')

@@ -1535,6 +1535,17 @@
 .post-edit {
   margin-bottom: 8px;
 }
+.post-edit form .markItUp {
+  width: 100%;
+}
+.post-edit form .markItUp textarea.markItUpEditor {
+  width: 100%;
+  font-familly: initial !important;
+  font-size: 14px !important;
+}
+.post-edit form .markItUp .markItUpHeader ul li {
+  margin-bottom: 5px;
+}
 .post-edit form #poll_formset .poll-option-form div.checkbox {
   margin-top: 6px;
 }

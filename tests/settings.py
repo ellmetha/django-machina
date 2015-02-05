@@ -52,7 +52,7 @@ TEST_SETTINGS = {
         'guardian',
         'haystack',
         'bootstrap3',
-        'precise_bbcode',
+        'django_markdown',
         'tests',
     ] + get_vanilla_apps(['tests._testsite.apps.conversation', ]),
     'ROOT_URLCONF': 'tests._testsite.urls',
