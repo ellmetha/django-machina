@@ -25,6 +25,9 @@
         
     </head>
     <body>
+        {% block js %}
+        {% endblock js %}
+    
         {% block header %}
             <div class="navbar-fixed-top-spacing">&nbsp;</div>
             <div class="navbar navbar-default navbar-fixed-top machina-navbar" role="navigation">
@@ -59,9 +62,6 @@
             {% block content %}
             {% endblock content %}
         </div>
-        
-        {% block js %}
-        {% endblock js %}
 
         {% block extra_js %}
         {% endblock extra_js %}
