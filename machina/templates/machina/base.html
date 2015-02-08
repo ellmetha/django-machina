@@ -27,41 +27,9 @@
     <body>
         {% block js %}
         {% endblock js %}
-    
-        {% block header %}
-            <div class="navbar-fixed-top-spacing">&nbsp;</div>
-            <div class="navbar navbar-default navbar-fixed-top machina-navbar" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">django-machina</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    {% block header_collapse %}
-                    {% endblock header_collapse %}
-                </div>
-            </div>
-        {% endblock header %}
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    {% block breadcrumb %}
-                    {% endblock breadcrumb %}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    {% block messages %}
-                    {% endblock messages %}
-                </div>
-            </div>
-            {% block content %}
-            {% endblock content %}
-        </div>
+
+        {% block body %}
+        {% endblock body %}
 
         {% block extra_js %}
         {% endblock extra_js %}

@@ -1,12 +1,10 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
-{% load staticfiles %}
 {% load conversation_tags %}
 
 {% block sub-title %}{% trans "Post a reply" %}{% endblock sub-title %}
 
 {% block content %}
-    <script type="text/javascript" src="{% static 'machina/_libs/jquery/dist/jquery.min.js' %}"></script>
     <div class="row">
         <div class="col-xs-12">
             <h1>{{ topic.subject }}</h1>
