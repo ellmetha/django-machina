@@ -48,7 +48,7 @@
             </div>
         </div>
     {% endblock header %}
-    <div class="container">
+    <div class="container" id="main_container">
         <div class="row">
             <div class="col-xs-12">
                 {% block breadcrumb %}
@@ -74,7 +74,6 @@
         <script type="text/javascript" src="{% static 'machina/_libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'machina/js/ui.js' %}" type="text/javascript" charset="utf-8"></script>
     {% endcompress %}
-    <script>window.jQuery || document.write('<script src="{% static "machina/_libs/jquery/dist/jquery.min.js" %}"><\/script>')</script>
     <script type="text/javascript">
         $(function() {
             machina.init();

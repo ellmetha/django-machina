@@ -98,6 +98,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'src/example_project/templates/'),
     MACHINA_MAIN_TEMPLATE_DIR,
 )
 
