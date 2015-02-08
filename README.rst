@@ -1,10 +1,16 @@
 django-machina
 ==============
-.. image::  https://travis-ci.org/ellmetha/django-machina.png?branch=master
-  :target: http://travis-ci.org/ellmetha/django-machina
-  :alt: build-status
-.. image:: https://coveralls.io/repos/ellmetha/django-machina/badge.png?branch=master
-  :target: https://coveralls.io/r/ellmetha/django-machina?branch=master 
+
+.. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
+    :target: http://travis-ci.org/ellmetha/django-machina
+    :alt: Build status
+
+.. image:: http://img.shields.io/coveralls/ellmetha/django-machina.svg?style=flat-square
+    :target: https://coveralls.io/r/ellmetha/django-machina
+    :alt: Coveralls status
+
+|
+
 
 A Django forum engine for building powerful and pretty community driven websites.
 
