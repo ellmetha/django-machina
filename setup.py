@@ -45,6 +45,10 @@ setup(
         # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
         'django-markdown>=0.7.0,<1.0',
 
+        # Machina's default templates use djangi-compressor to compress static files ; but you
+        # can override this
+        'django-compressor>=1.4',
+
         # Machina's default templates use django-bootstrap3 to render forms ; but you can override this
         'django-bootstrap3>=3.3.0,<3.4',
     ],

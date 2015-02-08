@@ -1,7 +1,7 @@
 css:
 		# Compile CSS files from LESS
-		lessc machina/static/machina/less/admin_styles.less > machina/static/machina/css/admin_styles.css
-		lessc machina/static/machina/less/styles.less > machina/static/machina/css/styles.css
+		lessc machina/static/machina/less/admin_theme.less > machina/static/machina/css/admin_theme.css
+		lessc machina/static/machina/less/board_theme.less > machina/static/machina/css/board_theme.css
 
 
 .PHONY: install upgrade coverage travis

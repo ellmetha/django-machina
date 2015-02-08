@@ -1,0 +1,26 @@
+@import "../_libs/font-awesome/css/font-awesome.css";
+.danger {
+  color: #b82010;
+}
+a.danger {
+  color: #b82010;
+}
+a.danger:hover {
+  color: #9d261d;
+}
+.success {
+  color: #7ac143;
+}
+a.success {
+  color: #7ac143;
+}
+a.success:hover {
+  color: #46a546;
+}
+#forum-table-dnd .quick-actions-cell {
+  width: 5%;
+  text-align: center;
+}
+#forum-table-dnd .quick-actions-cell .disabled {
+  color: #eeeeee;
+}

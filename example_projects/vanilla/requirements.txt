@@ -1,6 +1,6 @@
 django
 south
-django-pipeline
+django-compressor
 django-debug-toolbar
 django-crispy-forms
 django-loginas

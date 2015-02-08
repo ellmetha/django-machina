@@ -2,8 +2,17 @@
 {% load url from future %}
 {% load static %}
 {% load i18n %}
+{% load compress %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
+
+{% block css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/less" href="{% static 'machina/_libs/bootstrap/less/bootstrap.less' %}" />
+        <link rel="stylesheet" type="text/less" href="{% static 'machina/_libs/font-awesome/less/font-awesome.less' %}" />
+        <link rel="stylesheet" type="text/less" href="{% static 'machina/less/board_theme.less' %}" />
+    {% endcompress %}
+{% endblock css %}
 
 {% block header_collapse %}
     <div class="col-sm-4 col-md-4">
@@ -33,14 +42,16 @@
 
 {% block content %}{% endblock content %}
 
-{# Block for body onload functions #}
-{% block extra_js %}
-    {{ block.super }}
-    <script src="{% static "machina/js/ui.js" %}" type="text/javascript" charset="utf-8"></script>
+{% block js %}
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'machina/_libs/jquery/dist/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'machina/_libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'machina/js/ui.js' %}" type="text/javascript" charset="utf-8"></script>
+    {% endcompress %}
     <script type="text/javascript">
         $(function() {
             machina.init();
             {% block onbodyload %}{% endblock onbodyload %}
         });
     </script>
-{% endblock extra_js %}
+{% endblock js %}

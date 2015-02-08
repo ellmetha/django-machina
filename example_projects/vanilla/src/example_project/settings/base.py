@@ -73,9 +73,8 @@ STATICFILES_DIRS = ()
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'onlyatest833090dhkgrfgdfg*fds5645456fg'
@@ -109,7 +108,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'pipeline.middleware.MinifyHTMLMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -130,7 +128,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     # Third party apps
-    'pipeline',
+    'compressor',
     'loginas',
     'crispy_forms',
     'guardian',
@@ -146,23 +144,16 @@ INSTALLED_APPS = [
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
-# Django pipeline setings
+# Django compressor setings
 # --------------------------------------
-PIPELINE_CSS = {
-    'theme': {
-        'source_filenames': (
-          'less/theme.less',
-          'machina/less/styles.less',
-        ),
-        'output_filename': 'css/theme.css',
-    },
-}
+COMPRESS_ENABLED = True
 
-PIPELINE_JS = {}
-
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc --relative-url {infile} {outfile}'),
 )
+
+COMPRESS_OUTPUT_DIR = 'machina'
+
 
 # Crispy forms settings
 # --------------------------------------

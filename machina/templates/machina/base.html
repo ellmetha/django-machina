@@ -1,0 +1,69 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html {% get_current_language as LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}">
+    <head>
+        {% block head %}
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <title>{% block title %}{{ site.name }}{% endblock %}</title>
+            <meta name="created" content="{% now "jS M Y h:i" %}" />
+            <meta name="description" content="{% block meta_description %}{% endblock meta_description %}" />
+            <meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}"/>
+
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+        {% endblock head %}
+        
+        {% block css %}
+        {% endblock css %}
+        
+        {% block extra_css %}
+        {% endblock extra_css %}
+        
+    </head>
+    <body>
+        {% block header %}
+            <div class="navbar-fixed-top-spacing">&nbsp;</div>
+            <div class="navbar navbar-default navbar-fixed-top machina-navbar" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">django-machina</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    {% block header_collapse %}
+                    {% endblock header_collapse %}
+                </div>
+            </div>
+        {% endblock header %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% block breadcrumb %}
+                    {% endblock breadcrumb %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    {% block messages %}
+                    {% endblock messages %}
+                </div>
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+        
+        {% block js %}
+        {% endblock js %}
+
+        {% block extra_js %}
+        {% endblock extra_js %}
+    </body>
+</html>
