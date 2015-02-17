@@ -30,9 +30,6 @@ class AbstractProfile(models.Model):
     # The user's signature
     signature = MarkupTextField(verbose_name=_('Signature'), max_length=machina_settings.PROFILE_SIGNATURE_MAX_LENGTH, blank=True, null=True)
 
-    # The user's rank
-    rank = models.ForeignKey('member.Rank', verbose_name=_('Rank'), blank=True, null=True)
-
     # The amount of posts the user has posted
     posts_count = models.PositiveIntegerField(verbose_name=_('Total posts'), blank=True, default=0)
 
@@ -43,28 +40,4 @@ class AbstractProfile(models.Model):
         verbose_name_plural = _('Profiles')
 
     def __str__(self):
-        return '{} profile'.format(self.user.username)
-
-
-@python_2_unicode_compatible
-class AbstractRank(models.Model):
-    """
-    Represents a rank that can be associated with any forum profile.
-    """
-    title = models.CharField(max_length=100, verbose_name=_('Title'))
-    image = models.ImageField(verbose_name=_('Rank image'), null=True, blank=True, upload_to=machina_settings.PROFILE_RANK_IMAGE_UPLOAD_TO)
-
-    # Number of posts necessary to reach the rank
-    min_posts = models.PositiveIntegerField(verbose_name=_('Minimum post count required'), blank=True, null=True)
-
-    # A rank can be special ; if so only administrators will be able to add users to this rank manually
-    is_special = models.NullBooleanField(verbose_name=_('Special rank'), default=False, blank=True, null=True)
-
-    class Meta:
-        abstract = True
-        app_label = 'member'
-        verbose_name = _('Rank')
-        verbose_name_plural = _('Ranks')
-
-    def __str__(self):
-        return '{} rank'.format(self.title)
+        return '{}'.format(self.user.username)

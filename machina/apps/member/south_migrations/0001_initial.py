@@ -14,29 +14,15 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name=u'forum_profile', unique=True, to=orm['auth.User'])),
             ('avatar', self.gf('machina.models.fields.ExtendedImageField')(max_length=100, null=True, blank=True)),
             ('signature', self.gf('machina.models.fields.MarkupTextField')(blank=True, max_length=255, null=True, no_rendered_field=True)),
-            ('rank', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['member.Rank'], null=True, blank=True)),
             ('posts_count', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
             (u'_signature_rendered', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'member', ['Profile'])
 
-        # Adding model 'Rank'
-        db.create_table(u'member_rank', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
-            ('min_posts', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
-            ('is_special', self.gf('django.db.models.fields.NullBooleanField')(default=False, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'member', ['Rank'])
-
 
     def backwards(self, orm):
         # Deleting model 'Profile'
         db.delete_table(u'member_profile')
-
-        # Deleting model 'Rank'
-        db.delete_table(u'member_rank')
 
 
     models = {
@@ -58,7 +44,7 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -66,7 +52,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'contenttypes.contenttype': {
@@ -82,17 +68,8 @@ class Migration(SchemaMigration):
             'avatar': ('machina.models.fields.ExtendedImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'posts_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'rank': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Rank']", 'null': 'True', 'blank': 'True'}),
             'signature': ('machina.models.fields.MarkupTextField', [], {'blank': 'True', 'max_length': '255', 'null': 'True', u'no_rendered_field': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "u'forum_profile'", 'unique': 'True', 'to': u"orm['auth.User']"})
-        },
-        u'member.rank': {
-            'Meta': {'object_name': 'Rank'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'is_special': ('django.db.models.fields.NullBooleanField', [], {'default': 'False', 'null': 'True', 'blank': 'True'}),
-            'min_posts': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
 
