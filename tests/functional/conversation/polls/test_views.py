@@ -77,7 +77,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Setup
         correct_url = reverse('conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
         post_data = {
-            'options': self.option_1.pk,
+            'options': [ self.option_1.pk, ],
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -94,7 +94,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         TopicPollVoteFactory.create(voter=self.user, poll_option=self.option_2)
         correct_url = reverse('conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
         post_data = {
-            'options': self.option_1.pk,
+            'options': [ self.option_1.pk, ],
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
