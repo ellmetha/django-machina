@@ -5,7 +5,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.forms.forms import NON_FIELD_ERRORS
-from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
@@ -47,8 +46,6 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
 
         options = form.cleaned_data['options']
         for option in options:
-            if option.poll != self.object:
-                return HttpResponseForbidden()
             TopicPollVote.objects.create(
                 poll_option=option, voter=self.request.user)
 
