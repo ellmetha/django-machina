@@ -12,5 +12,5 @@ from machina.core.db.models import model_factory
 Profile = model_factory(AbstractProfile)
 
 
-if django.VERSION < (1, 7):
+if django.VERSION < (1, 7):  # pragma: no cover
     from .receivers import *  # noqa

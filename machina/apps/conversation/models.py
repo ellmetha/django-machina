@@ -14,5 +14,5 @@ Topic = model_factory(AbstractTopic)
 Post = model_factory(AbstractPost)
 
 
-if django.VERSION < (1, 7):
+if django.VERSION < (1, 7):  # pragma: no cover
     from .receivers import *  # noqa

@@ -13,5 +13,5 @@ class ForumRegistryConfig(AppConfig):
     name = 'machina.apps.forum'
     verbose_name = _('Forum')
 
-    def ready(self):
+    def ready(self):  # pragma: no cover
         from . import receivers  # noqa

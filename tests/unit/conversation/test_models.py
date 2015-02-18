@@ -21,6 +21,7 @@ faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 Post = get_model('conversation', 'Post')
+Profile = get_model('member', 'Profile')
 Topic = get_model('conversation', 'Topic')
 
 
@@ -100,7 +101,7 @@ class TestTopic(TestCase):
             new_topic = build_topic(forum=top_level_link, poster=self.u1)
             new_topic.full_clean()
 
-    def test_can_trigger_the_update_of_the_counters_of_a_new_forum(self):
+    def test_save_can_trigger_the_update_of_the_counters_of_a_new_forum(self):
         # Setup
         new_top_level_forum = create_forum()
         # Run
@@ -176,3 +177,37 @@ class TestPost(TestCase):
         # Check
         topic = refresh(self.topic)
         self.assertEqual(topic.updated, topic_updated_date)
+
+    def test_save_triggers_the_update_of_the_member_posts_count_if_the_related_post_is_approved(self):
+        # Setup
+        post = PostFactory.build(topic=self.topic, poster=self.u1)
+        profile = Profile.objects.get(user=self.u1)
+        initial_posts_count = profile.posts_count
+        # Run
+        post.save()
+        # Check
+        profile = refresh(profile)
+        self.assertEqual(profile.posts_count, initial_posts_count + 1)
+
+    def test_save_cannot_trigger_the_update_of_the_member_posts_count_if_the_related_post_is_not_approved(self):
+        # Setup
+        post = PostFactory.build(topic=self.topic, poster=self.u1, approved=False)
+        profile = Profile.objects.get(user=self.u1)
+        initial_posts_count = profile.posts_count
+        # Run
+        post.save()
+        # Check
+        profile = refresh(profile)
+        self.assertEqual(profile.posts_count, initial_posts_count)
+
+    def test_save_trigger_the_update_of_the_member_posts_count_if_the_related_post_switch_to_approved(self):
+        # Setup
+        post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
+        profile = Profile.objects.get(user=self.u1)
+        initial_posts_count = profile.posts_count
+        # Run
+        post.approved = True
+        post.save()
+        # Check
+        profile = refresh(profile)
+        self.assertEqual(profile.posts_count, initial_posts_count + 1)

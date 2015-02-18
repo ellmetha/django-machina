@@ -14,5 +14,5 @@ ForumReadTrack = model_factory(AbstractForumReadTrack)
 TopicReadTrack = model_factory(AbstractTopicReadTrack)
 
 
-if django.VERSION < (1, 7):
+if django.VERSION < (1, 7):  # pragma: no cover
     from .receivers import *  # noqa
