@@ -43,3 +43,8 @@ def get_vanilla_apps(overrides=None):
 
     apps = [get_app_label(app_label, overrides) for app_label in MACHINA_VANILLA_APPS]
     return apps
+
+
+pkg_resources = __import__('pkg_resources')
+distribution = pkg_resources.get_distribution('django-machina')
+__version__ = distribution.version
