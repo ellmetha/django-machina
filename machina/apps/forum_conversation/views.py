@@ -75,7 +75,8 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         self.topic = self.get_topic()
-        qs = self.topic.posts.all().exclude(approved=False).prefetch_related('attachments')
+        qs = self.topic.posts.all().exclude(approved=False).select_related('poster') \
+            .prefetch_related('attachments', 'poster__forum_profile')
         return qs
 
     def get_controlled_object(self):
