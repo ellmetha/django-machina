@@ -45,6 +45,9 @@ setup(
         # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
         'django-markdown>=0.7.0,<1.0',
 
+        # Easy-thumbnails is used as the default thumbnailer ; but you can change this
+        'easy-thumbnails>=2.0,<3.0',
+
         # Machina's default templates use djangi-compressor to compress static files ; but you
         # can override this
         'django-compressor>=1.4',
