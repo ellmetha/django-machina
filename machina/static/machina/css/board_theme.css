@@ -97,6 +97,9 @@
 .post .panel-body .post-sidebar {
   border-left: 1px solid #eeeeee;
 }
+.post .panel-body .post-sidebar .avatar {
+  margin-bottom: 6px;
+}
 .poll {
   margin-bottom: 8px;
 }
