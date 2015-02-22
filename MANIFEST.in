@@ -2,3 +2,6 @@ include LICENSE
 include VERSION
 include MANIFEST.in
 include README.rst
+recursive-include machina/static *
+recursive-include machina/locale *
+recursive-include machina *.html
