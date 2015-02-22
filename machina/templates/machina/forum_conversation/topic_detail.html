@@ -50,10 +50,13 @@
                                 {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
                             </div>
                             <div class="col-md-2 post-sidebar">
-                                <div class="avatar">
-                                    <i class="fa fa-user fa-4x"></i>
-                                </div>
-                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                                {% if not post.poster.is_anonymous %}
+                                    <div class="avatar">
+                                        <i class="fa fa-user fa-4x"></i>
+                                    </div>
+                                    <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                                    <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
