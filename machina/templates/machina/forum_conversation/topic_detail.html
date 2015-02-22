@@ -1,5 +1,6 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
+{% load thumbnail %}
 {% load forum_conversation_tags %}
 
 {% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
@@ -51,9 +52,13 @@
                             </div>
                             <div class="col-md-2 post-sidebar">
                                 {% if not post.poster.is_anonymous %}
-                                    <div class="avatar">
-                                        <i class="fa fa-user fa-4x"></i>
-                                    </div>
+                                    {% if post.poster.forum_profile.avatar %}
+                                        <div class="avatar">
+                                            <a href="#">
+                                                <img src="{% thumbnail post.poster.forum_profile.avatar 150x250 crop upscale %}" alt="{{ post.poster.username }}" />
+                                            </a>
+                                        </div>
+                                    {% endif %}
                                     <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
                                     <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
                                 {% endif %}
