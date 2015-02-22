@@ -12,9 +12,9 @@ from machina.test.factories.conversation import TopicFactory
 
 faker = FakerFactory.create()
 
-TopicPoll = get_model('polls', 'TopicPoll')
-TopicPollOption = get_model('polls', 'TopicPollOption')
-TopicPollVote = get_model('polls', 'TopicPollVote')
+TopicPoll = get_model('forum_polls', 'TopicPoll')
+TopicPollOption = get_model('forum_polls', 'TopicPollOption')
+TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 
 
 class TopicPollFactory(factory.DjangoModelFactory):

@@ -22,12 +22,12 @@ from machina.test.factories import UserFactory
 
 Forum = get_model('forum', 'Forum')
 
-TrackingHandler = get_class('tracking.handler', 'TrackingHandler')
+TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
 class BaseTrackingTagsTestCase(TestCase):
     def setUp(self):
-        self.loadstatement = '{% load url from future %}{% load tracking_tags %}'
+        self.loadstatement = '{% load url from future %}{% load forum_tracking_tags %}'
         self.request_factory = RequestFactory()
 
         # Tracking handler

@@ -9,8 +9,8 @@ from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
-from machina.apps.conversation.forms import PostForm
-from machina.apps.conversation.forms import TopicForm
+from machina.apps.forum_conversation.forms import PostForm
+from machina.apps.forum_conversation.forms import TopicForm
 from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
 from machina.core.utils import refresh
@@ -22,12 +22,12 @@ from machina.test.factories import UserFactory
 
 faker = FakerFactory.create()
 
-ForumReadTrack = get_model('tracking', 'ForumReadTrack')
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
-TopicReadTrack = get_model('tracking', 'TopicReadTrack')
+ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
+TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TestPostForm(TestCase):

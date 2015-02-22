@@ -1,0 +1,84 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load forum_conversation_tags %}
+
+{% block sub-title %}{% trans "Post a reply" %}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{{ topic.subject }}</h1>
+        </div>
+    </div>
+    {% if preview %}
+        {% include "machina/forum_conversation/post_preview.html" %}
+    {% endif %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default post-edit">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Post a reply" %}</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
+                        {% include 'partials/form_fields.html' %}
+                        {% if attachment_formset %}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div id="attachment_formset" class="col-md-12">
+                                         <p class="lead attachments-title">{% trans "Attachments" %}</p>
+                                        {% include "machina/forum_conversation/forum_attachments/attachment_formset.html" %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="form-actions">
+                            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default topic-review">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Topic review" %}&nbsp;&ndash;&nbsp;{{ topic.subject }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% for post in previous_posts %}
+                        <div class="row post-review">
+                            <div class="col-md-10 post-content-wrapper">
+                                <h4 class="subject">{{ post.subject }}</h4>
+                                <p><small class="text-muted">
+                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                                </small></p>
+                                <div class="post-content">
+                                    {{ post.content.rendered }}
+                                </div>
+                                {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                            </div>
+                            <div class="col-md-2 post-sidebar">
+                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block onbodyload %}
+    machina.attachment.init();
+{% endblock onbodyload %}
+
+{% block extra_css %}
+    {{ form.media.css }}
+{% endblock extra_css %}
+
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock extra_js %}

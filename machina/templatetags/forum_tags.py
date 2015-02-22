@@ -12,7 +12,7 @@ from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
 register = template.Library()

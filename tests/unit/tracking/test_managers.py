@@ -14,7 +14,7 @@ from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
 
-ForumReadTrack = get_model('tracking', 'ForumReadTrack')
+ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 
 
 class TestForumReadTrackManager(BaseUnitTestCase):

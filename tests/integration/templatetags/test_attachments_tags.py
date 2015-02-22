@@ -21,12 +21,12 @@ from machina.test.factories import UserFactory
 Forum = get_model('forum', 'Forum')
 
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class BaseAttachmentsTagsTestCase(TestCase):
     def setUp(self):
-        self.loadstatement = '{% load url from future %}{% load attachments_tags %}'
+        self.loadstatement = '{% load url from future %}{% load forum_attachments_tags %}'
         self.request_factory = RequestFactory()
 
         self.g1 = GroupFactory.create()

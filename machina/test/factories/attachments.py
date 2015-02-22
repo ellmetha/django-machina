@@ -11,7 +11,7 @@ from machina.test.factories.conversation import PostFactory
 
 faker = FakerFactory.create()
 
-Attachment = get_model('attachments', 'Attachment')
+Attachment = get_model('forum_attachments', 'Attachment')
 
 
 class AttachmentFactory(factory.DjangoModelFactory):

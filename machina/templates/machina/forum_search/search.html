@@ -1,0 +1,107 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load highlight %}
+
+{% block sub-title %}{% trans "Search" %}{% endblock sub-title %}
+
+
+{% block content %}
+    {% if not query %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{% trans "Search" %}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default post-edit">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "Search forums" %}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="get" action="." class="form">
+                            {% with remove_csrf=True %}
+                                {% include 'partials/form_fields.html' %}
+                            {% endwith %}
+                            <div class="form-actions">
+                                <input type="submit" class="btn btn-large btn-primary" value="{% trans "Search" %}" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{% trans "Search" %}
+                &nbsp;
+                <a href="{% url 'forum-search:search' %}" class="btn btn-xs btn-primary"><i class="fa fa-search"></i>&nbsp;{% trans "New search" %}</a></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-4 forum-actions-block">
+                <p class="text-muted">
+                           {% blocktrans count number_of_results=page.paginator.count %}
+                                Your search has returned <b>{{ number_of_results }}</b> result
+                            {% plural %}
+                                Your search has returned <b>{{ number_of_results }}</b> results
+                            {% endblocktrans %}
+                </p>
+            </div>
+            <div class="col-xs-12 col-md-8 pagination-block">
+                {% if page.has_previous or page.has_next %}
+                    {% with pagination_size="pagination-sm" %}
+                        {% include "machina/forum_search/pagination.html" %}
+                    {% endwith %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default resultslist">
+                    <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-search"></i>&nbsp;{% trans "Results" %}
+                            </h3>
+                        </table>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            {% for result in page.object_list %}
+                                <tr>
+                                    <td class="post-name">
+                                        <a href="{% url 'forum-conversation:topic' result.forum_slug result.forum result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
+                                        <div>
+                                            <div class="post-created">
+                                                {% trans "By:" %} <a href="#">{{ result.poster_name }}</a> {% trans "on" %} {{ result.created }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="post-content">
+                                        {% highlight result.text with request.GET.q max_lenght 800 %}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td>
+                                        {% trans "No results." %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if page.has_previous or page.has_next %}
+            <div class="row">
+                <div class="col-md-12 pagination-block">
+                    {% with pagination_size="pagination-sm" %}
+                        {% include "machina/forum_search/pagination.html" %}
+                    {% endwith %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

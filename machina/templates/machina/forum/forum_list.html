@@ -2,8 +2,8 @@
 {% load i18n %}
 {% load mptt_tags %}
 {% load forum_tags %}
-{% load conversation_tags %}
-{% load tracking_tags %}
+{% load forum_conversation_tags %}
+{% load forum_tracking_tags %}
 
 <div class="row">
     <div class="col-xs-12">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="sub-forums">{{ children }}</div>
                             </td>
-                            <td class="forum-syndication"><a href="{% url 'feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
+                            <td class="forum-syndication"><a href="{% url 'forum-feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
                             <td class="forum-count">{{ node.topics_count }}</td>
                             <td class="forum-count">{{ node.posts_count }}</td>
                             <td class="forum-last-post">
@@ -66,7 +66,7 @@
                                 {% if last_post %}
                                     {{ last_post.created }}<br />
                                     <a href="#">{{ last_post.poster }}</a>
-                                    &nbsp;<a href="{% url 'conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                    &nbsp;<a href="{% url 'forum-conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                 {% else %}
                                     {% trans "No posts" %}
                                 {% endif %}
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="sub-forums">{{ children }}</div>
                             </td>
-                            <td class="forum-syndication"><a href="{% url 'feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
+                            <td class="forum-syndication"><a href="{% url 'forum-feeds:forum-latest-topics-with-descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></td>
                             <td class="forum-count">{{ node.topics_count }}</td>
                             <td class="forum-count">{{ node.posts_count }}</td>
                             <td class="forum-last-post">
@@ -114,7 +114,7 @@
                                 {% if last_post %}
                                     {{ last_post.created }}<br />
                                     <a href="#">{{ last_post.poster }}</a>
-                                    &nbsp;<a href="{% url 'conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                    &nbsp;<a href="{% url 'forum-conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                 {% else %}
                                     {% trans "No posts" %}
                                 {% endif %}

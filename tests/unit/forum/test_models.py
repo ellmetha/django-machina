@@ -17,8 +17,8 @@ from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
 
 Forum = get_model('forum', 'Forum')
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
 
 
 class TestForum(TestCase):

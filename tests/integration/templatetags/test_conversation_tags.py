@@ -20,15 +20,15 @@ from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
 
 Forum = get_model('forum', 'Forum')
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class BaseConversationTagsTestCase(TestCase):
     def setUp(self):
-        self.loadstatement = '{% load url from future %}{% load conversation_tags %}'
+        self.loadstatement = '{% load url from future %}{% load forum_conversation_tags %}'
         self.request_factory = RequestFactory()
 
         self.g1 = GroupFactory.create()
@@ -158,7 +158,7 @@ class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
         for i in range(0, 35):
             PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         expected_out_small = render_to_string(
-            'machina/conversation/topic_pages_inline_list.html',
+            'machina/forum_conversation/topic_pages_inline_list.html',
             {
                 'topic': self.forum_1_topic,
                 'first_pages': [1, 2, 3, ],
@@ -168,7 +168,7 @@ class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
         for i in range(0, 120):
             PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
         expected_out_huge = render_to_string(
-            'machina/conversation/topic_pages_inline_list.html',
+            'machina/forum_conversation/topic_pages_inline_list.html',
             {
                 'topic': self.forum_2_topic,
                 'first_pages': [1, 2, 3, 4, ],

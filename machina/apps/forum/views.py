@@ -14,9 +14,9 @@ from machina.core.loading import get_class
 from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
-Topic = get_model('conversation', 'Topic')
+Topic = get_model('forum_conversation', 'Topic')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
 

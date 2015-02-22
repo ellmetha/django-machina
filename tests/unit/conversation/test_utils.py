@@ -7,7 +7,7 @@ from django.test import TestCase
 from faker import Factory as FakerFactory
 
 # Local application / specific library imports
-from machina.apps.conversation.utils import get_client_ip
+from machina.apps.forum_conversation.utils import get_client_ip
 
 faker = FakerFactory.create()
 

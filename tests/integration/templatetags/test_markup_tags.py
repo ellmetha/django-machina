@@ -12,7 +12,7 @@ from django.test.client import RequestFactory
 
 class TestRenderedTag(TestCase):
     def setUp(self):
-        self.loadstatement = '{% load url from future %}{% load markup_tags %}'
+        self.loadstatement = '{% load url from future %}{% load forum_markup_tags %}'
         self.request_factory = RequestFactory()
 
     def test_can_render_a_formatted_text_on_the_fly(self):

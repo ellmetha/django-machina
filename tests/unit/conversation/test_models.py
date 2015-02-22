@@ -20,9 +20,9 @@ from machina.test.factories import UserFactory
 faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
-Post = get_model('conversation', 'Post')
-Profile = get_model('member', 'Profile')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Profile = get_model('forum_member', 'Profile')
+Topic = get_model('forum_conversation', 'Topic')
 
 
 class TestTopic(TestCase):

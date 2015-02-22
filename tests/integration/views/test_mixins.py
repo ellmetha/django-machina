@@ -20,7 +20,7 @@ from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TestPermissionRequiredMixin(TestCase):

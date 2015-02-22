@@ -55,7 +55,7 @@ TEST_SETTINGS = {
         'compressor',
         'django_markdown',
         'tests',
-    ] + get_vanilla_apps(['tests._testsite.apps.conversation', ]),
+    ] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ]),
     'ROOT_URLCONF': 'tests._testsite.urls',
     'MIDDLEWARE_CLASSES': (
         'django.middleware.common.CommonMiddleware',

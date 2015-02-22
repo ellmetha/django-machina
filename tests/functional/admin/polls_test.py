@@ -8,9 +8,9 @@ from django.db.models import get_model
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 
-TopicPoll = get_model('polls', 'TopicPoll')
-TopicPollOption = get_model('polls', 'TopicPollOption')
-TopicPollVote = get_model('polls', 'TopicPollVote')
+TopicPoll = get_model('forum_polls', 'TopicPoll')
+TopicPollOption = get_model('forum_polls', 'TopicPollOption')
+TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 
 
 class TestTopicPollAdmin(AdminClientTestCase, AdminBaseViewTestMixin):

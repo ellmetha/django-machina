@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load forum_markup_tags %}
+
+<div class="row preview">
+    <div class="col-xs-12">
+        <div class="panel panel-default post post-preview">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 post-content-wrapper">
+                        <h4 class="subject">{% trans "Preview:" %}&nbsp;{{ form.subject.value }}</h4>
+                        <hr />
+                        <div class="post-content">
+                            {{ form.content.value|safe|rendered }}
+                        </div>
+                        {% include "machina/forum_conversation/forum_attachments/attachments_preview.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,10 +13,10 @@ from machina.test.factories import create_link_forum
 from machina.test.testcases import BaseClientTestCase
 from machina.test.utils import mock_signal_receiver
 
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TestForumView(BaseClientTestCase):

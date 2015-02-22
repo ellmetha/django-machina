@@ -10,14 +10,14 @@ import os
 MACHINA_VANILLA_APPS = [
     'machina',
     'machina.apps.forum',
-    'machina.apps.conversation',
-    'machina.apps.conversation.attachments',
-    'machina.apps.conversation.polls',
-    'machina.apps.feeds',
-    'machina.apps.search',
-    'machina.apps.tracking',
-    'machina.apps.member',
-    'machina.apps.permission',
+    'machina.apps.forum_conversation',
+    'machina.apps.forum_conversation.forum_attachments',
+    'machina.apps.forum_conversation.forum_polls',
+    'machina.apps.forum_feeds',
+    'machina.apps.forum_search',
+    'machina.apps.forum_tracking',
+    'machina.apps.forum_member',
+    'machina.apps.forum_permission',
 ]
 
 

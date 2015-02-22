@@ -1,0 +1,76 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load forum_conversation_tags %}
+
+{% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{{ topic.subject }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 topic-actions-block">
+            {% if topic|can_be_enriched_by:user %}
+                <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+            {% endif %}
+        </div>
+        <div class="col-xs-12 col-md-8 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            {% for post in posts %}
+                {% if forloop.first and post.is_topic_head and poll %}
+                    {% include "machina/forum_conversation/forum_polls/poll_detail.html" %}
+                {% endif %}
+                <div id="{{ post.id }}" class="panel panel-default post">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-10 post-content-wrapper">
+                                <div class="pull-right post-controls">
+                                    {% if post|can_be_edited_by:user %}
+                                        <a href="{% if post.is_topic_head %}{% url 'forum-conversation:topic-update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum-conversation:post-update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
+                                    {% endif %}
+                                    {% if post|can_be_deleted_by:user %}
+                                        <a href="{% url 'forum-conversation:post-delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                    {% endif %}
+                                </div>
+                                <h4 class="subject">{{ post.subject }}</h4>
+                                <p><small class="text-muted">
+                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                                </small></p>
+                                <div class="post-content">
+                                    {{ post.content.rendered }}
+                                </div>
+                                {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                            </div>
+                            <div class="col-md-2 post-sidebar">
+                                <div class="avatar">
+                                    <i class="fa fa-user fa-4x"></i>
+                                </div>
+                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 topic-actions-block">
+            {% if topic|can_be_enriched_by:user %}
+                <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+            {% endif %}
+        </div>
+        <div class="col-xs-12 col-md-8 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock content %}

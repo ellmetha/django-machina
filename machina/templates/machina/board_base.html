@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse">
                 {% block header_collapse %}
                     <div class="col-sm-4 col-md-4">
-                        <form class="navbar-form form-inline" role="search" action="{% url 'search:search' %}">
+                        <form class="navbar-form form-inline" role="search" action="{% url 'forum-search:search' %}">
                             <div class="form-group col-md-9">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="{% trans 'Search...' %}" name="q">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="{% url 'search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
+                                <a href="{% url 'forum-search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
                             </div>
                         </form>
                     </div>

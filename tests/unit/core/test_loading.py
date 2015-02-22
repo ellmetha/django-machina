@@ -20,14 +20,14 @@ from machina.core.loading import get_classes
 class TestClassLoadingFunctions(TestCase):
     def test_can_load_a_single_class(self):
         # Run & check
-        LastTopicsFeed = get_class('feeds.feeds', 'LastTopicsFeed')
-        self.assertEqual('machina.apps.feeds.feeds', LastTopicsFeed.__module__)
+        LastTopicsFeed = get_class('forum_feeds.feeds', 'LastTopicsFeed')
+        self.assertEqual('machina.apps.forum_feeds.feeds', LastTopicsFeed.__module__)
 
     def test_can_load_many_classes(self):
         # Run & check
-        PostForm, TopicForm = get_classes('conversation.forms', ['PostForm', 'TopicForm', ])
-        self.assertEqual('machina.apps.conversation.forms', PostForm.__module__)
-        self.assertEqual('machina.apps.conversation.forms', TopicForm.__module__)
+        PostForm, TopicForm = get_classes('forum_conversation.forms', ['PostForm', 'TopicForm', ])
+        self.assertEqual('machina.apps.forum_conversation.forms', PostForm.__module__)
+        self.assertEqual('machina.apps.forum_conversation.forms', TopicForm.__module__)
 
     def test_raises_if_the_module_label_is_incorrect(self):
         # Run & check
@@ -86,5 +86,5 @@ class TestClassLoadingFunctionsWithOverrides(TestCase):
 
 class TestModelOverrides(TestCase):
     def test_are_registered_before_vanilla_models(self):
-        klass = get_model('conversation', 'Topic')
-        self.assertEqual('tests._testsite.apps.conversation.models', klass.__module__)
+        klass = get_model('forum_conversation', 'Topic')
+        self.assertEqual('tests._testsite.apps.forum_conversation.models', klass.__module__)

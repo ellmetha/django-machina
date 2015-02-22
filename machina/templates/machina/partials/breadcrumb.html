@@ -9,6 +9,6 @@
         <li><a href="{% url 'forum:forum' forum.slug forum.id %}">{{ forum.name }}</a></li>
     {% endif %}
     {% if topic %}
-        <li><a href="{% url 'conversation:topic' forum.slug forum.id topic.slug topic.id %}">{{ topic.subject }}</a></li>
+        <li><a href="{% url 'forum-conversation:topic' forum.slug forum.id topic.slug topic.id %}">{{ topic.subject }}</a></li>
     {% endif %}
 </ul>

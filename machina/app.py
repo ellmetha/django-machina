@@ -16,10 +16,10 @@ class BoardApp(Application):
     name = None
 
     forum_app = get_class('forum.app', 'application')
-    conversation_app = get_class('conversation.app', 'application')
-    feeds_app = get_class('feeds.app', 'application')
-    search_app = get_class('search.app', 'application')
-    tracking_app = get_class('tracking.app', 'application')
+    conversation_app = get_class('forum_conversation.app', 'application')
+    feeds_app = get_class('forum_feeds.app', 'application')
+    search_app = get_class('forum_search.app', 'application')
+    tracking_app = get_class('forum_tracking.app', 'application')
 
     def get_urls(self):
         urls = [
@@ -32,4 +32,4 @@ class BoardApp(Application):
         return patterns('', *urls)
 
 
-board = application = BoardApp()
+board = forum = application = BoardApp()

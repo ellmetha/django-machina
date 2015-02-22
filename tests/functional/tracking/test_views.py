@@ -22,8 +22,8 @@ faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
-TrackingHandler = get_class('tracking.handler', 'TrackingHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
 class TestMarkForumsReadView(BaseClientTestCase):
@@ -71,8 +71,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url_1 = reverse('tracking:mark-all-forums-read')
-        correct_url_2 = reverse('tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
+        correct_url_1 = reverse('forum-tracking:mark-all-forums-read')
+        correct_url_2 = reverse('forum-tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
         # Run
         response_1 = self.client.get(correct_url_1, follow=True)
         response_2 = self.client.get(correct_url_2, follow=True)
@@ -84,7 +84,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         # Setup
         new_topic = create_topic(forum=self.forum_2, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        correct_url = reverse('tracking:mark-all-forums-read')
+        correct_url = reverse('forum-tracking:mark-all-forums-read')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -98,7 +98,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         PostFactory.create(topic=new_topic, poster=self.u1)
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        correct_url = reverse('tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
+        correct_url = reverse('forum-tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -154,7 +154,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = reverse('tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
+        correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -164,7 +164,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         # Setup
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        correct_url = reverse('tracking:mark-topics-read', kwargs={'pk': self.forum_4.pk})
+        correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_4.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -176,7 +176,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
     def test_do_not_perform_anything_if_the_user_has_not_the_required_permission(self):
         # Setup
         self.user.groups.clear()
-        correct_url = reverse('tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
+        correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -228,7 +228,7 @@ class TestUnreadTopicsView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = reverse('tracking:unread-topics')
+        correct_url = reverse('forum-tracking:unread-topics')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -238,7 +238,7 @@ class TestUnreadTopicsView(BaseClientTestCase):
         # Setup
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        correct_url = reverse('tracking:unread-topics')
+        correct_url = reverse('forum-tracking:unread-topics')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check

@@ -21,13 +21,13 @@ from machina.test.testcases import BaseClientTestCase
 
 faker = FakerFactory.create()
 
-Attachment = get_model('attachments', 'Attachment')
-ForumReadTrack = get_model('tracking', 'ForumReadTrack')
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
-TopicReadTrack = get_model('tracking', 'TopicReadTrack')
+Attachment = get_model('forum_attachments', 'Attachment')
+ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
+TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TestTopicView(BaseClientTestCase):

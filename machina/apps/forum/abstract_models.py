@@ -191,7 +191,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # Determine the list of the associated topics, that is the list of topics
         # associated with the current forum plus the list of all topics associated
         # with the descendant forums.
-        Topic = models.get_model('conversation', 'Topic')
+        Topic = models.get_model('forum_conversation', 'Topic')
         topics = Topic.objects.filter(forum__id__in=forum_ids).order_by('-updated')
         approved_topics = topics.filter(approved=True)
 

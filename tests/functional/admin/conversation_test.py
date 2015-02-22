@@ -7,8 +7,8 @@ from django.db.models import get_model
 # Local application / specific library imports
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
 
 
 class TestPostAdmin(AdminClientTestCase, AdminBaseViewTestMixin):

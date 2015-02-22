@@ -24,10 +24,10 @@ from machina.test.testcases import BaseUnitTestCase
 faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
-ForumReadTrack = get_model('tracking', 'ForumReadTrack')
+ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 
-PermissionHandler = get_class('permission.handler', 'PermissionHandler')
-TrackingHandler = get_class('tracking.handler', 'TrackingHandler')
+PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
 class TestTrackingHandler(BaseUnitTestCase):

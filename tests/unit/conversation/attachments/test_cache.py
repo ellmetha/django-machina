@@ -11,7 +11,7 @@ from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.test import TestCase
 
 # Local application / specific library imports
-from machina.apps.conversation.attachments.cache import cache
+from machina.apps.forum_conversation.forum_attachments.cache import cache
 from machina.conf import settings as machina_settings
 from machina.core.compat import force_bytes
 
@@ -21,7 +21,7 @@ class TestAttachmentCache(TestCase):
         # Run & check
         machina_settings.ATTACHMENT_CACHE_NAME = 'dummy'
         with self.assertRaises(ImproperlyConfigured):
-            from machina.apps.conversation.attachments.cache import AttachmentCache
+            from machina.apps.forum_conversation.forum_attachments.cache import AttachmentCache
             AttachmentCache()
         machina_settings.ATTACHMENT_CACHE_NAME = 'machina_attachments'
 

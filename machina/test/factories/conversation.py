@@ -16,8 +16,8 @@ from machina.test.factories.forum import ForumFactory
 
 faker = FakerFactory.create()
 
-Post = get_model('conversation', 'Post')
-Topic = get_model('conversation', 'Topic')
+Post = get_model('forum_conversation', 'Post')
+Topic = get_model('forum_conversation', 'Topic')
 
 
 class TopicFactory(factory.DjangoModelFactory):
