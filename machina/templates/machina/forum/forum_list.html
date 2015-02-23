@@ -31,23 +31,25 @@
                         </div>
                     </div>
                 {% else %}
-                    {% if node.get_previous_sibling and node.get_previous_sibling.is_category or not node.get_previous_sibling %}
-                        <div class="panel panel-default forumlist">
-                            <div class="panel-heading">
-                                <table class="table">
-                                    <tr>
-                                        <td class="forum-name-col" colspan="2">
-                                            <h3 class="panel-title">{% trans "Forums" %}</h3>
-                                        </td>
-                                        <td class="forum-count-col">{% trans "Topics" %}</td>
-                                        <td class="forum-count-col">{% trans "Posts" %}</td>
-                                        <td class="forum-last-post-col">{% trans "Last post" %}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table">
-                    {% endif %}
+                    {% with node.get_previous_sibling as previous_sibling %}
+                        {% if previous_sibling and previous_sibling.is_category or not previous_sibling in forums or not previous_sibling %}
+                            <div class="panel panel-default forumlist">
+                                <div class="panel-heading">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="forum-name-col" colspan="2">
+                                                <h3 class="panel-title">{% trans "Forums" %}</h3>
+                                            </td>
+                                            <td class="forum-count-col">{% trans "Topics" %}</td>
+                                            <td class="forum-count-col">{% trans "Posts" %}</td>
+                                            <td class="forum-last-post-col">{% trans "Last post" %}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                        {% endif %}
+                    {% endwith %}
                     <tr>
                         {% if not node.is_link %}
                             <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
@@ -88,11 +90,13 @@
                             </td>
                         {% endif %}
                     </tr>
-                    {% if node.get_next_sibling and node.get_next_sibling.is_category or not node.get_next_sibling %}
-                                </table>
+                    {% with node.get_next_sibling as next_sibling %}
+                        {% if next_sibling and next_sibling.is_category or not next_sibling in forums or not next_sibling %}
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    {% endwith %}
                 {% endif %}
             {% elif node.level == root_level_middle %}
                 {% if node.parent.is_category %}
