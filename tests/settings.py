@@ -54,6 +54,7 @@ TEST_SETTINGS = {
         'bootstrap3',
         'compressor',
         'django_markdown',
+        'easy_thumbnails',
         'tests',
     ] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ]),
     'ROOT_URLCONF': 'tests._testsite.urls',
