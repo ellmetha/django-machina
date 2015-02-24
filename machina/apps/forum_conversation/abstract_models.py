@@ -195,6 +195,9 @@ class AbstractPost(DatedModel):
     # Content
     content = MarkupTextField(verbose_name=_('Content'))
 
+    # Username: if the user creating a topic post is not authenticated, he must enter a username
+    username = models.CharField(verbose_name=_('Username'), max_length=155, blank=True, null=True)
+
     # A post can be approved before publishing ; defaults to True
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 

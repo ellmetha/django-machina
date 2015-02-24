@@ -9,6 +9,9 @@
 
 	{% bootstrap_field form.subject %}
 	{% bootstrap_field form.content %}
+	{% if request.user.is_anonymous %}
+		{% bootstrap_field form.username %}
+	{% endif %}
 
 	<!-- Sub "forms" tabs -->
 	<ul class="nav nav-tabs nav-justified">

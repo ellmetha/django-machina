@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
                 ('poster_ip', models.GenericIPAddressField(default='2002::0', null=True, verbose_name='Poster IP address', blank=True)),
                 ('subject', models.CharField(max_length=255, verbose_name='Subject')),
                 ('content', machina.models.fields.MarkupTextField(no_rendered_field=True, verbose_name='Content')),
+                ('username', models.CharField(max_length=155, null=True, verbose_name='Username', blank=True)),
                 ('approved', models.BooleanField(default=True, verbose_name='Approved')),
                 ('update_reason', models.CharField(max_length=255, null=True, verbose_name='Update reason', blank=True)),
                 ('updates_count', models.PositiveIntegerField(default=0, verbose_name='Updates count', editable=False, blank=True)),

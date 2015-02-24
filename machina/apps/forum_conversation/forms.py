@@ -8,6 +8,7 @@ from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
+from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -25,7 +26,7 @@ perm_handler = PermissionHandler()
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['subject', 'content', ]
+        fields = ['subject', 'content', 'username', ]
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -39,6 +40,15 @@ class PostForm(forms.ModelForm):
         self.fields['subject'].widget.attrs['placeholder'] = _('Enter your subject')
         self.fields['content'].label = _('Message')
         self.fields['content'].widget.attrs['placeholder'] = _('Enter your message')
+
+        # Handles anonymous users
+        if self.user and self.user.is_anonymous():
+            self.user = get_anonymous_user()
+            self.fields['username'].required = True
+        else:
+            # The 'username' field is not really usefull if the user is
+            # authenticated
+            del self.fields['username']
 
         # Handles the definition of a default subject if we are
         # considering an answer
@@ -61,6 +71,8 @@ class PostForm(forms.ModelForm):
                 subject=self.cleaned_data['subject'],
                 approved=perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'])
+            if 'username' in self.cleaned_data and self.cleaned_data['username']:
+                post.username = self.cleaned_data['username']
 
         if commit:
             post.save()

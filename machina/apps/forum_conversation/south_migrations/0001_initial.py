@@ -44,6 +44,7 @@ class Migration(SchemaMigration):
             ('poster_ip', self.gf('django.db.models.fields.GenericIPAddressField')(default=u'2002::0', max_length=39, null=True, blank=True)),
             ('subject', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('content', self.gf('machina.models.fields.MarkupTextField')(no_rendered_field=True)),
+            ('username', self.gf('django.db.models.fields.CharField')(max_length=155, null=True, blank=True)),
             ('approved', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('update_reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('updated_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
@@ -83,7 +84,7 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -91,7 +92,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'contenttypes.contenttype': {
@@ -140,7 +141,8 @@ class Migration(SchemaMigration):
             'update_reason': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'updated_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
-            'updates_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'})
+            'updates_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '155', 'null': 'True', 'blank': 'True'})
         },
         u'forum_conversation.topic': {
             'Meta': {'ordering': "[u'-type', u'-updated']", 'object_name': 'Topic'},
