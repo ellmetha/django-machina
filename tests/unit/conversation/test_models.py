@@ -89,6 +89,14 @@ class TestTopic(TestCase):
         post.delete()
         self.assertEqual(initial_count - 1, self.topic.posts_count)
 
+    def test_saves_only_its_number_of_approved_posts(self):
+        # Run & check
+        post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
+        initial_count = self.topic.posts.filter(approved=True).count()
+        self.assertEqual(initial_count, self.topic.posts_count)
+        post.delete()
+        self.assertEqual(initial_count, self.topic.posts_count)
+
     def test_can_not_be_associated_with_a_forum_link_or_a_forum_category(self):
         # Setup
         top_level_cat = create_category_forum()

@@ -61,13 +61,15 @@ class TestForum(TestCase):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
-        self.assertEqual(self.top_level_forum.posts_count, topic.posts.count())
+        self.assertEqual(self.top_level_forum.posts_count, topic.posts.filter(approved=True).count())
         self.assertEqual(self.top_level_forum.topics_count, self.top_level_forum.topics.count())
         self.assertEqual(self.top_level_forum.real_topics_count, self.top_level_forum.topics.count())
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
-        self.assertEqual(self.top_level_forum.posts_count, topic.posts.count() + topic2.posts.count())
+        self.assertEqual(
+            self.top_level_forum.posts_count,
+            topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count())
         self.assertEqual(self.top_level_forum.topics_count,
                          self.top_level_forum.topics.filter(approved=True).count())
         self.assertEqual(self.top_level_forum.real_topics_count, self.top_level_forum.topics.count())

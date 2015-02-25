@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
+from guardian.shortcuts import remove_perm
 from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
@@ -219,6 +220,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_start_new_topics', self.user, self.top_level_forum)
+        assign_perm('can_post_without_approval', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
         # Setup
@@ -272,6 +274,26 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(topic_url, last_url)
+
+    def test_redirects_to_the_forum_if_the_post_is_not_approved(self):
+        # Setup
+        remove_perm('can_post_without_approval', self.user, self.top_level_forum)
+        correct_url = reverse('forum-conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        forum_url = reverse(
+            'forum:forum',
+            kwargs={'slug': self.top_level_forum.slug, 'pk': self.top_level_forum.pk})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(forum_url, last_url)
 
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_create_polls(self):
         # Setup
