@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="topic-count">{{ topic.posts_count }}</td>
+                                <td class="topic-count">{{ topic.posts_count|add:"-1" }}</td>
                                 <td class="topic-count">{{ topic.views_count }}</td>
                                 <td class="topic-last-post">
                                     {% with last_post=topic.last_post %}

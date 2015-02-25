@@ -57,7 +57,7 @@ class AbstractTopic(DatedModel):
     # should correspond to the one associated with the first post
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
-    # The number of posts included in this topic
+    # The number of posts included in this topic (only those that are approved)
     posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), editable=False, blank=True, default=0)
 
     # The number of time the topic has been viewed
@@ -164,7 +164,7 @@ class AbstractTopic(DatedModel):
         Updates the posts count, the update date and the link toward the last post
         associated with the current topic.
         """
-        self.posts_count = self.posts.count()
+        self.posts_count = self.posts.filter(approved=True).count()
         posts = self.posts.all().order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
         self.updated = self._last_post.created

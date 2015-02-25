@@ -113,6 +113,7 @@ class TopicView(PermissionRequiredMixin, ListView):
 
 class PostEditMixin(object):
     success_message = _('This message has been posted successfully.')
+    approval_required_message = _('This message will be validated before appearing on the forum.')
     attachment_formset_class = AttachmentFormset
     attachment_formset_general_error_message = _('There are some errors in the attachments you submitted.')
 
@@ -208,6 +209,9 @@ class PostEditMixin(object):
             attachment_formset.save()
 
         messages.success(self.request, self.success_message)
+        if not self.object.approved:
+            messages.warning(self.request, self.approval_required_message)
+
         return valid
 
     def get_controlled_object(self):
@@ -298,6 +302,10 @@ class TopicCreateView(PermissionRequiredMixin, TopicEditMixin, CreateView):
         return kwargs
 
     def get_success_url(self):
+        if not self.object.approved:
+            return reverse('forum:forum', kwargs={
+                'slug': self.object.topic.forum.slug,
+                'pk': self.object.topic.forum.pk})
         return reverse('forum-conversation:topic', kwargs={
             'forum_slug': self.object.topic.forum.slug,
             'forum_pk': self.object.topic.forum.pk,
