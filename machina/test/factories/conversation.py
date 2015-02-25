@@ -25,7 +25,7 @@ class TopicFactory(factory.DjangoModelFactory):
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
     status = Topic.STATUS_CHOICES.topic_unlocked
-    subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
+    subject = faker.text(max_nb_chars=200)
     slug = factory.LazyAttribute(lambda t: slugify(t.subject))
 
 
@@ -33,7 +33,7 @@ class PostFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Post
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
-    subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
+    subject = faker.text(max_nb_chars=200)
     content = fuzzy.FuzzyText(length=255)
 
 

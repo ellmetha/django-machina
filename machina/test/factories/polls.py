@@ -20,13 +20,13 @@ TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 class TopicPollFactory(factory.DjangoModelFactory):
     FACTORY_FOR = TopicPoll
     topic = factory.SubFactory(TopicFactory)
-    question = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
+    question = faker.text(max_nb_chars=200)
 
 
 class TopicPollOptionFactory(factory.DjangoModelFactory):
     FACTORY_FOR = TopicPollOption
     poll = factory.SubFactory(TopicPollFactory)
-    text = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=100))
+    text = faker.text(max_nb_chars=100)
 
 
 class TopicPollVoteFactory(factory.DjangoModelFactory):
