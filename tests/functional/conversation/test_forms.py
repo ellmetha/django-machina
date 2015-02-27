@@ -3,10 +3,12 @@
 # Standard library imports
 # Third party imports
 from django import forms
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import get_model
 from django.test import TestCase
 from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
+from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forms import PostForm
@@ -125,6 +127,27 @@ class TestPostForm(TestCase):
         assign_perm('can_post_without_approval', self.user, self.top_level_forum)
         post = form.save()
         self.assertTrue(post.approved)
+
+    def test_adds_the_username_field_if_the_user_is_anonymous(self):
+        # Setup
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'username': 'testname',
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=AnonymousUser(),
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic)
+        # Check
+        self.assertEqual(form.user, get_anonymous_user())
+        self.assertIn('username', form.fields)
+        self.assertTrue(form.is_valid())
+        post = form.save()
+        self.assertEqual(post.username, 'testname')
 
 
 class TestTopicForm(TestCase):

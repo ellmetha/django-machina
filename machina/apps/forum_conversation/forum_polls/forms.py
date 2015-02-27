@@ -53,16 +53,10 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         This rewrite of total_form_count allows to add an empty form to the formset only when
         no initial data is provided.
         """
-        if self.data or self.files:
-            return self.management_form.cleaned_data[TOTAL_FORM_COUNT]
-        else:
-            if self.initial_form_count() > 0:
-                total_forms = self.initial_form_count()
-            else:
-                total_forms = self.initial_form_count() + self.extra
-            if total_forms > self.max_num > 0:
-                total_forms = self.max_num
-            return total_forms
+        total_forms = super(BaseTopicPollOptionFormset, self).total_form_count()
+        if not self.data and not self.files and self.initial_form_count() > 0:
+            total_forms -= self.extra
+        return total_forms
 
     def clean(self):
         if any(self.errors):

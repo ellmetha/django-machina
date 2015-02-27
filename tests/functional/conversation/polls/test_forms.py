@@ -40,9 +40,11 @@ class TestTopicPollOptionFormset(TestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up some topics and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.alt_topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        self.alt_post = PostFactory.create(topic=self.alt_topic, poster=self.user)
 
         # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
@@ -146,10 +148,12 @@ class TestTopicPollOptionFormset(TestCase):
         form_1 = TopicPollOptionFormset(
             data=form_data_1,
             topic=refresh(self.topic))
-        form_2 = TopicPollOptionFormset(topic=refresh(self.topic))
+        form_2 = TopicPollOptionFormset(topic=refresh(self.topic))  # poll already created
+        form_3 = TopicPollOptionFormset(topic=self.alt_topic)  # no poll
         # Check
         self.assertEqual(form_1.total_form_count(), 2)
         self.assertEqual(form_2.total_form_count(), 2)
+        self.assertEqual(form_3.total_form_count(), 2)
 
 
 class TestTopicPollVoteForm(TestCase):
