@@ -2,12 +2,9 @@
 
 # Standard library imports
 # Third party imports
-from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.test.client import RequestFactory
-from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
-from guardian.shortcuts import remove_perm
 
 # Local application / specific library imports
 from machina.apps.forum_feeds.feeds import LastTopicsFeed
@@ -15,17 +12,10 @@ from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
-from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
-from machina.test.factories import TopicPollFactory
-from machina.test.factories import TopicPollOptionFactory
-from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
 from machina.test.testcases import BaseUnitTestCase
 
-faker = FakerFactory.create()
-
-ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
