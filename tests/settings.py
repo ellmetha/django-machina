@@ -77,7 +77,8 @@ TEST_SETTINGS = {
     'ANONYMOUS_USER_ID': -1,
     'HAYSTACK_CONNECTIONS': {
         'default': {
-            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+            'PATH': os.path.join(TEST_ROOT, '_testdata/whoosh_index'),
         },
     },
     'CACHES': {
