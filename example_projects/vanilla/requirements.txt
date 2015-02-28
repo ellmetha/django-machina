@@ -4,3 +4,4 @@ django-compressor
 django-debug-toolbar
 django-crispy-forms
 django-loginas
+Whoosh
