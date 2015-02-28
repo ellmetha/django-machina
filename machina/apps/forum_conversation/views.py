@@ -100,7 +100,7 @@ class TopicView(PermissionRequiredMixin, ListView):
                 context['poll_form'] = self.poll_form_class(poll=topic.poll)
                 context['view_results_action'] = self.request.GET.get('view_results', None)
                 context['change_vote_action'] = self.request.GET.get('change_vote', None)
-        except ObjectDoesNotExist:
+        except ObjectDoesNotExist:  # pragma: no cover
             pass
 
         return context

@@ -456,6 +456,45 @@ class TestTopicCreateView(BaseClientTestCase):
         # Check
         self.assertTrue(response.context_data['attachment_preview'])
 
+    def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):
+        # Setup
+        assign_perm('can_attach_file', self.user, self.top_level_forum)
+        correct_url = reverse('forum-conversation:topic-create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
+        post_data_1 = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'attachment-0-id': '',
+            'attachment-0-file': f,
+            'attachment-0-comment': '',
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 1,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        post_data_2 = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': TOPIC_TYPES.topic_post,
+            'preview': 'Preview',
+            'attachment-0-id': '',
+            'attachment-0-file': '',
+            'attachment-0-comment': '',
+            'attachment-INITIAL_FORMS': 0,
+            'attachment-TOTAL_FORMS': 1,
+            'attachment-MAX_NUM_FORMS': 1000,
+        }
+        # Run
+        response_1 = self.client.post(correct_url, post_data_1, follow=True)
+        response_2 = self.client.post(correct_url, post_data_2, follow=True)
+        # Check
+        self.assertTrue(response_1.context_data['attachment_preview'])
+        self.assertTrue(response_2.context_data['attachment_preview'])
+        self.assertEqual(len(response_2.context_data['attachment_file_previews']), 1)
+        self.assertEqual(response_2.context_data['attachment_file_previews'][0][1].name, 'file1.txt')
+
     def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)

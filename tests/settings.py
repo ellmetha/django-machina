@@ -57,6 +57,7 @@ TEST_SETTINGS = {
         'easy_thumbnails',
         'tests',
     ] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ]),
+    'SITE_ID': 1,
     'ROOT_URLCONF': 'tests._testsite.urls',
     'MIDDLEWARE_CLASSES': (
         'django.middleware.common.CommonMiddleware',

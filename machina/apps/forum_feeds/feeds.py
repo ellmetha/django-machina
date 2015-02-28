@@ -35,7 +35,8 @@ class LastTopicsFeed(Feed):
 
         if forum_pk:
             forum = get_object_or_404(Forum, pk=forum_pk)
-            forums_qs = forum.get_descendants(include_self=True) if descendants else [forum, ]
+            forums_qs = forum.get_descendants(include_self=True) if descendants \
+                else Forum.objects.filter(pk=forum_pk)
             self.forums = perm_handler.forum_list_filter(
                 forums_qs, request.user)
         else:

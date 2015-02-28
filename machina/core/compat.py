@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
-except ImportError as err:
+except ImportError as err:  # pragma: no cover
     try:
         # If that failed, try the alternate import syntax for PIL.
         import Image as PILImage  # noqa
@@ -26,14 +26,14 @@ except ImportError as err:
 # Django slugify
 try:
     from django.utils.text import slugify
-except ImportError:
+except ImportError:  # pragma: no cover
     from django.template.defaultfilters import slugify  # noqa
 
 
 # force_bytes
 try:
     from django.utils.encoding import force_bytes
-except ImportError:
+except ImportError:  # pragma: no cover
     from django.utils.encoding import smart_str as force_bytes  # noqa
 
 

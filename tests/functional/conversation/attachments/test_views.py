@@ -30,9 +30,9 @@ TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
-class TestTopicView(BaseClientTestCase):
+class TestAttachmentView(BaseClientTestCase):
     def setUp(self):
-        super(TestTopicView, self).setUp()
+        super(TestAttachmentView, self).setUp()
 
         # Permission handler
         self.perm_handler = PermissionHandler()
