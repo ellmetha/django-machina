@@ -10,5 +10,9 @@ mock>=1.0.1,<1.1
 tox>=1.7,<1.8
 flake8>=2.2.5,<3.0
 
+# Docs
+Sphinx==1.2.3
+
 # Search indexes
 Whoosh>=2.6.0,<3.0
+sphinx-rtd-theme
