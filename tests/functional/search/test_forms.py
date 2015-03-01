@@ -8,7 +8,8 @@ from django.db.models import get_model
 from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
 from guardian.utils import get_anonymous_user
-from haystack.management.commands import update_index
+from haystack.management.commands import clear_index
+from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
 
 # Local application / specific library imports
@@ -92,12 +93,16 @@ class TestSearchForm(BaseUnitTestCase):
         assign_perm('can_read_forum', self.user, self.top_level_forum_1)
 
         self.sqs = SearchQuerySet()
-        update_index.Command().handle(interactive=False, verbosity=-1)
+
+        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+
+    def tearDown(self):
+        clear_index.Command().handle(interactive=False, verbosity=-1)
 
     def test_can_search_forum_posts(self):
         # Setup
         form = SearchForm(
-            {'q': self.topic_1.first_post.content},
+            {'q': self.topic_1.first_post.subject},
             user=self.user,
         )
         # Run
