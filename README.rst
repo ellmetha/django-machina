@@ -23,6 +23,6 @@ django-machina
 
 *Django-machina* was built with integration in mind : the application is designed to be used inside existing Django applications and it is not self-sufficient.
 
-*Django-machina* was built with customization and extensibility in mind : each single functionality of the application can be customized or overriden to accommodate with your needs.
+*Django-machina* was built with customization and extensibility in mind : each single functionality of the application can be customized or overriden to accommodate with your needs. In fact, *django-machina* uses the same techniques as those introduced by the famous django-oscar e-commerce framework to allow powerfull customizations.
 
 **This application is in heavy development. It is not yet suitable for production environments.**
