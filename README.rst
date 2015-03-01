@@ -12,8 +12,17 @@ django-machina
 |
 
 
-A Django forum engine for building powerful and pretty community driven websites.
+*Django-machina* is a forum framework for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution :
+
+* Topic and post editing
+* Forums tree management
+* Per-forum permissions
+* Anonymous posting
+* Polls and attachments
+* ...
+
+*Django-machina* was built with integration in mind : the application is designed to be used inside existing Django applications and it is not self-sufficient.
+
+*Django-machina* was built with customization and extensibility in mind : each single functionality of the application can be customized or overriden to accommodate with your needs.
 
 **This application is in heavy development. It is not yet suitable for production environments.**
-
-*WIP*
