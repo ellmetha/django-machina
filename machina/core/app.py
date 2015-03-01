@@ -16,7 +16,7 @@ class Application(object):
     def __init__(self, app_name=None, **kwargs):
         self.app_name = app_name
         # Set all kwargs as object attributes
-        for key, value in kwargs.items():
+        for key, value in kwargs.items():  # pragma: no cover
             setattr(self, key, value)
 
     def get_urls(self):

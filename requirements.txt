@@ -8,5 +8,7 @@ fake-factory>=0.4.0,<0.5
 coveralls>=0.2,<0.3
 mock>=1.0.1,<1.1
 tox>=1.7,<1.8
-flake8==2.2.5
-Whoosh==2.6.0
+flake8>=2.2.5,<3.0
+
+# Search indexes
+Whoosh>=2.6.0,<3.0

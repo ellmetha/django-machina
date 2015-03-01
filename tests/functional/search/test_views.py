@@ -4,6 +4,7 @@
 # Third party imports
 from django import forms
 from django.contrib.auth.models import AnonymousUser
+from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
 from guardian.shortcuts import assign_perm
@@ -22,7 +23,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
+from machina.test.testcases import BaseClientTestCase
 
 faker = FakerFactory.create()
 
@@ -32,13 +33,12 @@ Topic = get_model('forum_conversation', 'Topic')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
-class TestSearchForm(BaseUnitTestCase):
+class TestFacetedSearchView(BaseClientTestCase):
     def setUp(self):
+        super(TestFacetedSearchView, self).setUp()
+
         # Permission handler
         self.perm_handler = PermissionHandler()
-
-        # Create a basic user
-        self.user = UserFactory.create()
 
         # Set up the following forum tree:
         #
@@ -100,100 +100,12 @@ class TestSearchForm(BaseUnitTestCase):
         clear_index.Command().handle(interactive=False, verbosity=-1)
 
     def test_can_search_forum_posts(self):
-        # Setup
-        form = SearchForm(
-            {'q': self.topic_1.first_post.subject},
-            user=self.user,
-        )
-        # Run
-        results = form.search()
-        # Check
-        self.assertTrue(form.is_valid())
-        self.assertEqual(results[0].forum, self.topic_1.forum.pk)
-
-    def test_cannot_search_forum_posts_if_the_user_has_not_the_required_permissions(self):
-        # Setup
-        u1 = UserFactory.create()
-        form = SearchForm(
-            {'q': self.topic_1.first_post.content},
-            user=u1,
-        )
-        # Run
-        results = form.search()
-        # Check
-        self.assertTrue(form.is_valid())
-        self.assertFalse(len(results))
-
-    def test_cannot_search_forum_posts_if_the_form_is_not_valid(self):
-        # Setup
-        form = SearchForm(
-            {
-                'q': self.topic_1.first_post.content,
-                'search_forums': [1000, ],
-            },
-            user=self.user,
-        )
-        # Run
-        results = form.search()
-        # Check
-        self.assertFalse(len(results))
-
-    def test_can_search_forum_posts_by_using_only_topic_subjects(self):
-        # Setup
-        form = SearchForm(
-            {
-                'q': self.topic_1.subject,
-                'search_topics': True,
-
-            },
-            user=self.user,
-        )
-        # Run
-        results = form.search()
-        # Check
-        self.assertTrue(form.is_valid())
-        self.assertEqual(results[0].forum, self.topic_1.forum.pk)
-
-    def test_can_search_forum_posts_by_using_the_poster_name(self):
         # Setup
-        self.topic_2.first_post.subject = self.topic_1.subject
-        self.topic_2.first_post.save()
-        self.topic_3.first_post.subject = self.topic_1.subject
-        self.topic_3.first_post.save()
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
-        form = SearchForm(
-            {
-                'q': self.topic_1.subject,
-                'search_poster_name': self.user.username,
-
-            },
-            user=self.user,
-        )
+        correct_url = reverse('forum-search:search')
+        get_data = {'q': self.topic_1.subject}
         # Run
-        results = form.search()
+        response = self.client.get(correct_url, data=get_data)
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertQuerysetEqual(
-            [r.object for r in results],
-            [self.post_1, self.post_2, self.post_3, ])
-
-    def test_can_search_forum_posts_by_using_a_set_of_forums(self):
-        # Setup
-        self.topic_2.first_post.subject = self.topic_1.subject
-        self.topic_2.first_post.save()
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
-        form = SearchForm(
-            {
-                'q': self.topic_1.subject,
-                'search_forums': [self.forum_1.pk, self.forum_2.pk, ],
-
-            },
-            user=self.user,
-        )
-        # Run
-        results = form.search()
-        # Check
-        self.assertTrue(form.is_valid())
-        self.assertQuerysetEqual(
-            [r.object for r in results],
-            [self.post_1, self.post_2, ])
+        self.assertIsOk(response)
+        self.assertEqual(len(response.context['page'].object_list), 1)
+        self.assertEqual(response.context['page'].object_list[0].object, self.post_1)
