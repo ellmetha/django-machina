@@ -70,6 +70,15 @@ class TestTopic(TestCase):
         self.assertEqual(self.topic.last_post, new_last_post)
         self.assertIsNone(new_topic.last_post)
 
+    def test_cannot_tel_tha_a_non_approved_post_is_the_last_post(self):
+        # Setup
+        new_topic = create_topic(forum=self.top_level_forum, poster=self.u1)
+        # Run & check
+        middle_post = PostFactory.create(topic=self.topic, poster=self.u1)
+        latest_post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
+        topic = refresh(self.topic)
+        self.assertEqual(topic.last_post, middle_post)
+
     def test_has_the_first_post_name_as_subject(self):
         # Run & check
         self.assertEqual(self.topic.subject, self.post.subject)

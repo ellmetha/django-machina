@@ -116,7 +116,7 @@ class AbstractTopic(DatedModel):
         lighten the next request.
         """
         if not hasattr(self, '_last_post'):
-            posts = self.posts.select_related('poster').all().order_by('-created')
+            posts = self.posts.select_related('poster').filter(approved=True).order_by('-created')
             self._last_post = posts[0] if len(posts) else None
         return self._last_post
 
