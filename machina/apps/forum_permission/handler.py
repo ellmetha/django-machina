@@ -48,7 +48,7 @@ class PermissionHandler(object):
             hidden_forums = self._get_hidden_forum_ids(forums, checker)
 
         forums = forums.exclude(id__in=hidden_forums)
-        posts = Post.objects.filter(topic__forum__in=forums).order_by('-created')
+        posts = Post.approved_objects.filter(topic__forum__in=forums).order_by('-created')
 
         if not posts.exists():
             return None

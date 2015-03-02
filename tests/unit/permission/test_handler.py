@@ -95,7 +95,7 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Check
         self.assertQuerysetEqual(filtered_forums, [])
 
-    def test_knows_the_last_topic_visible_inside_a_forum(self):
+    def test_knows_the_last_post_visible_inside_a_forum(self):
         # Run & check : no forum hidden
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertEqual(last_post, self.post_2)
@@ -109,6 +109,15 @@ class TestPermissionHandler(BaseUnitTestCase):
         remove_perm('can_see_forum', self.u1, self.forum_1)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertIsNone(last_post)
+
+    def test_cannot_say_that_post_is_the_last_post_if_it_is_not_approved(self):
+        # Setup
+        post_bis = PostFactory.create(topic=self.forum_1_topic, poster=self.u1, approved=False)
+        remove_perm('can_read_forum', self.g1, self.forum_3)
+        # Run
+        last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
+        # Check
+        self.assertEqual(last_post, self.post_1)
 
     def test_shows_all_forums_to_a_superuser(self):
         # Setup

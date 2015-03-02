@@ -15,9 +15,12 @@ from model_utils import Choices
 # Local application / specific library imports
 from machina.core.compat import AUTH_USER_MODEL
 from machina.core.compat import slugify
+from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
+
+ApprovedManager = get_class('forum_conversation.managers', 'ApprovedManager')
 
 
 TOPIC_TYPES = Choices(
@@ -65,6 +68,9 @@ class AbstractTopic(DatedModel):
 
     # Many users can subscribe to this topic
     subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True, null=True)
+
+    objects = models.Manager()
+    approved_objects = ApprovedManager()
 
     class Meta:
         abstract = True
@@ -207,6 +213,9 @@ class AbstractPost(DatedModel):
     # Tracking data
     updated_by = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Lastly updated by'), editable=False, blank=True, null=True)
     updates_count = models.PositiveIntegerField(verbose_name=_('Updates count'), editable=False, blank=True, default=0)
+
+    objects = models.Manager()
+    approved_objects = ApprovedManager()
 
     class Meta:
         abstract = True
