@@ -1,31 +1,25 @@
-{% extends "base.html" %}
+{% extends "board_base.html" %}
 {% load i18n %}
 
+{% block sub-title %}{% trans "Sign in" %}{% endblock sub-title %}
+
+{% block breadcrumb %}{% endblock breadcrumb %}
+
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="span6">
-                <h2>{% trans "Log in" %}</h2>
-                {% if form.errors %}
-                    <p class="alert alert-error">
-                        {% trans "Your username and password didn't match. Please try again." %}
-                    </p>
-                {% endif %}
-                
-                <form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
-                    {% csrf_token %}
-                    <p>
-                        <label for="{{ form.username.auto_id }}">{{ form.username.label }}</label>
-                        {{ form.username }}
-                    </p>
-                    <p>
-                        {{ form.password.label_tag }}
-                        {{ form.password }}
-                    </p>
-                    <input type="submit" value="{% trans "Log in" %}" class="btn btn-primary" />
-                    <input type="hidden" name="next" value="{{ next }}" />
-                </form>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 vertical-offset-100">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title"><strong>{% trans "Sign in" %}</strong></h3></div>
+                <div class="panel-body">
+                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
+                        {% include 'machina/partials/form_fields.html' %}
+                        <div class="form-actions">
+                            <a href="{% url 'password_reset' %}"class="btn btn-large btn-default">{% trans "Forgot password?" %}</a>
+                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Login" %}" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
