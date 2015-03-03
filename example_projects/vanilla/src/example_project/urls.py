@@ -7,10 +7,13 @@ from django.conf.urls import include
 from django.conf.urls import patterns
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.edit import CreateView
+from machina.app import board
 
 # Local application / specific library imports
-from machina.app import board
+from example_project.forms import UserCreationForm
 
 
 # Admin autodiscover
@@ -23,6 +26,11 @@ urlpatterns = patterns(
     # Admin
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^account/', include('django.contrib.auth.urls')),
+    url('^register/', CreateView.as_view(
+            template_name='registration/register.html',
+            form_class=UserCreationForm,
+            success_url='/'
+    ), name='register'),
     url('^markdown/', include( 'django_markdown.urls')),
 
     # Apps

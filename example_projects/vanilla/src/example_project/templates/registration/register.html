@@ -1,7 +1,7 @@
 {% extends "board_base.html" %}
 {% load i18n %}
 
-{% block sub-title %}{% trans "Sign in" %}{% endblock sub-title %}
+{% block sub-title %}{% trans "Sign up" %}{% endblock sub-title %}
 
 {% block breadcrumb %}{% endblock breadcrumb %}
 
@@ -9,14 +9,13 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 vertical-offset-100">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title"><strong>{% trans "Sign in" %}</strong></h3></div>
+                <div class="panel-heading"><h3 class="panel-title"><strong>{% trans "Sign up" %}</strong></h3></div>
                 <div class="panel-body">
                     <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
                         {% include 'machina/partials/form_fields.html' %}
                         <input type="hidden" name="next" value="/">
                         <div class="form-actions">
-                            <a href="{% url 'password_reset' %}"class="btn btn-large btn-default">{% trans "Forgot password?" %}</a>
-                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Login" %}" />
+                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Register" %}" />
                         </div>
                     </form>
                 </div>
