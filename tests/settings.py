@@ -54,7 +54,6 @@ TEST_SETTINGS = {
         'bootstrap3',
         'compressor',
         'django_markdown',
-        'easy_thumbnails',
         'tests',
     ] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ]),
     'SITE_ID': 1,
