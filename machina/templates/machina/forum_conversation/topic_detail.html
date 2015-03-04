@@ -1,6 +1,5 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
-{% load thumbnail %}
 {% load forum_conversation_tags %}
 {% load forum_member_tags %}
 
@@ -56,7 +55,7 @@
                                     {% if post.poster.forum_profile.avatar %}
                                         <div class="avatar">
                                             <a href="#">
-                                                <img src="{% thumbnail post.poster.forum_profile.avatar 150x250 crop upscale %}" alt="{{ post.poster.username }}" />
+                                                <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
                                             </a>
                                         </div>
                                     {% endif %}

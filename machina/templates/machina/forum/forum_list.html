@@ -54,7 +54,12 @@
                     <tr>
                         {% if not node.is_link %}
                             <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
-                            <td class="forum-name">
+                            <td class="forum-name visible-lg">
+                                {% if node.image %}
+                                    <div class="pull-left visible-md visible-lg forum-image">
+                                        <img src="{{ node.image.url }}" alt="{{ node.name }}" />
+                                    </div>
+                                {% endif %}
                                 <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                                 <div class="forum-description">
                                     {{ node.description.rendered }}
@@ -105,6 +110,11 @@
                         {% if not node.is_link %}
                             <td class="forum-icon {% if node in unread_forums %}unread{% endif %}"><i class="fa fa-circle-o fa-2x"></i></td>
                             <td class="forum-name">
+                                {% if node.image %}
+                                    <div class="pull-left visible-md visible-lg forum-image">
+                                        <img src="{{ node.image.url }}" alt="{{ node.name }}" />
+                                    </div>
+                                {% endif %}
                                 <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                                 <div class="forum-description">
                                     {{ node.description.rendered }}

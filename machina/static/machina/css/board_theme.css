@@ -294,6 +294,14 @@
 .forumlist .panel-body .forum-icon.link {
   color: #999999;
 }
+.forumlist .panel-body .forum-image {
+  padding: 0 10px;
+  height: 70px;
+  line-height: 70px;
+}
+.forumlist .panel-body .forum-image img {
+  vertical-align: middle;
+}
 .forumlist .panel-body .forum-name .forum-description {
   font-size: 11px;
 }
