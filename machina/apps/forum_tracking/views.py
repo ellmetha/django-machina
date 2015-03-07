@@ -104,7 +104,7 @@ class UnreadTopicsView(ListView):
             Forum.objects.all(), self.request.user)
         topics = Topic.objects.filter(forum__in=forums)
         topics_pk = map(lambda t: t.pk, track_handler.get_unread_topics(topics, self.request.user))
-        return Topic.objects.filter(pk__in=topics_pk).order_by('-updated')
+        return Topic.objects.filter(pk__in=topics_pk).order_by('-last_post_on')
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):

@@ -107,7 +107,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Check
         self.assertEqual(unread_topics, [new_topic, ])
 
-    def test_says_that_a_topic_with_an_update_date_greater_than_the_forum_mark_time_is_unread(self):
+    def test_says_that_a_topic_with_a_last_post_date_greater_than_the_forum_mark_time_is_unread(self):
         # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
         # Run
@@ -115,7 +115,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Check
         self.assertEqual(unread_topics, [self.topic, ])
 
-    def test_says_that_a_topic_with_an_update_date_greater_than_its_mark_time_is_unread(self):
+    def test_says_that_a_topic_with_a_last_post_date_greater_than_its_mark_time_is_unread(self):
         # Setup
         TopicReadTrackFactory.create(topic=self.topic, user=self.u2)
         PostFactory.create(topic=self.topic, poster=self.u1)
@@ -155,3 +155,11 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Check
         self.assertFalse(len(unread_forums))
         self.assertFalse(len(unread_topics))
+
+    def test_cannot_say_that_a_forum_is_unread_if_it_has_been_updated_without_new_topics_or_posts(self):
+        # Setup
+        self.forum_2.save()
+        # Run
+        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
+        # Check
+        self.assertFalse(len(unread_forums))

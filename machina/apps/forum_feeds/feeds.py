@@ -44,7 +44,7 @@ class LastTopicsFeed(Feed):
                 Forum.objects.all(), request.user)
 
     def items(self):
-        return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-updated')
+        return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-last_post_on')
 
     def item_pubdate(self, item):
         return item.created

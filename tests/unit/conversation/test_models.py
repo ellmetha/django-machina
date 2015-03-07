@@ -183,16 +183,6 @@ class TestPost(TestCase):
         with self.assertRaises(Topic.DoesNotExist):
             Topic.objects.get(pk=self.topic_pk)
 
-    def test_update_should_not_result_in_the_update_of_the_updated_date_of_the_topic(self):
-        # Setup
-        topic_updated_date = self.topic.updated
-        self.post.content = faker.text()
-        # Run
-        self.post.save()
-        # Check
-        topic = refresh(self.topic)
-        self.assertEqual(topic.updated, topic_updated_date)
-
     def test_save_triggers_the_update_of_the_member_posts_count_if_the_related_post_is_approved(self):
         # Setup
         post = PostFactory.build(topic=self.topic, poster=self.u1)

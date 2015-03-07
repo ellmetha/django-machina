@@ -66,6 +66,9 @@ class AbstractTopic(DatedModel):
     # The number of time the topic has been viewed
     views_count = models.PositiveIntegerField(verbose_name=_('Views count'), editable=False, blank=True, default=0)
 
+    # The date of the latest post
+    last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
+
     # Many users can subscribe to this topic
     subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True, null=True)
 
@@ -75,8 +78,8 @@ class AbstractTopic(DatedModel):
     class Meta:
         abstract = True
         app_label = 'forum_conversation'
-        ordering = ['-type', '-updated', ]
-        get_latest_by = 'updated'
+        ordering = ['-type', '-last_post_on', ]
+        get_latest_by = 'last_post_on'
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
 
@@ -154,12 +157,8 @@ class AbstractTopic(DatedModel):
         This allow the database to not be hit by such checks during very common and regular
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a topic's forum.
-        This save is done without triggering the update of the 'updated' field by disabling the
-        'auto_now' behavior.
         """
-        self._meta.get_field_by_name('updated')[0].auto_now = False
         super(AbstractTopic, self).save(*args, **kwargs)
-        self._meta.get_field_by_name('updated')[0].auto_now = True
 
     def delete(self, using=None):
         super(AbstractTopic, self).delete(using)
@@ -173,7 +172,7 @@ class AbstractTopic(DatedModel):
         self.posts_count = self.posts.filter(approved=True).count()
         posts = self.posts.all().order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
-        self.updated = self._last_post.created
+        self.last_post_on = self._last_post.created
         self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()

@@ -69,6 +69,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
     topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
     link_redirects_count = models.PositiveIntegerField(verbose_name=_('Track link redirects count'),
                                                        editable=False, blank=True, default=0)
+    last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Display options
     display_sub_forum_list = models.BooleanField(verbose_name=_('Display in parent-forums legend'),
@@ -175,12 +176,8 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         This allow the database to not be hit by such checks during very common and regular
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a forum parent.
-        This save is done without triggering the update of the 'updated' field by disabling the
-        'auto_now' behavior.
         """
-        self._meta.get_field_by_name('updated')[0].auto_now = False
         super(AbstractForum, self).save(*args, **kwargs)
-        self._meta.get_field_by_name('updated')[0].auto_now = True
 
     def update_trackers(self):
         # Fetch the list of ids of all descendant forums including the current one
@@ -190,7 +187,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # associated with the current forum plus the list of all topics associated
         # with the descendant forums.
         topic_klass = models.get_model('forum_conversation', 'Topic')
-        topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-updated')
+        topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-last_post_on')
         approved_topics = topics.filter(approved=True)
 
         self.topics_count = approved_topics.count()
@@ -198,8 +195,9 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         posts_count = sum(topic.posts_count for topic in topics)
         self.posts_count = posts_count
 
-        # Force the forum 'updated' date to the one associated with the last topic updated
-        self.updated = approved_topics[0].updated if len(approved_topics) else now()
+        # Force the forum 'last_post_on' date to the one associated with the topic with
+        # the latest post.
+        self.last_post_on = approved_topics[0].last_post_on if len(approved_topics) else now()
 
         # Any save of a forum triggered from the update_tracker process will not result
         # in checking for a change of the forum's parent.

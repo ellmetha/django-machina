@@ -28,7 +28,8 @@ class ForumReadTrackManager(models.Manager):
         tracked_forums = []
 
         for track in tracks:
-            if track.mark_time < track.forum.updated and track.forum not in unread_forums:
+            if (track.forum.last_post_on and track.mark_time < track.forum.last_post_on) \
+                    and track.forum not in unread_forums:
                 unread_forums.extend(track.forum.get_ancestors(include_self=True))
             tracked_forums.append(track.forum)
 

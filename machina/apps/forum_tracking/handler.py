@@ -68,7 +68,7 @@ class TrackingHandler(object):
         if topic_tracks.exists():
             tracks_dict = dict(topic_tracks.values_list('topic__pk', 'mark_time'))
             for topic in topics:
-                topic_last_modification_date = topic.updated or topic.created
+                topic_last_modification_date = topic.last_post_on or topic.created
                 if topic.id in tracks_dict.keys() and topic_last_modification_date > tracks_dict[topic.id]:
                     unread_topics.append(topic)
 
@@ -81,7 +81,7 @@ class TrackingHandler(object):
         if forum_tracks.exists():
             tracks_dict = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
             for topic in topics:
-                topic_last_modification_date = topic.updated or topic.created
+                topic_last_modification_date = topic.last_post_on or topic.created
                 if ((topic.forum.id in tracks_dict.keys() and topic.id not in tracked_topics) and
                         topic_last_modification_date > tracks_dict[topic.forum.id]):
                     unread_topics.append(topic)

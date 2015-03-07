@@ -31,7 +31,7 @@ def update_user_trackers(sender, topic, user, request, response, **kwargs):
     except ForumReadTrack.DoesNotExist:
         forum_track = None
 
-    if forum_track is None or forum_track.mark_time < topic.updated:
+    if forum_track is None or (topic.last_post_on and forum_track.mark_time < topic.last_post_on):
         topic_track, created = TopicReadTrack.objects.get_or_create(topic=topic, user=user)
         if not created:
             topic_track.save()  # mark_time filled
@@ -39,8 +39,8 @@ def update_user_trackers(sender, topic, user, request, response, **kwargs):
         # If no other topic is unread inside the considered forum, the latter should also
         # be marked as read.
         unread_topics = forum.topics.filter(
-            Q(tracks__user=user, tracks__mark_time__lt=F('updated')) |
-            Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('updated'), tracks__isnull=True)).exclude(id=topic.id)
+            Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
+            Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'), tracks__isnull=True)).exclude(id=topic.id)
 
         if not unread_topics.exists():
             # The topics that are marked as read inside the forum for the given user
