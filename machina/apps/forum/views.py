@@ -30,6 +30,15 @@ class IndexView(ListView):
             self.request.user
         )
 
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+
+        top_level_forums = context['forums'].filter(parent__isnull=True)
+        context['total_posts_count'] = sum(f.posts_count for f in top_level_forums)
+        context['total_topics_count'] = sum(f.topics_count for f in top_level_forums)
+
+        return context
+
 
 class ForumView(PermissionRequiredMixin, ListView):
     template_name = 'forum/forum_detail.html'
