@@ -137,7 +137,6 @@ INSTALLED_APPS = [
     'haystack',
     'bootstrap3',
     'django_markdown',
-    'easy_thumbnails',
 
     # Local apps
     'example_project',
