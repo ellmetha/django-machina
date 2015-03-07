@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -25,7 +26,10 @@ def update_member_profile(sender, instance, **kwargs):
     increase_posts_count = False
 
     if instance.pk:
-        old_instance = instance.__class__._default_manager.get(pk=instance.pk)
+        try:
+            old_instance = instance.__class__._default_manager.get(pk=instance.pk)
+        except ObjectDoesNotExist:  # pragma: no cover
+            return  # this should never happen (except with django loaddata command)
         if old_instance.approved is False and instance.approved is True:
             increase_posts_count = True
     elif instance.approved:
