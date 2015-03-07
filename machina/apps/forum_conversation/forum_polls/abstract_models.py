@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 # Third party imports
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
@@ -47,7 +48,7 @@ class AbstractTopicPoll(DatedModel):
     def __str__(self):
         return '{}'.format(self.topic.subject)
 
-    @property
+    @cached_property
     def votes(self):
         """
         Returns all the votes related to this topic poll.
