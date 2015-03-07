@@ -28,7 +28,6 @@ class Migration(migrations.Migration):
                 ('type', models.PositiveSmallIntegerField(db_index=True, verbose_name='Forum type', choices=[(0, 'Default forum'), (1, 'Category forum'), (2, 'Link forum')])),
                 ('posts_count', models.PositiveIntegerField(default=0, verbose_name='Number of posts', editable=False, blank=True)),
                 ('topics_count', models.PositiveIntegerField(default=0, verbose_name='Number of topics', editable=False, blank=True)),
-                ('real_topics_count', models.PositiveIntegerField(default=0, verbose_name='Number of topics (includes unapproved topics)', editable=False, blank=True)),
                 ('link_redirects_count', models.PositiveIntegerField(default=0, verbose_name='Track link redirects count', editable=False, blank=True)),
                 ('display_sub_forum_list', models.BooleanField(default=True, help_text='Displays this forum on the legend of its parent-forum (sub forums list)', verbose_name='Display in parent-forums legend')),
                 ('lft', models.PositiveIntegerField(editable=False, db_index=True)),

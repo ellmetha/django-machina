@@ -64,11 +64,9 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
     TYPE_CHOICES = FORUM_TYPES
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
-    # Tracking data
+    # Tracking data (only approved topics and posts are recorded)
     posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
     topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
-    real_topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics (includes unapproved topics)'),
-                                                    editable=False, blank=True, default=0)
     link_redirects_count = models.PositiveIntegerField(verbose_name=_('Track link redirects count'),
                                                        editable=False, blank=True, default=0)
 
@@ -191,8 +189,8 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # Determine the list of the associated topics, that is the list of topics
         # associated with the current forum plus the list of all topics associated
         # with the descendant forums.
-        Topic = models.get_model('forum_conversation', 'Topic')
-        topics = Topic.objects.filter(forum__id__in=forum_ids).order_by('-updated')
+        topic_klass = models.get_model('forum_conversation', 'Topic')
+        topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-updated')
         approved_topics = topics.filter(approved=True)
 
         self.real_topics_count = topics.count()

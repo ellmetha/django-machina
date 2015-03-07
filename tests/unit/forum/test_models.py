@@ -63,7 +63,6 @@ class TestForum(TestCase):
         PostFactory.create(topic=topic, poster=self.u1)
         self.assertEqual(self.top_level_forum.posts_count, topic.posts.filter(approved=True).count())
         self.assertEqual(self.top_level_forum.topics_count, self.top_level_forum.topics.count())
-        self.assertEqual(self.top_level_forum.real_topics_count, self.top_level_forum.topics.count())
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
@@ -72,7 +71,6 @@ class TestForum(TestCase):
             topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count())
         self.assertEqual(self.top_level_forum.topics_count,
                          self.top_level_forum.topics.filter(approved=True).count())
-        self.assertEqual(self.top_level_forum.real_topics_count, self.top_level_forum.topics.count())
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
         # Run & check
@@ -91,7 +89,6 @@ class TestForum(TestCase):
         # Check
         self.assertEqual(self.top_level_cat.posts_count, self.top_level_forum.posts_count)
         self.assertEqual(self.top_level_cat.topics_count, self.top_level_forum.topics_count)
-        self.assertEqual(self.top_level_cat.real_topics_count, self.top_level_forum.real_topics_count)
 
     def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
         # Setup
@@ -106,4 +103,3 @@ class TestForum(TestCase):
         self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
         self.assertEqual(self.top_level_forum.posts_count, 0)
         self.assertEqual(self.top_level_forum.topics_count, 0)
-        self.assertEqual(self.top_level_forum.real_topics_count, 0)
