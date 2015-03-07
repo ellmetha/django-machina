@@ -193,9 +193,8 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-updated')
         approved_topics = topics.filter(approved=True)
 
-        self.real_topics_count = topics.count()
         self.topics_count = approved_topics.count()
-        # Compute the forum level posts count
+        # Compute the forum level posts count (only approved posts are recorded)
         posts_count = sum(topic.posts_count for topic in topics)
         self.posts_count = posts_count
 
