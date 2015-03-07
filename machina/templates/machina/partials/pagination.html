@@ -6,23 +6,23 @@
             <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&laquo;</a>
         </li>
         {% for number in paginator.page_range %}
-            {% if page_obj.number == number %}
-                <li class="active"><a href="?page={{ number }}">{{ number }}</a></li>
+            {% if forloop.first %}
+                <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+                {% if page_obj.number > 4 %}
+                    <li><span>...</span></li>
+                {% endif %}
+            {% elif forloop.last %}
+                {% if page_obj.number < paginator.num_pages|add:"-3" %}
+                    <li><span>...</span></li>
+                {% endif %}
+                <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
             {% else %}
-                {% if forloop.first %}
-                    <li><a href="?page={{ number }}">{{ number }}</a></li>
-                    {% if page_obj.number > 3 %}
-                        <li><span>...</span></li>
-                    {% endif %}
-                {% elif forloop.last %}
-                    {% if page_obj.number < paginator.num_pages|add:"-2" %}
-                        <li><span>...</span></li>
-                    {% endif %}
-                    <li><a href="?page={{ number }}">{{ number }}</a></li>
-                {% else %}
-                    {% if number == page_obj.previous_page_number or number == page_obj.next_page_number %}
-                        <li><a href="?page={{ number }}">{{ number }}</a></li>
-                    {% endif %}
+                {% if page_obj.number < 3 and number <= 5 %}
+                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+                {% elif page_obj.number > paginator.num_pages|add:"-2" and number >= paginator.num_pages|add:"-4" %}
+                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+                {% elif number >= page_obj.previous_page_number|add:"-1" and number <= page_obj.next_page_number|add:"1" %}
+                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}
