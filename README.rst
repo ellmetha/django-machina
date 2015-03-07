@@ -11,6 +11,7 @@ django-machina
 
 |
 
+**This application is in heavy development. It is not yet suitable for production environments.**
 
 *Django-machina* is a forum framework for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution :
 
@@ -27,4 +28,3 @@ django-machina
 
 .. _django-oscar: https://github.com/django-oscar/django-oscar
 
-**This application is in heavy development. It is not yet suitable for production environments.**
