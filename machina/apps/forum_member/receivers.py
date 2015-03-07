@@ -29,8 +29,10 @@ def update_member_profile(sender, instance, **kwargs):
         try:
             old_instance = instance.__class__._default_manager.get(pk=instance.pk)
         except ObjectDoesNotExist:  # pragma: no cover
-            return  # this should never happen (except with django loaddata command)
-        if old_instance.approved is False and instance.approved is True:
+            # This should never happen (except with django loaddata command)
+            increase_posts_count = True
+            old_instance = None
+        if old_instance and old_instance.approved is False and instance.approved is True:
             increase_posts_count = True
     elif instance.approved:
         increase_posts_count = True
