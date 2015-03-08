@@ -29,8 +29,13 @@ Features
 Using django-machina
 --------------------
 
+
+
 .. toctree::
    :maxdepth: 2
+
+   getting_started
+
 
 
 
