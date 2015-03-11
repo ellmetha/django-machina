@@ -175,5 +175,7 @@ Finally you have to update your main ``urls.py`` module in order to include foru
     # [...]
 
     # Apps
-    url(r'', include(board.urls)),
+    url(r'^forum/', include(board.urls)),
   )
+
+*Congrats! You're in.*
