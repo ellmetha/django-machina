@@ -111,7 +111,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         verbose_name_plural = _('Forums')
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
     @property
     def margin_level(self):

@@ -85,9 +85,9 @@ class AbstractTopic(DatedModel):
 
     def __str__(self):
         if self.posts.exists():
-            return '{}'.format(self.posts.all().order_by('created')[0].subject)
+            return self.posts.all().order_by('created')[0].subject
         else:
-            return '{}'.format(self.id)
+            return self.id
 
     @property
     def is_topic(self):
@@ -225,7 +225,7 @@ class AbstractPost(DatedModel):
         verbose_name_plural = _('Posts')
 
     def __str__(self):
-        return '{}'.format(self.subject)
+        return self.subject
 
     @property
     def is_topic_head(self):

@@ -40,4 +40,4 @@ class AbstractProfile(models.Model):
         verbose_name_plural = _('Profiles')
 
     def __str__(self):
-        return '{}'.format(self.user.username)
+        return self.user.username
