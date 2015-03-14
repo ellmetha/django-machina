@@ -87,7 +87,7 @@ class AbstractTopic(DatedModel):
         if self.posts.exists():
             return self.posts.all().order_by('created')[0].subject
         else:
-            return self.id
+            return str(self.id)
 
     @property
     def is_topic(self):
