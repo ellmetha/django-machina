@@ -42,13 +42,29 @@
                                     {% endif %}
                                 </div>
                                 <h4 class="subject">{{ post.subject }}</h4>
-                                <p><small class="text-muted">
-                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} {% if not post.poster|is_anonymous %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %} {% trans "on" %} {{ post.created }}
-                                </small></p>
+                                <p>
+                                    <small class="text-muted">
+                                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if not post.poster|is_anonymous %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
+                                    </small>
+                                </p>
                                 <div class="post-content">
                                     {{ post.content.rendered }}
                                 </div>
                                 {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                                {% if post.updates_count %}
+                                    <div class="edit-info">
+                                        <br />
+                                        <small class="text-muted">
+                                            <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="#">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
+                                        </small>
+                                        {% if post.update_reason %}
+                                            <br />
+                                            <small class="text-muted">
+                                                <b>{% trans "Reason:" %}</b>&nbsp;{{ post.update_reason }}
+                                            </small>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="col-md-2 post-sidebar">
                                 {% if not post.poster|is_anonymous %}

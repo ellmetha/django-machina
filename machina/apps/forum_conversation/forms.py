@@ -26,7 +26,7 @@ perm_handler = PermissionHandler()
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['subject', 'content', 'username', ]
+        fields = ['subject', 'content', 'username', 'update_reason', ]
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -56,6 +56,11 @@ class PostForm(forms.ModelForm):
             self.fields['subject'].initial = '{} {}'.format(
                 machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
                 self.topic.subject)
+
+        # Delete the 'update_reason' field if we are
+        # considering a post update
+        if not self.instance.pk:
+            del self.fields['update_reason']
 
     def save(self, commit=True):
         if self.instance.pk:

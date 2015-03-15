@@ -9,7 +9,10 @@
 
 	{% bootstrap_field form.subject %}
 	{% bootstrap_field form.content %}
-	{% if request.user.is_anonymous %}
+	{% if form.update_reason %}
+		{% bootstrap_field form.update_reason %}
+	{% endif %}
+	{% if form.username %}
 		{% bootstrap_field form.username %}
 	{% endif %}
 
