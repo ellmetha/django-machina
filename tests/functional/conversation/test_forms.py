@@ -149,6 +149,27 @@ class TestPostForm(TestCase):
         post = form.save()
         self.assertEqual(post.username, 'testname')
 
+    def test_adds_the_update_reason_field_if_the_post_is_updated(self):
+        # Setup
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'update_reason': 'X',
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        self.assertIn('update_reason', form.fields)
+        self.assertTrue(form.is_valid())
+        post = form.save()
+        self.assertEqual(post.update_reason, 'X')
+
 
 class TestTopicForm(TestCase):
     def setUp(self):
