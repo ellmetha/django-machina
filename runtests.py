@@ -14,8 +14,12 @@ from tests.settings import configure
 
 
 def run(verbosity, *args):
-    from django_nose import NoseTestSuiteRunner
-    runner = NoseTestSuiteRunner(verbosity=verbosity)
+    if django.VERSION < (1, 8):
+        from django_nose import NoseTestSuiteRunner
+        runner = NoseTestSuiteRunner(verbosity=verbosity)
+    else:
+        from django.test.runner import DiscoverRunner
+        runner = DiscoverRunner(verbosity=verbosity)
 
     if not args:
         args = ['tests']

@@ -90,6 +90,7 @@ class TestMarkupTextField(TestCase):
         class TestableForm(forms.ModelForm):
             class Meta:
                 model = TestableModel
+                exclude = []
         # Run
         form = TestableForm()
         # Check
@@ -102,6 +103,7 @@ class TestMarkupTextField(TestCase):
         class TestableForm(forms.ModelForm):
             class Meta:
                 model = TestableModel
+                exclude = []
         # Run
         form = TestableForm()
         # Check
@@ -116,6 +118,7 @@ class TestMarkupTextField(TestCase):
             class TestableForm(forms.ModelForm):
                 class Meta:
                     model = TestableModel
+                    exclude = []
         machina_settings.MACHINA_MARKUP_WIDGET = None
 
 
