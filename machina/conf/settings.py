@@ -13,7 +13,6 @@ from django.conf import settings
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(settings, 'MACHINA_MARKUP_LANGUAGE', ('django_markdown.utils.markdown', {}))
 MACHINA_MARKUP_WIDGET = getattr(settings, 'MACHINA_MARKUP_WIDGET', 'django_markdown.widgets.MarkdownWidget')
-MACHINA_BASE_TEMPLATE = getattr(settings, 'MACHINA_BASE_TEMPLATE', 'base.html')
 
 
 # Forum
