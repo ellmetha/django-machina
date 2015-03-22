@@ -22,7 +22,7 @@ class ForumReadTrackManager(models.Manager):
 
         unread_forums = []
 
-        tracks = get_queryset().filter(
+        tracks = get_queryset().select_related('forum').filter(
             user=user,
             forum__in=forums)
         tracked_forums = []
