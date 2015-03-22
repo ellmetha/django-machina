@@ -178,7 +178,6 @@ HAYSTACK_CONNECTIONS = {
 ANONYMOUS_USER_ID = -1
 
 # Attachment cache backend
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -193,3 +192,15 @@ MACHINA_FORUM_IMAGE_WIDTH = 100
 MACHINA_FORUM_IMAGE_HEIGHT = 70
 MACHINA_PROFILE_AVATAR_WIDTH = 150
 MACHINA_PROFILE_AVATAR_HEIGHT = 250
+
+MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
+    'can_see_forum',
+    'can_read_forum',
+    'can_start_new_topics',
+    'can_reply_to_topics',
+    'can_edit_own_posts',
+    'can_post_without_approval',
+    'can_create_poll',
+    'can_vote_in_polls',
+    'can_download_file',
+]
