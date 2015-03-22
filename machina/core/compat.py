@@ -40,3 +40,11 @@ except ImportError:  # pragma: no cover
 # A settings that can be used in foreign key declarations to ensure backwards compatibility
 # with Django 1.4
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
+# get_user_model
+try:
+    from django.contrib.auth import get_user_model
+except ImportError:  # pragma: no cover
+    from django.contrib.auth.models import User
+    get_user_model = lambda: User

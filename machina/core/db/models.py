@@ -11,7 +11,7 @@ from django.utils.importlib import import_module
 # The following is mainly inspired from the model loading tools provided
 # by django-oscar to handle overridable model classes.
 
-if DJANGO_VERSION < (1, 7):
+if DJANGO_VERSION < (1, 7):  # pragma: no cover
 
     from django.db.models import get_model as django_get_model
 

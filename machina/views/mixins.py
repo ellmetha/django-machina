@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.utils.six import string_types
-from guardian.core import ObjectPermissionChecker
 
 # Local application / specific library imports
+from machina.core.permission import ObjectPermissionChecker
 
 
 class PermissionRequiredMixin(object):
