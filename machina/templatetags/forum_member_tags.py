@@ -20,4 +20,4 @@ def is_anonymous(user):
         {% if topic.poster|is_anonymous %}...{% endif %}
     """
     return user.id == settings.ANONYMOUS_USER_ID if hasattr(settings, 'ANONYMOUS_USER_ID') \
-        else False
+        else user.is_authenticated()
