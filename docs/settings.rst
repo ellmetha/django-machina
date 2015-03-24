@@ -39,3 +39,41 @@ Forum
 Default: ``'machina/forum_images'``
 
 The media subdirectory where forum images should be uploaded.
+
+``MACHINA_FORUM_IMAGE_WIDTH``
+-----------------------------
+
+Default: ``None``
+
+The width used to create the thumbnail that is displayed for each forum that has an image in the list of forums.
+
+``MACHINA_FORUM_IMAGE_HEIGHT``
+------------------------------
+
+Default: ``None``
+
+The height used to create the thumbnail that is displayed for each forum that has an image in the list of forums.
+
+``MACHINA_FORUM_TOPICS_NUMBER_PER_PAGE``
+----------------------------------------
+
+Default: ``20``
+
+The number of topics displayed inside one page of a forum.
+
+Conversation
+************
+
+``MACHINA_TOPIC_ANSWER_SUBJECT_PREFIX``
+---------------------------------------
+
+Default: ``'Re:'``
+
+This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* will be proposed in the reply form.
+
+``MACHINA_TOPIC_POSTS_NUMBER_PER_PAGE``
+---------------------------------------
+
+Default: ``15``
+
+The number of posts displayed inside one page of a forum topic.
