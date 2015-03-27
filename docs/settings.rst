@@ -69,7 +69,7 @@ Conversation
 
 Default: ``'Re:'``
 
-This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* will be proposed in the reply form.
+This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* in the reply form.
 
 ``MACHINA_TOPIC_POSTS_NUMBER_PER_PAGE``
 ---------------------------------------
