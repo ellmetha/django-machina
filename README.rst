@@ -13,7 +13,7 @@ django-machina
 
 **This application is in heavy development. It is not yet suitable for production environments.**
 
-*Django-machina* is a forum framework for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution :
+*Django-machina* is a forum framework for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution:
 
 * Topic and post editing
 * Forums tree management
@@ -27,9 +27,9 @@ django-machina
 
 |
 
-*Django-machina* was built with integration in mind : the application is designed to be used inside existing Django applications. It is not a standalone forum solution.
+*Django-machina* was built with integration in mind: the application is designed to be used inside existing Django applications. It is not a standalone forum solution.
 
-*Django-machina* was built with customization and extensibility in mind : each single functionality of the application can be customized or overriden to accommodate with your needs. In fact, *django-machina* uses the same techniques as those introduced by the famous django-oscar_ e-commerce framework to allow powerfull customizations.
+*Django-machina* was built with customization and extensibility in mind: each single functionality of the application can be customized or overriden to accommodate with your needs. In fact, *django-machina* uses the same techniques as those introduced by the famous django-oscar_ e-commerce framework to allow powerfull customizations.
 
 .. _django-oscar: https://github.com/django-oscar/django-oscar
 
