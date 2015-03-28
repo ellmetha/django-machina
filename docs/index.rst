@@ -14,7 +14,7 @@ Welcome to django-machina's documentation!
 
 *Django-machina* is a forum engine for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution that is designed to be used inside existing Django applications.
 
-*Django-machina* is customizable and extensible : each single functionality of the application can be customized or overriden to accommodate with your needs and your own business logic. The central aim of *django-machina* is to provide a solid core of a forum project - without much of extra functionality included - that can be extended or customized to suit your project needs.
+*Django-machina* is customizable and extensible: each single functionality of the application can be customized or overriden to accommodate with your needs and your own business logic. The central aim of *django-machina* is to provide a solid core of a forum project - without much of extra functionality included - that can be extended or customized to suit your project needs.
 
 .. image:: ./images/machina_forum_header.png
 
