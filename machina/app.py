@@ -18,6 +18,7 @@ class BoardApp(Application):
     forum_app = get_class('forum.app', 'application')
     conversation_app = get_class('forum_conversation.app', 'application')
     feeds_app = get_class('forum_feeds.app', 'application')
+    moderation_app = get_class('forum_moderation.app', 'application')
     search_app = get_class('forum_search.app', 'application')
     tracking_app = get_class('forum_tracking.app', 'application')
 
@@ -26,6 +27,7 @@ class BoardApp(Application):
             url(r'', include(self.forum_app.urls)),
             url(r'', include(self.conversation_app.urls)),
             url(_(r'^feeds/'), include(self.feeds_app.urls)),
+            url(_(r'^moderation/'), include(self.moderation_app.urls)),
             url(_(r'^search/'), include(self.search_app.urls)),
             url(_(r'^tracking/'), include(self.tracking_app.urls)),
         ]

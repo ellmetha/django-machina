@@ -14,6 +14,7 @@ MACHINA_VANILLA_APPS = [
     'machina.apps.forum_conversation.forum_attachments',
     'machina.apps.forum_conversation.forum_polls',
     'machina.apps.forum_feeds',
+    'machina.apps.forum_moderation',
     'machina.apps.forum_search',
     'machina.apps.forum_tracking',
     'machina.apps.forum_member',
