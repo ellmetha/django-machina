@@ -18,7 +18,7 @@
             <div class="forumlist-top-controls col-xs-12">
                 {% if request.user.is_authenticated %}
                     <div class="pull-right">
-                        <a href="{% url 'forum-tracking:mark-subforums-read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o"></i>&nbsp;{% trans "Mark subforums read" %}</a>
+                        <a href="{% url 'forum-tracking:mark-subforums-read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o">&nbsp;</i>{% trans "Mark subforums read" %}</a>
                     </div>
                 {% endif %}
             </div>

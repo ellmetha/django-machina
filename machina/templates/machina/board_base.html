@@ -3,6 +3,7 @@
 {% load static %}
 {% load i18n %}
 {% load compress %}
+{% load forum_moderation_tags %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
 
@@ -56,6 +57,11 @@
                 {% block breadcrumb %}
                     {% include "machina/partials/breadcrumb.html" %}
                 {% endblock breadcrumb %}
+                {% if request.user|can_access_moderation_panel %}
+                    <div class="pull-right moderation-link-wrapper">
+                        <a href="#" class="btn btn-link"><i class="fa fa-wrench">&nbsp;</i>{% trans "Moderation panel" %}</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="row">

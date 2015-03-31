@@ -7,6 +7,9 @@
 #main_container {
   margin-bottom: 40px;
 }
+#main_container .moderation-link-wrapper {
+  margin-top: -20px;
+}
 .preview .post-preview .post-content-wrapper hr {
   margin-top: 5px;
   margin-bottom: 10px;

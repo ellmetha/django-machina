@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <ul class="breadcrumb">
-    <li><a href="{% url 'forum:index' %}"><i class="fa fa-home"></i> {% trans "Forum index" %}</a></li>
+    <li><a href="{% url 'forum:index' %}"><i class="fa fa-home">&nbsp;</i>{% trans "Forum index" %}</a></li>
     {% if forum %}
         {% for ancestor in forum.get_ancestors %}
             <li><a href="{% url 'forum:forum' ancestor.slug ancestor.id %}">{{ ancestor.name }}</a></li>
