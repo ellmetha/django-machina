@@ -106,6 +106,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             ('can_edit_posts', _('Can edit posts')),
             ('can_delete_posts', _('Can delete posts')),
             ('can_move_posts', _('Can move posts')),
+            ('can_approve_posts', _('Can approve posts')),
         ]
         verbose_name = _('Forum')
         verbose_name_plural = _('Forums')
