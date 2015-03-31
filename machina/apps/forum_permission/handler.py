@@ -7,6 +7,7 @@ from datetime import timedelta
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import _get_queryset
 from django.utils.timezone import now
+from guardian.shortcuts import get_objects_for_user
 from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
@@ -174,6 +175,22 @@ class PermissionHandler(object):
         Given a forum, checks whether the user can download files attached to posts.
         """
         return self._perform_basic_permission_check(forum, user, 'can_download_file')
+
+    # Moderation
+
+    def can_access_moderation_panel(self, user):
+        """
+        Returns True if the passed user can access the moderation panel.
+        This panel allows:
+
+            - posts approval
+
+        """
+        perms = [
+            'can_approve_posts',
+        ]
+        moderated_forums = get_objects_for_user(user, perms, klass=Forum, any_perm=True)
+        return moderated_forums.exists()
 
     # Common
     # --

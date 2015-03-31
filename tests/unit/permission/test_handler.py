@@ -319,3 +319,21 @@ class TestPermissionHandler(BaseUnitTestCase):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         self.assertTrue(self.perm_handler.can_download_files(self.forum_1, u2))
+
+    def test_knows_that_a_non_moderator_cannot_access_the_moderation_panel(self):
+        # Setup
+        u2 = UserFactory.create()
+        # Run & check
+        self.assertFalse(self.perm_handler.can_access_moderation_panel(u2))
+
+    def test_knows_that_a_moderator_can_access_the_moderation_panel(self):
+        # Setup
+        assign_perm('can_approve_posts', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_access_moderation_panel(self.u1))
+
+    def test_knows_that_a_superuser_can_access_the_moderation_panel(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_access_moderation_panel(u2))
