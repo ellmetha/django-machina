@@ -31,7 +31,7 @@ setup(
         'django-model-utils>=2.0,<3.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
-        'django-mptt>=0.6.1,<0.7',
+        'django-mptt>=0.7.0,<0.8',
 
         # Django-guardian is used to provide a powerful per-forum object permission system
         'django-guardian>=1.2,<1.3',
