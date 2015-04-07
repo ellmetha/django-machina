@@ -13,11 +13,13 @@ faker = FakerFactory.create()
 
 
 class UserFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = User
     username = factory.LazyAttribute(lambda t: faker.user_name())
     email = factory.Sequence(lambda n: 'test{0}@example.com'.format(n))
     password = '1234'
     is_active = True
+
+    class Meta:
+        model = User
 
     @classmethod
     def _prepare(cls, create, **kwargs):
@@ -31,5 +33,7 @@ class UserFactory(factory.DjangoModelFactory):
 
 
 class GroupFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Group
     name = factory.Sequence(lambda n: '{}-{}'.format(str(n), faker.job()))
+
+    class Meta:
+        model = Group

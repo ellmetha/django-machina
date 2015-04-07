@@ -17,12 +17,14 @@ Forum = get_model('forum', 'Forum')
 
 
 class ForumFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Forum
     name = faker.text(max_nb_chars=150)
     slug = factory.LazyAttribute(lambda t: slugify(t.name))
 
     # Link forum specific
     link = faker.uri()
+
+    class Meta:
+        model = Forum
 
 
 def build_forum(**attrs):

@@ -15,6 +15,8 @@ Attachment = get_model('forum_attachments', 'Attachment')
 
 
 class AttachmentFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Attachment
     post = factory.SubFactory(PostFactory)
     comment = faker.text(max_nb_chars=255)
+
+    class Meta:
+        model = Attachment

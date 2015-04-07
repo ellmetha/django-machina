@@ -21,20 +21,24 @@ Topic = get_model('forum_conversation', 'Topic')
 
 
 class TopicFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Topic
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
     status = Topic.STATUS_CHOICES.topic_unlocked
     subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
     slug = factory.LazyAttribute(lambda t: slugify(t.subject))
 
+    class Meta:
+        model = Topic
+
 
 class PostFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Post
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
     subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
     content = fuzzy.FuzzyText(length=255)
+
+    class Meta:
+        model = Post
 
 
 def build_topic(**attrs):

@@ -15,12 +15,16 @@ TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 
 class ForumReadTrackFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = ForumReadTrack
     user = factory.SubFactory(UserFactory)
     forum = factory.SubFactory(ForumFactory)
 
+    class Meta:
+        model = ForumReadTrack
+
 
 class TopicReadTrackFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = TopicReadTrack
     user = factory.SubFactory(UserFactory)
     topic = factory.SubFactory(TopicFactory)
+
+    class Meta:
+        model = TopicReadTrack
