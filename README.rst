@@ -1,5 +1,5 @@
 django-machina
-==============
+##############
 
 .. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
     :target: http://travis-ci.org/ellmetha/django-machina
@@ -33,3 +33,19 @@ django-machina
 
 .. _django-oscar: https://github.com/django-oscar/django-oscar
 
+.. contents::
+
+Documentation
+=============
+
+Head over to the `documentation <http://django-machina.readthedocs.org/en/>`_ for all the details on how to set up your forum and how to customize it to suit your needs.
+
+Author
+======
+
+Morgan Aubert (@ellmetha) <morgan.aubert@zoho.com>
+
+License
+=======
+
+BSD. See ``LICENSE`` for more details.
