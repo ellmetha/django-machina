@@ -102,6 +102,10 @@ class AbstractTopic(DatedModel):
         return self.type == self.TYPE_CHOICES.topic_announce
 
     @property
+    def is_locked(self):
+        return self.status == self.STATUS_CHOICES.topic_locked
+
+    @property
     def first_post(self):
         """
         Try to fetch the first post associated with the current topic and caches it to

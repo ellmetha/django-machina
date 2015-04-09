@@ -54,6 +54,13 @@ class TestTopic(TestCase):
         # Run & check
         self.assertTrue(announce.is_announce)
 
+    def test_knows_if_it_is_locked(self):
+        # Run & check
+        self.assertFalse(self.topic.is_locked)
+        self.topic.status = self.topic.STATUS_CHOICES.topic_locked
+        self.topic.save()
+        self.assertTrue(self.topic.is_locked)
+
     def test_has_a_first_post(self):
         # Run & check
         self.assertEqual(self.topic.first_post, self.post)

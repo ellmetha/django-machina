@@ -218,6 +218,28 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Run & check
         self.assertTrue(self.perm_handler.can_post_without_approval(self.forum_1, u2))
 
+    def test_knows_if_a_user_can_add_posts_to_a_topic(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_reply_to_topics', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_post(self.forum_1_topic, self.u1))
+        self.assertFalse(self.perm_handler.can_add_post(self.forum_1_topic, u2))
+
+    def test_knows_that_a_superuser_can_add_posts_to_a_topic(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_add_post(self.forum_1_topic, u2))
+
+    def test_knows_that_a_user_cannot_add_posts_to_a_locked_topic(self):
+        # Setup
+        assign_perm('can_reply_to_topics', self.u1, self.forum_1)
+        self.forum_1_topic.status = self.forum_1_topic.STATUS_CHOICES.topic_locked
+        self.forum_1_topic.save()
+        # Run & check
+        self.assertFalse(self.perm_handler.can_add_post(self.forum_1_topic, self.u1))
+
     def test_knows_if_a_user_can_create_polls(self):
         # Setup
         u2 = UserFactory.create()
