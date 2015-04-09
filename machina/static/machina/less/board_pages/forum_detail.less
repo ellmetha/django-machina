@@ -80,7 +80,17 @@
                 vertical-align: middle !important;
             }
 
-            td.topic-icon{width: 5%;}
+            td.topic-icon{
+                position: relative;
+                width: 5%;
+
+                .locked-indicator{
+                    position: absolute;
+                    right: 10px;
+                    bottom: 8px;
+                    color: @red;
+                }
+            }
             td.topic-name{width: 50%;}
             td.topic-count{width: 10%;}
             td.topic-last-post{width: 15%;}

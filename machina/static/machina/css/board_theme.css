@@ -192,7 +192,14 @@
   vertical-align: middle !important;
 }
 .topiclist .panel-body table.table td.topic-icon {
+  position: relative;
   width: 5%;
+}
+.topiclist .panel-body table.table td.topic-icon .locked-indicator {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  color: #9d261d;
 }
 .topiclist .panel-body table.table td.topic-name {
   width: 50%;

@@ -26,7 +26,7 @@
                     <table class="table">
                         {% for topic in topics %}
                             <tr>
-                                <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i></td>
+                                <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i>{% if topic.is_locked %}<i class="fa fa-times locked-indicator"></i>{% endif %}</td>
                                 <td class="topic-name">
                                     <a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                                     <div>
