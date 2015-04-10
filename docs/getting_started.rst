@@ -8,7 +8,7 @@ Requirements
 * `Django`_ 1.4.x, 1.5.x, 1.6.x or 1.7.x
 * `Pillow`_ 2.2. or higher
 * `Django-model-utils`_ 2.0. or higher
-* `Django-mptt`_ 0.6.1. or higher
+* `Django-mptt`_ 0.7. or higher
 * `Django-guardian`_ 1.2. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-markdown`_ 0.7. or higher
