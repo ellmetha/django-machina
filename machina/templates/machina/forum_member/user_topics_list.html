@@ -1,0 +1,38 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+
+{% block sub-title %}{% trans "View my messages" %}{% endblock sub-title %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{% trans "View my messages" %}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 forum-actions-block">
+            {% if paginator.count > 0 %}
+                <p class="text-muted">
+                	{% blocktrans with paginator.count as topic_length %}{{ topic_length }} topics found{% endblocktrans %}
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-xs-12 col-md-8 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+    {% trans "Not topics found." as empty_message %}
+    {% with topic_list_title="Topics" empty_message=empty_message %}
+        {% include "machina/forum_conversation/topic_list.html" %}
+    {% endwith %}
+    <div class="row">
+        <div class="col-xs-12 col-md-12 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock content %}

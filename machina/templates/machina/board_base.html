@@ -3,6 +3,7 @@
 {% load static %}
 {% load i18n %}
 {% load compress %}
+{% load forum_member_tags %}
 {% load forum_moderation_tags %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
@@ -57,11 +58,14 @@
                 {% block breadcrumb %}
                     {% include "machina/partials/breadcrumb.html" %}
                 {% endblock breadcrumb %}
-                {% if request.user|can_access_moderation_panel %}
-                    <div class="pull-right moderation-link-wrapper">
+                <div class="pull-right controls-link-wrapper">
+                    {% if not request.user|is_anonymous %}
+                        <a href="{% url 'forum-member:user-topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
+                    {% endif %}
+                    {% if request.user|can_access_moderation_panel %}
                         <a href="#" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation panel" %}</a>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="row">
