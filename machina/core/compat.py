@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
@@ -48,3 +49,13 @@ try:
 except ImportError:  # pragma: no cover
     from django.contrib.auth.models import User
     get_user_model = lambda: User
+
+
+# get_cache
+if DJANGO_VERSION >= (1, 7):
+    from django.core.cache import caches
+
+    def get_cache(key):
+        return caches[key]
+else:  # pragma: no cover
+    from django.core.cache import get_cache  # noqa
