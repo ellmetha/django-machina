@@ -5,7 +5,6 @@
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -23,6 +22,8 @@ faker = FakerFactory.create()
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 

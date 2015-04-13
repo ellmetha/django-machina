@@ -7,7 +7,6 @@ from django.template import Context
 from django.template.base import Template
 from django.test import TestCase
 from django.test.client import RequestFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -17,8 +16,8 @@ from machina.test.factories import UserFactory
 
 Forum = get_model('forum', 'Forum')
 
-
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestCanAccessModerationPanelTag(TestCase):

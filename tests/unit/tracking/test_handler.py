@@ -6,7 +6,6 @@ from django.contrib.auth import get_user
 from django.db.models import get_model
 from django.test.client import Client
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -26,6 +25,7 @@ faker = FakerFactory.create()
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 

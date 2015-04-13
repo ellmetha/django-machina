@@ -7,8 +7,6 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
-from guardian.utils import get_anonymous_user
 from haystack.management.commands import clear_index
 from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
@@ -31,6 +29,8 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
 
 
 class TestFacetedSearchView(BaseClientTestCase):

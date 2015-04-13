@@ -49,7 +49,6 @@ TEST_SETTINGS = {
         'django.contrib.sessions',
         'django.contrib.sites',
         'mptt',
-        'guardian',
         'haystack',
         'bootstrap3',
         'compressor',
@@ -73,7 +72,6 @@ TEST_SETTINGS = {
     'PASSWORD_HASHERS': ['django.contrib.auth.hashers.MD5PasswordHasher'],
     'LOGIN_REDIRECT_URL': '/accounts/',
     'STATIC_URL': '/static/',
-    'ANONYMOUS_USER_ID': -1,
     'HAYSTACK_CONNECTIONS': {
         'default': {
             'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',

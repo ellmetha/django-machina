@@ -132,7 +132,6 @@ INSTALLED_APPS = [
     'compressor',
     'loginas',
     'crispy_forms',
-    'guardian',
     'mptt',
     'haystack',
     'bootstrap3',
@@ -173,9 +172,6 @@ HAYSTACK_CONNECTIONS = {
 
 # Specific machina settings
 # --------------------------------------
-
-# Django guardian
-ANONYMOUS_USER_ID = -1
 
 # Attachment cache backend
 CACHES = {

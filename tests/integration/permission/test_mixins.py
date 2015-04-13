@@ -10,17 +10,18 @@ from django.db.models import get_model
 from django.test import RequestFactory
 from django.test import TestCase
 from django.views.generic import DetailView
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
 from machina.test.factories import UserFactory
-from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+
+PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
 class TestPermissionRequiredMixin(TestCase):

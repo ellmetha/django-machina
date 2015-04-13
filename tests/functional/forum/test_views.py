@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.db.models import get_model
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.apps.forum.signals import forum_viewed
@@ -17,6 +16,7 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestForumView(BaseClientTestCase):

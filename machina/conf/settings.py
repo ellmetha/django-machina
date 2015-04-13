@@ -9,11 +9,6 @@ from django.conf import settings
 # Local application / specific library imports
 
 
-# Core
-DEFAULT_AUTHENTICATED_USER_PERMISSIONS = getattr(
-    settings, 'DEFAULT_AUTHENTICATED_USER_PERMISSIONS', {})
-
-
 # General
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(settings, 'MACHINA_MARKUP_LANGUAGE', ('django_markdown.utils.markdown', {}))
@@ -76,5 +71,8 @@ PROFILE_SIGNATURE_MAX_LENGTH = getattr(settings, 'MACHINA_PROFILE_SIGNATURE_MAX_
 # Permission
 DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(
     settings, 'MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS', [])
-DEFAULT_AUTHENTICATED_USER_PERMISSIONS['forum.forum'] = \
-    DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS
+
+ANONYMOUS_USER_ID = getattr(settings, 'MACHINA_ANONYMOUS_USER_ID', -1)
+ANONYMOUS_USER_KWARGS = getattr(
+    settings, 'MACHINA_ANONYMOUS_USER_ID',
+    {'pk': ANONYMOUS_USER_ID, 'username': 'Anonymous user'})

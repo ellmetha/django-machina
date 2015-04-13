@@ -5,11 +5,10 @@ Requirements
 ------------
 
 * `Python`_ 2.7, 3.3 or 3.4
-* `Django`_ 1.4.x, 1.5.x, 1.6.x or 1.7.x
+* `Django`_ 1.4.x, 1.5.x, 1.6.x, 1.7.x or 1.8.x
 * `Pillow`_ 2.2. or higher
 * `Django-model-utils`_ 2.0. or higher
 * `Django-mptt`_ 0.7. or higher
-* `Django-guardian`_ 1.2. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-markdown`_ 0.7. or higher
 * `Django-compressor`_ 1.4. or higher
@@ -17,9 +16,9 @@ Requirements
 * `South`_ 1.0.1 or higher if you are using Django < 1.7
 
 
-.. warning:: While *django-machina* is compatible with Django 1.5.x, this version of Django
-             is no longer supported by the Django team. Please upgrade to
-             Django 1.6.x or 1.7.x immediately.
+.. warning:: While *django-machina* is compatible with Django 1.5.x and Django 1.6.x, these versions of Django
+             are no longer supported by the Django team. Please upgrade to
+             Django 1.7.x or 1.8.x immediately.
 
 .. note::
 
@@ -34,7 +33,6 @@ Requirements
 .. _Pillow: http://python-pillow.github.io/
 .. _Django-model-utils: https://github.com/carljm/django-model-utils
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
-.. _Django-guardian: https://github.com/lukaszb/django-guardian
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
 .. _Django-markdown: https://github.com/klen/django_markdown
 .. _Django-compressor: https://github.com/django-compressor/django-compressor
@@ -73,7 +71,6 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     
     # Machina related apps:
     'mptt',
-    'guardian',
     'haystack',
 
     'bootstrap3',
@@ -85,7 +82,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
 
   As previously stated, *django-markdown* is the default syntax used for forum messages and *django-compressor* and *django-bootstrap3* are used in templates to handle static files and form rendering. These modules are optional really and you may decide to override the *django-machina*'s templates to use other modules. 
 
-*Django-machina* uses *django-mptt* to handle the tree of forum instances and *django-guardian* is used to allow per-forum permissions management. Search capabilities are provided by *django-haystack*.
+*Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
 
 Then update your ``TEMPLATE_CONTEXT_PROCESSORS`` setting as follows::
 
@@ -121,15 +118,6 @@ Finally you have to add a new cache to your settings. This cache will be used to
       'LOCATION': '/tmp',
     }
   }
-
-Django-guardian settings
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-*Django-machina* uses the *django-guardian* module to allow you define your forum permissions in a permissive way. As *django-guardian* provides object permissions capabilities, you can define specific user or group permissions for each forum you create.
-
-*Django-machina* supports anonymous posting and handle anonymous users. So you need to create an ``ANONYMOUS_USER_ID`` setting in order to allow *django-machina* to properly handle anonymous user permissions inside your forum::
-
-  ANONYMOUS_USER_ID = -1
 
 Django-haystack settings
 ~~~~~~~~~~~~~~~~~~~~~~~~

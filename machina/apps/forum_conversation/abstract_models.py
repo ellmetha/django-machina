@@ -70,7 +70,7 @@ class AbstractTopic(DatedModel):
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Many users can subscribe to this topic
-    subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True, null=True)
+    subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True)
 
     objects = models.Manager()
     approved_objects = ApprovedManager()

@@ -8,7 +8,6 @@ from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
-from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -18,6 +17,8 @@ from machina.core.loading import get_class
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 TopicPoll = get_model('forum_polls', 'TopicPoll')
+
+get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()

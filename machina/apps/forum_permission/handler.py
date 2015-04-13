@@ -4,22 +4,22 @@
 from datetime import timedelta
 
 # Third party imports
-from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.shortcuts import _get_queryset
 from django.utils.timezone import now
-from guardian.shortcuts import get_objects_for_user
-from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
 from machina.core.compat import get_user_model
 from machina.core.db.models import get_model
-from machina.core.permission import ObjectPermissionChecker
+from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')
-ForumGroupObjectPermission = get_model('forum_permission', 'ForumGroupObjectPermission')
-ForumUserObjectPermission = get_model('forum_permission', 'ForumUserObjectPermission')
+GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 Post = get_model('forum_conversation', 'Post')
+UserForumPermission = get_model('forum_permission', 'UserForumPermission')
+
+ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionChecker')
 
 
 class PermissionHandler(object):
@@ -108,7 +108,7 @@ class PermissionHandler(object):
         """
         Given a forum post, checks whether the user can edit the latter.
         """
-        checker = ObjectPermissionChecker(user)
+        checker = ForumPermissionChecker(user)
 
         # A user can edit a post if...
         #     he is a superuser
@@ -123,7 +123,7 @@ class PermissionHandler(object):
         """
         Given a forum post, checks whether the user can delete the latter.
         """
-        checker = ObjectPermissionChecker(user)
+        checker = ForumPermissionChecker(user)
 
         # A user can delete a post if...
         #     he is a superuser
@@ -191,7 +191,7 @@ class PermissionHandler(object):
         perms = [
             'can_approve_posts',
         ]
-        moderated_forums = get_objects_for_user(user, perms, klass=Forum, any_perm=True)
+        moderated_forums = self._get_forums_for_user(user, perms)
         return moderated_forums.exists()
 
     # Common
@@ -226,40 +226,61 @@ class PermissionHandler(object):
         codenames. User and group forum permissions are used.
         """
         forum_queryset = _get_queryset(Forum)
-        forum_ctype = ContentType.objects.get_for_model(Forum)
 
         # First check if the user is a superuser and if so, returns the forum
         # queryset immediately.
         if user.is_superuser:  # pragma: no cover
             return forum_queryset
 
-        # If the user is not authenticated, the django-guardian AnonymousUser
-        # should be used.
-        if user.is_anonymous():  # pragma: no cover
-            user = get_anonymous_user()
+        # Generates the appropriate queryset filter in order to handle both
+        # authenticated users and anonymous users.
+        user_kwargs_filter = {'anonymous_user': True} if user.is_anonymous() \
+            else {'user': user}
 
-        user_obj_perms_queryset = ForumUserObjectPermission.objects \
-            .filter(user=user) \
-            .filter(permission__content_type=forum_ctype) \
+        # Get all the user permissions for the considered user.
+        user_perms = UserForumPermission.objects \
+            .filter(**user_kwargs_filter) \
             .filter(permission__codename__in=perm_codenames)
 
-        group_filters = {
-            'permission__content_type': forum_ctype,
-            'permission__codename__in': perm_codenames,
-            'group__{0}'.format(get_user_model().groups.field.related_query_name()): user,
-        }
-        groups_obj_perms_queryset = ForumGroupObjectPermission.objects.filter(**group_filters)
+        globally_granted_user_perms = list(filter(lambda p: p.has_perm and p.forum is None, user_perms))
+        per_forum_granted_user_perms = list(filter(lambda p: p.has_perm and p.forum is not None, user_perms))
+        per_forum_nongranted_user_perms = list(filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
 
-        values = user_obj_perms_queryset.values_list('content_object__pk', flat=True)
-        objects = forum_queryset.filter(pk__in=values)
-        values = groups_obj_perms_queryset.values_list('content_object__pk', flat=True)
-        objects |= forum_queryset.filter(pk__in=values)
+        user_granted_forum_ids = [p.forum_id for p in per_forum_granted_user_perms]
+        user_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
 
-        if not objects.exists() and set(perm_codenames).issubset(set(
+        if not user.is_anonymous():
+            # Get all the group permissions for the considered user.
+            group_perms = GroupForumPermission.objects \
+                .filter(**{'group__{0}'.format(get_user_model().groups.field.related_query_name()): user}) \
+                .filter(permission__codename__in=perm_codenames)
+
+            globally_granted_group_perms = list(filter(lambda p: p.has_perm and p.forum is None, group_perms))
+            per_forum_granted_group_perms = list(filter(lambda p: p.has_perm and p.forum is not None, group_perms))
+            per_forum_nongranted_group_perms = list(filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
+
+            group_granted_forum_ids = [p.forum_id for p in per_forum_granted_group_perms]
+            group_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_group_perms]
+
+            if globally_granted_user_perms or globally_granted_group_perms:
+                forum_objects = forum_queryset.filter(
+                    ~Q(pk__in=(user_nongranted_forum_ids + group_nongranted_forum_ids)))
+            else:
+                forum_objects = forum_queryset.filter(
+                    Q(pk__in=user_granted_forum_ids) | Q(pk__in=group_granted_forum_ids)) \
+                    .filter(~Q(pk__in=(user_nongranted_forum_ids + group_nongranted_forum_ids)))
+        else:
+            if globally_granted_user_perms:
+                forum_objects = forum_queryset.filter(~Q(pk__in=user_nongranted_forum_ids))
+            else:
+                forum_objects = forum_queryset.filter(Q(pk__in=user_granted_forum_ids)) \
+                    .filter(~Q(pk__in=user_nongranted_forum_ids))
+
+        if not user.is_anonymous() and not forum_objects.exists() and set(perm_codenames).issubset(set(
                 machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
             return forum_queryset
 
-        return objects
+        return forum_objects
 
     def _perform_basic_permission_check(self, forum, user, permission):
         """
@@ -270,7 +291,7 @@ class PermissionHandler(object):
             1. The permission is granted if the user is a superuser
             2. If not, a check is performed with the given permission
         """
-        checker = ObjectPermissionChecker(user)
+        checker = ForumPermissionChecker(user)
 
         # The action is granted if...
         #     the user is the superuser

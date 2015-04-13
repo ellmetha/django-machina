@@ -8,7 +8,6 @@ from django.template.base import Template
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.test.client import RequestFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -24,6 +23,7 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class BaseConversationTagsTestCase(TestCase):

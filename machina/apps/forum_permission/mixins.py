@@ -13,7 +13,9 @@ from django.utils.http import urlquote
 from django.utils.six import string_types
 
 # Local application / specific library imports
-from machina.core.permission import ObjectPermissionChecker
+from machina.core.loading import get_class
+
+ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionChecker')
 
 
 class PermissionRequiredMixin(object):
@@ -73,7 +75,7 @@ class PermissionRequiredMixin(object):
         be overridden in any subclass.
         """
         # Initializes a permission checker
-        checker = ObjectPermissionChecker(user)
+        checker = ForumPermissionChecker(user)
         # Check permissions
         return all(checker.has_perm(perm, obj) for perm in perms)
 

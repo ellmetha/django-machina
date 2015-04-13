@@ -4,7 +4,6 @@
 # Third party imports
 from django.db.models import get_model
 from django.test.client import RequestFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.apps.forum_feeds.feeds import LastTopicsFeed
@@ -20,6 +19,7 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestLastTopicsFeed(BaseUnitTestCase):

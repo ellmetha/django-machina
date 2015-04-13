@@ -2,11 +2,19 @@
 
 # Standard library imports
 # Third party imports
+import django
+
 # Local application / specific library imports
-from machina.apps.forum_permission.abstract_models import AbstractForumGroupObjectPermission
-from machina.apps.forum_permission.abstract_models import AbstractForumUserObjectPermission
+from machina.apps.forum_permission.abstract_models import AbstractForumPermission
+from machina.apps.forum_permission.abstract_models import AbstractGroupForumPermission
+from machina.apps.forum_permission.abstract_models import AbstractUserForumPermission
 from machina.core.db.models import model_factory
 
 
-ForumUserObjectPermission = model_factory(AbstractForumUserObjectPermission)
-ForumGroupObjectPermission = model_factory(AbstractForumGroupObjectPermission)
+ForumPermission = model_factory(AbstractForumPermission)
+GroupForumPermission = model_factory(AbstractGroupForumPermission)
+UserForumPermission = model_factory(AbstractUserForumPermission)
+
+
+if django.VERSION < (1, 7):  # pragma: no cover
+    from . import receivers  # noqa

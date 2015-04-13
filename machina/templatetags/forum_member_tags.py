@@ -3,9 +3,9 @@
 # Standard library imports
 # Third party imports
 from django import template
-from django.conf import settings
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 
 register = template.Library()
 
@@ -19,5 +19,5 @@ def is_anonymous(user):
 
         {% if topic.poster|is_anonymous %}...{% endif %}
     """
-    return (user.id == settings.ANONYMOUS_USER_ID if hasattr(settings, 'ANONYMOUS_USER_ID') else False) \
+    return user.id == machina_settings.ANONYMOUS_USER_ID \
         or not user.is_authenticated()

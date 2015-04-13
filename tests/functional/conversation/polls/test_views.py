@@ -5,8 +5,6 @@
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
-from guardian.shortcuts import remove_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -28,6 +26,8 @@ TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestTopicPollVoteView(BaseClientTestCase):

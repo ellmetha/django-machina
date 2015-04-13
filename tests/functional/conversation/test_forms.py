@@ -7,8 +7,6 @@ from django.contrib.auth.models import AnonymousUser
 from django.db.models import get_model
 from django.test import TestCase
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
-from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forms import PostForm
@@ -29,7 +27,10 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
+get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
+
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestPostForm(TestCase):

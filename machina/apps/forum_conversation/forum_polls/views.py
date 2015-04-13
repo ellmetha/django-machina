@@ -14,7 +14,6 @@ from django.views.generic.edit import ModelFormMixin
 # Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.views.mixins import PermissionRequiredMixin
 
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollVote = get_model('forum_polls', 'TopicPollVote')
@@ -23,6 +22,8 @@ TopicPollVoteForm = get_class('forum_polls.forms', 'TopicPollVoteForm')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
+
+PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
 class TopicPollVoteView(PermissionRequiredMixin, UpdateView):

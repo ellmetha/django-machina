@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.core.urlresolvers import reverse
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -16,6 +15,7 @@ from machina.test.factories import UserFactory
 from machina.test.testcases import BaseClientTestCase
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestUserTopicsView(BaseClientTestCase):

@@ -32,7 +32,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     def test_can_move_a_forum_upward(self):
         # Setup
         model = self.model
-        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, model._meta.module_name)
+        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_forum.id, 'direction': 'up'})
         response = self.client.get(url)
@@ -45,7 +45,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     def test_can_move_a_forum_downward(self):
         # Setup
         model = self.model
-        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, model._meta.module_name)
+        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.sub_forum_2.id, 'direction': 'down'})
         response = self.client.get(url)
@@ -58,7 +58,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     def test_can_not_move_a_forum_with_no_siblings(self):
         # Setup
         model = self.model
-        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, model._meta.module_name)
+        raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id, 'direction': 'up'})
         response = self.client.get(url)
@@ -67,3 +67,10 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         self.assertIsRedirect(response)
         self.assertEqual(moved_forum.get_previous_sibling(), None)
         self.assertEqual(moved_forum.get_next_sibling(), self.top_level_forum)
+
+    def _get_module_name(self, options):
+        try:
+            module_name = options.module_name
+        except AttributeError:  # pragma: no cover
+            module_name = options.model_name
+        return module_name

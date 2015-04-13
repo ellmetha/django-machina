@@ -8,7 +8,6 @@ from django.conf import settings
 from django.core.files import File
 from django.db.models import get_model
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -28,6 +27,7 @@ Topic = get_model('forum_conversation', 'Topic')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestAttachmentView(BaseClientTestCase):

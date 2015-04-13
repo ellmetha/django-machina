@@ -33,9 +33,6 @@ setup(
         # Django-mptt is required to handle the tree hierarchy of nested forums
         'django-mptt>=0.7.0,<0.8',
 
-        # Django-guardian is used to provide a powerful per-forum object permission system
-        'django-guardian>=1.2,<1.3',
-
         # Machina uses Django-haystack to provide search support
         'django-haystack>=2.1.0,<2.4',
 

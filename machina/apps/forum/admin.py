@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-from guardian.admin import GuardedModelAdmin
 from mptt.exceptions import InvalidMove
 
 # Local application / specific library imports
@@ -18,7 +17,7 @@ from machina.core.db.models import get_model
 Forum = get_model('forum', 'Forum')
 
 
-class ForumAdmin(GuardedModelAdmin):
+class ForumAdmin(admin.ModelAdmin):
     """
     The ForumAdmin class is a subclass of GuardedModelAdmin and so provides common tools for
     assigning user permissions or group permissions to any forums.

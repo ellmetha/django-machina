@@ -7,9 +7,6 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
-from guardian.shortcuts import assign_perm
-from guardian.shortcuts import remove_perm
-from guardian.utils import get_anonymous_user
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.abstract_models import TOPIC_TYPES
@@ -39,6 +36,9 @@ Topic = get_model('forum_conversation', 'Topic')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
+remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestTopicView(BaseClientTestCase):

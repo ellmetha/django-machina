@@ -5,8 +5,6 @@ import datetime
 
 # Third party imports
 from django.db.models import get_model
-from guardian.shortcuts import assign_perm
-from guardian.shortcuts import remove_perm
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -25,6 +23,9 @@ from machina.test.testcases import BaseUnitTestCase
 Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
+
+assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 

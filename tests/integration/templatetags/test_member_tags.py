@@ -2,7 +2,6 @@
 
 # Standard library imports
 # Third party imports
-from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.template import Context
@@ -11,6 +10,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.test.factories import UserFactory
 
 
@@ -38,6 +38,6 @@ class TestIsAnonymousTag(TestCase):
 
     def test_can_tell_that_a_guardian_anonymous_user_is_anonymous(self):
         # Setup
-        user = User.objects.get(id=settings.ANONYMOUS_USER_ID)
+        user = User.objects.get(id=machina_settings.ANONYMOUS_USER_ID)
         # Run & check
         self.assertEqual(self.get_rendered(user), 'OK')

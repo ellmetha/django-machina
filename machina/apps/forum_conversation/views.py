@@ -20,7 +20,6 @@ from machina.apps.forum_conversation.utils import get_client_ip
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.views.mixins import PermissionRequiredMixin
 
 Attachment = get_model('forum_attachments', 'Attachment')
 Forum = get_model('forum', 'Forum')
@@ -38,6 +37,8 @@ attachments_cache = get_class('forum_attachments.cache', 'cache')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
+
+PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
 class TopicView(PermissionRequiredMixin, ListView):

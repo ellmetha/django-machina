@@ -22,7 +22,11 @@ class AdminBaseViewTestMixin(object):
             'admin:{}_{}_changelist',
             'admin:{}_{}_add',
         )
-        urls = [raw_url.format(model._meta.app_label, model._meta.module_name) for raw_url in urls]
+        try:
+            module_name = model._meta.module_name
+        except AttributeError:  # pragma: no cover
+            module_name = model._meta.model_name
+        urls = [raw_url.format(model._meta.app_label, module_name) for raw_url in urls]
         try:
             for raw_url in urls:
                 url = reverse(raw_url)

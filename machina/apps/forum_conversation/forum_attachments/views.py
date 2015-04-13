@@ -11,12 +11,13 @@ from django.views.generic import DetailView
 # Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.views.mixins import PermissionRequiredMixin
 
 Attachment = get_model('forum_attachments', 'Attachment')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
+
+PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
 class AttachmentView(PermissionRequiredMixin, DetailView):

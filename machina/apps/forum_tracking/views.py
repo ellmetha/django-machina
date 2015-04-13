@@ -17,7 +17,6 @@ from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.loading import get_classes
-from machina.views.mixins import PermissionRequiredMixin
 
 Forum = get_model('forum', 'Forum')
 ForumReadTrack, TopicReadTrack = get_classes('forum_tracking.models',
@@ -29,6 +28,8 @@ perm_handler = PermissionHandler()
 
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 track_handler = TrackingHandler()
+
+PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
 class MarkForumsReadView(View):
