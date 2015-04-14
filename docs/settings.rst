@@ -187,7 +187,7 @@ Permission
 
 Default: ``[]``
 
-*Django-machina* relies on a permission system based on per-forum permissions. This allows you to define which permissions should be applied for each forum, for each user and for each group of users. However you might want to grant the same permissions to all the users and for all the forums you created. In that case, this setting can be used in order to define which permissions should be granted to all authenticated users. Note that the permissions specified in this list are granted only if the considered forum does not have any permission for the considered authenticated user. For example, the setting could be specified as follows::
+*Django-machina* relies on a permission system based on per-forum permissions. This allows you to define which permissions should be applied for each forum, for each user and for each group of users. However you might want to not have to deal with complex permissions and grant the same basic permissions to all the users and for all the forums you created. In that case, this setting can be used in order to define which permissions should be granted to all authenticated users. Note that the permissions specified in this list are granted only if the considered forum does not have any permission for the considered authenticated user. For example, the setting could be specified as follows::
 
 	MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
 	    'can_see_forum',
@@ -202,3 +202,17 @@ Default: ``[]``
 	]
 
 For a full list of the available forum permissions, please refer to :doc:`index`.
+
+``MACHINA_ANONYMOUS_USER_ID``
+-----------------------------
+
+Default: ``-1``
+
+The primary key of the dummy user created to handle anonymous users on the forum. Each topic or post created by an anonymous user will be associated with this user.
+
+``ANONYMOUS_USER_KWARGS``
+-------------------------
+
+Default: ``{'pk': ANONYMOUS_USER_ID, 'username': 'Forum anonymous user'}``
+
+A dictionnary of keyworg arguments to use during the creation of the dummy anonymous user.

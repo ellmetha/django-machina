@@ -75,4 +75,4 @@ DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(
 ANONYMOUS_USER_ID = getattr(settings, 'MACHINA_ANONYMOUS_USER_ID', -1)
 ANONYMOUS_USER_KWARGS = getattr(
     settings, 'MACHINA_ANONYMOUS_USER_ID',
-    {'pk': ANONYMOUS_USER_ID, 'username': 'Anonymous user'})
+    {'pk': ANONYMOUS_USER_ID, 'username': 'Forum anonymous user'})
