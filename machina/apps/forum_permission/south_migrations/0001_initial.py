@@ -38,17 +38,16 @@ class Migration(SchemaMigration):
             ('has_perm', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('forum', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['forum.Forum'], null=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('anonymous_user', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal(u'forum_permission', ['UserForumPermission'])
 
-        # Adding unique constraint on 'UserForumPermission', fields ['permission', 'forum', 'user', 'anonymous_user']
-        db.create_unique(u'forum_permission_userforumpermission', ['permission_id', 'forum_id', 'user_id', 'anonymous_user'])
+        # Adding unique constraint on 'UserForumPermission', fields ['permission', 'forum', 'user']
+        db.create_unique(u'forum_permission_userforumpermission', ['permission_id', 'forum_id', 'user_id'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'UserForumPermission', fields ['permission', 'forum', 'user', 'anonymous_user']
-        db.delete_unique(u'forum_permission_userforumpermission', ['permission_id', 'forum_id', 'user_id', 'anonymous_user'])
+        # Removing unique constraint on 'UserForumPermission', fields ['permission', 'forum', 'user']
+        db.delete_unique(u'forum_permission_userforumpermission', ['permission_id', 'forum_id', 'user_id'])
 
         # Removing unique constraint on 'GroupForumPermission', fields ['permission', 'forum', 'group']
         db.delete_unique(u'forum_permission_groupforumpermission', ['permission_id', 'forum_id', 'group_id'])
@@ -142,8 +141,7 @@ class Migration(SchemaMigration):
             'permission': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['forum_permission.ForumPermission']"})
         },
         u'forum_permission.userforumpermission': {
-            'Meta': {'unique_together': "((u'permission', u'forum', u'user', u'anonymous_user'),)", 'object_name': 'UserForumPermission'},
-            'anonymous_user': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'Meta': {'unique_together': "((u'permission', u'forum', u'user'),)", 'object_name': 'UserForumPermission'},
             'forum': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['forum.Forum']", 'null': 'True', 'blank': 'True'}),
             'has_perm': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

@@ -75,11 +75,10 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     Represents a per-user forum object permission.
     """
     user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
-    anonymous_user = models.BooleanField(verbose_name=_('Target anonymous user'), default=False)
 
     class Meta:
         abstract = True
-        unique_together = ('permission', 'forum', 'user', 'anonymous_user', )
+        unique_together = ('permission', 'forum', 'user', )
         app_label = 'forum_permission'
         verbose_name = _('User forum permission')
         verbose_name_plural = _('User forum permissions')
@@ -88,12 +87,6 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
         if self.forum:
             return '{} - {} - {}'.format(self.permission, self.user, self.forum)
         return '{} - {}'.format(self.permission, self.user)
-
-    def clean(self):
-        super(AbstractUserForumPermission, self).clean()
-        if (self.user is None and not self.anonymous_user) \
-                or (self.user and self.anonymous_user):
-            raise ValidationError(_('A permission should target either a user or an anonymous user'))
 
 
 @python_2_unicode_compatible

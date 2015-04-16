@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('forum', '0002_auto_20150413_2352'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('auth', '0001_initial'),
+        ('auth', '0006_require_contenttypes_0002'),
     ]
 
     operations = [
@@ -49,7 +49,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('has_perm', models.BooleanField(default=True, verbose_name='Has perm')),
-                ('anonymous_user', models.BooleanField(default=False, verbose_name='Target anonymous user')),
                 ('forum', models.ForeignKey(verbose_name='Forum', blank=True, to='forum.Forum', null=True)),
                 ('permission', models.ForeignKey(verbose_name='Forum permission', to='forum_permission.ForumPermission')),
                 ('user', models.ForeignKey(verbose_name='User', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
@@ -62,7 +61,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='userforumpermission',
-            unique_together=set([('permission', 'forum', 'user', 'anonymous_user')]),
+            unique_together=set([('permission', 'forum', 'user')]),
         ),
         migrations.AlterUniqueTogether(
             name='groupforumpermission',
