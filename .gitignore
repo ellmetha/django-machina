@@ -5,7 +5,8 @@ __pycache__
 .coverage
 *.egg-info/
 *.egg/
-dist
+dist/
+build/
 docs/_build/
 public/
 whoosh_index/
