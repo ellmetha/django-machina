@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('forum', '0002_auto_20150413_2352'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('auth', '0006_require_contenttypes_0002'),
+        ('auth', '0001_initial'),
     ]
 
     operations = [
