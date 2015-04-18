@@ -15,8 +15,7 @@ upgrade:
 		python setup.py develop --upgrade
 
 coverage:
-		coverage run --source=machina ./runtests.py
-		coverage report -m
+	py.test --cov-report term-missing --cov machina
 
 travis: install coverage
 

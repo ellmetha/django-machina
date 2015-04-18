@@ -1,7 +1,8 @@
 # Testing
-django-nose
-nose>=1.2.1
-spec>=0.11.1,<0.12
+pytest>=2.6
+pytest-cov>=1.8
+pytest-django>=2.8
+pytest-spec>=0.2
 coverage>=3.7,<3.8
 factory-boy>=2.4,<2.6
 fake-factory>=0.5,<0.6
