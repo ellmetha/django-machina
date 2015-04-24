@@ -1,7 +1,6 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
 {% load forum_conversation_tags %}
-{% load forum_member_tags %}
 
 {% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
 
@@ -44,7 +43,7 @@
                                 <h4 class="subject">{{ post.subject }}</h4>
                                 <p>
                                     <small class="text-muted">
-                                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if not post.poster|is_anonymous %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
+                                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
                                     </small>
                                 </p>
                                 <div class="post-content">
@@ -67,7 +66,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-2 post-sidebar">
-                                {% if not post.poster|is_anonymous %}
+                                {% if post.poster %}
                                     {% if post.poster.forum_profile.avatar %}
                                         <div class="avatar">
                                             <a href="#">
