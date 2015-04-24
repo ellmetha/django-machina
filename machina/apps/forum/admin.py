@@ -19,9 +19,7 @@ Forum = get_model('forum', 'Forum')
 
 class ForumAdmin(admin.ModelAdmin):
     """
-    The ForumAdmin class is a subclass of GuardedModelAdmin and so provides common tools for
-    assigning user permissions or group permissions to any forums.
-    This class also provides a specific view for moving up or down any forums.
+    The ForumAdmin class provides a specific view for moving up or down any forums.
     """
     fieldsets = (
         [None, {
