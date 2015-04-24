@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages import constants as MSG
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
@@ -37,7 +38,6 @@ TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
-get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
 remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
@@ -147,7 +147,7 @@ class TestTopicView(BaseClientTestCase):
     def test_cannot_create_any_track_if_the_user_is_not_authenticated(self):
         # Setup
         ForumReadTrack.objects.all().delete()
-        assign_perm('can_read_forum', get_anonymous_user(), self.top_level_forum)
+        assign_perm('can_read_forum', AnonymousUser(), self.top_level_forum)
         self.client.logout()
         correct_url = self.topic.get_absolute_url()
         # Run

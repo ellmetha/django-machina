@@ -202,17 +202,3 @@ Default: ``[]``
 	]
 
 For a full list of the available forum permissions, please refer to :doc:`index`.
-
-``MACHINA_ANONYMOUS_USER_ID``
------------------------------
-
-Default: ``-1``
-
-The primary key of the dummy user created to handle anonymous users on the forum. Each topic or post created by an anonymous user will be associated with this user.
-
-``ANONYMOUS_USER_KWARGS``
--------------------------
-
-Default: ``{'pk': ANONYMOUS_USER_ID, 'username': 'Forum anonymous user'}``
-
-A dictionnary of keyworg arguments to use during the creation of the dummy anonymous user.

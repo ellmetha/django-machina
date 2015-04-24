@@ -31,11 +31,11 @@ class Migration(migrations.Migration):
                 ('link_redirects_count', models.PositiveIntegerField(default=0, verbose_name='Track link redirects count', editable=False, blank=True)),
                 ('last_post_on', models.DateTimeField(null=True, verbose_name='Last post added on', blank=True)),
                 ('display_sub_forum_list', models.BooleanField(default=True, help_text='Displays this forum on the legend of its parent-forum (sub forums list)', verbose_name='Display in parent-forums legend')),
+                ('_description_rendered', models.TextField(null=True, editable=False, blank=True)),
                 ('lft', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
-                ('_description_rendered', models.TextField(null=True, editable=False, blank=True)),
                 ('parent', mptt.fields.TreeForeignKey(related_name='children', verbose_name='Parent', blank=True, to='forum.Forum', null=True)),
             ],
             options={
@@ -43,8 +43,7 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'verbose_name': 'Forum',
                 'verbose_name_plural': 'Forums',
-                'permissions': [('can_see_forum', 'Can see forum'), ('can_read_forum', 'Can read forum'), ('can_start_new_topics', 'Can start new topics'), ('can_reply_to_topics', 'Can reply to topics'), ('can_post_announcements', 'Can post announcements'), ('can_post_stickies', 'Can post stickies'), ('can_delete_own_posts', 'Can delete own posts'), ('can_edit_own_posts', 'Can edit own posts'), ('can_post_without_approval', 'Can post without approval'), ('can_create_poll', 'Can create poll'), ('can_vote_in_polls', 'Can vote in polls'), ('can_attach_file', 'Can attach file'), ('can_download_file', 'Can download file'), ('can_close_topics', 'Can close topics'), ('can_move_topics', 'Can move topics'), ('can_edit_posts', 'Can edit posts'), ('can_delete_posts', 'Can delete posts'), ('can_move_posts', 'Can move posts')],
+                'permissions': [('can_see_forum', 'Can see forum'), ('can_read_forum', 'Can read forum'), ('can_start_new_topics', 'Can start new topics'), ('can_reply_to_topics', 'Can reply to topics'), ('can_post_announcements', 'Can post announcements'), ('can_post_stickies', 'Can post stickies'), ('can_delete_own_posts', 'Can delete own posts'), ('can_edit_own_posts', 'Can edit own posts'), ('can_post_without_approval', 'Can post without approval'), ('can_create_poll', 'Can create poll'), ('can_vote_in_polls', 'Can vote in polls'), ('can_attach_file', 'Can attach file'), ('can_download_file', 'Can download file'), ('can_close_topics', 'Can close topics'), ('can_move_topics', 'Can move topics'), ('can_edit_posts', 'Can edit posts'), ('can_delete_posts', 'Can delete posts'), ('can_move_posts', 'Can move posts'), ('can_approve_posts', 'Can approve posts')],
             },
-            bases=(models.Model,),
         ),
     ]

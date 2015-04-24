@@ -8,7 +8,6 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import Group
 
 # Local application / specific library imports
-from machina.conf import settings as machina_settings
 from machina.core.compat import get_user_model
 from machina.core.db.models import get_model
 
@@ -26,7 +25,11 @@ def assign_perm(perm, user_or_group, forum, has_perm=True):
     perm = ForumPermission.objects.get(codename=perm)
     if user:
         return UserForumPermission.objects.create(
-            forum=forum, permission=perm, user=user, has_perm=has_perm)
+            forum=forum,
+            permission=perm,
+            user=user if not user.is_anonymous() else None,
+            anonymous_user=user.is_anonymous(),
+            has_perm=has_perm)
     if group:
         return GroupForumPermission.objects.create(
             forum=forum, permission=perm, group=group, has_perm=has_perm)
@@ -56,10 +59,3 @@ def get_identity(identity):
     raise NotUserNorGroup(
         'User/AnonymousUser or Group instance is required '
         '(got {})'.format(identity))
-
-
-def get_anonymous_user():
-    """
-    Returns the anonymous user instance stored in the database.
-    """
-    return get_user_model().objects.get(pk=machina_settings.ANONYMOUS_USER_ID)

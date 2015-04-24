@@ -18,8 +18,6 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 
-get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
-
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
@@ -44,7 +42,6 @@ class PostForm(forms.ModelForm):
 
         # Handles anonymous users
         if self.user and self.user.is_anonymous():
-            self.user = get_anonymous_user()
             self.fields['username'].required = True
         else:
             # The 'username' field is not really usefull if the user is
@@ -72,12 +69,13 @@ class PostForm(forms.ModelForm):
         else:
             post = Post(
                 topic=self.topic,
-                poster=self.user,
                 poster_ip=self.user_ip,
                 subject=self.cleaned_data['subject'],
                 approved=perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'])
-            if 'username' in self.cleaned_data and self.cleaned_data['username']:
+            if not self.user.is_anonymous():
+                post.poster = self.user
+            elif 'username' in self.cleaned_data and self.cleaned_data['username']:
                 post.username = self.cleaned_data['username']
 
         if commit:
@@ -151,11 +149,12 @@ class TopicForm(PostForm):
 
             topic = Topic(
                 forum=self.forum,
-                poster=self.user,
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
                 status=Topic.STATUS_CHOICES.topic_unlocked,
                 approved=perm_handler.can_post_without_approval(self.forum, self.user))
+            if not self.user.is_anonymous():
+                topic.poster = self.user
             self.topic = topic
             if commit:
                 topic.save()

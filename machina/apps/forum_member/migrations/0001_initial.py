@@ -28,6 +28,5 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Profile',
                 'verbose_name_plural': 'Profiles',
             },
-            bases=(models.Model,),
         ),
     ]

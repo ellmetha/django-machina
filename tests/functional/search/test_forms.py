@@ -29,7 +29,6 @@ Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
-get_anonymous_user = get_class('forum_permission.shortcuts', 'get_anonymous_user')
 
 
 class TestSearchForm(BaseUnitTestCase):

@@ -33,7 +33,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Topic poll',
                 'verbose_name_plural': 'Topic polls',
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='TopicPollOption',
@@ -47,7 +46,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Topic poll option',
                 'verbose_name_plural': 'Topic poll options',
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='TopicPollVote',
@@ -62,6 +60,5 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Topic poll vote',
                 'verbose_name_plural': 'Topic poll votes',
             },
-            bases=(models.Model,),
         ),
     ]

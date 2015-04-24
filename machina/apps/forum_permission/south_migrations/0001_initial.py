@@ -38,6 +38,7 @@ class Migration(SchemaMigration):
             ('has_perm', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('forum', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['forum.Forum'], null=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('anonymous_user', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal(u'forum_permission', ['UserForumPermission'])
 
@@ -142,6 +143,7 @@ class Migration(SchemaMigration):
         },
         u'forum_permission.userforumpermission': {
             'Meta': {'unique_together': "((u'permission', u'forum', u'user'),)", 'object_name': 'UserForumPermission'},
+            'anonymous_user': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'forum': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['forum.Forum']", 'null': 'True', 'blank': 'True'}),
             'has_perm': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

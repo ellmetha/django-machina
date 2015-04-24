@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Forum track',
                 'verbose_name_plural': 'Forum tracks',
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='TopicReadTrack',
@@ -42,7 +41,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Topic track',
                 'verbose_name_plural': 'Topic tracks',
             },
-            bases=(models.Model,),
         ),
         migrations.AlterUniqueTogether(
             name='topicreadtrack',

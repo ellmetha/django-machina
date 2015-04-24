@@ -22,6 +22,11 @@ def update_member_profile(sender, instance, **kwargs):
     Receiver to handle the update of the profile related to the user
     who is the poster of the forum post being created or updated.
     """
+    if instance.poster is None:
+        # An anonymous post is considered. No profile can be updated in
+        # that case.
+        return
+
     profile, dummy = Profile.objects.get_or_create(user=instance.poster)
     increase_posts_count = False
 

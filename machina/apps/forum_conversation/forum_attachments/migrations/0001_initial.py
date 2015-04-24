@@ -24,6 +24,5 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Attachment',
                 'verbose_name_plural': 'Attachments',
             },
-            bases=(models.Model,),
         ),
     ]
