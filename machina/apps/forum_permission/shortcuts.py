@@ -55,7 +55,7 @@ def get_identity(identity):
         return identity, None
     elif isinstance(identity, Group):
         return None, identity
-
-    raise NotUserNorGroup(
-        'User/AnonymousUser or Group instance is required '
-        '(got {})'.format(identity))
+    else:  # pragma: no cover
+        raise NotUserNorGroup(
+            'User/AnonymousUser or Group instance is required '
+            '(got {})'.format(identity))
