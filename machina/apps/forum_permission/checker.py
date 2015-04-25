@@ -23,7 +23,7 @@ class ForumPermissionChecker(object):
         """
         Checks if the considered user has given permission for the passed forum.
         """
-        if self.user and not self.user.is_active:
+        if self.user.is_authenticated() and not self.user.is_active:
             return False
         elif self.user and self.user.is_superuser:
             return True
@@ -33,7 +33,7 @@ class ForumPermissionChecker(object):
         """
         Returns the list of codenames of all permissions for the given forum.
         """
-        if self.user and not self.user.is_active:
+        if self.user.is_authenticated() and not self.user.is_active:
             return []
         user_model = get_user_model()
         user_groups_related_name = user_model.groups.field.related_query_name()
