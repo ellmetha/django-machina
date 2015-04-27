@@ -38,6 +38,8 @@ Using django-machina
 
    getting_started
    settings
+   glossary
+
 
 
 
