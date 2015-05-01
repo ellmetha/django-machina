@@ -12,6 +12,7 @@ from django.test import TestCase
 from django.views.generic import DetailView
 
 # Local application / specific library imports
+from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
 from machina.test.factories import UserFactory
@@ -46,6 +47,7 @@ class TestPermissionRequiredMixin(TestCase):
         self.mixin.permission_required = 10
         request = self.factory.get('/')
         request.user = self.user
+        ForumPermissionHandlerMiddleware().process_request(request)
         # Run & check
         with self.assertRaises(ImproperlyConfigured):
             self.mixin.check_permissions(request)
@@ -56,6 +58,7 @@ class TestPermissionRequiredMixin(TestCase):
         self.mixin.permission_required = 'can_read_forum'
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        ForumPermissionHandlerMiddleware().process_request(request)
         # Run
         response = self.mixin.dispatch(request)
         # Check
@@ -67,6 +70,7 @@ class TestPermissionRequiredMixin(TestCase):
         self.mixin.permission_required = ['can_read_forum', ]
         request = self.factory.get('/')
         request.user = self.user
+        ForumPermissionHandlerMiddleware().process_request(request)
         # Run & check
         with self.assertRaises(PermissionDenied):
             self.mixin.dispatch(request)
@@ -82,6 +86,7 @@ class TestPermissionRequiredMixin(TestCase):
         forum_view = ForumTestView()
         request = self.factory.get('/')
         request.user = self.user
+        ForumPermissionHandlerMiddleware().process_request(request)
         # Run
         response = forum_view.dispatch(request, pk=self.forum.pk)
         # Check
@@ -103,6 +108,7 @@ class TestPermissionRequiredMixin(TestCase):
         user_view = UserTestView()
         request = self.factory.get('/')
         request.user = self.user
+        ForumPermissionHandlerMiddleware().process_request(request)
         # Run
         response = user_view.dispatch(request, pk=self.user.pk)
         # Check
