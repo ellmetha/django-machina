@@ -1,12 +1,14 @@
 {% load url from future %}
 {% load i18n %}
+{% load forum_permission_tags %}
 {% load forum_polls_tags %}
 
 <div class="panel panel-default poll">
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-12 poll-content-wrapper">
-				{% with can_be_completed=poll|can_be_completed_by:request.user has_been_completed=poll|has_been_completed_by:request.user %}
+				{% get_permission 'can_vote_in_poll' request.user poll=poll as user_can_vote_in_poll %}
+				{% with can_be_completed=can_vote_in_poll has_been_completed=poll|has_been_completed_by:request.user %}
 					<h4 class="question">{{ poll.question }}</h4>
 					<hr />
 					<div class="max-options-indication">

@@ -98,35 +98,3 @@ class TestForumListTag(TestCase):
         # Check
         self.assertNotEqual(rendered, '')
         self.assertEqual(rendered, expected_out)
-
-
-class TestCanBeFilledByTag(TestCase):
-    def setUp(self):
-        self.loadstatement = '{% load forum_tags %}'
-        self.request_factory = RequestFactory()
-        self.user = UserFactory.create()
-
-        # Set up a top-level category
-        self.top_level_cat = create_category_forum()
-
-        # Set up some forums
-        self.forum_1 = create_forum(parent=self.top_level_cat)
-        self.forum_2 = create_forum(parent=self.top_level_cat)
-
-        # Assign some permissions
-        assign_perm('can_start_new_topics', self.user, self.forum_1)
-
-    def test_can_tell_if_a_user_can_create_topics(self):
-        # Setup
-        def get_rendered(forum, user):
-            request = self.request_factory.get('/')
-            request.user = user
-            t = Template(self.loadstatement + '{% if forum|can_be_filled_by:request.user %}CAN_START_TOPICS{% else %}CANNOT_START_TOPICS{% endif %}')
-            c = Context({'forum': forum, 'request': request})
-            rendered = t.render(c)
-
-            return rendered
-
-        # Run & check
-        self.assertEqual(get_rendered(self.forum_1, self.user), 'CAN_START_TOPICS')
-        self.assertEqual(get_rendered(self.forum_2, self.user), 'CANNOT_START_TOPICS')

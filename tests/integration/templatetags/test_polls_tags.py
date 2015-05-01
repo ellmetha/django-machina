@@ -76,25 +76,6 @@ class BasePollsTagsTestCase(TestCase):
         assign_perm('can_vote_in_polls', self.g1, self.forum_1)
 
 
-class TestCanBeCompletedByTag(BasePollsTagsTestCase):
-    def test_can_tell_if_a_user_can_vote_in_a_poll(self):
-        # Setup
-        def get_rendered(poll, user):
-            request = self.request_factory.get('/')
-            request.user = user
-            t = Template(self.loadstatement + '{% if poll|can_be_completed_by:request.user %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}')
-            c = Context({'poll': poll, 'request': request})
-            rendered = t.render(c)
-
-            return rendered
-
-        # Run & check
-        self.assertEqual(get_rendered(self.poll_1, self.u1), 'CAN_VOTE')
-        self.assertEqual(get_rendered(self.poll_2, self.u1), 'CANNOT_VOTE')
-        self.assertEqual(get_rendered(self.poll_1, self.superuser), 'CAN_VOTE')
-        self.assertEqual(get_rendered(self.poll_2, self.superuser), 'CAN_VOTE')
-
-
 class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
     def test_can_if_a_user_has_already_voted_in_a_poll(self):
         # Setup

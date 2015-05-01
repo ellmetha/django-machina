@@ -113,17 +113,21 @@ class TestPostForm(TestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
-        form = PostForm(
-            data=form_data,
-            user=self.user,
-            user_ip=faker.ipv4(),
-            forum=self.top_level_forum,
-            topic=self.topic)
+        form_kwargs = {
+            'data' : form_data,
+            'user': self.user,
+            'user_ip': faker.ipv4(),
+            'forum': self.top_level_forum,
+            'topic': self.topic,
+        }
+        form = PostForm(**form_kwargs)
         # Check
         self.assertTrue(form.is_valid())
         post = form.save()
         self.assertFalse(post.approved)
         assign_perm('can_post_without_approval', self.user, self.top_level_forum)
+        form = PostForm(**form_kwargs)
+        self.assertTrue(form.is_valid())
         post = form.save()
         self.assertTrue(post.approved)
 

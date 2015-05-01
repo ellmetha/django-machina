@@ -16,19 +16,6 @@ register = template.Library()
 
 
 @register.filter
-def can_be_completed_by(poll, user):
-    """
-    This will return a boolean indicating if the passed user can vote
-    in the given poll.
-
-    Usage::
-
-        {% if poll|can_be_completed_by:user %}...{% endif %}
-    """
-    return perm_handler.can_vote_in_poll(poll, user)
-
-
-@register.filter
 def has_been_completed_by(poll, user):
     """
     This will return a boolean indicating if the passed user has already

@@ -1,6 +1,7 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
 {% load forum_conversation_tags %}
+{% load forum_permission_tags %}
 
 {% block sub-title %}{{ topic.subject }}{% endblock sub-title %}
 
@@ -12,7 +13,8 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
-            {% if topic|can_be_enriched_by:user %}
+            {% get_permission 'can_add_post' request.user topic=topic as user_can_add_post %}
+            {% if user_can_add_post %}
                 <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
         </div>
@@ -33,10 +35,12 @@
                         <div class="row">
                             <div class="col-md-10 post-content-wrapper">
                                 <div class="pull-right post-controls">
-                                    {% if post|can_be_edited_by:user %}
+                                    {% get_permission 'can_edit_post' request.user post=post as user_can_edit_post %}
+                                    {% if user_can_edit_post %}
                                         <a href="{% if post.is_topic_head %}{% url 'forum-conversation:topic-update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum-conversation:post-update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
                                     {% endif %}
-                                    {% if post|can_be_deleted_by:user %}
+                                    {% get_permission 'can_delete_post' request.user post=post as user_can_delete_post %}
+                                    {% if user_can_delete_post %}
                                         <a href="{% url 'forum-conversation:post-delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                                     {% endif %}
                                 </div>
@@ -89,7 +93,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
-            {% if topic|can_be_enriched_by:user %}
+            {% if user_can_add_post %}
                 <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
         </div>

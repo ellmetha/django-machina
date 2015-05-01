@@ -88,63 +88,6 @@ class TestPostedByTag(BaseConversationTagsTestCase):
         self.assertEqual(get_rendered(self.post_2, self.u1), 'NO_OWNER')
 
 
-class TestCanBeEditedByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_user_can_edit_a_post(self):
-        # Setup
-        def get_rendered(post, user):
-            request = self.request_factory.get('/')
-            request.user = user
-            t = Template(self.loadstatement + '{% if post|can_be_edited_by:request.user %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}')
-            c = Context({'post': post, 'request': request})
-            rendered = t.render(c)
-
-            return rendered
-
-        # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'CAN_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_EDIT')
-
-
-class TestCanBeDeleteddByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_user_can_edit_a_post(self):
-        # Setup
-        def get_rendered(post, user):
-            request = self.request_factory.get('/')
-            request.user = user
-            t = Template(self.loadstatement + '{% if post|can_be_deleted_by:request.user %}CAN_DELETE{% else %}CANNOT_DELETE{% endif %}')
-            c = Context({'post': post, 'request': request})
-            rendered = t.render(c)
-
-            return rendered
-
-        # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'CAN_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_DELETE')
-
-
-class TestCanBeEnrichedByTag(BaseConversationTagsTestCase):
-    def test_can_tell_if_the_user_can_reply_to_topics(self):
-        # Setup
-        def get_rendered(topic, user):
-            request = self.request_factory.get('/')
-            request.user = user
-            t = Template(self.loadstatement + '{% if topic|can_be_enriched_by:request.user %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}')
-            c = Context({'topic': topic, 'request': request})
-            rendered = t.render(c)
-
-            return rendered
-
-        # Run & check
-        self.assertEqual(get_rendered(self.forum_1_topic, self.u1), 'CAN_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_2_topic, self.u1), 'CANNOT_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_1_topic, self.superuser), 'CAN_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_2_topic, self.superuser), 'CAN_ADD_POST')
-
-
 class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
     def test_provides_the_number_of_pages_of_a_topic(self):
         # Setup

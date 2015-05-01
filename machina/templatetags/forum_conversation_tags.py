@@ -8,10 +8,6 @@ from django import template
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
-from machina.core.loading import get_class
-
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
 
 register = template.Library()
 
@@ -27,43 +23,6 @@ def posted_by(post, user):
         {% if post|posted_by:user %}...{% endif %}
     """
     return post.poster == user
-
-
-@register.filter
-def can_be_edited_by(post, user):
-    """
-    Determines whether the given user can edit the considered post.
-
-    Usage::
-
-        {% if post|can_be_edited_by:user %}...{% endif %}
-    """
-    return perm_handler.can_edit_post(post, user)
-
-
-@register.filter
-def can_be_deleted_by(post, user):
-    """
-    Determines whether the given user can delete the considered post.
-
-    Usage::
-
-        {% if post|can_be_deleted_by:user %}...{% endif %}
-    """
-    return perm_handler.can_delete_post(post, user)
-
-
-@register.filter
-def can_be_enriched_by(topic, user):
-    """
-    This will return a boolean indicating if the considered user can append answers
-    to the passed topic.
-
-    Usage::
-
-        {% if topic|can_be_enriched_by:user %}...{% endif %}
-    """
-    return perm_handler.can_add_post(topic, user)
 
 
 @register.inclusion_tag('machina/forum_conversation/topic_pages_inline_list.html')

@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 {% load compress %}
-{% load forum_moderation_tags %}
+{% load forum_permission_tags %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
 
@@ -61,7 +61,8 @@
                     {% if not request.user.is_anonymous %}
                         <a href="{% url 'forum-member:user-topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
                     {% endif %}
-                    {% if request.user|can_access_moderation_panel %}
+                    {% get_permission 'can_access_moderation_panel' request.user as user_can_access_moderation_panel %}
+                    {% if user_can_access_moderation_panel %}
                         <a href="#" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation panel" %}</a>
                     {% endif %}
                 </div>

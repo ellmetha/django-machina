@@ -3,6 +3,7 @@
 {% load mptt_tags %}
 {% load forum_tags %}
 {% load forum_conversation_tags %}
+{% load forum_permission_tags %}
 {% load forum_tracking_tags %}
 
 {% block sub-title %}{{ forum.name }}{% endblock sub-title %}
@@ -28,7 +29,8 @@
     {% if forum.is_forum %}
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
-                {% if forum|can_be_filled_by:user %}
+                {% get_permission 'can_add_topic' request.user forum=forum as user_can_add_topic %}
+                {% if user_can_add_topic %}
                     <a href="{% url 'forum-conversation:topic-create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 {% endif %}
             </div>
@@ -49,7 +51,7 @@
         {% endwith %}
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
-                {% if forum|can_be_filled_by:user %}
+                {% if user_can_add_topic %}
                     <a href="{% url 'forum-conversation:topic-create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 {% endif %}
             </div>
