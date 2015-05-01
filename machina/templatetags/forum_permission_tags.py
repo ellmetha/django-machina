@@ -28,7 +28,7 @@ def get_permission(context, method, user, **kwargs):
     request = context.get('request', None)
     perm_handler = request.forum_permission_handler if request else PermissionHandler()
 
-    allowed_methods = inspect.getmembers(PermissionHandler, predicate=inspect.ismethod)
+    allowed_methods = inspect.getmembers(perm_handler, predicate=inspect.ismethod)
     allowed_method_names = [a[0] for a in allowed_methods if not a[0].startswith('_')]
 
     if method not in allowed_method_names:
