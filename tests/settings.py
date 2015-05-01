@@ -71,6 +71,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Machina
+    'machina.apps.forum_permission.middleware.ForumPermissionHandlerMiddleware',
 )
 
 ADMINS = ('admin@example.com',)

@@ -23,9 +23,6 @@ ForumReadTrack, TopicReadTrack = get_classes('forum_tracking.models',
                                              ['ForumReadTrack', 'TopicReadTrack'])
 Topic = get_model('forum_conversation', 'Topic')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 track_handler = TrackingHandler()
 
@@ -40,11 +37,11 @@ class MarkForumsReadView(View):
 
         if pk is not None:
             top_level_forum = get_object_or_404(Forum, pk=pk)
-            forums = perm_handler.forum_list_filter(
+            forums = request.forum_permission_handler.forum_list_filter(
                 top_level_forum.get_descendants(include_self=True), request.user)
             redirect_to = reverse('forum:forum', kwargs={'slug': top_level_forum.slug, 'pk': pk})
         else:
-            forums = perm_handler.forum_list_filter(
+            forums = request.forum_permission_handler.forum_list_filter(
                 Forum.objects.all(), request.user)
             redirect_to = reverse('forum:index')
 
@@ -101,7 +98,7 @@ class UnreadTopicsView(ListView):
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
 
     def get_queryset(self):
-        forums = perm_handler.forum_list_filter(
+        forums = self.request.forum_permission_handler.forum_list_filter(
             Forum.objects.all(), self.request.user)
         topics = Topic.objects.filter(forum__in=forums)
         topics_pk = map(lambda t: t.pk, track_handler.get_unread_topics(topics, self.request.user))

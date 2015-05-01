@@ -19,7 +19,6 @@ Topic = get_model('forum_conversation', 'Topic')
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
 
 
 class PostForm(forms.ModelForm):
@@ -32,6 +31,8 @@ class PostForm(forms.ModelForm):
         self.user_ip = kwargs.pop('user_ip', None)
         self.forum = kwargs.pop('forum', None)
         self.topic = kwargs.pop('topic', None)
+
+        self.perm_handler = PermissionHandler()
 
         super(PostForm, self).__init__(*args, **kwargs)
 
@@ -71,7 +72,7 @@ class PostForm(forms.ModelForm):
                 topic=self.topic,
                 poster_ip=self.user_ip,
                 subject=self.cleaned_data['subject'],
-                approved=perm_handler.can_post_without_approval(self.forum, self.user),
+                approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'])
             if not self.user.is_anonymous():
                 post.poster = self.user
@@ -91,9 +92,9 @@ class TopicForm(PostForm):
         super(TopicForm, self).__init__(*args, **kwargs)
 
         # Perform some checks before doing anything
-        self.can_add_stickies = perm_handler.can_add_stickies(self.forum, self.user)
-        self.can_add_announcements = perm_handler.can_add_announcements(self.forum, self.user)
-        self.can_create_polls = perm_handler.can_create_polls(self.forum, self.user)
+        self.can_add_stickies = self.perm_handler.can_add_stickies(self.forum, self.user)
+        self.can_add_announcements = self.perm_handler.can_add_announcements(self.forum, self.user)
+        self.can_create_polls = self.perm_handler.can_create_polls(self.forum, self.user)
 
         if not self.can_add_stickies:
             choices = filter(
@@ -152,7 +153,7 @@ class TopicForm(PostForm):
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
                 status=Topic.STATUS_CHOICES.topic_unlocked,
-                approved=perm_handler.can_post_without_approval(self.forum, self.user))
+                approved=self.perm_handler.can_post_without_approval(self.forum, self.user))
             if not self.user.is_anonymous():
                 topic.poster = self.user
             self.topic = topic

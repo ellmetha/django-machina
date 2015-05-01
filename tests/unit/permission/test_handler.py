@@ -102,11 +102,13 @@ class TestPermissionHandler(BaseUnitTestCase):
         self.assertEqual(last_post, self.post_2)
 
         # Run & check : one forum hidden
+        self.perm_handler = PermissionHandler()
         remove_perm('can_read_forum', self.g1, self.forum_3)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertEqual(last_post, self.post_1)
 
         # Run & check : all forums hidden
+        self.perm_handler = PermissionHandler()
         remove_perm('can_see_forum', self.u1, self.forum_1)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertIsNone(last_post)

@@ -10,6 +10,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 # Local application / specific library imports
+from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -79,7 +80,8 @@ class TestForumListTag(TestCase):
         forums = Forum.objects.all()
         request = self.request_factory.get('/')
         request.user = self.user
-        t = Template(self.loadstatement + '{% forum_list forums request %}')
+        ForumPermissionHandlerMiddleware().process_request(request)
+        t = Template(self.loadstatement + '{% forum_list forums %}')
         c = Context({'forums': forums, 'request': request})
         expected_out = render_to_string(
             'machina/forum/forum_list.html',

@@ -20,9 +20,6 @@ TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 
 TopicPollVoteForm = get_class('forum_polls.forms', 'TopicPollVoteForm')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
@@ -77,4 +74,4 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):
-        return perm_handler.can_vote_in_poll(obj, user)
+        return self.request.forum_permission_handler.can_vote_in_poll(obj, user)

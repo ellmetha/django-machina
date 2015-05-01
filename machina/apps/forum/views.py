@@ -15,9 +15,6 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
@@ -26,7 +23,7 @@ class IndexView(ListView):
     context_object_name = 'forums'
 
     def get_queryset(self):
-        return perm_handler.forum_list_filter(
+        return self.request.forum_permission_handler.forum_list_filter(
             Forum.objects.displayable_subforums(),
             self.request.user
         )
@@ -82,7 +79,8 @@ class ForumView(PermissionRequiredMixin, ListView):
 
         # Get the list of forums that have the current forum as parent
         sub_forums = Forum.objects.displayable_subforums(start_from=self.forum)
-        context['sub_forums'] = perm_handler.forum_list_filter(sub_forums, self.request.user)
+        context['sub_forums'] = self.request.forum_permission_handler \
+            .forum_list_filter(sub_forums, self.request.user)
 
         # The announces will be displayed on each page of the forum
         context['announces'] = self.get_forum().topics.filter(type=Topic.TYPE_CHOICES.topic_announce)

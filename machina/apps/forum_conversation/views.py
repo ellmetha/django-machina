@@ -35,9 +35,6 @@ TopicPollVoteForm = get_class('forum_polls.forms', 'TopicPollVoteForm')
 
 attachments_cache = get_class('forum_attachments.cache', 'cache')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
@@ -162,7 +159,7 @@ class PostEditMixin(object):
         post = self.object if self.object else None
         attachment_queryset = Attachment.objects.filter(post=post)
 
-        if perm_handler.can_attach_files(self.get_forum(), self.request.user):
+        if self.request.forum_permission_handler.can_attach_files(self.get_forum(), self.request.user):
             # Add the attachment formset to the context
             if self.request.method == 'POST':
                 context['attachment_formset'] = self.attachment_formset_class(
@@ -187,7 +184,7 @@ class PostEditMixin(object):
         preview = 'preview' in self.request.POST
         save_attachment_formset = False
 
-        if perm_handler.can_attach_files(self.get_forum(), self.request.user):
+        if self.request.forum_permission_handler.can_attach_files(self.get_forum(), self.request.user):
             attachment_formset = self.attachment_formset_class(
                 self.request.POST, self.request.FILES, prefix='attachment')
             if attachment_formset.is_valid():
@@ -236,7 +233,7 @@ class TopicEditMixin(PostEditMixin):
         topic = self.object.topic if self.object is not None else None
         poll_option_queryset = TopicPollOption.objects.filter(poll__topic=topic)
 
-        if perm_handler.can_create_polls(self.get_forum(), self.request.user):
+        if self.request.forum_permission_handler.can_create_polls(self.get_forum(), self.request.user):
             # Add the poll option formset to the context
             if self.request.method == 'POST':
                 context['poll_option_formset'] = self.poll_option_formset_class(
@@ -258,7 +255,7 @@ class TopicEditMixin(PostEditMixin):
         preview = 'preview' in self.request.POST
         save_poll_option_formset = False
 
-        if perm_handler.can_create_polls(self.get_forum(), self.request.user):
+        if self.request.forum_permission_handler.can_create_polls(self.get_forum(), self.request.user):
             if len(form.cleaned_data['poll_question']):
                 poll_option_formset = self.poll_option_formset_class(
                     data=self.request.POST, prefix='poll')
@@ -350,7 +347,7 @@ class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):
-        return perm_handler.can_edit_post(obj, user)
+        return self.request.forum_permission_handler.can_edit_post(obj, user)
 
 
 class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
@@ -433,7 +430,7 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):
-        return perm_handler.can_edit_post(obj, user)
+        return self.request.forum_permission_handler.can_edit_post(obj, user)
 
 
 class PostDeleteView(PermissionRequiredMixin, DeleteView):
@@ -488,4 +485,4 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):
-        return perm_handler.can_delete_post(obj, user)
+        return self.request.forum_permission_handler.can_delete_post(obj, user)

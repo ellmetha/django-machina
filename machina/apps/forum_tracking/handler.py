@@ -11,10 +11,14 @@ ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
 
 
 class TrackingHandler(object):
+    def __init__(self, request=None):
+        self.request = request
+        self.perm_handler = request.forum_permission_handler if request \
+            else PermissionHandler()
+
     def get_unread_forums(self, forums, user):
         """
         Returns a list of unread forums for the given user from a given
@@ -40,7 +44,7 @@ class TrackingHandler(object):
 
         for forum in sorted_forums:
             if forum not in unread_forums and forum not in processed_forums:
-                readable_forums = perm_handler.forum_list_filter(
+                readable_forums = self.perm_handler.forum_list_filter(
                     forum.get_descendants(include_self=True), user)
                 unread = ForumReadTrack.objects.get_unread_forums_from_list(readable_forums, user)
                 unread_forums.extend(unread)

@@ -23,6 +23,8 @@ ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionC
 
 
 class PermissionHandler(object):
+    def __init__(self):
+        self._visible_forum_ids_cache = {}
 
     # Filtering methods
     # --
@@ -202,7 +204,13 @@ class PermissionHandler(object):
         Given a set of forums and an initialized checker, returns the list of forums
         that are not visible by the user or the group associated with this checker.
         """
-        visible_forums = self._get_forums_for_user(user, ['can_see_forum', 'can_read_forum', ])
+        local_cache_key = user.id if not user.is_anonymous() else 'anonymous'
+        visible_forums = self._visible_forum_ids_cache.get(local_cache_key, None)
+
+        if visible_forums is None:
+            visible_forums = self._get_forums_for_user(user, ['can_see_forum', 'can_read_forum', ])
+            self._visible_forum_ids_cache[local_cache_key] = visible_forums
+
         hidden_forums = []
         for forum in forums:
             if forum.id not in hidden_forums:
@@ -214,7 +222,7 @@ class PermissionHandler(object):
                         break
 
                 if (ancestors_visible is False) or (forum not in visible_forums):
-                    # If one forum can not be seen by a given user, all of its descendant
+                    # If one forum can not be seen by a given user, all of its descendants
                     # should also be hidden.
                     forum_and_descendants = forum.get_descendants(include_self=True)
                     hidden_forums.extend(forum_and_descendants.values_list('id', flat=True))

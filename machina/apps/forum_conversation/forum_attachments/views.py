@@ -14,9 +14,6 @@ from machina.core.loading import get_class
 
 Attachment = get_model('forum_attachments', 'Attachment')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
@@ -45,4 +42,4 @@ class AttachmentView(PermissionRequiredMixin, DetailView):
         return self.get_object().post.topic.forum
 
     def perform_permissions_check(self, user, obj, perms):
-        return perm_handler.can_download_files(obj, user)
+        return self.request.forum_permission_handler.can_download_files(obj, user)

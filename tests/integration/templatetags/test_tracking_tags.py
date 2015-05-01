@@ -9,6 +9,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 # Local application / specific library imports
+from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -68,6 +69,7 @@ class TestUnreadForumsTag(BaseTrackingTagsTestCase):
         def get_rendered(forums, user):
             request = self.request_factory.get('/')
             request.user = user
+            ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(self.loadstatement + '{% get_unread_forums forums request.user as unread_forums %}')
             c = Context({'forums': forums, 'request': request})
             rendered = t.render(c)
@@ -99,6 +101,7 @@ class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
         def get_rendered(topics, user):
             request = self.request_factory.get('/')
             request.user = user
+            ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(self.loadstatement + '{% get_unread_topics topics request.user as unread_topics %}')
             c = Context({'topics': topics, 'request': request})
             rendered = t.render(c)

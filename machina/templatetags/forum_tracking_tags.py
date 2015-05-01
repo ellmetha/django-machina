@@ -15,8 +15,8 @@ tracks_handler = TrackingHandler()
 register = template.Library()
 
 
-@register.assignment_tag
-def get_unread_forums(forums, user):
+@register.assignment_tag(takes_context=True)
+def get_unread_forums(context, forums, user):
     """
     This will return a list of unread forums for the given user from a given set of forums.
 
@@ -24,11 +24,12 @@ def get_unread_forums(forums, user):
 
         {% get_unread_forums forums request.user as unread_forums %}
     """
-    return tracks_handler.get_unread_forums(forums, user)
+    request = context.get('request', None)
+    return TrackingHandler(request=request).get_unread_forums(forums, user)
 
 
-@register.assignment_tag
-def get_unread_topics(topics, user):
+@register.assignment_tag(takes_context=True)
+def get_unread_topics(context, topics, user):
     """
     This will return a list of unread topics for the given user from a given set of forums.
 
@@ -36,4 +37,5 @@ def get_unread_topics(topics, user):
 
         {% get_unread_topics topics request.user as unread_topics %}
     """
-    return tracks_handler.get_unread_topics(topics, user)
+    request = context.get('request', None)
+    return TrackingHandler(request=request).get_unread_topics(topics, user)
