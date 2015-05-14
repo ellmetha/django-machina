@@ -168,4 +168,13 @@ Finally you have to update your main ``urls.py`` module in order to include foru
     url(r'^forum/', include(board.urls)),
   )
 
+Creating your first forums
+--------------------------
+
+You can now navigate to http://127.0.0.1:8000/forum/ in order to visualize the index of your forum board. As you should see no forum have been created yet. *Django-machina* does not ship with pre-created forums, so you should navigate to your administration panel and create some forum instances.
+
+.. note::
+
+  A common practice when creating forums is to embed them in categories in order to better organize the tree of forum instances. Please refer to :doc:`glossary` if you do not know what a category is in a forum tree.
+
 *Congrats! You're in.*
