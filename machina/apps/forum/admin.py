@@ -6,8 +6,10 @@ from django import forms
 from django.conf.urls import patterns
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.admin import helpers
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 from django.core.urlresolvers import reverse
+from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
@@ -108,7 +110,27 @@ class ForumAdmin(admin.ModelAdmin):
         context['title'] = _('Forum permissions')
 
         if request.method == 'POST':
-            pass
+            user_form = PickUserForm(request.POST, admin_site=self.admin_site)
+            group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
+
+            if user_form.is_valid() and group_form.is_valid():
+                if not user_form.cleaned_data['user'] \
+                        and not user_form.cleaned_data['anonymous_user'] \
+                        and not group_form.cleaned_data['group']:
+                    user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
+                        [_('Choose either a user ID, a group ID or the anonymous user'), ])
+                elif user_form.cleaned_data['user']:
+                    # Redirect to user
+                    pass
+                elif user_form.cleaned_data['anonymous_user']:
+                    # Redirect to anonymous user
+                    pass
+                elif group_form.cleaned_data['group']:
+                    # Redirect to group
+                    pass
+
+            context['user_errors'] = helpers.AdminErrorList(user_form, [])
+            context['group_errors'] = helpers.AdminErrorList(group_form, [])
         else:
             user_form = PickUserForm(admin_site=self.admin_site)
             group_form = PickGroupForm(admin_site=self.admin_site)
@@ -126,15 +148,25 @@ class PickUserForm(forms.Form):
     user = UserForumPermission._meta.get_field('user').formfield()
     anonymous_user = forms.BooleanField(
         label=_('Anonymous'),
+        initial=False,
         help_text=_('Please select this option if you want to edit the permissions of the anonymous user'))
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')
         super(PickUserForm, self).__init__(*args, **kwargs)
 
+        self.fields['user'].required = False
         self.fields['user'].widget = ForeignKeyRawIdWidget(
             UserForumPermission._meta.get_field('user').rel,
             admin_site)
+
+        self.fields['anonymous_user'].required = False
+
+    def clean(self):
+        cleaned_data = super(PickUserForm, self).clean()
+        if cleaned_data['user'] and cleaned_data['anonymous_user']:
+            self._errors[NON_FIELD_ERRORS] = self.error_class(
+                [_('Choose either a user ID or select the anonymous user'), ])
 
 
 class PickGroupForm(forms.Form):
@@ -144,6 +176,7 @@ class PickGroupForm(forms.Form):
         admin_site = kwargs.pop('admin_site')
         super(PickGroupForm, self).__init__(*args, **kwargs)
 
+        self.fields['group'].required = False
         self.fields['group'].widget = ForeignKeyRawIdWidget(
             GroupForumPermission._meta.get_field('group').rel,
             admin_site)
