@@ -114,18 +114,20 @@ class ForumAdmin(admin.ModelAdmin):
             group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
             if user_form.is_valid() and group_form.is_valid():
-                if not user_form.cleaned_data['user'] \
-                        and not user_form.cleaned_data['anonymous_user'] \
-                        and not group_form.cleaned_data['group']:
+                user = user_form.cleaned_data.get('user', None)
+                anonymous_user = user_form.cleaned_data.get('anonymous_user', None)
+                group = group_form.cleaned_data.get('group', None)
+
+                if not user and not anonymous_user and not group:
                     user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
                         [_('Choose either a user ID, a group ID or the anonymous user'), ])
-                elif user_form.cleaned_data['user']:
+                elif user:
                     # Redirect to user
                     pass
-                elif user_form.cleaned_data['anonymous_user']:
+                elif anonymous_user:
                     # Redirect to anonymous user
                     pass
-                elif group_form.cleaned_data['group']:
+                elif group:
                     # Redirect to group
                     pass
 
@@ -164,7 +166,9 @@ class PickUserForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(PickUserForm, self).clean()
-        if cleaned_data['user'] and cleaned_data['anonymous_user']:
+        user = cleaned_data.get('user', None)
+        anonymous_user = cleaned_data.get('anonymous_user', None)
+        if user and anonymous_user:
             self._errors[NON_FIELD_ERRORS] = self.error_class(
                 [_('Choose either a user ID or select the anonymous user'), ])
 
