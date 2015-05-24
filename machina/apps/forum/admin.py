@@ -175,10 +175,10 @@ class ForumAdmin(admin.ModelAdmin):
             .order_by('name')
         granted_permissions = UserForumPermission.objects.filter(
             permission__in=editable_permissions, forum=forum, user=user, has_perm=True) \
-            .values_list('permission__codename')
+            .values_list('permission__codename', flat=True)
         non_granted_permissions = UserForumPermission.objects.filter(
             permission__in=editable_permissions, forum=forum, user=user, has_perm=False) \
-            .values_list('permission__codename')
+            .values_list('permission__codename', flat=True)
 
         context['editable_permissions'] = editable_permissions
         permissions_dict = OrderedDict()
@@ -193,7 +193,26 @@ class ForumAdmin(admin.ModelAdmin):
         context['permissions'] = permissions_dict
 
         if request.method == 'POST':
-            pass
+            form = PermissionsForm(request.POST, permissions=permissions_dict)
+            if form.is_valid():
+                for codename, value in form.cleaned_data.items():
+                    try:
+                        perm = UserForumPermission.objects.get(
+                            forum=forum, user=user, permission=permissions_dict[codename][0])
+                    except UserForumPermission.DoesNotExist:
+                        if value == 'not-set':
+                            continue
+                        perm = UserForumPermission.objects.create(
+                            forum=forum, user=user, permission=permissions_dict[codename][0])
+
+                    if value == 'not-set':
+                        perm.delete()
+                        continue
+
+                    perm.has_perm = (value == 'granted')
+                    perm.save()
+
+                self.message_user(request, _('Permissions successfully applied'))
         else:
             form = PermissionsForm(permissions=permissions_dict)
 
