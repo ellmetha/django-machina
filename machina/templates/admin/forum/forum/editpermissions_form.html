@@ -1,0 +1,82 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}machina/css/admin_theme.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}machina/_libs/font-awesome/css/font-awesome.css"/>
+{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+	{% block breadcrumbs %}
+		<div class="breadcrumbs">
+			<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+			&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+			&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+			&rsaquo; {% if has_change_permission %}<a href="{% url 'admin:forum_forum_change' forum.id %}">{{ forum.name }}</a>{% endif %}
+			&rsaquo; {% if has_change_permission %}<a href="{% url 'admin:forum_forum_editpermission_index' forum.id %}">{% trans "Forum permissions" %}</a>{% endif %}
+			&rsaquo; {% if has_change_permission %}{{ title }}{% endif %}
+		</div>
+	{% endblock %}
+{% endif %}
+
+{% block content %}
+	<form action="." method="post" id="permissions_form" novalidate>{% csrf_token %}
+		<div>
+			<fieldset class="module aligned {{ fieldset.classes }}">
+			    <h2>{% block form_title %}{% endblock %}</h2>
+			    <table cellspacing="0" id="forum-permissions-table-dnd">
+				    <thead>
+				        <tr>
+				            <th class="permission-name-cell" scope="col"><div class="text"><span>{% trans "Permission" %}</span></div></th>
+				            <th class="not-set-cell" scope="col"><div class="text"><a href="#" id="toggle_notset"><span>{% trans "Not set" %}</span></a></div></th>
+				            <th class="granted-cell" scope="col"><div class="text"><a href="#" id="toggle_granted"><span>{% trans "Granted" %}</span></a></div></th>
+				            <th class="not-granted-cell" scope="col"><div class="text"><a href="#" id="toggle_notgranted"><span>{% trans "Not granted" %}</span></a></div></th>
+				        </tr>
+				    </thead>
+				    <tbody>
+			            {% for field in form %}
+			            	<tr>
+			            		<td class="permission-name-cell"><div class="text">{{ field.label }}</div></td>
+						        {% for choice in field.field.choices %}
+						            <td class="{{ choice.0 }}-cell">
+						                <label for="{{ field.html_name }}"><input id="id_{{ field.html_name }}_{{ forloop.counter }}" type="radio" value="{{ choice.0 }}" name="{{ field.html_name }}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %}></label>
+						            </td>
+						        {% endfor %}
+			            	</tr>
+			            	{% comment %}
+			            	<div class="form-row">
+				                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+				                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+				                    {% if field.is_checkbox %}
+				                        {{ field.field }}{{ field.label_tag }}
+				                    {% else %}
+				                        {{ field.label_tag }}
+				                        {{ field }}
+				                    {% endif %}
+				                    {% if field.field.help_text %}
+				                        <p class="help">{{ field.field.help_text|safe }}</p>
+				                    {% endif %}
+				                </div>
+			                </div>
+			                {% endcomment %}
+			            {% endfor %}
+		            <tbody>
+			    </table>
+			</fieldset>
+		</div>
+		<div class="submit-row">
+			<input type="submit" value="{% trans 'Save' %}" class="default" name="submit" />
+		</div>
+	</form>
+{% endblock content %}

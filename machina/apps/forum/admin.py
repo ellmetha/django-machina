@@ -10,6 +10,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
@@ -27,6 +28,11 @@ Forum = get_model('forum', 'Forum')
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
+
+
+PERM_GRANTED = 'granted'
+PERM_NOT_GRANTED = 'not-granted'
+PERM_NOT_SET = 'not-set'
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -51,6 +57,8 @@ class ForumAdmin(admin.ModelAdmin):
 
     editpermissions_index_view_template_name = 'admin/forum/forum/editpermissions_index.html'
     editpermissions_user_view_template_name = 'admin/forum/forum/editpermissions_user.html'
+    editpermissions_anonymous_user_view_template_name = 'admin/forum/forum/editpermissions_anonymous_user.html'
+    editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
 
     def get_urls(self):
         urls = super(ForumAdmin, self).get_urls()
@@ -65,6 +73,12 @@ class ForumAdmin(admin.ModelAdmin):
             url(r'^(?P<forum_id>[0-9]+)/edit-permissions/user/(?P<user_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_user_view),
                 name='forum_forum_editpermission_user'),
+            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/user/anonymous/$',
+                self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
+                name='forum_forum_editpermission_anonymous_user'),
+            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
+                self.admin_site.admin_view(self.editpermissions_group_view),
+                name='forum_forum_editpermission_group'),
         )
         return forum_admin_urls + urls
 
@@ -137,10 +151,14 @@ class ForumAdmin(admin.ModelAdmin):
                         args=(forum.id, user.id)))
                 elif anonymous_user:
                     # Redirect to anonymous user
-                    pass
+                    return redirect(reverse(
+                        'admin:forum_forum_editpermission_anonymous_user',
+                        args=(forum.id,)))
                 elif group:
                     # Redirect to group
-                    pass
+                    return redirect(reverse(
+                        'admin:forum_forum_editpermission_group',
+                        args=(forum.id, group.id)))
 
             context['user_errors'] = helpers.AdminErrorList(user_form, [])
             context['group_errors'] = helpers.AdminErrorList(group_form, [])
@@ -152,9 +170,7 @@ class ForumAdmin(admin.ModelAdmin):
         context['group_form'] = group_form
 
         return render(
-            request,
-            self.editpermissions_index_view_template_name,
-            context)
+            request, self.editpermissions_index_view_template_name, context)
 
     def editpermissions_user_view(self, request, forum_id, user_id):
         """
@@ -169,59 +185,93 @@ class ForumAdmin(admin.ModelAdmin):
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), user)
+        context['form'] = self.editpermissions_get_form(
+            request, UserForumPermission, {'forum': forum, 'user': user})
 
+        return render(
+            request, self.editpermissions_user_view_template_name, context)
+
+    def editpermissions_anonymous_user_view(self, request, forum_id):
+        """
+        Display a form to define which permissions are granted for the anonymous user
+        for the considered forum.
+        """
+        forum = get_object_or_404(Forum, pk=forum_id)
+
+        # Set up the context
+        context = self.get_forum_perms_base_context(request, forum)
+        context['forum'] = forum
+        context['title'] = '{} - {}'.format(_('Forum permissions'), _('Anonymous user'))
+        context['form'] = self.editpermissions_get_form(
+            request, UserForumPermission, {'forum': forum, 'anonymous_user': True})
+
+        return render(
+            request, self.editpermissions_anonymous_user_view_template_name, context)
+
+    def editpermissions_group_view(self, request, forum_id, group_id):
+        """
+        Display a form to define which permissions are granted for the given group
+        for the considered forum.
+        """
+        group = get_object_or_404(Group, pk=group_id)
+        forum = get_object_or_404(Forum, pk=forum_id)
+
+        # Set up the context
+        context = self.get_forum_perms_base_context(request, forum)
+        context['forum'] = forum
+        context['title'] = '{} - {}'.format(_('Forum permissions'), group)
+        context['form'] = self.editpermissions_get_form(
+            request, GroupForumPermission, {'forum': forum, 'group': group})
+
+        return render(
+            request, self.editpermissions_group_view_template_name, context)
+
+    def editpermissions_get_form(self, request, permission_model, filter_kwargs):
         # Fetch the permissions
         editable_permissions = ForumPermission.objects.filter(is_local=True) \
             .order_by('name')
-        granted_permissions = UserForumPermission.objects.filter(
-            permission__in=editable_permissions, forum=forum, user=user, has_perm=True) \
+        granted_permissions = permission_model.objects.filter(
+            permission__in=editable_permissions, has_perm=True, **filter_kwargs) \
             .values_list('permission__codename', flat=True)
-        non_granted_permissions = UserForumPermission.objects.filter(
-            permission__in=editable_permissions, forum=forum, user=user, has_perm=False) \
+        non_granted_permissions = permission_model.objects.filter(
+            permission__in=editable_permissions, has_perm=False, **filter_kwargs) \
             .values_list('permission__codename', flat=True)
 
-        context['editable_permissions'] = editable_permissions
         permissions_dict = OrderedDict()
         for p in editable_permissions:
             if p.codename in granted_permissions:
-                perm_state = 'granted'
+                perm_state = PERM_GRANTED
             elif p.codename in non_granted_permissions:
-                perm_state = 'not-granted'
+                perm_state = PERM_NOT_GRANTED
             else:
-                perm_state = 'not-set'
+                perm_state = PERM_NOT_SET
             permissions_dict[p.codename] = (p, perm_state)
-        context['permissions'] = permissions_dict
 
         if request.method == 'POST':
-            form = PermissionsForm(request.POST, permissions=permissions_dict)
+            form = PermissionsForm(request.POST, permissions_dict=permissions_dict)
             if form.is_valid():
                 for codename, value in form.cleaned_data.items():
                     try:
-                        perm = UserForumPermission.objects.get(
-                            forum=forum, user=user, permission=permissions_dict[codename][0])
-                    except UserForumPermission.DoesNotExist:
-                        if value == 'not-set':
+                        perm = permission_model.objects.get(
+                            permission=permissions_dict[codename][0], **filter_kwargs)
+                    except permission_model.DoesNotExist:
+                        if value == PERM_NOT_SET:
                             continue
-                        perm = UserForumPermission.objects.create(
-                            forum=forum, user=user, permission=permissions_dict[codename][0])
+                        perm = permission_model.objects.create(
+                            permission=permissions_dict[codename][0], **filter_kwargs)
 
-                    if value == 'not-set':
+                    if value == PERM_NOT_SET:
                         perm.delete()
                         continue
 
-                    perm.has_perm = (value == 'granted')
+                    perm.has_perm = (value == PERM_GRANTED)
                     perm.save()
 
                 self.message_user(request, _('Permissions successfully applied'))
         else:
-            form = PermissionsForm(permissions=permissions_dict)
+            form = PermissionsForm(permissions_dict=permissions_dict)
 
-        context['form'] = form
-
-        return render(
-            request,
-            self.editpermissions_user_view_template_name,
-            context)
+        return form
 
 
 class PickUserForm(forms.Form):
@@ -266,16 +316,16 @@ class PickGroupForm(forms.Form):
 
 class PermissionsForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        permissions = kwargs.pop('permissions', {})
+        self.permissions_dict = kwargs.pop('permissions_dict', {})
         super(PermissionsForm, self).__init__(*args, **kwargs)
 
         # Initializes permission fields
         f_choices = (
-            ('not-set', _('Not set')),
-            ('granted', _('Granted')),
-            ('not-granted', _('Not granted')),
+            (PERM_NOT_SET, _('Not set')),
+            (PERM_GRANTED, _('Granted')),
+            (PERM_NOT_GRANTED, _('Not granted')),
         )
-        for codename, p in permissions.items():
+        for codename, p in self.permissions_dict.items():
             self.fields[codename] = forms.ChoiceField(
                 label=p[0].name,
                 choices=f_choices,
