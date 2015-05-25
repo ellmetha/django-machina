@@ -185,7 +185,7 @@ class ForumAdmin(admin.ModelAdmin):
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), user)
-        context['form'] = self.editpermissions_get_form(
+        context['form'] = self._get_permissions_form(
             request, UserForumPermission, {'forum': forum, 'user': user})
 
         return render(
@@ -202,7 +202,7 @@ class ForumAdmin(admin.ModelAdmin):
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), _('Anonymous user'))
-        context['form'] = self.editpermissions_get_form(
+        context['form'] = self._get_permissions_form(
             request, UserForumPermission, {'forum': forum, 'anonymous_user': True})
 
         return render(
@@ -220,13 +220,13 @@ class ForumAdmin(admin.ModelAdmin):
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), group)
-        context['form'] = self.editpermissions_get_form(
+        context['form'] = self._get_permissions_form(
             request, GroupForumPermission, {'forum': forum, 'group': group})
 
         return render(
             request, self.editpermissions_group_view_template_name, context)
 
-    def editpermissions_get_form(self, request, permission_model, filter_kwargs):
+    def _get_permissions_form(self, request, permission_model, filter_kwargs):
         # Fetch the permissions
         editable_permissions = ForumPermission.objects.filter(is_local=True) \
             .order_by('name')
