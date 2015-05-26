@@ -97,6 +97,9 @@ class ForumAdmin(admin.ModelAdmin):
         }
         try:
             context.update(self.admin_site.each_context(request))
+        except TypeError:  # pragma: no cover
+            # Django 1.7 compatibility
+            context.update(self.admin_site.each_context())
         except AttributeError:  # pragma: no cover
             pass
         return context
