@@ -2,6 +2,6 @@
 {% load i18n %}
 
 {% block object-tools-items %}
-<li><a href="{% url 'admin:forum_forum_editpermission_index' original.id %}" class="permissionslink">{% trans "Forum permissions" %}</a></li>
+<li><a href="edit-permissions/" class="permissionslink">{% trans "Forum permissions" %}</a></li>
 {{ block.super }}
 {% endblock %}

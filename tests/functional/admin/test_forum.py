@@ -7,6 +7,7 @@ from django.db.models import get_model
 
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import FORUM_TYPES
+from machina.test.factories import GroupFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 Forum = get_model('forum', 'Forum')
@@ -67,6 +68,76 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         self.assertIsRedirect(response)
         self.assertEqual(moved_forum.get_previous_sibling(), None)
         self.assertEqual(moved_forum.get_next_sibling(), self.top_level_forum)
+
+    def test_editpermission_index_view_browsing_works(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.get(url)
+        # Check
+        self.assertIsOk(response)
+
+    def test_editpermission_index_view_submission_cannot_work_without_data(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url)
+        # Check
+        self.assertIsOk(response)
+        self.assertTrue(response.context['user_form'].errors is not None)
+
+    def test_editpermission_index_view_can_redirect_to_user_permissions_form(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'user': self.user.id}, follow=True)
+        # Check
+        editpermissions_user_raw_url = 'admin:{}_{}_editpermission_user'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        editpermissions_user_url = reverse(editpermissions_user_raw_url, kwargs={
+            'forum_id': self.top_level_cat.id, 'user_id': self.user.id})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(editpermissions_user_url, last_url)
+
+    def test_editpermission_index_view_can_redirect_to_anonymous_user_permissions_form(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'anonymous_user': 1}, follow=True)
+        # Check
+        editpermissions_anonymous_user_raw_url = 'admin:{}_{}_editpermission_anonymous_user'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        editpermissions_anonymous_user_url = reverse(editpermissions_anonymous_user_raw_url, kwargs={
+            'forum_id': self.top_level_cat.id})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(editpermissions_anonymous_user_url, last_url)
+
+    def test_editpermission_index_view_can_redirect_to_group_permissions_form(self):
+        # Setup
+        group = GroupFactory.create()
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'group': group.id}, follow=True)
+        # Check
+        editpermissions_group_raw_url = 'admin:{}_{}_editpermission_group'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        editpermissions_group_url = reverse(editpermissions_group_raw_url, kwargs={
+            'forum_id': self.top_level_cat.id, 'group_id': self.user.id})
+        self.assertGreater(len(response.redirect_chain), 0)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertIn(editpermissions_group_url, last_url)
 
     def _get_module_name(self, options):
         try:

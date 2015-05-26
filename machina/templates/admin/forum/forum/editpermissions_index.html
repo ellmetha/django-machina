@@ -1,12 +1,5 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/change_form.html" %}
 {% load i18n admin_urls admin_static admin_modify %}
-
-{% block extrahead %}{{ block.super }}
-<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-{{ media }}
-{% endblock %}
-
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
 
 {% block coltype %}colM{% endblock %}
 
@@ -15,10 +8,10 @@
 {% if not is_popup %}
 	{% block breadcrumbs %}
 		<div class="breadcrumbs">
-			<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-			&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
-			&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
-			&rsaquo; {% if has_change_permission %}<a href="{% url 'admin:forum_forum_change' forum.id %}">{{ forum.name }}</a>{% endif %}
+			<a href="../../../../">{% trans 'Home' %}</a>
+			&rsaquo; <a href="../../../">{{ opts.app_config.verbose_name }}</a>
+			&rsaquo; {% if has_change_permission %}<a href="../../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+			&rsaquo; {% if has_change_permission %}<a href="../">{{ forum.name }}</a>{% endif %}
 			&rsaquo; {% if has_change_permission %}{% trans "Forum permissions" %}{% endif %}
 		</div>
 	{% endblock %}

@@ -95,7 +95,10 @@ class ForumAdmin(admin.ModelAdmin):
             'opts': self.model._meta,
             'has_change_permission': self.has_change_permission(request, obj),
         }
-        context.update(self.admin_site.each_context(request))
+        try:
+            context.update(self.admin_site.each_context(request))
+        except AttributeError:  # pragma: no cover
+            pass
         return context
 
     def moveforum_view(self, request, forum_id, direction):
@@ -137,9 +140,12 @@ class ForumAdmin(admin.ModelAdmin):
             group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
             if user_form.is_valid() and group_form.is_valid():
-                user = user_form.cleaned_data.get('user', None)
-                anonymous_user = user_form.cleaned_data.get('anonymous_user', None)
-                group = group_form.cleaned_data.get('group', None)
+                user = user_form.cleaned_data.get('user', None) \
+                    if user_form.cleaned_data else None
+                anonymous_user = user_form.cleaned_data.get('anonymous_user', None) \
+                    if user_form.cleaned_data else None
+                group = group_form.cleaned_data.get('group', None) \
+                    if group_form.cleaned_data else None
 
                 if not user and not anonymous_user and not group:
                     user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
@@ -299,6 +305,7 @@ class PickUserForm(forms.Form):
         if user and anonymous_user:
             self._errors[NON_FIELD_ERRORS] = self.error_class(
                 [_('Choose either a user ID or select the anonymous user'), ])
+        return cleaned_data
 
 
 class PickGroupForm(forms.Form):
