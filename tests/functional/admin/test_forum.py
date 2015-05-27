@@ -7,6 +7,8 @@ from django.db.models import get_model
 
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import FORUM_TYPES
+from machina.apps.forum_permission.models import GroupForumPermission
+from machina.apps.forum_permission.models import UserForumPermission
 from machina.test.factories import GroupFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
@@ -138,6 +140,124 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(editpermissions_group_url, last_url)
+
+    def test_editpermission_form_can_update_user_permissions(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_user'.format(model._meta.app_label, self._get_module_name(model._meta))
+        post_data = {
+            'can_see_forum': 'granted',
+            'can_read_forum': 'not-granted',
+            'can_start_new_topics': 'not-set',
+            'can_reply_to_topics': 'not-set',
+            'can_post_announcements': 'not-set',
+            'can_post_stickies': 'not-set',
+            'can_delete_own_posts': 'not-set',
+            'can_edit_own_posts': 'not-set',
+            'can_post_without_approval': 'not-set',
+            'can_create_poll': 'not-set',
+            'can_vote_in_polls': 'not-set',
+            'can_attach_file': 'not-set',
+            'can_download_file': 'not-set',
+            'can_close_topics': 'not-set',
+            'can_edit_posts': 'not-set',
+            'can_delete_posts': 'not-set',
+            'can_move_posts': 'not-set',
+            'can_approve_posts': 'not-set',
+        }
+        # Run
+        url = reverse(raw_url, kwargs={
+            'forum_id': self.top_level_cat.id, 'user_id': self.user.id})
+        response = self.client.post(url, post_data)
+        # Check
+        self.assertIsOk(response)
+        granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_see_forum', has_perm=True,
+            user=self.user, forum=self.top_level_cat)
+        self.assertTrue(granted_perm.exists())
+        not_granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_read_forum', has_perm=False,
+            user=self.user, forum=self.top_level_cat)
+        self.assertTrue(not_granted_perm.exists())
+
+    def test_editpermission_form_can_update_anonymous_user_permissions(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_anonymous_user'.format(model._meta.app_label, self._get_module_name(model._meta))
+        post_data = {
+            'can_see_forum': 'granted',
+            'can_read_forum': 'not-granted',
+            'can_start_new_topics': 'not-set',
+            'can_reply_to_topics': 'not-set',
+            'can_post_announcements': 'not-set',
+            'can_post_stickies': 'not-set',
+            'can_delete_own_posts': 'not-set',
+            'can_edit_own_posts': 'not-set',
+            'can_post_without_approval': 'not-set',
+            'can_create_poll': 'not-set',
+            'can_vote_in_polls': 'not-set',
+            'can_attach_file': 'not-set',
+            'can_download_file': 'not-set',
+            'can_close_topics': 'not-set',
+            'can_edit_posts': 'not-set',
+            'can_delete_posts': 'not-set',
+            'can_move_posts': 'not-set',
+            'can_approve_posts': 'not-set',
+        }
+        # Run
+        url = reverse(raw_url, kwargs={
+            'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, post_data)
+        # Check
+        self.assertIsOk(response)
+        granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_see_forum', has_perm=True,
+            anonymous_user=True, forum=self.top_level_cat)
+        self.assertTrue(granted_perm.exists())
+        not_granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_read_forum', has_perm=False,
+            anonymous_user=True, forum=self.top_level_cat)
+        self.assertTrue(not_granted_perm.exists())
+
+    def test_editpermission_form_can_update_group_permissions(self):
+        # Setup
+        group = GroupFactory.create()
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_group'.format(model._meta.app_label, self._get_module_name(model._meta))
+        post_data = {
+            'can_see_forum': 'granted',
+            'can_read_forum': 'not-granted',
+            'can_start_new_topics': 'not-set',
+            'can_reply_to_topics': 'not-set',
+            'can_post_announcements': 'not-set',
+            'can_post_stickies': 'not-set',
+            'can_delete_own_posts': 'not-set',
+            'can_edit_own_posts': 'not-set',
+            'can_post_without_approval': 'not-set',
+            'can_create_poll': 'not-set',
+            'can_vote_in_polls': 'not-set',
+            'can_attach_file': 'not-set',
+            'can_download_file': 'not-set',
+            'can_close_topics': 'not-set',
+            'can_edit_posts': 'not-set',
+            'can_delete_posts': 'not-set',
+            'can_move_posts': 'not-set',
+            'can_approve_posts': 'not-set',
+        }
+        # Run
+        url = reverse(raw_url, kwargs={
+            'forum_id': self.top_level_cat.id, 'group_id': group.id})
+        response = self.client.post(url, post_data)
+        # Check
+        self.assertIsOk(response)
+        granted_perm = GroupForumPermission.objects.filter(
+            permission__codename='can_see_forum', has_perm=True,
+            group=group, forum=self.top_level_cat)
+        self.assertTrue(granted_perm.exists())
+        not_granted_perm = GroupForumPermission.objects.filter(
+            permission__codename='can_read_forum', has_perm=False,
+            group=group, forum=self.top_level_cat)
+        self.assertTrue(not_granted_perm.exists())
 
     def _get_module_name(self, options):
         try:
