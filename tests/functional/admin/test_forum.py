@@ -7,9 +7,11 @@ from django.db.models import get_model
 
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import FORUM_TYPES
+from machina.apps.forum_permission.models import ForumPermission
 from machina.apps.forum_permission.models import GroupForumPermission
 from machina.apps.forum_permission.models import UserForumPermission
 from machina.test.factories import GroupFactory
+from machina.test.factories import UserForumPermissionFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 Forum = get_model('forum', 'Forum')
@@ -143,6 +145,18 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
 
     def test_editpermission_form_can_update_user_permissions(self):
         # Setup
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_see_forum'),
+            forum=self.top_level_cat,
+            user=self.user, has_perm=False)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_read_forum'),
+            forum=self.top_level_cat,
+            user=self.user, has_perm=True)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.top_level_cat,
+            user=self.user, has_perm=False)
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_user'.format(model._meta.app_label, self._get_module_name(model._meta))
         post_data = {
