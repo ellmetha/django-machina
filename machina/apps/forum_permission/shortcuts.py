@@ -20,7 +20,10 @@ class NotUserNorGroup(Exception):
     pass
 
 
-def assign_perm(perm, user_or_group, forum, has_perm=True):
+def assign_perm(perm, user_or_group, forum=None, has_perm=True):
+    """
+    Assign a permission to a user (anonymous or not) or a group.
+    """
     user, group = get_identity(user_or_group)
     perm = ForumPermission.objects.get(codename=perm)
     if user:
@@ -35,13 +38,21 @@ def assign_perm(perm, user_or_group, forum, has_perm=True):
             forum=forum, permission=perm, group=group, has_perm=has_perm)
 
 
-def remove_perm(perm, user_or_group, forum):
+def remove_perm(perm, user_or_group, forum=None):
+    """
+    Remove a permission to a user (anonymous or not) or a group.
+    """
     user, group = get_identity(user_or_group)
     perm = ForumPermission.objects.get(codename=perm)
     if user:
-        UserForumPermission.objects.filter(permission=perm, forum=forum, user=user).delete()
+        UserForumPermission.objects.filter(
+            forum=forum,
+            permission=perm,
+            user=user if not user.is_anonymous() else None,
+            anonymous_user=user.is_anonymous()).delete()
     if group:
-        GroupForumPermission.objects.filter(permission=perm, forum=forum, group=group).delete()
+        GroupForumPermission.objects.filter(
+            forum=forum, permission=perm, group=group).delete()
 
 
 def get_identity(identity):
