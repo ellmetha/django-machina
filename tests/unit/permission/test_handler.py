@@ -4,6 +4,7 @@
 import datetime
 
 # Third party imports
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import get_model
 
 # Local application / specific library imports
@@ -65,19 +66,31 @@ class TestPermissionHandler(BaseUnitTestCase):
 
     def test_shows_a_forum_if_it_is_visible(self):
         # Setup
+        u2 = UserFactory.create()
+        u3 = AnonymousUser()
+        assign_perm('can_see_forum', u2)  # Global user permission
+        assign_perm('can_see_forum', u3)  # Global user permission
         forums = Forum.objects.filter(pk=self.top_level_cat.pk)
         # Run
-        filtered_forums = self.perm_handler.forum_list_filter(forums, self.u1)
+        filtered_forums_1 = self.perm_handler.forum_list_filter(forums, self.u1)
+        filtered_forums_2 = self.perm_handler.forum_list_filter(forums, u2)
+        filtered_forums_3 = self.perm_handler.forum_list_filter(forums, u3)
         # Check
-        self.assertQuerysetEqual(filtered_forums, [self.top_level_cat, ])
+        self.assertQuerysetEqual(filtered_forums_1, [self.top_level_cat, ])
+        self.assertQuerysetEqual(filtered_forums_2, [self.top_level_cat, ])
+        self.assertQuerysetEqual(filtered_forums_3, [self.top_level_cat, ])
 
     def test_hide_a_forum_if_it_is_not_visible(self):
         # Setup
+        u2 = AnonymousUser()
+        assign_perm('can_see_forum', u2, self.top_level_cat)
         forums = Forum.objects.filter(pk=self.top_level_cat.pk)
         # Run
-        filtered_forums = self.perm_handler.forum_list_filter(forums, self.u1)
+        filtered_forums_1 = self.perm_handler.forum_list_filter(forums, self.u1)
+        filtered_forums_2 = self.perm_handler.forum_list_filter(forums, u2)
         # Check
-        self.assertQuerysetEqual(filtered_forums, [self.top_level_cat, ])
+        self.assertQuerysetEqual(filtered_forums_1, [self.top_level_cat, ])
+        self.assertQuerysetEqual(filtered_forums_2, [self.top_level_cat, ])
 
     def test_shows_a_forum_if_all_of_its_ancestors_are_visible(self):
         # Setup
