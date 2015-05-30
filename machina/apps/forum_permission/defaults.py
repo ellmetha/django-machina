@@ -8,6 +8,10 @@ from __future__ import unicode_literals
 
 
 class PermissionConfig(object):
+    """
+    This class defines the default configuration of forum permissions. It is used
+    to create the related ForumPermission instances on a syncdb or migrate operation.
+    """
     permissions = [
         # Forums
         {'codename': 'can_see_forum', 'name': 'Can see forum', 'is_local': True, 'is_global': True},
