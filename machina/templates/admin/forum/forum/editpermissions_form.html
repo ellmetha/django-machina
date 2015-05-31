@@ -14,10 +14,10 @@
 {% if not is_popup %}
 	{% block breadcrumbs %}
 		<div class="breadcrumbs">
-			<a href="../../../../../../">{% trans 'Home' %}</a>
-			&rsaquo; <a href="../../../../../">{{ opts.app_config.verbose_name }}</a>
-			&rsaquo; {% if has_change_permission %}<a href="../../../../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
-			&rsaquo; {% if has_change_permission %}<a href="../../../">{{ forum.name }}</a>{% endif %}
+			<a href="{% if forum %}../../../../../../{% else %}../../../../../{% endif %}">{% trans 'Home' %}</a>
+			&rsaquo; <a href="{% if forum %}../../../../../{% else %}../../../../{% endif %}">{{ opts.app_config.verbose_name }}</a>
+			&rsaquo; {% if has_change_permission %}<a href="{% if forum %}../../../../{% else %}../../../{% endif %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+			{% if forum and has_change_permission %}&rsaquo; <a href="../../../">{{ forum.name }}</a>{% endif %}
 			&rsaquo; {% if has_change_permission %}<a href="../../">{% trans "Forum permissions" %}</a>{% endif %}
 			&rsaquo; {% if has_change_permission %}{{ title }}{% endif %}
 		</div>

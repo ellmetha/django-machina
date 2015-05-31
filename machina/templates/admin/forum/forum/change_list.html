@@ -13,6 +13,11 @@
 {{ block.super }}
 {% endblock %}
 
+{% block object-tools-items %}
+	<li><a href="{% url 'admin:forum_forum_editpermission_index' %}">{% trans "Global forum permissions" %}</a></li>
+	{{ block.super }}
+{% endblock object-tools-items %}
+
 {% block result_list %}
     <form method="post" action="">
         {% csrf_token %}
