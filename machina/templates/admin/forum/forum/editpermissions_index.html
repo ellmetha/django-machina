@@ -78,6 +78,35 @@
 			<input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />
 		</div>
 	</form>
+	{% if forum %}
+		<form action="." method="post" id="{{ opts.model_name }}_pick_forum_form" novalidate>{% csrf_token %}
+			<div>
+				<fieldset class="module aligned {{ fieldset.classes }}">
+				    <h2>{% trans "Copy permissions from another forum" %}</h2>
+				    <div class="description">{% trans "Please select a forum in order to copy its permissions configuration to the current forum" %}</div>
+		            {% for field in forum_form %}
+		            	<div class="form-row">
+			                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+			                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+			                    {% if field.is_checkbox %}
+			                        {{ field.field }}{{ field.label_tag }}
+			                    {% else %}
+			                        {{ field.label_tag }}
+			                        {{ field }}
+			                    {% endif %}
+			                    {% if field.field.help_text %}
+			                        <p class="help">{{ field.field.help_text|safe }}</p>
+			                    {% endif %}
+			                </div>
+		                </div>
+		            {% endfor %}
+				</fieldset>
+			</div>
+			<div class="submit-row">
+				<input type="submit" value="{% trans 'Copy' %}" class="default" name="_select_forum" />
+			</div>
+		</form>
+	{% endif %}
 
     <script type="text/javascript">
         (function($) {

@@ -18,6 +18,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+from mptt.forms import TreeNodeChoiceField
 from mptt.exceptions import InvalidMove
 
 # Local application / specific library imports
@@ -191,6 +192,12 @@ class ForumAdmin(admin.ModelAdmin):
             user_form = PickUserForm(admin_site=self.admin_site)
             group_form = PickGroupForm(admin_site=self.admin_site)
 
+        # Handles "copy permission from" form
+        if forum and request.method == 'POST':
+            pass
+        elif forum:
+            context['forum_form'] = PickForumForm()
+
         context['user_form'] = user_form
         context['group_form'] = group_form
 
@@ -344,6 +351,10 @@ class PickGroupForm(forms.Form):
         self.fields['group'].widget = ForeignKeyRawIdWidget(
             GroupForumPermission._meta.get_field('group').rel,
             admin_site)
+
+
+class PickForumForm(forms.Form):
+    forum = TreeNodeChoiceField(queryset=Forum.objects.all())
 
 
 class PermissionsForm(forms.Form):
