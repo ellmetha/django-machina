@@ -153,7 +153,20 @@ class ForumAdmin(admin.ModelAdmin):
         context['title'] = _('Forum permissions') if forum \
             else _('Global forum permissions')
 
-        if request.method == 'POST':
+        # Handles "copy permission from" form
+        permissions_copied = False
+        if forum and request.method == 'POST':
+            forum_form = PickForumForm(request.POST)
+            if forum_form.is_valid() and forum_form.cleaned_data['forum']:
+                self._copy_forum_permissions(forum_form.cleaned_data['forum'], forum)
+                self.message_user(request, _('Permissions successfully copied'))
+                permissions_copied = True
+            context['forum_form'] = forum_form
+        elif forum:
+            context['forum_form'] = PickForumForm()
+
+        # Handles user or group selection
+        if request.method == 'POST' and not permissions_copied:
             user_form = PickUserForm(request.POST, admin_site=self.admin_site)
             group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
@@ -191,12 +204,6 @@ class ForumAdmin(admin.ModelAdmin):
         else:
             user_form = PickUserForm(admin_site=self.admin_site)
             group_form = PickGroupForm(admin_site=self.admin_site)
-
-        # Handles "copy permission from" form
-        if forum and request.method == 'POST':
-            pass
-        elif forum:
-            context['forum_form'] = PickForumForm()
 
         context['user_form'] = user_form
         context['group_form'] = group_form
@@ -311,6 +318,36 @@ class ForumAdmin(admin.ModelAdmin):
 
         return form
 
+    def _copy_forum_permissions(self, forum_from, forum_to):
+        user_perms = UserForumPermission.objects.filter(
+            forum=forum_from)
+        group_perms = GroupForumPermission.objects.filter(
+            forum=forum_from)
+
+        for perm in user_perms:
+            try:
+                new_perm = UserForumPermission.objects.get(
+                    permission=perm.permission, forum=forum_to,
+                    user=perm.user, anonymous_user=perm.anonymous_user)
+            except UserForumPermission.DoesNotExist:
+                new_perm = UserForumPermission(
+                    permission=perm.permission, forum=forum_to,
+                    user=perm.user, anonymous_user=perm.anonymous_user)
+            new_perm.has_perm = perm.has_perm
+            new_perm.save()
+
+        for perm in group_perms:
+            try:
+                new_perm = GroupForumPermission.objects.get(
+                    permission=perm.permission, forum=forum_to,
+                    group=perm.group)
+            except GroupForumPermission.DoesNotExist:
+                new_perm = GroupForumPermission(
+                    permission=perm.permission, forum=forum_to,
+                    group=perm.group)
+            new_perm.has_perm = perm.has_perm
+            new_perm.save()
+
 
 class PickUserForm(forms.Form):
     user = UserForumPermission._meta.get_field('user').formfield()
@@ -354,7 +391,8 @@ class PickGroupForm(forms.Form):
 
 
 class PickForumForm(forms.Form):
-    forum = TreeNodeChoiceField(queryset=Forum.objects.all())
+    forum = TreeNodeChoiceField(
+        queryset=Forum.objects.all(), required=False)
 
 
 class PermissionsForm(forms.Form):
