@@ -11,6 +11,7 @@ from machina.apps.forum_permission.models import ForumPermission
 from machina.apps.forum_permission.models import GroupForumPermission
 from machina.apps.forum_permission.models import UserForumPermission
 from machina.test.factories import GroupFactory
+from machina.test.factories import GroupForumPermissionFactory
 from machina.test.factories import UserForumPermissionFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
@@ -142,6 +143,51 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         self.assertIn(editpermissions_group_url, last_url)
+
+    def test_editpermission_index_view_can_copy_permissions_from_another_forum(self):
+        # Setup
+        group = GroupFactory.create()
+        model = self.model
+
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_see_forum'),
+            forum=self.sub_forum_1,
+            user=self.user, has_perm=False)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_read_forum'),
+            forum=self.sub_forum_1,
+            user=self.user, has_perm=True)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.sub_forum_1,
+            user=self.user, has_perm=False)
+        GroupForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.sub_forum_1,
+            group=group, has_perm=False)
+
+        raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'forum': self.sub_forum_1.id})
+        # Check
+        self.assertIsOk(response)
+        self.assertTrue(
+            UserForumPermission.objects.filter(
+                permission__codename='can_see_forum', forum=self.top_level_cat,
+                user=self.user, has_perm=False).exists())
+        self.assertTrue(
+            UserForumPermission.objects.filter(
+                permission__codename='can_read_forum', forum=self.top_level_cat,
+                user=self.user, has_perm=True).exists())
+        self.assertTrue(
+            UserForumPermission.objects.filter(
+                permission__codename='can_start_new_topics', forum=self.top_level_cat,
+                user=self.user, has_perm=False).exists())
+        self.assertTrue(
+            GroupForumPermission.objects.filter(
+                permission__codename='can_start_new_topics', forum=self.top_level_cat,
+                group=group, has_perm=False).exists())
 
     def test_editpermission_form_can_update_user_permissions(self):
         # Setup
