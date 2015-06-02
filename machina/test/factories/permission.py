@@ -13,6 +13,7 @@ from machina.core.db.models import get_model
 faker = FakerFactory.create()
 
 ForumPermission = get_model('forum_permission', 'ForumPermission')
+GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 
@@ -29,3 +30,10 @@ class UserForumPermissionFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = UserForumPermission
+
+
+class GroupForumPermissionFactory(factory.DjangoModelFactory):
+    permission = factory.SubFactory(ForumPermissionFactory)
+
+    class Meta:
+        model = GroupForumPermission
