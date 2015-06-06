@@ -69,7 +69,6 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     # Machina related apps:
     'mptt',
     'haystack',
-
     'bootstrap3',
     'django_markdown',
   ] + get_vanilla_apps()
@@ -103,6 +102,15 @@ Then edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina
   TEMPLATE_DIRS = (
     # ...
     MACHINA_MAIN_TEMPLATE_DIR,
+  )
+
+Then edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory::
+
+  from machina import MACHINA_MAIN_STATIC_DIR
+
+  STATICFILES_DIRS = (
+    # ...
+    MACHINA_MAIN_STATIC_DIR,
   )
 
 Finally you have to add a new cache to your settings. This cache will be used to store temporary post attachments. Note that this ``machina_attachments`` cache must use the ``django.core.cache.backends.filebased.FileBasedCache`` backend, as follows::
