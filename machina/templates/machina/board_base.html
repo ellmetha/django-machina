@@ -2,17 +2,12 @@
 {% load url from future %}
 {% load static %}
 {% load i18n %}
-{% load compress %}
 {% load forum_permission_tags %}
 
 {% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub-title %}{% endblock sub-title %}{% endblock title %}
 
 {% block css %}
-    {% compress css %}
-        <link rel="stylesheet" type="text/less" href="{% static 'machina/_libs/bootstrap/less/bootstrap.less' %}" />
-        <link rel="stylesheet" type="text/less" href="{% static 'machina/_libs/font-awesome/less/font-awesome.less' %}" />
-        <link rel="stylesheet" type="text/less" href="{% static 'machina/less/board_theme.less' %}" />
-    {% endcompress %}
+    <link rel="stylesheet" href="{% static 'css/machina.board_theme.min.css' %}" />
 {% endblock css %}
 
 {% block body %}
@@ -81,11 +76,8 @@
 {% endblock body %}
 
 {% block js %}
-    {% compress js %}
-        <script type="text/javascript" src="{% static 'machina/_libs/jquery/dist/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'machina/_libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'machina/js/ui.js' %}" type="text/javascript" charset="utf-8"></script>
-    {% endcompress %}
+    <script src="{% static 'js/machina.packages.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/machina.min.js' %}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(function() {
             machina.init();

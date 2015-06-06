@@ -1,7 +1,5 @@
-css:
-		# Compile CSS files from LESS
-		lessc machina/static/machina/less/admin_theme.less > machina/static/machina/css/admin_theme.css
-		lessc machina/static/machina/less/board_theme.less > machina/static/machina/css/board_theme.css
+staticfiles:
+	cd machina/static/machina && gulp build-application
 
 
 .PHONY: install upgrade coverage travis docs

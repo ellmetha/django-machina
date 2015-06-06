@@ -11,7 +11,6 @@ Requirements
 * `Django-mptt`_ 0.7. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-markdown`_ 0.7. or higher
-* `Django-compressor`_ 1.4. or higher
 * `Django-bootstrap3`_ 3.0. or higher
 * `South`_ 1.0.1 or higher if you are using Django < 1.7
 
@@ -25,8 +24,7 @@ Requirements
 	*Django-machina* uses Markdown (*django-markdown*) by default as a syntax for forum messages, but you can change this
 	in your settings.
 
-	*Django-machina*'s default templates use *django-compressor* to handle static files and *django-bootstrap3* to render
-	forms. These packages are optional and you can override this by using your own templates.
+	*Django-machina*'s default templates use *django-bootstrap3* to render forms. This package is optional and you can override it by using your own templates.
 
 .. _Python: https://www.python.org
 .. _Django: https://www.djangoproject.com
@@ -35,7 +33,6 @@ Requirements
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
 .. _Django-markdown: https://github.com/klen/django_markdown
-.. _Django-compressor: https://github.com/django-compressor/django-compressor
 .. _Django-bootstrap3: https://github.com/dyve/django-bootstrap3
 .. _South: http://south.aeracode.org/
 
@@ -74,13 +71,12 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     'haystack',
 
     'bootstrap3',
-    'compressor',
     'django_markdown',
   ] + get_vanilla_apps()
 
 .. note::
 
-  As previously stated, *django-markdown* is the default syntax used for forum messages and *django-compressor* and *django-bootstrap3* are used in templates to handle static files and form rendering. These modules are optional really and you may decide to override the *django-machina*'s templates to use other modules. 
+  As previously stated, *django-markdown* is the default syntax used for forum messages and *django-bootstrap3* is used in templates to handle form rendering. This module is optional really and you may decide to override the *django-machina*'s templates to use other modules.
 
 *Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
 

@@ -6,7 +6,6 @@ __pycache__
 *.egg-info/
 *.egg/
 dist/
-build/
 docs/_build/
 public/
 whoosh_index/

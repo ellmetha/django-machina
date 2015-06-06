@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import gettext
 from machina import get_vanilla_apps
+from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 import os
 PROJECT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../..')
@@ -66,7 +67,9 @@ STATIC_ROOT = os.path.join(PROJECT_PATH, 'public/static/')
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = ()
+STATICFILES_DIRS = (
+    MACHINA_MAIN_STATIC_DIR,
+)
 
 # List of finder classes that know how to find static files in
 # various locations.

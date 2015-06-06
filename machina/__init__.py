@@ -22,6 +22,10 @@ MACHINA_VANILLA_APPS = [
 ]
 
 
+# Main Machina static directory
+MACHINA_MAIN_STATIC_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'static/machina/build')
+
 # Main Machina template directory
 MACHINA_MAIN_TEMPLATE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'templates/machina')

@@ -8,6 +8,7 @@ from django.conf import settings
 
 # Local application / specific library imports
 from machina import get_vanilla_apps
+from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 
@@ -54,7 +55,6 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'bootstrap3',
-    'compressor',
     'django_markdown',
     'tests',
 ] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ])
@@ -79,6 +79,10 @@ ADMINS = ('admin@example.com',)
 
 MEDIA_ROOT = os.path.join(TEST_ROOT, '_testdata/media/')
 STATIC_ROOT = os.path.join(TEST_ROOT, '_testdata/static/')
+
+STATICFILES_DIRS = (
+    MACHINA_MAIN_STATIC_DIR,
+)
 
 PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']
 
