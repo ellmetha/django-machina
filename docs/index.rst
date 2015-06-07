@@ -39,6 +39,7 @@ Using django-machina
    getting_started
    settings
    glossary
+   forum_permissions
 
 
 
