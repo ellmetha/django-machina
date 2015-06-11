@@ -4,5 +4,75 @@ Forum permissions
 
 *Django-machina* comes with its own permission system, allowing you to define exactly what users or groups can or can not do with the forums you created.
 
+Permissions can be granted to users (anonymous user or registered users) and to groups. Some permissions can be granted globally: in this case, the permissions apply to all forums.
+
 Built-in permissions
 --------------------
+
++-------------------------------+-----------+--------------------------------------------------+
+| Permission                    | Is global | Definition                                       |
++===============================+===========+==================================================+
+| **Forums**                                                                                   |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_see_forum``             | Yes       | Defines whether the target can see a forum       |
+|                               |           | (eg. in the list of forums)                      |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_read_forum``            | Yes       | Defines whether the target can read the content  |
+|                               |           | of a forum                                       |
++-------------------------------+-----------+--------------------------------------------------+
+| **Topics and posts**                                                                         |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_start_new_topics``      | Yes       | Defines whether the target can start a new topic |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_start_new_topics``      | Yes       | Defines whether the target can start a new topic |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_reply_to_topics``       | Yes       | Defines whether the target can reply to topics   |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_post_announcements``    | Yes       | Defines whether the target can create announces  |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_post_stickies``         | Yes       | Defines whether the target can create sticky     |
+|                               |           | posts                                            |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_delete_own_posts``      | Yes       | Defines whether the target can remove its own    |
+|                               |           | posts                                            |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_edit_own_posts``        | Yes       | Defines whether the target can edit its own      |
+|                               |           | posts                                            |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_post_without_approval`` | Yes       | Defines whether the target can create topics or  |
+|                               |           | posts without moderator approval                 |
++-------------------------------+-----------+--------------------------------------------------+
+| **Polls**                                                                                    |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_create_poll``           | Yes       | Defines whether the target can create polls      |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_vote_in_polls``         | Yes       | Defines whether the target can vote in polls     |
++-------------------------------+-----------+--------------------------------------------------+
+| **Attachments**                                                                              |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_attach_file``           | Yes       | Defines whether the target can attach files to   |
+|                               |           | forum posts                                      |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_download_file``         | Yes       | Defines whether the target can download the      |
+|                               |           | files attached to forum posts                    |
++-------------------------------+-----------+--------------------------------------------------+
+| **Moderation**                                                                               |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_close_topics``          | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can close a forum topic               |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_edit_posts``            | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can edit forum posts that he did not  |
+|                               |           | write                                            |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_delete_posts``          | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can delete forum posts that he did    |
+|                               |           | not write                                        |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_move_posts``            | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can move a forum posts to another     |
+|                               |           | topic                                            |
++-------------------------------+-----------+--------------------------------------------------+
+| ``can_approve_posts``         | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can approve unapproved posts          |
++-------------------------------+-----------+--------------------------------------------------+
