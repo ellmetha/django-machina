@@ -76,3 +76,6 @@ Built-in permissions
 | ``can_approve_posts``         | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can approve unapproved posts          |
 +-------------------------------+-----------+--------------------------------------------------+
+| ``can_reply_to_closed_topic`` | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can add posts in closed topics        |
++-------------------------------+-----------+--------------------------------------------------+
