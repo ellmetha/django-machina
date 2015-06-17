@@ -79,3 +79,6 @@ Built-in permissions
 | ``can_reply_to_closed_topic`` | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can add posts in closed topics        |
 +-------------------------------+-----------+--------------------------------------------------+
+
+Defining forum permissions
+--------------------------
