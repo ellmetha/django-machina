@@ -82,3 +82,10 @@ Built-in permissions
 
 Defining forum permissions
 --------------------------
+
+*Django-machina* allows you to precisely define which permissions should be granted for each forum, for each user and for each group of users. The permissions can be granted from the administration panel. Just go to the 'Forums' section of the administration panel. In this section you can update forum instances and their related permissions.
+
+
+.. note::
+
+	Defining precise permissions on each forum can be overwhelming if you just want to set up single forums with a basic set of permissions. In that case you can use the ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting to define which permissions should be granted to all authenticated users for all forums (please refer to :doc:`settings`).

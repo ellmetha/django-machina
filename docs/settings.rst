@@ -201,4 +201,4 @@ Default: ``[]``
 	    'can_download_file',
 	]
 
-For a full list of the available forum permissions, please refer to :doc:`index`.
+For a full list of the available forum permissions, please refer to :doc:`forum_permissions`.
