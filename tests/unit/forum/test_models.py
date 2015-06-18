@@ -100,6 +100,6 @@ class TestForum(TestCase):
         sub_level_forum.parent = self.top_level_cat
         sub_level_forum.save()
         # Check
-        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
+        self.top_level_forum = Forum.active.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
         self.assertEqual(self.top_level_forum.posts_count, 0)
         self.assertEqual(self.top_level_forum.topics_count, 0)

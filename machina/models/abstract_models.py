@@ -21,7 +21,7 @@ class ActiveManager(models.Manager):
 
         return get_queryset().filter(is_active__exact=True)
 
-    if DJANGO_VERSION < (1, 6):
+    if DJANGO_VERSION < (1, 6):  # pragma: no cover
         get_query_set = get_queryset
 
 
