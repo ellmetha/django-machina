@@ -85,7 +85,28 @@ Defining forum permissions
 
 *Django-machina* allows you to precisely define which permissions should be granted for each forum, for each user and for each group of users. The permissions can be granted from the administration panel. Just go to the 'Forums' section of the administration panel. In this section you can update forum instances and their related permissions.
 
-
 .. note::
 
 	Defining precise permissions on each forum can be overwhelming if you just want to set up single forums with a basic set of permissions. In that case you can use the ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting to define which permissions should be granted to all authenticated users for all forums (please refer to :doc:`settings`).
+
+As previously stated, the forum permissions can be applied either to a specific forum or globally to all forums:
+
+* in order to edit global forum permissions, go to the list of forum instances in the administration panel and click on "Global forum permissions"
+* in order to edit specific forum permissions, select a forum in the list of forum instances in the administration panel. Then click on "Forum permissions"
+
+Note that global permissions have a lower priority than permissions that are associated with a specific forum. For example, a forum will be hidden if it is tied with a permission defining that it should not be accessible for a group of user, even if this forum can be accessed according to the permissions applying to all forums for this group of users.
+
+The admin pages mentioned above ("Global forum permissions" or "Forum permissions" for specific forums) allow you to select the user or group for which you want to set permissions. You have to select a specific user, the anonymous user or a specific group in order to set its permissions.
+
+.. image:: ./images/permissions_edit_page_1.png
+
+Once you have selected a user or group, you access a page where you can set its permissions for the considered forum (or for all the forums in case of global permissions). The form allows you to define the state of each permission for the considered user or group. Each permission can be either **not set**, **granted** or **not granted**.
+
+.. image:: ./images/permissions_edit_page_2.png
+
+Copying forum permissions
+-------------------------
+
+If you are on the permissions page of a specific forum, you can choose to copy the permissions configuration of another forum in order to apply it to the current forum. This allows you to easily apply a set of permission to many forums.
+
+.. image:: ./images/permissions_edit_page_3.png
