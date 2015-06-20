@@ -32,6 +32,7 @@ class PermissionConfig(object):
         {'codename': 'can_download_file', 'name': 'Can download file', 'is_local': True, 'is_global': True},
         # Moderation
         {'codename': 'can_close_topics', 'name': 'Can move topics', 'is_local': True, 'is_global': False},
+        {'codename': 'can_move_topics', 'name': 'Can move topics', 'is_local': True, 'is_global': False},
         {'codename': 'can_edit_posts', 'name': 'Can edit posts', 'is_local': True, 'is_global': False},
         {'codename': 'can_delete_posts', 'name': 'Can delete posts', 'is_local': True, 'is_global': False},
         {'codename': 'can_move_posts', 'name': 'Can move posts', 'is_local': True, 'is_global': False},
