@@ -61,6 +61,9 @@ Built-in permissions
 | ``can_close_topics``          | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can close a forum topic               |
 +-------------------------------+-----------+--------------------------------------------------+
+| ``can_move_topics``           | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can move topics to another forum      |
++-------------------------------+-----------+--------------------------------------------------+
 | ``can_edit_posts``            | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can edit forum posts that he did not  |
 |                               |           | write                                            |
