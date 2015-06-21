@@ -14,9 +14,16 @@
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
             {% get_permission 'can_add_post' request.user topic=topic as user_can_add_post %}
+            {% get_permission 'can_move_topics' request.user forum=topic.forum as user_can_move_topics %}
             {% if user_can_add_post %}
                 <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
+            <div class="dropdown moderation-dropdown">
+                <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {% if user_can_move_topics %}<li><a href="#">{% trans "Move topic" %}</a></li>{% endif %}
+                </ul>
+            </div>
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">
             {% with "pagination-sm" as pagination_size %}
@@ -96,6 +103,12 @@
             {% if user_can_add_post %}
                 <a href="{% url 'forum-conversation:post-create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
             {% endif %}
+            <div class="dropdown moderation-dropdown">
+                <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {% if user_can_move_topics %}<li><a href="#">{% trans "Move topic" %}</a></li>{% endif %}
+                </ul>
+            </div>
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">
             {% with "pagination-sm" as pagination_size %}
