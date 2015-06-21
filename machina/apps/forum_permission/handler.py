@@ -198,6 +198,12 @@ class PermissionHandler(object):
         moderated_forums = self._get_forums_for_user(user, perms)
         return moderated_forums.exists()
 
+    def can_move_topics(self, forum, user):
+        """
+        Given a forum, checks whether the user can move its topics to another forum.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_move_topics')
+
     # Common
     # --
 
