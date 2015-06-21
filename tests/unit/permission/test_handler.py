@@ -375,3 +375,17 @@ class TestPermissionHandler(BaseUnitTestCase):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         self.assertTrue(self.perm_handler.can_access_moderation_panel(u2))
+
+    def test_knows_if_a_user_can_move_topics(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_move_topics', self.u1, self.forum_1)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_move_topics(self.forum_1, self.u1))
+        self.assertFalse(self.perm_handler.can_move_topics(self.forum_1, u2))
+
+    def test_knows_that_a_superuser_can_move_topics(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        self.assertTrue(self.perm_handler.can_move_topics(self.forum_1, u2))
