@@ -65,7 +65,7 @@ def get_permission(context, method, user, **kwargs):
         if poll is None:
             raise_missing('poll')
         return perm_method(poll, user)
-    elif method == 'can_add_topic':
+    elif method in ['can_add_topic', 'can_move_topics']:
         forum = kwargs.get('forum', None)
         if forum is None:
             raise_missing('forum')
