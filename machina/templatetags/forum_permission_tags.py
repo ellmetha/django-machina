@@ -45,6 +45,8 @@ def get_permission(context, method, user, **kwargs):
             'A `{}` keyword argument should be passed to this templatetag '
             'when requesting the `{}` method.'.format(arg, method))
 
+    forum = kwargs.get('forum', None)
+
     if method == 'can_download_files':
         post = kwargs.get('post', None)
         if post is None:
@@ -65,10 +67,7 @@ def get_permission(context, method, user, **kwargs):
         if poll is None:
             raise_missing('poll')
         return perm_method(poll, user)
-    elif method in ['can_add_topic', 'can_close_topics', 'can_move_topics']:
-        forum = kwargs.get('forum', None)
-        if forum is None:
-            raise_missing('forum')
+    elif forum:
         return perm_method(forum, user)
     else:
         return perm_method(user)
