@@ -210,6 +210,15 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_move_topics')
 
+    def can_delete_topics(self, forum, user):
+        """
+        Given a forum, checks whether the user can delete its topics.
+        Note: the ``can_delete_posts`` permission is used here because
+        a user who can delete all the posts of a topic is also able to
+        delete the topic itself.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_delete_posts')
+
     # Common
     # --
 
