@@ -8,7 +8,7 @@
 		<div class="row">
 			<div class="col-md-12 poll-content-wrapper">
 				{% get_permission 'can_vote_in_poll' request.user poll=poll as user_can_vote_in_poll %}
-				{% with can_be_completed=can_vote_in_poll has_been_completed=poll|has_been_completed_by:request.user %}
+				{% with can_be_completed=user_can_vote_in_poll has_been_completed=poll|has_been_completed_by:request.user poll=poll %}
 					<h4 class="question">{{ poll.question }}</h4>
 					<hr />
 					<div class="max-options-indication">

@@ -21,7 +21,7 @@
                 </div>
                 <div class="panel-body">
                     <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
-                        {% include 'partials/form_fields.html' %}
+                        {% include 'partials/form_fields.html' with form=post_form %}
                         {% if attachment_formset %}
                             <div class="form-group">
                                 <div class="row">
@@ -76,9 +76,9 @@
 {% endblock onbodyload %}
 
 {% block extra_css %}
-    {{ form.media.css }}
+    {{ post_form.media.css }}
 {% endblock extra_css %}
 
 {% block extra_js %}
-    {{ form.media.js }}
+    {{ post_form.media.js }}
 {% endblock extra_js %}

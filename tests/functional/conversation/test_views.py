@@ -311,7 +311,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse('poll_option_formset' in response.context_data)
+        self.assertFalse(response.context_data['poll_option_formset'] is not None)
 
     def test_can_handle_poll_previews(self):
         # Setup
@@ -431,7 +431,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse('attachment_formset' in response.context_data)
+        self.assertFalse(response.context_data['attachment_formset'] is not None)
 
     def test_can_handle_attachment_previews(self):
         # Setup
@@ -646,7 +646,7 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse('poll_option_formset' in response.context_data)
+        self.assertFalse(response.context_data['poll_option_formset'] is not None)
 
     def test_can_handle_poll_previews(self):
         # Setup
@@ -763,7 +763,7 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse('attachment_formset' in response.context_data)
+        self.assertFalse(response.context_data['attachment_formset'] is not None)
 
     def test_can_handle_attachment_previews(self):
         # Setup

@@ -7,13 +7,13 @@
 
 	{% csrf_token %}
 
-	{% bootstrap_field form.subject %}
-	{% bootstrap_field form.content %}
-	{% if form.update_reason %}
-		{% bootstrap_field form.update_reason %}
+	{% bootstrap_field post_form.subject %}
+	{% bootstrap_field post_form.content %}
+	{% if post_form.update_reason %}
+		{% bootstrap_field post_form.update_reason %}
 	{% endif %}
-	{% if form.username %}
-		{% bootstrap_field form.username %}
+	{% if post_form.username %}
+		{% bootstrap_field post_form.username %}
 	{% endif %}
 
 	<!-- Sub "forms" tabs -->
@@ -34,7 +34,7 @@
 				<br />
 				<div class="row">
 					<div class="col-md-12">
-						{% bootstrap_field form.topic_type %}
+						{% bootstrap_field post_form.topic_type %}
 					</div>
 				</div>
 			</div>
@@ -45,10 +45,10 @@
 					<br />
 					<div class="row">
 						<div class="col-md-6">
-							{% bootstrap_field form.poll_question %}
-							{% bootstrap_field form.poll_max_options %}
-							{% bootstrap_field form.poll_duration %}
-							{% bootstrap_field form.poll_user_changes %}
+							{% bootstrap_field post_form.poll_question %}
+							{% bootstrap_field post_form.poll_max_options %}
+							{% bootstrap_field post_form.poll_duration %}
+							{% bootstrap_field post_form.poll_user_changes %}
 						</div>
 						<div id="poll_formset" class="col-md-6">
 							{% include "machina/forum_conversation/forum_polls/poll_option_formset.html" %}

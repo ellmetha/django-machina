@@ -6,15 +6,15 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-12 poll-content-wrapper">
-						<h4 class="question">{% trans "Preview:" %}&nbsp;{{ form.poll_question.value }}</h4>
+						<h4 class="question">{% trans "Preview:" %}&nbsp;{{ post_form.poll_question.value }}</h4>
 						<hr />
 						<div class="max-options-indication">
-							{% if form.poll_max_options.value == '1' %}
+							{% if post_form.poll_max_options.value == '1' %}
 								{% blocktrans %}
 									You may select <b>1</b> option
 								{% endblocktrans %}
 							{% else %}
-								{% blocktrans with max_options=form.poll_max_options.value %}
+								{% blocktrans with max_options=post_form.poll_max_options.value %}
 									You may select up to <b>{{ max_options }}</b> options
 								{% endblocktrans %}
 							{% endif %}
@@ -26,7 +26,7 @@
 								{% endif %}
 								<div class="col-md-6">
 	                            	<div class="well well-sm">
-										{% if form.poll_max_options.value == '1' %}
+										{% if post_form.poll_max_options.value == '1' %}
 		                                	<div class="radio">
 		                                    	<label>
 													<input type="radio" value="">

@@ -9,10 +9,10 @@ from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView
 from django.views.generic import DeleteView
+from django.views.generic import FormView
 from django.views.generic import ListView
-from django.views.generic import UpdateView
+from django.views.generic.detail import SingleObjectMixin
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.signals import topic_viewed
@@ -109,29 +109,76 @@ class TopicView(PermissionRequiredMixin, ListView):
             request=request, response=response)
 
 
-class PostEditMixin(object):
+class BasePostFormView(FormView):
+    """
+    A base view for handling post forms.
+    """
+    post_form_class = PostForm
+    attachment_formset_class = AttachmentFormset
+
+    post_pk_url_kwarg = None
+    topic_pk_url_kwarg = None
+    forum_pk_url_kwarg = None
+
     success_message = _('This message has been posted successfully.')
     approval_required_message = _('This message will be validated before appearing on the forum.')
-    attachment_formset_class = AttachmentFormset
     attachment_formset_general_error_message = _('There are some errors in the attachments you submitted.')
 
     def get(self, request, *args, **kwargs):
-        # Invalidates previous attachments
-        attachments_cache.delete(self.get_attachments_cache_key(request))
-        return super(PostEditMixin, self).get(request, *args, **kwargs)
+        self.init_attachment_cache()
+
+        # Initializes the forms
+        post_form_class = self.get_post_form_class()
+        post_form = self.get_post_form(post_form_class)
+        attachment_formset_class = self.get_attachment_formset_class()
+        attachment_formset = self.get_attachment_formset(attachment_formset_class)
+
+        return self.render_to_response(
+            self.get_context_data(
+                post_form=post_form,
+                attachment_formset=attachment_formset))
 
     def post(self, request, *args, **kwargs):
-        attachments_cache_key = self.get_attachments_cache_key(request)
+        self.init_attachment_cache()
+
+        # Stores a boolean indicating if we are considering a preview
+        self.preview = 'preview' in self.request.POST
+
+        # Initializes the forms
+        post_form_class = self.get_post_form_class()
+        post_form = self.get_post_form(post_form_class)
+        attachment_formset_class = self.get_attachment_formset_class()
+        attachment_formset = self.get_attachment_formset(attachment_formset_class)
+
+        self.attachment_preview = self.preview if attachment_formset \
+            and attachment_formset.is_valid() else None
+
+        post_form_valid = post_form.is_valid()
+        if (post_form_valid and attachment_formset is None) or \
+                (post_form_valid and attachment_formset.is_valid()):
+            return self.form_valid(post_form, attachment_formset)
+        else:
+            return self.form_invalid(post_form, attachment_formset)
+
+    def init_attachment_cache(self):
+        """
+        Initializes the attachment cache for the current view.
+        """
+        if self.request.method == 'GET':
+            # Invalidates previous attachments
+            attachments_cache.delete(self.get_attachments_cache_key(self.request))
+            return
+
+        # Try to restore previous uploaded attachments if applicable
+        attachments_cache_key = self.get_attachments_cache_key(self.request)
         restored_attachments_dict = attachments_cache.get(attachments_cache_key)
-
         if restored_attachments_dict:
-            restored_attachments_dict.update(request.FILES)
-            request._files = restored_attachments_dict
+            restored_attachments_dict.update(self.request.FILES)
+            self.request._files = restored_attachments_dict
 
-        if request.FILES:
-            attachments_cache.set(attachments_cache_key, request.FILES)
-
-        return super(PostEditMixin, self).post(request, *args, **kwargs)
+        # Updates the attachment cache if files are available
+        if self.request.FILES:
+            attachments_cache.set(attachments_cache_key, self.request.FILES)
 
     def get_attachments_cache_key(self, request):
         """
@@ -140,36 +187,68 @@ class PostEditMixin(object):
         """
         return 'attachments_{}'.format(request.session.session_key)
 
-    def get_form_kwargs(self):
-        kwargs = super(PostEditMixin, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        kwargs['user_ip'] = get_client_ip(self.request)
-        kwargs['forum'] = self.get_forum()
+    def get_post_form_class(self):
+        return self.post_form_class
+
+    def get_post_form(self, form_class):
+        return form_class(**self.get_post_form_kwargs())
+
+    def get_post_form_kwargs(self):
+        kwargs = {
+            'user': self.request.user,
+            'user_ip': get_client_ip(self.request),
+            'forum': self.get_forum(),
+            'topic': self.get_topic(),
+        }
+
+        post = self.get_post()
+        if post:
+            kwargs.update({'instance': post})
+
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST,
+                'files': self.request.FILES,
+            })
+        return kwargs
+
+    def get_attachment_formset_class(self):
+        return self.attachment_formset_class
+
+    def get_attachment_formset(self, formset_class):
+        if self.request.forum_permission_handler.can_attach_files(
+                self.get_forum(), self.request.user):
+            return formset_class(**self.get_attachment_formset_kwargs())
+
+    def get_attachment_formset_kwargs(self):
+        kwargs = {
+            'prefix': 'attachment',
+        }
+
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST,
+                'files': self.request.FILES,
+            })
+        else:
+            post = self.get_post()
+            attachment_queryset = Attachment.objects.filter(post=post)
+            kwargs.update({
+                'queryset': attachment_queryset,
+            })
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(PostEditMixin, self).get_context_data(**kwargs)
+        context = super(BasePostFormView, self).get_context_data(**kwargs)
 
-        if hasattr(self, 'preview'):
-            context['preview'] = self.preview
-
-        # Insert the considered forum into the context
+        # Insert the considered forum, topic and post into the context
         context['forum'] = self.get_forum()
+        context['topic'] = self.get_topic()
+        context['post'] = self.get_post()
 
-        post = self.object if self.object else None
-        attachment_queryset = Attachment.objects.filter(post=post)
-
-        if self.request.forum_permission_handler.can_attach_files(self.get_forum(), self.request.user):
-            # Add the attachment formset to the context
-            if self.request.method == 'POST':
-                context['attachment_formset'] = self.attachment_formset_class(
-                    self.request.POST, self.request.FILES, prefix='attachment')
-            else:
-                context['attachment_formset'] = self.attachment_formset_class(
-                    queryset=attachment_queryset, prefix='attachment')
-
-            # Handles the preview of the attachments
-            if hasattr(self, 'attachment_preview'):
+        # Handles the preview of the attachments
+        if context['attachment_formset']:
+            if hasattr(self, 'attachment_preview') and self.attachment_preview:
                 context['attachment_preview'] = self.attachment_preview
                 attachments = []
                 for form in context['attachment_formset'].forms:
@@ -180,70 +259,163 @@ class PostEditMixin(object):
 
         return context
 
-    def form_valid(self, form):
-        preview = 'preview' in self.request.POST
-        save_attachment_formset = False
+    def get_forum(self):
+        pk = self.kwargs.get(self.forum_pk_url_kwarg, None)
+        if not pk:
+            return
+        if not hasattr(self, '_forum'):
+            self._forum = get_object_or_404(Forum, pk=pk)
+        return self._forum
 
-        if self.request.forum_permission_handler.can_attach_files(self.get_forum(), self.request.user):
-            attachment_formset = self.attachment_formset_class(
-                self.request.POST, self.request.FILES, prefix='attachment')
-            if attachment_formset.is_valid():
-                save_attachment_formset = not preview
-                self.attachment_preview = preview
-            else:
-                save_attachment_formset = False
-                if len(attachment_formset.errors):
-                    messages.error(self.request, self.attachment_formset_general_error_message)
-                return self.form_invalid(form)
+    def get_topic(self):
+        pk = self.kwargs.get(self.topic_pk_url_kwarg, None)
+        if not pk:
+            return
+        if not hasattr(self, '_topic'):
+            self._topic = get_object_or_404(Topic, pk=pk)
+        return self._topic
 
-        if preview:
-            self.preview = True
-            return self.render_to_response(self.get_context_data(form=form))
+    def get_post(self):
+        pk = self.kwargs.get(self.post_pk_url_kwarg, None)
+        if not pk:
+            return
+        if not hasattr(self, '_forum_post'):
+            self._forum_post = get_object_or_404(Post, pk=pk)
+        return self._forum_post
 
-        valid = super(PostEditMixin, self).form_valid(form)
+    def form_valid(self, post_form, attachment_formset, **kwargs):
+        """
+        Called if all forms are valid. Creates a Post instance along with
+        associated attachments if required and then redirects to a success
+        page.
+        """
+        save_attachment_formset = attachment_formset is not None \
+            and not self.preview
+
+        if self.preview:
+            return self.render_to_response(
+                self.get_context_data(
+                    preview=True,
+                    post_form=post_form,
+                    attachment_formset=attachment_formset, **kwargs))
+
+        # This is not a preview ; the object is going to be saved
+        self.forum_post = post_form.save()
 
         if save_attachment_formset:
-            attachment_formset.post = self.object
+            attachment_formset.post = self.forum_post
             attachment_formset.save()
 
         messages.success(self.request, self.success_message)
-        if not self.object.approved:
+        if not self.forum_post.approved:
             messages.warning(self.request, self.approval_required_message)
 
-        return valid
+        return HttpResponseRedirect(self.get_success_url())
 
-    def get_controlled_object(self):
+    def form_invalid(self, post_form, attachment_formset, **kwargs):
         """
-        Returns the forum associated with the topic being created.
+        Called if one of the forms is invalid. Re-renders the context data with
+        the data-filled forms and errors.
         """
-        return self.get_forum()
+        if attachment_formset and not attachment_formset.is_valid() \
+                and len(attachment_formset.errors):
+            messages.error(
+                self.request, self.attachment_formset_general_error_message)
 
-    def get_forum(self):
-        if not hasattr(self, 'forum'):
-            self.forum = get_object_or_404(Forum, pk=self.kwargs['forum_pk'])
-        return self.forum
+        return self.render_to_response(
+            self.get_context_data(
+                post_form=post_form,
+                attachment_formset=attachment_formset, **kwargs))
 
 
-class TopicEditMixin(PostEditMixin):
+class BaseTopicFormView(BasePostFormView):
+    """
+    A base view for handling topic forms.
+    """
+    # A specific form class is used here in order to fill the Topic-related
+    # date in addition to the ones related to Post instances.
+    post_form_class = TopicForm
+
     poll_option_formset_class = TopicPollOptionFormset
 
+    def get(self, request, *args, **kwargs):
+        self.init_attachment_cache()
+
+        # Initializes the forms
+        post_form_class = self.get_post_form_class()
+        post_form = self.get_post_form(post_form_class)
+        attachment_formset_class = self.get_attachment_formset_class()
+        attachment_formset = self.get_attachment_formset(attachment_formset_class)
+        poll_option_formset_class = self.get_poll_option_formset_class()
+        poll_option_formset = self.get_poll_option_formset(poll_option_formset_class)
+
+        return self.render_to_response(
+            self.get_context_data(
+                post_form=post_form,
+                attachment_formset=attachment_formset,
+                poll_option_formset=poll_option_formset))
+
+    def post(self, request, *args, **kwargs):
+        self.init_attachment_cache()
+
+        # Stores a boolean indicating if we are considering a preview
+        self.preview = 'preview' in self.request.POST
+
+        # Initializes the forms
+        post_form_class = self.get_post_form_class()
+        post_form = self.get_post_form(post_form_class)
+        attachment_formset_class = self.get_attachment_formset_class()
+        attachment_formset = self.get_attachment_formset(attachment_formset_class)
+        poll_option_formset_class = self.get_poll_option_formset_class()
+        poll_option_formset = self.get_poll_option_formset(poll_option_formset_class)
+
+        post_form_valid = post_form.is_valid()
+        attachment_formset_valid = attachment_formset.is_valid() if attachment_formset \
+            else None
+        poll_option_formset_valid = poll_option_formset.is_valid() if poll_option_formset \
+            and len(post_form.cleaned_data['poll_question']) else None
+
+        self.attachment_preview = self.preview if attachment_formset_valid else None
+        self.poll_preview = self.preview if poll_option_formset_valid else None
+
+        if post_form_valid and attachment_formset_valid is not False \
+                and poll_option_formset_valid is not False:
+            return self.form_valid(post_form, attachment_formset, poll_option_formset)
+        else:
+            return self.form_invalid(post_form, attachment_formset, poll_option_formset)
+
+    def get_poll_option_formset_class(self):
+        return self.poll_option_formset_class
+
+    def get_poll_option_formset(self, formset_class):
+        if self.request.forum_permission_handler.can_create_polls(
+                self.get_forum(), self.request.user):
+            return formset_class(**self.get_poll_option_formset_kwargs())
+
+    def get_poll_option_formset_kwargs(self):
+        kwargs = {
+            'prefix': 'poll',
+        }
+
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST,
+                'files': self.request.FILES,
+            })
+        else:
+            topic = self.get_topic()
+            poll_option_queryset = TopicPollOption.objects.filter(poll__topic=topic)
+            kwargs.update({
+                'queryset': poll_option_queryset,
+            })
+        return kwargs
+
     def get_context_data(self, **kwargs):
-        context = super(TopicEditMixin, self).get_context_data(**kwargs)
+        context = super(BaseTopicFormView, self).get_context_data(**kwargs)
 
-        topic = self.object.topic if self.object is not None else None
-        poll_option_queryset = TopicPollOption.objects.filter(poll__topic=topic)
-
-        if self.request.forum_permission_handler.can_create_polls(self.get_forum(), self.request.user):
-            # Add the poll option formset to the context
-            if self.request.method == 'POST':
-                context['poll_option_formset'] = self.poll_option_formset_class(
-                    data=self.request.POST, topic=topic, prefix='poll')
-            else:
-                context['poll_option_formset'] = self.poll_option_formset_class(
-                    queryset=poll_option_queryset, topic=topic, prefix='poll')
-
-            # Handles the preview of the poll
-            if hasattr(self, 'poll_preview'):
+        # Handles the preview of the poll
+        if context['poll_option_formset']:
+            if hasattr(self, 'poll_preview') and self.poll_preview:
                 context['poll_preview'] = self.poll_preview
                 context['poll_options_previews'] = filter(
                     lambda f: f['text'].value() and not f['DELETE'].value(),
@@ -251,92 +423,72 @@ class TopicEditMixin(PostEditMixin):
 
         return context
 
-    def form_valid(self, form):
-        preview = 'preview' in self.request.POST
-        save_poll_option_formset = False
+    def form_valid(self, post_form, attachment_formset, poll_option_formset):
+        save_poll_option_formset = poll_option_formset is not None \
+            and not self.preview
 
-        if self.request.forum_permission_handler.can_create_polls(self.get_forum(), self.request.user):
-            if len(form.cleaned_data['poll_question']):
-                poll_option_formset = self.poll_option_formset_class(
-                    data=self.request.POST, prefix='poll')
-                if poll_option_formset.is_valid():
-                    save_poll_option_formset = not preview
-                    self.poll_preview = preview
-                else:
-                    save_poll_option_formset = False
-                    errors = list()
-                    for error in poll_option_formset.errors:
-                        if error:
-                            errors += [v[0] for _, v in error.items()]
-                    if not len(errors) and poll_option_formset._non_form_errors:
-                        form._errors[NON_FIELD_ERRORS] = poll_option_formset._non_form_errors
-                        messages.error(self.request, form._errors[NON_FIELD_ERRORS])
-                    return self.form_invalid(form)
-
-        valid = super(TopicEditMixin, self).form_valid(form)
+        valid = super(BaseTopicFormView, self).form_valid(
+            post_form, attachment_formset, poll_option_formset=poll_option_formset)
 
         if save_poll_option_formset:
-            poll_option_formset.topic = self.object.topic
+            poll_option_formset.topic = self.forum_post.topic
             poll_option_formset.save(
-                poll_question=form.cleaned_data.pop('poll_question', None),
-                poll_max_options=form.cleaned_data.pop('poll_max_options', None),
-                poll_duration=form.cleaned_data.pop('poll_duration', None),
-                poll_user_changes=form.cleaned_data.pop('poll_user_changes', None),
+                poll_question=post_form.cleaned_data.pop('poll_question', None),
+                poll_max_options=post_form.cleaned_data.pop('poll_max_options', None),
+                poll_duration=post_form.cleaned_data.pop('poll_duration', None),
+                poll_user_changes=post_form.cleaned_data.pop('poll_user_changes', None),
             )
 
         return valid
 
+    def form_invalid(self, post_form, attachment_formset, poll_option_formset):
+        if poll_option_formset and not poll_option_formset.is_valid():
+            errors = list()
+            for error in poll_option_formset.errors:
+                if error:
+                    errors += [v[0] for _, v in error.items()]
+            if not len(errors) and poll_option_formset._non_form_errors:
+                post_form._errors[NON_FIELD_ERRORS] = poll_option_formset._non_form_errors
+                messages.error(self.request, post_form._errors[NON_FIELD_ERRORS])
 
-class TopicCreateView(PermissionRequiredMixin, TopicEditMixin, CreateView):
+        return super(BaseTopicFormView, self).form_invalid(
+            post_form, attachment_formset, poll_option_formset=poll_option_formset)
+
+
+class PostFormView(SingleObjectMixin, BasePostFormView):
+    post_pk_url_kwarg = 'pk'
+    topic_pk_url_kwarg = 'topic_pk'
+    forum_pk_url_kwarg = 'forum_pk'
+
+
+class TopicFormView(SingleObjectMixin, BaseTopicFormView):
+    topic_pk_url_kwarg = 'pk'
+    forum_pk_url_kwarg = 'forum_pk'
+
+
+class TopicCreateView(PermissionRequiredMixin, TopicFormView):
+    model = Topic
     template_name = 'forum_conversation/topic_create.html'
     permission_required = ['can_start_new_topics', ]
-    form_class = TopicForm
 
-    poll_option_formset_class = TopicPollOptionFormset
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        return super(TopicCreateView, self).get(request, *args, **kwargs)
 
-    def get_form_kwargs(self):
-        kwargs = super(TopicCreateView, self).get_form_kwargs()
-        kwargs['forum'] = self.get_forum()
-        return kwargs
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        return super(TopicCreateView, self).post(request, *args, **kwargs)
 
     def get_success_url(self):
-        if not self.object.approved:
+        if not self.forum_post.approved:
             return reverse('forum:forum', kwargs={
-                'slug': self.object.topic.forum.slug,
-                'pk': self.object.topic.forum.pk})
+                'slug': self.forum_post.topic.forum.slug,
+                'pk': self.forum_post.topic.forum.pk})
         return reverse('forum-conversation:topic', kwargs={
-            'forum_slug': self.object.topic.forum.slug,
-            'forum_pk': self.object.topic.forum.pk,
-            'slug': self.object.topic.slug,
-            'pk': self.object.topic.pk})
-
-
-class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
-    success_message = _('This message has been edited successfully.')
-    template_name = 'forum_conversation/topic_update.html'
-    form_class = TopicForm
-    model = Topic
-
-    def get_object(self, queryset=None):
-        topic = super(TopicUpdateView, self).get_object(queryset)
-        return topic.first_post
-
-    def get_form_kwargs(self):
-        kwargs = super(TopicUpdateView, self).get_form_kwargs()
-        kwargs['forum'] = self.get_forum()
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super(TopicUpdateView, self).get_context_data(**kwargs)
-        context['topic'] = self.object.topic
-        return context
-
-    def get_success_url(self):
-        return reverse('forum-conversation:topic', kwargs={
-            'forum_slug': self.object.topic.forum.slug,
-            'forum_pk': self.object.topic.forum.pk,
-            'slug': self.object.topic.slug,
-            'pk': self.object.topic.pk})
+            'forum_slug': self.forum_post.topic.forum.slug,
+            'forum_pk': self.forum_post.topic.forum.pk,
+            'slug': self.forum_post.topic.slug,
+            'pk': self.forum_post.topic.pk})
 
     # Permissions checks
 
@@ -344,28 +496,63 @@ class TopicUpdateView(PermissionRequiredMixin, TopicEditMixin, UpdateView):
         """
         Returns the post that will be edited.
         """
-        return self.get_object()
+        return self.get_forum()
+
+
+class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
+    model = Topic
+    template_name = 'forum_conversation/topic_update.html'
+    success_message = _('This message has been edited successfully.')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(TopicUpdateView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(TopicUpdateView, self).post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.get_topic()
+
+    def get_post(self):
+        return self.get_topic().first_post
+
+    def get_success_url(self):
+        return reverse('forum-conversation:topic', kwargs={
+            'forum_slug': self.forum_post.topic.forum.slug,
+            'forum_pk': self.forum_post.topic.forum.pk,
+            'slug': self.forum_post.topic.slug,
+            'pk': self.forum_post.topic.pk})
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_topic().first_post
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_edit_post(obj, user)
 
 
-class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
+class PostCreateView(PermissionRequiredMixin, PostFormView):
+    model = Post
     template_name = 'forum_conversation/post_create.html'
     permission_required = ['can_reply_to_topics', ]
-    form_class = PostForm
 
-    def get_form_kwargs(self):
-        kwargs = super(PostCreateView, self).get_form_kwargs()
-        kwargs['topic'] = self.get_topic()
-        return kwargs
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        return super(PostCreateView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        return super(PostCreateView, self).post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         topic = self.get_topic()
-
-        # Insert the considered topic into the context
-        context['topic'] = topic
 
         # Add the previous posts to the context
         previous_posts = topic.posts.order_by('-created')
@@ -377,49 +564,11 @@ class PostCreateView(PermissionRequiredMixin, PostEditMixin, CreateView):
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
             reverse('forum-conversation:topic', kwargs={
-                'forum_slug': self.object.topic.forum.slug,
-                'forum_pk': self.object.topic.forum.pk,
-                'slug': self.object.topic.slug,
-                'pk': self.object.topic.pk}),
-            self.object.pk)
-
-    def get_topic(self):
-        if not hasattr(self, 'topic'):
-            self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
-        return self.topic
-
-
-class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
-    success_message = _('This message has been edited successfully.')
-    template_name = 'forum_conversation/post_update.html'
-    form_class = PostForm
-    model = Post
-
-    def get_form_kwargs(self):
-        kwargs = super(PostUpdateView, self).get_form_kwargs()
-        kwargs['topic'] = self.get_topic()
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super(PostUpdateView, self).get_context_data(**kwargs)
-        # Insert the considered topic into the context
-        context['topic'] = self.get_topic()
-
-        return context
-
-    def get_success_url(self):
-        return '{0}?post={1}#{1}'.format(
-            reverse('forum-conversation:topic', kwargs={
-                'forum_slug': self.object.topic.forum.slug,
-                'forum_pk': self.object.topic.forum.pk,
-                'slug': self.object.topic.slug,
-                'pk': self.object.topic.pk}),
-            self.object.pk)
-
-    def get_topic(self):
-        if not hasattr(self, 'topic'):
-            self.topic = get_object_or_404(Topic, pk=self.kwargs['topic_pk'])
-        return self.topic
+                'forum_slug': self.forum_post.topic.forum.slug,
+                'forum_pk': self.forum_post.topic.forum.pk,
+                'slug': self.forum_post.topic.slug,
+                'pk': self.forum_post.topic.pk}),
+            self.forum_post.pk)
 
     # Permissions checks
 
@@ -427,7 +576,41 @@ class PostUpdateView(PermissionRequiredMixin, PostEditMixin, UpdateView):
         """
         Returns the post that will be edited.
         """
-        return self.get_object()
+        return self.get_forum()
+
+
+class PostUpdateView(PermissionRequiredMixin, PostFormView):
+    model = Post
+    success_message = _('This message has been edited successfully.')
+    template_name = 'forum_conversation/post_update.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(PostUpdateView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(PostUpdateView, self).post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.get_post()
+
+    def get_success_url(self):
+        return '{0}?post={1}#{1}'.format(
+            reverse('forum-conversation:topic', kwargs={
+                'forum_slug': self.forum_post.topic.forum.slug,
+                'forum_pk': self.forum_post.topic.forum.pk,
+                'slug': self.forum_post.topic.slug,
+                'pk': self.forum_post.topic.pk}),
+            self.forum_post.pk)
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_post()
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_edit_post(obj, user)
