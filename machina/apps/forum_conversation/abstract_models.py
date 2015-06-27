@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -13,7 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
 # Local application / specific library imports
-from machina.core.compat import AUTH_USER_MODEL
 from machina.core.compat import slugify
 from machina.core.loading import get_class
 from machina.core.utils import refresh
@@ -42,7 +42,7 @@ class AbstractTopic(DatedModel):
     Represents a forum topic.
     """
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Topic forum'), related_name='topics')
-    poster = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Poster'), blank=True, null=True)
+    poster = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Poster'), blank=True, null=True)
 
     # The subject of the thread should correspond to the one associated with the first post
     subject = models.CharField(max_length=255, verbose_name=_('Subject'))
@@ -70,7 +70,7 @@ class AbstractTopic(DatedModel):
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Many users can subscribe to this topic
-    subscribers = models.ManyToManyField(AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True)
+    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True)
 
     objects = models.Manager()
     approved_objects = ApprovedManager()
@@ -194,7 +194,7 @@ class AbstractPost(DatedModel):
     Represents a forum post. A forum post is always linked to a topic.
     """
     topic = models.ForeignKey('forum_conversation.Topic', verbose_name=_('Topic'), related_name='posts')
-    poster = models.ForeignKey(AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'), blank=True, null=True)
+    poster = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'), blank=True, null=True)
     poster_ip = models.GenericIPAddressField(verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0')
 
     # Each post can have its own subject. The subject of the thread corresponds to the
@@ -214,7 +214,7 @@ class AbstractPost(DatedModel):
     update_reason = models.CharField(max_length=255, verbose_name=_('Update reason'), blank=True, null=True)
 
     # Tracking data
-    updated_by = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Lastly updated by'), editable=False, blank=True, null=True)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Lastly updated by'), editable=False, blank=True, null=True)
     updates_count = models.PositiveIntegerField(verbose_name=_('Updates count'), editable=False, blank=True, default=0)
 
     objects = models.Manager()

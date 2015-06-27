@@ -4,14 +4,14 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.core.compat import AUTH_USER_MODEL
 
 
 @python_2_unicode_compatible
@@ -74,7 +74,7 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     """
     Represents a per-user forum object permission.
     """
-    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
     anonymous_user = models.BooleanField(verbose_name=_('Target anonymous user'), default=False)
 
     class Meta:

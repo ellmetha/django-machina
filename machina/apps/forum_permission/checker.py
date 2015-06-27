@@ -4,11 +4,11 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
-from machina.core.compat import get_user_model
 from machina.core.db.models import get_model
 
 ForumPermission = get_model('forum_permission', 'ForumPermission')

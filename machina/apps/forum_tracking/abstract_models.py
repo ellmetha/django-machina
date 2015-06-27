@@ -4,12 +4,12 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
-from machina.core.compat import AUTH_USER_MODEL
 from machina.core.loading import get_class
 
 ForumReadTrackManager = get_class('forum_tracking.managers', 'ForumReadTrackManager')
@@ -20,7 +20,7 @@ class AbstractForumReadTrack(models.Model):
     """
     Represents a track which records which forums have been read by a given user.
     """
-    user = models.ForeignKey(AUTH_USER_MODEL, related_name='forum_tracks', verbose_name=_('User'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='forum_tracks', verbose_name=_('User'))
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), related_name='tracks')
     mark_time = models.DateTimeField(auto_now=True)
 
@@ -42,7 +42,7 @@ class AbstractTopicReadTrack(models.Model):
     """
     Represents a track which records which topics have been read by a given user.
     """
-    user = models.ForeignKey(AUTH_USER_MODEL, related_name='topic_tracks', verbose_name=_('User'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='topic_tracks', verbose_name=_('User'))
     topic = models.ForeignKey('forum_conversation.Topic', verbose_name=_('Topic'), related_name='tracks')
     mark_time = models.DateTimeField(auto_now=True)
 

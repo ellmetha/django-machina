@@ -10,6 +10,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.forms.forms import NON_FIELD_ERRORS
@@ -22,7 +23,6 @@ from mptt.forms import TreeNodeChoiceField
 from mptt.exceptions import InvalidMove
 
 # Local application / specific library imports
-from machina.core.compat import get_user_model
 from machina.core.db.models import get_model
 
 Forum = get_model('forum', 'Forum')

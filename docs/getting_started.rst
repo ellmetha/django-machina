@@ -5,7 +5,7 @@ Requirements
 ------------
 
 * `Python`_ 2.7, 3.3 or 3.4
-* `Django`_ 1.4.x, 1.5.x, 1.6.x, 1.7.x or 1.8.x
+* `Django`_ 1.5.x, 1.6.x, 1.7.x or 1.8.x
 * `Pillow`_ 2.2. or higher
 * `Django-model-utils`_ 2.0. or higher
 * `Django-mptt`_ 0.7. or higher

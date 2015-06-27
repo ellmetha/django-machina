@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import unicode_literals
 
 # Third party imports
+from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
@@ -12,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forum_polls import validators
-from machina.core.compat import AUTH_USER_MODEL
 from machina.models.abstract_models import DatedModel
 
 
@@ -89,7 +89,7 @@ class AbstractTopicPollVote(models.Model):
     Represents a poll vote.
     """
     poll_option = models.ForeignKey('forum_polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
-    voter = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes')
+    voter = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes')
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Vote\'s date'))
 
     class Meta:
