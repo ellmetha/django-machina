@@ -43,6 +43,7 @@
 			<div class="tab-pane" id="poll">
 				<div class="form-group">
 					<br />
+					{% if poll_option_formset.non_form_errors %}<div class="alert alert-danger">{{ poll_option_formset.non_form_errors|striptags }}</div>{% endif %}
 					<div class="row">
 						<div class="col-md-6">
 							{% bootstrap_field post_form.poll_question %}

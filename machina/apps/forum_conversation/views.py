@@ -5,7 +5,6 @@
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
@@ -347,6 +346,8 @@ class BaseTopicFormView(BasePostFormView):
 
     poll_option_formset_class = TopicPollOptionFormset
 
+    poll_option_formset_general_error_message = _('There are some errors in the poll options you submitted.')
+
     def get(self, request, *args, **kwargs):
         self.init_attachment_cache()
 
@@ -451,14 +452,9 @@ class BaseTopicFormView(BasePostFormView):
         return valid
 
     def form_invalid(self, post_form, attachment_formset, poll_option_formset):
-        if poll_option_formset and not poll_option_formset.is_valid():
-            errors = list()
-            for error in poll_option_formset.errors:
-                if error:
-                    errors += [v[0] for _, v in error.items()]
-            if not len(errors) and poll_option_formset._non_form_errors:
-                post_form._errors[NON_FIELD_ERRORS] = poll_option_formset._non_form_errors
-                messages.error(self.request, post_form._errors[NON_FIELD_ERRORS])
+        if poll_option_formset and not poll_option_formset.is_valid() \
+                and len(post_form.cleaned_data['poll_question']):
+            messages.error(self.request, self.poll_option_formset_general_error_message)
 
         return super(BaseTopicFormView, self).form_invalid(
             post_form, attachment_formset, poll_option_formset=poll_option_formset)
