@@ -493,7 +493,7 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertTrue(response_1.context_data['attachment_preview'])
         self.assertTrue(response_2.context_data['attachment_preview'])
         self.assertEqual(len(response_2.context_data['attachment_file_previews']), 1)
-        self.assertEqual(response_2.context_data['attachment_file_previews'][0][1].name, 'file1.txt')
+        self.assertEqual(response_2.context_data['attachment_file_previews'][0][1], 'file1.txt')
 
     def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
