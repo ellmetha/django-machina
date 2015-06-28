@@ -97,7 +97,7 @@ As previously stated, the forum permissions can be applied either to a specific 
 * in order to edit global forum permissions, go to the list of forum instances in the administration panel and click on "Global forum permissions"
 * in order to edit specific forum permissions, select a forum in the list of forum instances in the administration panel. Then click on "Forum permissions"
 
-Note that global permissions have a lower priority than permissions that are associated with a specific forum. For example, a forum will be hidden if it is tied with a permission defining that it should not be accessible for a group of user, even if this forum can be accessed according to the permissions applying to all forums for this group of users.
+Note that global permissions have a lower priority than permissions that are associated with a specific forum. For example, a forum will be hidden if it is tied with a permission defining that it should not be accessible for a group of user, even if this forum can be accessed according to the global permissions applying to all forums for this group of users.
 
 The admin pages mentioned above ("Global forum permissions" or "Forum permissions" for specific forums) allow you to select the user or group for which you want to set permissions. You have to select a specific user, the anonymous user or a specific group in order to set its permissions.
 
