@@ -409,11 +409,11 @@ class TestTopicCreateView(BaseClientTestCase):
         response_2 = self.client.post(correct_url, post_data_2, follow=True)
         # Check
         messages_1 = list(response_1.context['messages'])
-        self.assertEqual(len(messages_1), 1)
-        self.assertEqual(messages_1[0].level, MSG.ERROR)
+        self.assertTrue(len(messages_1) >= 1)
+        self.assertTrue(all(m.level == MSG.ERROR for m in messages_1))
         messages_2 = list(response_2.context['messages'])
-        self.assertEqual(len(messages_2), 1)
-        self.assertEqual(messages_2[0].level, MSG.ERROR)
+        self.assertTrue(len(messages_2) >= 1)
+        self.assertTrue(all(m.level == MSG.ERROR for m in messages_2))
 
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup
