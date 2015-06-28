@@ -3,24 +3,14 @@
 
 {% if attachment_preview %}
     <div class="row attachments">
-        {% if attachment_file_previews or post.attachments.all %}
+        {% if attachment_file_previews %}
             <div class="col-md-12">
                 <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
             </div>
         {% endif %}
-        {% if post %}
-            {% for attachment in post.attachments.all %}
-                <div class="col-md-12 attachment">
-                    <a href="#"><i class="fa fa-file"></i>&nbsp;{{ attachment.filename }}</a>
-                    {% if attachment.comment %}
-                        <p class="text-muted"><em>{{ attachment.comment }}</em></p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        {% endif %}
-        {% for attachment_form, file in attachment_file_previews %}
+        {% for attachment_form, filename in attachment_file_previews %}
             <div class="col-md-12 attachment">
-                <a href="#"><i class="fa fa-file"></i>&nbsp;{{ file.name }}</a>
+                <a href="#"><i class="fa fa-file"></i>&nbsp;{{ filename }}</a>
                 {% if attachment_form.comment.value %}
                     <p class="text-muted"><em>{{ attachment_form.comment.value }}</em></p>
                 {% endif %}

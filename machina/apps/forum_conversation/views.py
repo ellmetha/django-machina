@@ -251,17 +251,26 @@ class BasePostFormView(FormView):
             if hasattr(self, 'attachment_preview') and self.attachment_preview:
                 context['attachment_preview'] = self.attachment_preview
                 attachments = []
+                # Computes the list of the attachment file names that should be attached
+                # to the forum post being created or updated
                 for form in context['attachment_formset'].forms:
-                    if form['DELETE'].value() or not form['file'].html_name in self.request._files:
+                    if form['DELETE'].value() or (not form['file'].html_name in self.request._files
+                                                  and not form.instance.pk):
                         continue
-                    attachments.append((form, self.request._files[form['file'].html_name]))
+                    attachments.append(
+                        (
+                            form,
+                            self.request._files[form['file'].html_name].name if not form.instance
+                            else form.instance.filename
+                        ))
                 context['attachment_file_previews'] = attachments
 
         return context
 
     def get_forum(self):
         pk = self.kwargs.get(self.forum_pk_url_kwarg, None)
-        if not pk:
+        if not pk:  # pragma: no cover
+            # This should never happen
             return
         if not hasattr(self, '_forum'):
             self._forum = get_object_or_404(Forum, pk=pk)
