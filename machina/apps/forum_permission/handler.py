@@ -157,7 +157,8 @@ class PermissionHandler(object):
                 return False
 
         # Is this user allowed to vote in polls in the current forum ?
-        can_vote = self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls')
+        can_vote = self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls') \
+            and not poll.topic.is_locked
 
         # Retrieve the user votes for the considered poll
         user_votes = user.poll_votes.filter(poll_option__poll=poll)

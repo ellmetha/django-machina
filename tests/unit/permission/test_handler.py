@@ -54,6 +54,8 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Set up some topics
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_3_topic = create_topic(forum=self.forum_3, poster=self.u1)
+        self.forum_3_topic_2 = create_topic(
+            forum=self.forum_3, poster=self.u1, status=Topic.STATUS_CHOICES.topic_locked)
 
         # Set up some posts
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
@@ -274,10 +276,12 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
         poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        poll_3 = TopicPollFactory.create(topic=self.forum_3_topic_2)
         assign_perm('can_vote_in_polls', self.u1, self.forum_1)
         # Run & check
         self.assertTrue(self.perm_handler.can_vote_in_poll(poll_1, self.u1))
         self.assertFalse(self.perm_handler.can_vote_in_poll(poll_2, self.u1))
+        self.assertFalse(self.perm_handler.can_vote_in_poll(poll_3, self.u1))
 
     def test_knows_that_a_superuser_can_vote_in_polls(self):
         # Setup
