@@ -25,7 +25,7 @@
                     <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         {% if user_can_close_topics and not topic.is_locked %}<li><a href="{% url 'forum-moderation:topic-close' slug=topic.slug pk=topic.pk %}">{% trans "Close topic" %}</a></li>{% endif %}
-                        {% if user_can_delete_topics %}<li><a href="#">{% trans "Delete topic" %}</a></li>{% endif %}
+                        {% if user_can_delete_topics %}<li><a href="{% url 'forum-moderation:topic-delete' slug=topic.slug pk=topic.pk %}">{% trans "Delete topic" %}</a></li>{% endif %}
                         {% if user_can_move_topics %}<li><a href="#">{% trans "Move topic" %}</a></li>{% endif %}
                     </ul>
                 </div>
@@ -113,8 +113,8 @@
                 <div class="dropdown moderation-dropdown">
                     <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        {% if user_can_close_topics %}<li><a href="#">{% trans "Close topic" %}</a></li>{% endif %}
-                        {% if user_can_delete_topics %}<li><a href="#">{% trans "Delete topic" %}</a></li>{% endif %}
+                        {% if user_can_close_topics and not topic.is_locked %}<li><a href="{% url 'forum-moderation:topic-close' slug=topic.slug pk=topic.pk %}">{% trans "Close topic" %}</a></li>{% endif %}
+                        {% if user_can_delete_topics %}<li><a href="{% url 'forum-moderation:topic-delete' slug=topic.slug pk=topic.pk %}">{% trans "Delete topic" %}</a></li>{% endif %}
                         {% if user_can_move_topics %}<li><a href="#">{% trans "Move topic" %}</a></li>{% endif %}
                     </ul>
                 </div>
