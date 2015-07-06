@@ -11,6 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.views.generic.edit import ModelFormMixin
+from django.views.generic.edit import ProcessFormView
 
 # Local application / specific library imports
 from machina.core.db.models import get_model
@@ -120,3 +122,14 @@ class TopicDeleteView(PermissionRequiredMixin, DeleteView):
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_delete_topics(obj, user)
+
+
+class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
+                    ModelFormMixin, ProcessFormView):
+    """
+    A view providing the ability to move forum topics.
+    """
+    template_name = 'forum_moderation/topic_move.html'
+    context_object_name = 'topic'
+    success_message = _('This topic has been moved successfully.')
+    model = Topic
