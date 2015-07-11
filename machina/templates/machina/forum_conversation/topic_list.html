@@ -7,58 +7,62 @@
         <div class="col-xs-12">
             <div class="panel panel-default topiclist">
                 <div class="panel-heading">
-                    <table class="table">
-                        <tr>
-                            <td class="topic-name-col" colspan="2">
-                                <h3 class="panel-title"><i class="fa fa-comment"></i> {% trans topic_list_title %}</h3>
-                            </td>
-                            <td class="topic-count-col">{% trans "Replies" %}</td>
-                            <td class="topic-count-col">{% trans "Views" %}</td>
-                            <td class="topic-last-post-col">{% trans "Last post" %}</td>
-                        </tr>
-                    </table>
+                    <div class="row panel-row">
+                        <div class="col-md-8 col-sm-9 col-xs-12 topic-name-col">
+                            <h3 class="panel-title"><i class="fa fa-comment"></i> {% trans topic_list_title %}</h3>
+                        </div>
+                        <div class="col-md-1 topic-count-col hidden-sm hidden-xs">{% trans "Replies" %}</div>
+                        <div class="col-md-1 topic-count-col hidden-sm hidden-xs">{% trans "Views" %}</div>
+                        <div class="col-md-2 col-sm-3 hidden-xs topic-last-post-col">{% trans "Last post" %}</div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     {% if not force_all_unread %}
                         {% get_unread_topics topics request.user as unread_topics %}
                     {% endif %}
-                    <table class="table">
-                        {% for topic in topics %}
-                            <tr>
-                                <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}"><i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i>{% if topic.is_locked %}<i class="fa fa-times locked-indicator"></i>{% endif %}</td>
-                                <td class="topic-name">
-                                    <a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
-                                    <div>
-                                        <div class="topic-inline-pagination pull-right">
-                                            {% topic_pages_inline_list topic %}
-                                        </div>
-                                        <div class="topic-created">
-                                            {% trans "By:" %} {% if topic.poster %}<a href="#">{{ topic.poster.username }}</a>{% else %}{{ topic.first_post.username }}{% endif %} {% trans "on" %} {{ topic.created }}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="topic-count">{{ topic.posts_count|add:"-1" }}</td>
-                                <td class="topic-count">{{ topic.views_count }}</td>
-                                <td class="topic-last-post">
-                                    {% with last_post=topic.last_post %}
-                                        {% trans "By:" %} {% if last_post.poster %}<a href="#">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
-                                        <br />
-                                        {{ last_post.created }}
-                                    {% endwith %}
-                                </td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td>
-                                    {% if empty_message %}
-                                        {{ empty_message }}
-                                    {% else %}
-                                        {% trans "There are no topics in this forum." %}
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                    {% for topic in topics %}
+                        <div class="row panel-row">
+                            <div class="col-md-8 col-sm-9 col-xs-11 topic-name">
+                                <div class="topic-inline-pagination pull-right hidden-xs">
+                                    {% topic_pages_inline_list topic %}
+                                </div>
+                                <table class="topic-data-table">
+                                    <tr>
+                                        <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}">
+                                            <i class="fa {% if topic.is_sticky %}fa-lightbulb-o{% elif topic.is_announce %}fa-info{% else %}fa-dot-circle-o{% endif %} fa-2x"></i>{% if topic.is_locked %}<i class="fa fa-times locked-indicator"></i>{% endif %}
+                                        </td>
+                                        <td class="topic-name">
+                                            <a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
+                                            <div>
+                                                <div class="topic-created">
+                                                    {% trans "By:" %} {% if topic.poster %}<a href="#">{{ topic.poster.username }}</a>{% else %}{{ topic.first_post.username }}{% endif %} {% trans "on" %} {{ topic.created }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-1 topic-count hidden-sm hidden-xs">{{ topic.posts_count|add:"-1" }}</div>
+                            <div class="col-md-1 topic-count hidden-sm hidden-xs">{{ topic.views_count }}</div>
+                            <div class="col-md-2 col-sm-3 hidden-xs topic-last-post">
+                                {% with last_post=topic.last_post %}
+                                    {% trans "By:" %} {% if last_post.poster %}<a href="#">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                    <br />
+                                    {{ last_post.created }}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="row panel-row">
+                            <div class="col-md-12">
+                                {% if empty_message %}
+                                    {{ empty_message }}
+                                {% else %}
+                                    {% trans "There are no topics in this forum." %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -39,70 +39,48 @@
         padding-right: 0;
         padding-bottom: 8px;
 
-        table.table{
-            margin: 0 auto;
+        .panel-row{
+            margin: 0;
+        }
 
-            td{
-                padding-top: 0px;
-                padding-bottom: 0px;
-                border: none;
-            }
+        .topic-count-col{
+            text-align: center;
+        }
 
-            td.topic-name-col{width: 55%;}
-            td.topic-count-col{width: 10%;}
-            td.topic-last-post-col{width: 15%;}
-
-            td.topic-name-col{
-                padding-left: 14px;
-            }
-
-            .topic-count-col{
-                text-align: center;
-            }
-
-            .topic-count-col, .topic-last-post-col{
-                font-size: 13px;
-                text-transform: uppercase;
-                color: @gray;
-            }
+        .topic-count-col, .topic-last-post-col{
+            font-size: 13px;
+            text-transform: uppercase;
+            color: @gray;
         }
     }
 
     .panel-body{
         padding: 0;
 
-        table.table{
-            margin: 0 auto;
-
-            td{
-                padding-top: 2px;
-                padding-bottom: 2px;
-                vertical-align: middle !important;
-            }
-
-            td.topic-icon{
-                position: relative;
-                width: 5%;
-
-                .locked-indicator{
-                    position: absolute;
-                    right: 10px;
-                    bottom: 8px;
-                    color: @red;
-                }
-            }
-            td.topic-name{width: 50%;}
-            td.topic-count{width: 10%;}
-            td.topic-last-post{width: 15%;}
+        .panel-row{
+            margin: 0;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid @gray-lighter;
         }
 
         .topic-icon{
-            padding-left: 20px;
+            position: relative;
+            padding-left: 5px;
+            padding-right: 20px;
+            width: 50px;
             text-align: center;
             color: lighten(@blue-dark, 20%);
 
             &.unread{
                 color: lighten(@red, 20%);
+            }
+
+            .locked-indicator{
+                position: absolute;
+                right: 10px;
+                bottom: 8px;
+                color: @red;
             }
         }
 
@@ -110,6 +88,10 @@
             .topic-created, .topic-inline-pagination{
                 font-size: 11px;
                 color: #666;
+            }
+
+            .topic-inline-pagination{
+                padding-top: 6px;
             }
         }
 
