@@ -15,6 +15,7 @@ from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.test import TestCase
 from django.utils.six import BytesIO
+import pytest
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -25,7 +26,8 @@ from tests.models import RESIZED_IMAGE_WIDTH
 from tests.models import TestableModel
 
 
-class TestMarkupTextField(TestCase):
+@pytest.mark.django_db
+class TestMarkupTextField(object):
     # The following tests involve the django-markdown
     # app. This one can be used with Machina in order to
     # provide a support for the Markdown syntax. But instead
@@ -44,9 +46,9 @@ class TestMarkupTextField(TestCase):
         # Run
         test.save()
         # Check
-        self.assertIsNone(test.content)
+        assert test.content is None
         rendered = hasattr(test.content, 'rendered')
-        self.assertFalse(rendered)
+        assert not rendered
 
     def test_correctly_saves_its_data(self):
         # Run & check
@@ -54,7 +56,7 @@ class TestMarkupTextField(TestCase):
             test = TestableModel()
             test.content = markup_text
             test.save()
-            self.assertEqual(test.content.rendered, expected_html_text)
+            assert test.content.rendered == expected_html_text
 
     def test_provides_access_to_the_raw_text_and_to_the_rendered_text(self):
         # Setup
@@ -70,19 +72,19 @@ class TestMarkupTextField(TestCase):
         test.content = markup_bk
         test.save()
         # Check
-        self.assertEqual(field.value_to_string(test), markup_content)
-        self.assertEqual(test.content.rendered, '<p><strong>hello world!</strong></p>')
-        self.assertEqual(len(test.content), markup_content_len)
-        with self.assertRaises(AttributeError):
+        assert field.value_to_string(test) == markup_content
+        assert test.content.rendered == '<p><strong>hello world!</strong></p>'
+        assert len(test.content) == markup_content_len
+        with pytest.raises(AttributeError):
             print(TestableModel.content.rendered)
 
     def test_should_not_allow_non_accessible_markup_languages(self):
         # Run & check
         machina_settings.MACHINA_MARKUP_LANGUAGE = (('it.will.fail'), {})
-        with self.assertRaises(ImproperlyConfigured):
+        with pytest.raises(ImproperlyConfigured):
             reload(fields)
         del machina_settings.MACHINA_MARKUP_LANGUAGE
-        with self.assertRaises(ImproperlyConfigured):
+        with pytest.raises(ImproperlyConfigured):
             reload(fields)
 
     def test_should_use_a_default_text_input_widget_with_formfields(self):
@@ -94,7 +96,7 @@ class TestMarkupTextField(TestCase):
         # Run
         form = TestableForm()
         # Check
-        self.assertTrue(isinstance(form.fields['content'].widget, forms.Textarea))
+        assert isinstance(form.fields['content'].widget, forms.Textarea)
 
     def test_can_use_a_custom_form_widget(self):
         # Setup
@@ -107,14 +109,14 @@ class TestMarkupTextField(TestCase):
         # Run
         form = TestableForm()
         # Check
-        self.assertTrue(isinstance(form.fields['content'].widget, forms.HiddenInput))
+        assert isinstance(form.fields['content'].widget, forms.HiddenInput)
         machina_settings.MACHINA_MARKUP_WIDGET = None
 
     def test_should_not_allow_non_accessible_custom_form_widgets(self):
         # Setup
         machina_settings.MACHINA_MARKUP_WIDGET = 'it.will.fail'
         # Run & check
-        with self.assertRaises(ImproperlyConfigured):
+        with pytest.raises(ImproperlyConfigured):
             class TestableForm(forms.ModelForm):
                 class Meta:
                     model = TestableModel
@@ -169,7 +171,7 @@ class TestExtendedImageField(TestCase):
         test.save()
         # Check
         image = Image.open(BytesIO(test.resized_image.read()))
-        self.assertEqual(image.size, (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT))
+        assert image.size == (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT)
 
     def test_should_not_accept_images_with_incorrect_sizes_or_dimensions(self):
         # Setup
@@ -179,5 +181,5 @@ class TestExtendedImageField(TestCase):
         # Run & check
         for img in invalid_images:
             field.save_form_data(test, self.images_dict[img])
-            with self.assertRaises(ValidationError):
+            with pytest.raises(ValidationError):
                 test.full_clean()
