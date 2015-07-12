@@ -5,8 +5,9 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.forms.widgets import Select
-from django.utils.encoding import force_unicode
-from django.utils.html import escape, conditional_escape
+from django.utils.encoding import force_text
+from django.utils.html import conditional_escape
+from django.utils.html import escape
 
 # Local application / specific library imports
 
@@ -19,7 +20,7 @@ class SelectWithDisabled(Select):
     of the form: {'label': 'option label', 'disabled': True}
     """
     def render_option(self, selected_choices, option_value, option_label):
-        option_value = force_unicode(option_value)
+        option_value = force_text(option_value)
         if (option_value in selected_choices):
             selected_html = ' selected="selected"'
         else:
@@ -31,4 +32,4 @@ class SelectWithDisabled(Select):
             option_label = option_label['label']
         return '<option value="%s"%s%s>%s</option>' % (
             escape(option_value), selected_html, disabled_html,
-            conditional_escape(force_unicode(option_label)))
+            conditional_escape(force_text(option_label)))
