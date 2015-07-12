@@ -1,0 +1,26 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load forum_conversation_tags %}
+
+{{% block sub-title %}{% trans "Move topic" %}{% endblock sub-title %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default topic-close">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">{% trans "Move topic" %}</h3>
+	            </div>
+	            <div class="panel-body">
+				    <form action="" method="post">{% csrf_token %}
+				    	{% bootstrap_field form.forum %}
+				    	{% bootstrap_field form.lock_topic %}
+				        <input type="submit" value="{% trans "Move" %}" class="btn btn-warning" />
+				        <a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
+				    </form>
+	            </div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

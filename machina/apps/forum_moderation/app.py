@@ -18,11 +18,13 @@ class ModerationApp(Application):
 
     topic_close_view = get_class('forum_moderation.views', 'TopicCloseView')
     topic_delete_view = get_class('forum_moderation.views', 'TopicDeleteView')
+    topic_move_view = get_class('forum_moderation.views', 'TopicMoveView')
 
     def get_urls(self):
         urls = [
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/close/$'), self.topic_close_view.as_view(), name='topic-close'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'), self.topic_delete_view.as_view(), name='topic-delete'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/move/$'), self.topic_move_view.as_view(), name='topic-move'),
         ]
         return patterns('', *urls)
 

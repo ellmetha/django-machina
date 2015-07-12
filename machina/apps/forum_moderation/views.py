@@ -18,7 +18,10 @@ from django.views.generic.edit import ProcessFormView
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
+
+TopicMoveForm = get_class('forum_moderation.forms', 'TopicMoveForm')
 
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
@@ -130,6 +133,50 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
     A view providing the ability to move forum topics.
     """
     template_name = 'forum_moderation/topic_move.html'
+    form_class = TopicMoveForm
     context_object_name = 'topic'
     success_message = _('This topic has been moved successfully.')
     model = Topic
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(TopicMoveView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(TopicMoveView, self).post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(TopicMoveView, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user,
+        })
+        return kwargs
+
+    def form_valid(self, form):
+        # Move the topic
+        topic = self.object
+        old_forum = topic.forum
+        new_forum = form.cleaned_data['forum']
+        topic.forum = new_forum
+
+        # Eventually lock the topic
+        if form.cleaned_data['lock_topic']:
+            topic.status = Topic.STATUS_CHOICES.topic_locked
+
+        topic.save()
+        old_forum.save()
+
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.get_success_url())
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object().forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_move_topics(obj, user)
