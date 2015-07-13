@@ -63,6 +63,17 @@ class PermissionHandler(object):
             return None
         return posts[0]
 
+    def get_movable_forums(self, user):
+        """
+        Returns a list of forum whose topics can be moved by the the given user. The latest
+        can move topics from these forums and to these forums.
+        """
+        perms = [
+            'can_move_topics',
+        ]
+        movable_forums = self._get_forums_for_user(user, perms)
+        return movable_forums
+
     # Verification methods
     # --
 

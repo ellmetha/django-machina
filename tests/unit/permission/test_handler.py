@@ -421,3 +421,16 @@ class TestPermissionHandler(BaseUnitTestCase):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         self.assertTrue(self.perm_handler.can_delete_topics(self.forum_1, u2))
+
+    def test_knows_the_forums_whose_topics_can_be_moved(self):
+        # Setup
+        assign_perm('can_move_topics', self.u1, self.forum_1)
+        u2 = UserFactory.create(is_superuser=True)
+        u3 = UserFactory.create()
+        # Run & check
+        self.assertQuerysetEqual(
+            self.perm_handler.get_movable_forums(self.u1), [self.forum_1, ])
+        self.assertQuerysetEqual(
+            self.perm_handler.get_movable_forums(u2), Forum.objects.all())
+        self.assertQuerysetEqual(
+            self.perm_handler.get_movable_forums(u3), [])
