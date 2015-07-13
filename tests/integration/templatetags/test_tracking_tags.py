@@ -32,7 +32,7 @@ class BaseTrackingTagsTestCase(TestCase):
         self.loadstatement = '{% load url from future %}{% load forum_tracking_tags %}'
         self.request_factory = RequestFactory()
 
-        # Tracking handler
+        # Tracking handler
         self.tracks_handler = TrackingHandler()
 
         self.g1 = GroupFactory.create()
@@ -48,13 +48,13 @@ class BaseTrackingTagsTestCase(TestCase):
         self.forum_1 = create_forum(parent=self.top_level_cat)
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
-        # Set up some topics and posts
+        # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.u1)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.g1, self.top_level_cat)
         assign_perm('can_read_forum', self.g1, self.top_level_cat)
         assign_perm('can_see_forum', self.g1, self.forum_1)

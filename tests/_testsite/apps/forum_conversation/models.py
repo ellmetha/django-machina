@@ -12,4 +12,4 @@ class Topic(AbstractTopic):
     dummy = models.CharField(max_length=128, null=True, blank=True)
 
 
-from machina.apps.forum_conversation.models import *
+from machina.apps.forum_conversation.models import *  # noqa

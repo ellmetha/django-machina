@@ -39,7 +39,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         #             sub_sub_forum
         #     top_level_forum_3
         #         forum_3
-        #             forum_3_child_1
+        #             forum_3_child_1
         #                 forum_3_child_1_1
         #                     deep_forum
         #     last_forum
@@ -64,7 +64,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
 
         self.last_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic_1 = create_topic(forum=self.forum_1, poster=self.user)
         self.post_1 = PostFactory.create(topic=self.topic_1, poster=self.user)
         self.topic_2 = create_topic(forum=self.forum_2, poster=self.user)
@@ -72,7 +72,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         self.topic_3 = create_topic(forum=self.forum_2_child_1, poster=self.user)
         self.post_3 = PostFactory.create(topic=self.topic_3, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_cat)
         assign_perm('can_read_forum', self.user, self.forum_1)
         assign_perm('can_read_forum', self.user, self.forum_2)

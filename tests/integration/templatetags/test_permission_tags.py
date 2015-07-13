@@ -51,7 +51,7 @@ class TestGetPermissionTag(TestCase):
         self.forum_1 = create_forum(parent=self.top_level_cat)
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
-        # Set up some topics and posts
+        # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.u2)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
@@ -63,7 +63,8 @@ class TestGetPermissionTag(TestCase):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_access_moderation_panel\' request.user as user_can_access_moderation_panel %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_access_moderation_panel\' request.user as user_can_access_moderation_panel %}'
                 '{% if user_can_access_moderation_panel %}CAN_ACCESS{% else %}CANNOT_ACCESS{% endif %}')
             c = Context({'request': request})
             rendered = t.render(c)
@@ -83,7 +84,8 @@ class TestGetPermissionTag(TestCase):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_download_files\' request.user post=post as user_can_download_files %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_download_files\' request.user post=post as user_can_download_files %}'
                 '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -115,7 +117,8 @@ class TestGetPermissionTag(TestCase):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_edit_post\' request.user post=post as user_can_edit_post %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_edit_post\' request.user post=post as user_can_edit_post %}'
                 '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -140,13 +143,14 @@ class TestGetPermissionTag(TestCase):
         self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_EDIT')
         self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_EDIT')
 
-    def test_can_tell_if_the_user_can_edit_a_post(self):
+    def test_can_tell_if_the_user_can_delete_a_post(self):
         # Setup
         def get_rendered(post, user):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_delete_post\' request.user post=post as user_can_delete_post %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_delete_post\' request.user post=post as user_can_delete_post %}'
                 '{% if user_can_delete_post %}CAN_DELETE{% else %}CANNOT_DELETE{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -177,7 +181,8 @@ class TestGetPermissionTag(TestCase):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_add_post\' request.user topic=topic as user_can_add_post %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_add_post\' request.user topic=topic as user_can_add_post %}'
                 '{% if user_can_add_post %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}')
             c = Context({'topic': topic, 'request': request})
             rendered = t.render(c)
@@ -208,7 +213,8 @@ class TestGetPermissionTag(TestCase):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_vote_in_poll\' request.user poll=poll as user_can_vote_in_poll %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_vote_in_poll\' request.user poll=poll as user_can_vote_in_poll %}'
                 '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}')
             c = Context({'poll': poll, 'request': request})
             rendered = t.render(c)
@@ -238,12 +244,13 @@ class TestGetPermissionTag(TestCase):
         self.assertEqual(get_rendered(self.poll_2, self.superuser), 'CAN_VOTE')
 
     def test_can_tell_if_a_user_can_create_topics(self):
-        # Setup
+        # Setup
         def get_rendered(forum, user):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_permission \'can_add_topic\' request.user forum=forum as user_can_add_topic %}'
+            t = Template(
+                self.loadstatement + '{% get_permission \'can_add_topic\' request.user forum=forum as user_can_add_topic %}'
                 '{% if user_can_add_topic %}CAN_START_TOPICS{% else %}CANNOT_START_TOPICS{% endif %}')
             c = Context({'forum': forum, 'request': request})
             rendered = t.render(c)
@@ -256,7 +263,6 @@ class TestGetPermissionTag(TestCase):
         self.assertEqual(get_rendered(self.forum_1, self.u1), 'CAN_START_TOPICS')
         self.assertEqual(get_rendered(self.forum_2, self.u2), 'CANNOT_START_TOPICS')
 
-
     def test_raises_if_the_required_arguments_are_not_passed(self):
         # Setup
         request = self.request_factory.get('/')
@@ -266,19 +272,19 @@ class TestGetPermissionTag(TestCase):
 
         templates = [
             '{% get_permission \'can_download_files\' request.user as user_can_download_files %}'
-                '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}',
+            '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}',
 
             '{% get_permission \'can_edit_post\' request.user as user_can_edit_post %}'
-                '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
+            '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
 
             '{% get_permission \'can_edit_post\' request.user as user_can_edit_post %}'
-                '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
+            '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
 
             '{% get_permission \'can_add_post\' request.user as user_can_add_post %}'
-                '{% if user_can_add_post %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}',
+            '{% if user_can_add_post %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}',
 
             '{% get_permission \'can_vote_in_poll\' request.user as user_can_vote_in_poll %}'
-                '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}',
+            '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}',
         ]
 
         # Run & check

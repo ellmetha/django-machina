@@ -16,7 +16,7 @@ class TestRenderedTag(TestCase):
         self.request_factory = RequestFactory()
 
     def test_can_render_a_formatted_text_on_the_fly(self):
-        # Setup
+        # Setup
         def get_rendered(value):
             request = self.request_factory.get('/')
             t = Template(self.loadstatement + '{{ value|rendered|safe }}')

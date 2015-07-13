@@ -28,7 +28,7 @@ class TestUserTopicsView(BaseClientTestCase):
         self.u1.groups.add(self.g1)
         self.user.groups.add(self.g1)
 
-        # Permission handler
+        # Permission handler
         self.perm_handler = PermissionHandler()
 
         self.top_level_cat_1 = create_category_forum()
@@ -51,24 +51,23 @@ class TestUserTopicsView(BaseClientTestCase):
         self.topic_4 = create_topic(forum=self.forum_2, poster=self.user)
         PostFactory.create(topic=self.topic_4, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
         assign_perm('can_read_forum', self.g1, self.forum_1)
         assign_perm('can_read_forum', self.g1, self.forum_2)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-member:user-topics')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
-
 
     def test_insert_only_topics_where_the_considered_user_participated_in_the_context(self):
         # Setup
         correct_url = reverse('forum-member:user-topics')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)
@@ -81,7 +80,7 @@ class TestUserTopicsView(BaseClientTestCase):
         topic_5 = create_topic(forum=self.forum_2, poster=self.user)
         PostFactory.create(topic=topic_5, poster=self.user, approved=False)
         correct_url = reverse('forum-member:user-topics')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)

@@ -30,24 +30,24 @@ class TestForumView(BaseClientTestCase):
         self.top_level_forum = create_forum()
         self.top_level_link = create_link_forum(link_redirects=True)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_read_forum', self.user, self.top_level_link)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = self.top_level_forum.get_absolute_url()
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_triggers_a_viewed_signal(self):
-        # Setup
+        # Setup
         forum_url, link_url = (self.top_level_forum.get_absolute_url(),
                                self.top_level_link.get_absolute_url())
 
-        # Run & check
+        # Run & check
         for url in [forum_url, link_url]:
             with mock_signal_receiver(forum_viewed) as receiver:
                 self.client.get(url)
@@ -56,7 +56,7 @@ class TestForumView(BaseClientTestCase):
     def test_redirects_to_the_link_of_a_link_forum(self):
         # Setup
         correct_url = self.top_level_link.get_absolute_url()
-        # Run
+        # Run
         response = self.client.get(correct_url)
         # Check
         self.assertIsRedirect(response)
@@ -66,7 +66,7 @@ class TestForumView(BaseClientTestCase):
         # Setup
         correct_url = self.top_level_link.get_absolute_url()
         initial_redirects_count = self.top_level_link.link_redirects_count
-        # Run
+        # Run
         self.client.get(correct_url)
         # Check
         top_level_link = self.top_level_link.__class__._default_manager.get(pk=self.top_level_link.pk)

@@ -32,10 +32,10 @@ class TestAttachmentCache(TestCase):
         f2.charset = 'iso-8859-1'
         files = {'f1': f1, 'f2': f2}
         real_cache = cache.get_backend()
-        # Run
+        # Run
         cache.set('mykey', files)
         states = real_cache.get('mykey')
-        # Check
+        # Check
         self.assertEqual(states['f1']['name'], 'file1.txt')
         self.assertEqual(states['f1']['content'], force_bytes('file_content_1'))
         self.assertIsNone(states['f1']['charset'])
@@ -54,7 +54,7 @@ class TestAttachmentCache(TestCase):
         original_f2.charset = 'iso-8859-1'
         original_files = {'f1': original_f1, 'f2': original_f2}
         cache.set('mykey', original_files)
-        # Run
+        # Run
         files = cache.get('mykey')
         self.assertIn('f1', files)
         self.assertIn('f2', files)

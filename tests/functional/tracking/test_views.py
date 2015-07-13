@@ -39,10 +39,10 @@ class TestMarkForumsReadView(BaseClientTestCase):
         self.u2.groups.add(self.g1)
         self.user.groups.add(self.g1)
 
-        # Permission handler
+        # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Tracking handler
+        # Tracking handler
         self.tracks_handler = TrackingHandler()
 
         self.top_level_cat_1 = create_category_forum()
@@ -62,7 +62,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
         assign_perm('can_read_forum', self.g1, self.top_level_cat_2)
         assign_perm('can_read_forum', self.g1, self.forum_1)
@@ -71,24 +71,24 @@ class TestMarkForumsReadView(BaseClientTestCase):
         assign_perm('can_read_forum', self.g1, self.forum_4)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url_1 = reverse('forum-tracking:mark-all-forums-read')
         correct_url_2 = reverse('forum-tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
-        # Run
+        # Run
         response_1 = self.client.get(correct_url_1, follow=True)
         response_2 = self.client.get(correct_url_2, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response_1)
         self.assertIsOk(response_2)
 
     def test_can_mark_all_readable_forums_read(self):
-        # Setup
+        # Setup
         new_topic = create_topic(forum=self.forum_2, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum-tracking:mark-all-forums-read')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
         self.assertQuerysetEqual(self.tracks_handler.get_unread_forums(
             Forum.objects.all(), self.user), [])
@@ -100,9 +100,9 @@ class TestMarkForumsReadView(BaseClientTestCase):
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum-tracking:mark-subforums-read', kwargs={'pk': self.top_level_cat_1.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
         self.assertQuerysetEqual(self.tracks_handler.get_unread_forums(
             self.top_level_cat_1.get_descendants(include_self=True), self.user), [])
@@ -122,10 +122,10 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         self.u2.groups.add(self.g1)
         self.user.groups.add(self.g1)
 
-        # Permission handler
+        # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Tracking handler
+        # Tracking handler
         self.tracks_handler = TrackingHandler()
 
         self.top_level_cat_1 = create_category_forum()
@@ -145,7 +145,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
         assign_perm('can_read_forum', self.g1, self.top_level_cat_2)
         assign_perm('can_read_forum', self.g1, self.forum_1)
@@ -154,11 +154,11 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         assign_perm('can_read_forum', self.g1, self.forum_4)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_can_mark_forum_topics_read(self):
@@ -166,7 +166,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_4.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)
@@ -175,12 +175,12 @@ class TestMarkTopicsReadView(BaseClientTestCase):
             [])
 
     def test_do_not_perform_anything_if_the_user_has_not_the_required_permission(self):
-        # Setup
+        # Setup
         self.user.groups.clear()
         correct_url = reverse('forum-tracking:mark-topics-read', kwargs={'pk': self.forum_2.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsForbidden(response)
 
 
@@ -196,10 +196,10 @@ class TestUnreadTopicsView(BaseClientTestCase):
         self.u2.groups.add(self.g1)
         self.user.groups.add(self.g1)
 
-        # Permission handler
+        # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Tracking handler
+        # Tracking handler
         self.tracks_handler = TrackingHandler()
 
         self.top_level_cat_1 = create_category_forum()
@@ -219,7 +219,7 @@ class TestUnreadTopicsView(BaseClientTestCase):
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
         assign_perm('can_read_forum', self.g1, self.top_level_cat_2)
         assign_perm('can_read_forum', self.g1, self.forum_1)
@@ -228,11 +228,11 @@ class TestUnreadTopicsView(BaseClientTestCase):
         assign_perm('can_read_forum', self.g1, self.forum_4)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-tracking:unread-topics')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_insert_unred_topics_in_context(self):
@@ -240,7 +240,7 @@ class TestUnreadTopicsView(BaseClientTestCase):
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum-tracking:unread-topics')
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)

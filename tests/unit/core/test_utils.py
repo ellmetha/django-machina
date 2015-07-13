@@ -22,7 +22,7 @@ class TestCoreUtils(TestCase):
         # Setup
         forum_name = self.forum.name
         new_forum_name = faker.text(max_nb_chars=200)
-        # Run
+        # Run
         Forum.objects.all().update(name=new_forum_name)
         # Check
         self.assertEqual(self.forum.name, forum_name)
@@ -30,11 +30,11 @@ class TestCoreUtils(TestCase):
         self.assertEqual(forum.name, new_forum_name)
 
     def test_can_get_an_object_or_none(self):
-        # Setup
+        # Setup
         forum_pk = self.forum.pk
-        # Run
+        # Run
         forum = get_object_or_none(Forum, pk=forum_pk)
         unknown_forum = get_object_or_none(Forum, pk=10000)
-        # Check
+        # Check
         self.assertEqual(self.forum.pk, forum.pk)
         self.assertIsNone(unknown_forum)

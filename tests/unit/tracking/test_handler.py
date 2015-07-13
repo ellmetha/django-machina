@@ -38,10 +38,10 @@ class TestTrackingHandler(BaseUnitTestCase):
         self.u1.groups.add(self.g1)
         self.u2.groups.add(self.g1)
 
-        # Permission handler
+        # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Tracking handler
+        # Tracking handler
         self.tracks_handler = TrackingHandler()
 
         self.top_level_cat_1 = create_category_forum()
@@ -61,7 +61,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Initially u2 read the previously created topic
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
         assign_perm('can_read_forum', self.g1, self.top_level_cat_2)
         assign_perm('can_read_forum', self.g1, self.forum_1)
@@ -69,32 +69,32 @@ class TestTrackingHandler(BaseUnitTestCase):
         assign_perm('can_read_forum', self.g1, self.forum_2_child_2)
 
     def test_says_that_all_forums_are_read_for_users_that_are_not_authenticated(self):
-        # Setup
+        # Setup
         u3 = get_user(Client())
-        # Run
+        # Run
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), u3)
-        # Check
+        # Check
         self.assertFalse(len(unread_forums))
 
     def test_cannot_say_that_a_forum_is_unread_if_it_is_not_visible_by_the_user(self):
-        # Setup
+        # Setup
         new_topic = create_topic(forum=self.forum_3, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        # Run
+        # Run
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
-        # Check
+        # Check
         self.assertNotIn(self.forum_3, unread_forums)
 
     def test_says_that_all_topics_are_read_for_users_that_are_not_authenticated(self):
-        # Setup
+        # Setup
         u3 = get_user(Client())
-        # Run
+        # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), u3)
-        # Check
+        # Check
         self.assertFalse(len(unread_topics))
 
     def test_returns_an_empty_list_of_topics_if_the_forum_has_no_topics(self):
-        # Run & check
+        # Run & check
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.u2)
         self.assertFalse(len(unread_topics))
 
@@ -102,35 +102,35 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Setup
         new_topic = create_topic(forum=self.forum_2, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        # Run
+        # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
-        # Check
+        # Check
         self.assertEqual(unread_topics, [new_topic, ])
 
     def test_says_that_a_topic_with_a_last_post_date_greater_than_the_forum_mark_time_is_unread(self):
         # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
-        # Run
+        # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
-        # Check
+        # Check
         self.assertEqual(unread_topics, [self.topic, ])
 
     def test_says_that_a_topic_with_a_last_post_date_greater_than_its_mark_time_is_unread(self):
-        # Setup
+        # Setup
         TopicReadTrackFactory.create(topic=self.topic, user=self.u2)
         PostFactory.create(topic=self.topic, poster=self.u1)
-        # Run
+        # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
-        # Check
+        # Check
         self.assertEqual(unread_topics, [self.topic, ])
 
     def test_says_that_a_topic_is_unread_if_the_related_forum_is_not_marked(self):
         # Setup
         new_topic = create_topic(forum=self.forum_3, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        # Run
+        # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_3.topics.all(), self.u2)
-        # Check
+        # Check
         self.assertEqual(unread_topics, [new_topic, ])
 
     def test_cannot_say_that_a_topic_is_unread_if_it_has_been_marked(self):

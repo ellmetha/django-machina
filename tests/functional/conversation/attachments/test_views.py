@@ -40,7 +40,7 @@ class TestAttachmentView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -50,10 +50,10 @@ class TestAttachmentView(BaseClientTestCase):
         self.attachment = AttachmentFactory.create(
             post=self.post, file=self.attachment_file)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_download_file', self.user, self.top_level_forum)
 
@@ -67,32 +67,32 @@ class TestAttachmentView(BaseClientTestCase):
                 pass
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = self.attachment.get_absolute_url()
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_embed_the_correct_http_headers_in_the_response(self):
-        # Setup
+        # Setup
         correct_url = self.attachment.get_absolute_url()
         filename = os.path.basename(self.attachment.file.name)
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
         self.assertEqual(response['Content-Type'], 'image/jpeg')
         self.assertEqual(response['Content-Disposition'], 'attachment; filename={}'.format(filename))
 
     def test_is_able_to_handle_unknown_file_content_types(self):
-        # Setup
+        # Setup
         f = open(settings.MEDIA_ROOT + '/attachment.kyz', 'rb')
         attachment_file = File(f)
         attachment = AttachmentFactory.create(
             post=self.post, file=attachment_file)
         correct_url = attachment.get_absolute_url()
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         self.assertIsOk(response)

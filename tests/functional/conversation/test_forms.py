@@ -36,22 +36,22 @@ class TestPostForm(TestCase):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Create a basic user
+        # Create a basic user
         self.user = UserFactory.create()
 
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_start_new_topics', self.user, self.top_level_forum)
 
     def test_can_valid_a_basic_post(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -64,11 +64,11 @@ class TestPostForm(TestCase):
             forum=self.top_level_forum,
             topic=self.topic)
         valid = form.is_valid()
-        # Check
+        # Check
         self.assertTrue(valid)
 
     def test_can_affect_a_default_subject_to_the_post(self):
-        # Setup
+        # Setup
         form_data = {
             'content': '[b]{}[/b]'.format(faker.text()),
         }
@@ -79,14 +79,14 @@ class TestPostForm(TestCase):
             user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
-        # Check
+        # Check
         default_subject = '{} {}'.format(
             machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
             self.topic.subject)
         self.assertEqual(form.fields['subject'].initial, default_subject)
 
     def test_increments_the_post_updates_counter_in_case_of_post_edition(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -107,21 +107,21 @@ class TestPostForm(TestCase):
         self.assertEqual(self.post.updates_count, initial_updates_count + 1)
 
     def test_set_the_topic_as_unapproved_if_the_user_has_not_the_required_permission(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
         }
         # Run
         form_kwargs = {
-            'data' : form_data,
+            'data': form_data,
             'user': self.user,
             'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
             'topic': self.topic,
         }
         form = PostForm(**form_kwargs)
-        # Check
+        # Check
         self.assertTrue(form.is_valid())
         post = form.save()
         self.assertFalse(post.approved)
@@ -132,7 +132,7 @@ class TestPostForm(TestCase):
         self.assertTrue(post.approved)
 
     def test_adds_the_username_field_if_the_user_is_anonymous(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -152,7 +152,7 @@ class TestPostForm(TestCase):
         self.assertEqual(post.username, 'testname')
 
     def test_adds_the_update_reason_field_if_the_post_is_updated(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -178,22 +178,22 @@ class TestTopicForm(TestCase):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Create a basic user
+        # Create a basic user
         self.user = UserFactory.create()
 
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_start_new_topics', self.user, self.top_level_forum)
 
     def test_can_valid_a_basic_topic(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -206,11 +206,11 @@ class TestTopicForm(TestCase):
             user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
-        # Check
+        # Check
         self.assertTrue(valid)
 
     def test_can_valid_a_basic_sticky_post(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -224,11 +224,11 @@ class TestTopicForm(TestCase):
             user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
-        # Check
+        # Check
         self.assertTrue(valid)
 
     def test_can_valid_a_basic_announce(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
@@ -242,7 +242,7 @@ class TestTopicForm(TestCase):
             user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
-        # Check
+        # Check
         self.assertTrue(valid)
 
     def test_creates_a_post_topic_if_no_topic_type_is_provided(self):
@@ -258,7 +258,7 @@ class TestTopicForm(TestCase):
             user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
-        # Check
+        # Check
         self.assertTrue(valid)
         post = form.save()
         self.assertEqual(post.topic.type, Topic.TYPE_CHOICES.topic_post)
@@ -276,7 +276,7 @@ class TestTopicForm(TestCase):
             'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
-        #  Run & check
+        # Run & check
         form = TopicForm(**form_kwargs)
         self.assertFalse(form.is_valid())
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
@@ -300,7 +300,7 @@ class TestTopicForm(TestCase):
             'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
-        #  Run & check
+        # Run & check
         form = TopicForm(**form_kwargs)
         self.assertFalse(form.is_valid())
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
@@ -312,7 +312,7 @@ class TestTopicForm(TestCase):
         self.assertIn(Topic.TYPE_CHOICES.topic_announce, choices)
 
     def test_can_be_used_to_update_the_topic_type(self):
-        # Setup
+        # Setup
         form_data = {
             'subject': 'Re: {}'.format(faker.text(max_nb_chars=200)),
             'content': '[b]{}[/b]'.format(faker.text()),

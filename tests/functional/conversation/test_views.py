@@ -3,7 +3,7 @@
 # Standard library imports
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
-from django.contrib.messages import constants as MSG
+from django.contrib.messages import constants as MSG  # noqa
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
@@ -51,28 +51,28 @@ class TestTopicView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = self.topic.get_absolute_url()
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_triggers_a_viewed_signal(self):
-        # Setup
+        # Setup
         correct_url = self.topic.get_absolute_url()
-        # Run & check
+        # Run & check
         with mock_signal_receiver(topic_viewed) as receiver:
             self.client.get(correct_url, follow=True)
             self.assertEqual(receiver.call_count, 1)
@@ -81,7 +81,7 @@ class TestTopicView(BaseClientTestCase):
         # Setup
         correct_url = self.topic.get_absolute_url()
         initial_views_count = self.topic.views_count
-        # Run
+        # Run
         self.client.get(correct_url)
         # Check
         topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
@@ -91,7 +91,7 @@ class TestTopicView(BaseClientTestCase):
         # Setup
         correct_url = self.topic.get_absolute_url()
         initial_updated_date = self.topic.updated
-        # Run
+        # Run
         self.client.get(correct_url)
         # Check
         topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
@@ -105,7 +105,7 @@ class TestTopicView(BaseClientTestCase):
         TopicReadTrackFactory.create(topic=self.topic, user=self.user)
         PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
-        # Run
+        # Run
         self.client.get(correct_url)
         # Check
         forum_tracks = ForumReadTrack.objects.all()
@@ -121,7 +121,7 @@ class TestTopicView(BaseClientTestCase):
         PostFactory.create(topic=new_topic, poster=self.user)
         PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
-        # Run
+        # Run
         self.client.get(correct_url)
         # Check
         topic_tracks = TopicReadTrack.objects.all()
@@ -138,14 +138,14 @@ class TestTopicView(BaseClientTestCase):
         correct_url = topic_alt.get_absolute_url()
         # Run
         self.client.get(correct_url)
-        # Check
+        # Check
         forum_tracks = ForumReadTrack.objects.filter(forum=top_level_forum_alt)
         topic_tracks = TopicReadTrack.objects.all()
         self.assertEqual(forum_tracks.count(), 1)
         self.assertEqual(topic_tracks.count(), 0)
 
     def test_cannot_create_any_track_if_the_user_is_not_authenticated(self):
-        # Setup
+        # Setup
         ForumReadTrack.objects.all().delete()
         assign_perm('can_read_forum', AnonymousUser(), self.top_level_forum)
         self.client.logout()
@@ -159,12 +159,12 @@ class TestTopicView(BaseClientTestCase):
         self.assertFalse(len(topic_tracks))
 
     def test_can_paginate_based_on_a_post_id(self):
-        # Setup
+        # Setup
         for _ in range(0, 40):
             # 15 posts per page
             PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
-        # Run & check
+        # Run & check
         first_post_pk = self.topic.first_post.pk
         response = self.client.get(correct_url, {'post': first_post_pk}, follow=True)
         self.assertEqual(response.context_data['page_obj'].number, 1)
@@ -176,12 +176,12 @@ class TestTopicView(BaseClientTestCase):
         self.assertEqual(response.context_data['page_obj'].number, 3)
 
     def test_properly_handles_a_bad_post_id_in_parameters(self):
-        # Setup
+        # Setup
         for _ in range(0, 40):
             # 15 posts per page
             PostFactory.create(topic=self.topic, poster=self.user)
         correct_url = self.topic.get_absolute_url()
-        # Run & check
+        # Run & check
         bad_post_pk = self.topic.first_post.pk + 50000
         response = self.client.get(correct_url, {'post': bad_post_pk}, follow=True)
         self.assertEqual(response.context_data['page_obj'].number, 1)
@@ -189,7 +189,7 @@ class TestTopicView(BaseClientTestCase):
         self.assertEqual(response.context_data['page_obj'].number, 1)
 
     def test_embed_poll_data_into_the_context_if_a_poll_is_associated_to_the_topic(self):
-        # Setup
+        # Setup
         poll = TopicPollFactory.create(topic=self.topic)
         TopicPollOptionFactory.create(poll=poll)
         TopicPollOptionFactory.create(poll=poll)
@@ -210,34 +210,34 @@ class TestTopicCreateView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_start_new_topics', self.user, self.top_level_forum)
         assign_perm('can_post_without_approval', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_embed_the_current_forum_into_the_context(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertEqual(response.context_data['forum'], self.top_level_forum)
 
     def test_can_detect_that_a_preview_should_be_done(self):
@@ -250,9 +250,9 @@ class TestTopicCreateView(BaseClientTestCase):
             'topic_type': TOPIC_TYPES.topic_post,
             'preview': 'Preview',
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['preview'])
 
     def test_redirects_to_topic_view_on_success(self):
@@ -264,7 +264,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': TOPIC_TYPES.topic_post,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
@@ -285,7 +285,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': TOPIC_TYPES.topic_post,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         forum_url = reverse(
@@ -300,7 +300,7 @@ class TestTopicCreateView(BaseClientTestCase):
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertIn('poll_option_formset', response.context_data)
         self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
@@ -309,12 +309,12 @@ class TestTopicCreateView(BaseClientTestCase):
         # Setup
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertFalse(response.context_data['poll_option_formset'] is not None)
 
     def test_can_handle_poll_previews(self):
-        # Setup
+        # Setup
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -334,13 +334,13 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['poll_preview'])
 
     def test_can_create_a_poll_and_its_options_if_the_user_is_allowed_to_do_it(self):
-        # Setup
+        # Setup
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -359,9 +359,9 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         topic = Topic.objects.get(pk=response.context_data['topic'].pk)
         self.assertTrue(topic.poll is not None)
         self.assertEqual(topic.poll.question, post_data['poll_question'])
@@ -372,7 +372,7 @@ class TestTopicCreateView(BaseClientTestCase):
         self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
 
     def test_cannot_create_polls_with_invalid_options(self):
-        # Setup
+        # Setup
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -404,10 +404,10 @@ class TestTopicCreateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response_1 = self.client.post(correct_url, post_data_1, follow=True)
         response_2 = self.client.post(correct_url, post_data_2, follow=True)
-        # Check
+        # Check
         messages_1 = list(response_1.context['messages'])
         self.assertTrue(len(messages_1) >= 1)
         self.assertTrue(all(m.level == MSG.ERROR for m in messages_1))
@@ -420,7 +420,7 @@ class TestTopicCreateView(BaseClientTestCase):
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertIn('attachment_formset', response.context_data)
         self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
@@ -429,12 +429,12 @@ class TestTopicCreateView(BaseClientTestCase):
         # Setup
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertFalse(response.context_data['attachment_formset'] is not None)
 
     def test_can_handle_attachment_previews(self):
-        # Setup
+        # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -451,13 +451,13 @@ class TestTopicCreateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 2,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['attachment_preview'])
 
     def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):
-        # Setup
+        # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -486,17 +486,17 @@ class TestTopicCreateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 1,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response_1 = self.client.post(correct_url, post_data_1, follow=True)
         response_2 = self.client.post(correct_url, post_data_2, follow=True)
-        # Check
+        # Check
         self.assertTrue(response_1.context_data['attachment_preview'])
         self.assertTrue(response_2.context_data['attachment_preview'])
         self.assertEqual(len(response_2.context_data['attachment_file_previews']), 1)
         self.assertEqual(response_2.context_data['attachment_file_previews'][0][1], 'file1.txt')
 
     def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
-        # Setup
+        # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -512,15 +512,15 @@ class TestTopicCreateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 2,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         post = Topic.objects.get(pk=response.context_data['topic'].pk).first_post
         self.assertTrue(post.attachments.exists())
         self.assertEqual(post.attachments.count(), 1)
 
     def test_cannot_create_attachments_with_invalid_options(self):
-        # Setup
+        # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -536,9 +536,9 @@ class TestTopicCreateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 2,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         messages = list(response.context['messages'])
         self.assertEqual(len(messages), 1)
         self.assertEqual(messages[0].level, MSG.ERROR)
@@ -554,38 +554,38 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_start_new_topics', self.user, self.top_level_forum)
         assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_embed_the_current_forum_into_the_context(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertEqual(response.context_data['forum'], self.top_level_forum)
 
     def test_can_detect_that_a_preview_should_be_done(self):
@@ -600,9 +600,9 @@ class TestTopicUpdateView(BaseClientTestCase):
             'topic_type': TOPIC_TYPES.topic_post,
             'preview': 'Preview',
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['preview'])
 
     def test_redirects_to_topic_view_on_success(self):
@@ -615,7 +615,7 @@ class TestTopicUpdateView(BaseClientTestCase):
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
@@ -633,7 +633,7 @@ class TestTopicUpdateView(BaseClientTestCase):
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertIn('poll_option_formset', response.context_data)
         self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
@@ -644,12 +644,12 @@ class TestTopicUpdateView(BaseClientTestCase):
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertFalse(response.context_data['poll_option_formset'] is not None)
 
     def test_can_handle_poll_previews(self):
-        # Setup
+        # Setup
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
@@ -671,13 +671,13 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['poll_preview'])
 
     def test_allows_poll_updates(self):
-        # Setup
+        # Setup
         poll = TopicPollFactory.create(topic=self.topic)
         option_1 = TopicPollOptionFactory.create(poll=poll)
         option_2 = TopicPollOptionFactory.create(poll=poll)
@@ -701,16 +701,16 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         option_2 = refresh(option_2)
         self.assertEqual(option_2.text, post_data['poll-1-text'])
         poll = refresh(poll)
         self.assertEqual(poll.question, post_data['poll_question'])
 
     def test_allows_poll_creations(self):
-        # Setup
+        # Setup
         assign_perm('can_create_poll', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
@@ -731,9 +731,9 @@ class TestTopicUpdateView(BaseClientTestCase):
             'poll-TOTAL_FORMS': 2,
             'poll-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         topic = Topic.objects.get(pk=response.context_data['topic'].pk)
         self.assertTrue(topic.poll is not None)
         self.assertEqual(topic.poll.question, post_data['poll_question'])
@@ -750,7 +750,7 @@ class TestTopicUpdateView(BaseClientTestCase):
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertIn('attachment_formset', response.context_data)
         self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
@@ -761,12 +761,12 @@ class TestTopicUpdateView(BaseClientTestCase):
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
         self.assertFalse(response.context_data['attachment_formset'] is not None)
 
     def test_can_handle_attachment_previews(self):
-        # Setup
+        # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
@@ -785,13 +785,13 @@ class TestTopicUpdateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 1,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['attachment_preview'])
 
     def test_allows_attachment_updates(self):
-        # Setup
+        # Setup
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
         assign_perm('can_attach_file', self.user, self.top_level_forum)
@@ -810,14 +810,14 @@ class TestTopicUpdateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 1,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         attachment = refresh(attachment)
         self.assertEqual(attachment.comment, post_data['attachment-0-comment'])
 
     def test_allows_attachment_creations(self):
-        # Setup
+        # Setup
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         new_file = SimpleUploadedFile('file2.txt', force_bytes('file_content_2'))
         attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
@@ -840,9 +840,9 @@ class TestTopicUpdateView(BaseClientTestCase):
             'attachment-TOTAL_FORMS': 2,
             'attachment-MAX_NUM_FORMS': 1000,
         }
-        # Run
+        # Run
         self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         attachments = self.topic.first_post.attachments
         self.assertEqual(attachments.count(), 2)
 
@@ -857,38 +857,38 @@ class TestPostCreateView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
         assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:post-create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_embed_the_current_topic_into_the_context(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:post-create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertEqual(response.context_data['topic'], self.topic)
 
     def test_can_detect_that_a_preview_should_be_done(self):
@@ -902,9 +902,9 @@ class TestPostCreateView(BaseClientTestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'preview': 'Preview',
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['preview'])
 
     def test_redirects_to_topic_view_on_success(self):
@@ -917,7 +917,7 @@ class TestPostCreateView(BaseClientTestCase):
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
@@ -940,41 +940,41 @@ class TestPostUpdateView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
         assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:post-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_embed_the_current_topic_into_the_context(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:post-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertEqual(response.context_data['topic'], self.topic)
 
     def test_can_detect_that_a_preview_should_be_done(self):
@@ -989,9 +989,9 @@ class TestPostUpdateView(BaseClientTestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'preview': 'Preview',
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
-        # Check
+        # Check
         self.assertTrue(response.context_data['preview'])
 
     def test_redirects_to_topic_view_on_success(self):
@@ -1005,7 +1005,7 @@ class TestPostUpdateView(BaseClientTestCase):
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
@@ -1027,30 +1027,30 @@ class TestPostDeleteView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
         assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
         assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse(
             'forum-conversation:post-delete',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})
-        # Run
+        # Run
         response = self.client.get(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_redirects_to_the_topic_view_if_posts_remain(self):
@@ -1060,7 +1060,7 @@ class TestPostDeleteView(BaseClientTestCase):
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})
-        # Run
+        # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
@@ -1079,7 +1079,7 @@ class TestPostDeleteView(BaseClientTestCase):
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})
-        # Run
+        # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         forum_url = reverse(

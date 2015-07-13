@@ -2,8 +2,6 @@
 
 # Standard library imports
 # Third party imports
-from django import forms
-from django.contrib.auth.models import AnonymousUser
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
@@ -12,15 +10,11 @@ from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
 
 # Local application / specific library imports
-from machina.apps.forum_search.forms import SearchForm
-from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
-from machina.core.utils import refresh
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
-from machina.test.factories import UserFactory
 from machina.test.testcases import BaseClientTestCase
 
 faker = FakerFactory.create()
@@ -51,7 +45,7 @@ class TestFacetedSearchView(BaseClientTestCase):
         #             sub_sub_forum
         #     top_level_forum_3
         #         forum_3
-        #             forum_3_child_1
+        #             forum_3_child_1
         #                 forum_3_child_1_1
         #                     deep_forum
         #     last_forum
@@ -76,7 +70,7 @@ class TestFacetedSearchView(BaseClientTestCase):
 
         self.last_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic_1 = create_topic(forum=self.forum_1, poster=self.user)
         self.post_1 = PostFactory.create(topic=self.topic_1, poster=self.user)
         self.topic_2 = create_topic(forum=self.forum_2, poster=self.user)
@@ -84,7 +78,7 @@ class TestFacetedSearchView(BaseClientTestCase):
         self.topic_3 = create_topic(forum=self.forum_2_child_1, poster=self.user)
         self.post_3 = PostFactory.create(topic=self.topic_3, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_cat)
         assign_perm('can_read_forum', self.user, self.forum_1)
         assign_perm('can_read_forum', self.user, self.forum_2)

@@ -53,7 +53,7 @@ class BasePollsTagsTestCase(TestCase):
         self.forum_1 = create_forum(parent=self.top_level_cat)
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
-        # Set up some topics and posts
+        # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.u2)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
@@ -61,7 +61,7 @@ class BasePollsTagsTestCase(TestCase):
         self.poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
         self.poll_2 = TopicPollFactory.create(topic=self.forum_2_topic)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.g1, self.forum_1)
         assign_perm('can_read_forum', self.g1, self.forum_1)
         assign_perm('can_edit_own_posts', self.g1, self.forum_1)

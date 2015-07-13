@@ -33,27 +33,27 @@ class TestPermissionRequiredMixin(TestCase):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Set up a single forum
+        # Set up a single forum
         self.forum = create_forum()
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.user, self.forum)
 
         self.mixin = PermissionRequiredMixin()
 
     def test_should_raise_if_the_permission_required_attribute_is_set_with_an_incorrect_value(self):
-        # Setup
+        # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = 10
         request = self.factory.get('/')
         request.user = self.user
         ForumPermissionHandlerMiddleware().process_request(request)
-        # Run & check
+        # Run & check
         with self.assertRaises(ImproperlyConfigured):
             self.mixin.check_permissions(request)
 
     def test_should_redirect_anonymous_users_to_login_url_if_access_is_not_granted(self):
-        # Setup
+        # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = 'can_read_forum'
         request = self.factory.get('/')
@@ -61,11 +61,11 @@ class TestPermissionRequiredMixin(TestCase):
         ForumPermissionHandlerMiddleware().process_request(request)
         # Run
         response = self.mixin.dispatch(request)
-        # Check
+        # Check
         self.assertEqual(response.status_code, 302)  # Moved temporarily
 
     def test_should_return_http_response_forbiden_to_logged_in_users_if_access_is_not_granted(self):
-        # Setup
+        # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = ['can_read_forum', ]
         request = self.factory.get('/')
@@ -76,7 +76,7 @@ class TestPermissionRequiredMixin(TestCase):
             self.mixin.dispatch(request)
 
     def test_should_return_a_valid_response_if_access_is_granted(self):
-        # Setup
+        # Setup
         class ForumTestView(PermissionRequiredMixin, DetailView):
             permission_required = ['can_see_forum', ]
 
@@ -87,15 +87,15 @@ class TestPermissionRequiredMixin(TestCase):
         request = self.factory.get('/')
         request.user = self.user
         ForumPermissionHandlerMiddleware().process_request(request)
-        # Run
+        # Run
         response = forum_view.dispatch(request, pk=self.forum.pk)
-        # Check
+        # Check
         self.assertEqual(response.status_code, 200)
 
     def test_should_consider_controlled_object_prior_to_builtin_objet_or_get_object_attributes(self):
         forum = self.forum
 
-        # Setup
+        # Setup
         class UserTestView(PermissionRequiredMixin, DetailView):
             permission_required = ['can_see_forum', ]
 
@@ -109,7 +109,7 @@ class TestPermissionRequiredMixin(TestCase):
         request = self.factory.get('/')
         request.user = self.user
         ForumPermissionHandlerMiddleware().process_request(request)
-        # Run
+        # Run
         response = user_view.dispatch(request, pk=self.user.pk)
-        # Check
+        # Check
         self.assertEqual(response.status_code, 200)

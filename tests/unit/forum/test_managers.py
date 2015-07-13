@@ -21,16 +21,16 @@ class TestForumManager(BaseUnitTestCase):
         #         forum_1
         #         forum_2
         #             forum_2_child_1
-        #             forum_2_child_2
-        #                 forum_2_child_2_1
-        #                 forum_2_child_2_2
+        #             forum_2_child_2
+        #                 forum_2_child_2_1
+        #                 forum_2_child_2_2
         #     top_level_forum_1
         #     top_level_forum_2
         #         sub_cat
         #             sub_sub_forum
         #     top_level_forum_3
         #         forum_3
-        #             forum_3_child_1
+        #             forum_3_child_1
         #                 forum_3_child_1_1
         #                     deep_forum
         #     last_forum

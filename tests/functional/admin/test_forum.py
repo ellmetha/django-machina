@@ -39,7 +39,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_forum.id, 'direction': 'up'})
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.top_level_forum.id)
@@ -52,7 +52,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.sub_forum_2.id, 'direction': 'down'})
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.sub_forum_2.id)
@@ -65,7 +65,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_move'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id, 'direction': 'up'})
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.top_level_cat.id)
@@ -78,7 +78,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.get(url)
         # Check
@@ -88,7 +88,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url)
         # Check
@@ -99,7 +99,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url, {'user': self.user.id}, follow=True)
         # Check
@@ -115,7 +115,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Setup
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url, {'anonymous_user': 1}, follow=True)
         # Check
@@ -132,7 +132,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         group = GroupFactory.create()
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url, {'group': group.id}, follow=True)
         # Check
@@ -167,7 +167,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             group=group, has_perm=False)
 
         raw_url = 'admin:{}_{}_editpermission_index'.format(model._meta.app_label, self._get_module_name(model._meta))
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url, {'forum': self.sub_forum_1.id})
         # Check
@@ -225,7 +225,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={
             'forum_id': self.top_level_cat.id, 'user_id': self.user.id})
         response = self.client.post(url, post_data)
@@ -264,7 +264,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={
             'forum_id': self.top_level_cat.id})
         response = self.client.post(url, post_data)
@@ -304,7 +304,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
-        # Run
+        # Run
         url = reverse(raw_url, kwargs={
             'forum_id': self.top_level_cat.id, 'group_id': group.id})
         response = self.client.post(url, post_data)

@@ -27,6 +27,6 @@ class TestAttachment(BaseUnitTestCase):
         # Setup
         f = SimpleUploadedFile('dummy_file.txt', force_bytes('file_content'))
         attachment = AttachmentFactory.create(post=self.post, file=f)
-        # Run & check
+        # Run & check
         self.assertEqual(attachment.filename, 'dummy_file.txt')
         attachment.file.delete()

@@ -2,8 +2,6 @@
 
 # Standard library imports
 # Third party imports
-from django import forms
-from django.contrib.auth.models import AnonymousUser
 from django.db.models import get_model
 from faker import Factory as FakerFactory
 from haystack.management.commands import clear_index
@@ -12,9 +10,7 @@ from haystack.query import SearchQuerySet
 
 # Local application / specific library imports
 from machina.apps.forum_search.forms import SearchForm
-from machina.conf import settings as machina_settings
 from machina.core.loading import get_class
-from machina.core.utils import refresh
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
@@ -36,7 +32,7 @@ class TestSearchForm(BaseUnitTestCase):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
-        # Create a basic user
+        # Create a basic user
         self.user = UserFactory.create()
 
         # Set up the following forum tree:
@@ -51,7 +47,7 @@ class TestSearchForm(BaseUnitTestCase):
         #             sub_sub_forum
         #     top_level_forum_3
         #         forum_3
-        #             forum_3_child_1
+        #             forum_3_child_1
         #                 forum_3_child_1_1
         #                     deep_forum
         #     last_forum
@@ -76,7 +72,7 @@ class TestSearchForm(BaseUnitTestCase):
 
         self.last_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic_1 = create_topic(forum=self.forum_1, poster=self.user)
         self.post_1 = PostFactory.create(topic=self.topic_1, poster=self.user)
         self.topic_2 = create_topic(forum=self.forum_2, poster=self.user)
@@ -84,7 +80,7 @@ class TestSearchForm(BaseUnitTestCase):
         self.topic_3 = create_topic(forum=self.forum_2_child_1, poster=self.user)
         self.post_3 = PostFactory.create(topic=self.topic_3, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_cat)
         assign_perm('can_read_forum', self.user, self.forum_1)
         assign_perm('can_read_forum', self.user, self.forum_2)
@@ -99,7 +95,7 @@ class TestSearchForm(BaseUnitTestCase):
         clear_index.Command().handle(interactive=False, verbosity=-1)
 
     def test_can_search_forum_posts(self):
-        # Setup
+        # Setup
         form = SearchForm(
             {'q': self.topic_1.first_post.subject},
             user=self.user,
@@ -111,7 +107,7 @@ class TestSearchForm(BaseUnitTestCase):
         self.assertEqual(results[0].forum, self.topic_1.forum.pk)
 
     def test_cannot_search_forum_posts_if_the_user_has_not_the_required_permissions(self):
-        # Setup
+        # Setup
         u1 = UserFactory.create()
         form = SearchForm(
             {'q': self.topic_1.first_post.content},
@@ -124,7 +120,7 @@ class TestSearchForm(BaseUnitTestCase):
         self.assertFalse(len(results))
 
     def test_cannot_search_forum_posts_if_the_form_is_not_valid(self):
-        # Setup
+        # Setup
         form = SearchForm(
             {
                 'q': self.topic_1.first_post.content,
@@ -138,7 +134,7 @@ class TestSearchForm(BaseUnitTestCase):
         self.assertFalse(len(results))
 
     def test_can_search_forum_posts_by_using_only_topic_subjects(self):
-        # Setup
+        # Setup
         form = SearchForm(
             {
                 'q': self.topic_1.subject,

@@ -1,1 +1,1 @@
-from machina.apps.forum_conversation.admin import *
+from machina.apps.forum_conversation.admin import *  # noqa

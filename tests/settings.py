@@ -4,8 +4,6 @@
 import os
 
 # Third party imports
-from django.conf import settings
-
 # Local application / specific library imports
 from machina import get_vanilla_apps
 from machina import MACHINA_MAIN_STATIC_DIR

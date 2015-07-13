@@ -40,23 +40,23 @@ class TestForumReadTrackManager(BaseUnitTestCase):
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
 
     def test_can_tell_if_a_forum_is_unread(self):
-        # Setup
+        # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
-        # Run
+        # Run
         unread_forums = ForumReadTrack.objects.get_unread_forums_from_list(
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
-        # Check
+        # Check
         self.assertIn(self.forum_2, unread_forums)
 
     def test_tells_that_the_ancestors_of_an_unread_forum_are_also_unread(self):
         # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
-        # Run
+        # Run
         unread_forums = ForumReadTrack.objects.get_unread_forums_from_list(
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
-        # Check
+        # Check
         self.assertQuerysetEqual(unread_forums, [
             self.top_level_cat_1,
             self.forum_2])
@@ -64,18 +64,18 @@ class TestForumReadTrackManager(BaseUnitTestCase):
     def test_cannot_tell_that_the_descendant_of_an_unread_forum_are_also_unread(self):
         # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
-        # Run
+        # Run
         unread_forums = ForumReadTrack.objects.get_unread_forums_from_list(
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
-        # Check
+        # Check
         self.assertNotIn(self.forum_2_child_2, unread_forums)
 
     def test_considers_a_forum_as_unread_without_tracks_if_it_has_topics(self):
-        # Setup
+        # Setup
         new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u2)
         PostFactory.create(topic=new_topic, poster=self.u2)
-        # Run
+        # Run
         unread_forums = ForumReadTrack.objects.get_unread_forums_from_list(
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u1)

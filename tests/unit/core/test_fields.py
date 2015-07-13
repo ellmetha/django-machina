@@ -26,13 +26,12 @@ from tests.models import RESIZED_IMAGE_WIDTH
 from tests.models import TestableModel
 
 
-@pytest.mark.django_db
-class TestMarkupTextField(object):
+class TestMarkupTextField(TestCase):
     # The following tests involve the django-markdown
     # app. This one can be used with Machina in order to
     # provide a support for the Markdown syntax. But instead
-    # we can use another Django app providing support for
-    # other syntax (eg. BBCode).
+    # we can use another Django app providing support for
+    # other syntax (eg. BBCode).
     MARKUP_TEXT_FIELD_TESTS = (
         ('**hello _world!_**', '<p><strong>hello <em>world!</em></strong></p>'),
         ('[goto google](http://google.com)', '<p><a href="http://google.com">goto google</a></p>'),
@@ -79,7 +78,7 @@ class TestMarkupTextField(object):
             print(TestableModel.content.rendered)
 
     def test_should_not_allow_non_accessible_markup_languages(self):
-        # Run & check
+        # Run & check
         machina_settings.MACHINA_MARKUP_LANGUAGE = (('it.will.fail'), {})
         with pytest.raises(ImproperlyConfigured):
             reload(fields)
@@ -95,7 +94,7 @@ class TestMarkupTextField(object):
                 exclude = []
         # Run
         form = TestableForm()
-        # Check
+        # Check
         assert isinstance(form.fields['content'].widget, forms.Textarea)
 
     def test_can_use_a_custom_form_widget(self):
@@ -108,14 +107,14 @@ class TestMarkupTextField(object):
                 exclude = []
         # Run
         form = TestableForm()
-        # Check
+        # Check
         assert isinstance(form.fields['content'].widget, forms.HiddenInput)
         machina_settings.MACHINA_MARKUP_WIDGET = None
 
     def test_should_not_allow_non_accessible_custom_form_widgets(self):
-        # Setup
+        # Setup
         machina_settings.MACHINA_MARKUP_WIDGET = 'it.will.fail'
-        # Run & check
+        # Run & check
         with pytest.raises(ImproperlyConfigured):
             class TestableForm(forms.ModelForm):
                 class Meta:
@@ -129,19 +128,19 @@ class TestExtendedImageField(TestCase):
         # Set up some images used for doing image tests
         images_dict = {}
 
-        # Fetch an image aimed to be resized
+        # Fetch an image aimed to be resized
         f = open(settings.MEDIA_ROOT + "/to_be_resized_image.png", "rb")
         images_dict['to_be_resized_image'] = File(f)
 
-        # Fetch a big image
+        # Fetch a big image
         f = open(settings.MEDIA_ROOT + "/too_large_image.jpg", "rb")
         images_dict['too_large_image'] = File(f)
 
-        # Fetch a wide image
+        # Fetch a wide image
         f = open(settings.MEDIA_ROOT + "/too_wide_image.jpg", "rb")
         images_dict['too_wide_image'] = File(f)
 
-        # Fetch a high image
+        # Fetch a high image
         f = open(settings.MEDIA_ROOT + "/too_high_image.jpg", "rb")
         images_dict['too_high_image'] = File(f)
 
@@ -162,19 +161,19 @@ class TestExtendedImageField(TestCase):
                 pass
 
     def test_can_resize_images_before_saving_them(self):
-        # Setup
+        # Setup
         test = TestableModel()
         # Run
         field = test._meta.get_field('resized_image')
         field.save_form_data(test, self.images_dict['to_be_resized_image'])
         test.full_clean()
         test.save()
-        # Check
+        # Check
         image = Image.open(BytesIO(test.resized_image.read()))
         assert image.size == (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT)
 
     def test_should_not_accept_images_with_incorrect_sizes_or_dimensions(self):
-        # Setup
+        # Setup
         test = TestableModel()
         field = test._meta.get_field('validated_image')
         invalid_images = ['too_large_image', 'too_wide_image', 'too_high_image', ]

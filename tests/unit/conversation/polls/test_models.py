@@ -25,13 +25,13 @@ class TestTopicPoll(BaseUnitTestCase):
         self.post = PostFactory.create(topic=self.topic, poster=self.u1)
 
     def test_cannot_save_a_poll_for_which_the_users_cannot_choose_any_option(self):
-        # Run & Check
+        # Run & Check
         with self.assertRaises(ValidationError):
             poll = TopicPollFactory.build(topic=self.topic, max_options=0)
             poll.full_clean()
 
     def test_cannot_save_a_poll_for_which_the_users_can_choose_too_many_options(self):
-        # Run & Check
+        # Run & Check
         with self.assertRaises(ValidationError):
             poll = TopicPollFactory.build(topic=self.topic, max_options=50)
             poll.full_clean()
@@ -69,6 +69,6 @@ class TestTopicPollOption(BaseUnitTestCase):
         TopicPollVoteFactory.create(poll_option=option_2, voter=self.u1)
         TopicPollVoteFactory.create(poll_option=option_1, voter=u2)
         TopicPollVoteFactory.create(poll_option=option_2, voter=u2)
-        # Run & check
+        # Run & check
         self.assertEqual(option_1.percentage, 50)
         self.assertEqual(option_2.percentage, 50)

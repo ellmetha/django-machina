@@ -51,29 +51,29 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Set up a top-level forum link
         self.top_level_link = create_link_forum()
 
-        # Set up some topics
+        # Set up some topics
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_3_topic = create_topic(forum=self.forum_3, poster=self.u1)
         self.forum_3_topic_2 = create_topic(
             forum=self.forum_3, poster=self.u1, status=Topic.STATUS_CHOICES.topic_locked)
 
-        # Set up some posts
+        # Set up some posts
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         self.post_2 = PostFactory.create(topic=self.forum_3_topic, poster=self.u1)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.u1, self.top_level_cat)
         assign_perm('can_see_forum', self.u1, self.forum_1)
         assign_perm('can_read_forum', self.g1, self.forum_3)
 
     def test_shows_a_forum_if_it_is_visible(self):
-        # Setup
+        # Setup
         u2 = UserFactory.create()
         u3 = AnonymousUser()
         assign_perm('can_see_forum', u2)  # Global user permission
         assign_perm('can_see_forum', u3)  # Global user permission
         forums = Forum.objects.filter(pk=self.top_level_cat.pk)
-        # Run
+        # Run
         filtered_forums_1 = self.perm_handler.forum_list_filter(forums, self.u1)
         filtered_forums_2 = self.perm_handler.forum_list_filter(forums, u2)
         filtered_forums_3 = self.perm_handler.forum_list_filter(forums, u3)
@@ -83,11 +83,11 @@ class TestPermissionHandler(BaseUnitTestCase):
         self.assertQuerysetEqual(filtered_forums_3, [self.top_level_cat, ])
 
     def test_hide_a_forum_if_it_is_not_visible(self):
-        # Setup
+        # Setup
         u2 = AnonymousUser()
         assign_perm('can_see_forum', u2, self.top_level_cat)
         forums = Forum.objects.filter(pk=self.top_level_cat.pk)
-        # Run
+        # Run
         filtered_forums_1 = self.perm_handler.forum_list_filter(forums, self.u1)
         filtered_forums_2 = self.perm_handler.forum_list_filter(forums, u2)
         # Check
@@ -95,34 +95,34 @@ class TestPermissionHandler(BaseUnitTestCase):
         self.assertQuerysetEqual(filtered_forums_2, [self.top_level_cat, ])
 
     def test_shows_a_forum_if_all_of_its_ancestors_are_visible(self):
-        # Setup
+        # Setup
         forums = Forum.objects.filter(parent=self.top_level_cat)
-        # Run
+        # Run
         filtered_forums = self.perm_handler.forum_list_filter(forums, self.u1)
         # Check
         self.assertQuerysetEqual(filtered_forums, [self.forum_1, self.forum_3])
 
     def test_hide_a_forum_if_one_of_its_ancestors_is_not_visible(self):
-        # Setup
+        # Setup
         remove_perm('can_see_forum', self.u1, self.top_level_cat)
         forums = Forum.objects.filter(parent=self.top_level_cat)
-        # Run
+        # Run
         filtered_forums = self.perm_handler.forum_list_filter(forums, self.u1)
         # Check
         self.assertQuerysetEqual(filtered_forums, [])
 
     def test_knows_the_last_post_visible_inside_a_forum(self):
-        # Run & check : no forum hidden
+        # Run & check : no forum hidden
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertEqual(last_post, self.post_2)
 
-        # Run & check : one forum hidden
+        # Run & check : one forum hidden
         self.perm_handler = PermissionHandler()
         remove_perm('can_read_forum', self.g1, self.forum_3)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         self.assertEqual(last_post, self.post_1)
 
-        # Run & check : all forums hidden
+        # Run & check : all forums hidden
         self.perm_handler = PermissionHandler()
         remove_perm('can_see_forum', self.u1, self.forum_1)
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
@@ -130,9 +130,9 @@ class TestPermissionHandler(BaseUnitTestCase):
 
     def test_cannot_say_that_post_is_the_last_post_if_it_is_not_approved(self):
         # Setup
-        post_bis = PostFactory.create(topic=self.forum_1_topic, poster=self.u1, approved=False)
+        PostFactory.create(topic=self.forum_1_topic, poster=self.u1, approved=False)
         remove_perm('can_read_forum', self.g1, self.forum_3)
-        # Run
+        # Run
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
         # Check
         self.assertEqual(last_post, self.post_1)
@@ -141,56 +141,56 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
         forums = Forum.objects.filter(parent=self.top_level_cat)
-        # Run
+        # Run
         filtered_forums = self.perm_handler.forum_list_filter(forums, u2)
-        # Check
+        # Check
         self.assertQuerysetEqual(filtered_forums, [self.forum_1, self.forum_2, self.forum_3])
 
     def test_knows_that_a_superuser_can_edit_all_posts(self):
-        # Setup
+        # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_edit_post(self.post_1, u2))
 
     def test_knows_if_an_owner_of_a_post_can_edit_it(self):
-        # Setup
+        # Setup
         u2 = UserFactory.create()
         assign_perm('can_edit_own_posts', self.u1, self.forum_1)
         assign_perm('can_edit_own_posts', u2, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_edit_post(self.post_1, self.u1))
         self.assertFalse(self.perm_handler.can_edit_post(self.post_2, self.u1))
         self.assertFalse(self.perm_handler.can_edit_post(self.post_1, u2))
 
     def test_knows_if_a_moderator_can_edit_a_post(self):
-        # Setup
+        # Setup
         moderator = UserFactory.create()
         assign_perm('can_edit_posts', moderator, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_edit_post(self.post_1, moderator))
         self.assertFalse(self.perm_handler.can_edit_post(self.post_2, moderator))
 
     def test_knows_that_a_superuser_can_delete_all_posts(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_delete_post(self.post_1, u2))
 
     def test_knows_if_an_owner_of_a_post_can_delete_it(self):
-        # Setup
+        # Setup
         u2 = UserFactory.create()
         assign_perm('can_delete_own_posts', self.u1, self.forum_1)
         assign_perm('can_delete_own_posts', u2, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_delete_post(self.post_1, self.u1))
         self.assertFalse(self.perm_handler.can_delete_post(self.post_2, self.u1))
         self.assertFalse(self.perm_handler.can_delete_post(self.post_1, u2))
 
     def test_knows_if_a_moderator_can_delete_a_post(self):
-        # Setup
+        # Setup
         moderator = UserFactory.create()
         assign_perm('can_delete_posts', moderator, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_delete_post(self.post_1, moderator))
         self.assertFalse(self.perm_handler.can_delete_post(self.post_2, moderator))
 
@@ -198,42 +198,42 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_post_stickies', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_add_stickies(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_add_stickies(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_add_stickies(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_add_stickies(self.forum_1, u2))
 
     def test_knows_if_a_user_can_add_announces(self):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_post_announcements', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_add_announcements(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_add_announcements(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_add_announces(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_add_announcements(self.forum_1, u2))
 
     def test_knows_if_a_user_can_post_without_approval(self):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_post_without_approval', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_post_without_approval(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_post_without_approval(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_post_without_approval(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_post_without_approval(self.forum_1, u2))
 
     def test_knows_if_a_user_can_add_posts_to_a_topic(self):
@@ -262,18 +262,18 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_create_poll', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_create_polls(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_create_polls(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_create_polls(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_create_polls(self.forum_1, u2))
 
     def test_knows_if_a_user_can_vote_in_polls(self):
-        # Setup
+        # Setup
         poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
         poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
         poll_3 = TopicPollFactory.create(topic=self.forum_3_topic_2)
@@ -287,22 +287,22 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         poll = TopicPollFactory.create(topic=self.forum_1_topic)
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_vote_in_poll(poll, u2))
 
     def test_knows_that_a_user_should_no_vote_in_a_completed_poll(self):
-        # Setup
+        # Setup
         poll = TopicPollFactory.create(topic=self.forum_1_topic, duration=2)
         poll._meta.get_field_by_name('updated')[0].auto_now = False
         poll.created = datetime.datetime(2000, 1, 12)
         poll.save()
         poll._meta.get_field_by_name('updated')[0].auto_now = True
         assign_perm('can_vote_in_polls', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertFalse(self.perm_handler.can_vote_in_poll(poll, self.u1))
 
     def test_knows_if_a_user_can_vote_again_in_a_poll(self):
-        # Setup
+        # Setup
         poll_1 = TopicPollFactory.create(topic=self.forum_1_topic, user_changes=True)
         poll_option_1 = TopicPollOptionFactory.create(poll=poll_1)
         TopicPollOptionFactory.create(poll=poll_1)
@@ -316,7 +316,7 @@ class TestPermissionHandler(BaseUnitTestCase):
 
         assign_perm('can_vote_in_polls', self.u1, self.forum_1)
         assign_perm('can_vote_in_polls', self.u1, self.forum_3)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_vote_in_poll(poll_1, self.u1))
         self.assertFalse(self.perm_handler.can_vote_in_poll(poll_2, self.u1))
 
@@ -338,28 +338,28 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_attach_file', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_attach_files(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_attach_files(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_attach_files(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_attach_files(self.forum_1, u2))
 
     def test_knows_if_a_user_can_download_files(self):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_download_file', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_download_files(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_download_files(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_download_files(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_download_files(self.forum_1, u2))
 
     def test_knows_that_a_non_moderator_cannot_access_the_moderation_panel(self):
@@ -384,40 +384,40 @@ class TestPermissionHandler(BaseUnitTestCase):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_close_topics', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_close_topics(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_close_topics(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_close_topics(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_close_topics(self.forum_1, u2))
 
     def test_knows_if_a_user_can_move_topics(self):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_move_topics', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_move_topics(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_move_topics(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_move_topics(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_move_topics(self.forum_1, u2))
 
     def test_knows_if_a_user_can_delete_topics(self):
         # Setup
         u2 = UserFactory.create()
         assign_perm('can_delete_posts', self.u1, self.forum_1)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_delete_topics(self.forum_1, self.u1))
         self.assertFalse(self.perm_handler.can_delete_topics(self.forum_1, u2))
 
     def test_knows_that_a_superuser_can_delete_topics(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
-        # Run & check
+        # Run & check
         self.assertTrue(self.perm_handler.can_delete_topics(self.forum_1, u2))

@@ -41,18 +41,18 @@ class TestForumLastPostTag(TestCase):
         self.forum_1 = create_forum(parent=self.top_level_cat)
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
-        # Set up some topics and posts
+        # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.user)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.user)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.user)
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.user, self.top_level_cat)
         assign_perm('can_see_forum', self.user, self.forum_1)
 
     def test_can_provide_the_last_post_of_a_forum(self):
-        # Setup
+        # Setup
         t = Template(self.loadstatement + '{% get_forum_last_post forum user as var %}')
         c = Context({'forum': self.forum_1, 'user': self.user})
         # Run
@@ -76,7 +76,7 @@ class TestForumListTag(TestCase):
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
     def test_can_render_a_list_of_forums_according_to_their_minimum_tree_level(self):
-        # Setup
+        # Setup
         forums = Forum.objects.all()
         request = self.request_factory.get('/')
         request.user = self.user

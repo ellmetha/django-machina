@@ -40,46 +40,46 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Set up a top-level forum
         self.top_level_forum = create_forum()
 
-        # Set up a topic and some posts
+        # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
-        # Creates a poll and two options
+        # Creates a poll and two options
         self.poll = TopicPollFactory.create(topic=self.topic)
         self.option_1 = TopicPollOptionFactory.create(poll=self.poll)
         self.option_2 = TopicPollOptionFactory.create(poll=self.poll)
 
-        # Mark the forum as read
+        # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_vote_in_polls', self.user, self.top_level_forum)
 
     def test_browsing_works(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
-        # Run
+        # Run
         response = self.client.post(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsOk(response)
 
     def test_cannot_be_used_by_unauthorized_users(self):
-        # Setup
+        # Setup
         remove_perm('can_vote_in_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
-        # Run
+        # Run
         response = self.client.post(correct_url, follow=True)
-        # Check
+        # Check
         self.assertIsNotOk(response)
 
     def test_can_be_used_to_vote(self):
-        # Setup
+        # Setup
         correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
         post_data = {
-            'options': [ self.option_1.pk, ],
+            'options': [self.option_1.pk, ],
         }
-        # Run
+        # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         self.assertIsOk(response)
@@ -94,7 +94,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         TopicPollVoteFactory.create(voter=self.user, poll_option=self.option_2)
         correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
         post_data = {
-            'options': [ self.option_1.pk, ],
+            'options': [self.option_1.pk, ],
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)

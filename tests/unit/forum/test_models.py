@@ -33,7 +33,7 @@ class TestForum(TestCase):
     def test_has_a_margin_level_two_times_greater_than_its_real_level(self):
         # Run
         sub_level_forum = create_forum(parent=self.top_level_forum)
-        # Check
+        # Check
         self.assertEqual(self.top_level_forum.margin_level, 0)
         self.assertEqual(sub_level_forum.margin_level, 2)
 
@@ -79,19 +79,19 @@ class TestForum(TestCase):
         self.assertTrue(self.top_level_link.is_link)
 
     def test_can_trigger_the_update_of_the_counters_of_a_new_parent(self):
-        # Setup
+        # Setup
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         # Run
         self.top_level_forum.parent = self.top_level_cat
         self.top_level_forum.save()
-        # Check
+        # Check
         self.assertEqual(self.top_level_cat.posts_count, self.top_level_forum.posts_count)
         self.assertEqual(self.top_level_cat.topics_count, self.top_level_forum.topics_count)
 
     def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
-        # Setup
+        # Setup
         sub_level_forum = create_forum(parent=self.top_level_forum)
         topic = create_topic(forum=sub_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
@@ -99,7 +99,7 @@ class TestForum(TestCase):
         # Run
         sub_level_forum.parent = self.top_level_cat
         sub_level_forum.save()
-        # Check
+        # Check
         self.top_level_forum = Forum.active.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
         self.assertEqual(self.top_level_forum.posts_count, 0)
         self.assertEqual(self.top_level_forum.topics_count, 0)

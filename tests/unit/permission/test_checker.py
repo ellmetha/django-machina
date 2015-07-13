@@ -20,7 +20,7 @@ class TestForumPermissionChecker(TestCase):
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = ['can_see_forum', ]
 
     def tearDown(self):
-        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS= []
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
 
     def test_knows_that_a_superuser_has_all_the_permissions(self):
         # Setup
@@ -29,7 +29,8 @@ class TestForumPermissionChecker(TestCase):
         # Run & check
         self.assertTrue(checker.has_perm('can_see_forum', self.forum))
         self.assertTrue(checker.has_perm('can_read_forum', self.forum))
-        self.assertEqual(checker.get_perms(self.forum),
+        self.assertEqual(
+            checker.get_perms(self.forum),
             list(ForumPermission.objects.values_list('codename', flat=True)))
 
     def test_knows_that_an_inactive_user_has_no_permissions(self):

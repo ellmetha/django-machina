@@ -51,13 +51,13 @@ class BaseConversationTagsTestCase(TestCase):
         self.forum_1 = create_forum(parent=self.top_level_cat)
         self.forum_2 = create_forum(parent=self.top_level_cat)
 
-        # Set up some topics and posts
+        # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.u2)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.u2)
 
-        # Assign some permissions
+        # Assign some permissions
         assign_perm('can_see_forum', self.g1, self.forum_1)
         assign_perm('can_read_forum', self.g1, self.forum_1)
         assign_perm('can_edit_own_posts', self.g1, self.forum_1)
@@ -90,7 +90,7 @@ class TestPostedByTag(BaseConversationTagsTestCase):
 
 class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
     def test_provides_the_number_of_pages_of_a_topic(self):
-        # Setup
+        # Setup
         def get_rendered(topic):
             t = Template(self.loadstatement + '{% topic_pages_inline_list topic %}')
             c = Context({'topic': topic})
@@ -123,6 +123,6 @@ class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
         rendered_small = get_rendered(self.forum_1_topic)
         rendered_huge = get_rendered(self.forum_2_topic)
 
-        # Check
+        # Check
         self.assertEqual(rendered_small, expected_out_small)
         self.assertEqual(rendered_huge, expected_out_huge)
