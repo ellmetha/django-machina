@@ -15,7 +15,6 @@ from machina.forms.widgets import SelectWithDisabled
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
 
 
 class TopicMoveForm(forms.Form):
@@ -26,12 +25,13 @@ class TopicMoveForm(forms.Form):
         label=_('Lock topic'), required=False)
 
     def __init__(self, *args, **kwargs):
-        self.topic = kwargs.pop('instance', None)
+        self.topic = kwargs.pop('topic', None)
         self.user = kwargs.pop('user', None)
+        self.perm_handler = PermissionHandler()
 
         super(TopicMoveForm, self).__init__(*args, **kwargs)
 
-        self.allowed_forums = perm_handler.forum_list_filter(Forum.objects.all(), self.user)
+        self.allowed_forums = self.perm_handler.get_movable_forums(self.user)
         forum_choices = []
 
         for f in self.allowed_forums:
@@ -45,11 +45,7 @@ class TopicMoveForm(forms.Form):
             else:
                 forum_choices.append((f.id, '{} {}'.format('-' * f.margin_level, f.name)))
 
-        if self.allowed_forums:
-            self.fields['forum'].choices = forum_choices
-        else:
-            # The user cannot view any single forum, the 'forum' field can be deleted
-            del self.fields['forum']
+        self.fields['forum'].choices = forum_choices
 
     def clean_forum(self):
         forum_id = self.cleaned_data['forum']

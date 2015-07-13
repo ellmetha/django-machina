@@ -10,8 +10,9 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 from django.views.generic.detail import BaseDetailView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
-from django.views.generic.edit import ModelFormMixin
+from django.views.generic.edit import FormMixin
 from django.views.generic.edit import ProcessFormView
 
 # Local application / specific library imports
@@ -128,7 +129,7 @@ class TopicDeleteView(PermissionRequiredMixin, DeleteView):
 
 
 class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
-                    ModelFormMixin, ProcessFormView):
+                    FormMixin, SingleObjectMixin, ProcessFormView):
     """
     A view providing the ability to move forum topics.
     """
@@ -149,6 +150,7 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
     def get_form_kwargs(self):
         kwargs = super(TopicMoveView, self).get_form_kwargs()
         kwargs.update({
+            'topic': self.object,
             'user': self.request.user,
         })
         return kwargs
@@ -169,6 +171,13 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
 
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('forum-conversation:topic', kwargs={
+            'forum_slug': self.object.forum.slug,
+            'forum_pk': self.object.forum.pk,
+            'slug': self.object.slug,
+            'pk': self.object.pk})
 
     # Permissions checks
 
