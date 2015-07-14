@@ -147,6 +147,16 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         self.object = self.get_object()
         return super(TopicMoveView, self).post(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(TopicMoveView, self).get_context_data(**kwargs)
+
+        # Append the forum associated with the topic being deleted
+        # to the context
+        topic = self.get_object()
+        context['forum'] = topic.forum
+
+        return context
+
     def get_form_kwargs(self):
         kwargs = super(TopicMoveView, self).get_form_kwargs()
         kwargs.update({
