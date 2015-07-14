@@ -119,3 +119,19 @@ class TestTopicMoveForm(object):
         is_valid = form.is_valid()
         # Check
         assert is_valid
+
+    def test_locks_the_topic_if_it_was_already_locked(self):
+        # Setup
+        assign_perm('can_move_topics', self.user, self.top_level_forum)
+        assign_perm('can_move_topics', self.user, self.other_forum)
+        self.topic.status = Topic.STATUS_CHOICES.topic_locked
+        self.topic.save()
+        form = TopicMoveForm(
+            data={
+                'forum': self.other_forum.id,
+            },
+            topic=self.topic,
+            user=self.user,
+        )
+        # Run & check
+        assert form.fields['lock_topic'].initial

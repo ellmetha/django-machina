@@ -175,6 +175,8 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         # Eventually lock the topic
         if form.cleaned_data['lock_topic']:
             topic.status = Topic.STATUS_CHOICES.topic_locked
+        else:
+            topic.status = Topic.STATUS_CHOICES.topic_moved
 
         topic.save()
         old_forum.save()

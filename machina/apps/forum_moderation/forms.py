@@ -45,6 +45,9 @@ class TopicMoveForm(forms.Form):
             else:
                 forum_choices.append((f.id, '{} {}'.format('-' * f.margin_level, f.name)))
 
+        if self.topic.is_locked:
+            self.fields['lock_topic'].initial = True
+
         self.fields['forum'].choices = forum_choices
 
     def clean_forum(self):
