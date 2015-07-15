@@ -154,3 +154,89 @@ class TestTopicDeleteView(BaseClientTestCase):
         self.assertGreater(len(response.redirect_chain), 0)
         last_url, status_code = response.redirect_chain[-1]
         assert forum_url in last_url
+
+
+class TestTopicMoveView(BaseClientTestCase):
+    def setUp(self):
+        super(TestTopicMoveView, self).setUp()
+
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Set up a top-level forum
+        self.top_level_forum = create_forum()
+        self.other_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
+        self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
+        assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_move_topics', self.user, self.top_level_forum)
+        assign_perm('can_move_topics', self.user, self.other_forum)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-move',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        self.assertIsOk(response)
+
+    def test_can_move_topics(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-move',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        post_data = {
+            'forum': self.other_forum.id,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic = refresh(self.topic)
+        assert topic.forum == self.other_forum
+
+    def test_can_move_and_lock_topics(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-move',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        post_data = {
+            'forum': self.other_forum.id,
+            'lock_topic': True,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic = refresh(self.topic)
+        assert topic.forum == self.other_forum
+        assert topic.is_locked
+
+    def test_can_move_and_unlock_a_topic_if_it_was_locked(self):
+        # Setup
+        self.topic.status = self.topic.STATUS_CHOICES.topic_locked
+        self.topic.save()
+        correct_url = reverse(
+            'forum-moderation:topic-move',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        post_data = {
+            'forum': self.other_forum.id,
+            'lock_topic': False,
+        }
+        # Run
+        self.client.post(correct_url, post_data, follow=True)
+        # Check
+        topic = refresh(self.topic)
+        assert topic.forum == self.other_forum
+        assert not topic.is_locked
