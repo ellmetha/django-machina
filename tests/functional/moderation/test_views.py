@@ -31,9 +31,9 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
-class TestTopicCloseView(BaseClientTestCase):
+class TestTopicLockView(BaseClientTestCase):
     def setUp(self):
-        super(TestTopicCloseView, self).setUp()
+        super(TestTopicLockView, self).setUp()
 
         # Permission handler
         self.perm_handler = PermissionHandler()
@@ -59,7 +59,7 @@ class TestTopicCloseView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-close',
+            'forum-moderation:topic-lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -69,7 +69,7 @@ class TestTopicCloseView(BaseClientTestCase):
     def test_can_lock_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-close',
+            'forum-moderation:topic-lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -80,7 +80,7 @@ class TestTopicCloseView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-close',
+            'forum-moderation:topic-lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)

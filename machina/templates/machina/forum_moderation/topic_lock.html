@@ -2,17 +2,17 @@
 {% load i18n %}
 {% load forum_conversation_tags %}
 
-{{% block sub-title %}{% trans "Close topic" %}{% endblock sub-title %}
+{{% block sub-title %}{% trans "Lock topic" %}{% endblock sub-title %}
 
 {% block content %}
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="panel panel-default topic-close">
+			<div class="panel panel-default topic-lock">
 	            <div class="panel-heading">
-	                <h3 class="panel-title">{% trans "Close topic" %}</h3>
+	                <h3 class="panel-title">{% trans "Lock topic" %}</h3>
 	            </div>
 	            <div class="panel-body">
-	            	<div class="warning-message">{% trans "Are you sure you want to close this topic?" %}</div>
+	            	<div class="warning-message">{% trans "Are you sure you want to lock this topic?" %}</div>
 				    <form action="" method="post">{% csrf_token %}
 				        <input type="hidden" name="post" value="yes" />
 				        <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />

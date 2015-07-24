@@ -27,16 +27,16 @@ TopicMoveForm = get_class('forum_moderation.forms', 'TopicMoveForm')
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
-class TopicCloseView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
     """
-    A view providing the ability to close forum topics.
+    A view providing the ability to lock forum topics.
     """
-    template_name = 'forum_moderation/topic_close.html'
+    template_name = 'forum_moderation/topic_lock.html'
     context_object_name = 'topic'
-    success_message = _('This topic has been closed successfully.')
+    success_message = _('This topic has been locked successfully.')
     model = Topic
 
-    def close(self, request, *args, **kwargs):
+    def lock(self, request, *args, **kwargs):
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.status = Topic.STATUS_CHOICES.topic_locked
@@ -44,12 +44,12 @@ class TopicCloseView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
-        return self.close(request, *args, **kwargs)
+        return self.lock(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicCloseView, self).get_context_data(**kwargs)
+        context = super(TopicLockView, self).get_context_data(**kwargs)
 
-        # Append the forum associated with the topic being closed
+        # Append the forum associated with the topic being locked
         # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
