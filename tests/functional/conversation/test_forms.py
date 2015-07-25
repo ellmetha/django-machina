@@ -340,7 +340,7 @@ class TestTopicForm(TestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         # Run
         form = TopicForm(
             data=form_data,
@@ -387,7 +387,7 @@ class TestTopicForm(TestCase):
             'content': '[b]{}[/b]'.format(faker.text()),
             'topic_type': Topic.TYPE_CHOICES.topic_sticky,
         }
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         poll = TopicPollFactory.create(topic=self.post.topic)
         # Run
         form = TopicForm(

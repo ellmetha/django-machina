@@ -297,7 +297,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_create_polls(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
@@ -315,7 +315,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_can_handle_poll_previews(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
@@ -341,7 +341,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_can_create_a_poll_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
@@ -373,7 +373,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_cannot_create_polls_with_invalid_options(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum-conversation:topic-create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data_1 = {
@@ -628,7 +628,7 @@ class TestTopicUpdateView(BaseClientTestCase):
 
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_add_polls(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
@@ -650,7 +650,7 @@ class TestTopicUpdateView(BaseClientTestCase):
 
     def test_can_handle_poll_previews(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
@@ -681,7 +681,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         poll = TopicPollFactory.create(topic=self.topic)
         option_1 = TopicPollOptionFactory.create(poll=poll)
         option_2 = TopicPollOptionFactory.create(poll=poll)
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
@@ -711,7 +711,7 @@ class TestTopicUpdateView(BaseClientTestCase):
 
     def test_allows_poll_creations(self):
         # Setup
-        assign_perm('can_create_poll', self.user, self.top_level_forum)
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
             'forum-conversation:topic-update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,

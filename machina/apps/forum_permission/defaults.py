@@ -25,7 +25,7 @@ class PermissionConfig(object):
         {'codename': 'can_edit_own_posts', 'name': 'Can edit own posts', 'is_local': True, 'is_global': True},
         {'codename': 'can_post_without_approval', 'name': 'Can post without approval', 'is_local': True, 'is_global': True},
         # Polls
-        {'codename': 'can_create_poll', 'name': 'Can create poll', 'is_local': True, 'is_global': True},
+        {'codename': 'can_create_polls', 'name': 'Can create polls', 'is_local': True, 'is_global': True},
         {'codename': 'can_vote_in_polls', 'name': 'Can vote in polls', 'is_local': True, 'is_global': True},
         # Attachments
         {'codename': 'can_attach_file', 'name': 'Can attach file', 'is_local': True, 'is_global': True},

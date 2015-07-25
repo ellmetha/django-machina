@@ -201,7 +201,7 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_reply_to_topics',
     'can_edit_own_posts',
     'can_post_without_approval',
-    'can_create_poll',
+    'can_create_polls',
     'can_vote_in_polls',
     'can_download_file',
 ]

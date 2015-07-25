@@ -155,7 +155,7 @@ class PermissionHandler(object):
         """
         Given a forum, checks whether the user can add a topic with an embedded poll.
         """
-        return self._perform_basic_permission_check(forum, user, 'can_create_poll')
+        return self._perform_basic_permission_check(forum, user, 'can_create_polls')
 
     def can_vote_in_poll(self, poll, user):
         """
