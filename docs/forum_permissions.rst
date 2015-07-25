@@ -58,8 +58,8 @@ Built-in permissions
 +-------------------------------+-----------+--------------------------------------------------+
 | **Moderation**                                                                               |
 +-------------------------------+-----------+--------------------------------------------------+
-| ``can_close_topics``          | No        | **Moderation permission:** defines whether       |
-|                               |           | the target can close a forum topic               |
+| ``can_lock_topics``           | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can lock a forum topic                |
 +-------------------------------+-----------+--------------------------------------------------+
 | ``can_move_topics``           | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can move topics to another forum      |
@@ -79,8 +79,8 @@ Built-in permissions
 | ``can_approve_posts``         | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can approve unapproved posts          |
 +-------------------------------+-----------+--------------------------------------------------+
-| ``can_reply_to_closed_topic`` | No        | **Moderation permission:** defines whether       |
-|                               |           | the target can add posts in closed topics        |
+| ``can_reply_to_locked_topic`` | No        | **Moderation permission:** defines whether       |
+|                               |           | the target can add posts in locked topics        |
 +-------------------------------+-----------+--------------------------------------------------+
 
 Defining forum permissions

@@ -31,11 +31,11 @@ class PermissionConfig(object):
         {'codename': 'can_attach_file', 'name': 'Can attach file', 'is_local': True, 'is_global': True},
         {'codename': 'can_download_file', 'name': 'Can download file', 'is_local': True, 'is_global': True},
         # Moderation
-        {'codename': 'can_close_topics', 'name': 'Can move topics', 'is_local': True, 'is_global': False},
+        {'codename': 'can_lock_topics', 'name': 'Can lock topics', 'is_local': True, 'is_global': False},
         {'codename': 'can_move_topics', 'name': 'Can move topics', 'is_local': True, 'is_global': False},
         {'codename': 'can_edit_posts', 'name': 'Can edit posts', 'is_local': True, 'is_global': False},
         {'codename': 'can_delete_posts', 'name': 'Can delete posts', 'is_local': True, 'is_global': False},
         {'codename': 'can_move_posts', 'name': 'Can move posts', 'is_local': True, 'is_global': False},
         {'codename': 'can_approve_posts', 'name': 'Can approve posts', 'is_local': True, 'is_global': False},
-        {'codename': 'can_reply_to_closed_topic', 'name': 'Can add posts in locked topics', 'is_local': True, 'is_global': False}
+        {'codename': 'can_reply_to_locked_topics', 'name': 'Can add posts in locked topics', 'is_local': True, 'is_global': False}
     ]

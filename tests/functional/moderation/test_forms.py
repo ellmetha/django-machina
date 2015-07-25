@@ -58,7 +58,7 @@ class TestTopicMoveForm(object):
         assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
         assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
         assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
-        assign_perm('can_close_topics', self.user, self.top_level_forum)
+        assign_perm('can_lock_topics', self.user, self.top_level_forum)
 
     def test_cannot_validate_if_the_user_cannot_move_forums(self):
         # Setup

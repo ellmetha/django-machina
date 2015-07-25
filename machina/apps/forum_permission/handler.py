@@ -210,11 +210,11 @@ class PermissionHandler(object):
         moderated_forums = self._get_forums_for_user(user, perms)
         return moderated_forums.exists()
 
-    def can_close_topics(self, forum, user):
+    def can_lock_topics(self, forum, user):
         """
-        Given a forum, checks whether the user can close its topics.
+        Given a forum, checks whether the user can lock its topics.
         """
-        return self._perform_basic_permission_check(forum, user, 'can_close_topics')
+        return self._perform_basic_permission_check(forum, user, 'can_lock_topics')
 
     def can_move_topics(self, forum, user):
         """

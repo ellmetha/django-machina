@@ -74,7 +74,7 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
-        return self.request.forum_permission_handler.can_close_topics(obj, user)
+        return self.request.forum_permission_handler.can_lock_topics(obj, user)
 
 
 class TopicDeleteView(PermissionRequiredMixin, DeleteView):
