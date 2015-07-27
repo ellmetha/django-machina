@@ -13,6 +13,7 @@
         <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
         <ul class="dropdown-menu">
             {% if user_can_lock_topics and not topic.is_locked %}<li><a href="{% url 'forum-moderation:topic-lock' slug=topic.slug pk=topic.pk %}">{% trans "Lock topic" %}</a></li>{% endif %}
+            {% if user_can_lock_topics and topic.is_locked %}<li><a href="{% url 'forum-moderation:topic-unlock' slug=topic.slug pk=topic.pk %}">{% trans "Unlock topic" %}</a></li>{% endif %}
             {% if user_can_delete_topics %}<li><a href="{% url 'forum-moderation:topic-delete' slug=topic.slug pk=topic.pk %}">{% trans "Delete topic" %}</a></li>{% endif %}
             {% if user_can_move_topics %}<li><a href="{% url 'forum-moderation:topic-move' slug=topic.slug pk=topic.pk %}">{% trans "Move topic" %}</a></li>{% endif %}
         </ul>

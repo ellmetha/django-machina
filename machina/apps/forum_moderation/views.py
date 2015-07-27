@@ -77,6 +77,56 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
         return self.request.forum_permission_handler.can_lock_topics(obj, user)
 
 
+class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    A view providing the ability to unlock forum topics.
+    """
+    template_name = 'forum_moderation/topic_unlock.html'
+    context_object_name = 'topic'
+    success_message = _('This topic has been unlocked successfully.')
+    model = Topic
+
+    def unlock(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.status = Topic.STATUS_CHOICES.topic_unlocked
+        self.object.save()
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.unlock(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicUnlockView, self).get_context_data(**kwargs)
+
+        # Append the forum associated with the topic being locked
+        # to the context
+        topic = self.get_object()
+        context['forum'] = topic.forum
+
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+
+        return reverse('forum-conversation:topic', kwargs={
+            'forum_slug': self.object.forum.slug,
+            'forum_pk': self.object.forum.pk,
+            'slug': self.object.slug,
+            'pk': self.object.pk})
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object().forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_lock_topics(obj, user)
+
+
 class TopicDeleteView(PermissionRequiredMixin, DeleteView):
     """
     A view providing the ability to delete forum topics.
