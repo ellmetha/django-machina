@@ -93,6 +93,70 @@ class TestTopicLockView(BaseClientTestCase):
         assert topic_url in last_url
 
 
+class TestTopicUnlockView(BaseClientTestCase):
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Set up a top-level forum
+        self.top_level_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(
+            forum=self.top_level_forum, poster=self.user,
+            status=Topic.STATUS_CHOICES.topic_locked)
+        self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
+        assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_lock_topics', self.user, self.top_level_forum)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-unlock',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+
+    def test_can_unlock_topics(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-unlock',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        self.client.post(correct_url, follow=True)
+        # Check
+        topic = refresh(self.topic)
+        assert not topic.is_locked
+
+    def test_redirects_to_the_topic_view(self):
+        # Setup
+        correct_url = reverse(
+            'forum-moderation:topic-unlock',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.post(correct_url, follow=True)
+        # Check
+        topic_url = reverse(
+            'forum-conversation:topic',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        assert len(response.redirect_chain)
+        last_url, status_code = response.redirect_chain[-1]
+        assert topic_url in last_url
+
+
 class TestTopicDeleteView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
     def setup(self):
