@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
+import pytest
 
 # Local application / specific library imports
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
-from machina.test.testcases import BaseUnitTestCase
 
 Forum = get_model('forum', 'Forum')
 
 
-class TestForumManager(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestForumManager(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Set up the following forum tree:
         #
         #     top_level_cat
@@ -61,7 +65,7 @@ class TestForumManager(BaseUnitTestCase):
     def test_can_return_a_list_of_displayable_forums_from_the_root(self):
         # Run & check
         displayable_forums = Forum.objects.displayable_subforums()
-        self.assertQuerysetEqual(displayable_forums, [
+        assert set(displayable_forums) == set([
             self.top_level_cat,
             self.forum_1,
             self.forum_2,
@@ -77,14 +81,14 @@ class TestForumManager(BaseUnitTestCase):
     def test_can_return_a_list_of_displayable_forums_from_a_given_forum(self):
         # Run & check
         displayable_forums = Forum.objects.displayable_subforums(start_from=self.top_level_cat)
-        self.assertQuerysetEqual(displayable_forums, [
+        assert set(displayable_forums) == set([
             self.forum_1,
             self.forum_2,
             self.forum_2_child_1,
             self.forum_2_child_2])
         displayable_forums = Forum.objects.displayable_subforums(start_from=self.top_level_forum_3)
-        self.assertQuerysetEqual(displayable_forums, [
+        assert set(displayable_forums) == set([
             self.forum_3,
             self.forum_3_child_1])
         displayable_forums = Forum.objects.displayable_subforums(start_from=self.last_forum)
-        self.assertQuerysetEqual(displayable_forums, [])
+        assert list(displayable_forums) == []

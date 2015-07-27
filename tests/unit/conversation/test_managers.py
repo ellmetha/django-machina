@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
+import pytest
 
 # Local application / specific library imports
 from machina.test.factories import create_category_forum
@@ -11,14 +14,15 @@ from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 
-class TestApprovedManager(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestApprovedManager(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
 
         # Set up a top-level category
@@ -46,10 +50,10 @@ class TestApprovedManager(BaseUnitTestCase):
         # Run
         topics = Topic.approved_objects.all()
         # Check
-        self.assertQuerysetEqual(topics, [self.forum_1_topic, self.forum_3_topic, ])
+        assert set(topics) == set([self.forum_3_topic, self.forum_1_topic, ])
 
     def test_can_help_return_approved_posts(self):
         # Run
         posts = Post.approved_objects.all()
         # Check
-        self.assertQuerysetEqual(posts, [self.post_1, self.post_2, ])
+        assert set(posts) == set([self.post_1, self.post_2, ])

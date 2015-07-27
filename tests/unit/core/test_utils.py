@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.test import TestCase
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum.models import Forum
@@ -14,8 +16,10 @@ from machina.test.factories import create_forum
 faker = FakerFactory.create()
 
 
-class TestCoreUtils(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestCoreUtils(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.forum = create_forum()
 
     def test_can_be_used_to_refresh_a_model_instance(self):
@@ -25,9 +29,9 @@ class TestCoreUtils(TestCase):
         # Run
         Forum.objects.all().update(name=new_forum_name)
         # Check
-        self.assertEqual(self.forum.name, forum_name)
+        assert self.forum.name == forum_name
         forum = refresh(self.forum)
-        self.assertEqual(forum.name, new_forum_name)
+        assert forum.name == new_forum_name
 
     def test_can_get_an_object_or_none(self):
         # Setup
@@ -36,5 +40,5 @@ class TestCoreUtils(TestCase):
         forum = get_object_or_none(Forum, pk=forum_pk)
         unknown_forum = get_object_or_none(Forum, pk=10000)
         # Check
-        self.assertEqual(self.forum.pk, forum.pk)
-        self.assertIsNone(unknown_forum)
+        assert self.forum.pk == forum.pk
+        assert unknown_forum is None

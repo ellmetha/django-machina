@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.template import Context
 from django.template import TemplateSyntaxError
 from django.template.base import Template
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
@@ -26,8 +28,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestGetPermissionTag(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestGetPermissionTag(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load url from future %}{% load forum_permission_tags %}'
         self.request_factory = RequestFactory()
 
@@ -74,9 +78,9 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_approve_posts', self.moderators, self.top_level_cat)
 
         # Run & check
-        self.assertEqual(get_rendered(self.superuser), 'CAN_ACCESS')
-        self.assertEqual(get_rendered(self.moderator), 'CAN_ACCESS')
-        self.assertEqual(get_rendered(self.u1), 'CANNOT_ACCESS')
+        assert get_rendered(self.superuser) == 'CAN_ACCESS'
+        assert get_rendered(self.moderator) == 'CAN_ACCESS'
+        assert get_rendered(self.u1) == 'CANNOT_ACCESS'
 
     def test_can_tell_if_a_user_can_download_files_attached_to_a_specific_post(self):
         # Setup
@@ -106,10 +110,10 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_download_file', self.g1, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'CAN_DOWNLOAD')
-        self.assertEqual(get_rendered(self.post_2, self.u1), 'CANNOT_DOWNLOAD')
-        self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_DOWNLOAD')
-        self.assertEqual(get_rendered(self.post_2, self.superuser), 'CAN_DOWNLOAD')
+        assert get_rendered(self.post_1, self.u1) == 'CAN_DOWNLOAD'
+        assert get_rendered(self.post_2, self.u1) == 'CANNOT_DOWNLOAD'
+        assert get_rendered(self.post_1, self.superuser) == 'CAN_DOWNLOAD'
+        assert get_rendered(self.post_2, self.superuser) == 'CAN_DOWNLOAD'
 
     def test_can_tell_if_the_user_can_edit_a_post(self):
         # Setup
@@ -138,10 +142,10 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_delete_posts', self.moderators, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'CAN_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_EDIT')
-        self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_EDIT')
+        assert get_rendered(self.post_1, self.u1) == 'CAN_EDIT'
+        assert get_rendered(self.post_1, self.u2) == 'CANNOT_EDIT'
+        assert get_rendered(self.post_1, self.moderator) == 'CAN_EDIT'
+        assert get_rendered(self.post_1, self.superuser) == 'CAN_EDIT'
 
     def test_can_tell_if_the_user_can_delete_a_post(self):
         # Setup
@@ -170,10 +174,10 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_delete_posts', self.moderators, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'CAN_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.u2), 'CANNOT_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.moderator), 'CAN_DELETE')
-        self.assertEqual(get_rendered(self.post_1, self.superuser), 'CAN_DELETE')
+        assert get_rendered(self.post_1, self.u1) == 'CAN_DELETE'
+        assert get_rendered(self.post_1, self.u2) == 'CANNOT_DELETE'
+        assert get_rendered(self.post_1, self.moderator) == 'CAN_DELETE'
+        assert get_rendered(self.post_1, self.superuser) == 'CAN_DELETE'
 
     def test_can_tell_if_the_user_can_reply_to_topics(self):
         # Setup
@@ -202,10 +206,10 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_delete_posts', self.moderators, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.forum_1_topic, self.u1), 'CAN_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_2_topic, self.u1), 'CANNOT_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_1_topic, self.superuser), 'CAN_ADD_POST')
-        self.assertEqual(get_rendered(self.forum_2_topic, self.superuser), 'CAN_ADD_POST')
+        assert get_rendered(self.forum_1_topic, self.u1) == 'CAN_ADD_POST'
+        assert get_rendered(self.forum_2_topic, self.u1) == 'CANNOT_ADD_POST'
+        assert get_rendered(self.forum_1_topic, self.superuser) == 'CAN_ADD_POST'
+        assert get_rendered(self.forum_2_topic, self.superuser) == 'CAN_ADD_POST'
 
     def test_can_tell_if_a_user_can_vote_in_a_poll(self):
         # Setup
@@ -238,10 +242,10 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_vote_in_polls', self.g1, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.poll_1, self.u1), 'CAN_VOTE')
-        self.assertEqual(get_rendered(self.poll_2, self.u1), 'CANNOT_VOTE')
-        self.assertEqual(get_rendered(self.poll_1, self.superuser), 'CAN_VOTE')
-        self.assertEqual(get_rendered(self.poll_2, self.superuser), 'CAN_VOTE')
+        assert get_rendered(self.poll_1, self.u1) == 'CAN_VOTE'
+        assert get_rendered(self.poll_2, self.u1) == 'CANNOT_VOTE'
+        assert get_rendered(self.poll_1, self.superuser) == 'CAN_VOTE'
+        assert get_rendered(self.poll_2, self.superuser) == 'CAN_VOTE'
 
     def test_can_tell_if_a_user_can_create_topics(self):
         # Setup
@@ -260,8 +264,8 @@ class TestGetPermissionTag(TestCase):
         assign_perm('can_start_new_topics', self.u1, self.forum_1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.forum_1, self.u1), 'CAN_START_TOPICS')
-        self.assertEqual(get_rendered(self.forum_2, self.u2), 'CANNOT_START_TOPICS')
+        assert get_rendered(self.forum_1, self.u1) == 'CAN_START_TOPICS'
+        assert get_rendered(self.forum_2, self.u2) == 'CANNOT_START_TOPICS'
 
     def test_raises_if_the_required_arguments_are_not_passed(self):
         # Setup
@@ -290,5 +294,5 @@ class TestGetPermissionTag(TestCase):
         # Run & check
         for raw_template in templates:
             t = Template(self.loadstatement + raw_template)
-            with self.assertRaises(TemplateSyntaxError):
+            with pytest.raises(TemplateSyntaxError):
                 t.render(context)

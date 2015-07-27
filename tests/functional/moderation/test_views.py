@@ -32,9 +32,8 @@ remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestTopicLockView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicLockView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -64,7 +63,7 @@ class TestTopicLockView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_can_lock_topics(self):
         # Setup
@@ -89,15 +88,14 @@ class TestTopicLockView(BaseClientTestCase):
             'forum-conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
 
 
 class TestTopicDeleteView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicDeleteView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -127,7 +125,7 @@ class TestTopicDeleteView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_can_delete_topics(self):
         # Setup
@@ -151,15 +149,14 @@ class TestTopicDeleteView(BaseClientTestCase):
         forum_url = reverse(
             'forum:forum',
             kwargs={'slug': self.top_level_forum.slug, 'pk': self.top_level_forum.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert forum_url in last_url
 
 
 class TestTopicMoveView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicMoveView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -191,7 +188,7 @@ class TestTopicMoveView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_can_move_topics(self):
         # Setup

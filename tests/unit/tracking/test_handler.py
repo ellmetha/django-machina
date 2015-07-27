@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.contrib.auth import get_user
 from django.db.models import get_model
 from django.test.client import Client
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -18,7 +21,6 @@ from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicReadTrackFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 faker = FakerFactory.create()
 
@@ -30,8 +32,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
-class TestTrackingHandler(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTrackingHandler(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
         self.u2 = UserFactory.create()
         self.g1 = GroupFactory.create()
@@ -74,7 +78,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), u3)
         # Check
-        self.assertFalse(len(unread_forums))
+        assert not len(unread_forums)
 
     def test_cannot_say_that_a_forum_is_unread_if_it_is_not_visible_by_the_user(self):
         # Setup
@@ -83,7 +87,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
         # Check
-        self.assertNotIn(self.forum_3, unread_forums)
+        assert self.forum_3 not in unread_forums
 
     def test_says_that_all_topics_are_read_for_users_that_are_not_authenticated(self):
         # Setup
@@ -91,12 +95,12 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), u3)
         # Check
-        self.assertFalse(len(unread_topics))
+        assert not len(unread_topics)
 
     def test_returns_an_empty_list_of_topics_if_the_forum_has_no_topics(self):
         # Run & check
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.u2)
-        self.assertFalse(len(unread_topics))
+        assert not len(unread_topics)
 
     def test_says_that_a_topic_with_a_creation_date_greater_than_the_forum_mark_time_is_unread(self):
         # Setup
@@ -105,7 +109,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
-        self.assertEqual(unread_topics, [new_topic, ])
+        assert unread_topics == [new_topic, ]
 
     def test_says_that_a_topic_with_a_last_post_date_greater_than_the_forum_mark_time_is_unread(self):
         # Setup
@@ -113,7 +117,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
-        self.assertEqual(unread_topics, [self.topic, ])
+        assert unread_topics == [self.topic, ]
 
     def test_says_that_a_topic_with_a_last_post_date_greater_than_its_mark_time_is_unread(self):
         # Setup
@@ -122,7 +126,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
-        self.assertEqual(unread_topics, [self.topic, ])
+        assert unread_topics == [self.topic, ]
 
     def test_says_that_a_topic_is_unread_if_the_related_forum_is_not_marked(self):
         # Setup
@@ -131,7 +135,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_3.topics.all(), self.u2)
         # Check
-        self.assertEqual(unread_topics, [new_topic, ])
+        assert unread_topics == [new_topic, ]
 
     def test_cannot_say_that_a_topic_is_unread_if_it_has_been_marked(self):
         # Setup
@@ -141,7 +145,7 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
-        self.assertEqual(unread_topics, [new_topic, ])
+        assert unread_topics == [new_topic, ]
 
     def test_cannot_say_that_a_topic_is_unread_if_it_has_been_edited(self):
         # Setup
@@ -153,8 +157,8 @@ class TestTrackingHandler(BaseUnitTestCase):
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
-        self.assertFalse(len(unread_forums))
-        self.assertFalse(len(unread_topics))
+        assert not len(unread_forums)
+        assert not len(unread_topics)
 
     def test_cannot_say_that_a_forum_is_unread_if_it_has_been_updated_without_new_topics_or_posts(self):
         # Setup
@@ -162,4 +166,4 @@ class TestTrackingHandler(BaseUnitTestCase):
         # Run
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
         # Check
-        self.assertFalse(len(unread_forums))
+        assert not len(unread_forums)

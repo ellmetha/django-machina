@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.exceptions import ValidationError
+import pytest
 
 # Local application / specific library imports
 from machina.test.factories import create_forum
@@ -12,11 +15,12 @@ from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 
-class TestTopicPoll(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTopicPoll(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
 
         # Set up a top-level forum, an associated topic and a post
@@ -26,13 +30,13 @@ class TestTopicPoll(BaseUnitTestCase):
 
     def test_cannot_save_a_poll_for_which_the_users_cannot_choose_any_option(self):
         # Run & Check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             poll = TopicPollFactory.build(topic=self.topic, max_options=0)
             poll.full_clean()
 
     def test_cannot_save_a_poll_for_which_the_users_can_choose_too_many_options(self):
         # Run & Check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             poll = TopicPollFactory.build(topic=self.topic, max_options=50)
             poll.full_clean()
 
@@ -47,11 +51,13 @@ class TestTopicPoll(BaseUnitTestCase):
         vote_2 = TopicPollVoteFactory.create(poll_option=option_2, voter=self.u1)
         vote_3 = TopicPollVoteFactory.create(poll_option=option_2, voter=u2)
         # Check
-        self.assertQuerysetEqual(poll.votes, [vote_1, vote_2, vote_3])
+        assert set(poll.votes) == set([vote_1, vote_2, vote_3])
 
 
-class TestTopicPollOption(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTopicPollOption(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
 
         # Set up a top-level forum, an associated topic and a post
@@ -70,5 +76,5 @@ class TestTopicPollOption(BaseUnitTestCase):
         TopicPollVoteFactory.create(poll_option=option_1, voter=u2)
         TopicPollVoteFactory.create(poll_option=option_2, voter=u2)
         # Run & check
-        self.assertEqual(option_1.percentage, 50)
-        self.assertEqual(option_2.percentage, 50)
+        assert option_1.percentage == 50
+        assert option_2.percentage == 50

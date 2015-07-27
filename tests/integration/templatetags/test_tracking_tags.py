@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
@@ -27,7 +29,9 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
-class BaseTrackingTagsTestCase(TestCase):
+@pytest.mark.django_db
+class BaseTrackingTagsTestCase(object):
+    @pytest.fixture(autouse=True)
     def setUp(self):
         self.loadstatement = '{% load url from future %}{% load forum_tracking_tags %}'
         self.request_factory = RequestFactory()
@@ -78,21 +82,21 @@ class TestUnreadForumsTag(BaseTrackingTagsTestCase):
 
         # Run & check
         context, rendered = get_rendered(Forum.objects.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertEqual(set(context['unread_forums']), set([self.top_level_cat, self.forum_1, self.forum_2, ]))
+        assert rendered == ''
+        assert set(context['unread_forums']) == set([self.top_level_cat, self.forum_1, self.forum_2, ])
 
         # forum_1 and forum_2 are now read
         ForumReadTrackFactory.create(forum=self.forum_1, user=self.u2)
         ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
         context, rendered = get_rendered(Forum.objects.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertFalse(len(context['unread_forums']))
+        assert rendered == ''
+        assert not len(context['unread_forums'])
 
         # A new post is created
         PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
         context, rendered = get_rendered(Forum.objects.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertEqual(set(context['unread_forums']), set([self.forum_2, self.top_level_cat]))
+        assert rendered == ''
+        assert set(context['unread_forums']) == set([self.forum_2, self.top_level_cat])
 
 
 class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
@@ -110,24 +114,24 @@ class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
 
         # Run & check
         context, rendered = get_rendered(self.forum_2.topics.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertEqual(set(context['unread_topics']), set(self.forum_2.topics.all()))
+        assert rendered == ''
+        assert set(context['unread_topics']) == set(self.forum_2.topics.all())
 
         # forum_2 topics are now read
         TopicReadTrackFactory.create(topic=self.forum_2_topic, user=self.u2)
         context, rendered = get_rendered(self.forum_2.topics.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertFalse(len(context['unread_topics']))
+        assert rendered == ''
+        assert not len(context['unread_topics'])
 
         # A new post is created with a pre-existing topic track
         PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
         context, rendered = get_rendered(self.forum_2.topics.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertEqual(set(context['unread_topics']), set(self.forum_2.topics.all()))
+        assert rendered == ''
+        assert set(context['unread_topics']) == set(self.forum_2.topics.all())
 
         # A new post is created with a pre-existing forum track
         ForumReadTrackFactory.create(forum=self.forum_1, user=self.u2)
         PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         context, rendered = get_rendered(self.forum_1.topics.all(), self.u2)
-        self.assertEqual(rendered, '')
-        self.assertEqual(set(context['unread_topics']), set(self.forum_1.topics.all()))
+        assert rendered == ''
+        assert set(context['unread_topics']) == set(self.forum_1.topics.all())

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -28,8 +30,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class BasePollsTagsTestCase(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class BasePollsTagsTestCase(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load url from future %}{% load forum_polls_tags %}'
         self.request_factory = RequestFactory()
 
@@ -94,5 +98,5 @@ class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
         TopicPollVoteFactory.create(poll_option=poll_option_1, voter=self.u1)
 
         # Run & check
-        self.assertEqual(get_rendered(self.poll_1, self.u1), 'HAS_VOTED')
-        self.assertEqual(get_rendered(self.poll_2, self.u1), 'HAS_NOT_VOTED')
+        assert get_rendered(self.poll_1, self.u1) == 'HAS_VOTED'
+        assert get_rendered(self.poll_2, self.u1) == 'HAS_NOT_VOTED'

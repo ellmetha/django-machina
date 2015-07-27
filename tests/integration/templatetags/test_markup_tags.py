@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.template import Context
 from django.template.base import Template
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 
 
-class TestRenderedTag(TestCase):
-    def setUp(self):
+class TestRenderedTag(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load url from future %}{% load forum_markup_tags %}'
         self.request_factory = RequestFactory()
 
@@ -25,4 +28,4 @@ class TestRenderedTag(TestCase):
 
             return rendered
 
-        self.assertEqual(get_rendered('**This is a test**'), '<p><strong>This is a test</strong></p>')
+        assert get_rendered('**This is a test**') == '<p><strong>This is a test</strong></p>'

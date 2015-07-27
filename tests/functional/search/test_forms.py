@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from faker import Factory as FakerFactory
 from haystack.management.commands import clear_index
 from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_search.forms import SearchForm
@@ -16,7 +19,6 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 faker = FakerFactory.create()
 
@@ -27,8 +29,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestSearchForm(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestSearchForm(object):
+    @pytest.yield_fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -91,7 +95,11 @@ class TestSearchForm(BaseUnitTestCase):
 
         rebuild_index.Command().handle(interactive=False, verbosity=-1)
 
-    def tearDown(self):
+        yield
+
+        # teardown
+        # --
+
         clear_index.Command().handle(interactive=False, verbosity=-1)
 
     def test_can_search_forum_posts(self):
@@ -103,8 +111,8 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertEqual(results[0].forum, self.topic_1.forum.pk)
+        assert form.is_valid()
+        assert results[0].forum == self.topic_1.forum.pk
 
     def test_cannot_search_forum_posts_if_the_user_has_not_the_required_permissions(self):
         # Setup
@@ -116,8 +124,8 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertFalse(len(results))
+        assert form.is_valid()
+        assert not len(results)
 
     def test_cannot_search_forum_posts_if_the_form_is_not_valid(self):
         # Setup
@@ -131,7 +139,7 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertFalse(len(results))
+        assert not len(results)
 
     def test_can_search_forum_posts_by_using_only_topic_subjects(self):
         # Setup
@@ -146,8 +154,8 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertEqual(results[0].forum, self.topic_1.forum.pk)
+        assert form.is_valid()
+        assert results[0].forum == self.topic_1.forum.pk
 
     def test_can_search_forum_posts_by_using_the_poster_name(self):
         # Setup
@@ -167,10 +175,8 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertQuerysetEqual(
-            [r.object for r in results],
-            [self.post_1, self.post_2, self.post_3, ])
+        assert form.is_valid()
+        assert [r.object for r in results] == [self.post_1, self.post_2, self.post_3, ]
 
     def test_can_search_forum_posts_by_using_a_set_of_forums(self):
         # Setup
@@ -188,7 +194,5 @@ class TestSearchForm(BaseUnitTestCase):
         # Run
         results = form.search()
         # Check
-        self.assertTrue(form.is_valid())
-        self.assertQuerysetEqual(
-            [r.object for r in results],
-            [self.post_1, self.post_2, ])
+        assert form.is_valid()
+        assert [r.object for r in results] == [self.post_1, self.post_2, ]

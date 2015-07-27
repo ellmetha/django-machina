@@ -1,46 +1,20 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.test.client import Client
+import pytest
 
 # Local application / specific library imports
 
 
-class BaseUnitTestCase(TestCase):
+@pytest.mark.django_db
+class BaseClientTestCase(object):
     """
-    Shortcut TestCase providing some useful assertion method that can
-    be used for unit testing models, backend protocols, etc.
-    """
-
-    def assertQuerysetEqual(self, qs1, qs2):
-        """
-        Check whether the two querysets are equal.
-        """
-        pk = lambda obj: obj.pk
-        return self.assertEqual(
-            list(sorted(qs1, key=pk)),
-            list(sorted(qs2, key=pk))
-        )
-
-
-def add_permissions(user, permissions):
-    """
-    Add a set of permissions to a given user.
-    """
-    for permission in permissions:
-        app_label, _, codename = permission.partition('.')
-        perm = Permission.objects.get(content_type__app_label=app_label,
-                                      codename=codename)
-        user.user_permissions.add(perm)
-
-
-class BaseClientTestCase(BaseUnitTestCase):
-    """
-    Shortcut TestCase for using Django's test client and avoid boilerplate code
+    Shortcut class for using Django's test client and avoid boilerplate code
     such as user login or user creation.
     """
     username = 'dummyuser'
@@ -51,7 +25,8 @@ class BaseClientTestCase(BaseUnitTestCase):
     is_superuser = False
     permissions = []
 
-    def setUp(self):
+    @pytest.fixture(autouse=True)
+    def _setup_client(self):
         self.client = Client()
         if not self.is_anonymous:
             self.login()
@@ -69,21 +44,7 @@ class BaseClientTestCase(BaseUnitTestCase):
         user.is_staff = is_staff or self.is_staff
         user.is_superuser = is_superuser or self.is_superuser
         user.save()
-        perms = permissions if permissions is not None else self.permissions
-        add_permissions(user, perms)
         return user
-
-    def assertIsOk(self, response):
-        self.assertEqual(response.status_code, 200)
-
-    def assertIsNotOk(self, response):
-        self.assertTrue(response.status_code in (404, 403))
-
-    def assertIsRedirect(self, response):
-        self.assertTrue(response.status_code in (302, 301))
-
-    def assertIsForbidden(self, response):
-        self.assertEqual(response.status_code, 403)
 
 
 class AdminClientTestCase(BaseClientTestCase):

@@ -5,6 +5,7 @@
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -28,9 +29,8 @@ TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
 class TestMarkForumsReadView(BaseClientTestCase):
-    def setUp(self):
-        super(TestMarkForumsReadView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Add some users
         self.u1 = UserFactory.create()
         self.u2 = UserFactory.create()
@@ -78,8 +78,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
         response_1 = self.client.get(correct_url_1, follow=True)
         response_2 = self.client.get(correct_url_2, follow=True)
         # Check
-        self.assertIsOk(response_1)
-        self.assertIsOk(response_2)
+        assert response_1.status_code == 200
+        assert response_2.status_code == 200
 
     def test_can_mark_all_readable_forums_read(self):
         # Setup
@@ -89,9 +89,9 @@ class TestMarkForumsReadView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.user), [])
+        assert response.status_code == 200
+        assert list(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.user)) == []
 
     def test_can_mark_subforums_read(self):
         # Setup
@@ -103,17 +103,16 @@ class TestMarkForumsReadView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(self.tracks_handler.get_unread_forums(
-            self.top_level_cat_1.get_descendants(include_self=True), self.user), [])
-        self.assertQuerysetEqual(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.user), [self.top_level_cat_2, self.forum_4, ])
+        assert response.status_code == 200
+        assert list(self.tracks_handler.get_unread_forums(
+            self.top_level_cat_1.get_descendants(include_self=True), self.user)) == []
+        assert list(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.user)) == [self.top_level_cat_2, self.forum_4, ]
 
 
 class TestMarkTopicsReadView(BaseClientTestCase):
-    def setUp(self):
-        super(TestMarkTopicsReadView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Add some users
         self.u1 = UserFactory.create()
         self.u2 = UserFactory.create()
@@ -159,7 +158,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_can_mark_forum_topics_read(self):
         # Setup
@@ -169,10 +168,8 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(
-            self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.user),
-            [])
+        assert response.status_code == 200
+        assert list(self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.user)) == []
 
     def test_do_not_perform_anything_if_the_user_has_not_the_required_permission(self):
         # Setup
@@ -181,13 +178,12 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsForbidden(response)
+        assert response.status_code == 403
 
 
 class TestUnreadTopicsView(BaseClientTestCase):
-    def setUp(self):
-        super(TestUnreadTopicsView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Add some users
         self.u1 = UserFactory.create()
         self.u2 = UserFactory.create()
@@ -233,7 +229,7 @@ class TestUnreadTopicsView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_insert_unred_topics_in_context(self):
         # Setup
@@ -243,5 +239,5 @@ class TestUnreadTopicsView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(response.context_data['topics'], [new_topic, ])
+        assert response.status_code == 200
+        assert list(response.context_data['topics']) == [new_topic, ]

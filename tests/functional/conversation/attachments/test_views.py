@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
 import os
 
 # Third party imports
@@ -8,6 +9,7 @@ from django.conf import settings
 from django.core.files import File
 from django.db.models import get_model
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -31,9 +33,8 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestAttachmentView(BaseClientTestCase):
-    def setUp(self):
-        super(TestAttachmentView, self).setUp()
-
+    @pytest.yield_fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -57,7 +58,11 @@ class TestAttachmentView(BaseClientTestCase):
         assign_perm('can_read_forum', self.user, self.top_level_forum)
         assign_perm('can_download_file', self.user, self.top_level_forum)
 
-    def tearDown(self):
+        yield
+
+        # teardown
+        # --
+
         self.attachment_file.close()
         attachments = Attachment.objects.all()
         for attachment in attachments:
@@ -72,7 +77,7 @@ class TestAttachmentView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_embed_the_correct_http_headers_in_the_response(self):
         # Setup
@@ -81,9 +86,9 @@ class TestAttachmentView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertEqual(response['Content-Type'], 'image/jpeg')
-        self.assertEqual(response['Content-Disposition'], 'attachment; filename={}'.format(filename))
+        assert response.status_code == 200
+        assert response['Content-Type'] == 'image/jpeg'
+        assert response['Content-Disposition'] == 'attachment; filename={}'.format(filename)
 
     def test_is_able_to_handle_unknown_file_content_types(self):
         # Setup
@@ -95,7 +100,7 @@ class TestAttachmentView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertEqual(response['Content-Type'], 'text/plain')
+        assert response.status_code == 200
+        assert response['Content-Type'] == 'text/plain'
         attachment_file.close()
         attachment.file.delete()

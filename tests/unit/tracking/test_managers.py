@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
+import pytest
 
 # Local application / specific library imports
 from machina.test.factories import create_category_forum
@@ -12,13 +15,14 @@ from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 
 
-class TestForumReadTrackManager(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestForumReadTrackManager(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
         self.u2 = UserFactory.create()
 
@@ -47,7 +51,7 @@ class TestForumReadTrackManager(BaseUnitTestCase):
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
         # Check
-        self.assertIn(self.forum_2, unread_forums)
+        assert self.forum_2 in unread_forums
 
     def test_tells_that_the_ancestors_of_an_unread_forum_are_also_unread(self):
         # Setup
@@ -57,7 +61,7 @@ class TestForumReadTrackManager(BaseUnitTestCase):
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
         # Check
-        self.assertQuerysetEqual(unread_forums, [
+        assert set(unread_forums) == set([
             self.top_level_cat_1,
             self.forum_2])
 
@@ -69,7 +73,7 @@ class TestForumReadTrackManager(BaseUnitTestCase):
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u2)
         # Check
-        self.assertNotIn(self.forum_2_child_2, unread_forums)
+        assert self.forum_2_child_2 not in unread_forums
 
     def test_considers_a_forum_as_unread_without_tracks_if_it_has_topics(self):
         # Setup
@@ -80,4 +84,4 @@ class TestForumReadTrackManager(BaseUnitTestCase):
             self.top_level_cat_1.get_descendants(include_self=True),
             self.u1)
         # Check
-        self.assertIn(self.forum_2_child_2, unread_forums)
+        assert self.forum_2_child_2 in unread_forums

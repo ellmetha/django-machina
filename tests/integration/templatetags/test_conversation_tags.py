@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -26,8 +28,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class BaseConversationTagsTestCase(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class BaseConversationTagsTestCase(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load url from future %}{% load forum_conversation_tags %}'
         self.request_factory = RequestFactory()
 
@@ -84,8 +88,8 @@ class TestPostedByTag(BaseConversationTagsTestCase):
             return rendered
 
         # Run & check
-        self.assertEqual(get_rendered(self.post_1, self.u1), 'OWNER')
-        self.assertEqual(get_rendered(self.post_2, self.u1), 'NO_OWNER')
+        assert get_rendered(self.post_1, self.u1) == 'OWNER'
+        assert get_rendered(self.post_2, self.u1) == 'NO_OWNER'
 
 
 class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
@@ -124,5 +128,5 @@ class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
         rendered_huge = get_rendered(self.forum_2_topic)
 
         # Check
-        self.assertEqual(rendered_small, expected_out_small)
-        self.assertEqual(rendered_huge, expected_out_huge)
+        assert rendered_small == expected_out_small
+        assert rendered_huge == expected_out_huge

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.urlresolvers import reverse
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -19,9 +22,8 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestUserTopicsView(BaseClientTestCase):
-    def setUp(self):
-        super(TestUserTopicsView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Add some users
         self.u1 = UserFactory.create()
         self.g1 = GroupFactory.create()
@@ -62,7 +64,7 @@ class TestUserTopicsView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_insert_only_topics_where_the_considered_user_participated_in_the_context(self):
         # Setup
@@ -70,10 +72,8 @@ class TestUserTopicsView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(
-            response.context_data['topics'],
-            [self.topic_4, self.topic_2, self.topic_1, ])
+        assert response.status_code == 200
+        assert list(response.context_data['topics']) == [self.topic_4, self.topic_2, self.topic_1, ]
 
     def test_does_not_consider_non_approved_posts(self):
         # Setup
@@ -83,7 +83,5 @@ class TestUserTopicsView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
-        self.assertQuerysetEqual(
-            response.context_data['topics'],
-            [self.topic_4, self.topic_2, self.topic_1, ])
+        assert response.status_code == 200
+        assert list(response.context_data['topics']) == [self.topic_4, self.topic_2, self.topic_1, ]

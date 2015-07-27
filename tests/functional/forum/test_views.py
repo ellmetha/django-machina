@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum.signals import forum_viewed
@@ -20,9 +23,8 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestForumView(BaseClientTestCase):
-    def setUp(self):
-        super(TestForumView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -40,7 +42,7 @@ class TestForumView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_triggers_a_viewed_signal(self):
         # Setup
@@ -51,7 +53,7 @@ class TestForumView(BaseClientTestCase):
         for url in [forum_url, link_url]:
             with mock_signal_receiver(forum_viewed) as receiver:
                 self.client.get(url)
-                self.assertEqual(receiver.call_count, 1)
+                assert receiver.call_count == 1
 
     def test_redirects_to_the_link_of_a_link_forum(self):
         # Setup
@@ -59,8 +61,8 @@ class TestForumView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url)
         # Check
-        self.assertIsRedirect(response)
-        self.assertEqual(response['Location'], self.top_level_link.link)
+        assert response.status_code == 302
+        assert response['Location'] == self.top_level_link.link
 
     def test_increases_the_redirects_counter_of_a_link_forum(self):
         # Setup
@@ -70,4 +72,4 @@ class TestForumView(BaseClientTestCase):
         self.client.get(correct_url)
         # Check
         top_level_link = self.top_level_link.__class__._default_manager.get(pk=self.top_level_link.pk)
-        self.assertEqual(top_level_link.link_redirects_count, initial_redirects_count + 1)
+        assert top_level_link.link_redirects_count == initial_redirects_count + 1

@@ -13,7 +13,6 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
 from django.core.files import File
-from django.test import TestCase
 from django.utils.six import BytesIO
 import pytest
 
@@ -26,7 +25,8 @@ from tests.models import RESIZED_IMAGE_WIDTH
 from tests.models import TestableModel
 
 
-class TestMarkupTextField(TestCase):
+@pytest.mark.django_db
+class TestMarkupTextField(object):
     # The following tests involve the django-markdown
     # app. This one can be used with Machina in order to
     # provide a support for the Markdown syntax. But instead
@@ -123,8 +123,10 @@ class TestMarkupTextField(TestCase):
         machina_settings.MACHINA_MARKUP_WIDGET = None
 
 
-class TestExtendedImageField(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestExtendedImageField(object):
+    @pytest.yield_fixture(autouse=True)
+    def setup(self):
         # Set up some images used for doing image tests
         images_dict = {}
 
@@ -146,7 +148,11 @@ class TestExtendedImageField(TestCase):
 
         self.images_dict = images_dict
 
-    def tearDown(self):
+        yield
+
+        # teardown
+        # --
+
         for img in self.images_dict.values():
             img.close()
         tests = TestableModel.objects.all()

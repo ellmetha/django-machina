@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
@@ -8,6 +10,7 @@ from faker import Factory as FakerFactory
 from haystack.management.commands import clear_index
 from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -27,9 +30,8 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestFacetedSearchView(BaseClientTestCase):
-    def setUp(self):
-        super(TestFacetedSearchView, self).setUp()
-
+    @pytest.yield_fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -89,7 +91,11 @@ class TestFacetedSearchView(BaseClientTestCase):
 
         rebuild_index.Command().handle(interactive=False, verbosity=-1)
 
-    def tearDown(self):
+        yield
+
+        # teardown
+        # --
+
         clear_index.Command().handle(interactive=False, verbosity=-1)
 
     def test_can_search_forum_posts(self):
@@ -99,6 +105,6 @@ class TestFacetedSearchView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, data=get_data)
         # Check
-        self.assertIsOk(response)
-        self.assertEqual(len(response.context['page'].object_list), 1)
-        self.assertEqual(response.context['page'].object_list[0].object, self.post_1)
+        assert response.status_code == 200
+        assert len(response.context['page'].object_list) == 1
+        assert response.context['page'].object_list[0].object == self.post_1

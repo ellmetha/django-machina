@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_feeds.feeds import LastTopicsFeed
@@ -13,7 +16,6 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
@@ -22,8 +24,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestLastTopicsFeed(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestLastTopicsFeed(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.factory = RequestFactory()
         self.user = UserFactory.create()
 
@@ -88,7 +92,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         feed.get_object(request)
         topics = feed.items()
         # Check
-        self.assertQuerysetEqual(topics, [self.topic_1, self.topic_2, self.topic_3, ])
+        assert list(topics) == [self.topic_3, self.topic_2, self.topic_1, ]
 
     def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_without_its_descendants(self):
         # Setup
@@ -99,7 +103,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         feed.get_object(request, forum_pk=self.forum_2.pk, descendants=False)
         topics = feed.items()
         # Check
-        self.assertQuerysetEqual(topics, [self.topic_2, ])
+        assert list(topics) == [self.topic_2, ]
 
     def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_including_its_descendants(self):
         # Setup
@@ -110,7 +114,7 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         feed.get_object(request, forum_pk=self.forum_2.pk, descendants=True)
         topics = feed.items()
         # Check
-        self.assertQuerysetEqual(topics, [self.topic_2, self.topic_3, ])
+        assert list(topics) == [self.topic_3, self.topic_2, ]
 
     def test_plucation_dates_correspond_to_the_topic_creation_dates(self):
         # Setup
@@ -118,4 +122,4 @@ class TestLastTopicsFeed(BaseUnitTestCase):
         request = self.factory.get('/')
         request.user = self.user
         # Run & check
-        self.assertEqual(feed.item_pubdate(self.topic_2), self.topic_2.created)
+        assert feed.item_pubdate(self.topic_2) == self.topic_2.created

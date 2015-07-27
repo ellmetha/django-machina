@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
-from django.test import TestCase
 from django.test.client import RequestFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
@@ -26,8 +28,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestForumLastPostTag(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestForumLastPostTag(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load url from future %}{% load forum_tags %}'
         self.user = UserFactory.create()
 
@@ -58,12 +62,14 @@ class TestForumLastPostTag(TestCase):
         # Run
         rendered = t.render(c)
         # Check
-        self.assertEqual(rendered, '')
-        self.assertEqual(c['var'], self.post_1)
+        assert rendered == ''
+        assert c['var'] == self.post_1
 
 
-class TestForumListTag(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestForumListTag(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.loadstatement = '{% load forum_tags %}'
         self.request_factory = RequestFactory()
         self.user = UserFactory.create()
@@ -96,5 +102,5 @@ class TestForumListTag(TestCase):
         # Run
         rendered = t.render(c)
         # Check
-        self.assertNotEqual(rendered, '')
-        self.assertEqual(rendered, expected_out)
+        assert rendered != ''
+        assert rendered == expected_out

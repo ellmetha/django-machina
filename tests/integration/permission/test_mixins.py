@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
@@ -8,8 +10,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import PermissionDenied
 from django.db.models import get_model
 from django.test import RequestFactory
-from django.test import TestCase
 from django.views.generic import DetailView
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
@@ -25,8 +27,10 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
 
 
-class TestPermissionRequiredMixin(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestPermissionRequiredMixin(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.user = UserFactory.create()
         self.factory = RequestFactory()
 
@@ -49,7 +53,7 @@ class TestPermissionRequiredMixin(TestCase):
         request.user = self.user
         ForumPermissionHandlerMiddleware().process_request(request)
         # Run & check
-        with self.assertRaises(ImproperlyConfigured):
+        with pytest.raises(ImproperlyConfigured):
             self.mixin.check_permissions(request)
 
     def test_should_redirect_anonymous_users_to_login_url_if_access_is_not_granted(self):
@@ -62,7 +66,7 @@ class TestPermissionRequiredMixin(TestCase):
         # Run
         response = self.mixin.dispatch(request)
         # Check
-        self.assertEqual(response.status_code, 302)  # Moved temporarily
+        assert response.status_code == 302  # Moved temporarily
 
     def test_should_return_http_response_forbiden_to_logged_in_users_if_access_is_not_granted(self):
         # Setup
@@ -72,7 +76,7 @@ class TestPermissionRequiredMixin(TestCase):
         request.user = self.user
         ForumPermissionHandlerMiddleware().process_request(request)
         # Run & check
-        with self.assertRaises(PermissionDenied):
+        with pytest.raises(PermissionDenied):
             self.mixin.dispatch(request)
 
     def test_should_return_a_valid_response_if_access_is_granted(self):
@@ -90,7 +94,7 @@ class TestPermissionRequiredMixin(TestCase):
         # Run
         response = forum_view.dispatch(request, pk=self.forum.pk)
         # Check
-        self.assertEqual(response.status_code, 200)
+        assert response.status_code == 200
 
     def test_should_consider_controlled_object_prior_to_builtin_objet_or_get_object_attributes(self):
         forum = self.forum
@@ -112,4 +116,4 @@ class TestPermissionRequiredMixin(TestCase):
         # Run
         response = user_view.dispatch(request, pk=self.user.pk)
         # Check
-        self.assertEqual(response.status_code, 200)
+        assert response.status_code == 200

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.test import RequestFactory
-from django.test import TestCase
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.utils import get_client_ip
@@ -12,8 +14,10 @@ from machina.apps.forum_conversation.utils import get_client_ip
 faker = FakerFactory.create()
 
 
-class TestIpAddressExtractor(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestIpAddressExtractor(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.factory = RequestFactory()
 
     def test_can_determine_the_ip_address_with_the_http_x_forwarded_for_header(self):
@@ -25,7 +29,7 @@ class TestIpAddressExtractor(TestCase):
         # Run
         ip_address = get_client_ip(request)
         # Check
-        self.assertEqual(ip_address, parameters['HTTP_X_FORWARDED_FOR'])
+        assert ip_address == parameters['HTTP_X_FORWARDED_FOR']
 
     def test_can_determine_the_ip_address_with_the_remote_addr_header(self):
         # Setup
@@ -37,4 +41,4 @@ class TestIpAddressExtractor(TestCase):
         # Run
         ip_address = get_client_ip(request)
         # Check
-        self.assertEqual(ip_address, parameters['REMOTE_ADDR'])
+        assert ip_address == parameters['REMOTE_ADDR']

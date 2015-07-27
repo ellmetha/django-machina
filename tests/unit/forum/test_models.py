@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
-from django.test import TestCase
+import pytest
 
 # Local application / specific library imports
 from machina.test.factories import build_category_forum
@@ -21,8 +23,10 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 
-class TestForum(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestForum(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
 
         # Set up top-level forums: a category, a default forum and a link forum
@@ -34,25 +38,25 @@ class TestForum(TestCase):
         # Run
         sub_level_forum = create_forum(parent=self.top_level_forum)
         # Check
-        self.assertEqual(self.top_level_forum.margin_level, 0)
-        self.assertEqual(sub_level_forum.margin_level, 2)
+        assert self.top_level_forum.margin_level == 0
+        assert sub_level_forum.margin_level == 2
 
     def test_category_cannot_be_the_child_of_another_category(self):
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             cat = build_category_forum(parent=self.top_level_cat)
             cat.full_clean()
 
     def test_can_not_be_the_child_of_a_forum_link(self):
         # Run & check
         for forum_type, _ in Forum.TYPE_CHOICES:
-            with self.assertRaises(ValidationError):
+            with pytest.raises(ValidationError):
                 forum = build_link_forum(parent=self.top_level_link)
                 forum.full_clean()
 
     def test_must_have_a_link_in_case_of_a_link_forum(self):
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             forum = Forum(parent=self.top_level_forum, name='sub_link_forum', type=Forum.TYPE_CHOICES.forum_link)
             forum.full_clean()
 
@@ -61,22 +65,21 @@ class TestForum(TestCase):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
-        self.assertEqual(self.top_level_forum.posts_count, topic.posts.filter(approved=True).count())
-        self.assertEqual(self.top_level_forum.topics_count, self.top_level_forum.topics.count())
+        assert self.top_level_forum.posts_count == topic.posts.filter(approved=True).count()
+        assert self.top_level_forum.topics_count == self.top_level_forum.topics.count()
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
-        self.assertEqual(
-            self.top_level_forum.posts_count,
-            topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count())
-        self.assertEqual(self.top_level_forum.topics_count,
-                         self.top_level_forum.topics.filter(approved=True).count())
+        assert self.top_level_forum.posts_count == \
+            topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
+        assert self.top_level_forum.topics_count == \
+            self.top_level_forum.topics.filter(approved=True).count()
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
         # Run & check
-        self.assertTrue(self.top_level_cat.is_category)
-        self.assertTrue(self.top_level_forum.is_forum)
-        self.assertTrue(self.top_level_link.is_link)
+        assert self.top_level_cat.is_category
+        assert self.top_level_forum.is_forum
+        assert self.top_level_link.is_link
 
     def test_can_trigger_the_update_of_the_counters_of_a_new_parent(self):
         # Setup
@@ -87,8 +90,8 @@ class TestForum(TestCase):
         self.top_level_forum.parent = self.top_level_cat
         self.top_level_forum.save()
         # Check
-        self.assertEqual(self.top_level_cat.posts_count, self.top_level_forum.posts_count)
-        self.assertEqual(self.top_level_cat.topics_count, self.top_level_forum.topics_count)
+        assert self.top_level_cat.posts_count == self.top_level_forum.posts_count
+        assert self.top_level_cat.topics_count == self.top_level_forum.topics_count
 
     def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
         # Setup
@@ -101,5 +104,5 @@ class TestForum(TestCase):
         sub_level_forum.save()
         # Check
         self.top_level_forum = Forum.active.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
-        self.assertEqual(self.top_level_forum.posts_count, 0)
-        self.assertEqual(self.top_level_forum.topics_count, 0)
+        assert self.top_level_forum.posts_count == 0
+        assert self.top_level_forum.topics_count == 0

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages import constants as MSG  # noqa
@@ -8,6 +10,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.abstract_models import TOPIC_TYPES
@@ -42,9 +45,8 @@ remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestTopicView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -67,7 +69,7 @@ class TestTopicView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_triggers_a_viewed_signal(self):
         # Setup
@@ -75,7 +77,7 @@ class TestTopicView(BaseClientTestCase):
         # Run & check
         with mock_signal_receiver(topic_viewed) as receiver:
             self.client.get(correct_url, follow=True)
-            self.assertEqual(receiver.call_count, 1)
+            assert receiver.call_count == 1
 
     def test_increases_the_views_counter_of_the_topic(self):
         # Setup
@@ -85,7 +87,7 @@ class TestTopicView(BaseClientTestCase):
         self.client.get(correct_url)
         # Check
         topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
-        self.assertEqual(topic.views_count, initial_views_count + 1)
+        assert topic.views_count == initial_views_count + 1
 
     def test_cannot_change_the_updated_date_of_the_topic(self):
         # Setup
@@ -95,7 +97,7 @@ class TestTopicView(BaseClientTestCase):
         self.client.get(correct_url)
         # Check
         topic = self.topic.__class__._default_manager.get(pk=self.topic.pk)
-        self.assertEqual(topic.updated, initial_updated_date)
+        assert topic.updated == initial_updated_date
 
     def test_marks_the_related_forum_as_read_if_no_other_unread_topics_are_present(self):
         # Setup
@@ -110,10 +112,10 @@ class TestTopicView(BaseClientTestCase):
         # Check
         forum_tracks = ForumReadTrack.objects.all()
         topic_tracks = TopicReadTrack.objects.all()
-        self.assertEqual(forum_tracks.count(), 1)
-        self.assertFalse(len(topic_tracks))
-        self.assertEqual(forum_tracks[0].forum, self.topic.forum)
-        self.assertEqual(forum_tracks[0].user, self.user)
+        assert forum_tracks.count() == 1
+        assert not len(topic_tracks)
+        assert forum_tracks[0].forum == self.topic.forum
+        assert forum_tracks[0].user == self.user
 
     def test_marks_the_related_topic_as_read_if_other_unread_topics_are_present(self):
         # Setup
@@ -125,9 +127,9 @@ class TestTopicView(BaseClientTestCase):
         self.client.get(correct_url)
         # Check
         topic_tracks = TopicReadTrack.objects.all()
-        self.assertEqual(topic_tracks.count(), 1)
-        self.assertEqual(topic_tracks[0].topic, self.topic)
-        self.assertEqual(topic_tracks[0].user, self.user)
+        assert topic_tracks.count() == 1
+        assert topic_tracks[0].topic == self.topic
+        assert topic_tracks[0].user == self.user
 
     def test_marks_the_related_topic_as_read_even_if_no_track_is_registered_for_the_related_forum(self):
         # Setup
@@ -141,8 +143,8 @@ class TestTopicView(BaseClientTestCase):
         # Check
         forum_tracks = ForumReadTrack.objects.filter(forum=top_level_forum_alt)
         topic_tracks = TopicReadTrack.objects.all()
-        self.assertEqual(forum_tracks.count(), 1)
-        self.assertEqual(topic_tracks.count(), 0)
+        assert forum_tracks.count() == 1
+        assert not topic_tracks.count()
 
     def test_cannot_create_any_track_if_the_user_is_not_authenticated(self):
         # Setup
@@ -155,8 +157,8 @@ class TestTopicView(BaseClientTestCase):
         # Check
         forum_tracks = ForumReadTrack.objects.all()
         topic_tracks = TopicReadTrack.objects.all()
-        self.assertFalse(len(forum_tracks))
-        self.assertFalse(len(topic_tracks))
+        assert not len(forum_tracks)
+        assert not len(topic_tracks)
 
     def test_can_paginate_based_on_a_post_id(self):
         # Setup
@@ -167,13 +169,13 @@ class TestTopicView(BaseClientTestCase):
         # Run & check
         first_post_pk = self.topic.first_post.pk
         response = self.client.get(correct_url, {'post': first_post_pk}, follow=True)
-        self.assertEqual(response.context_data['page_obj'].number, 1)
+        assert response.context_data['page_obj'].number == 1
         mid_post_pk = self.topic.first_post.pk + 18
         response = self.client.get(correct_url, {'post': mid_post_pk}, follow=True)
-        self.assertEqual(response.context_data['page_obj'].number, 2)
+        assert response.context_data['page_obj'].number == 2
         last_post_pk = self.topic.last_post.pk
         response = self.client.get(correct_url, {'post': last_post_pk}, follow=True)
-        self.assertEqual(response.context_data['page_obj'].number, 3)
+        assert response.context_data['page_obj'].number == 3
 
     def test_properly_handles_a_bad_post_id_in_parameters(self):
         # Setup
@@ -184,9 +186,9 @@ class TestTopicView(BaseClientTestCase):
         # Run & check
         bad_post_pk = self.topic.first_post.pk + 50000
         response = self.client.get(correct_url, {'post': bad_post_pk}, follow=True)
-        self.assertEqual(response.context_data['page_obj'].number, 1)
+        assert response.context_data['page_obj'].number == 1
         response = self.client.get(correct_url, {'post': 'I\'m a post'}, follow=True)
-        self.assertEqual(response.context_data['page_obj'].number, 1)
+        assert response.context_data['page_obj'].number == 1
 
     def test_embed_poll_data_into_the_context_if_a_poll_is_associated_to_the_topic(self):
         # Setup
@@ -196,14 +198,13 @@ class TestTopicView(BaseClientTestCase):
         correct_url = self.topic.get_absolute_url()
         # Run & check
         response = self.client.get(correct_url)
-        self.assertEqual(response.context_data['poll'], poll)
-        self.assertTrue(isinstance(response.context_data['poll_form'], TopicPollVoteForm))
+        assert response.context_data['poll'] == poll
+        assert isinstance(response.context_data['poll_form'], TopicPollVoteForm)
 
 
 class TestTopicCreateView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicCreateView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -229,7 +230,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
@@ -238,7 +239,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertEqual(response.context_data['forum'], self.top_level_forum)
+        assert response.context_data['forum'] == self.top_level_forum
 
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
@@ -253,7 +254,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['preview'])
+        assert response.context_data['preview']
 
     def test_redirects_to_topic_view_on_success(self):
         # Setup
@@ -271,9 +272,9 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum-conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        assert topic_url in last_url
 
     def test_redirects_to_the_forum_if_the_post_is_not_approved(self):
         # Setup
@@ -291,9 +292,9 @@ class TestTopicCreateView(BaseClientTestCase):
         forum_url = reverse(
             'forum:forum',
             kwargs={'slug': self.top_level_forum.slug, 'pk': self.top_level_forum.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(forum_url, last_url)
+        assert forum_url in last_url
 
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_create_polls(self):
         # Setup
@@ -302,8 +303,8 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertIn('poll_option_formset', response.context_data)
-        self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
+        assert 'poll_option_formset' in response.context_data
+        assert isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset)
 
     def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_create_polls(self):
         # Setup
@@ -311,7 +312,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse(response.context_data['poll_option_formset'] is not None)
+        assert response.context_data['poll_option_formset'] is None
 
     def test_can_handle_poll_previews(self):
         # Setup
@@ -337,7 +338,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['poll_preview'])
+        assert response.context_data['poll_preview']
 
     def test_can_create_a_poll_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
@@ -363,13 +364,13 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic = Topic.objects.get(pk=response.context_data['topic'].pk)
-        self.assertTrue(topic.poll is not None)
-        self.assertEqual(topic.poll.question, post_data['poll_question'])
-        self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
-        self.assertEqual(topic.poll.duration, post_data['poll_duration'])
-        self.assertEqual(topic.poll.options.count(), 2)
-        self.assertEqual(topic.poll.options.all()[0].text, post_data['poll-0-text'])
-        self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
+        assert topic.poll is not None
+        assert topic.poll.question == post_data['poll_question']
+        assert topic.poll.max_options == post_data['poll_max_options']
+        assert topic.poll.duration == post_data['poll_duration']
+        assert topic.poll.options.count() == 2
+        assert topic.poll.options.all()[0].text == post_data['poll-0-text']
+        assert topic.poll.options.all()[1].text == post_data['poll-1-text']
 
     def test_cannot_create_polls_with_invalid_options(self):
         # Setup
@@ -409,11 +410,11 @@ class TestTopicCreateView(BaseClientTestCase):
         response_2 = self.client.post(correct_url, post_data_2, follow=True)
         # Check
         messages_1 = list(response_1.context['messages'])
-        self.assertTrue(len(messages_1) >= 1)
-        self.assertTrue(all(m.level == MSG.ERROR for m in messages_1))
+        assert len(messages_1) >= 1
+        assert all(m.level == MSG.ERROR for m in messages_1)
         messages_2 = list(response_2.context['messages'])
-        self.assertTrue(len(messages_2) >= 1)
-        self.assertTrue(all(m.level == MSG.ERROR for m in messages_2))
+        assert len(messages_2) >= 1
+        assert all(m.level == MSG.ERROR for m in messages_2)
 
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup
@@ -422,8 +423,8 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertIn('attachment_formset', response.context_data)
-        self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
+        assert 'attachment_formset' in response.context_data
+        assert isinstance(response.context_data['attachment_formset'], AttachmentFormset)
 
     def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
         # Setup
@@ -431,7 +432,7 @@ class TestTopicCreateView(BaseClientTestCase):
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse(response.context_data['attachment_formset'] is not None)
+        assert response.context_data['attachment_formset'] is None
 
     def test_can_handle_attachment_previews(self):
         # Setup
@@ -454,7 +455,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['attachment_preview'])
+        assert response.context_data['attachment_preview']
 
     def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):
         # Setup
@@ -490,10 +491,10 @@ class TestTopicCreateView(BaseClientTestCase):
         response_1 = self.client.post(correct_url, post_data_1, follow=True)
         response_2 = self.client.post(correct_url, post_data_2, follow=True)
         # Check
-        self.assertTrue(response_1.context_data['attachment_preview'])
-        self.assertTrue(response_2.context_data['attachment_preview'])
-        self.assertEqual(len(response_2.context_data['attachment_file_previews']), 1)
-        self.assertEqual(response_2.context_data['attachment_file_previews'][0][1], 'file1.txt')
+        assert response_1.context_data['attachment_preview']
+        assert response_2.context_data['attachment_preview']
+        assert len(response_2.context_data['attachment_file_previews']) == 1
+        assert response_2.context_data['attachment_file_previews'][0][1] == 'file1.txt'
 
     def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
@@ -516,8 +517,8 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         post = Topic.objects.get(pk=response.context_data['topic'].pk).first_post
-        self.assertTrue(post.attachments.exists())
-        self.assertEqual(post.attachments.count(), 1)
+        assert post.attachments.exists()
+        assert post.attachments.count() == 1
 
     def test_cannot_create_attachments_with_invalid_options(self):
         # Setup
@@ -540,14 +541,13 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         messages = list(response.context['messages'])
-        self.assertEqual(len(messages), 1)
-        self.assertEqual(messages[0].level, MSG.ERROR)
+        assert len(messages) == 1
+        assert messages[0].level == MSG.ERROR
 
 
 class TestTopicUpdateView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicUpdateView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -575,7 +575,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
@@ -586,7 +586,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertEqual(response.context_data['forum'], self.top_level_forum)
+        assert response.context_data['forum'] == self.top_level_forum
 
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
@@ -603,7 +603,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['preview'])
+        assert response.context_data['preview']
 
     def test_redirects_to_topic_view_on_success(self):
         # Setup
@@ -622,9 +622,9 @@ class TestTopicUpdateView(BaseClientTestCase):
             'forum-conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        assert topic_url in last_url
 
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_add_polls(self):
         # Setup
@@ -635,8 +635,8 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertIn('poll_option_formset', response.context_data)
-        self.assertTrue(isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset))
+        assert 'poll_option_formset' in response.context_data
+        assert isinstance(response.context_data['poll_option_formset'], TopicPollOptionFormset)
 
     def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_add_polls(self):
         # Setup
@@ -646,7 +646,7 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse(response.context_data['poll_option_formset'] is not None)
+        assert response.context_data['poll_option_formset'] is None
 
     def test_can_handle_poll_previews(self):
         # Setup
@@ -674,7 +674,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['poll_preview'])
+        assert response.context_data['poll_preview']
 
     def test_allows_poll_updates(self):
         # Setup
@@ -705,9 +705,9 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.client.post(correct_url, post_data, follow=True)
         # Check
         option_2 = refresh(option_2)
-        self.assertEqual(option_2.text, post_data['poll-1-text'])
+        assert option_2.text == post_data['poll-1-text']
         poll = refresh(poll)
-        self.assertEqual(poll.question, post_data['poll_question'])
+        assert poll.question == post_data['poll_question']
 
     def test_allows_poll_creations(self):
         # Setup
@@ -735,13 +735,13 @@ class TestTopicUpdateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic = Topic.objects.get(pk=response.context_data['topic'].pk)
-        self.assertTrue(topic.poll is not None)
-        self.assertEqual(topic.poll.question, post_data['poll_question'])
-        self.assertEqual(topic.poll.max_options, post_data['poll_max_options'])
-        self.assertEqual(topic.poll.duration, post_data['poll_duration'])
-        self.assertEqual(topic.poll.options.count(), 2)
-        self.assertEqual(topic.poll.options.all()[0].text, post_data['poll-0-text'])
-        self.assertEqual(topic.poll.options.all()[1].text, post_data['poll-1-text'])
+        assert topic.poll is not None
+        assert topic.poll.question == post_data['poll_question']
+        assert topic.poll.max_options == post_data['poll_max_options']
+        assert topic.poll.duration == post_data['poll_duration']
+        assert topic.poll.options.count() == 2
+        assert topic.poll.options.all()[0].text == post_data['poll-0-text']
+        assert topic.poll.options.all()[1].text == post_data['poll-1-text']
 
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup
@@ -752,8 +752,8 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertIn('attachment_formset', response.context_data)
-        self.assertTrue(isinstance(response.context_data['attachment_formset'], AttachmentFormset))
+        assert 'attachment_formset' in response.context_data
+        assert isinstance(response.context_data['attachment_formset'], AttachmentFormset)
 
     def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
         # Setup
@@ -763,7 +763,7 @@ class TestTopicUpdateView(BaseClientTestCase):
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
-        self.assertFalse(response.context_data['attachment_formset'] is not None)
+        assert response.context_data['attachment_formset'] is None
 
     def test_can_handle_attachment_previews(self):
         # Setup
@@ -788,7 +788,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['attachment_preview'])
+        assert response.context_data['attachment_preview']
 
     def test_allows_attachment_updates(self):
         # Setup
@@ -814,7 +814,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.client.post(correct_url, post_data, follow=True)
         # Check
         attachment = refresh(attachment)
-        self.assertEqual(attachment.comment, post_data['attachment-0-comment'])
+        assert attachment.comment == post_data['attachment-0-comment']
 
     def test_allows_attachment_creations(self):
         # Setup
@@ -844,13 +844,12 @@ class TestTopicUpdateView(BaseClientTestCase):
         self.client.post(correct_url, post_data, follow=True)
         # Check
         attachments = self.topic.first_post.attachments
-        self.assertEqual(attachments.count(), 2)
+        assert attachments.count() == 2
 
 
 class TestPostCreateView(BaseClientTestCase):
-    def setUp(self):
-        super(TestPostCreateView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -878,7 +877,7 @@ class TestPostCreateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
@@ -889,7 +888,7 @@ class TestPostCreateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertEqual(response.context_data['topic'], self.topic)
+        assert response.context_data['topic'] == self.topic
 
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
@@ -905,7 +904,7 @@ class TestPostCreateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['preview'])
+        assert response.context_data['preview']
 
     def test_redirects_to_topic_view_on_success(self):
         # Setup
@@ -925,15 +924,14 @@ class TestPostCreateView(BaseClientTestCase):
             kwargs={
                 'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                 'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        assert topic_url in last_url
 
 
 class TestPostUpdateView(BaseClientTestCase):
-    def setUp(self):
-        super(TestPostUpdateView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -963,7 +961,7 @@ class TestPostUpdateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
@@ -975,7 +973,7 @@ class TestPostUpdateView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertEqual(response.context_data['topic'], self.topic)
+        assert response.context_data['topic'] == self.topic
 
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
@@ -992,7 +990,7 @@ class TestPostUpdateView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertTrue(response.context_data['preview'])
+        assert response.context_data['preview']
 
     def test_redirects_to_topic_view_on_success(self):
         # Setup
@@ -1012,15 +1010,14 @@ class TestPostUpdateView(BaseClientTestCase):
             'forum-conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        assert topic_url in last_url
 
 
 class TestPostDeleteView(BaseClientTestCase):
+    @pytest.fixture(autouse=True)
     def setUp(self):
-        super(TestPostDeleteView, self).setUp()
-
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -1051,7 +1048,7 @@ class TestPostDeleteView(BaseClientTestCase):
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_redirects_to_the_topic_view_if_posts_remain(self):
         # Setup
@@ -1067,9 +1064,9 @@ class TestPostDeleteView(BaseClientTestCase):
             'forum-conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(topic_url, last_url)
+        assert topic_url in last_url
 
     def test_redirects_to_the_forum_view_if_no_posts_remain(self):
         # Setup
@@ -1085,6 +1082,6 @@ class TestPostDeleteView(BaseClientTestCase):
         forum_url = reverse(
             'forum:forum',
             kwargs={'slug': self.top_level_forum.slug, 'pk': self.top_level_forum.pk, })
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(forum_url, last_url)
+        assert forum_url in last_url

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.db.models import get_model
-from django.test import TestCase
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
@@ -29,8 +31,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestTopicPollOptionFormset(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTopicPollOptionFormset(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -67,7 +71,7 @@ class TestTopicPollOptionFormset(TestCase):
             topic=self.topic)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_cannot_validate_less_than_two_options(self):
         # Setup
@@ -84,7 +88,7 @@ class TestTopicPollOptionFormset(TestCase):
             topic=self.topic)
         valid = form.is_valid()
         # Check
-        self.assertFalse(valid)
+        assert not valid
 
     def test_cannot_validate_invalid_options(self):
         # Setup
@@ -103,7 +107,7 @@ class TestTopicPollOptionFormset(TestCase):
             topic=self.topic)
         valid = form.is_valid()
         # Check
-        self.assertFalse(valid)
+        assert not valid
 
     def test_can_update_options_associated_with_an_existing_poll(self):
         # Setup
@@ -125,10 +129,10 @@ class TestTopicPollOptionFormset(TestCase):
             topic=refresh(self.topic))
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
         form.save()
         option_1 = refresh(option_1)
-        self.assertEqual(option_1.text, form_data['form-0-text'])
+        assert option_1.text == form_data['form-0-text']
 
     def test_append_empty_forms_only_when_no_initial_data_is_provided(self):
         # Setup
@@ -151,13 +155,15 @@ class TestTopicPollOptionFormset(TestCase):
         form_2 = TopicPollOptionFormset(topic=refresh(self.topic))  # poll already created
         form_3 = TopicPollOptionFormset(topic=self.alt_topic)  # no poll
         # Check
-        self.assertEqual(form_1.total_form_count(), 2)
-        self.assertEqual(form_2.total_form_count(), 2)
-        self.assertEqual(form_3.total_form_count(), 2)
+        assert form_1.total_form_count() == 2
+        assert form_2.total_form_count() == 2
+        assert form_3.total_form_count() == 2
 
 
-class TestTopicPollVoteForm(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTopicPollVoteForm(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -191,7 +197,7 @@ class TestTopicPollVoteForm(TestCase):
             poll=self.poll)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_cannot_validate_empty_votes(self):
         # Setup
@@ -202,7 +208,7 @@ class TestTopicPollVoteForm(TestCase):
             poll=self.poll)
         valid = form.is_valid()
         # Check
-        self.assertFalse(valid)
+        assert not valid
 
     def test_cannot_validate_votes_for_too_many_options(self):
         # Setup
@@ -219,4 +225,4 @@ class TestTopicPollVoteForm(TestCase):
             poll=self.poll)
         valid = form.is_valid()
         # Check
-        self.assertFalse(valid)
+        assert not valid

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.files.uploadedfile import SimpleUploadedFile
+import pytest
 
 # Local application / specific library imports
 from machina.core.compat import force_bytes
@@ -11,11 +14,12 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
-from machina.test.testcases import BaseUnitTestCase
 
 
-class TestAttachment(BaseUnitTestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestAttachment(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.u1 = UserFactory.create()
 
         # Set up a top-level forum, an associated topic and a post
@@ -28,5 +32,5 @@ class TestAttachment(BaseUnitTestCase):
         f = SimpleUploadedFile('dummy_file.txt', force_bytes('file_content'))
         attachment = AttachmentFactory.create(post=self.post, file=f)
         # Run & check
-        self.assertEqual(attachment.filename, 'dummy_file.txt')
+        assert attachment.filename == 'dummy_file.txt'
         attachment.file.delete()

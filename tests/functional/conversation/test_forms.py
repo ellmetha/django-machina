@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django import forms
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import get_model
-from django.test import TestCase
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forms import PostForm
@@ -31,8 +33,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
-class TestPostForm(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestPostForm(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -65,7 +69,7 @@ class TestPostForm(TestCase):
             topic=self.topic)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_can_affect_a_default_subject_to_the_post(self):
         # Setup
@@ -83,7 +87,7 @@ class TestPostForm(TestCase):
         default_subject = '{} {}'.format(
             machina_settings.TOPIC_ANSWER_SUBJECT_PREFIX,
             self.topic.subject)
-        self.assertEqual(form.fields['subject'].initial, default_subject)
+        assert form.fields['subject'].initial == default_subject
 
     def test_increments_the_post_updates_counter_in_case_of_post_edition(self):
         # Setup
@@ -101,10 +105,10 @@ class TestPostForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         form.save()
         self.post = refresh(self.post)
-        self.assertEqual(self.post.updates_count, initial_updates_count + 1)
+        assert self.post.updates_count == initial_updates_count + 1
 
     def test_set_the_topic_as_unapproved_if_the_user_has_not_the_required_permission(self):
         # Setup
@@ -122,14 +126,14 @@ class TestPostForm(TestCase):
         }
         form = PostForm(**form_kwargs)
         # Check
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         post = form.save()
-        self.assertFalse(post.approved)
+        assert not post.approved
         assign_perm('can_post_without_approval', self.user, self.top_level_forum)
         form = PostForm(**form_kwargs)
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         post = form.save()
-        self.assertTrue(post.approved)
+        assert post.approved
 
     def test_adds_the_username_field_if_the_user_is_anonymous(self):
         # Setup
@@ -146,10 +150,10 @@ class TestPostForm(TestCase):
             forum=self.top_level_forum,
             topic=self.topic)
         # Check
-        self.assertIn('username', form.fields)
-        self.assertTrue(form.is_valid())
+        assert 'username' in form.fields
+        assert form.is_valid()
         post = form.save()
-        self.assertEqual(post.username, 'testname')
+        assert post.username == 'testname'
 
     def test_adds_the_update_reason_field_if_the_post_is_updated(self):
         # Setup
@@ -167,14 +171,16 @@ class TestPostForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertIn('update_reason', form.fields)
-        self.assertTrue(form.is_valid())
+        assert 'update_reason' in form.fields
+        assert form.is_valid()
         post = form.save()
-        self.assertEqual(post.update_reason, 'X')
+        assert post.update_reason == 'X'
 
 
-class TestTopicForm(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestTopicForm(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -207,7 +213,7 @@ class TestTopicForm(TestCase):
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_can_valid_a_basic_sticky_post(self):
         # Setup
@@ -225,7 +231,7 @@ class TestTopicForm(TestCase):
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_can_valid_a_basic_announce(self):
         # Setup
@@ -243,7 +249,7 @@ class TestTopicForm(TestCase):
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
 
     def test_creates_a_post_topic_if_no_topic_type_is_provided(self):
         # Setup
@@ -259,9 +265,9 @@ class TestTopicForm(TestCase):
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
-        self.assertTrue(valid)
+        assert valid
         post = form.save()
-        self.assertEqual(post.topic.type, Topic.TYPE_CHOICES.topic_post)
+        assert post.topic.type == Topic.TYPE_CHOICES.topic_post
 
     def test_allows_the_creation_of_stickies_if_the_user_has_required_permission(self):
         # Setup
@@ -278,14 +284,14 @@ class TestTopicForm(TestCase):
         }
         # Run & check
         form = TopicForm(**form_kwargs)
-        self.assertFalse(form.is_valid())
+        assert not form.is_valid()
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
-        self.assertNotIn(Topic.TYPE_CHOICES.topic_sticky, choices)
+        assert Topic.TYPE_CHOICES.topic_sticky not in choices
         assign_perm('can_post_stickies', self.user, self.top_level_forum)
         form = TopicForm(**form_kwargs)
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
-        self.assertIn(Topic.TYPE_CHOICES.topic_sticky, choices)
+        assert Topic.TYPE_CHOICES.topic_sticky in choices
 
     def test_allows_the_creation_of_announces_if_the_user_has_required_permission(self):
         # Setup
@@ -302,14 +308,14 @@ class TestTopicForm(TestCase):
         }
         # Run & check
         form = TopicForm(**form_kwargs)
-        self.assertFalse(form.is_valid())
+        assert not form.is_valid()
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
-        self.assertNotIn(Topic.TYPE_CHOICES.topic_announce, choices)
+        assert Topic.TYPE_CHOICES.topic_announce not in choices
         assign_perm('can_post_announcements', self.user, self.top_level_forum)
         form = TopicForm(**form_kwargs)
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         choices = [ch[0] for ch in form.fields['topic_type'].choices]
-        self.assertIn(Topic.TYPE_CHOICES.topic_announce, choices)
+        assert Topic.TYPE_CHOICES.topic_announce in choices
 
     def test_can_be_used_to_update_the_topic_type(self):
         # Setup
@@ -328,10 +334,10 @@ class TestTopicForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertTrue(form.is_valid())
+        assert form.is_valid()
         form.save()
         self.topic = refresh(self.topic)
-        self.assertEqual(self.topic.type, Topic.TYPE_CHOICES.topic_sticky)
+        assert self.topic.type == Topic.TYPE_CHOICES.topic_sticky
 
     def test_can_append_poll_fields_if_the_user_is_allowed_to_create_polls(self):
         # Setup
@@ -350,14 +356,14 @@ class TestTopicForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertIn('poll_question', form.fields)
-        self.assertIn('poll_max_options', form.fields)
-        self.assertIn('poll_duration', form.fields)
-        self.assertIn('poll_user_changes', form.fields)
-        self.assertTrue(isinstance(form.fields['poll_question'], forms.CharField))
-        self.assertTrue(isinstance(form.fields['poll_max_options'], forms.IntegerField))
-        self.assertTrue(isinstance(form.fields['poll_duration'], forms.IntegerField))
-        self.assertTrue(isinstance(form.fields['poll_user_changes'], forms.BooleanField))
+        assert 'poll_question' in form.fields
+        assert 'poll_max_options' in form.fields
+        assert 'poll_duration' in form.fields
+        assert 'poll_user_changes' in form.fields
+        assert isinstance(form.fields['poll_question'], forms.CharField)
+        assert isinstance(form.fields['poll_max_options'], forms.IntegerField)
+        assert isinstance(form.fields['poll_duration'], forms.IntegerField)
+        assert isinstance(form.fields['poll_user_changes'], forms.BooleanField)
 
     def test_cannot_append_poll_fields_if_the_user_is_not_allowed_to_create_polls(self):
         # Setup
@@ -375,10 +381,10 @@ class TestTopicForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertNotIn('poll_question', form.fields)
-        self.assertNotIn('poll_max_options', form.fields)
-        self.assertNotIn('poll_duration', form.fields)
-        self.assertNotIn('poll_user_changes', form.fields)
+        assert 'poll_question' not in form.fields
+        assert 'poll_max_options' not in form.fields
+        assert 'poll_duration' not in form.fields
+        assert 'poll_user_changes' not in form.fields
 
     def test_can_initialize_poll_fields_from_topic_related_poll_object(self):
         # Setup
@@ -398,11 +404,11 @@ class TestTopicForm(TestCase):
             topic=self.topic,
             instance=self.post)
         # Check
-        self.assertIn('poll_question', form.fields)
-        self.assertIn('poll_max_options', form.fields)
-        self.assertIn('poll_duration', form.fields)
-        self.assertIn('poll_user_changes', form.fields)
-        self.assertEqual(form.fields['poll_question'].initial, poll.question)
-        self.assertEqual(form.fields['poll_max_options'].initial, poll.max_options)
-        self.assertEqual(form.fields['poll_duration'].initial, poll.duration)
-        self.assertEqual(form.fields['poll_user_changes'].initial, poll.user_changes)
+        assert 'poll_question' in form.fields
+        assert 'poll_max_options' in form.fields
+        assert 'poll_duration' in form.fields
+        assert 'poll_user_changes' in form.fields
+        assert form.fields['poll_question'].initial == poll.question
+        assert form.fields['poll_max_options'].initial == poll.max_options
+        assert form.fields['poll_duration'].initial == poll.duration
+        assert form.fields['poll_user_changes'].initial == poll.user_changes

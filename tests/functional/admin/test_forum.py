@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum.abstract_models import FORUM_TYPES
@@ -15,14 +18,15 @@ from machina.test.factories import GroupForumPermissionFactory
 from machina.test.factories import UserForumPermissionFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
+
 Forum = get_model('forum', 'Forum')
 
 
 class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     model = Forum
 
-    def setUp(self):
-        super(TestForumAdmin, self).setUp()
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Set up a top-level category
         top_level_cat = Forum.objects.create(name='top_level_cat', type=FORUM_TYPES.forum_cat)
         self.top_level_cat = top_level_cat
@@ -44,9 +48,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.top_level_forum.id)
         # Check
-        self.assertIsRedirect(response)
-        self.assertEqual(moved_forum.get_previous_sibling(), None)
-        self.assertEqual(moved_forum.get_next_sibling(), self.top_level_cat)
+        assert response.status_code == 302
+        assert moved_forum.get_previous_sibling() is None
+        assert moved_forum.get_next_sibling() == self.top_level_cat
 
     def test_can_move_a_forum_downward(self):
         # Setup
@@ -57,9 +61,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.sub_forum_2.id)
         # Check
-        self.assertIsRedirect(response)
-        self.assertEqual(moved_forum.get_previous_sibling(), self.sub_forum_3)
-        self.assertEqual(moved_forum.get_next_sibling(), None)
+        assert response.status_code == 302
+        assert moved_forum.get_previous_sibling() == self.sub_forum_3
+        assert moved_forum.get_next_sibling() is None
 
     def test_can_not_move_a_forum_with_no_siblings(self):
         # Setup
@@ -70,9 +74,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         response = self.client.get(url)
         moved_forum = Forum.objects.get(id=self.top_level_cat.id)
         # Check
-        self.assertIsRedirect(response)
-        self.assertEqual(moved_forum.get_previous_sibling(), None)
-        self.assertEqual(moved_forum.get_next_sibling(), self.top_level_forum)
+        assert response.status_code == 302
+        assert moved_forum.get_previous_sibling() is None
+        assert moved_forum.get_next_sibling() == self.top_level_forum
 
     def test_editpermission_index_view_browsing_works(self):
         # Setup
@@ -82,7 +86,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.get(url)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_editpermission_index_view_submission_cannot_work_without_data(self):
         # Setup
@@ -92,8 +96,8 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url)
         # Check
-        self.assertIsOk(response)
-        self.assertTrue(response.context['user_form'].errors is not None)
+        assert response.status_code == 200
+        assert response.context['user_form'].errors is not None
 
     def test_editpermission_index_view_can_redirect_to_user_permissions_form(self):
         # Setup
@@ -107,9 +111,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         editpermissions_user_url = reverse(editpermissions_user_raw_url, kwargs={
             'forum_id': self.top_level_cat.id, 'user_id': self.user.id})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(editpermissions_user_url, last_url)
+        assert editpermissions_user_url in last_url
 
     def test_editpermission_index_view_can_redirect_to_anonymous_user_permissions_form(self):
         # Setup
@@ -123,9 +127,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         editpermissions_anonymous_user_url = reverse(editpermissions_anonymous_user_raw_url, kwargs={
             'forum_id': self.top_level_cat.id})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(editpermissions_anonymous_user_url, last_url)
+        assert editpermissions_anonymous_user_url in last_url
 
     def test_editpermission_index_view_can_redirect_to_group_permissions_form(self):
         # Setup
@@ -140,9 +144,9 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         editpermissions_group_url = reverse(editpermissions_group_raw_url, kwargs={
             'forum_id': self.top_level_cat.id, 'group_id': self.user.id})
-        self.assertGreater(len(response.redirect_chain), 0)
+        assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
-        self.assertIn(editpermissions_group_url, last_url)
+        assert editpermissions_group_url in last_url
 
     def test_editpermission_index_view_can_copy_permissions_from_another_forum(self):
         # Setup
@@ -171,23 +175,19 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.post(url, {'forum': self.sub_forum_1.id})
         # Check
-        self.assertIsOk(response)
-        self.assertTrue(
-            UserForumPermission.objects.filter(
-                permission__codename='can_see_forum', forum=self.top_level_cat,
-                user=self.user, has_perm=False).exists())
-        self.assertTrue(
-            UserForumPermission.objects.filter(
-                permission__codename='can_read_forum', forum=self.top_level_cat,
-                user=self.user, has_perm=True).exists())
-        self.assertTrue(
-            UserForumPermission.objects.filter(
-                permission__codename='can_start_new_topics', forum=self.top_level_cat,
-                user=self.user, has_perm=False).exists())
-        self.assertTrue(
-            GroupForumPermission.objects.filter(
-                permission__codename='can_start_new_topics', forum=self.top_level_cat,
-                group=group, has_perm=False).exists())
+        assert response.status_code == 200
+        assert UserForumPermission.objects.filter(
+            permission__codename='can_see_forum', forum=self.top_level_cat,
+            user=self.user, has_perm=False).exists()
+        assert UserForumPermission.objects.filter(
+            permission__codename='can_read_forum', forum=self.top_level_cat,
+            user=self.user, has_perm=True).exists()
+        assert UserForumPermission.objects.filter(
+            permission__codename='can_start_new_topics', forum=self.top_level_cat,
+            user=self.user, has_perm=False).exists()
+        assert GroupForumPermission.objects.filter(
+            permission__codename='can_start_new_topics', forum=self.top_level_cat,
+            group=group, has_perm=False).exists()
 
     def test_editpermission_form_can_update_user_permissions(self):
         # Setup
@@ -230,15 +230,15 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'forum_id': self.top_level_cat.id, 'user_id': self.user.id})
         response = self.client.post(url, post_data)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
         granted_perm = UserForumPermission.objects.filter(
             permission__codename='can_see_forum', has_perm=True,
             user=self.user, forum=self.top_level_cat)
-        self.assertTrue(granted_perm.exists())
+        assert granted_perm.exists()
         not_granted_perm = UserForumPermission.objects.filter(
             permission__codename='can_read_forum', has_perm=False,
             user=self.user, forum=self.top_level_cat)
-        self.assertTrue(not_granted_perm.exists())
+        assert not_granted_perm.exists()
 
     def test_editpermission_form_can_update_anonymous_user_permissions(self):
         # Setup
@@ -269,15 +269,15 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'forum_id': self.top_level_cat.id})
         response = self.client.post(url, post_data)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
         granted_perm = UserForumPermission.objects.filter(
             permission__codename='can_see_forum', has_perm=True,
             anonymous_user=True, forum=self.top_level_cat)
-        self.assertTrue(granted_perm.exists())
+        assert granted_perm.exists()
         not_granted_perm = UserForumPermission.objects.filter(
             permission__codename='can_read_forum', has_perm=False,
             anonymous_user=True, forum=self.top_level_cat)
-        self.assertTrue(not_granted_perm.exists())
+        assert not_granted_perm.exists()
 
     def test_editpermission_form_can_update_group_permissions(self):
         # Setup
@@ -309,15 +309,15 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'forum_id': self.top_level_cat.id, 'group_id': group.id})
         response = self.client.post(url, post_data)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
         granted_perm = GroupForumPermission.objects.filter(
             permission__codename='can_see_forum', has_perm=True,
             group=group, forum=self.top_level_cat)
-        self.assertTrue(granted_perm.exists())
+        assert granted_perm.exists()
         not_granted_perm = GroupForumPermission.objects.filter(
             permission__codename='can_read_forum', has_perm=False,
             group=group, forum=self.top_level_cat)
-        self.assertTrue(not_granted_perm.exists())
+        assert not_granted_perm.exists()
 
     def _get_module_name(self, options):
         try:

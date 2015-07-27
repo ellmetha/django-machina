@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from faker import Factory as FakerFactory
+import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
@@ -31,9 +34,8 @@ remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestTopicPollVoteView(BaseClientTestCase):
-    def setUp(self):
-        super(TestTopicPollVoteView, self).setUp()
-
+    @pytest.fixture(autouse=True)
+    def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()
 
@@ -62,7 +64,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
 
     def test_cannot_be_used_by_unauthorized_users(self):
         # Setup
@@ -71,7 +73,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
-        self.assertIsNotOk(response)
+        assert response.status_code == 403
 
     def test_can_be_used_to_vote(self):
         # Setup
@@ -82,10 +84,10 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
         votes = TopicPollVote.objects.filter(voter=self.user)
-        self.assertEqual(votes.count(), 1)
-        self.assertEqual(votes[0].poll_option, self.option_1)
+        assert votes.count() == 1
+        assert votes[0].poll_option == self.option_1
 
     def test_can_be_used_to_change_a_vote(self):
         # Setup
@@ -99,7 +101,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
-        self.assertIsOk(response)
+        assert response.status_code == 200
         votes = TopicPollVote.objects.filter(voter=self.user)
-        self.assertEqual(votes.count(), 1)
-        self.assertEqual(votes[0].poll_option, self.option_1)
+        assert votes.count() == 1
+        assert votes[0].poll_option == self.option_1

@@ -8,7 +8,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.uploadedfile import TemporaryUploadedFile
-from django.test import TestCase
+import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forum_attachments.cache import cache
@@ -16,11 +16,12 @@ from machina.conf import settings as machina_settings
 from machina.core.compat import force_bytes
 
 
-class TestAttachmentCache(TestCase):
+@pytest.mark.django_db
+class TestAttachmentCache(object):
     def test_should_raise_at_import_if_the_cache_backend_is_not_configured(self):
         # Run & check
         machina_settings.ATTACHMENT_CACHE_NAME = 'dummy'
-        with self.assertRaises(ImproperlyConfigured):
+        with pytest.raises(ImproperlyConfigured):
             from machina.apps.forum_conversation.forum_attachments.cache import AttachmentCache
             AttachmentCache()
         machina_settings.ATTACHMENT_CACHE_NAME = 'machina_attachments'
@@ -36,16 +37,16 @@ class TestAttachmentCache(TestCase):
         cache.set('mykey', files)
         states = real_cache.get('mykey')
         # Check
-        self.assertEqual(states['f1']['name'], 'file1.txt')
-        self.assertEqual(states['f1']['content'], force_bytes('file_content_1'))
-        self.assertIsNone(states['f1']['charset'])
-        self.assertEqual(states['f1']['content_type'], 'text/plain')
-        self.assertEqual(states['f1']['size'], 14)
-        self.assertEqual(states['f2']['name'], 'file2.txt')
-        self.assertEqual(states['f2']['content'], force_bytes('file_content_2_long'))
-        self.assertEqual(states['f2']['charset'], 'iso-8859-1')
-        self.assertEqual(states['f2']['content_type'], 'text/plain')
-        self.assertEqual(states['f2']['size'], 19)
+        assert states['f1']['name'] == 'file1.txt'
+        assert states['f1']['content'] == force_bytes('file_content_1')
+        assert states['f1']['charset'] is None
+        assert states['f1']['content_type'] == 'text/plain'
+        assert states['f1']['size'] == 14
+        assert states['f2']['name'] == 'file2.txt'
+        assert states['f2']['content'] == force_bytes('file_content_2_long')
+        assert states['f2']['charset'] == 'iso-8859-1'
+        assert states['f2']['content_type'] == 'text/plain'
+        assert states['f2']['size'] == 19
 
     def test_is_able_to_regenerate_the_request_files_dict(self):
         # Setup
@@ -56,14 +57,14 @@ class TestAttachmentCache(TestCase):
         cache.set('mykey', original_files)
         # Run
         files = cache.get('mykey')
-        self.assertIn('f1', files)
-        self.assertIn('f2', files)
+        assert 'f1' in files
+        assert 'f2' in files
         f1 = files['f1']
         f2 = files['f2']
-        self.assertTrue(isinstance(f1, InMemoryUploadedFile))
-        self.assertEqual(f1.name, 'file1.txt')
-        self.assertEqual(f1.file.read(), force_bytes('file_content_1'))
-        self.assertTrue(isinstance(f2, TemporaryUploadedFile))  # because of the size of the content of f2
-        self.assertEqual(f2.name, 'file2.txt')
-        self.assertEqual(f2.file.read(), force_bytes('file_content_2_long' * 300000))
-        self.assertEqual(f2.charset, 'iso-8859-1')
+        assert isinstance(f1, InMemoryUploadedFile)
+        assert f1.name == 'file1.txt'
+        assert f1.file.read() == force_bytes('file_content_1')
+        assert isinstance(f2, TemporaryUploadedFile)  # because of the size of the content of f2
+        assert f2.name == 'file2.txt'
+        assert f2.file.read() == force_bytes('file_content_2_long' * 300000)
+        assert f2.charset == 'iso-8859-1'
