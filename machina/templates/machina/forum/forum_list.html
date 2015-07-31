@@ -60,6 +60,7 @@
                                                         </div>
                                                     </td>
                                                 {% endif %}
+                                            <td>
                                                 <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
                                                 <div class="forum-description">
                                                     {{ node.description.rendered }}
