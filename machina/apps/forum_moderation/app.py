@@ -20,6 +20,9 @@ class ModerationApp(Application):
     topic_unlock_view = get_class('forum_moderation.views', 'TopicUnlockView')
     topic_delete_view = get_class('forum_moderation.views', 'TopicDeleteView')
     topic_move_view = get_class('forum_moderation.views', 'TopicMoveView')
+    topic_update_to_normal_topic_view = get_class('forum_moderation.views', 'TopicUpdateToNormalTopicView')
+    topic_update_to_sticky_topic_view = get_class('forum_moderation.views', 'TopicUpdateToStickyTopicView')
+    topic_update_to_announce_view = get_class('forum_moderation.views', 'TopicUpdateToAnnounceView')
 
     def get_urls(self):
         urls = [
@@ -27,6 +30,12 @@ class ModerationApp(Application):
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/unlock/$'), self.topic_unlock_view.as_view(), name='topic-unlock'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'), self.topic_delete_view.as_view(), name='topic-delete'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/move/$'), self.topic_move_view.as_view(), name='topic-move'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/topic/$'),
+                self.topic_update_to_normal_topic_view.as_view(), name='topic-update-to-post'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/sticky/$'),
+                self.topic_update_to_sticky_topic_view.as_view(), name='topic-update-to-sticky'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/announce/$'),
+                self.topic_update_to_announce_view.as_view(), name='topic-update-to-announce'),
         ]
         return patterns('', *urls)
 

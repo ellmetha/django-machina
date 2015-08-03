@@ -251,3 +251,73 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_move_topics(obj, user)
+
+
+class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    A view providing the ability to change the type of forum topics: normal, sticky topic or announce.
+    """
+    template_name = 'forum_moderation/topic_update_type.html'
+    context_object_name = 'topic'
+    model = Topic
+    success_message = _('This topic type has been changed successfully.')
+
+    # The following attributes should be defined in subclasses
+    target_type = None
+    question = ''
+
+    def update_type(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.type = self.target_type
+        self.object.save()
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.update_type(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicUpdateTypeBaseView, self).get_context_data(**kwargs)
+        context['question'] = self.question
+
+        # Append the forum associated with the topic being locked
+        # to the context
+        topic = self.get_object()
+        context['forum'] = topic.forum
+
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+
+        return reverse('forum-conversation:topic', kwargs={
+            'forum_slug': self.object.forum.slug,
+            'forum_pk': self.object.forum.pk,
+            'slug': self.object.slug,
+            'pk': self.object.pk})
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        """
+        Returns the post that will be edited.
+        """
+        return self.get_object().forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_lock_topics(obj, user)
+
+
+class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
+    target_type = Topic.TYPE_CHOICES.topic_post
+    question = _('Would you want to change this topic to a default topic?')
+
+
+class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
+    target_type = Topic.TYPE_CHOICES.topic_sticky
+    question = _('Would you want to change this topic to a sticky topic?')
+
+
+class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
+    target_type = Topic.TYPE_CHOICES.topic_announce
+    question = _('Would you want to change this topic to an announce?')

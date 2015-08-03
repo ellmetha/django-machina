@@ -231,6 +231,28 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_delete_posts')
 
+    def can_update_topics_to_normal_topics(self, forum, user):
+        """
+        Given a forum, checks whether the user can change its topic types to normal
+        topics.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_edit_posts')
+
+    def can_update_topics_to_sticky_topics(self, forum, user):
+        """
+        Given a forum, checks whether the user can change its topic types to sticky
+        topics.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_edit_posts') \
+            and self._perform_basic_permission_check(forum, user, 'can_post_stickies')
+
+    def can_update_topics_to_announces(self, forum, user):
+        """
+        Given a forum, checks whether the user can change its topic types to announces.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_edit_posts') \
+            and self._perform_basic_permission_check(forum, user, 'can_post_announcements')
+
     # Common
     # --
 
