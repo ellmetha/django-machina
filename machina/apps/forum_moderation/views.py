@@ -312,12 +312,21 @@ class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_post
     question = _('Would you want to change this topic to a default topic?')
 
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_update_topics_to_normal_topics(obj, user)
+
 
 class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_sticky
     question = _('Would you want to change this topic to a sticky topic?')
 
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_update_topics_to_sticky_topics(obj, user)
+
 
 class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_announce
     question = _('Would you want to change this topic to an announce?')
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_update_topics_to_announces(obj, user)
