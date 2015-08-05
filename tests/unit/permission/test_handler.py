@@ -434,3 +434,47 @@ class TestPermissionHandler(object):
         assert set(self.perm_handler.get_movable_forums(self.u1)) == set([self.forum_1, ])
         assert set(self.perm_handler.get_movable_forums(u2)) == set(Forum.objects.all())
         assert list(self.perm_handler.get_movable_forums(u3)) == []
+
+    def test_knows_if_a_user_can_update_topics_to_normal_topics(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_edit_posts', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_normal_topics(self.forum_1, self.u1)
+        assert not self.perm_handler.can_update_topics_to_normal_topics(self.forum_1, u2)
+
+    def test_knows_that_a_superuser_can_update_topics_to_normal_topics(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_normal_topics(self.forum_1, u2)
+
+    def test_knows_if_a_user_can_update_topics_to_sticky_topics(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_edit_posts', self.u1, self.forum_1)
+        assign_perm('can_post_stickies', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_sticky_topics(self.forum_1, self.u1)
+        assert not self.perm_handler.can_update_topics_to_sticky_topics(self.forum_1, u2)
+
+    def test_knows_that_a_superuser_can_update_topics_to_sticky_topics(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_sticky_topics(self.forum_1, u2)
+
+    def test_knows_if_a_user_can_update_topics_to_announces(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_edit_posts', self.u1, self.forum_1)
+        assign_perm('can_post_announcements', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_announces(self.forum_1, self.u1)
+        assert not self.perm_handler.can_update_topics_to_announces(self.forum_1, u2)
+
+    def test_knows_that_a_superuser_can_update_topics_to_announces(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_update_topics_to_announces(self.forum_1, u2)
