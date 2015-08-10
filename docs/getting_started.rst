@@ -55,7 +55,7 @@ Django settings
 
 First update your ``INSTALLED_APPS`` in your project's settings module. Modify it to be a list and append the *django-machina*'s  apps to this list::
 
-  from machina import get_vanilla_apps
+  from machina import get_apps as get_machina_apps
 
   INSTALLED_APS = [
     'django.contrib.auth',
@@ -71,7 +71,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     'haystack',
     'bootstrap3',
     'django_markdown',
-  ] + get_vanilla_apps()
+  ] + get_machina_apps()
 
 .. note::
 
