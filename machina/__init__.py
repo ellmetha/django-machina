@@ -31,7 +31,7 @@ MACHINA_MAIN_TEMPLATE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'templates/machina')
 
 
-def get_vanilla_apps(overrides=None):
+def get_apps(overrides=None):
     """
     Returns a list of machina's apps. Any of these apps can be overriden with
     custom apps specified in the 'overrides' list.

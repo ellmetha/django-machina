@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
 import gettext
-from machina import get_vanilla_apps
+from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 import os
@@ -144,7 +144,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'example_project',
-] + get_vanilla_apps()
+] + get_machina_apps()
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 

@@ -5,7 +5,7 @@ import os
 
 # Third party imports
 # Local application / specific library imports
-from machina import get_vanilla_apps
+from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'django_markdown',
     'tests',
-] + get_vanilla_apps(['tests._testsite.apps.forum_conversation', ])
+] + get_machina_apps(['tests._testsite.apps.forum_conversation', ])
 
 SITE_ID = 1
 
