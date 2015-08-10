@@ -261,6 +261,17 @@ class TestPermissionHandler(object):
         # Run & check
         assert not self.perm_handler.can_add_post(self.forum_1_topic, self.u1)
 
+    def test_knows_that_a_moderator_can_add_posts_to_a_locked_topic(self):
+        # Setup
+        assign_perm('can_reply_to_topics', self.u1, self.forum_1)
+        assign_perm('can_reply_to_locked_topics', self.u1, self.forum_1)
+        u2 = UserFactory.create()
+        self.forum_1_topic.status = self.forum_1_topic.STATUS_CHOICES.topic_locked
+        self.forum_1_topic.save()
+        # Run & check
+        assert self.perm_handler.can_add_post(self.forum_1_topic, self.u1)
+        assert not self.perm_handler.can_add_post(self.forum_1_topic, u2)
+
     def test_knows_if_a_user_can_create_polls(self):
         # Setup
         u2 = UserFactory.create()

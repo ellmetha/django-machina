@@ -116,7 +116,8 @@ class PermissionHandler(object):
         Given a topic, checks whether the user can append posts to it.
         """
         can_add_post = self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_topics') \
-            and (not topic.is_locked or user.is_superuser)
+            and (not topic.is_locked
+                 or self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_locked_topics'))
         return can_add_post
 
     def can_edit_post(self, post, user):
