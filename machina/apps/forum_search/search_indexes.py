@@ -13,8 +13,8 @@ Post = get_model('forum_conversation', 'Post')
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True, template_name='forum_search/post_text.txt')
 
-    poster = indexes.CharField(model_attr='poster')
-    poster_name = indexes.CharField(model_attr='poster__username')
+    poster = indexes.CharField(model_attr='poster', null=True)
+    poster_name = indexes.CharField(model_attr='poster__username', null=True)
 
     forum = indexes.IntegerField(model_attr='topic__forum_id')
     forum_slug = indexes.CharField()
@@ -31,7 +31,8 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def prepare_poster_name(self, obj):
-        return obj.topic.poster.username
+        poster = obj.topic.poster
+        return poster.username if poster else ''
 
     def prepare_forum_slug(self, obj):
         return obj.topic.forum.slug
