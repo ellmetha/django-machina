@@ -5,3 +5,4 @@ django-debug-toolbar
 django-crispy-forms
 django-loginas
 Whoosh
+unipath

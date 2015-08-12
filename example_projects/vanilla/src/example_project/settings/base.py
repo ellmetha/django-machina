@@ -1,11 +1,16 @@
 # -*- coding:utf-8 -*-
+
 from __future__ import unicode_literals
 import gettext
+
+from unipath import Path
+
 from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
-import os
-PROJECT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../..')
+
+
+PROJECT_PATH = Path(__file__).ancestor(4)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -30,7 +35,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(PROJECT_PATH, 'src/locale/example_project'),
+    PROJECT_PATH.child('src', 'locale', 'xample_project'),
 )
 
 # If you set this to False, Django will make some optimizations so as not
@@ -49,7 +54,7 @@ ADMIN_URL = 'admin/'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'public/media/')
+MEDIA_ROOT = PROJECT_PATH.child('public', 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -60,7 +65,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'public/static/')
+STATIC_ROOT = PROJECT_PATH.child('public', 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -101,7 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'src/example_project/templates/'),
+    PROJECT_PATH.child('src', 'example_project', 'templates'),
     MACHINA_MAIN_TEMPLATE_DIR,
 )
 
@@ -170,7 +175,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(PROJECT_PATH, 'whoosh_index'),
+        'PATH': PROJECT_PATH.child('whoosh_index'),
     },
 }
 
