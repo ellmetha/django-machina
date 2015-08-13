@@ -376,23 +376,23 @@ class TestPermissionHandler(object):
         # Run & check
         assert self.perm_handler.can_download_files(self.forum_1, u2)
 
-    def test_knows_that_a_non_moderator_cannot_access_the_moderation_panel(self):
+    def test_knows_that_a_non_moderator_cannot_access_the_moderation_queue(self):
         # Setup
         u2 = UserFactory.create()
         # Run & check
-        assert not self.perm_handler.can_access_moderation_panel(u2)
+        assert not self.perm_handler.can_access_moderation_queue(u2)
 
-    def test_knows_that_a_moderator_can_access_the_moderation_panel(self):
+    def test_knows_that_a_moderator_can_access_the_moderation_queue(self):
         # Setup
         assign_perm('can_approve_posts', self.u1, self.forum_1)
         # Run & check
-        assert self.perm_handler.can_access_moderation_panel(self.u1)
+        assert self.perm_handler.can_access_moderation_queue(self.u1)
 
-    def test_knows_that_a_superuser_can_access_the_moderation_panel(self):
+    def test_knows_that_a_superuser_can_access_the_moderation_queue(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
-        assert self.perm_handler.can_access_moderation_panel(u2)
+        assert self.perm_handler.can_access_moderation_queue(u2)
 
     def test_knows_if_a_user_can_lock_topics(self):
         # Setup

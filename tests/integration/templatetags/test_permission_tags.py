@@ -61,15 +61,15 @@ class TestGetPermissionTag(object):
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.u2)
 
-    def test_can_tell_if_a_user_can_access_the_moderation_panel(self):
+    def test_can_tell_if_a_user_can_access_the_moderation_queue(self):
         # Setup
         def get_rendered(user):
             request = self.request_factory.get('/')
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_access_moderation_panel\' request.user as user_can_access_moderation_panel %}'
-                '{% if user_can_access_moderation_panel %}CAN_ACCESS{% else %}CANNOT_ACCESS{% endif %}')
+                self.loadstatement + '{% get_permission \'can_access_moderation_queue\' request.user as user_can_access_moderation_queue %}'
+                '{% if user_can_access_moderation_queue %}CAN_ACCESS{% else %}CANNOT_ACCESS{% endif %}')
             c = Context({'request': request})
             rendered = t.render(c)
 

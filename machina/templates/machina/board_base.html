@@ -56,9 +56,9 @@
                     {% if not request.user.is_anonymous %}
                         <a href="{% url 'forum-member:user-topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
                     {% endif %}
-                    {% get_permission 'can_access_moderation_panel' request.user as user_can_access_moderation_panel %}
-                    {% if user_can_access_moderation_panel %}
-                        <a href="#" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation panel" %}</a>
+                    {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
+                    {% if can_access_moderation_queue %}
+                        <a href="#" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a>
                     {% endif %}
                 </div>
             </div>

@@ -197,13 +197,10 @@ class PermissionHandler(object):
 
     # Moderation
 
-    def can_access_moderation_panel(self, user):
+    def can_access_moderation_queue(self, user):
         """
-        Returns True if the passed user can access the moderation panel.
-        This panel allows:
-
-            - posts approval
-
+        Returns True if the passed user can access the moderation queue.  The latest
+        allows the moderator to approve posts.
         """
         perms = [
             'can_approve_posts',
