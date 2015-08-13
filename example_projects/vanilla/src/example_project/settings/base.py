@@ -34,6 +34,13 @@ LANGUAGES = (
    ('fr', "Français"),
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': PROJECT_PATH.child('example.db'),
+    }
+}
+
 LOCALE_PATHS = (
     PROJECT_PATH.child('src', 'locale', 'xample_project'),
 )
