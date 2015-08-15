@@ -5,11 +5,11 @@ staticfiles:
 .PHONY: install upgrade coverage travis docs
 
 install:
-		pip install -r requirements.txt
+		pip install -r dev-requirements.txt
 		python setup.py develop
 
 upgrade:
-		pip install --upgrade -r requirements.txt
+		pip install --upgrade -r dev-requirements.txt
 		python setup.py develop --upgrade
 
 coverage:

@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
+from django.views.generic import ListView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
@@ -20,6 +21,7 @@ from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')
+Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 TopicMoveForm = get_class('forum_moderation.forms', 'TopicMoveForm')
@@ -330,3 +332,17 @@ class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_update_topics_to_announces(obj, user)
+
+
+class ModerationQueueListView(PermissionRequiredMixin, ListView):
+    template_name = 'forum_moderation/moderation_queue/list.html'
+    model = Post
+
+    def get_queryset(self):
+        qs = super(ModerationQueueListView, self).get_queryset()
+        return qs
+
+    # Permissions checks
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_access_moderation_queue(user)
