@@ -14,7 +14,7 @@ from machina.core.loading import get_class
 
 
 class ModerationApp(Application):
-    name = 'forum-moderation'
+    name = 'forum_moderation'
 
     topic_lock_view = get_class('forum_moderation.views', 'TopicLockView')
     topic_unlock_view = get_class('forum_moderation.views', 'TopicUnlockView')
@@ -26,16 +26,16 @@ class ModerationApp(Application):
 
     def get_urls(self):
         urls = [
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/lock/$'), self.topic_lock_view.as_view(), name='topic-lock'),
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/unlock/$'), self.topic_unlock_view.as_view(), name='topic-unlock'),
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'), self.topic_delete_view.as_view(), name='topic-delete'),
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/move/$'), self.topic_move_view.as_view(), name='topic-move'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/lock/$'), self.topic_lock_view.as_view(), name='topic_lock'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/unlock/$'), self.topic_unlock_view.as_view(), name='topic_unlock'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'), self.topic_delete_view.as_view(), name='topic_delete'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/move/$'), self.topic_move_view.as_view(), name='topic_move'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/topic/$'),
-                self.topic_update_to_normal_topic_view.as_view(), name='topic-update-to-post'),
+                self.topic_update_to_normal_topic_view.as_view(), name='topic_update_to_post'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/sticky/$'),
-                self.topic_update_to_sticky_topic_view.as_view(), name='topic-update-to-sticky'),
+                self.topic_update_to_sticky_topic_view.as_view(), name='topic_update_to_sticky'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/announce/$'),
-                self.topic_update_to_announce_view.as_view(), name='topic-update-to-announce'),
+                self.topic_update_to_announce_view.as_view(), name='topic_update_to_announce'),
         ]
         return patterns('', *urls)
 

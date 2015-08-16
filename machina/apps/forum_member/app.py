@@ -12,13 +12,13 @@ from machina.core.loading import get_class
 
 
 class MemberApp(Application):
-    name = 'forum-member'
+    name = 'forum_member'
 
     user_topics_view = get_class('forum_member.views', 'UserTopicsView')
 
     def get_urls(self):
         urls = [
-            url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user-topics'),
+            url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
         ]
         return patterns('', *urls)
 

@@ -17,7 +17,7 @@
 				    	{% bootstrap_field form.forum %}
 				    	{% bootstrap_field form.lock_topic %}
 				        <input type="submit" value="{% trans "Move" %}" class="btn btn-warning" />
-				        <a href="{% url 'forum-conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
+				        <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
 				    </form>
 	            </div>
 			</div>

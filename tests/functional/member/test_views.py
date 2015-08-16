@@ -60,7 +60,7 @@ class TestUserTopicsView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = reverse('forum-member:user-topics')
+        correct_url = reverse('forum_member:user_topics')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -68,7 +68,7 @@ class TestUserTopicsView(BaseClientTestCase):
 
     def test_insert_only_topics_where_the_considered_user_participated_in_the_context(self):
         # Setup
-        correct_url = reverse('forum-member:user-topics')
+        correct_url = reverse('forum_member:user_topics')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -79,7 +79,7 @@ class TestUserTopicsView(BaseClientTestCase):
         # Setup
         topic_5 = create_topic(forum=self.forum_2, poster=self.user)
         PostFactory.create(topic=topic_5, poster=self.user, approved=False)
-        correct_url = reverse('forum-member:user-topics')
+        correct_url = reverse('forum_member:user_topics')
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check

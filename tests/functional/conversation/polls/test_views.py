@@ -60,7 +60,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
+        correct_url = reverse('forum_conversation:topic_poll_vote', kwargs={'pk': self.poll.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
@@ -69,7 +69,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
     def test_cannot_be_used_by_unauthorized_users(self):
         # Setup
         remove_perm('can_vote_in_polls', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
+        correct_url = reverse('forum_conversation:topic_poll_vote', kwargs={'pk': self.poll.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
@@ -77,7 +77,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
 
     def test_can_be_used_to_vote(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
+        correct_url = reverse('forum_conversation:topic_poll_vote', kwargs={'pk': self.poll.pk})
         post_data = {
             'options': [self.option_1.pk, ],
         }
@@ -94,7 +94,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         self.poll.user_changes = True
         self.poll.save()
         TopicPollVoteFactory.create(voter=self.user, poll_option=self.option_2)
-        correct_url = reverse('forum-conversation:topic-poll-vote', kwargs={'pk': self.poll.pk})
+        correct_url = reverse('forum_conversation:topic_poll_vote', kwargs={'pk': self.poll.pk})
         post_data = {
             'options': [self.option_1.pk, ],
         }

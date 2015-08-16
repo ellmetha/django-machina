@@ -34,11 +34,11 @@
                                 <div class="pull-right post-controls">
                                     {% get_permission 'can_edit_post' request.user post=post as user_can_edit_post %}
                                     {% if user_can_edit_post %}
-                                        <a href="{% if post.is_topic_head %}{% url 'forum-conversation:topic-update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum-conversation:post-update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
+                                        <a href="{% if post.is_topic_head %}{% url 'forum_conversation:topic_update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum_conversation:post_update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
                                     {% endif %}
                                     {% get_permission 'can_delete_post' request.user post=post as user_can_delete_post %}
                                     {% if user_can_delete_post %}
-                                        <a href="{% url 'forum-conversation:post-delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                        <a href="{% url 'forum_conversation:post_delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                                     {% endif %}
                                 </div>
                                 <h4 class="subject">{{ post.subject }}</h4>

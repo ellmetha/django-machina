@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse">
                     {% block header_collapse %}
                         <div class="col-sm-7 col-md-8 col-lg-5">
-                            <form class="navbar-form form-inline" role="search" action="{% url 'forum-search:search' %}">
+                            <form class="navbar-form form-inline" role="search" action="{% url 'forum_search:search' %}">
                                 <div class="form-group col-sm-7 col-md-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="{% trans 'Search...' %}" name="q">
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="{% url 'forum-search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
+                                    <a href="{% url 'forum_search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
                                 </div>
                             </form>
                         </div>
@@ -54,7 +54,7 @@
                 {% endblock breadcrumb %}
                 <div class="pull-right controls-link-wrapper">
                     {% if not request.user.is_anonymous %}
-                        <a href="{% url 'forum-member:user-topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
+                        <a href="{% url 'forum_member:user_topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
                     {% endif %}
                     {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
                     {% if can_access_moderation_queue %}

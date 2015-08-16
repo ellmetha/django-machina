@@ -12,15 +12,17 @@ from machina.core.loading import get_class
 
 
 class FeedsApp(Application):
-    name = 'forum-feeds'
+    name = 'forum_feeds'
 
     latest_topics_feed = get_class('forum_feeds.feeds', 'LastTopicsFeed')
 
     def get_urls(self):
         urls = [
-            url(_(r'^topics/$'), self.latest_topics_feed(), name='latest-topics'),
-            url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/$'), self.latest_topics_feed(), name='forum-latest-topics'),
-            url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/all/$'), self.latest_topics_feed(), {'descendants': True}, name='forum-latest-topics-with-descendants'),
+            url(_(r'^topics/$'), self.latest_topics_feed(), name='latest_topics'),
+            url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/$'),
+                self.latest_topics_feed(), name='forum_latest_topics'),
+            url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/all/$'),
+                self.latest_topics_feed(), {'descendants': True}, name='forum_latest_topics_with_descendants'),
         ]
         return patterns('', *urls)
 

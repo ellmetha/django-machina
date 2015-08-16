@@ -12,7 +12,7 @@ from machina.core.loading import get_class
 
 
 class TrackingApp(Application):
-    name = 'forum-tracking'
+    name = 'forum_tracking'
 
     mark_forums_read_view = get_class('forum_tracking.views', 'MarkForumsReadView')
     mark_topics_read_view = get_class('forum_tracking.views', 'MarkTopicsReadView')
@@ -20,10 +20,10 @@ class TrackingApp(Application):
 
     def get_urls(self):
         urls = [
-            url(_(r'^mark/forums/$'), self.mark_forums_read_view.as_view(), name='mark-all-forums-read'),
-            url(_(r'^mark/forums/(?P<pk>\d+)/$'), self.mark_forums_read_view.as_view(), name='mark-subforums-read'),
-            url(_(r'^mark/forum/(?P<pk>\d+)/topics/$'), self.mark_topics_read_view.as_view(), name='mark-topics-read'),
-            url(_(r'^unread-topics/$'), self.unread_topics_view.as_view(), name='unread-topics'),
+            url(_(r'^mark/forums/$'), self.mark_forums_read_view.as_view(), name='mark_all_forums_read'),
+            url(_(r'^mark/forums/(?P<pk>\d+)/$'), self.mark_forums_read_view.as_view(), name='mark_subforums_read'),
+            url(_(r'^mark/forum/(?P<pk>\d+)/topics/$'), self.mark_topics_read_view.as_view(), name='mark_topics_read'),
+            url(_(r'^unread-topics/$'), self.unread_topics_view.as_view(), name='unread_topics'),
         ]
         return patterns('', *urls)
 

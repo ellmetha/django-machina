@@ -100,7 +100,7 @@ class TestFacetedSearchView(BaseClientTestCase):
 
     def test_can_search_forum_posts(self):
         # Setup
-        correct_url = reverse('forum-search:search')
+        correct_url = reverse('forum_search:search')
         get_data = {'q': self.topic_1.subject}
         # Run
         response = self.client.get(correct_url, data=get_data)

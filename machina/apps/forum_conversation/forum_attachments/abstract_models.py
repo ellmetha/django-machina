@@ -37,4 +37,4 @@ class AbstractAttachment(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('forum-conversation:attachment', kwargs={'pk': str(self.id)})
+        return reverse('forum_conversation:attachment', kwargs={'pk': str(self.id)})

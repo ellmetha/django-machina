@@ -61,7 +61,7 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
 
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.object.forum.slug,
             'forum_pk': self.object.forum.pk,
             'slug': self.object.slug,
@@ -111,7 +111,7 @@ class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
     def get_success_url(self):
         messages.success(self.request, self.success_message)
 
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.object.forum.slug,
             'forum_pk': self.object.forum.pk,
             'slug': self.object.slug,
@@ -237,7 +237,7 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.object.forum.slug,
             'forum_pk': self.object.forum.pk,
             'slug': self.object.slug,
@@ -292,7 +292,7 @@ class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateRespo
     def get_success_url(self):
         messages.success(self.request, self.success_message)
 
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.object.forum.slug,
             'forum_pk': self.object.forum.pk,
             'slug': self.object.slug,

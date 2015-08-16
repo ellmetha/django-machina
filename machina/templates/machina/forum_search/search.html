@@ -36,7 +36,7 @@
             <div class="col-xs-12">
                 <h1>{% trans "Search" %}
                 &nbsp;
-                <a href="{% url 'forum-search:search' %}" class="btn btn-xs btn-primary"><i class="fa fa-search"></i>&nbsp;{% trans "New search" %}</a></h1>
+                <a href="{% url 'forum_search:search' %}" class="btn btn-xs btn-primary"><i class="fa fa-search"></i>&nbsp;{% trans "New search" %}</a></h1>
             </div>
         </div>
         <div class="row">
@@ -71,7 +71,7 @@
                             {% for result in page.object_list %}
                                 <tr>
                                     <td class="post-name">
-                                        <a href="{% url 'forum-conversation:topic' result.forum_slug result.forum result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
+                                        <a href="{% url 'forum_conversation:topic' result.forum_slug result.forum result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
                                         <div>
                                             <div class="post-created">
                                                 {% trans "By:" %} <a href="#">{{ result.poster_name }}</a> {% trans "on" %} {{ result.created }}

@@ -1,7 +1,7 @@
 {% load url from future %}
 {% load i18n %}
 
-<form method="post" action="{% url 'forum-conversation:topic-poll-vote' poll.pk %}" class="form" novalidate>
+<form method="post" action="{% url 'forum_conversation:topic_poll_vote' poll.pk %}" class="form" novalidate>
 	{% csrf_token %}
 
 	{% for option in poll_form.options.field.queryset %}

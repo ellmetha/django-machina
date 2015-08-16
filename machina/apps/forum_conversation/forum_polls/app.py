@@ -17,7 +17,7 @@ class PollsApp(Application):
 
     def get_urls(self):
         urls = [
-            url(r'^poll/(?P<pk>\d+)/vote/$', self.poll_vote_view.as_view(), name='topic-poll-vote'),
+            url(r'^poll/(?P<pk>\d+)/vote/$', self.poll_vote_view.as_view(), name='topic_poll_vote'),
         ]
         return patterns('', *urls)
 

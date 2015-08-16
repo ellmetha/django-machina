@@ -12,7 +12,7 @@ from machina.core.loading import get_class
 
 
 class SearchApp(Application):
-    name = 'forum-search'
+    name = 'forum_search'
 
     search_view = get_class('forum_search.views', 'FacetedSearchView')
     search_form = get_class('forum_search.forms', 'SearchForm')

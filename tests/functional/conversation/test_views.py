@@ -225,7 +225,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -234,7 +234,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -243,7 +243,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
             'subject': faker.text(max_nb_chars=200),
@@ -258,7 +258,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_redirects_to_topic_view_on_success(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
             'subject': faker.text(max_nb_chars=200),
@@ -269,7 +269,7 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
         assert len(response.redirect_chain)
@@ -279,7 +279,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_redirects_to_the_forum_if_the_post_is_not_approved(self):
         # Setup
         remove_perm('can_post_without_approval', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
             'subject': faker.text(max_nb_chars=200),
@@ -299,7 +299,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_embed_a_poll_option_formset_in_the_context_if_the_user_can_create_polls(self):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -308,7 +308,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_create_polls(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -317,7 +317,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_can_handle_poll_previews(self):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
             'subject': faker.text(max_nb_chars=200),
@@ -343,7 +343,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_can_create_a_poll_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data = {
             'subject': faker.text(max_nb_chars=200),
@@ -375,7 +375,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_cannot_create_polls_with_invalid_options(self):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         post_data_1 = {
             'subject': faker.text(max_nb_chars=200),
@@ -419,7 +419,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -428,7 +428,7 @@ class TestTopicCreateView(BaseClientTestCase):
 
     def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
         # Setup
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -437,7 +437,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_can_handle_attachment_previews(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         post_data = {
@@ -460,7 +460,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         post_data_1 = {
@@ -499,7 +499,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_can_create_an_attachment_and_its_options_if_the_user_is_allowed_to_do_it(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         post_data = {
@@ -523,7 +523,7 @@ class TestTopicCreateView(BaseClientTestCase):
     def test_cannot_create_attachments_with_invalid_options(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
-        correct_url = reverse('forum-conversation:topic-create', kwargs={
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
         post_data = {
@@ -569,7 +569,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -580,7 +580,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -591,7 +591,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -608,7 +608,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_redirects_to_topic_view_on_success(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -619,7 +619,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -630,7 +630,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -641,7 +641,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_cannot_embed_a_poll_option_formset_in_the_context_if_the_user_canot_add_polls(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -652,7 +652,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -683,7 +683,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         option_2 = TopicPollOptionFactory.create(poll=poll)
         assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -713,7 +713,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Setup
         assign_perm('can_create_polls', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -747,7 +747,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -758,7 +758,7 @@ class TestTopicUpdateView(BaseClientTestCase):
     def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
@@ -769,7 +769,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         f = SimpleUploadedFile('file1.txt', force_bytes('file_content_1'))
@@ -796,7 +796,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -823,7 +823,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         attachment = AttachmentFactory.create(post=self.topic.first_post, file=f)
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum-conversation:topic-update',
+            'forum_conversation:topic_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
@@ -871,7 +871,7 @@ class TestPostCreateView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-create',
+            'forum_conversation:post_create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
         # Run
@@ -882,7 +882,7 @@ class TestPostCreateView(BaseClientTestCase):
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-create',
+            'forum_conversation:post_create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
         # Run
@@ -893,7 +893,7 @@ class TestPostCreateView(BaseClientTestCase):
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-create',
+            'forum_conversation:post_create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
         post_data = {
@@ -909,7 +909,7 @@ class TestPostCreateView(BaseClientTestCase):
     def test_redirects_to_topic_view_on_success(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-create',
+            'forum_conversation:post_create',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
         post_data = {
@@ -920,7 +920,7 @@ class TestPostCreateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={
                 'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                 'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
@@ -954,7 +954,7 @@ class TestPostUpdateView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-update',
+            'forum_conversation:post_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
@@ -966,7 +966,7 @@ class TestPostUpdateView(BaseClientTestCase):
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-update',
+            'forum_conversation:post_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
@@ -978,7 +978,7 @@ class TestPostUpdateView(BaseClientTestCase):
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-update',
+            'forum_conversation:post_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
@@ -995,7 +995,7 @@ class TestPostUpdateView(BaseClientTestCase):
     def test_redirects_to_topic_view_on_success(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-update',
+            'forum_conversation:post_update',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.post.pk})
@@ -1007,7 +1007,7 @@ class TestPostUpdateView(BaseClientTestCase):
         response = self.client.post(correct_url, post_data, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -1041,7 +1041,7 @@ class TestPostDeleteView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-delete',
+            'forum_conversation:post_delete',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})
@@ -1053,7 +1053,7 @@ class TestPostDeleteView(BaseClientTestCase):
     def test_redirects_to_the_topic_view_if_posts_remain(self):
         # Setup
         correct_url = reverse(
-            'forum-conversation:post-delete',
+            'forum_conversation:post_delete',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})
@@ -1061,7 +1061,7 @@ class TestPostDeleteView(BaseClientTestCase):
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -1072,7 +1072,7 @@ class TestPostDeleteView(BaseClientTestCase):
         # Setup
         self.post.delete()
         correct_url = reverse(
-            'forum-conversation:post-delete',
+            'forum_conversation:post_delete',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
                     'pk': self.first_post.pk})

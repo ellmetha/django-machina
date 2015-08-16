@@ -58,7 +58,7 @@ class TestTopicLockView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-lock',
+            'forum_moderation:topic_lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -68,7 +68,7 @@ class TestTopicLockView(BaseClientTestCase):
     def test_can_lock_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-lock',
+            'forum_moderation:topic_lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -79,13 +79,13 @@ class TestTopicLockView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-lock',
+            'forum_moderation:topic_lock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -122,7 +122,7 @@ class TestTopicUnlockView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-unlock',
+            'forum_moderation:topic_unlock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -132,7 +132,7 @@ class TestTopicUnlockView(BaseClientTestCase):
     def test_can_unlock_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-unlock',
+            'forum_moderation:topic_unlock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -143,13 +143,13 @@ class TestTopicUnlockView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-unlock',
+            'forum_moderation:topic_unlock',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -184,7 +184,7 @@ class TestTopicDeleteView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-delete',
+            'forum_moderation:topic_delete',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -194,7 +194,7 @@ class TestTopicDeleteView(BaseClientTestCase):
     def test_can_delete_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-delete',
+            'forum_moderation:topic_delete',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -205,7 +205,7 @@ class TestTopicDeleteView(BaseClientTestCase):
     def test_redirects_to_the_forum_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-delete',
+            'forum_moderation:topic_delete',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
@@ -247,7 +247,7 @@ class TestTopicMoveView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-move',
+            'forum_moderation:topic_move',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -257,7 +257,7 @@ class TestTopicMoveView(BaseClientTestCase):
     def test_can_move_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-move',
+            'forum_moderation:topic_move',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
             'forum': self.other_forum.id,
@@ -271,7 +271,7 @@ class TestTopicMoveView(BaseClientTestCase):
     def test_can_move_and_lock_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-move',
+            'forum_moderation:topic_move',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
             'forum': self.other_forum.id,
@@ -289,7 +289,7 @@ class TestTopicMoveView(BaseClientTestCase):
         self.topic.status = self.topic.STATUS_CHOICES.topic_locked
         self.topic.save()
         correct_url = reverse(
-            'forum-moderation:topic-move',
+            'forum_moderation:topic_move',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         post_data = {
             'forum': self.other_forum.id,
@@ -333,7 +333,7 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-post',
+            'forum_moderation:topic_update_to_post',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -343,7 +343,7 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
     def test_can_update_topics_to_standard_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-post',
+            'forum_moderation:topic_update_to_post',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -354,13 +354,13 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-post',
+            'forum_moderation:topic_update_to_post',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -398,7 +398,7 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-sticky',
+            'forum_moderation:topic_update_to_sticky',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -408,7 +408,7 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
     def test_can_update_topics_to_sticky_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-sticky',
+            'forum_moderation:topic_update_to_sticky',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -419,13 +419,13 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-sticky',
+            'forum_moderation:topic_update_to_sticky',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)
@@ -463,7 +463,7 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-announce',
+            'forum_moderation:topic_update_to_announce',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -473,7 +473,7 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
     def test_can_update_topics_to_sticky_topics(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-announce',
+            'forum_moderation:topic_update_to_announce',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         self.client.post(correct_url, follow=True)
@@ -484,13 +484,13 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
     def test_redirects_to_the_topic_view(self):
         # Setup
         correct_url = reverse(
-            'forum-moderation:topic-update-to-announce',
+            'forum_moderation:topic_update_to_announce',
             kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
         # Run
         response = self.client.post(correct_url, follow=True)
         # Check
         topic_url = reverse(
-            'forum-conversation:topic',
+            'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
                     'slug': self.topic.slug, 'pk': self.topic.pk})
         assert len(response.redirect_chain)

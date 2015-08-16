@@ -15,7 +15,7 @@ from machina.core.loading import get_class
 
 
 class BaseConversationApp(Application):
-    name = 'forum-conversation'
+    name = 'forum_conversation'
 
     topic_view = get_class('forum_conversation.views', 'TopicView')
     topic_create_view = get_class('forum_conversation.views', 'TopicCreateView')
@@ -31,12 +31,15 @@ class BaseConversationApp(Application):
             '',
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
 
-            url(_(r'^topic/create/$'), self.topic_create_view.as_view(), name='topic-create'),
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/update/$'), self.topic_update_view.as_view(), name='topic-update'),
+            url(_(r'^topic/create/$'), self.topic_create_view.as_view(), name='topic_create'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/update/$'), self.topic_update_view.as_view(), name='topic_update'),
 
-            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/post/create/$'), self.post_create_view.as_view(), name='post-create'),
-            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$'), self.post_update_view.as_view(), name='post-update'),
-            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$'), self.post_delete_view.as_view(), name='post-delete'),
+            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/post/create/$'),
+                self.post_create_view.as_view(), name='post_create'),
+            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$'),
+                self.post_update_view.as_view(), name='post_update'),
+            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$'),
+                self.post_delete_view.as_view(), name='post_delete'),
         )
 
         urls += [

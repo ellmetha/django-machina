@@ -489,7 +489,7 @@ class TopicCreateView(PermissionRequiredMixin, TopicFormView):
             return reverse('forum:forum', kwargs={
                 'slug': self.forum_post.topic.forum.slug,
                 'pk': self.forum_post.topic.forum.pk})
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.forum_post.topic.forum.slug,
             'forum_pk': self.forum_post.topic.forum.pk,
             'slug': self.forum_post.topic.slug,
@@ -524,7 +524,7 @@ class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
         return self.get_topic().first_post
 
     def get_success_url(self):
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.forum_post.topic.forum.slug,
             'forum_pk': self.forum_post.topic.forum.pk,
             'slug': self.forum_post.topic.slug,
@@ -568,7 +568,7 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
 
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
-            reverse('forum-conversation:topic', kwargs={
+            reverse('forum_conversation:topic', kwargs={
                 'forum_slug': self.forum_post.topic.forum.slug,
                 'forum_pk': self.forum_post.topic.forum.pk,
                 'slug': self.forum_post.topic.slug,
@@ -602,7 +602,7 @@ class PostUpdateView(PermissionRequiredMixin, PostFormView):
 
     def get_success_url(self):
         return '{0}?post={1}#{1}'.format(
-            reverse('forum-conversation:topic', kwargs={
+            reverse('forum_conversation:topic', kwargs={
                 'forum_slug': self.forum_post.topic.forum.slug,
                 'forum_pk': self.forum_post.topic.forum.pk,
                 'slug': self.forum_post.topic.slug,
@@ -658,7 +658,7 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
                 'slug': self.object.topic.forum.slug,
                 'pk': self.object.topic.forum.pk})
 
-        return reverse('forum-conversation:topic', kwargs={
+        return reverse('forum_conversation:topic', kwargs={
             'forum_slug': self.object.topic.forum.slug,
             'forum_pk': self.object.topic.forum.pk,
             'slug': self.object.topic.slug,
