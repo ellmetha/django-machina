@@ -14,7 +14,11 @@
         <div class="col-xs-6 col-md-4 forum-actions-block">
             {% if paginator.count > 0 %}
                 <p class="text-muted">
-                	{% blocktrans with paginator.count as topic_length %}{{ topic_length }} topics found{% endblocktrans %}
+                    {% blocktrans count counter=paginator.count %}
+                        {{ counter }} topic found
+                    {% plural %}
+                        {{ counter }} topics found
+                    {% endblocktrans %}
                 </p>
             {% endif %}
         </div>
