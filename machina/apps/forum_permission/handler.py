@@ -251,6 +251,12 @@ class PermissionHandler(object):
         return self._perform_basic_permission_check(forum, user, 'can_edit_posts') \
             and self._perform_basic_permission_check(forum, user, 'can_post_announcements')
 
+    def can_approve_posts(self, forum, user):
+        """
+        Given a forum, checks whether the user can approve its posts.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_approve_posts')
+
     # Common
     # --
 

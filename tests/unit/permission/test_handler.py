@@ -489,3 +489,17 @@ class TestPermissionHandler(object):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         assert self.perm_handler.can_update_topics_to_announces(self.forum_1, u2)
+
+    def test_knows_if_a_user_can_approve_posts(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_approve_posts', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_approve_posts(self.forum_1, self.u1)
+        assert not self.perm_handler.can_approve_posts(self.forum_1, u2)
+
+    def test_knows_that_a_superuser_can_approve_posts(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_approve_posts(self.forum_1, u2)
