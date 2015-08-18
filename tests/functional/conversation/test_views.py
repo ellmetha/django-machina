@@ -890,6 +890,33 @@ class TestPostCreateView(BaseClientTestCase):
         # Check
         assert response.context_data['topic'] == self.topic
 
+    def test_embed_the_topic_review_into_the_context(self):
+        # Setup
+        p2 = PostFactory.create(topic=self.topic, poster=self.user)
+        correct_url = reverse(
+            'forum_conversation:post_create',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert 'previous_posts' in response.context_data
+        assert set(response.context_data['previous_posts']) == set([p2, self.post, ])
+
+    def test_context_topic_review_contains_only_approved_posts(self):
+        # Setup
+        p2 = PostFactory.create(topic=self.topic, poster=self.user)
+        PostFactory.create(topic=self.topic, poster=self.user, approved=False)
+        correct_url = reverse(
+            'forum_conversation:post_create',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert 'previous_posts' in response.context_data
+        assert set(response.context_data['previous_posts']) == set([p2, self.post, ])
+
     def test_can_detect_that_a_preview_should_be_done(self):
         # Setup
         correct_url = reverse(

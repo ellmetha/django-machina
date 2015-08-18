@@ -560,7 +560,7 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
         topic = self.get_topic()
 
         # Add the previous posts to the context
-        previous_posts = topic.posts.order_by('-created')
+        previous_posts = topic.posts.filter(approved=True).order_by('-created')
         previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
         context['previous_posts'] = previous_posts
 
