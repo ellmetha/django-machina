@@ -1,0 +1,94 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+
+{% block sub-title %}{% trans "Moderation queue" %}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{% trans "Moderation queue" %}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 forum-actions-block">
+            {% if paginator.count > 0 %}
+                <p class="text-muted">
+                    {% blocktrans with paginator.count as topic_length %}{{ topic_length }} posts found{% endblocktrans %}
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-xs-12 col-md-8 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+    <form method="post" action="">{% csrf_token %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default postmoderationlist">
+                    <div class="panel-heading">
+                        <div class="row panel-row">
+                            <div class="col-md-7 post-name-col">
+                                <h3 class="panel-title">{% trans "Moderation queue" %}</h3>
+                            </div>
+                            <div class="col-md-2 moderation-col">{% trans "Topic" %}</div>
+                            <div class="col-md-2 moderation-col">{% trans "Forum" %}</div>
+                            <div class="col-md-1 moderation-col">{% trans "Mark" %}</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        {% for post in posts %}
+                            <div class="row panel-row">
+                                <div class="col-md-7 post-name">
+                                    <table class="post-data-table">
+                                        <tr>
+                                            <td class="post-name">
+                                                <a href="{% url 'forum_moderation:queued_post' post.pk %}" class="post-name-link">{{ post.subject }}</a>
+                                                <div>
+                                                    <div class="post-created">
+                                                        {% trans "By:" %} {% if post.poster %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %} {% trans "on" %} {{ post.created }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-2 topic-name">
+                                    {% if post.is_topic_head %}
+                                        <span class="label label-default">{% trans "New topic" %}</span>
+                                    {% else %}
+                                        <a href="#" class="post-name-link">{{ post.topic.subject }}</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-2 forum-name">
+                                    <a href="{% url 'forum:forum' slug=post.topic.forum.slug pk=post.topic.forum.pk %}" class="post-name-link">{{ post.topic.forum.name }}</a>
+                                </div>
+                                <div class="col-md-1 post-mark">
+                                    <input id="id_post_{{ forloop.count }}" type="checkbox" value="{{ post.pk }}" name="posts">
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="row panel-row">
+                                <div class="col-md-12">
+                                    {% trans "Not posts awaiting approval." %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning text-right" role="alert">
+            <button role="submit" name="disapprove" class="btn btn-warning">{% trans "Disapprove" %}</button>
+            <button role="submit" name="approve" class="btn btn-success"><b>{% trans "Approve" %}</b></button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-xs-12 col-md-12 pagination-block">
+            {% with "pagination-sm" as pagination_size %}
+                {% include "machina/partials/pagination.html" %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+
+{% block sub-title %}{% trans "Moderation queue" %}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{% trans "Moderation queue" %}</h1>
+        </div>
+    </div>
+	<div class="alert alert-warning" role="alert">
+		<div class="pull-right">
+			<a href="#" class="btn btn-warning">{% trans "Disapprove" %}</a>
+			<a href="#" class="btn btn-success"><b>{% trans "Approve" %}</b></a>
+		</div>
+		<h4>{{ post.subject }}</h4>
+		<p class="text-muted">{% if post.is_topic_head %}{% trans "New topic" %}{% else %}{% trans "New post" %}{% endif %}</p>
+	</div>
+    <div class="row">
+        <div class="col-xs-12">
+            {% if post.is_topic_head and poll %}
+                {% include "machina/forum_conversation/forum_polls/poll_detail.html" %}
+            {% endif %}
+            <div id="{{ post.id }}" class="panel panel-default post">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10 post-content-wrapper">
+                            <h4 class="subject">{{ post.subject }}</h4>
+                            <p>
+                                <small class="text-muted">
+                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
+                                </small>
+                            </p>
+                            <div class="post-content">
+                                {{ post.content.rendered }}
+                            </div>
+                            {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                        </div>
+                        <div class="col-md-2 post-sidebar">
+                            {% if post.poster %}
+                                {% if post.poster.forum_profile.avatar %}
+                                    <div class="avatar">
+                                        <a href="#">
+                                            <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                                <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
+                            {% else %}
+                                <div class="username"><b>{{ post.username }}</b></div>
+                                <div class="username text-muted">{% trans "Anonymous user" %}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if previous_posts %}
+	    <div class="row">
+	        <div class="col-xs-12">
+	            <div class="panel panel-default topic-review">
+	                <div class="panel-heading">
+	                    <h3 class="panel-title">{% trans "Topic review" %}&nbsp;&ndash;&nbsp;{{ post.topic.subject }}</h3>
+	                </div>
+	                <div class="panel-body">
+	                    {% for post in previous_posts %}
+	                        <div class="row post-review">
+	                            <div class="col-md-10 post-content-wrapper">
+	                                <h4 class="subject">{{ post.subject }}</h4>
+	                                <p><small class="text-muted">
+	                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+	                                </small></p>
+	                                <div class="post-content">
+	                                    {{ post.content.rendered }}
+	                                </div>
+	                                {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+	                            </div>
+	                            <div class="col-md-2 post-sidebar">
+	                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+	                            </div>
+	                        </div>
+	                    {% endfor %}
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    {% endif %}
+{% endblock content %}

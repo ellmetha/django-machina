@@ -58,7 +58,7 @@
                     {% endif %}
                     {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
                     {% if can_access_moderation_queue %}
-                        <a href="#" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a>
+                        <a href="{% url 'forum_moderation:queue' %}" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a>
                     {% endif %}
                 </div>
             </div>

@@ -23,6 +23,8 @@ class ModerationApp(Application):
     topic_update_to_normal_topic_view = get_class('forum_moderation.views', 'TopicUpdateToNormalTopicView')
     topic_update_to_sticky_topic_view = get_class('forum_moderation.views', 'TopicUpdateToStickyTopicView')
     topic_update_to_announce_view = get_class('forum_moderation.views', 'TopicUpdateToAnnounceView')
+    moderation_queue_list_view = get_class('forum_moderation.views', 'ModerationQueueListView')
+    moderation_queue_detail_view = get_class('forum_moderation.views', 'ModerationQueueDetailView')
 
     def get_urls(self):
         urls = [
@@ -36,6 +38,8 @@ class ModerationApp(Application):
                 self.topic_update_to_sticky_topic_view.as_view(), name='topic_update_to_sticky'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/announce/$'),
                 self.topic_update_to_announce_view.as_view(), name='topic_update_to_announce'),
+            url(_(r'^queue/$'), self.moderation_queue_list_view.as_view(), name='queue'),
+            url(_(r'^queue/(?P<pk>\d+)/$'), self.moderation_queue_detail_view.as_view(), name='queued_post'),
         ]
         return patterns('', *urls)
 

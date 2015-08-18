@@ -5,10 +5,12 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectMixin
@@ -17,6 +19,7 @@ from django.views.generic.edit import FormMixin
 from django.views.generic.edit import ProcessFormView
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
@@ -70,9 +73,6 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
@@ -120,9 +120,6 @@ class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
@@ -171,9 +168,6 @@ class TopicDeleteView(PermissionRequiredMixin, DeleteView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
@@ -246,9 +240,6 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
@@ -314,6 +305,8 @@ class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_post
     question = _('Would you want to change this topic to a default topic?')
 
+    # Permissions checks
+
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_update_topics_to_normal_topics(obj, user)
 
@@ -321,6 +314,8 @@ class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
 class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_sticky
     question = _('Would you want to change this topic to a sticky topic?')
+
+    # Permissions checks
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_update_topics_to_sticky_topics(obj, user)
@@ -330,19 +325,61 @@ class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_announce
     question = _('Would you want to change this topic to an announce?')
 
+    # Permissions checks
+
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_update_topics_to_announces(obj, user)
 
 
 class ModerationQueueListView(PermissionRequiredMixin, ListView):
     template_name = 'forum_moderation/moderation_queue/list.html'
+    context_object_name = 'posts'
+    paginate_by = machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE
     model = Post
 
     def get_queryset(self):
+        forums = self.request.forum_permission_handler.forum_list_filter(
+            Forum.objects.all(), self.request.user)
         qs = super(ModerationQueueListView, self).get_queryset()
-        return qs
+        qs = qs.filter(topic__forum__in=forums, approved=False)
+        return qs.order_by('-created')
 
     # Permissions checks
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_access_moderation_queue(user)
+
+
+class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
+    template_name = 'forum_moderation/moderation_queue/detail.html'
+    context_object_name = 'post'
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(ModerationQueueDetailView, self).get_context_data(**kwargs)
+
+        post = self.object
+        topic = post.topic
+
+        # Handles the case when a poll is associated to the topic
+        try:
+            if hasattr(topic, 'poll') and topic.poll.options.exists():
+                context['poll'] = topic.poll
+        except ObjectDoesNotExist:  # pragma: no cover
+            pass
+
+        if not post.is_topic_head:
+            # Add the topic review
+            previous_posts = topic.posts.filter(approved=True, created__lte=post.created).order_by('-created')
+            previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
+            context['previous_posts'] = previous_posts
+
+        return context
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        return self.get_object().topic.forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_approve_posts(obj, user)
