@@ -383,3 +383,76 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_approve_posts(obj, user)
+
+
+class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    A view providing the ability to approve queued forum posts.
+    """
+    template_name = 'forum_moderation/moderation_queue/post_approve.html'
+    context_object_name = 'post'
+    success_message = _('This post has been approved successfully.')
+    model = Post
+
+    def approve(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.approved = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.approve(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostApproveView, self).get_context_data(**kwargs)
+        context['forum'] = self.get_object().topic.forum
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse('forum_moderation:queue')
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        return self.get_object().topic.forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_approve_posts(obj, user)
+
+
+class PostDisapproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    A view providing the ability to disapprove queued forum posts.
+    """
+    template_name = 'forum_moderation/moderation_queue/post_disapprove.html'
+    context_object_name = 'post'
+    success_message = _('This post has been disapproved successfully.')
+    model = Post
+
+    def disapprove(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.disapprove(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDisapproveView, self).get_context_data(**kwargs)
+        context['forum'] = self.get_object().topic.forum
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse('forum_moderation:queue')
+
+    # Permissions checks
+
+    def get_controlled_object(self):
+        return self.get_object().topic.forum
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_approve_posts(obj, user)

@@ -25,6 +25,8 @@ class ModerationApp(Application):
     topic_update_to_announce_view = get_class('forum_moderation.views', 'TopicUpdateToAnnounceView')
     moderation_queue_list_view = get_class('forum_moderation.views', 'ModerationQueueListView')
     moderation_queue_detail_view = get_class('forum_moderation.views', 'ModerationQueueDetailView')
+    post_approve_view = get_class('forum_moderation.views', 'PostApproveView')
+    post_disapprove_view = get_class('forum_moderation.views', 'PostDisapproveView')
 
     def get_urls(self):
         urls = [
@@ -40,6 +42,8 @@ class ModerationApp(Application):
                 self.topic_update_to_announce_view.as_view(), name='topic_update_to_announce'),
             url(_(r'^queue/$'), self.moderation_queue_list_view.as_view(), name='queue'),
             url(_(r'^queue/(?P<pk>\d+)/$'), self.moderation_queue_detail_view.as_view(), name='queued_post'),
+            url(_(r'^queue/(?P<pk>\d+)/approve/$'), self.post_approve_view.as_view(), name='approve_queued_post'),
+            url(_(r'^queue/(?P<pk>\d+)/disapprove/$'), self.post_disapprove_view.as_view(), name='disapprove_queued_post'),
         ]
         return patterns('', *urls)
 

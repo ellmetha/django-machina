@@ -11,8 +11,8 @@
     </div>
 	<div class="alert alert-warning" role="alert">
 		<div class="pull-right">
-			<a href="#" class="btn btn-warning">{% trans "Disapprove" %}</a>
-			<a href="#" class="btn btn-success"><b>{% trans "Approve" %}</b></a>
+			<a href="{% url 'forum_moderation:disapprove_queued_post' post.pk %}" class="btn btn-warning">{% trans "Disapprove" %}</a>
+			<a href="{% url 'forum_moderation:approve_queued_post' post.pk %}" class="btn btn-success"><b>{% trans "Approve" %}</b></a>
 		</div>
 		<h4>{{ post.subject }}</h4>
 		<p class="text-muted">{% if post.is_topic_head %}{% trans "New topic" %}{% else %}{% trans "New post" %}{% endif %}</p>
