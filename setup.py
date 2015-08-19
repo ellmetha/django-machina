@@ -22,7 +22,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/ellmetha/django-machina',
-    license='BSD license, see LICENSE file',
+    license='BSD',
     description='A Django forum engine for building powerful and pretty community driven websites.',
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
