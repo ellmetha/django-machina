@@ -496,3 +496,61 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
+
+
+class TestModerationQueueListView(BaseClientTestCase):
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        # Set up a top-level forum
+        self.top_level_forum = create_forum()
+
+        # Set up a topic and some posts
+        self.topic = create_topic(
+            forum=self.top_level_forum, poster=self.user,
+            status=Topic.STATUS_CHOICES.topic_locked)
+        self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
+        self.post = PostFactory.create(topic=self.topic, poster=self.user)
+
+        # Mark the forum as read
+        ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.user, self.top_level_forum)
+        assign_perm('can_reply_to_topics', self.user, self.top_level_forum)
+        assign_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_delete_own_posts', self.user, self.top_level_forum)
+        assign_perm('can_edit_posts', self.user, self.top_level_forum)
+        assign_perm('can_approve_posts', self.user, self.top_level_forum)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse(
+            'forum_moderation:queue')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_users_who_cannot_approve_posts(self):
+        # Setup
+        remove_perm('can_approve_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:queue')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
+    def test_displays_only_non_approved_posts(self):
+        # Setup
+        post2 = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
+        correct_url = reverse(
+            'forum_moderation:queue')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert set(response.context_data['posts']) == set([post2, ])
