@@ -20,7 +20,56 @@
     <div class="row">
         <div class="col-xs-12">
             {% if post.is_topic_head and poll %}
-                {% include "machina/forum_conversation/forum_polls/poll_detail.html" %}
+                <div class="panel panel-default poll">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 poll-content-wrapper">
+                                <h4 class="question">{{ poll.question }}</h4>
+                                <hr />
+                                <div class="max-options-indication">
+                                    {% if poll.max_options == 1 %}
+                                        {% blocktrans %}
+                                            <b>1</b> option may be selected
+                                        {% endblocktrans %}
+                                    {% else %}
+                                        {% blocktrans with max_options=poll.max_options %}
+                                            Up to <b>{{ max_options }}</b> options may be selected
+                                        {% endblocktrans %}
+                                    {% endif %}
+                                </div>
+                                <div class="poll-options">
+                                    {% for option in poll_options %}
+                                        {% if forloop.first or not forloop.counter|divisibleby:2 %}
+                                            <div class="row">
+                                        {% endif %}
+                                        <div class="col-md-6">
+                                            <div class="well well-sm">
+                                                {% if poll.max_options == 1 %}
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="options" value="{{ option.id }}">
+                                                            {{ option.text }}
+                                                        </label>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="options" value="{{ option.id }}">
+                                                            {{ option.text }}
+                                                        </label>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if forloop.last or forloop.counter|divisibleby:2 %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
             <div id="{{ post.id }}" class="panel panel-default post">
                 <div class="panel-body">

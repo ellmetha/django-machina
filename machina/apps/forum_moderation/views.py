@@ -364,7 +364,9 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
         # Handles the case when a poll is associated to the topic
         try:
             if hasattr(topic, 'poll') and topic.poll.options.exists():
-                context['poll'] = topic.poll
+                poll = topic.poll
+                context['poll'] = poll
+                context['poll_options'] = poll.options.all()
         except ObjectDoesNotExist:  # pragma: no cover
             pass
 
