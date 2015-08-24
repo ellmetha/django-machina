@@ -376,6 +376,14 @@ class TestPermissionHandler(object):
         # Run & check
         assert self.perm_handler.can_download_files(self.forum_1, u2)
 
+    def test_knows_the_list_of_forums_eligible_to_the_moderation_queue_for_a_given_user(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_approve_posts', self.u1, self.forum_1)
+        # Run & check
+        assert set(self.perm_handler.get_moderation_queue_forums(self.u1)) == set([self.forum_1, ])
+        assert set(self.perm_handler.get_moderation_queue_forums(u2)) == set([])
+
     def test_knows_that_a_non_moderator_cannot_access_the_moderation_queue(self):
         # Setup
         u2 = UserFactory.create()

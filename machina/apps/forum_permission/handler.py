@@ -197,15 +197,19 @@ class PermissionHandler(object):
 
     # Moderation
 
+    def get_moderation_queue_forums(self, user):
+        """
+        Returns the list of forums whose posts can be approved by the considered
+        user.
+        """
+        return self._get_forums_for_user(user, ['can_approve_posts', ])
+
     def can_access_moderation_queue(self, user):
         """
         Returns True if the passed user can access the moderation queue.  The latest
         allows the moderator to approve posts.
         """
-        perms = [
-            'can_approve_posts',
-        ]
-        moderated_forums = self._get_forums_for_user(user, perms)
+        moderated_forums = self.get_moderation_queue_forums(user)
         return moderated_forums.exists()
 
     def can_lock_topics(self, forum, user):
