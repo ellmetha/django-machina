@@ -723,7 +723,7 @@ class TestPostDisapproveView(BaseClientTestCase):
         # Setup
         remove_perm('can_approve_posts', self.user, self.top_level_forum)
         correct_url = reverse(
-            'forum_moderation:approve_queued_post',
+            'forum_moderation:disapprove_queued_post',
             kwargs={'pk': self.post.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
