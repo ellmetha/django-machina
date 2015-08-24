@@ -338,8 +338,8 @@ class ModerationQueueListView(PermissionRequiredMixin, ListView):
     model = Post
 
     def get_queryset(self):
-        forums = self.request.forum_permission_handler.forum_list_filter(
-            Forum.objects.all(), self.request.user)
+        forums = self.request.forum_permission_handler.get_moderation_queue_forums(
+            self.request.user)
         qs = super(ModerationQueueListView, self).get_queryset()
         qs = qs.filter(topic__forum__in=forums, approved=False)
         return qs.order_by('-created')
