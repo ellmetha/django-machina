@@ -90,6 +90,15 @@ class TestTopic(object):
         topic = refresh(self.topic)
         assert topic.last_post == middle_post
 
+    def test_cannot_update_its_last_post_date_with_the_creation_date_of_a_non_approved_post(self):
+        # Setup
+        create_topic(forum=self.top_level_forum, poster=self.u1)
+        # Run & check
+        middle_post = PostFactory.create(topic=self.topic, poster=self.u1)
+        PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
+        topic = refresh(self.topic)
+        assert topic.last_post_on == middle_post.created
+
     def test_has_the_first_post_name_as_subject(self):
         # Run & check
         assert self.topic.subject == self.post.subject

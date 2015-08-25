@@ -174,9 +174,9 @@ class AbstractTopic(DatedModel):
         associated with the current topic.
         """
         self.posts_count = self.posts.filter(approved=True).count()
-        posts = self.posts.all().order_by('-created')
+        posts = self.posts.filter(approved=True).order_by('-created')
         self._last_post = posts[0] if posts.exists() else None
-        self.last_post_on = self._last_post.created
+        self.last_post_on = self._last_post.created if self._last_post else None
         self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
