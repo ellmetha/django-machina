@@ -92,6 +92,17 @@ class TestTopicLockView(BaseClientTestCase):
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
 
+    def test_cannot_be_browsed_by_users_who_cannot_lock_topics(self):
+        # Setup
+        remove_perm('can_lock_topics', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_lock',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
 
 class TestTopicUnlockView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -156,6 +167,17 @@ class TestTopicUnlockView(BaseClientTestCase):
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
 
+    def test_cannot_be_browsed_by_users_who_cannot_unlock_topics(self):
+        # Setup
+        remove_perm('can_lock_topics', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_unlock',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
 
 class TestTopicDeleteView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -216,6 +238,17 @@ class TestTopicDeleteView(BaseClientTestCase):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert forum_url in last_url
+
+    def test_cannot_be_browsed_by_users_who_cannot_delete_topics(self):
+        # Setup
+        remove_perm('can_delete_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_delete',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
 
 class TestTopicMoveView(BaseClientTestCase):
@@ -302,6 +335,17 @@ class TestTopicMoveView(BaseClientTestCase):
         assert topic.forum == self.other_forum
         assert not topic.is_locked
 
+    def test_cannot_be_browsed_by_users_who_cannot_move_topics(self):
+        # Setup
+        remove_perm('can_move_topics', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_move',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
 
 class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -366,6 +410,17 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
+
+    def test_cannot_be_browsed_by_users_who_cannot_update_topics_to_normal_topics(self):
+        # Setup
+        remove_perm('can_edit_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_update_to_post',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
 
 class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
@@ -432,6 +487,17 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
 
+    def test_cannot_be_browsed_by_users_who_cannot_update_topics_to_sticky_topics(self):
+        # Setup
+        remove_perm('can_post_stickies', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_update_to_sticky',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
 
 class TestTopicUpdateToAnnounceView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -496,6 +562,17 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
+
+    def test_cannot_be_browsed_by_users_who_cannot_update_topics_to_announces(self):
+        # Setup
+        remove_perm('can_post_announcements', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_moderation:topic_update_to_announce',
+            kwargs={'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
 
 class TestModerationQueueListView(BaseClientTestCase):
