@@ -13,7 +13,7 @@ from django.dispatch import receiver
 from machina.core.loading import get_class
 
 Post = get_class('forum_conversation.models', 'Post')
-Profile = get_class('forum_member.models', 'Profile')
+ForumProfile = get_class('forum_member.models', 'ForumProfile')
 
 
 @receiver(pre_save, sender=Post)
@@ -27,7 +27,7 @@ def update_member_profile(sender, instance, **kwargs):
         # that case.
         return
 
-    profile, dummy = Profile.objects.get_or_create(user=instance.poster)
+    profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
     increase_posts_count = False
 
     if instance.pk:

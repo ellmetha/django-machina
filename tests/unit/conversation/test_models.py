@@ -22,8 +22,8 @@ from machina.test.factories import UserFactory
 faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
+ForumProfile = get_model('forum_member', 'ForumProfile')
 Post = get_model('forum_conversation', 'Post')
-Profile = get_model('forum_member', 'Profile')
 Topic = get_model('forum_conversation', 'Topic')
 
 
@@ -208,7 +208,7 @@ class TestPost(object):
     def test_save_triggers_the_update_of_the_member_posts_count_if_the_related_post_is_approved(self):
         # Setup
         post = PostFactory.build(topic=self.topic, poster=self.u1)
-        profile = Profile.objects.get(user=self.u1)
+        profile = ForumProfile.objects.get(user=self.u1)
         initial_posts_count = profile.posts_count
         # Run
         post.save()
@@ -219,7 +219,7 @@ class TestPost(object):
     def test_save_cannot_trigger_the_update_of_the_member_posts_count_if_the_related_post_is_not_approved(self):
         # Setup
         post = PostFactory.build(topic=self.topic, poster=self.u1, approved=False)
-        profile = Profile.objects.get(user=self.u1)
+        profile = ForumProfile.objects.get(user=self.u1)
         initial_posts_count = profile.posts_count
         # Run
         post.save()
@@ -230,7 +230,7 @@ class TestPost(object):
     def test_save_trigger_the_update_of_the_member_posts_count_if_the_related_post_switch_to_approved(self):
         # Setup
         post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
-        profile = Profile.objects.get(user=self.u1)
+        profile = ForumProfile.objects.get(user=self.u1)
         initial_posts_count = profile.posts_count
         # Run
         post.approved = True

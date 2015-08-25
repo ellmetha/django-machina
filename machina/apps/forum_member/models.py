@@ -5,11 +5,11 @@
 import django
 
 # Local application / specific library imports
-from machina.apps.forum_member.abstract_models import AbstractProfile
+from machina.apps.forum_member.abstract_models import AbstractForumProfile
 from machina.core.db.models import model_factory
 
 
-Profile = model_factory(AbstractProfile)
+ForumProfile = model_factory(AbstractForumProfile)
 
 
 if django.VERSION < (1, 7):  # pragma: no cover

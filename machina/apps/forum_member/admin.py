@@ -7,10 +7,10 @@ from django.contrib import admin
 # Local application / specific library imports
 from machina.core.db.models import get_model
 
-Profile = get_model('forum_member', 'Profile')
+ForumProfile = get_model('forum_member', 'ForumProfile')
 
 
-class ProfileAdmin(admin.ModelAdmin):
+class ForumProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'posts_count', )
     list_filter = ('posts_count', )
     list_display_links = ('id', 'user', )
@@ -18,4 +18,4 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username',)
 
 
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(ForumProfile, ForumProfileAdmin)

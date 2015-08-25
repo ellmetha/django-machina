@@ -8,8 +8,8 @@ from django.db.models import get_model
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 
-Profile = get_model('forum_member', 'Profile')
+ForumProfile = get_model('forum_member', 'ForumProfile')
 
 
-class TestProfileAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
-    model = Profile
+class TestForumProfileAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
+    model = ForumProfile

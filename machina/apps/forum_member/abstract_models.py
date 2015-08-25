@@ -16,7 +16,7 @@ from machina.models.fields import MarkupTextField
 
 
 @python_2_unicode_compatible
-class AbstractProfile(models.Model):
+class AbstractForumProfile(models.Model):
     """
     Represents the profile associated with each forum user.
     """
@@ -36,8 +36,8 @@ class AbstractProfile(models.Model):
     class Meta:
         abstract = True
         app_label = 'forum_member'
-        verbose_name = _('Profile')
-        verbose_name_plural = _('Profiles')
+        verbose_name = _('Forum profile')
+        verbose_name_plural = _('Forum profiles')
 
     def __str__(self):
         return self.user.username
