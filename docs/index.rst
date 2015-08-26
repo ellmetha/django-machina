@@ -40,7 +40,7 @@ Using django-machina
    settings
    glossary
    forum_permissions
-
+   machina_apps_reference/index
 
 
 
