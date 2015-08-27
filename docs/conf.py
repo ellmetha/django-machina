@@ -15,19 +15,12 @@
 import sys
 import os
 
-machina_folder = os.path.realpath(
-    os.path.join(os.path.dirname(__file__), '..'))
-example_folder = os.path.realpath(
-    os.path.join(os.path.dirname(__file__), '../example_projects/vanilla/src/'))
-sys.path.append(machina_folder)
-sys.path.append(example_folder)
+sys.path.insert(0, os.path.abspath('..'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tests.settings')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'example_project.settings.base')
+machina = __import__('machina')
 
 ON_RTD = os.environ.get('READTHEDOCS', None) == 'True'
-
-import django
-django.setup()
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
