@@ -43,7 +43,7 @@ def get_apps(overrides=None):
         pattern = app_label.replace('machina.apps.', '')
         return next((o for o in overrides if o.endswith(pattern)), app_label)
 
-    return map(get_app_label, MACHINA_VANILLA_APPS)
+    return list(map(get_app_label, MACHINA_VANILLA_APPS))
 
 
 pkg_resources = __import__('pkg_resources')
