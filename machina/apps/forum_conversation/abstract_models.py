@@ -91,18 +91,30 @@ class AbstractTopic(DatedModel):
 
     @property
     def is_topic(self):
+        """
+        Returns True if the topic is a default topic.
+        """
         return self.type == self.TYPE_CHOICES.topic_post
 
     @property
     def is_sticky(self):
+        """
+        Returns True if the topic is a sticky topic.
+        """
         return self.type == self.TYPE_CHOICES.topic_sticky
 
     @property
     def is_announce(self):
+        """
+        Returns True if the topic is an announce.
+        """
         return self.type == self.TYPE_CHOICES.topic_announce
 
     @property
     def is_locked(self):
+        """
+        Returns True if the topic is locked.
+        """
         return self.status == self.STATUS_CHOICES.topic_locked
 
     @property
@@ -233,14 +245,23 @@ class AbstractPost(DatedModel):
 
     @property
     def is_topic_head(self):
+        """
+        Returns True if the post is the first post of the topic.
+        """
         return self.topic.first_post.id == self.id
 
     @property
     def is_topic_tail(self):
+        """
+        Returns True if the post is the last post of the topic.
+        """
         return self.topic.last_post.id == self.id
 
     @property
     def position(self):
+        """
+        Returns an integer corresponding to the position of the post in the topic.
+        """
         position = self.topic.posts.filter(Q(created__lt=self.created) | Q(id=self.id)).count()
         return position
 
