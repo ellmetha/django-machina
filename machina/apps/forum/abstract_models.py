@@ -98,14 +98,23 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
     @property
     def is_category(self):
+        """
+        Returns True if the forum is a category.
+        """
         return self.type == FORUM_TYPES.forum_cat
 
     @property
     def is_forum(self):
+        """
+        Returns True if the forum is a a default forum.
+        """
         return self.type == FORUM_TYPES.forum_post
 
     @property
     def is_link(self):
+        """
+        Returns True if the forum is a link.
+        """
         return self.type == FORUM_TYPES.forum_link
 
     def clean(self):

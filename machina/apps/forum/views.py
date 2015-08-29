@@ -19,6 +19,9 @@ PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequir
 
 
 class IndexView(ListView):
+    """
+    Displays the top-level forums.
+    """
     template_name = 'forum/index.html'
     context_object_name = 'forums'
 
@@ -39,6 +42,10 @@ class IndexView(ListView):
 
 
 class ForumView(PermissionRequiredMixin, ListView):
+    """
+    Displays a forums and its topics. If applicable, its sub-forums can
+    also be displayed.
+    """
     template_name = 'forum/forum_detail.html'
     context_object_name = 'topics'
     permission_required = ['can_read_forum', ]
@@ -55,6 +62,9 @@ class ForumView(PermissionRequiredMixin, ListView):
         return response
 
     def get_forum(self):
+        """
+        Returns the forum to consider.
+        """
         if not hasattr(self, 'forum'):
             self.forum = get_object_or_404(Forum, pk=self.kwargs['pk'])
         return self.forum
@@ -66,9 +76,6 @@ class ForumView(PermissionRequiredMixin, ListView):
         return qs
 
     def get_controlled_object(self):
-        """
-        Return the considered forum in order to allow permission checks.
-        """
         return self.get_forum()
 
     def get_context_data(self, **kwargs):
