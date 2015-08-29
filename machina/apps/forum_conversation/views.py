@@ -38,6 +38,9 @@ PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequir
 
 
 class TopicView(PermissionRequiredMixin, ListView):
+    """
+    Displays a forum topic.
+    """
     template_name = 'forum_conversation/topic_detail.html'
     context_object_name = 'posts'
     permission_required = ['can_read_forum', ]
@@ -66,6 +69,9 @@ class TopicView(PermissionRequiredMixin, ListView):
         return response
 
     def get_topic(self):
+        """
+        Returns the topic to consider.
+        """
         if not hasattr(self, 'topic'):
             self.topic = get_object_or_404(Topic, pk=self.kwargs['pk'])
         return self.topic
@@ -77,9 +83,6 @@ class TopicView(PermissionRequiredMixin, ListView):
         return qs
 
     def get_controlled_object(self):
-        """
-        Returns the forum associated with the current topic in order to allow permission checks.
-        """
         return self.get_topic().forum
 
     def get_context_data(self, **kwargs):
@@ -187,12 +190,21 @@ class BasePostFormView(FormView):
         return 'attachments_{}'.format(request.session.session_key)
 
     def get_post_form_class(self):
+        """
+        Returns the post form class to use for instantiating the form.
+        """
         return self.post_form_class
 
     def get_post_form(self, form_class):
+        """
+        Returns an instance of the post form to be used in the view.
+        """
         return form_class(**self.get_post_form_kwargs())
 
     def get_post_form_kwargs(self):
+        """
+        Returns the keyword arguments for instantiating the post form.
+        """
         kwargs = {
             'user': self.request.user,
             'user_ip': get_client_ip(self.request),
@@ -212,14 +224,24 @@ class BasePostFormView(FormView):
         return kwargs
 
     def get_attachment_formset_class(self):
+        """
+        Returns the attachment formset class to use for instantiating the
+        attachment formset.
+        """
         return self.attachment_formset_class
 
     def get_attachment_formset(self, formset_class):
+        """
+        Returns an instance of the attachment formset to be used in the view.
+        """
         if self.request.forum_permission_handler.can_attach_files(
                 self.get_forum(), self.request.user):
             return formset_class(**self.get_attachment_formset_kwargs())
 
     def get_attachment_formset_kwargs(self):
+        """
+        Returns the keyword arguments for instantiating the attachment formset.
+        """
         kwargs = {
             'prefix': 'attachment',
         }
@@ -267,6 +289,9 @@ class BasePostFormView(FormView):
         return context
 
     def get_forum(self):
+        """
+        Returns the considered forum.
+        """
         pk = self.kwargs.get(self.forum_pk_url_kwarg, None)
         if not pk:  # pragma: no cover
             # This should never happen
@@ -276,6 +301,9 @@ class BasePostFormView(FormView):
         return self._forum
 
     def get_topic(self):
+        """
+        Returns the considered topic if applicable.
+        """
         pk = self.kwargs.get(self.topic_pk_url_kwarg, None)
         if not pk:
             return
@@ -284,6 +312,9 @@ class BasePostFormView(FormView):
         return self._topic
 
     def get_post(self):
+        """
+        Returns the considered post if applicable.
+        """
         pk = self.kwargs.get(self.post_pk_url_kwarg, None)
         if not pk:
             return
@@ -395,14 +426,24 @@ class BaseTopicFormView(BasePostFormView):
             return self.form_invalid(post_form, attachment_formset, poll_option_formset)
 
     def get_poll_option_formset_class(self):
+        """
+        Returns the poll option formset class to use for instantiating the
+        poll option formset.
+        """
         return self.poll_option_formset_class
 
     def get_poll_option_formset(self, formset_class):
+        """
+        Returns an instance of the poll option formset to be used in the view.
+        """
         if self.request.forum_permission_handler.can_create_polls(
                 self.get_forum(), self.request.user):
             return formset_class(**self.get_poll_option_formset_kwargs())
 
     def get_poll_option_formset_kwargs(self):
+        """
+        Returns the keyword arguments for instantiating the poll option formset.
+        """
         kwargs = {
             'prefix': 'poll',
         }
@@ -461,17 +502,26 @@ class BaseTopicFormView(BasePostFormView):
 
 
 class PostFormView(SingleObjectMixin, BasePostFormView):
+    """
+    A base view for manipulating post forms.
+    """
     post_pk_url_kwarg = 'pk'
     topic_pk_url_kwarg = 'topic_pk'
     forum_pk_url_kwarg = 'forum_pk'
 
 
 class TopicFormView(SingleObjectMixin, BaseTopicFormView):
+    """
+    A base view for manipulating topic forms.
+    """
     topic_pk_url_kwarg = 'pk'
     forum_pk_url_kwarg = 'forum_pk'
 
 
 class TopicCreateView(PermissionRequiredMixin, TopicFormView):
+    """
+    Allows users to create forum topics.
+    """
     model = Topic
     template_name = 'forum_conversation/topic_create.html'
     permission_required = ['can_start_new_topics', ]
@@ -498,13 +548,13 @@ class TopicCreateView(PermissionRequiredMixin, TopicFormView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_forum()
 
 
 class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
+    """
+    Allows users to update forum topics.
+    """
     model = Topic
     template_name = 'forum_conversation/topic_update.html'
     success_message = _('This message has been edited successfully.')
@@ -521,6 +571,9 @@ class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
         return self.get_topic()
 
     def get_post(self):
+        """
+        Returns the considered post if applicable.
+        """
         return self.get_topic().first_post
 
     def get_success_url(self):
@@ -533,9 +586,6 @@ class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_topic().first_post
 
     def perform_permissions_check(self, user, obj, perms):
@@ -543,6 +593,9 @@ class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
 
 
 class PostCreateView(PermissionRequiredMixin, PostFormView):
+    """
+    Allows users to create forum posts.
+    """
     model = Post
     template_name = 'forum_conversation/post_create.html'
     permission_required = ['can_reply_to_topics', ]
@@ -578,13 +631,13 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_forum()
 
 
 class PostUpdateView(PermissionRequiredMixin, PostFormView):
+    """
+    Allows users to update forum topics.
+    """
     model = Post
     success_message = _('This message has been edited successfully.')
     template_name = 'forum_conversation/post_update.html'
@@ -612,9 +665,6 @@ class PostUpdateView(PermissionRequiredMixin, PostFormView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_post()
 
     def perform_permissions_check(self, user, obj, perms):
@@ -622,6 +672,9 @@ class PostUpdateView(PermissionRequiredMixin, PostFormView):
 
 
 class PostDeleteView(PermissionRequiredMixin, DeleteView):
+    """
+    Allows users to delete forum topics.
+    """
     template_name = 'forum_conversation/post_delete.html'
     success_message = _('This message has been deleted successfully.')
     model = Post
@@ -667,9 +720,6 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):
