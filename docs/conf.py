@@ -20,6 +20,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tests.settings')
 
 machina = __import__('machina')
 
+import django
+django.setup()
+
 ON_RTD = os.environ.get('READTHEDOCS', None) == 'True'
 
 # If extensions (or modules to document with autodoc) are in another directory,
