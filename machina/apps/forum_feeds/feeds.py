@@ -19,6 +19,9 @@ perm_handler = PermissionHandler()
 
 
 class LastTopicsFeed(Feed):
+    """
+    Provides feed items for the latest forum topics.
+    """
     # Standard RSS elements
     title = _('Latest topics')
     description = _('Latest topics updated on the forums')
