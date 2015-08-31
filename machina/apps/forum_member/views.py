@@ -19,6 +19,10 @@ perm_handler = PermissionHandler()
 
 
 class UserTopicsView(ListView):
+    """
+    Provides a list of all the topics in which the current user has
+    posted messages.
+    """
     template_name = 'forum_member/user_topics_list.html'
     context_object_name = 'topics'
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE

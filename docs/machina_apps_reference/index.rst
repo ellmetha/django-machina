@@ -12,3 +12,4 @@ Machina's apps reference
     forum
     forum_conversation
     forum_feeds
+    forum_member
