@@ -201,6 +201,15 @@ class TestTopicView(BaseClientTestCase):
         assert response.context_data['poll'] == poll
         assert isinstance(response.context_data['poll_form'], TopicPollVoteForm)
 
+    def test_cannot_be_browsed_by_users_who_cannot_browse_the_related_forum(self):
+        # Setup
+        remove_perm('can_read_forum', self.user, self.top_level_forum)
+        correct_url = self.topic.get_absolute_url()
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
 
 class TestTopicCreateView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -231,6 +240,16 @@ class TestTopicCreateView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_users_who_cannot_start_new_topics(self):
+        # Setup
+        remove_perm('can_start_new_topics', self.user, self.top_level_forum)
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
@@ -577,6 +596,18 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
 
+    def test_cannot_be_browsed_by_users_who_cannot_edit_their_topics(self):
+        # Setup
+        remove_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_conversation:topic_update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'slug': self.topic.slug, 'pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
     def test_embed_the_current_forum_into_the_context(self):
         # Setup
         correct_url = reverse(
@@ -879,6 +910,18 @@ class TestPostCreateView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
 
+    def test_cannot_be_browsed_by_users_who_cannot_reply_to_topics(self):
+        # Setup
+        remove_perm('can_reply_to_topics', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_conversation:post_create',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
         correct_url = reverse(
@@ -990,6 +1033,19 @@ class TestPostUpdateView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
 
+    def test_cannot_be_browsed_by_users_who_cannot_edit_their_posts(self):
+        # Setup
+        remove_perm('can_edit_own_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_conversation:post_update',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
+                    'pk': self.post.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
         correct_url = reverse(
@@ -1076,6 +1132,19 @@ class TestPostDeleteView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_users_who_cannot_delete_their_posts(self):
+        # Setup
+        remove_perm('can_delete_own_posts', self.user, self.top_level_forum)
+        correct_url = reverse(
+            'forum_conversation:post_delete',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk,
+                    'pk': self.first_post.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
     def test_redirects_to_the_topic_view_if_posts_remain(self):
         # Setup
