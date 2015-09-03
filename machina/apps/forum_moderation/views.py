@@ -42,6 +42,9 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
     model = Topic
 
     def lock(self, request, *args, **kwargs):
+        """
+        Locks the considered topic and retirects the user to the success URL.
+        """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.status = Topic.STATUS_CHOICES.topic_locked
@@ -89,6 +92,9 @@ class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
     model = Topic
 
     def unlock(self, request, *args, **kwargs):
+        """
+        Unlocks the considered topic and retirects the user to the success URL.
+        """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.status = Topic.STATUS_CHOICES.topic_unlocked
@@ -147,6 +153,7 @@ class TopicDeleteView(PermissionRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         """
+        Deletes the considered topic and retirects the user to the success URL.
         Calls the delete() method on the fetched object and then
         redirects to the success URL.
         This is a workaround for versions of Django prior 1.6
@@ -260,6 +267,9 @@ class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateRespo
     question = ''
 
     def update_type(self, request, *args, **kwargs):
+        """
+        Updates the type of the considered topic and retirects the user to the success URL.
+        """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.type = self.target_type
@@ -292,9 +302,6 @@ class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateRespo
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the post that will be edited.
-        """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
@@ -397,6 +404,9 @@ class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
     model = Post
 
     def approve(self, request, *args, **kwargs):
+        """
+        Approves the considered post and retirects the user to the success URL.
+        """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.approved = True
@@ -434,6 +444,9 @@ class PostDisapproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMi
     model = Post
 
     def disapprove(self, request, *args, **kwargs):
+        """
+        Disapproves the considered post and retirects the user to the success URL.
+        """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.delete()
