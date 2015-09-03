@@ -30,6 +30,7 @@ TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestAttachmentView(BaseClientTestCase):
@@ -78,6 +79,15 @@ class TestAttachmentView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_users_who_cannot_download_forum_files(self):
+        # Setup
+        remove_perm('can_download_file', self.user, self.top_level_forum)
+        correct_url = self.attachment.get_absolute_url()
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
     def test_embed_the_correct_http_headers_in_the_response(self):
         # Setup

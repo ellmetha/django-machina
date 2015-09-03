@@ -66,7 +66,7 @@ class TestTopicPollVoteView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
 
-    def test_cannot_be_used_by_unauthorized_users(self):
+    def test_cannot_be_browed_by_users_who_cannot_vote_in_polls(self):
         # Setup
         remove_perm('can_vote_in_polls', self.user, self.top_level_forum)
         correct_url = reverse('forum_conversation:topic_poll_vote', kwargs={'pk': self.poll.pk})
