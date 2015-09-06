@@ -20,6 +20,7 @@ Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
+remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestForumView(BaseClientTestCase):
@@ -43,6 +44,15 @@ class TestForumView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_users_who_cannot_read_the_forum(self):
+        # Setup
+        remove_perm('can_read_forum', self.user, self.top_level_forum)
+        correct_url = self.top_level_forum.get_absolute_url()
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
 
     def test_triggers_a_viewed_signal(self):
         # Setup
