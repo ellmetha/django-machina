@@ -15,3 +15,4 @@ Machina's apps reference
     forum_member
     forum_moderation
     forum_permission
+    forum_search

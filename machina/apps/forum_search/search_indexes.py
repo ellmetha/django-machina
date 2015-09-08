@@ -11,6 +11,9 @@ Post = get_model('forum_conversation', 'Post')
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
+    """
+    Defines the data stored in the Post indexes.
+    """
     text = indexes.CharField(document=True, use_template=True, template_name='forum_search/post_text.txt')
 
     poster = indexes.CharField(model_attr='poster', null=True)
