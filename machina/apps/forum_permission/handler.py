@@ -23,6 +23,11 @@ ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionC
 
 
 class PermissionHandler(object):
+    """
+    The PermissionHandler allows to filter lists of forums and to perform
+    permission verifications on forums. It uses the ForumPermissionChecker
+    class to perform these verifications.
+    """
     def __init__(self):
         self._granted_forums_cache = {}
         self._user_perm_checkers_cache = {}

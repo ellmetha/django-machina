@@ -14,3 +14,4 @@ Machina's apps reference
     forum_feeds
     forum_member
     forum_moderation
+    forum_permission

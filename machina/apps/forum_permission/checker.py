@@ -17,6 +17,10 @@ UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 
 class ForumPermissionChecker(object):
+    """
+    The ForumPermissionChecker allows to check forum permissions
+    on Forum instances.
+    """
     def __init__(self, user):
         self.user = user
         self._forum_perms_cache = {}
@@ -33,7 +37,7 @@ class ForumPermissionChecker(object):
 
     def get_perms(self, forum):
         """
-        Returns the list of codenames of all permissions for the given forum.
+        Returns the list of permission codenames of all permissions for the given forum.
         """
         if not self.user.is_anonymous() and not self.user.is_active:
             return []
