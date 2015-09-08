@@ -24,7 +24,7 @@ Forum = get_model('forum', 'Forum')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 @pytest.mark.django_db

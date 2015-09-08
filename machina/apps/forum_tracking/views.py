@@ -26,7 +26,7 @@ Topic = get_model('forum_conversation', 'Topic')
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 track_handler = TrackingHandler()
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 class MarkForumsReadView(View):

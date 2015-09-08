@@ -34,7 +34,7 @@ TopicPollVoteForm = get_class('forum_polls.forms', 'TopicPollVoteForm')
 
 attachments_cache = get_class('forum_attachments.cache', 'cache')
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 class TopicView(PermissionRequiredMixin, ListView):

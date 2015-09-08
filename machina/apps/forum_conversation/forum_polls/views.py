@@ -20,7 +20,7 @@ TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 
 TopicPollVoteForm = get_class('forum_polls.forms', 'TopicPollVoteForm')
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 class TopicPollVoteView(PermissionRequiredMixin, UpdateView):

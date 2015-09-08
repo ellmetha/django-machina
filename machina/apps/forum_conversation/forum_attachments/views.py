@@ -14,7 +14,7 @@ from machina.core.loading import get_class
 
 Attachment = get_model('forum_attachments', 'Attachment')
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 class AttachmentView(PermissionRequiredMixin, DetailView):

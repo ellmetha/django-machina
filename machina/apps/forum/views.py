@@ -15,7 +15,7 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
 
-PermissionRequiredMixin = get_class('forum_permission.mixins', 'PermissionRequiredMixin')
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
 class IndexView(ListView):
