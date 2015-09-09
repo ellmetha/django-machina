@@ -11,6 +11,7 @@ import pytest
 
 # Local application / specific library imports
 from machina.core.loading import get_class
+from machina.conf import settings as machina_settings
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
@@ -511,3 +512,14 @@ class TestPermissionHandler(object):
         u2 = UserFactory.create(is_superuser=True)
         # Run & check
         assert self.perm_handler.can_approve_posts(self.forum_1, u2)
+
+    def test_filter_methods_fallback_to_default_forum_permissions_if_applicable(self):
+        # Setup
+        codenames = [
+            'can_vote_in_polls',
+            'can_add_announcements',
+        ]
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = codenames
+        # Run & check
+        assert set(self.perm_handler._get_forums_for_user(self.u1, codenames)) == set(Forum.objects.all())
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
