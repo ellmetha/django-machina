@@ -33,12 +33,12 @@ class TestClassLoadingFunctions(object):
     def test_raises_if_the_module_label_is_incorrect(self):
         # Run & check
         with pytest.raises(AppNotFoundError):
-            get_classes('foo.bar', 'Forum')
+            get_class('foo.bar', 'Forum')
 
     def test_raises_if_the_class_name_is_incorrect(self):
         # Run & check
         with pytest.raises(ClassNotFoundError):
-            get_classes('forum.models', 'Foo')
+            get_class('forum.models', 'Foo')
 
     @unittest.skipIf(
         DJANGO_VERSION >= (1, 7),
@@ -56,6 +56,11 @@ class TestClassLoadingFunctions(object):
         with override_settings(INSTALLED_APPS=apps):
             with pytest.raises(ImportError):
                 get_class('forum.dummy', 'Dummy')
+
+    def test_raise_importerror_if_the_app_is_installed_but_the_module_does_not_exist(self):
+        # Run & check
+        with pytest.raises(AppNotFoundError):
+            get_class('forum.xyz', 'Xyz')
 
 
 class TestClassLoadingFunctionsWithOverrides(object):
