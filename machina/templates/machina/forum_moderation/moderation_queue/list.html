@@ -56,7 +56,7 @@
                                 {% if post.is_topic_head %}
                                     <span class="label label-default">{% trans "New topic" %}</span>
                                 {% else %}
-                                    <a href="#" class="post-name-link">{{ post.topic.subject }}</a>
+                                    <a href="{% url 'forum_conversation:topic' forum_slug=post.topic.forum.slug forum_pk=post.topic.forum.pk slug=post.topic.slug pk=post.topic.pk %}" class="post-name-link">{{ post.topic.subject }}</a>
                                 {% endif %}
                             </div>
                             <div class="col-md-2 forum-name">
