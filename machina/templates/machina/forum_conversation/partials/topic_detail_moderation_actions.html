@@ -1,13 +1,13 @@
 {% load i18n %}
 {% load forum_permission_tags %}
 
-{% get_permission 'can_add_post' request.user topic=topic as user_can_add_post %}
-{% get_permission 'can_lock_topics' request.user forum=topic.forum as user_can_lock_topics %}
-{% get_permission 'can_move_topics' request.user forum=topic.forum as user_can_move_topics %}
-{% get_permission 'can_delete_topics' request.user forum=topic.forum as user_can_delete_topics %}
-{% get_permission 'can_update_topics_to_normal_topics' request.user forum=topic.forum as user_can_change_to_normal_topics %}
-{% get_permission 'can_update_topics_to_sticky_topics' request.user forum=topic.forum as user_can_change_to_sticky_topics %}
-{% get_permission 'can_update_topics_to_announces' request.user forum=topic.forum as user_can_change_to_announces %}
+{% get_permission 'can_add_post' topic request.user as user_can_add_post %}
+{% get_permission 'can_lock_topics' topic.forum request.user as user_can_lock_topics %}
+{% get_permission 'can_move_topics' topic.forum request.user as user_can_move_topics %}
+{% get_permission 'can_delete_topics' topic.forum request.user as user_can_delete_topics %}
+{% get_permission 'can_update_topics_to_normal_topics' topic.forum request.user as user_can_change_to_normal_topics %}
+{% get_permission 'can_update_topics_to_sticky_topics' topic.forum request.user as user_can_change_to_sticky_topics %}
+{% get_permission 'can_update_topics_to_announces' topic.forum request.user as user_can_change_to_announces %}
 
 {% if user_can_add_post %}
     <a href="{% url 'forum_conversation:post_create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>

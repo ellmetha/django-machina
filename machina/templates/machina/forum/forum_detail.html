@@ -29,7 +29,7 @@
     {% if forum.is_forum %}
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
-                {% get_permission 'can_add_topic' request.user forum=forum as user_can_add_topic %}
+                {% get_permission 'can_add_topic' forum request.user as user_can_add_topic %}
                 {% if user_can_add_topic %}
                     <a href="{% url 'forum_conversation:topic_create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
                 {% endif %}

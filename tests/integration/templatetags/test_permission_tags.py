@@ -89,7 +89,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_download_files\' request.user post=post as user_can_download_files %}'
+                self.loadstatement + '{% get_permission \'can_download_files\' post.topic.forum request.user as user_can_download_files %}'
                 '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -122,7 +122,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_edit_post\' request.user post=post as user_can_edit_post %}'
+                self.loadstatement + '{% get_permission \'can_edit_post\' post request.user as user_can_edit_post %}'
                 '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -154,7 +154,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_delete_post\' request.user post=post as user_can_delete_post %}'
+                self.loadstatement + '{% get_permission \'can_delete_post\' post request.user as user_can_delete_post %}'
                 '{% if user_can_delete_post %}CAN_DELETE{% else %}CANNOT_DELETE{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -186,7 +186,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_add_post\' request.user topic=topic as user_can_add_post %}'
+                self.loadstatement + '{% get_permission \'can_add_post\' topic request.user as user_can_add_post %}'
                 '{% if user_can_add_post %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}')
             c = Context({'topic': topic, 'request': request})
             rendered = t.render(c)
@@ -218,7 +218,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_vote_in_poll\' request.user poll=poll as user_can_vote_in_poll %}'
+                self.loadstatement + '{% get_permission \'can_vote_in_poll\' poll request.user as user_can_vote_in_poll %}'
                 '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}')
             c = Context({'poll': poll, 'request': request})
             rendered = t.render(c)
@@ -254,7 +254,7 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionHandlerMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_add_topic\' request.user forum=forum as user_can_add_topic %}'
+                self.loadstatement + '{% get_permission \'can_add_topic\' forum request.user as user_can_add_topic %}'
                 '{% if user_can_add_topic %}CAN_START_TOPICS{% else %}CANNOT_START_TOPICS{% endif %}')
             c = Context({'forum': forum, 'request': request})
             rendered = t.render(c)
@@ -289,6 +289,26 @@ class TestGetPermissionTag(object):
 
             '{% get_permission \'can_vote_in_poll\' request.user as user_can_vote_in_poll %}'
             '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}',
+        ]
+
+        # Run & check
+        for raw_template in templates:
+            t = Template(self.loadstatement + raw_template)
+            with pytest.raises(TypeError):
+                t.render(context)
+
+    def test_raises_if_the_considered_handler_method_is_unknown(self):
+        # Setup
+        request = self.request_factory.get('/')
+        request.user = self.u1
+        ForumPermissionHandlerMiddleware().process_request(request)
+        context = Context({'request': request})
+
+        templates = [
+            '{% get_permission \'can_download_files_unknown\' request.user as user_can_download_files %}'
+            '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}',
+            '{% get_permission \'can_edit_post___\' request.user as user_can_edit_post %}'
+            '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
         ]
 
         # Run & check

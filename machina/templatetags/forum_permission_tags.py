@@ -16,7 +16,7 @@ register = template.Library()
 
 
 @register.assignment_tag(takes_context=True)
-def get_permission(context, method, user, **kwargs):
+def get_permission(context, method, *args, **kwargs):
     """
     This will return a boolean indicating if the considered permission is
     granted for the passed user.
@@ -37,37 +37,4 @@ def get_permission(context, method, user, **kwargs):
             'this templatetag: {}'.format(allowed_method_names))
 
     perm_method = getattr(perm_handler, method)
-
-    a = lambda x: x * 2
-
-    def raise_missing(arg):
-        raise template.TemplateSyntaxError(
-            'A `{}` keyword argument should be passed to this templatetag '
-            'when requesting the `{}` method.'.format(arg, method))
-
-    forum = kwargs.get('forum', None)
-
-    if method == 'can_download_files':
-        post = kwargs.get('post', None)
-        if post is None:
-            raise_missing('post')
-        return perm_method(post.topic.forum, user)
-    elif method in ['can_edit_post', 'can_delete_post', ]:
-        post = kwargs.get('post', None)
-        if post is None:
-            raise_missing('post')
-        return perm_method(post, user)
-    elif method == 'can_add_post':
-        topic = kwargs.get('topic', None)
-        if topic is None:
-            raise_missing('topic')
-        return perm_method(topic, user)
-    elif method == 'can_vote_in_poll':
-        poll = kwargs.get('poll', None)
-        if poll is None:
-            raise_missing('poll')
-        return perm_method(poll, user)
-    elif forum:
-        return perm_method(forum, user)
-    else:
-        return perm_method(user)
+    return perm_method(*args, **kwargs)
