@@ -53,7 +53,7 @@
                             <div class="col-md-10 post-content-wrapper">
                                 <h4 class="subject">{{ post.subject }}</h4>
                                 <p><small class="text-muted">
-                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %} <a href="#">{{ post.poster.username }}</a> {% trans "on" %} {{ post.created }}
+                                    <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
                                 </small></p>
                                 <div class="post-content">
                                     {{ post.content.rendered }}
@@ -61,7 +61,7 @@
                                 {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
                             </div>
                             <div class="col-md-2 post-sidebar">
-                                <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                                <div class="username">{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a>{% else %}<b>{{ post.username }}</b>{% endif %}</div>
                             </div>
                         </div>
                     {% endfor %}

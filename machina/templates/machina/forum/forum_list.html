@@ -76,7 +76,7 @@
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-last-post">
                                     {% get_forum_last_post node user as last_post %}
                                     {% if last_post %}
-                                        {% trans "By:" %} {% if last_post.poster %}<a href="#">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                        {% trans "By:" %} {% if last_post.poster %}<a href="{% url 'forum_member:profile' last_post.poster_id %}">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                         <br />
                                         {{ last_post.created }}
                                     {% else %}
@@ -148,7 +148,7 @@
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-last-post">
                                     {% get_forum_last_post node user as last_post %}
                                     {% if last_post %}
-                                        {% trans "By:" %} {% if last_post.poster %}<a href="#">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                        {% trans "By:" %} {% if last_post.poster %}<a href="{% url 'forum_member:profile' last_post.poster_id %}">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                         <br />
                                         {{ last_post.created }}
                                     {% else %}

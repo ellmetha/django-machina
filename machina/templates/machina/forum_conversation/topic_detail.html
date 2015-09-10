@@ -44,7 +44,7 @@
                                 <h4 class="subject">{{ post.subject }}</h4>
                                 <p>
                                     <small class="text-muted">
-                                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="#">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
+                                        <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
                                     </small>
                                 </p>
                                 <div class="post-content">
@@ -55,7 +55,7 @@
                                     <div class="edit-info">
                                         <br />
                                         <small class="text-muted">
-                                            <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="#">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
+                                            <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
                                         </small>
                                         {% if post.update_reason %}
                                             <br />
@@ -70,12 +70,12 @@
                                 {% if post.poster %}
                                     {% if post.poster.forum_profile.avatar %}
                                         <div class="avatar">
-                                            <a href="#">
+                                            <a href="{% url 'forum_member:profile' post.poster_id %}">
                                                 <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
                                             </a>
                                         </div>
                                     {% endif %}
-                                    <div class="username"><a href="#"><b>{{ post.poster.username }}</b></a></div>
+                                    <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
                                     <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
                                 {% else %}
                                     <div class="username"><b>{{ post.username }}</b></div>
