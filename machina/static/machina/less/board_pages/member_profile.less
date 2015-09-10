@@ -1,0 +1,26 @@
+// Member_profile.less
+// Variables to customize the look and feel of machina forum profiles
+// ------------------------------------------------------------------
+
+
+.profile-sidebar{
+	.panel{
+		override: hidden;
+
+		.profile-avatar{
+			&.empty{
+				height: 150px;
+				background: @gray-lighter;
+				text-align: center;
+
+				i.fa{
+					margin-top: 50px;
+				}
+			}
+
+			img{
+				width: 100%;
+			}
+		}
+	}
+}
