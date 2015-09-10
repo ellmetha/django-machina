@@ -16,3 +16,4 @@ Machina's apps reference
     forum_moderation
     forum_permission
     forum_search
+    forum_tracking

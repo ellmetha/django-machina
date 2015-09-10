@@ -30,6 +30,9 @@ PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRe
 
 
 class MarkForumsReadView(View):
+    """
+    Marks a set of forums as read.
+    """
     success_message = _('Forums have been marked read.')
 
     def get(self, request, pk=None):
@@ -64,6 +67,9 @@ class MarkForumsReadView(View):
 
 
 class MarkTopicsReadView(PermissionRequiredMixin, View):
+    """
+    Marks a set of topics as read.
+    """
     success_message = _('Topics have been marked read.')
     permission_required = ['can_read_forum', ]
 
@@ -93,6 +99,9 @@ class MarkTopicsReadView(PermissionRequiredMixin, View):
 
 
 class UnreadTopicsView(ListView):
+    """
+    Displays unread topics for the current user.
+    """
     template_name = 'forum_tracking/unread_topic_list.html'
     context_object_name = 'topics'
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
