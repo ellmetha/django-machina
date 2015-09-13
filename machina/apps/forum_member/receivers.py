@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.db.models.signals import pre_save
+from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 # Local application / specific library imports
@@ -17,7 +18,7 @@ ForumProfile = get_class('forum_member.models', 'ForumProfile')
 
 
 @receiver(pre_save, sender=Post)
-def update_member_profile(sender, instance, **kwargs):
+def increase_posts_count(sender, instance, **kwargs):
     """
     Receiver to handle the update of the profile related to the user
     who is the poster of the forum post being created or updated.
@@ -45,3 +46,19 @@ def update_member_profile(sender, instance, **kwargs):
     if increase_posts_count:
         profile.posts_count = F('posts_count') + 1
         profile.save()
+
+
+@receiver(post_delete, sender=Post)
+def decrease_posts_count(sender, instance, **kwargs):
+    """
+    Receiver to handle the deletion of a forum posts: the posts count
+    related to the post's author is decreased.
+    """
+    if instance.poster is None:
+        # An anonymous post is considered. No profile can be updated in
+        # that case.
+        return
+
+    profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
+    profile.posts_count = F('posts_count') - 1
+    profile.save()
