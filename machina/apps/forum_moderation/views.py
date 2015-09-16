@@ -304,9 +304,6 @@ class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateRespo
     def get_controlled_object(self):
         return self.get_object().forum
 
-    def perform_permissions_check(self, user, obj, perms):
-        return self.request.forum_permission_handler.can_lock_topics(obj, user)
-
 
 class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
     target_type = Topic.TYPE_CHOICES.topic_post
