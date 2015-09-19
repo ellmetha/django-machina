@@ -17,6 +17,8 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
+from machina.test.factories import TopicPollFactory
+from machina.test.factories import TopicPollOptionFactory
 from machina.test.testcases import BaseClientTestCase
 
 faker = FakerFactory.create()
@@ -684,6 +686,20 @@ class TestModerationQueueDetailView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 403
+
+    def test_inserts_the_topic_poll_in_the_context_if_applicable(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.topic)
+        option_1 = TopicPollOptionFactory.create(poll=poll)
+        option_2 = TopicPollOptionFactory.create(poll=poll)
+        correct_url = reverse(
+            'forum_moderation:queued_post', kwargs={'pk': self.post.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert response.context['poll'] == poll
+        assert set(response.context['poll_options']) == set({option_1, option_2, })
 
 
 class TestPostApproveView(BaseClientTestCase):
