@@ -33,7 +33,8 @@
                                     <p class="text-left"><strong>{{ request.user.username }}</strong></p>
                                     <p class="text-left small">{{ request.user.email }}</p>
                                     <p class="text-left">
-                                        <a href="#" class="btn btn-primary btn-block btn-sm">{% trans "Settings" %}</a>
+                                        <a href="#" class="btn btn-primary btn-block btn-sm">{% trans "Profile" %}</a>
+                                        <a href="{% url 'account-parameters' %}" class="btn btn-info btn-block btn-sm">{% trans "Account" %}</a>
                                     </p>
                                 </div>
                             </div>
