@@ -1,6 +1,4 @@
 """
-WSGI config for yrise project.
-
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
 named ``application``. Django's ``runserver`` and ``runfcgi`` commands discover
@@ -13,7 +11,7 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os  # noqa
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
