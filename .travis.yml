@@ -12,7 +12,7 @@ env:
   - TOXENV=lint
 
 install:
-  - "pip install $DJANGO --use-mirrors"
+  - "pip install $DJANGO"
 script:
   - make travis
 after_success:
