@@ -11,6 +11,15 @@ env:
   - DJANGO="django>=1.8,<1.9"
   - TOXENV=lint
 
+matrix:
+  exclude:
+  - python: "3.5"
+    env: DJANGO="django>=1.5,<1.6"
+  - python: "3.5"
+    env: DJANGO="django>=1.6,<1.7"
+  - python: "3.5"
+    env: DJANGO="django>=1.7,<1.8"
+
 install:
   - "pip install $DJANGO"
 script:
