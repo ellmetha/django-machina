@@ -4,7 +4,7 @@ Getting started
 Requirements
 ------------
 
-* `Python`_ 2.7, 3.3 or 3.4
+* `Python`_ 2.7, 3.3, 3.4 or 3.5
 * `Django`_ 1.5.x, 1.6.x, 1.7.x or 1.8.x
 * `Pillow`_ 2.2. or higher
 * `Django-model-utils`_ 2.0. or higher
@@ -161,7 +161,7 @@ If you are using Django 1.7 or higher, just use the ``syncdb`` or ``migrate`` co
 URLs configuration
 ------------------
 
-Finally you have to update your main ``urls.py`` module in order to include forum's URLs::
+Finally you have to update your main ``urls.py`` module in order to include forum's URLs and *django-markdown*'s URLs::
 
   from machina.app import board
 
@@ -169,6 +169,7 @@ Finally you have to update your main ``urls.py`` module in order to include foru
     # [...]
 
     # Apps
+    url(r'^markdown/', include( 'django_markdown.urls')),
     url(r'^forum/', include(board.urls)),
   )
 
