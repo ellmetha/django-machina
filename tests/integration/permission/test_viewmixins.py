@@ -8,13 +8,13 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import PermissionDenied
-from django.db.models import get_model
 from django.test import RequestFactory
 from django.views.generic import DetailView
 import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
 from machina.test.factories import UserFactory

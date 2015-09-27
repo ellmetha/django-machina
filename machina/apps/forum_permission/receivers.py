@@ -4,7 +4,6 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.db.models import signals
 from django.dispatch import receiver
 
 # Local application / specific library imports
@@ -23,10 +22,21 @@ def create_permissions():
         gp.save()
 
 
-@receiver(signals.post_syncdb)
-def create_global_permissions(app, sender, **kwargs):
-    if app.__name__.endswith('forum_permission.models'):
-        create_permissions()
+try:
+    from django.db.models.signals import post_migrate
+
+    @receiver(post_migrate)
+    def create_global_permissions(sender, **kwargs):
+        if sender.name.endswith('forum_permission'):
+            create_permissions()
+except ImportError:  # pragma: no cover
+    # Django < 1.7
+    from django.db.models.signals import post_syncdb
+
+    @receiver(post_syncdb)
+    def create_global_permissions(sender, **kwargs):
+        if sender.__name__.endswith('forum_permission.models'):
+            create_permissions()
 
 
 try:  # pragma: no cover

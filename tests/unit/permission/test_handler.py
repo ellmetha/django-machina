@@ -6,10 +6,10 @@ import datetime
 
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
-from django.db.models import get_model
 import pytest
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.conf import settings as machina_settings
 from machina.test.factories import create_category_forum

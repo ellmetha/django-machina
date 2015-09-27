@@ -4,7 +4,6 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
@@ -12,6 +11,7 @@ import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -33,7 +33,7 @@ TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 class BaseTrackingTagsTestCase(object):
     @pytest.fixture(autouse=True)
     def setUp(self):
-        self.loadstatement = '{% load url from future %}{% load forum_tracking_tags %}'
+        self.loadstatement = '{% load forum_tracking_tags %}'
         self.request_factory = RequestFactory()
 
         # Tracking handler

@@ -15,7 +15,7 @@ import pytest
 class TestRenderedTag(object):
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.loadstatement = '{% load url from future %}{% load forum_markup_tags %}'
+        self.loadstatement = '{% load forum_markup_tags %}'
         self.request_factory = RequestFactory()
 
     def test_can_render_a_formatted_text_on_the_fly(self):

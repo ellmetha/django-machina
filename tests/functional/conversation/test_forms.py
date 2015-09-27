@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 # Third party imports
 from django import forms
 from django.contrib.auth.models import AnonymousUser
-from django.db.models import get_model
 from faker import Factory as FakerFactory
 import pytest
 
@@ -14,6 +13,7 @@ import pytest
 from machina.apps.forum_conversation.forms import PostForm
 from machina.apps.forum_conversation.forms import TopicForm
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.test.factories import create_forum

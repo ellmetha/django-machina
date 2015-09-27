@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from importlib import import_module
+
 # Third party imports
 from django import VERSION as DJANGO_VERSION
-from django.utils.importlib import import_module
 
 # Local application / specific library imports
 

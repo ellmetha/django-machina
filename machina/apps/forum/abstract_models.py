@@ -18,6 +18,7 @@ from mptt.models import TreeForeignKey
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import slugify
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.models import ActiveModel
@@ -170,7 +171,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # Determine the list of the associated topics, that is the list of topics
         # associated with the current forum plus the list of all topics associated
         # with the descendant forums.
-        topic_klass = models.get_model('forum_conversation', 'Topic')
+        topic_klass = get_model('forum_conversation', 'Topic')
         topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-last_post_on')
         approved_topics = topics.filter(approved=True)
 

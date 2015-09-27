@@ -260,7 +260,9 @@ class BasePostFormView(FormView):
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(BasePostFormView, self).get_context_data(**kwargs)
+        context = kwargs
+        if 'view' not in context:
+            context['view'] = self
 
         # Insert the considered forum, topic and post into the context
         context['forum'] = self.get_forum()

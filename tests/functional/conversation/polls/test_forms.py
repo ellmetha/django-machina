@@ -4,13 +4,13 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.db.models import get_model
 from faker import Factory as FakerFactory
 import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.utils import refresh
 from machina.test.factories import create_forum

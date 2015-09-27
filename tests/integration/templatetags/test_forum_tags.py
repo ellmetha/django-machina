@@ -4,7 +4,6 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.db.models import get_model
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
@@ -13,6 +12,7 @@ import pytest
 
 # Local application / specific library imports
 from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -32,7 +32,7 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 class TestForumLastPostTag(object):
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.loadstatement = '{% load url from future %}{% load forum_tags %}'
+        self.loadstatement = '{% load forum_tags %}'
         self.user = UserFactory.create()
 
         # Permission handler

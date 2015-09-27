@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.core.urlresolvers import reverse
-from django.db.models import get_model
 from faker import Factory as FakerFactory
 from haystack.management.commands import clear_index
 from haystack.management.commands import rebuild_index
@@ -13,6 +12,7 @@ from haystack.query import SearchQuerySet
 import pytest
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum

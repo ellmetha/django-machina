@@ -5,11 +5,11 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.core.exceptions import ValidationError
-from django.db.models import get_model
 from faker import Factory as FakerFactory
 import pytest
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.utils import refresh
 from machina.test.factories import build_topic
 from machina.test.factories import create_category_forum

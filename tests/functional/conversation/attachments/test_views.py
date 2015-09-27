@@ -7,11 +7,11 @@ import os
 # Third party imports
 from django.conf import settings
 from django.core.files import File
-from django.db.models import get_model
 from faker import Factory as FakerFactory
 import pytest
 
 # Local application / specific library imports
+from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import AttachmentFactory
 from machina.test.factories import create_forum
