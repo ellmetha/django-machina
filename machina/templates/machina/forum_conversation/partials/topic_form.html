@@ -1,19 +1,20 @@
 {% load i18n %}
-{% load bootstrap3 %}
+{% load widget_tweaks %}
 
+<form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+    {% for error in post_form.non_field_errors %}
+        <div class="alert alert-danger">
+            <i class="icon-exclamation-sign"></i> {{ error }}
+        </div>
+    {% endfor %}
 
-<form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
-	{% bootstrap_messages %}
-
-	{% csrf_token %}
-
-	{% bootstrap_field post_form.subject %}
-	{% bootstrap_field post_form.content %}
-	{% if post_form.update_reason %}
-		{% bootstrap_field post_form.update_reason %}
-	{% endif %}
+	{% include "machina/partials/form_field.html" with field=post_form.subject %}
+	{% include "machina/partials/form_field.html" with field=post_form.content %}
 	{% if post_form.username %}
-		{% bootstrap_field post_form.username %}
+	    {% include "machina/partials/form_field.html" with field=post_form.username %}
+	{% endif %}
+	{% if post_form.update_reason %}
+	    {% include "machina/partials/form_field.html" with field=post_form.update_reason %}
 	{% endif %}
 
 	<!-- Sub "forms" tabs -->
@@ -34,7 +35,7 @@
 				<br />
 				<div class="row">
 					<div class="col-md-12">
-						{% bootstrap_field post_form.topic_type %}
+						{% include "machina/partials/form_field.html" with field=post_form.topic_type %}
 					</div>
 				</div>
 			</div>
@@ -46,10 +47,18 @@
 					{% if poll_option_formset.non_form_errors %}<div class="alert alert-danger">{{ poll_option_formset.non_form_errors|striptags }}</div>{% endif %}
 					<div class="row">
 						<div class="col-md-6">
-							{% bootstrap_field post_form.poll_question %}
-							{% bootstrap_field post_form.poll_max_options %}
-							{% bootstrap_field post_form.poll_duration %}
-							{% bootstrap_field post_form.poll_user_changes %}
+							{% include "machina/partials/form_field.html" with field=post_form.poll_question %}
+							{% include "machina/partials/form_field.html" with field=post_form.poll_max_options %}
+							{% include "machina/partials/form_field.html" with field=post_form.poll_duration %}
+							{% include "machina/partials/form_field.html" with field=post_form.poll_duration %}
+							<div{% if post_form.poll_user_changes.errors %} class="has-error"{% endif %}>
+								<div class="checkbox">
+									<label for="{{ post_form.poll_user_changes.auto_id }}">
+										{{ post_form.poll_user_changes }}
+										{{ post_form.poll_user_changes.label }}
+									</label>
+								</div>
+							</div>
 						</div>
 						<div id="poll_formset" class="col-md-6">
 							{% include "machina/forum_conversation/forum_polls/poll_option_formset.html" %}

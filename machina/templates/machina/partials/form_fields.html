@@ -1,8 +1,0 @@
-{% load bootstrap3 %}
-
-{% bootstrap_messages %}
-
-{% if not remove_csrf %}
-	{% csrf_token %}
-{% endif %}
-{% bootstrap_form form %}

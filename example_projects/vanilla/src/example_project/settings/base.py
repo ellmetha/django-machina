@@ -151,7 +151,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'mptt',
     'haystack',
-    'bootstrap3',
+    'widget_tweaks',
     'django_markdown',
 
     # Local apps

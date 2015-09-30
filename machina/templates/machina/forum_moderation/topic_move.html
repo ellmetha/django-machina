@@ -1,6 +1,5 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
-{% load bootstrap3 %}
 {% load forum_conversation_tags %}
 
 {{% block sub-title %}{% trans "Move topic" %}{% endblock sub-title %}
@@ -14,10 +13,15 @@
 	            </div>
 	            <div class="panel-body">
 				    <form action="" method="post">{% csrf_token %}
-				    	{% bootstrap_field form.forum %}
-				    	{% bootstrap_field form.lock_topic %}
+				    	{% include "machina/partials/form_field.html" with field=form.forum %}
+                        <div class="checkbox">
+                            <label for="{{ form.lock_topic.auto_id }}">
+                                {{ form.lock_topic }}
+                                {{ form.lock_topic.label }}
+                            </label>
+                        </div>
 				        <input type="submit" value="{% trans "Move" %}" class="btn btn-warning" />
-				        <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "No" %}</a>
+				        <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "Cancel" %}</a>
 				    </form>
 	            </div>
 			</div>

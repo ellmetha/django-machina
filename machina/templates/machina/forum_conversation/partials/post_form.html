@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% if post_form.non_field_errors %}
+    {% for error in post_form.non_field_errors %}
+        <div class="alert alert-danger">
+            <i class="icon-exclamation-sign"></i> {{ error }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% include "machina/partials/form_field.html" with field=post_form.subject %}
+{% include "machina/partials/form_field.html" with field=post_form.content %}
+{% if post_form.username %}
+    {% include "machina/partials/form_field.html" with field=post_form.username %}
+{% endif %}
+{% if post_form.update_reason %}
+    {% include "machina/partials/form_field.html" with field=post_form.update_reason %}
+{% endif %}

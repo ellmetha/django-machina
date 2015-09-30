@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load bootstrap3 %}
+{% load widget_tweaks %}
 
 
 <label>{% trans "Poll options" %}</label>
@@ -11,7 +11,16 @@
 				{% if forloop.first %}
 					{{ form.id }}
 				{% endif %}
-				{% bootstrap_field field %}
+				{% if field.name == 'DELETE' %}
+					<div class="checkbox">
+						<label for="{{ field.auto_id }}">
+							{{ field }}
+							{{ field.label }}
+						</label>
+					</div>
+				{% else %}
+					{% include "machina/partials/form_field.html" with field=field %}
+                {% endif %}
 			</div>
 		{% endfor %}
 	</div>

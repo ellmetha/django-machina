@@ -11,8 +11,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title"><strong>{% trans "Sign in" %}</strong></h3></div>
                 <div class="panel-body">
-                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
-                        {% include 'machina/partials/form_fields.html' %}
+                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <i class="icon-exclamation-sign"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% include "machina/partials/form_field.html" with field=form.username %}
+                        {% include "machina/partials/form_field.html" with field=form.password %}
                         <input type="hidden" name="next" value="/">
                         <div class="form-actions">
                             <a href="{% url 'password_reset' %}"class="btn btn-large btn-default">{% trans "Forgot password?" %}</a>

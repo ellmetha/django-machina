@@ -4,8 +4,6 @@
 
 {% block sub-title %}{% trans "Edit post" %}{% endblock sub-title %}
 
-{% block messages %}{# Messages will be rendered inside the form #}{% endblock messages %}
-
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
@@ -25,7 +23,7 @@
                     <h3 class="panel-title">{% trans "Edit post" %}</h3>
                 </div>
                 <div class="panel-body">
-                    {% include "machina/forum_conversation/topic_form.html" %}
+                    {% include "machina/forum_conversation/partials/topic_form.html" %}
                 </div>
             </div>
         </div>

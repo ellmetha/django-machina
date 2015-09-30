@@ -1,11 +1,8 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
-{% load bootstrap3 %}
 {% load forum_conversation_tags %}
 
 {% block sub-title %}{% trans "Post a new topic" %}{% endblock sub-title %}
-
-{% block messages %}{# Messages will be rendered inside the form #}{% endblock messages %}
 
 {% block content %}
     <div class="row">
@@ -26,7 +23,7 @@
                     <h3 class="panel-title">{% trans "Post a new topic" %}</h3>
                 </div>
                 <div class="panel-body">
-                    {% include "machina/forum_conversation/topic_form.html" %}
+                    {% include "machina/forum_conversation/partials/topic_form.html" %}
                 </div>
             </div>
         </div>

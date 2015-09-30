@@ -28,22 +28,22 @@ setup(
     zip_safe=False,
     install_requires=[
         'django>=1.5,<1.9',
-        'django-model-utils>=2.0,<3.0',
+        'django-model-utils>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
-        'django-mptt>=0.7.0,<0.8',
+        'django-mptt>=0.7.0',
 
         # Machina uses Django-haystack to provide search support
-        'django-haystack>=2.1.0,<2.4',
+        'django-haystack>=2.1.0',
 
         # Pillow is required for image fields
-        'pillow>=2.2,<3.0',
+        'pillow>=2.2',
 
         # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
-        'django-markdown>=0.7.0,<1.0',
+        'django-markdown>=0.7.0',
 
-        # Machina's default templates use django-bootstrap3 to render forms ; but you can override this
-        'django-bootstrap3>=3.0,<6.0',
+        # Machina's default templates use django-widget-tweaks to render form fields ; but you can override this
+        'django-widget-tweaks>=1.4',
     ],
     classifiers=[
         'Development Status :: 1 - Planning',

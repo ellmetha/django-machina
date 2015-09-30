@@ -20,8 +20,8 @@
                     <h3 class="panel-title">{% trans "Post a reply" %}</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>
-                        {% include 'partials/form_fields.html' with form=post_form %}
+                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+                        {% include "machina/forum_conversation/partials/post_form.html" %}
                         {% if attachment_formset %}
                             <div class="form-group">
                                 <div class="row">
