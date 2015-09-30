@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'mptt',
     'haystack',
-    'bootstrap3',
+    'widget_tweaks',
     'django_markdown',
     'tests',
 ] + get_machina_apps(['tests._testsite.apps.forum_conversation', ])
