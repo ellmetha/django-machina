@@ -11,7 +11,7 @@ Requirements
 * `Django-mptt`_ 0.7. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-markdown`_ 0.7. or higher
-* `Django-widget-tweaks`_ 3.0. or higher
+* `Django-widget-tweaks`_ 1.4. or higher
 * `South`_ 1.0.1 or higher if you are using Django < 1.7
 
 
