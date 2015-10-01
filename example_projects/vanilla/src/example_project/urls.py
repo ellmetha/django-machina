@@ -35,10 +35,6 @@ urlpatterns = patterns(
     url(r'', include(board.urls)),
 )
 
-urlpatterns += patterns('loginas.views',
-    url(r'^login/user/(?P<user_id>.+)/$', 'user_login', name='loginas-user-login'),
-)
-
 # # In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()

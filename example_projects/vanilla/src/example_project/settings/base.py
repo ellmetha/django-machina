@@ -147,8 +147,6 @@ INSTALLED_APPS = [
 
     # Third party apps
     'compressor',
-    'loginas',
-    'crispy_forms',
     'mptt',
     'haystack',
     'widget_tweaks',
@@ -170,11 +168,6 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_OUTPUT_DIR = 'machina'
-
-
-# Crispy forms settings
-# --------------------------------------
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 # Haystack settings
