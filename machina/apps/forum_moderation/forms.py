@@ -20,7 +20,7 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 class TopicMoveForm(forms.Form):
     forum = forms.ChoiceField(
         label=_('Select a destination forum'),
-        required=False, widget=SelectWithDisabled)
+        widget=SelectWithDisabled)
     lock_topic = forms.BooleanField(
         label=_('Lock topic'), required=False)
 
