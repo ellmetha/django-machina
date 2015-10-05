@@ -13,11 +13,20 @@
                 </div>
                 <div class="panel-body">
                     <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
-                        {% include "machina/partials/form_field.html" with field=form.username %}
-                        {% include "machina/partials/form_field.html" with field=form.email %}
-                        <input type="hidden" name="next" value="/">
-                        <div class="form-actions">
-                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% include "machina/partials/form_field.html" with field=form.username %}
+                            </div>
+                            <div class="col-md-6">
+                                {% include "machina/partials/form_field.html" with field=form.email %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-actions">
+                                    <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
