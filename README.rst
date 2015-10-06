@@ -47,10 +47,12 @@ Documentation
 
 Head over to the `documentation <http://django-machina.readthedocs.org/en/>`_ for all the details on how to set up your forum and how to customize it to suit your needs.
 
-Author
-======
+Authors
+=======
 
-Morgan Aubert (@ellmetha) <morgan.aubert@zoho.com>
+Morgan Aubert (@ellmetha) <morgan.aubert@zoho.com> and contributors_
+
+.. _contributors: https://github.com/ellmetha/django-machina/contributors
 
 License
 =======
