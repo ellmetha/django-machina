@@ -16,10 +16,12 @@ class MemberApp(Application):
 
     user_topics_view = get_class('forum_member.views', 'UserTopicsView')
     forum_profile_detail_view = get_class('forum_member.views', 'ForumProfileDetailView')
+    forum_profile_update_view = get_class('forum_member.views', 'ForumProfileUpdateView')
 
     def get_urls(self):
         urls = [
             url(_(r'^profile/(?P<pk>\d+)/$'), self.forum_profile_detail_view.as_view(), name='profile'),
+            url(_(r'^profile/edit/$'), self.forum_profile_update_view.as_view(), name='profile_update'),
             url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
         ]
         return patterns('', *urls)

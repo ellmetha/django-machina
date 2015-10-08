@@ -6,9 +6,11 @@ from __future__ import unicode_literals
 # Third party imports
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import UpdateView
 
 # Local application / specific library imports
 from machina.conf import settings as machina_settings
@@ -18,6 +20,8 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 ForumProfile = get_model('forum_member', 'ForumProfile')
 Topic = get_model('forum_conversation', 'Topic')
+
+ForumProfileForm = get_class('forum_member.forms', 'ForumProfileForm')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -69,3 +73,22 @@ class ForumProfileDetailView(DetailView):
         context['topics_count'] = Topic.objects.filter(
             approved=True, poster=self.object.user).count()
         return context
+
+
+class ForumProfileUpdateView(UpdateView):
+    """
+    Allows the current user to update its forum profile.
+    """
+    template_name = 'forum_member/forum_profile_update.html'
+    form_class = ForumProfileForm
+
+    def get_object(self, queryset=None):
+        profile, dummy = ForumProfile.objects.get_or_create(user=self.request.user)
+        return profile
+
+    def get_success_url(self):
+        return reverse('forum_member:profile_update')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(ForumProfileUpdateView, self).dispatch(request, *args, **kwargs)
