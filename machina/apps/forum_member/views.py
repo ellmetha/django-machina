@@ -4,10 +4,12 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
@@ -81,10 +83,16 @@ class ForumProfileUpdateView(UpdateView):
     """
     template_name = 'forum_member/forum_profile_update.html'
     form_class = ForumProfileForm
+    success_message = _('The profile has been edited successfully.')
 
     def get_object(self, queryset=None):
         profile, dummy = ForumProfile.objects.get_or_create(user=self.request.user)
         return profile
+
+    def form_valid(self, form):
+        response = super(ForumProfileUpdateView, self).form_valid(form)
+        messages.success(self.request, self.success_message)
+        return response
 
     def get_success_url(self):
         return reverse('forum_member:profile_update')
