@@ -30,7 +30,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     {% if request.user.is_authenticated %}
-                        <p class="navbar-text"><b>{{ request.user.username }}</p>
+                        <p class="navbar-text"><b>{{ request.user.username }}</b></p>
                     {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.is_authenticated %}

@@ -42,7 +42,7 @@ DATABASES = {
 }
 
 LOCALE_PATHS = (
-    PROJECT_PATH.child('src', 'locale', 'xample_project'),
+    PROJECT_PATH.child('src', 'locale', 'vanilla_project'),
 )
 
 # If you set this to False, Django will make some optimizations so as not
