@@ -1,0 +1,157 @@
+{% extends "machina/board_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load compress %}
+{% load forum_permission_tags %}
+
+{% block css %}
+	{{ block.super }}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/roboto.css' %}" />
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/material.css' %}" />
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/ripples.css' %}" />
+        <link rel="stylesheet" type="text/less" href="{% static 'less/theme.less' %}" />
+    {% endcompress %}
+{% endblock css %}
+
+{% block body %}
+    <div id="wrap">
+        <div class="navbar-fixed-top-spacing">&nbsp;</div>
+        <div class="navbar navbar-default navbar-fixed-top machina-navbar navbar-machina" role="navigation">
+            <div class="container-fluid"> 
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">django-machina</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    {% if request.user.is_authenticated %}
+                        <p class="navbar-text"><b>{{ request.user.username }}</p>
+                    {% endif %}
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'forum_search:search' %}" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Search' %}"><i class="fa fa-search"></i></a></li>
+                            <li><a href="{% url 'forum_member:profile' request.user.id %}" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Profile' %}"><i class="fa fa-user"></i></a></li>
+                            <li><a href="{% url 'account-parameters' %}" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Account settings' %}"><i class="fa fa-cogs"></i></a></li>
+                            <li><a href="{% url 'logout' %}?next=/" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Sign out' %}"><i class="fa fa-power-off"></i></a></li>
+                        {% else %}
+                            <li><a href="{% url 'register' %}">{% trans "Sign up" %}</a></li>
+                            <li><a href="{% url 'login' %}">{% trans "Sign in" %}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                {% comment %}
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-user"></span> 
+                                        <strong>{{ request.user.username }}</strong>
+                                        <span class="glyphicon glyphicon-chevron-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="navbar-login">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <p class="text-center">
+                                                            <span class="glyphicon glyphicon-user icon-size"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <p class="text-left"><strong>{{ request.user.username }}</strong></p>
+                                                        <p class="text-left small">{{ request.user.email }}</p>
+                                                        <p class="text-left">
+                                                            <a href="{% url 'forum_member:profile_update' %}" class="btn btn-primary btn-block btn-sm">{% trans "Profile" %}</a>
+                                                            <a href="{% url 'account-parameters' %}" class="btn btn-info btn-block btn-sm">{% trans "Account" %}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <div class="navbar-login navbar-login-session">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <p>
+                                                            <a href="{% url 'logout' %}?next=/" class="btn btn-danger btn-block">{% trans "Sign out" %}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{% url 'register' %}">{% trans "Sign up" %}</a></li>
+                                <li><a href="{% url 'login' %}">{% trans "Sign in" %}</a></li>
+                            {% endif %}
+                        </ul>
+
+                {% endcomment %}
+
+            </div>
+        </div>
+        <div class="container-fluid" id="main_container">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% block breadcrumb %}
+                        {% include "machina/partials/breadcrumb.html" %}
+                    {% endblock breadcrumb %}
+                    <div class="pull-right controls-link-wrapper">
+                        {% if not request.user.is_anonymous %}
+                            <a href="{% url 'forum_member:user_topics' %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
+                        {% endif %}
+                        {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
+                        {% if can_access_moderation_queue %}
+                            <a href="{% url 'forum_moderation:queue' %}" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <br />
+                    {% block messages %}
+                        {% include "machina/partials/messages.html" %}
+                    {% endblock messages %}
+                </div>
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div id="push"></div>
+    </div>
+    <footer id="footer">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <p class="text-muted">
+                    Powered by&nbsp;<a href="https://www.djangoproject.com/">django</a>&nbsp;and&nbsp;<a href="https://github.com/ellmetha/django-machina">django-machina</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+{% endblock body %}
+
+{% block js %}
+    {{ block.super }}
+    {% compress js %}
+        <script src="{% static 'bower_components/bootstrap-material-design/dist/js/material.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% static 'bower_components/bootstrap-material-design/dist/js/ripples.js' %}" type="text/javascript" charset="utf-8"></script>
+    {% endcompress %}
+    <script>
+        $(document).ready(function() {
+            // This command is used to initialize some elements and make them work properly
+            $.material.init();
+
+            $('a[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock js %}

@@ -1,2 +1,3 @@
 _libs/* linguist-vendored
 machina/static/machina/_libs/* linguist-vendored
+example_projects/demo/src/demo_project/static/bower_components/* linguist-vendored

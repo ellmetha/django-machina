@@ -1,0 +1,5 @@
+django
+django-compressor
+django-debug-toolbar
+Whoosh
+unipath

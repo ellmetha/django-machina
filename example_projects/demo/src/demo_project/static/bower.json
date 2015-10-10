@@ -1,0 +1,6 @@
+{
+  "name": "django-machina-demo-project",
+  "dependencies": {
+    "bootstrap-material-design": "~0.3.0"
+  }
+}
