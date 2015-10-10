@@ -6,7 +6,7 @@ staticfiles:
 
 install:
 		pip install -r dev-requirements.txt
-		python setup.py develop
+		pip install -e .
 
 upgrade:
 		pip install --upgrade -r dev-requirements.txt
