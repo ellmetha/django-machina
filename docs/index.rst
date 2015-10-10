@@ -16,7 +16,7 @@ Welcome to django-machina's documentation!
 
 *Django-machina* is customizable and extensible: each single functionality of the application can be customized or overriden to accommodate with your needs and your own business logic. The central aim of *django-machina* is to provide a solid core of a forum project - without much of extra functionality included - that can be extended or customized to suit your project needs.
 
-.. image:: ./images/machina_forum_header.png
+.. image:: ./_images/machina_forum_header.png
 
 Features
 --------
