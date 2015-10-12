@@ -22,7 +22,7 @@ django-machina
 * Polls and attachments
 * ...
 
-.. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/images/machina_forum_header.png
+.. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
   :target: http://django-machina.readthedocs.org/en/latest/
 
 |
