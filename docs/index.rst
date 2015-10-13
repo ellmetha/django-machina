@@ -25,7 +25,7 @@ Features
 * Per-forum permissions
 * Topic and post editing
 * Anonymous posting
-* Pre-moderation
+* Pre-moderation and moderation
 * Polls and attachments
 
 Using django-machina
