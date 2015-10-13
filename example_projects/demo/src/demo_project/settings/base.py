@@ -154,9 +154,15 @@ INSTALLED_APPS = [
 
     # Local apps
     'demo_project',
-] + get_machina_apps()
+] + get_machina_apps([
+    'demo_project.apps.forum_conversation',
+])
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+MIGRATION_MODULES = {
+    'forum_conversation': 'machina.apps.forum_conversation.migrations',
+}
 
 
 # Django compressor setings
