@@ -150,7 +150,7 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'widget_tweaks',
-    'django_markdown',
+    'ckeditor',
 
     # Local apps
     'demo_project',
@@ -216,3 +216,6 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_vote_in_polls',
     'can_download_file',
 ]
+
+MACHINA_MARKUP_LANGUAGE = ('demo_project.utils.dummy_html', {})
+MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'

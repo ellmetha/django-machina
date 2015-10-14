@@ -29,7 +29,6 @@ urlpatterns = patterns(
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^account/parameters/edit/', UserAccountParametersUpdateView.as_view(), name='account-parameters'),
     url('^register/', UserCreateView.as_view(), name='register'),
-    url('^markdown/', include( 'django_markdown.urls')),
 
     # Apps
     url(r'', include(board.urls)),

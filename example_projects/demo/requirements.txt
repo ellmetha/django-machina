@@ -1,5 +1,6 @@
 django
 django-compressor
 django-debug-toolbar
+django-ckeditor
 Whoosh
 unipath
