@@ -2,7 +2,7 @@ django-machina
 ##############
 
 .. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat-square
-   :target: https://readthedocs.org/projects/django-machina/latest/
+   :target: https://readthedocs.org/projects/django-machina/
    :alt: Documentation Status
 
 .. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
