@@ -19,7 +19,7 @@ The forum name.
 
 Default: ``('django_markdown.utils.markdown', {})``
 
-This setting defines how posts content is translated into HTML on the forum. It must be a two-tuple. The first element should be a string corresponding to the Python dotted path to a function returning HTML from a content expressed in a markup language. The second element of the tuple is a dictionary of keyword arguments to pass to the latest function (the dictionary should be empty if the function does not require any argument).
+This setting defines how posts content is translated into HTML on the forum. It should be a two-tuple. The first element should be a string corresponding to the Python dotted path to a function returning HTML from a content expressed in a markup language. The second element of the tuple is a dictionary of keyword arguments to pass to the latest function (the dictionary should be empty if the function does not require any argument). Note that if you do not want to use a markup language such as Markdown or BBCode (eg. if you are using a Wysiwyg editor), you can set this setting to ``None``.
 
 *Django-machina* uses Markdown as the default syntax for forum messages.
 
