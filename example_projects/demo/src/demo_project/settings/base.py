@@ -217,5 +217,5 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_download_file',
 ]
 
-MACHINA_MARKUP_LANGUAGE = ('demo_project.utils.dummy_html', {})
+MACHINA_MARKUP_LANGUAGE = None
 MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'

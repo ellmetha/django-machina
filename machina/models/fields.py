@@ -46,8 +46,9 @@ def _get_render_function(dotted_path, kwargs):
 
 
 try:
-    dotted_path, kwargs = machina_settings.MACHINA_MARKUP_LANGUAGE
-    render_func = _get_render_function(dotted_path, kwargs)
+    markup_lang = machina_settings.MACHINA_MARKUP_LANGUAGE
+    render_func = _get_render_function(markup_lang[0], markup_lang[1]) if markup_lang \
+        else lambda text: text
 except ImportError as e:
     raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_LANGUAGE {}: {}').format(
         machina_settings.MACHINA_MARKUP_LANGUAGE,
