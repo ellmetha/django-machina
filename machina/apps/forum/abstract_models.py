@@ -48,7 +48,11 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
 
-    description = MarkupTextField(verbose_name=_('Description'), null=True, blank=True)
+    description = MarkupTextField(
+        verbose_name=_('Description'),
+        help_text=_('Description of the forum. It can make use of a markup language if a '
+                    'markup language is configured for your project (or plain HTML in the opposite case).'),
+        null=True, blank=True)
 
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(verbose_name=_('Forum image'), null=True, blank=True,
