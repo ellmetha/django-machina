@@ -170,7 +170,7 @@ MIGRATION_MODULES = {
 COMPRESS_ENABLED = True
 
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc --relative-url {infile} {outfile}'),
+    ('text/less', 'lessc {infile} {outfile}'),
 )
 
 COMPRESS_OUTPUT_DIR = 'machina'
