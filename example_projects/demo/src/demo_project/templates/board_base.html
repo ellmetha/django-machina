@@ -7,9 +7,9 @@
 {% block css %}
 	{{ block.super }}
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/roboto.css' %}" />
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/material.css' %}" />
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/ripples.css' %}" />
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/roboto.css' %}" />
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/material.css' %}" />
+        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/ripples.css' %}" />
         <link rel="stylesheet" type="text/less" href="{% static 'less/theme.less' %}" />
     {% endcompress %}
 {% endblock css %}
@@ -143,8 +143,8 @@
 {% block js %}
     {{ block.super }}
     {% compress js %}
-        <script src="{% static 'bower_components/bootstrap-material-design/dist/js/material.js' %}" type="text/javascript" charset="utf-8"></script>
-        <script src="{% static 'bower_components/bootstrap-material-design/dist/js/ripples.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% static 'bower_components/bootstrap-material-design/build/js/material.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% static 'bower_components/bootstrap-material-design/build/js/ripples.js' %}" type="text/javascript" charset="utf-8"></script>
     {% endcompress %}
     <script>
         $(document).ready(function() {
