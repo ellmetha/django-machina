@@ -37,6 +37,7 @@ Using django-machina
    :maxdepth: 2
 
    getting_started
+   example_projects
    settings
    glossary
    forum_permissions
