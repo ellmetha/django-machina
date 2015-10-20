@@ -31,3 +31,22 @@ To run this project locally, you can follow these instructions:
 
 The demo project
 ----------------
+
+The "demo" project aims to show the possibilities of *django-machina* in terms of personalization and customization. It showcases how *django-machina* can be used to integrate a forum into a Django project. Some of the customisations that are included in this "demo" project are listed bellow:
+
+* a material design theme
+* the use of `django-ckeditor <https://github.com/django-ckeditor/django-ckeditor/>`_ instead of `django-markdown <https://github.com/klen/django_markdown/>`_
+
+To run this project locally, you can follow these instructions:
+
+.. code-block:: bash
+
+  $ git clone https://github.com/ellmetha/django-machina
+  $ cd django-machina
+  $ mkvirtualenv machina_demo_project
+  (machina_demo_project) $ make install && pip install -r example_projects/demo/requirements.txt
+  (machina_demo_project) $ cd example_projects/demo/src/
+  (machina_demo_project) $ python manage.py migrate
+  (machina_demo_project) $ python manage.py createsuperuser
+  (machina_demo_project) $ python manage.py loaddata fixtures/*
+  (machina_demo_project) $ python manage.py runserver
