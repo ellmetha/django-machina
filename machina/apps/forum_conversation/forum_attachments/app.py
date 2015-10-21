@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 
 # Local application / specific library imports
@@ -16,10 +17,9 @@ class PollsApp(Application):
     attachment_view = get_class('forum_conversation.forum_attachments.views', 'AttachmentView')
 
     def get_urls(self):
-        urls = [
+        return [
             url(r'^attachment/(?P<pk>\d+)/$', self.attachment_view.as_view(), name='attachment'),
         ]
-        return patterns('', *urls)
 
 
 application = PollsApp()

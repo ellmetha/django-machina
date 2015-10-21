@@ -4,7 +4,6 @@
 from __future__ import unicode_literals
 
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -29,7 +28,7 @@ class ModerationApp(Application):
     post_disapprove_view = get_class('forum_moderation.views', 'PostDisapproveView')
 
     def get_urls(self):
-        urls = [
+        return [
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/lock/$'), self.topic_lock_view.as_view(), name='topic_lock'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/unlock/$'), self.topic_unlock_view.as_view(), name='topic_unlock'),
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'), self.topic_delete_view.as_view(), name='topic_delete'),
@@ -45,7 +44,6 @@ class ModerationApp(Application):
             url(_(r'^queue/(?P<pk>\d+)/approve/$'), self.post_approve_view.as_view(), name='approve_queued_post'),
             url(_(r'^queue/(?P<pk>\d+)/disapprove/$'), self.post_disapprove_view.as_view(), name='disapprove_queued_post'),
         ]
-        return patterns('', *urls)
 
 
 application = ModerationApp()

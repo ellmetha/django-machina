@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.conf.urls import include
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,8 +28,7 @@ class BaseConversationApp(Application):
     def get_urls(self):
         urls = super(BaseConversationApp, self).get_urls()
 
-        conversation_patterns = patterns(
-            '',
+        conversation_patterns = [
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
 
             url(_(r'^topic/create/$'), self.topic_create_view.as_view(), name='topic_create'),
@@ -40,12 +40,12 @@ class BaseConversationApp(Application):
                 self.post_update_view.as_view(), name='post_update'),
             url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$'),
                 self.post_delete_view.as_view(), name='post_delete'),
-        )
+        ]
 
         urls += [
             url(_(r'forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/'), include(conversation_patterns)),
         ]
-        return patterns('', *urls)
+        return urls
 
 
 class PollsApp(Application):
@@ -57,7 +57,7 @@ class PollsApp(Application):
         urls += [
             url(_(r'^'), include(self.polls_app.urls)),
         ]
-        return patterns('', *urls)
+        return urls
 
 
 class AttachmentsApp(Application):
@@ -69,7 +69,7 @@ class AttachmentsApp(Application):
         urls += [
             url(_(r'^'), include(self.attachments_app.urls)),
         ]
-        return patterns('', *urls)
+        return urls
 
 
 class ConversationApp(BaseConversationApp, PollsApp, AttachmentsApp):

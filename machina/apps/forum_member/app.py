@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -19,12 +20,11 @@ class MemberApp(Application):
     forum_profile_update_view = get_class('forum_member.views', 'ForumProfileUpdateView')
 
     def get_urls(self):
-        urls = [
+        return [
             url(_(r'^profile/(?P<pk>\d+)/$'), self.forum_profile_detail_view.as_view(), name='profile'),
             url(_(r'^profile/edit/$'), self.forum_profile_update_view.as_view(), name='profile_update'),
             url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
         ]
-        return patterns('', *urls)
 
 
 application = MemberApp()

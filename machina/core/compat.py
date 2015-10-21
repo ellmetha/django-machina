@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
-except ImportError as err:  # pragma: no cover
+except ImportError as err:
     try:
         # If that failed, try the alternate import syntax for PIL.
         import Image as PILImage  # noqa
@@ -26,14 +26,14 @@ except ImportError as err:  # pragma: no cover
 # Django slugify
 try:
     from django.utils.text import slugify
-except ImportError:  # pragma: no cover
+except ImportError:
     from django.template.defaultfilters import slugify  # noqa
 
 
 # force_bytes
 try:
     from django.utils.encoding import force_bytes
-except ImportError:  # pragma: no cover
+except ImportError:
     from django.utils.encoding import smart_str as force_bytes  # noqa
 
 
@@ -43,5 +43,13 @@ if DJANGO_VERSION >= (1, 7):
 
     def get_cache(key):
         return caches[key]
-else:  # pragma: no cover
+else:
     from django.core.cache import get_cache  # noqa
+
+
+# URL patterns
+if DJANGO_VERSION >= (1, 8):
+    patterns = lambda urls: urls
+else:
+    from django.conf.urls import patterns as urlpatterns
+    patterns = lambda urls: urlpatterns('', *urls)

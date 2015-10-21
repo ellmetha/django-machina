@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,11 +19,10 @@ class ForumApp(Application):
     forum_view = get_class('forum.views', 'ForumView')
 
     def get_urls(self):
-        urls = [
+        return [
             url(r'^$', self.index_view.as_view(), name='index'),
             url(_(r'^forum/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.forum_view.as_view(), name='forum'),
         ]
-        return patterns('', *urls)
 
 
 application = ForumApp()

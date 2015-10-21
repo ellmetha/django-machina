@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,14 +18,13 @@ class FeedsApp(Application):
     latest_topics_feed = get_class('forum_feeds.feeds', 'LastTopicsFeed')
 
     def get_urls(self):
-        urls = [
+        return [
             url(_(r'^topics/$'), self.latest_topics_feed(), name='latest_topics'),
             url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/$'),
                 self.latest_topics_feed(), name='forum_latest_topics'),
             url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/all/$'),
                 self.latest_topics_feed(), {'descendants': True}, name='forum_latest_topics_with_descendants'),
         ]
-        return patterns('', *urls)
 
 
 application = FeedsApp()

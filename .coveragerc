@@ -6,4 +6,5 @@ exclude_lines =
     def south_field_triple
     raise NotImplementedError
 omit =
+	*compat*
     *migrations*

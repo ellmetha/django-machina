@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django.conf.urls import patterns
 from django.conf.urls import url
 from haystack.views import search_view_factory
 
@@ -18,13 +19,12 @@ class SearchApp(Application):
     search_form = get_class('forum_search.forms', 'SearchForm')
 
     def get_urls(self):
-        urls = [
+        return [
             url(r'^$', search_view_factory(
                 view_class=self.search_view,
                 form_class=self.search_form),
                 name='search'),
         ]
-        return patterns('', *urls)
 
 
 application = SearchApp()

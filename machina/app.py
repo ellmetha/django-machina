@@ -3,7 +3,6 @@
 # Standard library imports
 # Third party imports
 from django.conf.urls import include
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -33,7 +32,7 @@ class BoardApp(Application):
             url(_(r'^search/'), include(self.search_app.urls)),
             url(_(r'^tracking/'), include(self.tracking_app.urls)),
         ]
-        return patterns('', *urls)
+        return urls
 
 
 board = forum = application = BoardApp()
