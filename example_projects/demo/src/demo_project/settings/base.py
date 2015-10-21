@@ -94,28 +94,32 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'onlyatest833090dhkgrfgdfg*fds5645456fg'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    # Machina
-    'machina.core.context_processors.metadata',
-)
-
-TEMPLATE_DIRS = (
-    PROJECT_PATH.child('src', 'demo_project', 'templates'),
-    MACHINA_MAIN_TEMPLATE_DIR,
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': (
+            PROJECT_PATH.child('src', 'demo_project', 'templates'),
+            MACHINA_MAIN_TEMPLATE_DIR,
+        ),
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                # Machina
+                'machina.core.context_processors.metadata',
+            ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

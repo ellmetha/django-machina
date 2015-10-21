@@ -4,7 +4,6 @@
 # Third party imports
 from django.conf import settings
 from django.conf.urls import include
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
@@ -21,9 +20,7 @@ from demo_project.views import UserCreateView
 admin.autodiscover()
 
 # Patterns
-urlpatterns = patterns(
-    '',
-
+urlpatterns = [
     # Admin
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^account/', include('django.contrib.auth.urls')),
@@ -32,14 +29,14 @@ urlpatterns = patterns(
 
     # Apps
     url(r'', include(board.urls)),
-)
+]
 
 # # In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
+    from django.views.static import serve
     urlpatterns += staticfiles_urlpatterns()
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
-    urlpatterns += patterns(
-        '',
-        url(r'^%s/(?P<path>.*)$' % media_url, 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
+    urlpatterns += [
+        url(r'^%s/(?P<path>.*)$' % media_url, serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
