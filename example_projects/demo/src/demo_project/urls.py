@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic.edit import CreateView
 from machina.app import board
 
 # Local application / specific library imports
@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'', include(board.urls)),
 ]
 
-# # In DEBUG mode, serve media files through Django.
+# In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
     from django.views.static import serve
     urlpatterns += staticfiles_urlpatterns()
