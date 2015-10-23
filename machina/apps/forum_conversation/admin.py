@@ -6,6 +6,8 @@ from django.contrib import admin
 
 # Local application / specific library imports
 from machina.core.db.models import get_model
+from machina.models.fields import MarkupTextField
+from machina.models.fields import MarkupTextFieldWidget
 
 Attachment = get_model('forum_attachments', 'Attachment')
 Post = get_model('forum_conversation', 'Post')
@@ -29,6 +31,10 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('poster', )
     search_fields = ('content',)
     list_editable = ('approved',)
+
+    formfield_overrides = {
+        MarkupTextField: {'widget': MarkupTextFieldWidget},
+    }
 
 
 class TopicAdmin(admin.ModelAdmin):

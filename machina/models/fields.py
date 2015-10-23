@@ -37,6 +37,8 @@ def _get_markup_widget():
             machina_settings.MACHINA_MARKUP_WIDGET,
             e))
 
+MarkupTextFieldWidget = _get_markup_widget()
+
 
 def _get_render_function(dotted_path, kwargs):
     module, func = dotted_path.rsplit('.', 1)

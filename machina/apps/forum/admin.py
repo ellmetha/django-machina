@@ -24,6 +24,8 @@ from mptt.exceptions import InvalidMove
 # Local application / specific library imports
 from machina.core.compat import patterns
 from machina.core.db.models import get_model
+from machina.models.fields import MarkupTextField
+from machina.models.fields import MarkupTextFieldWidget
 
 Forum = get_model('forum', 'Forum')
 ForumPermission = get_model('forum_permission', 'ForumPermission')
@@ -40,6 +42,10 @@ class ForumAdmin(admin.ModelAdmin):
     """
     The ForumAdmin class provides a specific view for moving up or down any forums.
     """
+    formfield_overrides = {
+        MarkupTextField: {'widget': MarkupTextFieldWidget},
+    }
+
     fieldsets = (
         [None, {
             'fields': ('type', 'parent', 'name', 'description', 'image',)
