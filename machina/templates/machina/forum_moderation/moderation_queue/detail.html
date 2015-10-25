@@ -85,6 +85,11 @@
                                 {{ post.content.rendered }}
                             </div>
                             {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                            {% if post.poster.forum_profile.signature %}
+                                <div class="post-signature">
+                                    {{ post.poster.forum_profile.signature.rendered }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="col-md-2 post-sidebar">
                             {% if post.poster %}
