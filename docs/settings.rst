@@ -43,16 +43,16 @@ The media subdirectory where forum images should be uploaded.
 ``MACHINA_FORUM_IMAGE_WIDTH``
 -----------------------------
 
-Default: ``None``
+Default: ``100``
 
-The width used to create the thumbnail that is displayed for each forum that has an image in the list of forums.
+The width used to create the thumbnail that is displayed for each forum that has an image in the list of forums. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_FORUM_IMAGE_HEIGHT``
 ------------------------------
 
-Default: ``None``
+Default: ``70``
 
-The height used to create the thumbnail that is displayed for each forum that has an image in the list of forums.
+The height used to create the thumbnail that is displayed for each forum that has an image in the list of forums. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_FORUM_TOPICS_NUMBER_PER_PAGE``
 ----------------------------------------
@@ -126,44 +126,44 @@ The media subdirectory where forum member avatars should be uploaded.
 ``MACHINA_PROFILE_AVATAR_WIDTH``
 --------------------------------
 
-Default: ``None``
+Default: ``150``
 
-The imposed avatar width for forum member profiles.
+The width to use in order to resize forum profile avatars during upload. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_PROFILE_AVATAR_HEIGHT``
 ---------------------------------
 
-Default: ``None``
+Default: ``250``
 
-The imposed avatar height for forum member profiles.
+The height to use in order to resize forum profile avatars during upload. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_PROFILE_AVATAR_MIN_WIDTH``
 ------------------------------------
 
 Default: ``None``
 
-The imposed avatar minimum width for forum member profiles.
+The imposed avatar minimum width for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MIN_HEIGHT``
 -------------------------------------
 
 Default: ``None``
 
-The imposed avatar minimum height for forum member profiles.
+The imposed avatar minimum height for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_WIDTH``
 ------------------------------------
 
 Default: ``None``
 
-The imposed avatar maximum width for forum member profiles.
+The imposed avatar maximum width for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_HEIGHT``
 -------------------------------------
 
 Default: ``None``
 
-The imposed avatar maximum height for forum member profiles.
+The imposed avatar maximum height for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_UPLOAD_SIZE``
 ------------------------------------------
