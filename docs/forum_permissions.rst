@@ -101,15 +101,15 @@ Note that global permissions have a lower priority than permissions that are ass
 
 The admin pages mentioned above ("Global forum permissions" or "Forum permissions" for specific forums) allow you to select the user or group for which you want to set permissions. You have to select a specific user, the anonymous user or a specific group in order to set its permissions.
 
-.. image:: ./images/permissions_edit_page_1.png
+.. image:: ./_images/permissions_edit_page_1.png
 
 Once you have selected a user or group, you access a page where you can set its permissions for the considered forum (or for all the forums in case of global permissions). The form allows you to define the state of each permission for the considered user or group. Each permission can be either **not set**, **granted** or **not granted**.
 
-.. image:: ./images/permissions_edit_page_2.png
+.. image:: ./_images/permissions_edit_page_2.png
 
 Copying forum permissions
 -------------------------
 
 If you are on the permissions page of a specific forum, you can choose to copy the permissions configuration of another forum in order to apply it to the current forum. This allows you to easily apply a set of permission to many forums.
 
-.. image:: ./images/permissions_edit_page_3.png
+.. image:: ./_images/permissions_edit_page_3.png
