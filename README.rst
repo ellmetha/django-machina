@@ -52,6 +52,13 @@ Documentation
 
 Head over to the `documentation <http://django-machina.readthedocs.org/en/>`_ for all the details on how to set up your forum and how to customize it to suit your needs.
 
+What still needs to be done
+===========================
+
+* Documenting the customization features provided by django-machina and some common use cases. These features are similar to the ones provided by the django-oscar_ e-commerce framework
+* Documenting the ways to contribute to *django-machina*
+* Implementing the topic subscription feature : a user can get a list of all topics to which he subscribed
+
 Authors
 =======
 
