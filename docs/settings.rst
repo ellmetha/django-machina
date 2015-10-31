@@ -202,3 +202,7 @@ Default: ``[]``
 	]
 
 For a full list of the available forum permissions, please refer to :doc:`forum_permissions`.
+
+.. note::
+
+  Keep in mind that the permissions specified in the ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` list will be automatically granted for authenticated users if the targetted forum has no other permissions for these users. This behavior will apply if you create a new forum without a specific permission configuration ; so be careful with the permission code names you put in this setting.
