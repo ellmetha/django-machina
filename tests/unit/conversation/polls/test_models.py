@@ -78,3 +78,39 @@ class TestTopicPollOption(object):
         # Run & check
         assert option_1.percentage == 50
         assert option_2.percentage == 50
+
+
+@pytest.mark.django_db
+class TestTopicPollVote(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.u1 = UserFactory.create()
+
+        # Set up a top-level forum, an associated topic and a post
+        self.top_level_forum = create_forum()
+        self.topic = create_topic(forum=self.top_level_forum, poster=self.u1)
+        self.post = PostFactory.create(topic=self.topic, poster=self.u1)
+
+    def test_must_be_associated_with_a_user_or_a_session_key_to_be_created(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.topic, max_options=2)
+        option_1 = TopicPollOptionFactory.create(poll=poll)
+        TopicPollOptionFactory.create(poll=poll)
+
+        # Run & check
+        with pytest.raises(ValidationError):
+            vote = TopicPollVoteFactory.build(
+                poll_option=option_1, voter=None, anonymous_key=None)
+            vote.clean()
+
+    def test_cannot_be_associated_with_a_user_and_a_session_key_at_the_same_time_to_be_created(self):
+        # Setup
+        poll = TopicPollFactory.create(topic=self.topic, max_options=2)
+        option_1 = TopicPollOptionFactory.create(poll=poll)
+        TopicPollOptionFactory.create(poll=poll)
+
+        # Run & check
+        with pytest.raises(ValidationError):
+            vote = TopicPollVoteFactory.build(
+                poll_option=option_1, voter=self.u1, anonymous_key='ertyue')
+            vote.clean()

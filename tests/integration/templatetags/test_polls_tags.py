@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib.auth.models import AnonymousUser
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
@@ -81,7 +82,7 @@ class BasePollsTagsTestCase(object):
 
 
 class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
-    def test_can_if_a_user_has_already_voted_in_a_poll(self):
+    def test_can_tell_if_an_authenticated_user_has_already_voted_in_a_poll(self):
         # Setup
         def get_rendered(poll, user):
             request = self.request_factory.get('/')
@@ -100,3 +101,27 @@ class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
         # Run & check
         assert get_rendered(self.poll_1, self.u1) == 'HAS_VOTED'
         assert get_rendered(self.poll_2, self.u1) == 'HAS_NOT_VOTED'
+
+    def test_can_if_an_anonymous_user_has_already_voted_in_a_poll(self):
+        # Setup
+        def get_rendered(poll, user):
+            request = self.request_factory.get('/')
+            request.user = user
+            t = Template(self.loadstatement + '{% if poll|has_been_completed_by:request.user %}HAS_VOTED{% else %}HAS_NOT_VOTED{% endif %}')
+            c = Context({'poll': poll, 'request': request})
+            rendered = t.render(c)
+
+            return rendered
+
+        u2 = AnonymousUser()
+        u2.forum_key = 'dummy'
+        u3 = AnonymousUser()
+        poll_option_1 = TopicPollOptionFactory.create(poll=self.poll_1)
+        TopicPollOptionFactory.create(poll=self.poll_1)
+        TopicPollVoteFactory.create(poll_option=poll_option_1, anonymous_key='dummy')
+
+        # Run & check
+        assert get_rendered(self.poll_1, u2) == 'HAS_VOTED'
+        assert get_rendered(self.poll_2, u2) == 'HAS_NOT_VOTED'
+        assert get_rendered(self.poll_2, u3) == 'HAS_NOT_VOTED'
+        assert get_rendered(self.poll_2, u3) == 'HAS_NOT_VOTED'

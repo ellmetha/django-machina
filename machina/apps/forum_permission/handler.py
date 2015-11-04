@@ -17,6 +17,7 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 Post = get_model('forum_conversation', 'Post')
+TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionChecker')
@@ -178,7 +179,17 @@ class PermissionHandler(object):
             and not poll.topic.is_locked
 
         # Retrieve the user votes for the considered poll
-        user_votes = user.poll_votes.filter(poll_option__poll=poll)
+        user_votes = TopicPollVote.objects.filter(
+            poll_option__poll=poll)
+        if user.is_anonymous() and hasattr(user, 'forum_key'):
+            user_votes = user_votes.filter(anonymous_key=user.forum_key)
+        elif user.is_anonymous():
+            # If the forum key of the anonymous user cannot be retrieved, the user
+            # should not be allowed to vote in the considered poll.
+            user_votes = user_votes.none()
+            can_vote = False
+        else:
+            user_votes = user_votes.filter(voter=user)
 
         # If the user has already voted, he can vote again if the vote changes are allowed
         if user_votes.exists() and can_vote:

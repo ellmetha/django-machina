@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
@@ -88,8 +89,12 @@ class AbstractTopicPollVote(models.Model):
     """
     Represents a poll vote.
     """
+    voter = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes', blank=True, null=True)
+    anonymous_key = models.CharField(
+        max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
+
     poll_option = models.ForeignKey('forum_polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
-    voter = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes')
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Vote\'s date'))
 
     class Meta:
@@ -100,3 +105,13 @@ class AbstractTopicPollVote(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.poll_option, self.voter)
+
+    def clean(self):
+        super(AbstractTopicPollVote, self).clean()
+
+        # At least a poster (user) or a session key must be associated with
+        # the vote instance.
+        if self.voter is None and self.anonymous_key is None:
+            raise ValidationError(_('A user id or an anonymous key must be used.'))
+        if self.voter and self.anonymous_key:
+            raise ValidationError(_('A user id or an anonymous key must be used, but not both.'))

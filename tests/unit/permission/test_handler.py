@@ -298,6 +298,31 @@ class TestPermissionHandler(object):
         assert not self.perm_handler.can_vote_in_poll(poll_2, self.u1)
         assert not self.perm_handler.can_vote_in_poll(poll_3, self.u1)
 
+    def test_knows_if_an_anonymous_user_can_vote_in_polls(self):
+        # Setup
+        u3 = AnonymousUser()
+        u3.forum_key = 1
+        poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
+        poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        poll_3 = TopicPollFactory.create(topic=self.forum_3_topic_2)
+        assign_perm('can_vote_in_polls', u3, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_vote_in_poll(poll_1, u3)
+        assert not self.perm_handler.can_vote_in_poll(poll_2, u3)
+        assert not self.perm_handler.can_vote_in_poll(poll_3, u3)
+
+    def test_knows_that_an_anonymous_user_without_forum_key_cannot_vote_in_polls(self):
+        # Setup
+        u3 = AnonymousUser()
+        poll_1 = TopicPollFactory.create(topic=self.forum_1_topic)
+        poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        poll_3 = TopicPollFactory.create(topic=self.forum_3_topic_2)
+        assign_perm('can_vote_in_polls', u3, self.forum_1)
+        # Run & check
+        assert not self.perm_handler.can_vote_in_poll(poll_1, u3)
+        assert not self.perm_handler.can_vote_in_poll(poll_2, u3)
+        assert not self.perm_handler.can_vote_in_poll(poll_3, u3)
+
     def test_knows_that_a_superuser_can_vote_in_polls(self):
         # Setup
         poll = TopicPollFactory.create(topic=self.forum_1_topic)
@@ -334,6 +359,27 @@ class TestPermissionHandler(object):
         # Run & check
         assert self.perm_handler.can_vote_in_poll(poll_1, self.u1)
         assert not self.perm_handler.can_vote_in_poll(poll_2, self.u1)
+
+    def test_knows_if_an_anonymous_user_can_vote_again_in_a_poll(self):
+        # Setup
+        u3 = AnonymousUser()
+        u3.forum_key = 1
+        poll_1 = TopicPollFactory.create(topic=self.forum_1_topic, user_changes=True)
+        poll_option_1 = TopicPollOptionFactory.create(poll=poll_1)
+        TopicPollOptionFactory.create(poll=poll_1)
+
+        poll_2 = TopicPollFactory.create(topic=self.forum_3_topic)
+        poll_option_2 = TopicPollOptionFactory.create(poll=poll_2)
+        TopicPollOptionFactory.create(poll=poll_2)
+
+        TopicPollVoteFactory.create(poll_option=poll_option_1, anonymous_key=1)
+        TopicPollVoteFactory.create(poll_option=poll_option_2, anonymous_key=1)
+
+        assign_perm('can_vote_in_polls', u3, self.forum_1)
+        assign_perm('can_vote_in_polls', u3, self.forum_3)
+        # Run & check
+        assert self.perm_handler.can_vote_in_poll(poll_1, u3)
+        assert not self.perm_handler.can_vote_in_poll(poll_2, u3)
 
     def test_knows_if_a_user_can_read_a_forum(self):
         # Setup

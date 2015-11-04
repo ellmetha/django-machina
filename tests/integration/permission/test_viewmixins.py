@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import PermissionDenied
 from django.test import RequestFactory
@@ -13,7 +14,7 @@ from django.views.generic import DetailView
 import pytest
 
 # Local application / specific library imports
-from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
+from machina.apps.forum_permission.middleware import ForumPermissionMiddleware
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_forum
@@ -45,13 +46,20 @@ class TestPermissionRequiredMixin(object):
 
         self.mixin = PermissionRequiredMixin()
 
+    def get_request(self, url='/'):
+        request = self.factory.get('/')
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        return request
+
     def test_should_raise_if_the_permission_required_attribute_is_set_with_an_incorrect_value(self):
         # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = 10
-        request = self.factory.get('/')
+        request = self.get_request()
         request.user = self.user
-        ForumPermissionHandlerMiddleware().process_request(request)
+        ForumPermissionMiddleware().process_request(request)
         # Run & check
         with pytest.raises(ImproperlyConfigured):
             self.mixin.check_permissions(request)
@@ -60,9 +68,9 @@ class TestPermissionRequiredMixin(object):
         # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = 'can_read_forum'
-        request = self.factory.get('/')
+        request = self.get_request()
         request.user = AnonymousUser()
-        ForumPermissionHandlerMiddleware().process_request(request)
+        ForumPermissionMiddleware().process_request(request)
         # Run
         response = self.mixin.dispatch(request)
         # Check
@@ -72,9 +80,9 @@ class TestPermissionRequiredMixin(object):
         # Setup
         self.mixin.object = self.forum
         self.mixin.permission_required = ['can_read_forum', ]
-        request = self.factory.get('/')
+        request = self.get_request()
         request.user = self.user
-        ForumPermissionHandlerMiddleware().process_request(request)
+        ForumPermissionMiddleware().process_request(request)
         # Run & check
         with pytest.raises(PermissionDenied):
             self.mixin.dispatch(request)
@@ -88,9 +96,9 @@ class TestPermissionRequiredMixin(object):
                 return Forum.objects.all()
 
         forum_view = ForumTestView()
-        request = self.factory.get('/')
+        request = self.get_request()
         request.user = self.user
-        ForumPermissionHandlerMiddleware().process_request(request)
+        ForumPermissionMiddleware().process_request(request)
         # Run
         response = forum_view.dispatch(request, pk=self.forum.pk)
         # Check
@@ -110,9 +118,9 @@ class TestPermissionRequiredMixin(object):
                 return forum
 
         user_view = UserTestView()
-        request = self.factory.get('/')
+        request = self.get_request()
         request.user = self.user
-        ForumPermissionHandlerMiddleware().process_request(request)
+        ForumPermissionMiddleware().process_request(request)
         # Run
         response = user_view.dispatch(request, pk=self.user.pk)
         # Check

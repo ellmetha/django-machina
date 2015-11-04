@@ -4,13 +4,14 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
 import pytest
 
 # Local application / specific library imports
-from machina.apps.forum_permission.middleware import ForumPermissionHandlerMiddleware
+from machina.apps.forum_permission.middleware import ForumPermissionMiddleware
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
@@ -66,14 +67,21 @@ class BaseTrackingTagsTestCase(object):
         assign_perm('can_see_forum', self.g1, self.forum_2)
         assign_perm('can_read_forum', self.g1, self.forum_2)
 
+    def get_request(self, url='/'):
+        request = self.request_factory.get('/')
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        return request
+
 
 class TestUnreadForumsTag(BaseTrackingTagsTestCase):
     def test_can_determine_unread_forums(self):
         # Setup
         def get_rendered(forums, user):
-            request = self.request_factory.get('/')
+            request = self.get_request()
             request.user = user
-            ForumPermissionHandlerMiddleware().process_request(request)
+            ForumPermissionMiddleware().process_request(request)
             t = Template(self.loadstatement + '{% get_unread_forums forums request.user as unread_forums %}')
             c = Context({'forums': forums, 'request': request})
             rendered = t.render(c)
@@ -103,9 +111,9 @@ class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
     def test_can_determine_unread_forums(self):
         # Setup
         def get_rendered(topics, user):
-            request = self.request_factory.get('/')
+            request = self.get_request()
             request.user = user
-            ForumPermissionHandlerMiddleware().process_request(request)
+            ForumPermissionMiddleware().process_request(request)
             t = Template(self.loadstatement + '{% get_unread_topics topics request.user as unread_topics %}')
             c = Context({'topics': topics, 'request': request})
             rendered = t.render(c)

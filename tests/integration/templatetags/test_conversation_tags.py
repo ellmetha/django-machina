@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
@@ -74,12 +75,19 @@ class BaseConversationTagsTestCase(object):
         assign_perm('can_edit_posts', self.moderators, self.forum_1)
         assign_perm('can_delete_posts', self.moderators, self.forum_1)
 
+    def get_request(self, url='/'):
+        request = self.request_factory.get('/')
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        return request
+
 
 class TestPostedByTag(BaseConversationTagsTestCase):
     def test_can_tell_if_the_user_is_the_owner_of_a_post(self):
         # Setup
         def get_rendered(post, user):
-            request = self.request_factory.get('/')
+            request = self.get_request()
             request.user = user
             t = Template(self.loadstatement + '{% if post|posted_by:request.user %}OWNER{% else %}NO_OWNER{% endif %}')
             c = Context({'post': post, 'request': request})
