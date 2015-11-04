@@ -126,7 +126,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Machina
-    'machina.apps.forum_permission.middleware.ForumPermissionHandlerMiddleware',
+    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 )
 
 ROOT_URLCONF = 'vanilla_project.urls'
