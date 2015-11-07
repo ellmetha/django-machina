@@ -238,3 +238,21 @@ class TestPost(object):
         # Check
         profile = refresh(profile)
         assert profile.posts_count == initial_posts_count + 1
+
+    def test_cannot_be_cleaned_if_it_is_not_associated_with_a_user_or_an_anonymous_user(self):
+        # Run & check
+        with pytest.raises(ValidationError):
+            post = PostFactory.build(topic=self.topic, poster=None, anonymous_key=None)
+            post.clean()
+
+    def test_cannot_be_cleaned_if_it_is_not_associated_with_a_user_and_an_anonymous_user(self):
+        # Run & check
+        with pytest.raises(ValidationError):
+            post = PostFactory.build(topic=self.topic, poster=self.u1, anonymous_key='1234')
+            post.clean()
+
+    def test_cannot_be_cleaned_if_the_anonymous_poster_username_is_not_specified(self):
+        # Run & check
+        with pytest.raises(ValidationError):
+            post = PostFactory.build(topic=self.topic, poster=None, anonymous_key='1234')
+            post.clean()

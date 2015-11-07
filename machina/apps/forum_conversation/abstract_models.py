@@ -208,6 +208,7 @@ class AbstractPost(DatedModel):
     topic = models.ForeignKey('forum_conversation.Topic', verbose_name=_('Topic'), related_name='posts')
     poster = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'), blank=True, null=True)
     poster_ip = models.GenericIPAddressField(verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0')
+    anonymous_key = models.CharField(max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
 
     # Each post can have its own subject. The subject of the thread corresponds to the
     # one associated with the first post
@@ -264,6 +265,20 @@ class AbstractPost(DatedModel):
         """
         position = self.topic.posts.filter(Q(created__lt=self.created) | Q(id=self.id)).count()
         return position
+
+    def clean(self):
+        super(AbstractPost, self).clean()
+
+        # At least a poster (user) or a session key must be associated with
+        # the post.
+        if self.poster is None and self.anonymous_key is None:
+            raise ValidationError(_('A user id or an anonymous key must be associated with a post.'))
+        if self.poster and self.anonymous_key:
+            raise ValidationError(_('A user id or an anonymous key must be associated with a post, '
+                                    'but not both.'))
+
+        if self.anonymous_key and not self.username:
+            raise ValidationError(_('A username must be specified if the poster is anonymous'))
 
     def save(self, *args, **kwargs):
         super(AbstractPost, self).save(*args, **kwargs)

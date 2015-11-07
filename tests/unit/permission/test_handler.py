@@ -166,6 +166,25 @@ class TestPermissionHandler(object):
         assert not self.perm_handler.can_edit_post(self.post_2, self.u1)
         assert not self.perm_handler.can_edit_post(self.post_1, u2)
 
+    def test_knows_if_an_anonymous_owner_of_a_post_can_edit_it(self):
+        # Setup
+        u1 = AnonymousUser()
+        u1.forum_key = '1234'
+        u2 = AnonymousUser()
+        u2.forum_key = '5678'
+        u3 = AnonymousUser()
+        u3.forum_key = None
+        post_1 = PostFactory.create(topic=self.forum_1_topic, anonymous_key='1234')
+        post_2 = PostFactory.create(topic=self.forum_3_topic, anonymous_key='1234')
+        assign_perm('can_edit_own_posts', u1, self.forum_1)
+        assign_perm('can_edit_own_posts', u2, self.forum_1)
+        assign_perm('can_edit_own_posts', u3, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_edit_post(post_1, u1)
+        assert not self.perm_handler.can_edit_post(post_2, u1)
+        assert not self.perm_handler.can_edit_post(post_1, u2)
+        assert not self.perm_handler.can_edit_post(post_1, u3)
+
     def test_knows_if_a_moderator_can_edit_a_post(self):
         # Setup
         moderator = UserFactory.create()
@@ -189,6 +208,25 @@ class TestPermissionHandler(object):
         assert self.perm_handler.can_delete_post(self.post_1, self.u1)
         assert not self.perm_handler.can_delete_post(self.post_2, self.u1)
         assert not self.perm_handler.can_delete_post(self.post_1, u2)
+
+    def test_knows_if_an_anonymous_owner_of_a_post_can_delete_it(self):
+        # Setup
+        u1 = AnonymousUser()
+        u1.forum_key = '1234'
+        u2 = AnonymousUser()
+        u2.forum_key = '5678'
+        u3 = AnonymousUser()
+        u3.forum_key = None
+        post_1 = PostFactory.create(topic=self.forum_1_topic, anonymous_key='1234')
+        post_2 = PostFactory.create(topic=self.forum_3_topic, anonymous_key='1234')
+        assign_perm('can_delete_own_posts', u1, self.forum_1)
+        assign_perm('can_delete_own_posts', u2, self.forum_1)
+        assign_perm('can_delete_own_posts', u3, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_delete_post(post_1, u1)
+        assert not self.perm_handler.can_delete_post(post_2, u1)
+        assert not self.perm_handler.can_delete_post(post_1, u2)
+        assert not self.perm_handler.can_delete_post(post_1, u3)
 
     def test_knows_if_a_moderator_can_delete_a_post(self):
         # Setup

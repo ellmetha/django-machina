@@ -142,10 +142,12 @@ class TestPostForm(object):
             'content': '[b]{}[/b]'.format(faker.text()),
             'username': 'testname',
         }
+        user = AnonymousUser()
+        user.forum_key = '1234'
         # Run
         form = PostForm(
             data=form_data,
-            user=AnonymousUser(),
+            user=user,
             user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)

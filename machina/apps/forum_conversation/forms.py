@@ -20,6 +20,8 @@ TopicPoll = get_model('forum_polls', 'TopicPoll')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
+get_anonymous_user_forum_key = get_class('forum_permission.shortcuts', 'get_anonymous_user_forum_key')
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -61,6 +63,13 @@ class PostForm(forms.ModelForm):
         if not self.instance.pk:
             del self.fields['update_reason']
 
+    def clean(self):
+        if not self.user.is_anonymous():
+            self.instance.poster = self.user
+        else:
+            self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
+        super(PostForm, self).clean()
+
     def save(self, commit=True):
         if self.instance.pk:
             # First handle updates
@@ -76,8 +85,9 @@ class PostForm(forms.ModelForm):
                 content=self.cleaned_data['content'])
             if not self.user.is_anonymous():
                 post.poster = self.user
-            elif 'username' in self.cleaned_data and self.cleaned_data['username']:
+            else:
                 post.username = self.cleaned_data['username']
+                post.anonymous_key = get_anonymous_user_forum_key(self.user)
 
         if commit:
             post.save()

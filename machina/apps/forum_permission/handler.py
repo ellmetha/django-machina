@@ -138,8 +138,9 @@ class PermissionHandler(object):
         #     he is a superuser
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
+        is_author = self._is_post_author(post, user)
         can_edit = (user.is_superuser
-                    or (post.poster == user and checker.has_perm('can_edit_own_posts', post.topic.forum))
+                    or (is_author and checker.has_perm('can_edit_own_posts', post.topic.forum))
                     or checker.has_perm('can_edit_posts', post.topic.forum))
         return can_edit
 
@@ -153,8 +154,9 @@ class PermissionHandler(object):
         #     he is a superuser
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
+        is_author = self._is_post_author(post, user)
         can_delete = (user.is_superuser
-                      or (post.poster == user and checker.has_perm('can_delete_own_posts', post.topic.forum))
+                      or (is_author and checker.has_perm('can_delete_own_posts', post.topic.forum))
                       or checker.has_perm('can_delete_posts', post.topic.forum))
         return can_delete
 
@@ -283,6 +285,11 @@ class PermissionHandler(object):
 
     # Common
     # --
+
+    def _is_post_author(self, post, user):
+        return (post.poster == user) if user.is_authenticated() \
+            else (post.anonymous_key is not None
+                  and post.anonymous_key == get_anonymous_user_forum_key(user))
 
     def _get_hidden_forum_ids(self, forums, user):
         """
