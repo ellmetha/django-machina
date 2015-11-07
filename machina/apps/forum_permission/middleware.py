@@ -13,9 +13,9 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 class ForumPermissionMiddleware(object):
     """
-    This middleware attach to each request an instance of the PermissionHandler.
+    This middleware attaches an instance of the PermissionHandler to each request.
     This allows to cache the permissions for the lifetime of the request object.
-    The middleware also attach a random identifier to each anonymous user in order
+    The middleware also attaches a random identifier to each anonymous user in order
     to perform proper permission checks for anonymous users. This identifier is
     stored in the session.
     """
@@ -23,7 +23,7 @@ class ForumPermissionMiddleware(object):
 
     def process_request(self, request):
         if not request.user.is_authenticated():
-            # Get the anonymous forum key and attach it the AnonymousUser instance.
+            # Get the anonymous forum key and attaches it the AnonymousUser instance.
             anonymous_forum_key = request.session.get(self.anonymous_forum_key_session_id, None)
             if anonymous_forum_key is None:
                 anonymous_forum_key = self.get_anonymous_forum_key()
