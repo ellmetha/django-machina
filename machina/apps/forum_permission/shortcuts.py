@@ -70,3 +70,11 @@ def get_identity(identity):
         raise NotUserNorGroup(
             'User/AnonymousUser or Group instance is required '
             '(got {})'.format(identity))
+
+
+def get_anonymous_user_forum_key(user):
+    """
+    Returns the forum key identifier associated with the considered anonymous user.
+    """
+    return user.forum_key if isinstance(user, AnonymousUser) and hasattr(user, 'forum_key') \
+        else None

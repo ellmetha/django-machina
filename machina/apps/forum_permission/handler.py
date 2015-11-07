@@ -22,6 +22,8 @@ UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionChecker')
 
+get_anonymous_user_forum_key = get_class('forum_permission.shortcuts', 'get_anonymous_user_forum_key')
+
 
 class PermissionHandler(object):
     """
@@ -181,13 +183,15 @@ class PermissionHandler(object):
         # Retrieve the user votes for the considered poll
         user_votes = TopicPollVote.objects.filter(
             poll_option__poll=poll)
-        if user.is_anonymous() and hasattr(user, 'forum_key'):
-            user_votes = user_votes.filter(anonymous_key=user.forum_key)
-        elif user.is_anonymous():
-            # If the forum key of the anonymous user cannot be retrieved, the user
-            # should not be allowed to vote in the considered poll.
-            user_votes = user_votes.none()
-            can_vote = False
+        if user.is_anonymous():
+            forum_key = get_anonymous_user_forum_key(user)
+            if forum_key:
+                user_votes = user_votes.filter(anonymous_key=forum_key)
+            else:
+                # If the forum key of the anonymous user cannot be retrieved, the user
+                # should not be allowed to vote in the considered poll.
+                user_votes = user_votes.none()
+                can_vote = False
         else:
             user_votes = user_votes.filter(voter=user)
 

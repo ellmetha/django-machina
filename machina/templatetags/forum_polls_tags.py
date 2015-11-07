@@ -15,6 +15,8 @@ TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
 
+get_anonymous_user_forum_key = get_class('forum_permission.shortcuts', 'get_anonymous_user_forum_key')
+
 register = template.Library()
 
 
@@ -29,7 +31,8 @@ def has_been_completed_by(poll, user):
     user_votes = TopicPollVote.objects.filter(
         poll_option__poll=poll)
     if user.is_anonymous():
-        user_votes = user_votes.filter(anonymous_key=user.forum_key) if hasattr(user, 'forum_key') \
+        forum_key = get_anonymous_user_forum_key(user)
+        user_votes = user_votes.filter(anonymous_key=forum_key) if forum_key \
             else user_votes.none()
     else:
         user_votes = user_votes.filter(voter=user)
