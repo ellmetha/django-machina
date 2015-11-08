@@ -68,7 +68,7 @@ class PostForm(forms.ModelForm):
             self.instance.poster = self.user
         else:
             self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
-        super(PostForm, self).clean()
+        return super(PostForm, self).clean()
 
     def save(self, commit=True):
         if self.instance.pk:
