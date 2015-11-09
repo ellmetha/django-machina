@@ -1,0 +1,64 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+
+{% block sub-title %}{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}{% endblock sub-title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}</h1>
+            <br />
+        </div>
+    </div>
+	<div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<div class="panel panel-default">
+					{% if profile.avatar %}
+						<div class="profile-avatar">
+							<img src="{{ profile.avatar.url }}" class="img-responsive" alt="{{ profile.user.username }}" />
+						</div>
+					{% else %}
+						<div class="profile-avatar empty">
+							<i class="fa fa-user fa-4x" ></i>
+						</div>
+					{% endif %}
+					<div class="profile-username">
+						<h3 class="text-center text-muted">{{ profile.user.username }}</h3>
+					</div>
+					<div class="text-center text-muted joined-from">
+						{% blocktrans with date_joined=profile.user.date_joined|date:"F Y" %}
+							Registered since {{ date_joined }}
+						{% endblocktrans %}
+					</div>
+					<br />
+				</div>
+			</div>
+			{% if profile.user == request.user %}
+				<a href="{%url 'forum_member:profile_update' %}" class="btn btn-block btn-primary">{% trans "Edit profile" %}</a>
+			{% endif %}
+		</div>
+		<div class="col-md-9">
+            <div class="profile-content">
+				<div class="panel panel-default">
+					<div class="panel-heading">{% trans "Statistics" %}</div>
+					<div class="panel-body">
+						<div class="row">
+				            <div class="col-md-12 divider text-center">
+				                <div class="col-xs-12 col-sm-6 emphasis">
+				                    <h2><strong>{{ profile.posts_count }}</strong></h2>                    
+				                    <p><small>{% blocktrans count counter=profile.posts_count %}Post{% plural %}Posts{% endblocktrans %}</small></p>
+				                </div>
+				                <div class="col-xs-12 col-sm-6 emphasis">
+				                    <h2><strong>{{ topics_count }}</strong></h2>                    
+				                    <p><small>{% blocktrans count counter=profile.posts_count %}Topic{% plural %}Topics{% endblocktrans %}</small></p>
+				                </div>
+				            </div>
+			            </div>
+					</div>
+				</div>
+            </div>
+		</div>
+	</div>
+
+{% endblock content %}
