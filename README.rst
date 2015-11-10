@@ -40,17 +40,19 @@ django-machina
 
 .. contents::
 
+Documentation
+=============
+
+Online browsable documentation is available at https://django-machina.readthedocs.org.
+
+Head over to the documentation for all the details on how to set up your forum and how to customize it to suit your needs.
+
 Requirements
 ============
 
 Python 2.7+ or 3.3+, Django 1.5+. Please refer to the requirements_ section of the documentation for a full list of dependencies.
 
-.. _requirements: http://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
-
-Documentation
-=============
-
-Head over to the `documentation <http://django-machina.readthedocs.org/en/>`_ for all the details on how to set up your forum and how to customize it to suit your needs.
+.. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 
 What still needs to be done
 ===========================
