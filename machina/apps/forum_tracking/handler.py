@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
+from django.db.models import F
+from django.db.models import Q
+
 # Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -101,3 +106,73 @@ class TrackingHandler(object):
                 unread_topics.append(topic)
 
         return list(set(unread_topics))
+
+    def mark_forums_read(self, forums, user):
+        """
+        Marks a list of forums as read.
+        """
+        if not forums or not user.is_authenticated():
+            return
+
+        forums = sorted(forums, key=lambda f: f.level)
+
+        # Update all forum tracks to the current date for the considered forums
+        for forum in forums:
+            forum_track = ForumReadTrack.objects.get_or_create(forum=forum, user=user)[0]
+            forum_track.save()
+        # Delete all the unnecessary topic tracks
+        TopicReadTrack.objects.filter(topic__forum__in=forums, user=user).delete()
+        # Update parent forum tracks
+        self._update_parent_forum_tracks(forums[0], user)
+
+    def mark_topic_read(self, topic, user):
+        """
+        Marks a topic as read.
+        """
+        if not user.is_authenticated():
+            return
+
+        forum = topic.forum
+        try:
+            forum_track = ForumReadTrack.objects.get(forum=forum, user=user)
+        except ForumReadTrack.DoesNotExist:
+            forum_track = None
+
+        if forum_track is None or (topic.last_post_on and forum_track.mark_time < topic.last_post_on):
+            topic_track, created = TopicReadTrack.objects.get_or_create(topic=topic, user=user)
+            if not created:
+                topic_track.save()  # mark_time filled
+
+            # If no other topic is unread inside the considered forum, the latter should also
+            # be marked as read.
+            unread_topics = forum.topics.filter(
+                Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
+                Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'), tracks__isnull=True)).exclude(id=topic.id)
+
+            if not unread_topics.exists():
+                # The topics that are marked as read inside the forum for the given user
+                # wil be deleted while the forum track associated with the user must be
+                # created or updated.
+                TopicReadTrack.objects.filter(topic__forum=forum, user=user).delete()
+                forum_track, _ = ForumReadTrack.objects.get_or_create(forum=forum, user=user)
+                forum_track.save()
+
+                # Update parent forum tracks
+                self._update_parent_forum_tracks(forum, user)
+
+    def _update_parent_forum_tracks(self, forum, user):
+        for forum in forum.get_ancestors(ascending=True):
+            # If no other topics are unread inside the considered forum, the latter should also
+            # be marked as read.
+            unread_topics = forum.topics.filter(
+                Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
+                Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'), tracks__isnull=True))
+            if unread_topics.exists():
+                break
+
+            # The topics that are marked as read inside the forum for the given user
+            # wil be deleted while the forum track associated with the user must be
+            # created or updated.
+            TopicReadTrack.objects.filter(topic__forum=forum, user=user).delete()
+            forum_track, _ = ForumReadTrack.objects.get_or_create(forum=forum, user=user)
+            forum_track.save()

@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 # Third party imports
 from django.contrib.auth import get_user
+from django.contrib.auth.models import AnonymousUser
 from django.test.client import Client
 from faker import Factory as FakerFactory
 import pytest
@@ -26,6 +27,7 @@ faker = FakerFactory.create()
 
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
+TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
@@ -167,3 +169,81 @@ class TestTrackingHandler(object):
         unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
         # Check
         assert not len(unread_forums)
+
+    def test_can_mark_forums_read(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        self.tracks_handler.mark_forums_read(Forum.objects.all(), self.u2)
+        # Check
+        assert list(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.u2)) == []
+
+    def test_marks_parent_forums_as_read_when_marking_a_list_of_forums_as_read(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        self.tracks_handler.mark_forums_read([self.forum_2_child_2, ], self.u2)
+        # Check
+        assert list(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.u2)) == []
+        assert ForumReadTrack.objects.filter(user=self.u2).count() == 3
+
+    def test_cannot_mark_parent_forums_as_read_when_marking_a_list_of_forums_as_read_if_they_have_unread_topics(self):
+        # Setup
+        new_topic_1 = create_topic(forum=self.forum_2_child_2, poster=self.u1)
+        new_topic_2 = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic_1, poster=self.u1)
+        PostFactory.create(topic=new_topic_2, poster=self.u1)
+        # Run
+        self.tracks_handler.mark_forums_read([self.forum_2_child_2, ], self.u2)
+        # Check
+        assert list(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.u2)) == [self.top_level_cat_1, self.forum_2, ]
+        assert ForumReadTrack.objects.filter(user=self.u2).count() == 2
+
+    def test_cannot_mark_forums_read_for_anonymous_users(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        initial_read_tracks_count = ForumReadTrack.objects.count()
+        # Run
+        self.tracks_handler.mark_forums_read(Forum.objects.all(), AnonymousUser())
+        # Check
+        assert ForumReadTrack.objects.count() == initial_read_tracks_count
+
+    def test_can_mark_topics_read(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        self.tracks_handler.mark_topic_read(new_topic, self.u2)
+        # Check
+        assert list(self.tracks_handler.get_unread_forums(
+            [new_topic.forum, ], self.u2)) == []
+
+    def test_marks_parent_forums_as_read_when_marking_a_topic_as_read(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        # Run
+        self.tracks_handler.mark_topic_read(new_topic, self.u2)
+        # Check
+        assert list(self.tracks_handler.get_unread_forums(
+            [self.forum_2_child_2, self.forum_2, self.top_level_cat_1, ], self.u2)) == []
+        assert ForumReadTrack.objects.filter(user=self.u2).count() == 3
+        assert not TopicReadTrack.objects.filter(user=self.u2).exists()
+
+    def test_cannot_mark_topics_read_for_anonymous_users(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1)
+        initial_forum_read_tracks_count = ForumReadTrack.objects.count()
+        initial_topics_read_tracks_count = TopicReadTrack.objects.count()
+        # Run
+        self.tracks_handler.mark_topic_read(new_topic, AnonymousUser())
+        # Check
+        assert ForumReadTrack.objects.count() == initial_forum_read_tracks_count
+        assert TopicReadTrack.objects.count() == initial_topics_read_tracks_count
