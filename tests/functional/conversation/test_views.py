@@ -21,6 +21,7 @@ from machina.core.compat import force_bytes
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.utils import refresh
+from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import AttachmentFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
@@ -30,7 +31,6 @@ from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicReadTrackFactory
 from machina.test.testcases import BaseClientTestCase
-from machina.test.utils import mock_signal_receiver
 
 faker = FakerFactory.create()
 
