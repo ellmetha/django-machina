@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
 from django import VERSION as DJANGO_VERSION
 from django.core.exceptions import ImproperlyConfigured
@@ -19,22 +21,8 @@ except ImportError as err:
     except ImportError as err:
         # Neither worked, so it's likely not installed.
         raise ImproperlyConfigured(
-            _("Neither Pillow nor PIL could be imported: %s") % err
+            _('Neither Pillow nor PIL could be imported: {}').format(err)
         )
-
-
-# Django slugify
-try:
-    from django.utils.text import slugify
-except ImportError:
-    from django.template.defaultfilters import slugify  # noqa
-
-
-# force_bytes
-try:
-    from django.utils.encoding import force_bytes
-except ImportError:
-    from django.utils.encoding import smart_str as force_bytes  # noqa
 
 
 # get_cache

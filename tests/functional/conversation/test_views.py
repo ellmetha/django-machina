@@ -8,6 +8,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages import constants as MSG  # noqa
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
+from django.utils.encoding import force_bytes
 from faker import Factory as FakerFactory
 import pytest
 
@@ -17,7 +18,6 @@ from machina.apps.forum_conversation.forum_attachments.forms import AttachmentFo
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
 from machina.apps.forum_conversation.signals import topic_viewed
-from machina.core.compat import force_bytes
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.utils import refresh
