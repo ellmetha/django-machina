@@ -563,6 +563,21 @@ class TestTopicCreateView(BaseClientTestCase):
         assert len(messages) == 1
         assert messages[0].level == MSG.ERROR
 
+    def test_cannot_create_topics_with_invalid_data(self):
+        # Setup
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '',
+            'topic_type': TOPIC_TYPES.topic_post,
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert response.context['post_form'].errors
+
 
 class TestTopicUpdateView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
@@ -997,6 +1012,22 @@ class TestPostCreateView(BaseClientTestCase):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
+
+    def test_cannot_create_posts_with_invalid_data(self):
+        # Setup
+        correct_url = reverse(
+            'forum_conversation:post_create',
+            kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+                    'topic_slug': self.topic.slug, 'topic_pk': self.topic.pk})
+        post_data = {
+            'subject': '',
+            'content': '[b]{}[/b]'.format(faker.text()),
+        }
+        # Run
+        response = self.client.post(correct_url, post_data, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert response.context['post_form'].errors
 
 
 class TestPostUpdateView(BaseClientTestCase):
