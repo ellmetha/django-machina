@@ -64,7 +64,7 @@ What still needs to be done
 Authors
 =======
 
-Morgan Aubert (@ellmetha) <morgan.aubert@zoho.com> and contributors_
+Morgan Aubert (@ellmetha) and contributors_
 
 .. _contributors: https://github.com/ellmetha/django-machina/contributors
 
