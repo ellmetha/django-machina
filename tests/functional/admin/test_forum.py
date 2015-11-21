@@ -4,10 +4,12 @@
 from __future__ import unicode_literals
 
 # Third party imports
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 import pytest
 
 # Local application / specific library imports
+from machina.apps.forum.admin import PickUserForm
 from machina.apps.forum.abstract_models import FORUM_TYPES
 from machina.apps.forum_permission.models import ForumPermission
 from machina.apps.forum_permission.models import GroupForumPermission
@@ -15,6 +17,7 @@ from machina.apps.forum_permission.models import UserForumPermission
 from machina.core.db.models import get_model
 from machina.test.factories import GroupFactory
 from machina.test.factories import GroupForumPermissionFactory
+from machina.test.factories import UserFactory
 from machina.test.factories import UserForumPermissionFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
@@ -325,3 +328,20 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         except AttributeError:  # pragma: no cover
             module_name = options.model_name
         return module_name
+
+
+@pytest.mark.django_db
+class TestPickUserForm(object):
+    def test_cannot_be_validated_if_two_users_are_selected(self):
+        # Setup
+        user = UserFactory.create()
+        site = Site.objects.get_current()
+        form_data = {
+            'user': user.id,
+            'anonymous_user': True,
+        }
+        # Run
+        form = PickUserForm(form_data, admin_site=site)
+        # Check
+        is_valid = form.is_valid()
+        assert not is_valid
