@@ -9,15 +9,15 @@ import pytest
 
 # Local application / specific library imports
 from machina.apps.forum.models import Forum
-from machina.core.utils import get_object_or_none
-from machina.core.utils import refresh
+from machina.core.shortcuts import get_object_or_none
+from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 
 faker = FakerFactory.create()
 
 
 @pytest.mark.django_db
-class TestCoreUtils(object):
+class TestCoreShortcuts(object):
     @pytest.fixture(autouse=True)
     def setup(self):
         self.forum = create_forum()

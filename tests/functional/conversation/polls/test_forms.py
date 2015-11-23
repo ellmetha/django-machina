@@ -12,7 +12,7 @@ from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFor
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.core.utils import refresh
+from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory

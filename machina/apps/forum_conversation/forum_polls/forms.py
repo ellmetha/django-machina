@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 from machina.core.db.models import get_model
-from machina.core.utils import get_object_or_none
+from machina.core.shortcuts import get_object_or_none
 
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollOption = get_model('forum_polls', 'TopicPollOption')

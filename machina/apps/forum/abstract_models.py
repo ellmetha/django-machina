@@ -20,7 +20,7 @@ from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.core.utils import refresh
+from machina.core.shortcuts import refresh
 from machina.models import ActiveModel
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField

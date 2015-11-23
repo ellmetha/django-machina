@@ -16,7 +16,7 @@ from model_utils import Choices
 
 # Local application / specific library imports
 from machina.core.loading import get_class
-from machina.core.utils import refresh
+from machina.core.shortcuts import refresh
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
 

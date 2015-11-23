@@ -8,7 +8,7 @@ import pytest
 
 # Local application / specific library imports
 from machina.core.db.models import get_model
-from machina.core.utils import refresh
+from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
