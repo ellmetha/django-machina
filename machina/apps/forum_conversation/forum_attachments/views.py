@@ -18,6 +18,9 @@ PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRe
 
 
 class AttachmentView(PermissionRequiredMixin, DetailView):
+    """
+    Allows to retrieve a forum attachment.
+    """
     model = Attachment
 
     def render_to_response(self, context, **response_kwargs):
@@ -36,9 +39,6 @@ class AttachmentView(PermissionRequiredMixin, DetailView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the forum associated with the current attachment.
-        """
         return self.get_object().post.topic.forum
 
     def perform_permissions_check(self, user, obj, perms):

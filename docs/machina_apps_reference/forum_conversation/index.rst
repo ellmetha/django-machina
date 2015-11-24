@@ -10,6 +10,7 @@ Sub applications
 .. toctree::
     :maxdepth: 2
 
+    forum_attachments
     forum_polls
 
 Abstract models
