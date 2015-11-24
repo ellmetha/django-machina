@@ -10,7 +10,7 @@ Machina's apps reference
     :maxdepth: 2
 
     forum
-    forum_conversation
+    forum_conversation/index
     forum_feeds
     forum_member
     forum_moderation

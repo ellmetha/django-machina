@@ -24,6 +24,9 @@ PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRe
 
 
 class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
+    """
+    Allows to vote in polls.
+    """
     model = TopicPoll
     form_class = TopicPollVoteForm
     http_method_names = ['post', ]
@@ -71,9 +74,6 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
     # Permissions checks
 
     def get_controlled_object(self):
-        """
-        Returns the poll that will be answered.
-        """
         return self.get_object()
 
     def perform_permissions_check(self, user, obj, perms):

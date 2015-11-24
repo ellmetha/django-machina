@@ -4,6 +4,14 @@ Forum conversation
 
 The ``forum_conversation`` application handles all the conversations that can happen in forums. It provides some of the main features of a forum application: posting messages, writing answers, voting in polls, ...
 
+Sub applications
+----------------
+
+.. toctree::
+    :maxdepth: 2
+
+    forum_polls
+
 Abstract models
 ---------------
 
