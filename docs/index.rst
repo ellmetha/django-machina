@@ -2,11 +2,11 @@
 Welcome to django-machina's documentation!
 ##########################################
 
-.. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
     :target: http://travis-ci.org/ellmetha/django-machina
     :alt: Build status
 
-.. image:: http://img.shields.io/coveralls/ellmetha/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/coveralls/ellmetha/django-machina.svg?style=flat-square
     :target: https://coveralls.io/r/ellmetha/django-machina
     :alt: Coveralls status
 
