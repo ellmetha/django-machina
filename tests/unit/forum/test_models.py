@@ -9,6 +9,7 @@ import pytest
 
 # Local application / specific library imports
 from machina.core.db.models import get_model
+from machina.core.shortcuts import refresh
 from machina.test.factories import build_category_forum
 from machina.test.factories import build_link_forum
 from machina.test.factories import create_category_forum
@@ -106,3 +107,25 @@ class TestForum(object):
         self.top_level_forum = Forum.active.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
         assert self.top_level_forum.posts_count == 0
         assert self.top_level_forum.topics_count == 0
+
+    def test_stores_its_last_post_datetime(self):
+        # Setup
+        sub_level_forum = create_forum(parent=self.top_level_forum)
+        topic = create_topic(forum=sub_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        # Run
+        p2 = PostFactory.create(topic=topic, poster=self.u1)
+        # Check
+        sub_level_forum = refresh(sub_level_forum)
+        assert sub_level_forum.last_post_on == p2.created
+
+    def test_can_reset_last_post_datetime_if_all_topics_have_been_deleted(self):
+        # Setup
+        sub_level_forum = create_forum(parent=self.top_level_forum)
+        topic = create_topic(forum=sub_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        # Run
+        topic.delete()
+        # Check
+        sub_level_forum = refresh(sub_level_forum)
+        assert sub_level_forum.last_post_on is None

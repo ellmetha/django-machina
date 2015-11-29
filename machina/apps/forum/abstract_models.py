@@ -9,7 +9,6 @@ from django.db import models
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
-from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 from mptt.models import MPTTModel
@@ -184,7 +183,7 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
 
         # Force the forum 'last_post_on' date to the one associated with the topic with
         # the latest post.
-        self.last_post_on = approved_topics[0].last_post_on if len(approved_topics) else now()
+        self.last_post_on = approved_topics[0].last_post_on if len(approved_topics) else None
 
         # Any save of a forum triggered from the update_tracker process will not result
         # in checking for a change of the forum's parent.
