@@ -24,7 +24,7 @@ django-machina
 * Per-forum permissions
 * Anonymous posting
 * Polls and attachments
-* Moderation and pre-modaration
+* Moderation and pre-moderation
 * ...
 
 .. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
