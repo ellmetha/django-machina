@@ -41,6 +41,7 @@ Using django-machina
    settings
    glossary
    forum_permissions
+   customization/index
    machina_apps_reference/index
 
 
