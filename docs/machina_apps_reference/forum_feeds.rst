@@ -2,7 +2,7 @@
 Forum feeds
 ###########
 
-The ``forum_feeds`` allows to get forum topics as RSS feeds.
+The ``forum_feeds`` application allows to get forum topics as RSS feeds.
 
 Feeds
 -----
