@@ -18,12 +18,22 @@ If you wish to personalize the look and feel of your forum you can take advantag
 
 For example, you can easily override *django-machina*' templates by configuring the ``TEMPLATE_DIRS`` setting as follows::
 
+  import os
+
   TEMPLATE_DIRS = (
-    PROJECT_PATH.child('src', 'vanilla_project', 'templates'),
+    os.path.join(PROJECT_PATH, 'src/vanilla_project/templates'),
     MACHINA_MAIN_TEMPLATE_DIR,
   )
 
 Advanced customization mechanisms
 ---------------------------------
 
-*Django-machina* relies on a dynamic class loading system that allows to override or extend many classes: class-based views, forms, models, etc.
+*Django-machina* relies on a dynamic class loading system that allows to override or extend its Python classes: class-based views, forms, models, etc. This gives you the power to adapt your forum to your own business logic.
+
+In order to benefit from this dynamic class loading system, you will need to override a *django-machina* application. Please head over to the following topics in order to achieve this:
+
+.. toctree::
+    :maxdepth: 2
+
+    overriding_applications
+    underlying_mechanisms
