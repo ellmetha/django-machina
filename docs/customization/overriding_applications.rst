@@ -27,3 +27,68 @@ Overriding an application
 .. note::
 
     Overriding these applications is not a trivial task. Most of the time you will need to dig into the source code of *django-machina* in order to discover how things were implemented. This will allow you to find exactly which method should be rewritten in order to achieve the task at hand.
+
+Duplicate the application
+-------------------------
+
+Let's say we want to override the ``machina.apps.forum_conversation`` application.
+
+Create a Python package with the same application label
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The first thing to do is to create a Python package with the same application label as the app you want to override. This package can live under an ``apps`` Python package that acts as a root folder for your overridden applications, as shown below:
+
+.. code-block:: bash
+
+  $ mkdir -p apps/forum_conversation
+  $ touch apps/__init__.py
+  $ touch apps/forum_conversation/__init__.py
+
+Import the application models if needed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All *django-machina* application do not necessarily contain models. So this step may be skipped depending on the application you want to override. In the other case, it is necessary to reference the models of the overriden application by creating a ``models.py`` in your package::
+
+  # -*- coding: utf-8 -*-
+
+  from __future__ import unicode_literals
+
+  # Custom models should be declared before importing
+  # django-machina models
+
+  from machina.apps.forum_conversation.models import *  # noqa
+
+Your overridden application may need to add new models or modify *django-machina* own models. As stated in this snippet, custom models must be declared **before** the import of the *django-machina* models. This means that you can override a *django-machina* model in order to change the way it behaves if you want. Please refer to -- to get detailed instructions on how to override *django-machina* models.
+
+Only import *django-machina* models is not enough. You have to ensure the models migrations can be used by your Django project. You have two possibilities to do so:
+
+  * you can copy the content of the ``migrations`` folder from the application you want to override to your own local application
+  * you can configure the ``MIGRATION_MODULES`` Django setting (or ``SOUTH_MIGRATION_MODULES`` if you are using South) to reference the original migrations of the application you want to override
+
+::
+
+    DJANGO_MODULES = {
+      'forum_conversation': 'machina.apps.forum_conversation.migrations',
+    }
+
+.. note::
+
+    The second possibility should only be used if you are sure you will not define new models or overridden models into your local application
+
+Import the application admin classes if needed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As previously stated, this step can be skipped if the application you want to override does not contain models. In the other case you will want to create an ``admin.py`` file in your package in order to reference the admin classes of the overridden application::
+
+  # -*- coding: utf-8 -*-
+
+  from __future__ import unicode_literals
+  from machina.apps.forum_conversation.admin import *  # noqa
+
+Use the application AppConfig
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This step can be skipped if you are using Django<1.7.
+
+Add the local application to your INSTALLED_APPS
+------------------------------------------------
