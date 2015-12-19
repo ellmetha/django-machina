@@ -33,8 +33,8 @@ class PermissionHandler(object):
     """
     def __init__(self):
         self._granted_forums_cache = {}
+        self._forum_ancestors_cache = {}
         self._user_perm_checkers_cache = {}
-
     # Filtering methods
     # --
 
@@ -302,7 +302,7 @@ class PermissionHandler(object):
             if forum.id not in hidden_forums:
                 # First cheks if any of the forum ancestors is hidden
                 ancestors_visible = True
-                for ancestor in forum.get_ancestors():
+                for ancestor in self._get_forum_ancestors(forum):
                     if ancestor not in visible_forums:
                         ancestors_visible = False
                         break
@@ -314,6 +314,20 @@ class PermissionHandler(object):
                     hidden_forums.extend(forum_and_descendants.values_list('id', flat=True))
 
         return hidden_forums
+
+    def _get_forum_ancestors(self, forum):
+        """
+        Returns the ancestors of the given forum. These parent forums are
+        stored inside a local cache for further use.
+        """
+        forum_ancestors_cache_key = '{}__ancestors'.format(forum.pk)
+
+        if forum_ancestors_cache_key in self._forum_ancestors_cache:
+            return self._forum_ancestors_cache[forum_ancestors_cache_key]
+
+        forum_ancestors = forum.get_ancestors()
+        self._forum_ancestors_cache[forum_ancestors_cache_key] = forum_ancestors
+        return forum_ancestors
 
     def _get_forums_for_user(self, user, perm_codenames):
         """
