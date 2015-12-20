@@ -32,9 +32,18 @@ class PermissionHandler(object):
     class to perform these verifications.
     """
     def __init__(self):
+        # This dictionary will store the forums that are granted for a specific
+        # lit of permission codenames and a given user.
         self._granted_forums_cache = {}
+
+        # This one will store the ancestors of the forums that will be used to
+        # perform permission checks.
         self._forum_ancestors_cache = {}
+
+        # This one will store ForumPermissionChecker instances for users whose
+        # permissions will be checked.
         self._user_perm_checkers_cache = {}
+
     # Filtering methods
     # --
 
