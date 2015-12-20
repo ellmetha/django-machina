@@ -37,3 +37,14 @@ In order to benefit from this dynamic class loading system, you will need to ove
 
     overriding_applications
     underlying_mechanisms
+
+Recipes
+-------
+
+Here is a list of simple guides demonstrating how to solve common customizations problems when using *django-machina*:
+
+.. toctree::
+    :maxdepth: 2
+
+    recipes/overriding_models
+    recipes/using_another_markup_language

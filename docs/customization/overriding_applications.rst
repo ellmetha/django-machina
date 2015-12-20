@@ -47,7 +47,7 @@ The first thing to do is to create a Python package with the same application la
 Import the application models if needed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All *django-machina* application do not necessarily contain models. So this step may be skipped depending on the application you want to override. In the other case, it is necessary to reference the models of the overridden application by creating a ``models.py`` in your package::
+All *django-machina* application do not necessarily contain models. So this step may be skipped depending on the application you want to override. In the other case, it is necessary to reference the models of the overridden application by creating a ``models.py`` file in your package::
 
   # -*- coding: utf-8 -*-
 
@@ -58,7 +58,7 @@ All *django-machina* application do not necessarily contain models. So this step
 
   from machina.apps.forum_conversation.models import *  # noqa
 
-Your overridden application may need to add new models or modify *django-machina* own models. As stated in this snippet, custom models must be declared **before** the import of the *django-machina* models. This means that you can override a *django-machina* model in order to change the way it behaves if you want. Please refer to -- to get detailed instructions on how to override *django-machina* models.
+Your overridden application may need to add new models or modify *django-machina* own models. As stated in this snippet, custom models must be declared **before** the import of the *django-machina* models. This means that you can override a *django-machina* model in order to change the way it behaves if you want. Please refer to :doc:`recipes/overriding_models` to get detailed instructions on how to override *django-machina* models.
 
 Only importing *django-machina* models is not enough. You have to ensure the models migrations can be used by your Django project. You have two possibilities to do so:
 
