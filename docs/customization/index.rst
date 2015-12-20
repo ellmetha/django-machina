@@ -33,7 +33,7 @@ Advanced customization mechanisms
 In order to benefit from this dynamic class loading system, you will need to override a *django-machina* application. Please head over to the following topics in order to achieve this:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     overriding_applications
     underlying_mechanisms
@@ -41,10 +41,10 @@ In order to benefit from this dynamic class loading system, you will need to ove
 Recipes
 -------
 
-Here is a list of simple guides demonstrating how to solve common customizations problems when using *django-machina*:
+Here is a list of simple guides demonstrating how to solve common customization problems when using *django-machina*:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     recipes/overriding_models
     recipes/using_another_markup_language
