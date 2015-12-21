@@ -34,7 +34,8 @@ class ForumReadTrackManager(models.Manager):
             tracked_forums.append(track.forum)
 
         for forum in forums:
-            if forum not in tracked_forums and forum not in unread_forums and forum.topics.count() > 0:
+            if forum not in tracked_forums and forum not in unread_forums \
+                    and forum.topics.filter(approved=True).count() > 0:
                 unread_forums.extend(forum.get_ancestors(include_self=True))
 
         return list(set(unread_forums))

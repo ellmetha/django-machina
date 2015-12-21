@@ -75,7 +75,7 @@ class TestForumReadTrackManager(object):
         # Check
         assert self.forum_2_child_2 not in unread_forums
 
-    def test_considers_a_forum_as_unread_without_tracks_if_it_has_topics(self):
+    def test_considers_a_forum_without_tracks_as_unread_if_it_has_topics(self):
         # Setup
         new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u2)
         PostFactory.create(topic=new_topic, poster=self.u2)
@@ -85,3 +85,14 @@ class TestForumReadTrackManager(object):
             self.u1)
         # Check
         assert self.forum_2_child_2 in unread_forums
+
+    def test_cannot_consider_a_forum_without_tracks_as_unread_if_it_has_only_unapproved_topics(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u2)
+        PostFactory.create(topic=new_topic, poster=self.u2, approved=False)
+        # Run
+        unread_forums = ForumReadTrack.objects.get_unread_forums_from_list(
+            self.top_level_cat_1.get_descendants(include_self=True),
+            self.u1)
+        # Check
+        assert self.forum_2_child_2 not in unread_forums
