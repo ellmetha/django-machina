@@ -115,6 +115,15 @@ class TestPermissionHandler(object):
         # Check
         assert list(filtered_forums) == []
 
+    def test_hide_a_top_level_forum_if_it_is_not_visible(self):
+        # Setup
+        remove_perm('can_see_forum', self.u1, self.top_level_cat)
+        forums = Forum.objects.filter(id=self.top_level_cat.id)
+        # Run
+        filtered_forums = self.perm_handler.forum_list_filter(forums, self.u1)
+        # Check
+        assert list(filtered_forums) == []
+
     def test_knows_the_last_post_visible_inside_a_forum(self):
         # Run & check : no forum hidden
         last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)

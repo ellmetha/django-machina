@@ -301,8 +301,8 @@ class PermissionHandler(object):
 
     def _get_hidden_forum_ids(self, forums, user):
         """
-        Given a set of forums and an initialized checker, returns the list of forums
-        that are not visible by the user or the group associated with this checker.
+        Given a set of forums and a user, returns the list of forums that are not visible
+        by this user.
         """
         visible_forums = self._get_forums_for_user(user, ['can_see_forum', 'can_read_forum', ])
         hidden_forums = []
@@ -310,11 +310,9 @@ class PermissionHandler(object):
         for forum in forums:
             if forum.id not in hidden_forums:
                 # First cheks if any of the forum ancestors is hidden
-                ancestors_visible = True
-                for ancestor in self._get_forum_ancestors(forum):
-                    if ancestor not in visible_forums:
-                        ancestors_visible = False
-                        break
+                forum_ancestor_ids = set(self._get_forum_ancestors_ids(forum))
+                ancestors_visible = forum_ancestor_ids.issubset(set(f.id for f in visible_forums)) \
+                    if forum.parent_id else True
 
                 if (ancestors_visible is False) or (forum not in visible_forums):
                     # If one forum can not be seen by a given user, all of its descendants
@@ -324,9 +322,9 @@ class PermissionHandler(object):
 
         return hidden_forums
 
-    def _get_forum_ancestors(self, forum):
+    def _get_forum_ancestors_ids(self, forum):
         """
-        Returns the ancestors of the given forum. These parent forums are
+        Returns the ancestor IDs of the given forum. These parent forum identifiers are
         stored inside a local cache for further use.
         """
         forum_ancestors_cache_key = '{}__ancestors'.format(forum.pk)
@@ -334,9 +332,9 @@ class PermissionHandler(object):
         if forum_ancestors_cache_key in self._forum_ancestors_cache:
             return self._forum_ancestors_cache[forum_ancestors_cache_key]
 
-        forum_ancestors = forum.get_ancestors()
-        self._forum_ancestors_cache[forum_ancestors_cache_key] = forum_ancestors
-        return forum_ancestors
+        forum_ancestor_ids = list(forum.get_ancestors().values_list('id', flat=True))
+        self._forum_ancestors_cache[forum_ancestors_cache_key] = forum_ancestor_ids
+        return forum_ancestor_ids
 
     def _get_forums_for_user(self, user, perm_codenames):
         """
