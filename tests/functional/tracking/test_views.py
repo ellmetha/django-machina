@@ -241,3 +241,14 @@ class TestUnreadTopicsView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context_data['topics']) == [new_topic, ]
+
+    def test_cannot_insert_unapproved_topics_into_the_context(self):
+        # Setup
+        new_topic = create_topic(forum=self.forum_4, poster=self.u1)
+        PostFactory.create(topic=new_topic, poster=self.u1, approved=False)
+        correct_url = reverse('forum_tracking:unread_topics')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert not response.context_data['topics']
