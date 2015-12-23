@@ -7,7 +7,7 @@ Using another markup language for forum posts
 
 *Django-machina* uses Markdown as the default syntax for forum messages, which is provided by the use of the django-markdown_ module. But you can easily change this in your settings. We will see how to do this.
 
-It should be noted that *django-machina* relies on specific model fields to store forum messages. This fields contribute two columns to the model where they are used: the first one is used to store any content written by using a markup language (eg. BBCode or Markdown) and the second one keeps the rendered content obtained by converting the initial content to HTML. Thus forum messages are stored in two versions: plain and HTML.
+It should be noted that *django-machina* relies on specific model fields to store forum messages. These fields contribute two columns to the model where they are used: the first one is used to store any content written by using a markup language (eg. BBCode or Markdown) and the second one keeps the rendered content obtained by converting the initial content to HTML. Thus forum messages are stored in two versions: plain and HTML.
 
 Example: using django-ckeditor
 ------------------------------
