@@ -88,21 +88,21 @@ class TrackingHandler(object):
 
         # A topic can be unread if a track for its associated forum exists with
         # a mark time that is less important than its creation or update date.
-        forums = [topic.forum for topic in topics]
-        forum_tracks = ForumReadTrack.objects.filter(forum__in=forums, user=user)
+        forum_ids = [topic.forum_id for topic in topics]
+        forum_tracks = ForumReadTrack.objects.filter(forum_id__in=forum_ids, user=user)
         tracked_forums = forum_tracks.values_list('forum__pk', flat=True)
 
         if forum_tracks.exists():
             tracks_dict = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
             for topic in topics:
                 topic_last_modification_date = topic.last_post_on or topic.created
-                if ((topic.forum.id in tracks_dict.keys() and topic.id not in tracked_topics) and
-                        topic_last_modification_date > tracks_dict[topic.forum.id]):
+                if ((topic.forum_id in tracks_dict.keys() and topic.id not in tracked_topics) and
+                        topic_last_modification_date > tracks_dict[topic.forum_id]):
                     unread_topics.append(topic)
 
         # A topic can be unread if no tracks exists for it
         for topic in topics:
-            if topic.forum.pk not in tracked_forums and topic.pk not in tracked_topics:
+            if topic.forum_id not in tracked_forums and topic.id not in tracked_topics:
                 unread_topics.append(topic)
 
         return list(set(unread_topics))
