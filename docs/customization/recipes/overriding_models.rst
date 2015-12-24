@@ -24,8 +24,8 @@ Most importantly, you should've created a ``models.py`` file inside your package
 
 Finally you should have copied the content of the ``migration`` folder from the application you want to override into your own local application.
 
-Definition of the new custom model
-----------------------------------
+Defining a new custom model
+---------------------------
 
 In order to define a new version of an existing *django-machina* model you have to define a new class that subclasses the abstract model class of the model you want to override. The new model you define must have the exact same name as the model you are trying to override.
 
@@ -44,3 +44,16 @@ For example, in order to define a custom version of the ``Topic`` model it is ne
       icon = models.ImageField(verbose_name="Icon", upload_to="forum/topic_icons")
 
   from machina.apps.forum_conversation.models import *  # noqa
+
+.. note::
+
+    You need to ensure that the import of *django-machina*'s models is always done at the bottom of your ``models.py`` file. This is very important in the event that you define overridden models because it will ensure that your overriden models will be loaded by Django instead of the original versions provided by *django-machina*.
+
+Creating migrations
+-------------------
+
+As stated previously, you should've copied the content of the ``migration`` folder from the application you want to override into your own local application. Then you just have to create a new migration related to the changes you made to the overriden models:
+
+.. code-block:: bash
+
+  $ django-admin makemigrations forum_conversations
