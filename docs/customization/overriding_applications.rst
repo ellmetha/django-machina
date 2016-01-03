@@ -63,7 +63,7 @@ Your overridden application may need to add new models or modify *django-machina
 Only importing *django-machina* models is not enough. You have to ensure the models migrations can be used by your Django project. You have two possibilities to do so:
 
   * you can copy the content of the ``migrations`` folder from the application you want to override to your own local application
-  * you can configure the ``MIGRATION_MODULES`` Django setting (or ``SOUTH_MIGRATION_MODULES`` if you are using South) to reference the original migrations of the application you want to override
+  * you can configure the ``MIGRATION_MODULES`` setting (or ``SOUTH_MIGRATION_MODULES`` if you are using South) to reference the original migrations of the application you want to override
 
 ::
 

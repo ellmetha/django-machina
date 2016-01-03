@@ -63,7 +63,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    
+
     # Machina related apps:
     'mptt',
     'haystack',
@@ -73,7 +73,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
 
 .. note::
 
-  As previously stated, *django-markdown* is the default syntax used for forum messages.
+  As previously stated, Markdown is the default syntax used for forum messages.
 
 *Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
 
@@ -159,7 +159,7 @@ If you are using Django 1.7 or higher, just use the ``syncdb`` or ``migrate`` co
 URLs configuration
 ------------------
 
-Finally you have to update your main ``urls.py`` module in order to include forum's URLs and *django-markdown*'s URLs::
+Finally you have to update your main ``urls.py`` module in order to include the forum' URLs and the *django-markdown*' URLs::
 
   from machina.app import board
 
