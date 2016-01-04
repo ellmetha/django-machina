@@ -30,16 +30,11 @@ class ForumManager(TreeManager):
         If not starting forum is provided, the returned forums are those that can be seen from
         the root of the forums tree.
         """
-        super_self = super(ForumManager, self)
-        get_queryset = (super_self.get_query_set
-                        if hasattr(super_self, 'get_query_set')
-                        else super_self.get_queryset)
-
         parent_field = 'isnull' if start_from is None else 'pk'
         parent_value = True if start_from is None else start_from.pk
         parent_selector = lambda x: '__'.join(['parent' for _ in range(0, x)] + [parent_field, ])
 
-        return get_queryset().filter(
+        return super(ForumManager, self).get_queryset().filter(
             # Forums that have a top-level category has parent
             Q(parent__type=self.model.TYPE_CHOICES.forum_cat, **{parent_selector(2): parent_value}) |
             # Sub forums that can be displayed
