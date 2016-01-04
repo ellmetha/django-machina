@@ -127,7 +127,7 @@ class MarkupTextField(models.TextField):
     keeps the rendered content returned by a specific render function.
     """
     def __init__(self, *args, **kwargs):
-        # For South FakeORM / Django 1.7 migration serializer compatibility: the frozen version of a
+        # For Django 1.7 migration serializer compatibility: the frozen version of a
         # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field itself
         # is frozen / serialized as well.
         self.add_rendered_field = not kwargs.pop('no_rendered_field', False)
@@ -261,45 +261,3 @@ class ExtendedImageField(models.ImageField):
         string = BytesIO()
         image.save(string, format='PNG')
         return string.getvalue()
-
-
-# Allow South to handle those fields smoothly
-try:
-    from south.modelsinspector import add_introspection_rules
-
-    # For a normal MarkupTextField, the add_rendered_field attribute is always True,
-    # which means that the no_rendered_field arg will always be True in a frozen MarkupTextField,
-    # which is what we want. The use of this flag will tell South not to make the _rendered
-    # fields again.
-    add_introspection_rules(
-        rules=[
-            (
-                (MarkupTextField, ),
-                [],
-                {
-                    'no_rendered_field': ('add_rendered_field', {}),
-                },
-            ),
-        ],
-        patterns=['^machina\.models\.fields\.MarkupTextField'])
-
-    # ExtendedImageField
-    add_introspection_rules(
-        rules=[
-            (
-                (ExtendedImageField, ),
-                [],
-                {
-                    'width': ['width', {'default': None}],
-                    'height': ['height', {'default': None}],
-                    'min_width': ['min_width', {'default': None}],
-                    'max_width': ['max_width', {'default': None}],
-                    'min_height': ['min_height', {'default': None}],
-                    'max_height': ['max_height', {'default': None}],
-                    'max_upload_size': ['max_upload_size', {'default': 0}],
-                },
-            ),
-        ],
-        patterns=['^machina\.models\.fields\.ExtendedImageField'])
-except ImportError:  # pragma: no cover
-    pass
