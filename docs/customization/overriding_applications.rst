@@ -63,7 +63,7 @@ Your overridden application may need to add new models or modify *django-machina
 Only importing *django-machina* models is not enough. You have to ensure the models migrations can be used by your Django project. You have two possibilities to do so:
 
   * you can copy the content of the ``migrations`` folder from the application you want to override to your own local application
-  * you can configure the ``MIGRATION_MODULES`` setting (or ``SOUTH_MIGRATION_MODULES`` if you are using South) to reference the original migrations of the application you want to override
+  * you can configure the ``MIGRATION_MODULES`` setting to reference the original migrations of the application you want to override
 
 ::
 
@@ -88,7 +88,7 @@ As previously stated, this step can be skipped if the application you want to ov
 Use the application AppConfig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This step can be skipped if you are using Django<1.7. Most of *django-machina* applications define sublclasses of Django's ``AppConfig`` which can perform initialization operations. *Django-machina* ``AppConfig`` instances are defined inside sub-modules called ``registry_config``. You need to make sure the ``AppConfig`` subclass of the application you want to override is properly loaded. So your application's ``__init__.py`` should include the default app config to use::
+Most of *django-machina* applications define sublclasses of Django's ``AppConfig`` which can perform initialization operations. *Django-machina* ``AppConfig`` instances are defined inside sub-modules called ``registry_config``. You need to make sure the ``AppConfig`` subclass of the application you want to override is properly loaded. So your application's ``__init__.py`` should include the default app config to use::
 
     default_app_config = 'machina.apps.forum_conversation.registry_config.ConversationRegistryConfig'
 

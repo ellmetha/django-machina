@@ -27,7 +27,7 @@ setup(
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
     install_requires=[
-        'django>=1.5,<1.9',
+        'django>=1.7,<1.9',
         'django-model-utils>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums

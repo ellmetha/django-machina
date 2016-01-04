@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
 
+
 # PILImage
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
@@ -23,16 +24,6 @@ except ImportError as err:
         raise ImproperlyConfigured(
             _('Neither Pillow nor PIL could be imported: {}').format(err)
         )
-
-
-# get_cache
-if DJANGO_VERSION >= (1, 7):
-    from django.core.cache import caches
-
-    def get_cache(key):
-        return caches[key]
-else:
-    from django.core.cache import get_cache  # noqa
 
 
 # URL patterns
