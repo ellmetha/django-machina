@@ -2,7 +2,7 @@
 
 # Standard library imports
 from __future__ import unicode_literals
-import datetime
+import datetime as dt
 
 # Third party imports
 from django.contrib.auth.models import AnonymousUser
@@ -381,7 +381,7 @@ class TestPermissionHandler(object):
         # Setup
         poll = TopicPollFactory.create(topic=self.forum_1_topic, duration=2)
         poll._meta.get_field_by_name('updated')[0].auto_now = False
-        poll.created = datetime.datetime(2000, 1, 12)
+        poll.created = dt.datetime(2000, 1, 12)
         poll.save()
         poll._meta.get_field_by_name('updated')[0].auto_now = True
         assign_perm('can_vote_in_polls', self.u1, self.forum_1)

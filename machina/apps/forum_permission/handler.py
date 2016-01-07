@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
-from datetime import timedelta
+import datetime as dt
 
 # Third party imports
 from django.contrib.auth import get_user_model
@@ -182,7 +182,7 @@ class PermissionHandler(object):
         """
         # First we have to check if the poll is curently open
         if poll.duration:
-            poll_dtend = poll.created + timedelta(days=poll.duration)
+            poll_dtend = poll.created + dt.timedelta(days=poll.duration)
             if poll_dtend < now():
                 return False
 
