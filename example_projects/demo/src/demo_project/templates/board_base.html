@@ -7,9 +7,6 @@
 {% block css %}
 	{{ block.super }}
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/roboto.css' %}" />
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/material.css' %}" />
-        <link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/build/css/ripples.css' %}" />
         <link rel="stylesheet" type="text/less" href="{% static 'less/theme.less' %}" />
     {% endcompress %}
 {% endblock css %}
@@ -18,7 +15,7 @@
     <div id="wrap">
         <div class="navbar-fixed-top-spacing">&nbsp;</div>
         <div class="navbar navbar-default navbar-fixed-top machina-navbar navbar-machina" role="navigation">
-            <div class="container-fluid"> 
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -26,11 +23,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">django-machina</a>
+                    <a class="navbar-brand" href="/">Machina Forum</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     {% if request.user.is_authenticated %}
-                        <p class="navbar-text"><b>{{ request.user.username }}</b></p>
+                        <p class="navbar-text">{{ request.user.username }}</p>
                     {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.is_authenticated %}
@@ -46,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid" id="main_container">
+        <div class="container" id="main_container">
             <div class="row">
                 <div class="col-xs-12">
                     {% block breadcrumb %}
@@ -77,7 +74,7 @@
         <div id="push"></div>
     </div>
     <footer id="footer">
-        <div class="container-fluid">
+        <div class="container">
             <div class="pull-right">
                 <p class="text-muted">
                     Powered by&nbsp;<a href="https://www.djangoproject.com/">django</a>&nbsp;and&nbsp;<a href="https://github.com/ellmetha/django-machina">django-machina</a>
@@ -89,15 +86,8 @@
 
 {% block js %}
     {{ block.super }}
-    {% compress js %}
-        <script src="{% static 'bower_components/bootstrap-material-design/build/js/material.js' %}" type="text/javascript" charset="utf-8"></script>
-        <script src="{% static 'bower_components/bootstrap-material-design/build/js/ripples.js' %}" type="text/javascript" charset="utf-8"></script>
-    {% endcompress %}
     <script>
         $(document).ready(function() {
-            // This command is used to initialize some elements and make them work properly
-            $.material.init();
-
             $('a[data-toggle="tooltip"]').tooltip();
         });
     </script>
