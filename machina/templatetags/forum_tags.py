@@ -34,7 +34,7 @@ def get_forum_last_post(context, forum, user):
     return last_post
 
 
-@register.inclusion_tag('machina/forum/forum_list.html', takes_context=True)
+@register.inclusion_tag('forum/forum_list.html', takes_context=True)
 def forum_list(context, forums):
     """
     This will render the given list of forums by respecting the order and the depth of each

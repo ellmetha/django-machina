@@ -25,7 +25,7 @@ def posted_by(post, user):
     return post.poster == user
 
 
-@register.inclusion_tag('machina/forum_conversation/topic_pages_inline_list.html')
+@register.inclusion_tag('forum_conversation/topic_pages_inline_list.html')
 def topic_pages_inline_list(topic):
     """
     This will render an inline pagination for the posts related to the
