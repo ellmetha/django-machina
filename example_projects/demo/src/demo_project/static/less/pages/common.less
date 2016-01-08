@@ -138,7 +138,7 @@ form{
     color: @gray-dark;
   }
 
-  input.form-control{
+  input.form-control, select{
     padding: 8px;
     height: 40px;
     border-radius: 0 !important;
@@ -167,6 +167,22 @@ form{
     }
   }
 
+  &.btn-info{
+    .border-radius(0);
+  }
+
+  &.btn-warning{
+    .border-radius(0);
+  }
+
+  &.btn-danger{
+    .border-radius(0);
+  }
+
+  &.btn-success{
+    .border-radius(0);
+  }
+
   &.btn-default{
     .border-radius(0);
   }
@@ -176,6 +192,18 @@ form{
   }
 }
 
+.dropdown-menu{
+  .border-radius(0);
+  font-family: @opensansregular;
+  font-size: 12px;
+}
+
+#messages{
+  .alert{
+    .border-radius(0);
+    font-family: @opensansregular;
+  }
+}
 
 #push{
   height: 60px;
