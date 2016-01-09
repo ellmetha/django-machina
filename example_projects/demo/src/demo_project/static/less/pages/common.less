@@ -105,7 +105,7 @@ ul.breadcrumb{
   }
 }
 
-h1{
+h1, h2, h3, h4{
   font-family: @dosissemibold;
   font-weight: normal;
   color: @blue-darker;
@@ -147,6 +147,20 @@ form{
     &:focus{
       border-color: @gray-light !important;
       .box-shadow(0 0 2px @blue-lighter) !important;
+    }
+  }
+}
+
+ul.pagination{
+  li{
+    &.active{
+      a{
+        background: lighten(@blue-dark, 20%);
+      }
+    }
+
+    a{
+      .border-radius(0) !important;
     }
   }
 }
