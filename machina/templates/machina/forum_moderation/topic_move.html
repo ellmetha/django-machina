@@ -13,7 +13,7 @@
 	            </div>
 	            <div class="panel-body">
 				    <form action="" method="post">{% csrf_token %}
-				    	{% include "machina/partials/form_field.html" with field=form.forum %}
+				    	{% include "partials/form_field.html" with field=form.forum %}
                         <div class="checkbox">
                             <label for="{{ form.lock_topic.auto_id }}">
                                 {{ form.lock_topic }}

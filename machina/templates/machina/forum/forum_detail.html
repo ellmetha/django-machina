@@ -36,7 +36,7 @@
             </div>
             <div class="col-xs-12 col-md-8 pagination-block">
                 {% with "pagination-sm" as pagination_size %}
-                    {% include "machina/partials/pagination.html" %}
+                    {% include "partials/pagination.html" %}
                 {% endwith %}
                 {% if topics|length > 0 and request.user.is_authenticated %}
                     <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
@@ -44,10 +44,10 @@
             </div>
         </div>
         {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
-            {% include "machina/forum_conversation/topic_list.html" %}
+            {% include "forum_conversation/topic_list.html" %}
         {% endwith %}
         {% with "Topics" as topic_list_title %}
-            {% include "machina/forum_conversation/topic_list.html" %}
+            {% include "forum_conversation/topic_list.html" %}
         {% endwith %}
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
@@ -57,7 +57,7 @@
             </div>
             <div class="col-xs-12 col-md-8 pagination-block">
                 {% with "pagination-sm" as pagination_size %}
-                    {% include "machina/partials/pagination.html" %}
+                    {% include "partials/pagination.html" %}
                 {% endwith %}
                 {% if topics|length > 0 and request.user.is_authenticated %}
                     <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>

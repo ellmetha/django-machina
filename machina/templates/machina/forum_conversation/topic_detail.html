@@ -13,11 +13,11 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
-            {% include "machina/forum_conversation/partials/topic_detail_moderation_actions.html" %}
+            {% include "forum_conversation/partials/topic_detail_moderation_actions.html" %}
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">
             {% with "pagination-sm" as pagination_size %}
-                {% include "machina/partials/pagination.html" %}
+                {% include "partials/pagination.html" %}
             {% endwith %}
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="col-xs-12">
             {% for post in posts %}
                 {% if forloop.first and post.is_topic_head and poll %}
-                    {% include "machina/forum_conversation/forum_polls/poll_detail.html" %}
+                    {% include "forum_conversation/forum_polls/poll_detail.html" %}
                 {% endif %}
                 <div id="{{ post.id }}" class="panel panel-default post">
                     <div class="panel-body">
@@ -50,7 +50,7 @@
                                 <div class="post-content">
                                     {{ post.content.rendered }}
                                 </div>
-                                {% include "machina/forum_conversation/forum_attachments/attachments_detail.html" %}
+                                {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
                                 {% if post.poster.forum_profile.signature %}
                                     <div class="post-signature">
                                         {{ post.poster.forum_profile.signature.rendered }}
@@ -95,11 +95,11 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-4 topic-actions-block">
-            {% include "machina/forum_conversation/partials/topic_detail_moderation_actions.html" %}
+            {% include "forum_conversation/partials/topic_detail_moderation_actions.html" %}
         </div>
         <div class="col-xs-12 col-md-8 pagination-block">
             {% with "pagination-sm" as pagination_size %}
-                {% include "machina/partials/pagination.html" %}
+                {% include "partials/pagination.html" %}
             {% endwith %}
         </div>
     </div>

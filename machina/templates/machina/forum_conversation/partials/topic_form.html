@@ -8,13 +8,13 @@
         </div>
     {% endfor %}
 
-	{% include "machina/partials/form_field.html" with field=post_form.subject %}
-	{% include "machina/partials/form_field.html" with field=post_form.content %}
+	{% include "partials/form_field.html" with field=post_form.subject %}
+	{% include "partials/form_field.html" with field=post_form.content %}
 	{% if post_form.username %}
-	    {% include "machina/partials/form_field.html" with field=post_form.username %}
+	    {% include "partials/form_field.html" with field=post_form.username %}
 	{% endif %}
 	{% if post_form.update_reason %}
-	    {% include "machina/partials/form_field.html" with field=post_form.update_reason %}
+	    {% include "partials/form_field.html" with field=post_form.update_reason %}
 	{% endif %}
 
 	<!-- Sub "forms" tabs -->
@@ -35,7 +35,7 @@
 				<br />
 				<div class="row">
 					<div class="col-md-12">
-						{% include "machina/partials/form_field.html" with field=post_form.topic_type %}
+						{% include "partials/form_field.html" with field=post_form.topic_type %}
 					</div>
 				</div>
 			</div>
@@ -47,10 +47,10 @@
 					{% if poll_option_formset.non_form_errors %}<div class="alert alert-danger">{{ poll_option_formset.non_form_errors|striptags }}</div>{% endif %}
 					<div class="row">
 						<div class="col-md-6">
-							{% include "machina/partials/form_field.html" with field=post_form.poll_question %}
-							{% include "machina/partials/form_field.html" with field=post_form.poll_max_options %}
-							{% include "machina/partials/form_field.html" with field=post_form.poll_duration %}
-							{% include "machina/partials/form_field.html" with field=post_form.poll_duration %}
+							{% include "partials/form_field.html" with field=post_form.poll_question %}
+							{% include "partials/form_field.html" with field=post_form.poll_max_options %}
+							{% include "partials/form_field.html" with field=post_form.poll_duration %}
+							{% include "partials/form_field.html" with field=post_form.poll_duration %}
 							<div{% if post_form.poll_user_changes.errors %} class="has-error"{% endif %}>
 								<div class="checkbox">
 									<label for="{{ post_form.poll_user_changes.auto_id }}">
@@ -61,7 +61,7 @@
 							</div>
 						</div>
 						<div id="poll_formset" class="col-md-6">
-							{% include "machina/forum_conversation/forum_polls/poll_option_formset.html" %}
+							{% include "forum_conversation/forum_polls/poll_option_formset.html" %}
 						</div>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 					<br />
 					<div class="row">
 						<div id="attachment_formset" class="col-md-12">
-							{% include "machina/forum_conversation/forum_attachments/attachment_formset.html" %}
+							{% include "forum_conversation/forum_attachments/attachment_formset.html" %}
 						</div>
 					</div>
 				</div>

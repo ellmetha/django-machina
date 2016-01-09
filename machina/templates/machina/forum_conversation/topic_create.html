@@ -11,10 +11,10 @@
         </div>
     </div>
     {% if poll_preview %}
-        {% include "machina/forum_conversation/forum_polls/poll_preview.html" %}
+        {% include "forum_conversation/forum_polls/poll_preview.html" %}
     {% endif %}
     {% if preview %}
-        {% include "machina/forum_conversation/post_preview.html" %}
+        {% include "forum_conversation/post_preview.html" %}
     {% endif %}
     <div class="row">
         <div class="col-xs-12">
@@ -23,7 +23,7 @@
                     <h3 class="panel-title">{% trans "Post a new topic" %}</h3>
                 </div>
                 <div class="panel-body">
-                    {% include "machina/forum_conversation/partials/topic_form.html" %}
+                    {% include "forum_conversation/partials/topic_form.html" %}
                 </div>
             </div>
         </div>

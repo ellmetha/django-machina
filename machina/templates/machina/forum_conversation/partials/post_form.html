@@ -8,11 +8,11 @@
         </div>
     {% endfor %}
 {% endif %}
-{% include "machina/partials/form_field.html" with field=post_form.subject %}
-{% include "machina/partials/form_field.html" with field=post_form.content %}
+{% include "partials/form_field.html" with field=post_form.subject %}
+{% include "partials/form_field.html" with field=post_form.content %}
 {% if post_form.username %}
-    {% include "machina/partials/form_field.html" with field=post_form.username %}
+    {% include "partials/form_field.html" with field=post_form.username %}
 {% endif %}
 {% if post_form.update_reason %}
-    {% include "machina/partials/form_field.html" with field=post_form.update_reason %}
+    {% include "partials/form_field.html" with field=post_form.update_reason %}
 {% endif %}

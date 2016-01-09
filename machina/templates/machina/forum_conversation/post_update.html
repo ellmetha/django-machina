@@ -11,7 +11,7 @@
         </div>
     </div>
     {% if preview %}
-        {% include "machina/forum_conversation/post_preview.html" %}
+        {% include "forum_conversation/post_preview.html" %}
     {% endif %}
     <div class="row">
         <div class="col-xs-12">
@@ -21,13 +21,13 @@
                 </div>
                 <div class="panel-body">
                     <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
-                        {% include "machina/forum_conversation/partials/post_form.html" %}
+                        {% include "forum_conversation/partials/post_form.html" %}
                         {% if attachment_formset %}
                             <div class="form-group">
                                 <div class="row">
                                     <div id="attachment_formset" class="col-md-12">
                                          <p class="lead attachments-title">{% trans "Attachments" %}</p>
-                                        {% include "machina/forum_conversation/forum_attachments/attachment_formset.html" %}
+                                        {% include "forum_conversation/forum_attachments/attachment_formset.html" %}
                                     </div>
                                 </div>
                             </div>

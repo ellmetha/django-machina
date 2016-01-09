@@ -20,15 +20,15 @@
                     </div>
                     <div class="panel-body">
                         <form method="get" action="." class="form">
-                            {% include "machina/partials/form_field.html" with field=form.q %}
+                            {% include "partials/form_field.html" with field=form.q %}
                             <div class="checkbox">
                                 <label for="{{ form.search_topics.auto_id }}">
                                     {{ form.search_topics }}
                                     {{ form.search_topics.label }}
                                 </label>
                             </div>
-                            {% include "machina/partials/form_field.html" with field=form.search_poster_name %}
-                            {% include "machina/partials/form_field.html" with field=form.search_forums %}
+                            {% include "partials/form_field.html" with field=form.search_poster_name %}
+                            {% include "partials/form_field.html" with field=form.search_forums %}
                             <div class="form-actions">
                                 <input type="submit" class="btn btn-large btn-primary" value="{% trans "Search" %}" />
                             </div>
@@ -58,7 +58,7 @@
             <div class="col-xs-12 col-md-8 pagination-block">
                 {% if page.has_previous or page.has_next %}
                     {% with pagination_size="pagination-sm" %}
-                        {% include "machina/forum_search/pagination.html" %}
+                        {% include "forum_search/pagination.html" %}
                     {% endwith %}
                 {% endif %}
             </div>
@@ -104,7 +104,7 @@
             <div class="row">
                 <div class="col-md-12 pagination-block">
                     {% with pagination_size="pagination-sm" %}
-                        {% include "machina/forum_search/pagination.html" %}
+                        {% include "forum_search/pagination.html" %}
                     {% endwith %}
                 </div>
             </div>
