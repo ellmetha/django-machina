@@ -39,6 +39,13 @@
 				    </thead>
 				    <tbody>
 			            {% for field in form %}
+                    {% ifchanged field.field.scope %}
+                      <tr>
+                        <td colspan="4" class="permission-scope-wrapper">
+                          <strong>{{ field.field.scope }}</strong>
+                        </td>
+                      </tr>
+                    {% endifchanged %}
 			            	<tr>
 			            		<td class="permission-name-cell"><div class="text">{{ field.label }}</div></td>
 						        {% for choice in field.field.choices %}
@@ -47,22 +54,6 @@
 						            </td>
 						        {% endfor %}
 			            	</tr>
-			            	{% comment %}
-			            	<div class="form-row">
-				                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-				                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-				                    {% if field.is_checkbox %}
-				                        {{ field.field }}{{ field.label_tag }}
-				                    {% else %}
-				                        {{ field.label_tag }}
-				                        {{ field }}
-				                    {% endif %}
-				                    {% if field.field.help_text %}
-				                        <p class="help">{{ field.field.help_text|safe }}</p>
-				                    {% endif %}
-				                </div>
-			                </div>
-			                {% endcomment %}
 			            {% endfor %}
 		            <tbody>
 			    </table>

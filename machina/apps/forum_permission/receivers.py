@@ -17,9 +17,9 @@ PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 def create_permissions():
     for config in PermissionConfig.permissions:
         try:
-            gp = ForumPermission.objects.get(codename=config['codename'])
+            gp = ForumPermission.objects.get(codename=config['fields']['codename'])
         except ForumPermission.DoesNotExist:
-            gp = ForumPermission(**config)
+            gp = ForumPermission(**config['fields'])
         gp.save()
 
 

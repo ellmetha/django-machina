@@ -24,6 +24,7 @@ from mptt.exceptions import InvalidMove
 # Local application / specific library imports
 from machina.core.compat import patterns
 from machina.core.db.models import get_model
+from machina.core.loading import get_class
 from machina.models.fields import MarkupTextField
 from machina.models.fields import MarkupTextFieldWidget
 
@@ -32,6 +33,7 @@ ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
+PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 
 PERM_GRANTED = 'granted'
 PERM_NOT_GRANTED = 'not-granted'
@@ -411,13 +413,18 @@ class PermissionsForm(forms.Form):
             (PERM_GRANTED, _('Granted')),
             (PERM_NOT_GRANTED, _('Not granted')),
         )
-        for codename, p in self.permissions_dict.items():
-            self.fields[codename] = forms.ChoiceField(
-                label=p[0].name,
-                choices=f_choices,
-                required=False,
-                widget=forms.RadioSelect)
-            self.fields[codename].initial = p[1]
+        for scope in PermissionConfig.scopes:
+            codenames = [x['fields']['codename'] for x in PermissionConfig.permissions
+                         if x['scope'] == scope]
+            permissions = filter(lambda v: v[0] in codenames, self.permissions_dict.items())
+            for codename, p in permissions:
+                self.fields[codename] = forms.ChoiceField(
+                    label=p[0].name,
+                    choices=f_choices,
+                    required=False,
+                    widget=forms.RadioSelect)
+                self.fields[codename].initial = p[1]
+                self.fields[codename].scope = scope
 
 
 admin.site.register(Forum, ForumAdmin)
