@@ -180,6 +180,25 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_OUTPUT_DIR = 'machina'
 
 
+# Django ckeditor settings
+# --------------------------------------
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            {'name': 'clipboard', 'items': ['Undo', 'Redo', ]},
+            {'name': 'insert', 'items': ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', ]},
+            {'name': 'styles', 'items': ['Styles', 'Format', ]},
+            {'name': 'basicstyles', 'items': ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat', ]},
+            {'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', ]},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor', ]},
+            {'name': 'tools', 'items': ['Maximize', ]},
+        ],
+    }
+}
+
+
 # Haystack settings
 # --------------------------------------
 HAYSTACK_CONNECTIONS = {
