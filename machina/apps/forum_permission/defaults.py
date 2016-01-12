@@ -158,6 +158,15 @@ class PermissionConfig(object):
         },
         {
             'fields': {
+                'codename': 'can_copy_topics',
+                'name': 'Can copy topics',
+                'is_local': True,
+                'is_global': False,
+            },
+            'scope': 'moderation',
+        },
+        {
+            'fields': {
                 'codename': 'can_edit_posts',
                 'name': 'Can edit posts',
                 'is_local': True,

@@ -79,13 +79,6 @@ class PermissionHandler(object):
             return None
         return posts[0]
 
-    def get_target_forums_for_moved_topics(self, user):
-        """
-        Returns a list of forums in which the considered user can add topics
-        that have been moved from another forum.
-        """
-        return self._get_forums_for_user(user, ['can_move_topics', ])
-
     # Verification methods
     # --
 
@@ -250,11 +243,25 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_move_topics')
 
+    def get_target_forums_for_moved_topics(self, user):
+        """
+        Returns a list of forums in which the considered user can add topics
+        that have been moved from another forum.
+        """
+        return self._get_forums_for_user(user, ['can_move_topics', ])
+
     def can_copy_topics(self, forum, user):
         """
         Given a forum, checks whether the user can copy its topics to another forum.
         """
-        return self._perform_basic_permission_check(forum, user, 'can_move_topics')
+        return self._perform_basic_permission_check(forum, user, 'can_copy_topics')
+
+    def get_target_forums_for_copied_topics(self, user):
+        """
+        Returns a list of forums in which the considered user can add topics
+        that have been copied from another forum.
+        """
+        return self._get_forums_for_user(user, ['can_copy_topics', ])
 
     def can_delete_topics(self, forum, user):
         """
