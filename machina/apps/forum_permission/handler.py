@@ -79,16 +79,12 @@ class PermissionHandler(object):
             return None
         return posts[0]
 
-    def get_movable_forums(self, user):
+    def get_target_forums_for_moved_topics(self, user):
         """
-        Returns a list of forum whose topics can be moved by the the given user. The latest
-        can move topics from these forums and to these forums.
+        Returns a list of forums in which the considered user can add topics
+        that have been moved from another forum.
         """
-        perms = [
-            'can_move_topics',
-        ]
-        movable_forums = self._get_forums_for_user(user, perms)
-        return movable_forums
+        return self._get_forums_for_user(user, ['can_move_topics', ])
 
     # Verification methods
     # --
@@ -251,6 +247,12 @@ class PermissionHandler(object):
     def can_move_topics(self, forum, user):
         """
         Given a forum, checks whether the user can move its topics to another forum.
+        """
+        return self._perform_basic_permission_check(forum, user, 'can_move_topics')
+
+    def can_copy_topics(self, forum, user):
+        """
+        Given a forum, checks whether the user can copy its topics to another forum.
         """
         return self._perform_basic_permission_check(forum, user, 'can_move_topics')
 

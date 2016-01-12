@@ -538,15 +538,15 @@ class TestPermissionHandler(object):
         # Run & check
         assert self.perm_handler.can_delete_topics(self.forum_1, u2)
 
-    def test_knows_the_forums_whose_topics_can_be_moved(self):
+    def test_knows_the_forums_that_can_receive_moved_topics(self):
         # Setup
         assign_perm('can_move_topics', self.u1, self.forum_1)
         u2 = UserFactory.create(is_superuser=True)
         u3 = UserFactory.create()
         # Run & check
-        assert set(self.perm_handler.get_movable_forums(self.u1)) == set([self.forum_1, ])
-        assert set(self.perm_handler.get_movable_forums(u2)) == set(Forum.objects.all())
-        assert list(self.perm_handler.get_movable_forums(u3)) == []
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(u2)) == set(Forum.objects.all())
+        assert list(self.perm_handler.get_target_forums_for_moved_topics(u3)) == []
 
     def test_knows_if_a_user_can_update_topics_to_normal_topics(self):
         # Setup

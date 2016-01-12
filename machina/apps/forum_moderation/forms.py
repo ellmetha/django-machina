@@ -31,7 +31,7 @@ class TopicMoveForm(forms.Form):
 
         super(TopicMoveForm, self).__init__(*args, **kwargs)
 
-        self.allowed_forums = self.perm_handler.get_movable_forums(self.user)
+        self.allowed_forums = self.perm_handler.get_target_forums_for_moved_topics(self.user)
         forum_choices = []
 
         for f in self.allowed_forums:
