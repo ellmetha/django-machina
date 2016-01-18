@@ -13,6 +13,7 @@ from machina.core.loading import get_class
 from machina.core.db.models import get_model
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
+from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
@@ -44,6 +45,7 @@ class TestTopicMoveForm(object):
         self.cat = create_category_forum()
         self.top_level_forum = create_forum()
         self.other_forum = create_forum()
+        self.link = create_link_forum()
 
         # Set up a topic and some posts
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
@@ -77,6 +79,21 @@ class TestTopicMoveForm(object):
     def test_cannot_validate_if_the_forum_is_a_category(self):
         # Setup
         assign_perm('can_move_topics', self.user, self.cat)
+        form = TopicMoveForm(
+            data={
+                'forum': self.cat.id,
+            },
+            topic=self.topic,
+            user=self.user,
+        )
+        # Run
+        is_valid = form.is_valid()
+        # Check
+        assert not is_valid
+
+    def test_cannot_validate_if_the_forum_is_a_link(self):
+        # Setup
+        assign_perm('can_move_topics', self.user, self.link)
         form = TopicMoveForm(
             data={
                 'forum': self.cat.id,

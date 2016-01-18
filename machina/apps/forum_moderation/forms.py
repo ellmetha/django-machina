@@ -55,7 +55,7 @@ class TopicMoveForm(forms.Form):
 
         if forum_id:
             forum = Forum.objects.get(pk=forum_id)
-            if forum.is_category or forum.id == self.topic.forum.id:
+            if forum.is_category or forum.is_link or forum.id == self.topic.forum.id:
                 raise forms.ValidationError('You cannot select this forum as a destination')
 
         return forum
