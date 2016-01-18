@@ -225,7 +225,6 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_lock_topics': 'not-set',
             'can_edit_posts': 'not-set',
             'can_delete_posts': 'not-set',
-            'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
         # Run
@@ -264,7 +263,6 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_lock_topics': 'not-set',
             'can_edit_posts': 'not-set',
             'can_delete_posts': 'not-set',
-            'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
         # Run
@@ -304,7 +302,6 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             'can_lock_topics': 'not-set',
             'can_edit_posts': 'not-set',
             'can_delete_posts': 'not-set',
-            'can_move_posts': 'not-set',
             'can_approve_posts': 'not-set',
         }
         # Run

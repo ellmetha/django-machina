@@ -72,10 +72,6 @@ Built-in permissions
 |                               |           | the target can delete forum posts that he did    |
 |                               |           | not write                                        |
 +-------------------------------+-----------+--------------------------------------------------+
-| ``can_move_posts``            | No        | **Moderation permission:** defines whether       |
-|                               |           | the target can move a forum posts to another     |
-|                               |           | topic                                            |
-+-------------------------------+-----------+--------------------------------------------------+
 | ``can_approve_posts``         | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can approve unapproved posts          |
 +-------------------------------+-----------+--------------------------------------------------+

@@ -176,15 +176,6 @@ class PermissionConfig(object):
         },
         {
             'fields': {
-                'codename': 'can_move_posts',
-                'name': 'Can move posts',
-                'is_local': True,
-                'is_global': False,
-            },
-            'scope': 'moderation',
-        },
-        {
-            'fields': {
                 'codename': 'can_approve_posts',
                 'name': 'Can approve posts',
                 'is_local': True,
