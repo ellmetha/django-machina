@@ -549,45 +549,6 @@ class TestPermissionHandler(object):
         # Run & check
         assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
 
-    def test_knows_if_a_user_can_copy_topics(self):
-        # Setup
-        u2 = UserFactory.create()
-        assign_perm('can_copy_topics', self.u1, self.forum_1)
-        # Run & check
-        assert self.perm_handler.can_copy_topics(self.forum_1, self.u1)
-        assert not self.perm_handler.can_copy_topics(self.forum_1, u2)
-
-    def test_knows_that_a_superuser_can_copy_topics(self):
-        # Setup
-        u2 = UserFactory.create(is_superuser=True)
-        # Run & check
-        assert self.perm_handler.can_copy_topics(self.forum_1, u2)
-
-    def test_knows_the_forums_that_can_receive_copied_topics(self):
-        # Setup
-        assign_perm('can_copy_topics', self.u1, self.forum_1)
-        u2 = UserFactory.create(is_superuser=True)
-        u3 = UserFactory.create()
-        # Run & check
-        assert set(self.perm_handler.get_target_forums_for_copied_topics(self.u1)) == set([self.forum_1, ])
-        assert set(self.perm_handler.get_target_forums_for_copied_topics(u2)) == set(Forum.objects.filter(
-            type=Forum.TYPE_CHOICES.forum_post))
-        assert list(self.perm_handler.get_target_forums_for_copied_topics(u3)) == []
-
-    def test_cannot_allow_forum_categories_to_receive_copied_topics(self):
-        # Setup
-        assign_perm('can_copy_topics', self.u1, self.forum_1)
-        assign_perm('can_copy_topics', self.u1, self.top_level_cat)
-        # Run & check
-        assert set(self.perm_handler.get_target_forums_for_copied_topics(self.u1)) == set([self.forum_1, ])
-
-    def test_cannot_allow_forum_links_to_receive_copied_topics(self):
-        # Setup
-        assign_perm('can_copy_topics', self.u1, self.forum_1)
-        assign_perm('can_copy_topics', self.u1, self.forum_3)
-        # Run & check
-        assert set(self.perm_handler.get_target_forums_for_copied_topics(self.u1)) == set([self.forum_1, ])
-
     def test_knows_if_a_user_can_delete_topics(self):
         # Setup
         u2 = UserFactory.create()
