@@ -43,6 +43,7 @@ Using django-machina
    forum_permissions
    customization/index
    machina_apps_reference/index
+   contributing
 
 
 
