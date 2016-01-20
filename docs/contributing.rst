@@ -45,8 +45,13 @@ You can run the whole test suite using the following command:
 
     $ py.test
 
-Code coverage should not decrease with pull request! You can easily get the code coverage using the following command:
+Code coverage should not decrease with pull request! You can easily get the code coverage of the project using the following command:
 
 .. code-block:: bash
 
     $ make coverage
+
+Using the issue tracker
+=======================
+
+You should use the `project's issue tracker <https://github.com/ellmetha/django-machina/issues>`_ if you've found a bug or if you want to propose a new feature. Don't forget to include as many details as possible in your tickets (eg. tracebacks if this is appropriate).
