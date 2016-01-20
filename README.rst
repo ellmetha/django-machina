@@ -54,11 +54,11 @@ Python 2.7+ or 3.3+, Django 1.7+. Please refer to the requirements_ section of t
 
 .. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 
-What still needs to be done
-===========================
+Roadmap
+=======
 
-* Documenting the ways to contribute to *django-machina*
-* Implementing the topic subscription feature : a user can get a list of all topics to which he subscribed
+* Topic subscriptions: a user can get a list of all topics to which he subscribed
+* A view to get all the posts of a forum member
 
 Authors
 =======
