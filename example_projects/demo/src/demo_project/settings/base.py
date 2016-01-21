@@ -160,6 +160,7 @@ INSTALLED_APPS = [
     'demo_project',
 ] + get_machina_apps([
     'demo_project.apps.forum_conversation',
+    'demo_project.apps.forum_member',
 ])
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'

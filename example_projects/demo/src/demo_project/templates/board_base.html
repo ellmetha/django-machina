@@ -68,8 +68,10 @@
                     {% endblock messages %}
                 </div>
             </div>
+						{% block content_wrapper %}
             {% block content %}
             {% endblock content %}
+						{% endblock content_wrapper %}
         </div>
         <div id="push"></div>
     </div>

@@ -219,6 +219,52 @@ ul.pagination{
   }
 }
 
+.parameters-menu-wrapper{
+  margin-bottom: 20px;
+  background: @gray-lighter;
+
+  .title{
+    padding: 8px;
+    background: @blue-darker;
+    font-family: @dosissemibold;
+    font-size: 18px;
+    text-align: center;
+    color: @white;
+  }
+
+  ul.parameters-menu{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li{
+      display: block;
+
+      a{
+        padding: 8px;
+        padding-left: 18px;
+        display: block;
+        font-family: @opensanssemibold;
+        color: @blue-dark;
+        .transition(.25s, ease-in-out);
+
+        &:hover, &:focus{
+          text-decoration: none;
+          color: lighten(@blue-dark, 15%);
+        }
+      }
+
+      &.active{
+        a{
+          padding-left: 14px;
+          background: @blue-lighter;
+          border-left: 4px solid @gray-light;
+        }
+      }
+    }
+  }
+}
+
 #push{
   height: 60px;
 }

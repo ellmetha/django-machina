@@ -2,6 +2,7 @@
 
 # Standard library imports
 # Third party imports
+from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
@@ -13,6 +14,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 
 # Local application / specific library imports
+from demo_project.core.mixins import MenuItemMixin
 from demo_project.forms import UserCreationForm
 from demo_project.forms import UserParametersForm
 
@@ -35,10 +37,11 @@ class UserCreateView(CreateView):
         return response
 
 
-class UserAccountParametersUpdateView(UpdateView):
+class UserAccountParametersUpdateView(MenuItemMixin, UpdateView):
     model = User
     form_class = UserParametersForm
     template_name = 'registration/parameters.html'
+    menu_parameters = 'account'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -52,4 +55,4 @@ class UserAccountParametersUpdateView(UpdateView):
         return super(UserAccountParametersUpdateView, self).form_valid(form)
 
     def get_success_url(self):
-        return '/'
+        return reverse('account-parameters')
