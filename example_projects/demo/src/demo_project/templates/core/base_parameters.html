@@ -10,6 +10,7 @@
           <ul class="parameters-menu">
             <li{% if menu_parameters == "profile" %} class="active"{% endif %}><a href="{% url 'forum_member:profile_update' %}">{% trans "Forum profile" %}</a></li>
             <li{% if menu_parameters == "account" %} class="active"{% endif %}><a href="{% url 'account-parameters' %}">{% trans "Account" %}</a></li>
+            <li{% if menu_parameters == "password" %} class="active"{% endif %}><a href="{% url 'account-password' %}">{% trans "Password" %}</a></li>
           </ul>
         </div>
       </div>

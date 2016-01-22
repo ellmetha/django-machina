@@ -18,12 +18,14 @@ class AuthApp(Application):
 
     user_create_view = views.UserCreateView
     user_parameters_update_view = views.UserAccountParametersUpdateView
+    user_password_update_view = views.UserPasswordUpdateView
 
     def get_urls(self):
         return [
             url(r'^', include('django.contrib.auth.urls')),
-            url(r'^parameters/edit/', self.user_parameters_update_view.as_view(), name='account-parameters'),
-            url(r'^register/', self.user_create_view.as_view(), name='register'),
+            url(_(r'^parameters/edit/'), self.user_parameters_update_view.as_view(), name='account-parameters'),
+            url(_(r'^password/edit/'), self.user_password_update_view.as_view(), name='account-password'),
+            url(_(r'^register/'), self.user_create_view.as_view(), name='register'),
         ]
 
 
