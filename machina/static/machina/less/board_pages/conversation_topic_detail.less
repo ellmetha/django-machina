@@ -30,6 +30,20 @@
         .post-content-wrapper{
             h4.subject{
                 margin: 0;
+
+                &:hover{
+                  a{
+                    display: inline-block;
+                  }
+                }
+
+                a{
+                  display: none;
+
+                  &:hover, &:focus{
+                    text-decoration: none;
+                  }
+                }
             }
 
             .attachments{

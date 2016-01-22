@@ -41,7 +41,12 @@
                                         <a href="{% url 'forum_conversation:post_delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                                     {% endif %}
                                 </div>
-                                <h4 class="subject">{{ post.subject }}</h4>
+                                {% spaceless %}
+                                <h4 class="subject">
+                                  {{ post.subject }}
+                                  &nbsp;<a href="{% url 'forum_conversation:topic' forum.slug forum.pk topic.slug topic.pk %}?post={{ post.pk }}#{{ post.pk }}">&#182;</a>
+                                </h4>
+                                {% endspaceless %}
                                 <p>
                                     <small class="text-muted">
                                         <i class="fa fa-clock-o"></i>&nbsp;{% trans "By:" %}&nbsp;{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %}&nbsp;{% trans "on" %}&nbsp;{{ post.created }}
