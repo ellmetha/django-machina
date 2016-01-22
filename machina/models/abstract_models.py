@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
+
 # Third party imports
-from django import VERSION as DJANGO_VERSION
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -20,9 +21,6 @@ class ActiveManager(models.Manager):
                         else super_self.get_queryset)
 
         return get_queryset().filter(is_active__exact=True)
-
-    if DJANGO_VERSION < (1, 6):  # pragma: no cover
-        get_query_set = get_queryset
 
 
 class ActiveModel(models.Model):

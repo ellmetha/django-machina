@@ -2,10 +2,8 @@
 
 # Standard library imports
 from __future__ import unicode_literals
-import unittest
 
 # Third party imports
-from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.test.utils import override_settings
 import pytest
@@ -39,15 +37,6 @@ class TestClassLoadingFunctions(object):
         # Run & check
         with pytest.raises(ClassNotFoundError):
             get_class('forum.models', 'Foo')
-
-    @unittest.skipIf(
-        DJANGO_VERSION >= (1, 7),
-        'not required with Django >= 1.7 because dummy installed apps) will be detected by the app registry')
-    def test_raises_in_case_of_import_error_with_django_less_than_1_dot_7(self):
-        # Run & check
-        with override_settings(INSTALLED_APPS=('it.is.bad', )):
-            with pytest.raises(AppNotFoundError):
-                get_class('bad', 'Foo')
 
     def test_raise_importerror_if_app_raises_importerror(self):
         # Setup
