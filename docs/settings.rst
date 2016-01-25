@@ -179,6 +179,13 @@ Default: ``255``
 
 The maximum number of characters that can be used in a member signature.
 
+``MACHINA_PROFILE_RECENT_POSTS_NUMBER``
+---------------------------------------
+
+Default: ``15``
+
+The maximum number of recent posts that can be displayed in forum member profiles.
+
 Permission
 **********
 
