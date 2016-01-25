@@ -21,6 +21,7 @@ from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')
 ForumProfile = get_model('forum_member', 'ForumProfile')
+Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 ForumProfileForm = get_class('forum_member.forms', 'ForumProfileForm')
@@ -74,6 +75,14 @@ class ForumProfileDetailView(DetailView):
         # Computes the number of topics added by the considered member
         context['topics_count'] = Topic.objects.filter(
             approved=True, poster=self.object.user).count()
+
+        # Fetches the recent posts added by the considered user
+        forums = self.request.forum_permission_handler.forum_list_filter(
+            Forum.objects.all(), self.request.user)
+        recent_posts = Post.approved_objects.filter(
+            topic__forum__in=forums, poster=self.object.user).order_by('-created')
+        context['recent_posts'] = recent_posts[:machina_settings.PROFILE_RECENT_POSTS_NUMBER]
+
         return context
 
 
