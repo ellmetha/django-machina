@@ -39,25 +39,55 @@
 			{% endif %}
 		</div>
 		<div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
             <div class="profile-content">
-				<div class="panel panel-default">
-					<div class="panel-heading">{% trans "Statistics" %}</div>
-					<div class="panel-body">
-						<div class="row">
-				            <div class="col-md-12 divider text-center">
-				                <div class="col-xs-12 col-sm-6 emphasis">
-				                    <h2><strong>{{ profile.posts_count }}</strong></h2>
-				                    <p><small>{% blocktrans count counter=profile.posts_count %}Post{% plural %}Posts{% endblocktrans %}</small></p>
-				                </div>
-				                <div class="col-xs-12 col-sm-6 emphasis">
-				                    <h2><strong>{{ topics_count }}</strong></h2>
-				                    <p><small>{% blocktrans count counter=profile.posts_count %}Topic{% plural %}Topics{% endblocktrans %}</small></p>
-				                </div>
-				            </div>
-			            </div>
-					</div>
-				</div>
+      				<div class="panel panel-default">
+      					<div class="panel-heading">{% trans "Statistics" %}</div>
+      					<div class="panel-body">
+      						<div class="row">
+      				            <div class="col-md-12 divider text-center">
+      				                <div class="col-xs-12 col-sm-6 emphasis">
+      				                    <h2><strong>{{ profile.posts_count }}</strong></h2>
+      				                    <p><small>{% blocktrans count counter=profile.posts_count %}Post{% plural %}Posts{% endblocktrans %}</small></p>
+      				                </div>
+      				                <div class="col-xs-12 col-sm-6 emphasis">
+      				                    <h2><strong>{{ topics_count }}</strong></h2>
+      				                    <p><small>{% blocktrans count counter=profile.posts_count %}Topic{% plural %}Topics{% endblocktrans %}</small></p>
+      				                </div>
+      				            </div>
+      			            </div>
+      					</div>
+      				</div>
             </div>
+        </div>
+      </div>
+      <div class="row recent-posts">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Recent posts" %}</div>
+            <div class="panel-body">
+              {% for post in recent_posts %}
+              <div class="row post">
+                <div class="col-md-12 post-content-wrapper">
+                  <div class="post-title">
+                    <a href="{% url 'forum_conversation:topic' post.topic.forum.slug post.topic.forum.pk post.topic.slug post.topic.pk %}?post={{ post.pk }}#{{ post.pk }}">{{ post.subject }}</a>
+                  </div>
+                  <p>
+                    <small class="text-muted">
+                      <i class="fa fa-clock-o"></i>&nbsp;{% blocktrans with creation_date=post.created %}On {{ creation_date }}{% endblocktrans %}
+                    </small>
+                  </p>
+                  <div class="post-content">
+                    {{ post.content.rendered|truncatechars_html:160 }}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
 		</div>
 	</div>
 
