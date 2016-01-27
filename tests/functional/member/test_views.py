@@ -111,18 +111,18 @@ class TestForumProfileDetailView(BaseClientTestCase):
         self.forum_3 = create_forum(parent=self.top_level_cat_1)
 
         self.topic_1 = create_topic(forum=self.forum_2, poster=self.u1)
-        PostFactory.create(topic=self.topic_1, poster=self.u1)
-        PostFactory.create(topic=self.topic_1, poster=self.user)
+        self.topic_1_post_1 = PostFactory.create(topic=self.topic_1, poster=self.u1)
+        self.topic_1_post_2 = PostFactory.create(topic=self.topic_1, poster=self.user)
 
         self.topic_2 = create_topic(forum=self.forum_1, poster=self.user)
-        PostFactory.create(topic=self.topic_2, poster=self.user)
-        PostFactory.create(topic=self.topic_2, poster=self.u1)
+        self.topic_2_post_1 = PostFactory.create(topic=self.topic_2, poster=self.user)
+        self.topic_2_post_2 = PostFactory.create(topic=self.topic_2, poster=self.u1)
 
         self.topic_3 = create_topic(forum=self.forum_2, poster=self.u1)
-        PostFactory.create(topic=self.topic_3, poster=self.u1)
+        self.topic_3_post_1 = PostFactory.create(topic=self.topic_3, poster=self.u1)
 
         self.topic_4 = create_topic(forum=self.forum_2, poster=self.user)
-        PostFactory.create(topic=self.topic_4, poster=self.user)
+        self.topic_4_post_1 = PostFactory.create(topic=self.topic_4, poster=self.user)
 
         # Assign some permissions
         assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
@@ -145,6 +145,34 @@ class TestForumProfileDetailView(BaseClientTestCase):
         # Check
         assert response.status_code == 200
         assert response.context['topics_count'] == 2
+
+    def test_includes_the_recent_posts_of_the_user_in_the_context(self):
+        # Setup
+        correct_url = reverse('forum_member:profile', kwargs={'pk': self.user.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert list(response.context['recent_posts']) == [
+            self.topic_4_post_1,
+            self.topic_2_post_1,
+            self.topic_1_post_2,
+        ]
+
+    def test_recent_posts_are_determined_using_current_user_permissions(self):
+        # Setup
+        self.user.groups.clear()
+        assign_perm('can_read_forum', self.user, self.top_level_cat_1)
+        assign_perm('can_read_forum', self.user, self.forum_2)
+        correct_url = reverse('forum_member:profile', kwargs={'pk': self.u1.pk})
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert list(response.context['recent_posts']) == [
+            self.topic_3_post_1,
+            self.topic_1_post_1,
+        ]
 
 
 class TestForumProfileUpdateView(BaseClientTestCase):
