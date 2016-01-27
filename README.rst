@@ -59,7 +59,6 @@ Roadmap
 
 * Topic subscriptions: a user can get a list of all topics to which he subscribed
 * A view to get all the posts of a forum member
-* Display a list of recent posts in users' profiles
 
 Authors
 =======
