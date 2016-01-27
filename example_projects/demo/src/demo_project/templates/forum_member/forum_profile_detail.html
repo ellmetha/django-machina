@@ -43,7 +43,10 @@
         <div class="col-md-12">
             <div class="profile-content">
       				<div class="panel panel-default">
-      					<div class="panel-heading">{% trans "Statistics" %}</div>
+      					<div class="panel-heading">
+                  <div class="pull-right"><i class="fa fa-area-chart"></i></div>
+                  {% trans "Statistics" %}
+                </div>
       					<div class="panel-body">
       						<div class="row">
       				            <div class="col-md-12 divider text-center">
@@ -65,7 +68,10 @@
       <div class="row recent-posts">
         <div class="col-md-12">
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Recent posts" %}</div>
+            <div class="panel-heading">
+              <div class="pull-right"><i class="fa fa-comments-o"></i></div>
+              {% trans "Recent posts" %}
+            </div>
             <div class="panel-body">
               {% for post in recent_posts %}
               <div class="row post">
