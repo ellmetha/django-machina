@@ -11,20 +11,16 @@ python:
 env:
   - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8"
   - DJANGO_ENV="django>=1.8,<1.9"
-  - TOXENV=lint
 
 matrix:
   exclude:
-  - python: "3.3"
-    env: TOXENV=lint
-  - python: "3.4"
-    env: TOXENV=lint
   - python: "3.5"
     env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8"
 
 install:
   - "pip install $DJANGO_ENV"
 script:
+  - flake8
   - make travis
 after_success:
   - coveralls
