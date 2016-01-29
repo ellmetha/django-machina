@@ -18,7 +18,7 @@ VALIDATED_IMAGE_MAX_HEIGHT = 120
 VALIDATED_IMAGE_MAX_SIZE = 12000
 
 
-class TestableModel(models.Model):
+class DummyModel(models.Model):
     """
     This model will be used for testing purposes only.
     """
