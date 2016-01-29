@@ -19,8 +19,8 @@ from django.views.generic.edit import UpdateView
 
 # Local application / specific library imports
 from demo_project.core.mixins import MenuItemMixin
-from demo_project.forms import UserCreationForm
-from demo_project.forms import UserParametersForm
+from demo_project.apps.auth.forms import UserCreationForm
+from demo_project.apps.auth.forms import UserParametersForm
 
 
 class UserCreateView(CreateView):
