@@ -11,6 +11,7 @@ from django.db import models
 from django.db.models import signals
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.encoding import smart_str
 from django.utils.functional import curry
 from django.utils.safestring import mark_safe
@@ -59,6 +60,7 @@ except AttributeError as e:
     raise ImproperlyConfigured(_('MACHINA_MARKUP_LANGUAGE setting is required'))
 
 
+@python_2_unicode_compatible
 class MarkupText(SafeData):
     def __init__(self, instance, field_name, rendered_field_name):
         # Stores a reference to the instance along with field names
@@ -83,7 +85,7 @@ class MarkupText(SafeData):
     rendered = property(_get_rendered)
 
     # Allows display via templates to work without safe filter
-    def __unicode__(self):
+    def __str__(self):
         return self.raw
 
     # Return the length of the rendered string so that bool tests work as expected

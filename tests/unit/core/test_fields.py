@@ -13,6 +13,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
 from django.core.files import File
+from django.utils.encoding import force_text
 from django.utils.six import BytesIO
 import pytest
 
@@ -76,6 +77,14 @@ class TestMarkupTextField(object):
         assert len(test.content) == markup_content_len
         with pytest.raises(AttributeError):
             print(DummyModel.content.rendered)
+
+    def test_content_returns_the_raw_value_when_converted_to_a_string(self):
+        # Setup
+        test = DummyModel()
+        test.content = '**hello world!**'
+        test.save()
+        # Run & check
+        assert force_text(test.content) == '**hello world!**'
 
     def test_should_not_allow_non_accessible_markup_languages(self):
         # Run & check
