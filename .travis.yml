@@ -20,7 +20,6 @@ matrix:
 install:
   - "pip install $DJANGO_ENV"
 script:
-  - flake8
   - make travis
 after_success:
   - coveralls
