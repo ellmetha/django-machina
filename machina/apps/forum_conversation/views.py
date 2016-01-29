@@ -277,8 +277,9 @@ class BasePostFormView(FormView):
                 # Computes the list of the attachment file names that should be attached
                 # to the forum post being created or updated
                 for form in context['attachment_formset'].forms:
-                    if form['DELETE'].value() or (not form['file'].html_name in self.request._files
-                                                  and not form.instance.pk):
+                    if form['DELETE'].value() \
+                        or (not form['file'].html_name in self.request._files and
+                            not form.instance.pk):
                         continue
                     attachments.append(
                         (

@@ -80,9 +80,8 @@ class PermissionRequiredMixin(object):
         """
         Retrieve the controlled object and perform the permissions check.
         """
-        obj = (hasattr(self, 'get_controlled_object') and self.get_controlled_object()
-               or hasattr(self, 'get_object') and self.get_object()
-               or getattr(self, 'object', None))
+        obj = (hasattr(self, 'get_controlled_object') and self.get_controlled_object() or
+               hasattr(self, 'get_object') and self.get_object() or getattr(self, 'object', None))
         user = request.user
 
         # Get the permissions to check

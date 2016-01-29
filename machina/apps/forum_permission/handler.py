@@ -121,8 +121,8 @@ class PermissionHandler(object):
         Given a topic, checks whether the user can append posts to it.
         """
         can_add_post = self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_topics') \
-            and (not topic.is_locked
-                 or self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_locked_topics'))
+            and (not topic.is_locked or
+                 self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_locked_topics'))
         return can_add_post
 
     def can_edit_post(self, post, user):
@@ -136,9 +136,9 @@ class PermissionHandler(object):
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
         is_author = self._is_post_author(post, user)
-        can_edit = (user.is_superuser
-                    or (is_author and checker.has_perm('can_edit_own_posts', post.topic.forum))
-                    or checker.has_perm('can_edit_posts', post.topic.forum))
+        can_edit = (user.is_superuser or
+                    (is_author and checker.has_perm('can_edit_own_posts', post.topic.forum)) or
+                    checker.has_perm('can_edit_posts', post.topic.forum))
         return can_edit
 
     def can_delete_post(self, post, user):
@@ -152,9 +152,9 @@ class PermissionHandler(object):
         #     he is the original poster of the forum post
         #     he belongs to the forum moderators
         is_author = self._is_post_author(post, user)
-        can_delete = (user.is_superuser
-                      or (is_author and checker.has_perm('can_delete_own_posts', post.topic.forum))
-                      or checker.has_perm('can_delete_posts', post.topic.forum))
+        can_delete = (user.is_superuser or
+                      (is_author and checker.has_perm('can_delete_own_posts', post.topic.forum)) or
+                      checker.has_perm('can_delete_posts', post.topic.forum))
         return can_delete
 
     # Polls
@@ -293,8 +293,8 @@ class PermissionHandler(object):
 
     def _is_post_author(self, post, user):
         return (post.poster == user) if user.is_authenticated() \
-            else (post.anonymous_key is not None
-                  and post.anonymous_key == get_anonymous_user_forum_key(user))
+            else (post.anonymous_key is not None and
+                  post.anonymous_key == get_anonymous_user_forum_key(user))
 
     def _get_hidden_forum_ids(self, forums, user):
         """
@@ -418,8 +418,7 @@ class PermissionHandler(object):
         # The action is granted if...
         #     the user is the superuser
         #     the user has the permission to do so
-        check = (user.is_superuser
-                 or checker.has_perm(permission, forum))
+        check = (user.is_superuser or checker.has_perm(permission, forum))
         return check
 
     def _get_checker(self, user):
