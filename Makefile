@@ -9,8 +9,8 @@ install:
 	pip install -e .
 
 upgrade:
-	pip install --upgrade -r dev-requirements.txt
-	python setup.py develop --upgrade
+	pip install -r dev-requirements.txt -U
+	pip install -e . -U
 
 lint:
 	flake8
