@@ -4,6 +4,8 @@ from os.path import join
 from setuptools import find_packages
 from setuptools import setup
 
+import machina
+
 
 def read_relative_file(filename):
     """
@@ -16,7 +18,7 @@ def read_relative_file(filename):
 
 setup(
     name='django-machina',
-    version=read_relative_file('VERSION').strip(),
+    version=machina.__version__,
     author='Morgan Aubert',
     author_email='morgan.aubert@zoho.com',
     packages=find_packages(),

@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
+from __future__ import unicode_literals
 import os
 
 # Third party imports
 # Local application / specific library imports
+
+__version__ = '0.0.1.dev0'
 
 
 MACHINA_VANILLA_APPS = [
@@ -44,8 +47,3 @@ def get_apps(overrides=None):
         return next((o for o in overrides if o.endswith(pattern)), app_label)
 
     return list(map(get_app_label, MACHINA_VANILLA_APPS))
-
-
-pkg_resources = __import__('pkg_resources')
-distribution = pkg_resources.get_distribution('django-machina')
-__version__ = distribution.version
