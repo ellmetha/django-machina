@@ -2,7 +2,7 @@ staticfiles:
 	cd machina/static/machina && gulp build-application
 
 
-.PHONY: install upgrade coverage travis docs
+.PHONY: install upgrade lint coverage travis docs
 
 install:
 	pip install -r dev-requirements.txt
