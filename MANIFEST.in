@@ -1,5 +1,4 @@
 include LICENSE
-include VERSION
 include MANIFEST.in
 include *.rst
 recursive-include machina/static *
