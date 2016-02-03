@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 import gettext
 
+from django.core.urlresolvers import reverse_lazy
 from unipath import Path
 
 from machina import get_apps as get_machina_apps
@@ -168,6 +169,8 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 MIGRATION_MODULES = {
     'forum_conversation': 'machina.apps.forum_conversation.migrations',
 }
+
+LOGIN_URL = reverse_lazy('login')
 
 
 # Django compressor setings
