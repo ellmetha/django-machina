@@ -2,8 +2,10 @@
 
 # Standard library imports
 from __future__ import unicode_literals
+import shutil
 
 # Third party imports
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from faker import Factory as FakerFactory
 from haystack.management.commands import clear_index
@@ -97,6 +99,10 @@ class TestFacetedSearchView(BaseClientTestCase):
         # --
 
         clear_index.Command().handle(interactive=False, verbosity=-1)
+
+    @classmethod
+    def teardown_class(cls):
+        shutil.rmtree(settings.HAYSTACK_CONNECTIONS['default']['PATH'])
 
     def test_can_search_forum_posts(self):
         # Setup
