@@ -10,6 +10,8 @@ var machina = (function(m, $) {
 			$(this).attr('name', new_name);
 			var new_id = $(this).attr('id').replace('-' + (total-1) + '-','-' + total + '-');
 			$(this).attr('id', new_id);
+			$(this).parent('label').attr('for', new_id);
+			$(this).prev('label').attr('for', new_id);
 			if ($(this).is(':checkbox')) {
 				$(this).attr('checked', false);
 			}
