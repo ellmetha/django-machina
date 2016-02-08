@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import EmailField
 from django.utils.translation import ugettext_lazy as _
-
-# Local application / specific library imports
 
 
 class UserCreationForm(UserCreationForm):

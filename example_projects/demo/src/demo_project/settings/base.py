@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 
 from __future__ import unicode_literals
-import gettext
 
 from django.core.urlresolvers import reverse_lazy
 from unipath import Path
@@ -31,8 +30,8 @@ TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'fr'
 
 LANGUAGES = (
-   ('en', "English"),
-   ('fr', "Français"),
+    ('en', "English"),
+    ('fr', "Français"),
 )
 
 DATABASES = {
@@ -168,6 +167,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIGRATION_MODULES = {
     'forum_conversation': 'machina.apps.forum_conversation.migrations',
+    'forum_member': 'machina.apps.forum_member.migrations',
 }
 
 LOGIN_URL = reverse_lazy('login')
@@ -213,7 +213,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 
-# Specific machina settings
+# Specific machina settings
 # --------------------------------------
 
 # Attachment cache backend

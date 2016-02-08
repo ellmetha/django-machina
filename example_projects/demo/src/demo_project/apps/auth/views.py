@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -17,7 +15,6 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import FormView
 from django.views.generic.edit import UpdateView
 
-# Local application / specific library imports
 from demo_project.core.mixins import MenuItemMixin
 from demo_project.apps.auth.forms import UserCreationForm
 from demo_project.apps.auth.forms import UserParametersForm

@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from machina.apps.forum_conversation.views import TopicView as BaseTopicView
-
-# Local application / specific library imports
 
 
 class TopicView(BaseTopicView):

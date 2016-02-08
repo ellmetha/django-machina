@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 import inspect
-
-# Third party imports
-# Local application / specific library imports
 
 
 class MenuItemMixin(object):
