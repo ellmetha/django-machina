@@ -59,7 +59,6 @@ Roadmap
 
 * Topic subscriptions: a user can get a list of all topics to which he subscribed
 * A view to get all the posts of a forum member
-* A setting to limit the number of options that can be defined when creating a poll
 * A setting to limit the number of attachments that can be attached to a post
 * A setting to limit the maximum size of an attachment
 

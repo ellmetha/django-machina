@@ -88,6 +88,13 @@ The number of posts displayed when posting a reply. The posts displayed are rela
 Polls
 *****
 
+``MACHINA_POLL_MAX_OPTIONS_PER_POLL``
+-------------------------------------
+
+Default: ``30``
+
+This setting can be used to configure the number of options that can be defined when creating a poll.
+
 ``MACHINA_POLL_MAX_OPTIONS_PER_USER``
 -------------------------------------
 

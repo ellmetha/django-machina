@@ -11,6 +11,7 @@ from django.forms.models import modelformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.shortcuts import get_object_or_none
 
@@ -92,7 +93,8 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
 TopicPollOptionFormset = modelformset_factory(
     TopicPollOption, TopicPollOptionForm,
     formset=BaseTopicPollOptionFormset,
-    can_delete=True, extra=2)
+    can_delete=True, extra=2, max_num=machina_settings.POLL_MAX_OPTIONS_PER_POLL,
+    validate_max=True)
 
 
 class TopicPollVoteForm(forms.Form):
