@@ -67,7 +67,7 @@ Only importing *django-machina* models is not enough. You have to ensure the mod
 
 ::
 
-    DJANGO_MODULES = {
+    MIGRATION_MODULES = {
       'forum_conversation': 'machina.apps.forum_conversation.migrations',
     }
 
