@@ -12,7 +12,7 @@ The preferred way to contribute to *django-machina* is to submit pull requests t
 
 .. warning::
 
-    Keep in mind that should propose new features on the `project's issue tracker <https://github.com/ellmetha/django-machina/issues>`_ before starting working on your ideas! Remember that the central aim of *django-machina* is to provide a solid core of a forum project - without much of extra functionality included!
+    Keep in mind that you should propose new features on the `project's issue tracker <https://github.com/ellmetha/django-machina/issues>`_ before starting working on your ideas! Remember that the central aim of *django-machina* is to provide a solid core of a forum project - without much of extra functionality included!
 
 Development environment
 -----------------------
