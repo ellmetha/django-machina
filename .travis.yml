@@ -22,7 +22,7 @@ install:
 script:
   - make travis
 after_success:
-  - coveralls
+  - codecov
 branches:
   only:
     - master
