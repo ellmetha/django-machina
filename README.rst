@@ -9,7 +9,7 @@ django-machina
     :target: http://travis-ci.org/ellmetha/django-machina
     :alt: Build status
 
-.. image:: http://img.shields.io/coveralls/ellmetha/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
     :target: https://coveralls.io/r/ellmetha/django-machina
     :alt: Coveralls status
 
