@@ -6,7 +6,6 @@ pytest-spec>=0.2
 codecov>=1.6
 factory-boy>=2.4
 fake-factory>=0.5
-coveralls>=0.2
 mock>=1.0.1
 tox>=1.7
 flake8>=2.2.5
