@@ -10,8 +10,8 @@ django-machina
     :alt: Build status
 
 .. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
-    :target: https://coveralls.io/r/ellmetha/django-machina
-    :alt: Coveralls status
+    :target: https://codecov.io/github/ellmetha/django-machina
+    :alt: Codecov status
 
 |
 
