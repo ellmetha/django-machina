@@ -9,6 +9,7 @@ from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
 
 # Local application / specific library imports
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 
 Attachment = get_model('forum_attachments', 'Attachment')
@@ -35,4 +36,6 @@ class BaseAttachmentFormset(BaseModelFormSet):
 AttachmentFormset = modelformset_factory(
     Attachment, AttachmentForm,
     formset=BaseAttachmentFormset,
-    can_delete=True, extra=1)
+    can_delete=True, extra=1,
+    max_num=machina_settings.ATTACHMENT_MAX_FILES_PER_POST,
+    validate_max=True)

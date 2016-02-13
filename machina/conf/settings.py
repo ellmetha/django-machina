@@ -43,7 +43,7 @@ POLL_MAX_OPTIONS_PER_USER = getattr(settings, 'MACHINA_POLL_MAX_OPTIONS_PER_USER
 # Attachments
 ATTACHMENT_FILE_UPLOAD_TO = getattr(settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments')
 ATTACHMENT_CACHE_NAME = getattr(settings, 'MACHINA_ATTACHMENT_CACHE_NAME', 'machina_attachments')
-
+ATTACHMENT_MAX_FILES_PER_POST = getattr(settings, 'MACHINA_ATTACHMENT_MAX_FILES_PER_POST', 15)
 
 # Member
 PROFILE_AVATAR_UPLOAD_TO = getattr(settings, 'MACHINA_PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')

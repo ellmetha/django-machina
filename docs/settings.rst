@@ -93,7 +93,7 @@ Polls
 
 Default: ``30``
 
-This setting can be used to configure the number of options that can be defined when creating a poll.
+This setting can be used to configure the maximum number of options that can be defined when creating a poll.
 
 ``MACHINA_POLL_MAX_OPTIONS_PER_USER``
 -------------------------------------
@@ -118,6 +118,13 @@ The media subdirectory where forum attachments should be uploaded.
 Default: ``'machina_attachments'``
 
 The name of the cache used to store temporary post attachments.
+
+``MACHINA_ATTACHMENT_MAX_FILES_PER_POST``
+-----------------------------------------
+
+Default: ``15``
+
+This setting can be used to configure the maximum number of attachments that can be associated to a forum post.
 
 Member
 ******
