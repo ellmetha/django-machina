@@ -8,11 +8,11 @@
         {% for number in paginator.page_range %}
             {% if forloop.first %}
                 <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-                {% if page_obj.number > 4 %}
+                {% if page_obj.number > 4 and paginator.num_pages > 6 %}
                     <li><span>...</span></li>
                 {% endif %}
             {% elif forloop.last %}
-                {% if page_obj.number < paginator.num_pages|add:"-3" %}
+                {% if page_obj.number < paginator.num_pages|add:"-3" and paginator.num_pages > 6 %}
                     <li><span>...</span></li>
                 {% endif %}
                 <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
