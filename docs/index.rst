@@ -6,9 +6,9 @@ Welcome to django-machina's documentation!
     :target: http://travis-ci.org/ellmetha/django-machina
     :alt: Build status
 
-.. image:: https://img.shields.io/coveralls/ellmetha/django-machina.svg?style=flat-square
-    :target: https://coveralls.io/r/ellmetha/django-machina
-    :alt: Coveralls status
+.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
+    :target: https://codecov.io/github/ellmetha/django-machina
+    :alt: Codecov status
 
 |
 
@@ -54,4 +54,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
