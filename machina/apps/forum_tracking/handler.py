@@ -74,9 +74,13 @@ class TrackingHandler(object):
         if not user.is_authenticated() or topics is None or not len(topics):
             return unread_topics
 
+        # Note: this is done to Prevent MySQL NotSupportedError errors with
+        # LIMIT & IN/ALL/ANY/SOME subqueries.
+        topic_ids = list(topics.values_list('id', flat=True))
+
         # A topic can be unread if a track for itself exists with a mark time that
         # is less important than its update date.
-        topic_tracks = TopicReadTrack.objects.filter(topic__pk__in=topics, user=user)
+        topic_tracks = TopicReadTrack.objects.filter(topic__in=topic_ids, user=user)
         tracked_topics = topic_tracks.values_list('topic__pk', flat=True)
 
         if topic_tracks.exists():
