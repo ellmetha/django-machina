@@ -1,5 +1,11 @@
-# Force the use of the new container-based infrastructure
-sudo: false
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
 
 language: python
 
@@ -34,7 +40,7 @@ install:
   - if [[ $DB == "postgres" ]]; then pip install -q psycopg2; fi
   - pip install $DJANGO_ENV
 before_script:
-  - mysql -e 'create database machina_test;'
+  - mysql -u root -e 'create database machina_test;'
   - psql -c 'create database machina_test;' -U postgres
 script:
   - make travis
