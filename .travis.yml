@@ -1,17 +1,10 @@
 dist: trusty
 sudo: required
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
 
 language: python
 
 services:
   - postgresql
-  - mysql
 
 python:
   - "2.7"
@@ -35,6 +28,9 @@ matrix:
   - python: "3.5"
     env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=mysql
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6
 install:
   - if [[ $DB == "mysql" ]]; then pip install -q mysqlclient; fi
   - if [[ $DB == "postgres" ]]; then pip install -q psycopg2; fi
