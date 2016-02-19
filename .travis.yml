@@ -16,9 +16,19 @@ env:
   - DJANGO_ENV="django>=1.8,<1.9" DB=sqlite
   - DJANGO_ENV="django>=1.8,<1.9" DB=postgres
   - DJANGO_ENV="django>=1.8,<1.9" DB=mysql
-  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=sqlite
-  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=postgres
-  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=mysql
+  - DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=sqlite
+  - DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=postgres
+  - DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=mysql
+
+matrix:
+  exclude:
+  - python: "3.3"
+    env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=sqlite
+  - python: "3.5"
+    env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=postgres
+  - python: "3.5"
+    env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=mysql
+
 
 install:
   - if [[ $DB == "mysql" ]]; then pip install -q mysqlclient; fi
