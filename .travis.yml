@@ -24,9 +24,9 @@ matrix:
   exclude:
   - python: "3.3"
     env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=sqlite
-  - python: "3.5"
+  - python: "3.3"
     env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=postgres
-  - python: "3.5"
+  - python: "3.3"
     env: DJANGO_ENV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=mysql
 
 
