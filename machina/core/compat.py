@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
-from django import VERSION as DJANGO_VERSION
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
-
-# Local application / specific library imports
 
 
 # PILImage
@@ -24,11 +19,3 @@ except ImportError as err:
         raise ImproperlyConfigured(
             _('Neither Pillow nor PIL could be imported: {}').format(err)
         )
-
-
-# URL patterns
-if DJANGO_VERSION >= (1, 8):
-    patterns = lambda urls: urls
-else:
-    from django.conf.urls import patterns as urlpatterns
-    patterns = lambda urls: urlpatterns('', *urls)

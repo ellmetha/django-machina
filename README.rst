@@ -50,7 +50,7 @@ Head over to the documentation for all the details on how to set up your forum a
 Requirements
 ============
 
-Python 2.7+ or 3.3+, Django 1.7+. Please refer to the requirements_ section of the documentation for a full list of dependencies.
+Python 2.7+ or 3.3+, Django 1.8+. Please refer to the requirements_ section of the documentation for a full list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 

@@ -29,11 +29,11 @@ setup(
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
     install_requires=[
-        'django>=1.7,<1.9',
+        'django>=1.8',
         'django-model-utils>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
-        'django-mptt>=0.7.0',
+        'django-mptt>=0.8.0',
 
         # Machina uses Django-haystack to provide search support
         'django-haystack>=2.1.0',

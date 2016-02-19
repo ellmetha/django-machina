@@ -22,7 +22,6 @@ from mptt.forms import TreeNodeChoiceField
 from mptt.exceptions import InvalidMove
 
 # Local application / specific library imports
-from machina.core.compat import patterns
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.models.fields import MarkupTextField
@@ -71,7 +70,7 @@ class ForumAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(ForumAdmin, self).get_urls()
-        forum_admin_urls = patterns([
+        forum_admin_urls = [
             url(r'^(?P<forum_id>[0-9]+)/move-forum/(?P<direction>up|down)/$',
                 self.admin_site.admin_view(self.moveforum_view),
                 name='forum_forum_move'),
@@ -99,7 +98,7 @@ class ForumAdmin(admin.ModelAdmin):
             url(r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
                 name='forum_forum_editpermission_group'),
-        ])
+        ]
         return forum_admin_urls + urls
 
     def get_forum_perms_base_context(self, request, obj=None):

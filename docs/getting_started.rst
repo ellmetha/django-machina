@@ -5,7 +5,7 @@ Requirements
 ------------
 
 * `Python`_ 2.7, 3.3, 3.4 or 3.5
-* `Django`_ 1.7.x or 1.8.x
+* `Django`_ 1.8.x or 1.9.x
 * `Pillow`_ 2.2. or higher
 * `Django-model-utils`_ 2.0. or higher
 * `Django-mptt`_ 0.7. or higher
@@ -13,10 +13,6 @@ Requirements
 * `Django-markdown`_ 0.7. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
 
-
-.. warning:: While *django-machina* is compatible with Django 1.7.x, this version of Django
-             is no longer supported by the Django team. Please upgrade to
-             Django 1.8.x immediately.
 
 .. note::
 
@@ -146,7 +142,7 @@ You can also decide to use a more powerfull backend such as *Solr* or *Whoosh*::
 Database and migrations
 -----------------------
 
-*Django-machina* only provides new-style migrations. So if you are using Django 1.7 or higher, just use the ``syncdb`` or ``migrate`` commands::
+*Django-machina* only provides new-style migrations. So if you are using Django 1.8 or higher, just use the ``syncdb`` or ``migrate`` commands::
 
   python manage.py migrate
 

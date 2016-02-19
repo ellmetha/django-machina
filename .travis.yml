@@ -1,10 +1,11 @@
-dist: trusty
-sudo: required
+# Force the use of the new container-based infrastructure
+sudo: false
 
 language: python
 
 services:
   - postgresql
+  - mysql
 
 python:
   - "2.7"
@@ -12,31 +13,19 @@ python:
   - "3.4"
   - "3.5"
 env:
-  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="sqlite"
-  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="postgres"
-  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="mysql"
   - DJANGO_ENV="django>=1.8,<1.9" DB=sqlite
   - DJANGO_ENV="django>=1.8,<1.9" DB=postgres
   - DJANGO_ENV="django>=1.8,<1.9" DB=mysql
+  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=sqlite
+  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=postgres
+  - DJANGO_EMV="django>=1.9,<1.10 git+git://github.com/django-haystack/django-haystack.git" DB=mysql
 
-matrix:
-  exclude:
-  - python: "3.5"
-    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=sqlite
-  - python: "3.5"
-    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=postgres
-  - python: "3.5"
-    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=mysql
-
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6
 install:
   - if [[ $DB == "mysql" ]]; then pip install -q mysqlclient; fi
   - if [[ $DB == "postgres" ]]; then pip install -q psycopg2; fi
   - pip install $DJANGO_ENV
 before_script:
-  - mysql -u root -e 'create database machina_test;'
+  - mysql -e 'create database machina_test;'
   - psql -c 'create database machina_test;' -U postgres
 script:
   - make travis
