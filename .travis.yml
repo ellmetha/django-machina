@@ -3,22 +3,39 @@ sudo: false
 
 language: python
 
+services:
+  - postgresql
+  - mysql
+
 python:
   - "2.7"
   - "3.3"
   - "3.4"
   - "3.5"
 env:
-  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8"
-  - DJANGO_ENV="django>=1.8,<1.9"
+  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="sqlite"
+  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="postgres"
+  - DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB="mysql"
+  - DJANGO_ENV="django>=1.8,<1.9" DB=sqlite
+  - DJANGO_ENV="django>=1.8,<1.9" DB=postgres
+  - DJANGO_ENV="django>=1.8,<1.9" DB=mysql
 
 matrix:
   exclude:
   - python: "3.5"
-    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8"
+    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=sqlite
+  - python: "3.5"
+    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=postgres
+  - python: "3.5"
+    env: DJANGO_ENV="django>=1.7,<1.8 django-mptt<0.8" DB=mysql
 
 install:
-  - "pip install $DJANGO_ENV"
+  - if [[ $DB == "mysql" ]]; then pip install -q mysqlclient; fi
+  - if [[ $DB == "postgres" ]]; then pip install -q psycopg2; fi
+  - pip install $DJANGO_ENV
+before_script:
+  - mysql -e 'create database machina_test;'
+  - psql -c 'create database machina_test;' -U postgres
 script:
   - make travis
 after_success:
