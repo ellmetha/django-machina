@@ -12,6 +12,7 @@ public/
 whoosh_index/
 .tox
 tests/_testdata/media/machina
+tests/settings_local.py
 
 # If pipeline is used, don't commit generated CSS files
 machina/static/machina/less/*.css

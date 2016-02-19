@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
 from django.core.urlresolvers import reverse
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum
@@ -106,8 +103,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
         assert response.status_code == 200
         assert list(self.tracks_handler.get_unread_forums(
             self.top_level_cat_1.get_descendants(include_self=True), self.user)) == []
-        assert list(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.user)) == [self.top_level_cat_2, self.forum_4, ]
+        assert set(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.user)) == set([self.top_level_cat_2, self.forum_4, ])
 
 
 class TestMarkTopicsReadView(BaseClientTestCase):

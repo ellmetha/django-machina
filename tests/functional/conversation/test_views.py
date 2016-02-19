@@ -388,8 +388,8 @@ class TestTopicCreateView(BaseClientTestCase):
         assert topic.poll.max_options == post_data['poll_max_options']
         assert topic.poll.duration == post_data['poll_duration']
         assert topic.poll.options.count() == 2
-        assert topic.poll.options.all()[0].text == post_data['poll-0-text']
-        assert topic.poll.options.all()[1].text == post_data['poll-1-text']
+        assert post_data['poll-0-text'] in topic.poll.options.values_list('text', flat=True)
+        assert post_data['poll-1-text'] in topic.poll.options.values_list('text', flat=True)
 
     def test_cannot_create_polls_with_invalid_options(self):
         # Setup
@@ -786,8 +786,8 @@ class TestTopicUpdateView(BaseClientTestCase):
         assert topic.poll.max_options == post_data['poll_max_options']
         assert topic.poll.duration == post_data['poll_duration']
         assert topic.poll.options.count() == 2
-        assert topic.poll.options.all()[0].text == post_data['poll-0-text']
-        assert topic.poll.options.all()[1].text == post_data['poll-1-text']
+        assert post_data['poll-0-text'] in topic.poll.options.values_list('text', flat=True)
+        assert post_data['poll-1-text'] in topic.poll.options.values_list('text', flat=True)
 
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup

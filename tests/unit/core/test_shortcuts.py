@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum.models import Forum
 from machina.core.shortcuts import get_object_or_none
 from machina.core.shortcuts import refresh
@@ -25,7 +22,7 @@ class TestCoreShortcuts(object):
     def test_can_be_used_to_refresh_a_model_instance(self):
         # Setup
         forum_name = self.forum.name
-        new_forum_name = faker.text(max_nb_chars=200)
+        new_forum_name = faker.text(max_nb_chars=100)
         # Run
         Forum.objects.all().update(name=new_forum_name)
         # Check

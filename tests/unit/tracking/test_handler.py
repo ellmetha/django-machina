@@ -200,8 +200,8 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_forums_read([self.forum_2_child_2, ], self.u2)
         # Check
-        assert list(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.u2)) == [self.top_level_cat_1, self.forum_2, ]
+        assert set(self.tracks_handler.get_unread_forums(
+            Forum.objects.all(), self.u2)) == set([self.top_level_cat_1, self.forum_2, ])
         assert ForumReadTrack.objects.filter(user=self.u2).count() == 2
 
     def test_cannot_mark_forums_read_for_anonymous_users(self):

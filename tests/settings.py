@@ -38,7 +38,7 @@ elif DB_CONFIG == 'mysql':
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'machina_test',
-            'USER': 'postgres',
+            'USER': 'root',
         }
     }
 
@@ -132,3 +132,8 @@ CACHES = {
 SILENCED_SYSTEM_CHECKS = ['1_6.W001']
 
 SECRET_KEY = 'key'
+
+try:
+    from .settings_local import *  # noqa
+except ImportError:
+    pass

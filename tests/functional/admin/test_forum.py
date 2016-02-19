@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum.admin import PickUserForm
 from machina.apps.forum.abstract_models import FORUM_TYPES
 from machina.apps.forum_permission.models import ForumPermission
@@ -146,7 +143,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         editpermissions_group_raw_url = 'admin:{}_{}_editpermission_group'.format(
             model._meta.app_label, self._get_module_name(model._meta))
         editpermissions_group_url = reverse(editpermissions_group_raw_url, kwargs={
-            'forum_id': self.top_level_cat.id, 'group_id': self.user.id})
+            'forum_id': self.top_level_cat.id, 'group_id': group.id})
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert editpermissions_group_url in last_url
