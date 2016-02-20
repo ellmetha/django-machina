@@ -54,10 +54,16 @@ def decrease_posts_count(sender, instance, **kwargs):
     Receiver to handle the deletion of a forum posts: the posts count
     related to the post's author is decreased.
     """
-    if instance.poster is None:
+    try:
+        assert instance.poster is not None
+    except AssertionError:
         # An anonymous post is considered. No profile can be updated in
         # that case.
         return
+    except ObjectDoesNotExist:  # pragma: no cover
+        # This can happen if a User instance is deleted. In that case the
+        # User instance is not available and the receiver should return.
+        pass
 
     profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
     profile.posts_count = F('posts_count') - 1
