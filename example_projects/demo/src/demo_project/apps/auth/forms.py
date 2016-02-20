@@ -36,3 +36,18 @@ class UserParametersForm(forms.ModelForm):
         super(UserParametersForm, self).__init__(*args, **kwargs)
         # Update some fields
         self.fields['email'].required = True
+
+
+class UserDeletionForm(forms.Form):
+    username = forms.CharField(label='', max_length=254)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(UserDeletionForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = _('Type your username')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if username != self.user.username:
+            self.add_error('username', _('Please type your username to remove your account'))
+        return username

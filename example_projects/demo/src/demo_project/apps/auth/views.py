@@ -6,17 +6,21 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import FormView
-from django.views.generic.edit import UpdateView
+from django.views.generic import CreateView
+from django.views.generic import FormView
+from django.views.generic import TemplateView
+from django.views.generic import UpdateView
 
 from demo_project.core.mixins import MenuItemMixin
 from demo_project.apps.auth.forms import UserCreationForm
+from demo_project.apps.auth.forms import UserDeletionForm
 from demo_project.apps.auth.forms import UserParametersForm
 
 
@@ -83,3 +87,25 @@ class UserPasswordUpdateView(MenuItemMixin, FormView):
 
     def get_success_url(self):
         return reverse('account-password')
+
+
+class DeleteUserView(MenuItemMixin, FormView):
+    form_class = UserDeletionForm
+    template_name = 'registration/unregister.html'
+    menu_parameters = 'account'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(DeleteUserView, self).dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(DeleteUserView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.delete()
+        logout(self.request)
+        messages.success(self.request, _('Your account has been removed'))
+        return HttpResponseRedirect(reverse('forum:index'))
