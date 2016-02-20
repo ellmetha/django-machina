@@ -1,9 +1,9 @@
-{% extends "board_base.html" %}
+{% extends "registration/base_account.html" %}
 {% load i18n %}
 
 {% block sub-title %}{% trans "Edit account parameters" %}{% endblock sub-title %}
 
-{% block content %}
+{% block inner_content %}
     <br />
     <div class="row">
         <div class="col-xs-12">
@@ -24,7 +24,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-actions">
-                                    <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+                                  <div class="pull-right">
+                                    <a href="{% url 'unregister' %}" class="btn btn-danger">{% trans "Remove your account" %}</a>
+                                  </div>
+                                  <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
                                 </div>
                             </div>
                         </div>
@@ -33,4 +36,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock inner_content %}

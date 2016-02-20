@@ -1,0 +1,19 @@
+{% extends "board_base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills">
+          <li{% if menu_parameters == "account" %} class="active"{% endif %}><a href="{% url 'account-parameters' %}">{% trans "Account" %}</a></li>
+          <li{% if menu_parameters == "password" %} class="active"{% endif %}><a href="{% url 'account-password' %}">{% trans "Password" %}</a></li>
+        </ul>
+        <div class="row">
+          <div class="col-md-12">
+            {% block inner_content %}{% endblock inner_content %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -14,7 +12,9 @@ from machina.app import board
 
 # Local application / specific library imports
 from vanilla_project.views import UserAccountParametersUpdateView
+from vanilla_project.views import UserPasswordUpdateView
 from vanilla_project.views import UserCreateView
+from vanilla_project.views import UserDeleteView
 
 
 # Admin autodiscover
@@ -26,8 +26,10 @@ urlpatterns = [
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^account/parameters/edit/', UserAccountParametersUpdateView.as_view(), name='account-parameters'),
-    url('^register/', UserCreateView.as_view(), name='register'),
-    url('^markdown/', include(django_markdown_urls)),
+    url(r'^account/password/edit/', UserPasswordUpdateView.as_view(), name='account-password'),
+    url(r'^register/', UserCreateView.as_view(), name='register'),
+    url(r'^unregister/', UserDeleteView.as_view(), name='unregister'),
+    url(r'^markdown/', include(django_markdown_urls)),
 
     # Apps
     url(r'', include(board.urls)),

@@ -15,7 +15,7 @@ class AuthApp(Application):
     user_create_view = views.UserCreateView
     user_parameters_update_view = views.UserAccountParametersUpdateView
     user_password_update_view = views.UserPasswordUpdateView
-    user_delete_view = views.DeleteUserView
+    user_delete_view = views.UserDeleteView
 
     def get_urls(self):
         return [

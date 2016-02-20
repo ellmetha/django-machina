@@ -15,7 +15,6 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import FormView
-from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from demo_project.core.mixins import MenuItemMixin
@@ -89,17 +88,17 @@ class UserPasswordUpdateView(MenuItemMixin, FormView):
         return reverse('account-password')
 
 
-class DeleteUserView(MenuItemMixin, FormView):
+class UserDeleteView(MenuItemMixin, FormView):
     form_class = UserDeletionForm
     template_name = 'registration/unregister.html'
     menu_parameters = 'account'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(DeleteUserView, self).dispatch(request, *args, **kwargs)
+        return super(UserDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
-        kwargs = super(DeleteUserView, self).get_form_kwargs()
+        kwargs = super(UserDeleteView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
