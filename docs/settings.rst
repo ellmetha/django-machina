@@ -184,7 +184,7 @@ The imposed avatar maximum height for forum member profiles. This setting affect
 
 Default: ``0``
 
-The maximum avatar size for forum member profiles. A value of ``0`` means that there is no size limitation.
+The maximum avatar size for forum member profiles (the size must be expressed in bytes). A value of ``0`` means that there is no size limitation.
 
 ``MACHINA_PROFILE_SIGNATURE_MAX_LENGTH``
 ----------------------------------------
