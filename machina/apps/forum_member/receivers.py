@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.db.models.signals import pre_save
@@ -9,6 +10,8 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 from machina.core.loading import get_class
+
+User = get_user_model()
 
 Post = get_class('forum_conversation.models', 'Post')
 ForumProfile = get_class('forum_member.models', 'ForumProfile')
@@ -52,7 +55,8 @@ def decrease_posts_count(sender, instance, **kwargs):
     related to the post's author is decreased.
     """
     try:
-        assert instance.poster is not None
+        assert instance.poster_id is not None
+        poster = User.objects.get(pk=instance.poster_id)
     except AssertionError:
         # An anonymous post is considered. No profile can be updated in
         # that case.
@@ -62,6 +66,6 @@ def decrease_posts_count(sender, instance, **kwargs):
         # User instance is not available and the receiver should return.
         return
 
-    profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
+    profile, dummy = ForumProfile.objects.get_or_create(user=poster)
     profile.posts_count = F('posts_count') - 1
     profile.save()
