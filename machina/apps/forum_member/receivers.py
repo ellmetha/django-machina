@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.db.models.signals import pre_save
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-# Local application / specific library imports
 from machina.core.loading import get_class
 
 Post = get_class('forum_conversation.models', 'Post')
@@ -63,7 +60,7 @@ def decrease_posts_count(sender, instance, **kwargs):
     except ObjectDoesNotExist:  # pragma: no cover
         # This can happen if a User instance is deleted. In that case the
         # User instance is not available and the receiver should return.
-        pass
+        return
 
     profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
     profile.posts_count = F('posts_count') - 1
