@@ -60,7 +60,7 @@ Demo sites
 Two demo sites can be tested:
 
 * the `vanilla project <http://vanilla.machina-forum.io/>`_ contains a standard installation of *django-machina* without customization
-* the `demo project <http://demo.machina-forum.io/>`_ showcases the customization possibilities of django-machina
+* the `demo project <http://demo.machina-forum.io/>`_ showcases the customization possibilities of *django-machina*
 
 Roadmap
 =======
