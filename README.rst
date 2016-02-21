@@ -54,6 +54,14 @@ Python 2.7+ or 3.3+, Django 1.8+. Please refer to the requirements_ section of t
 
 .. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 
+Demo sites
+==========
+
+Two demo sites can be tested:
+
+* the `vanilla project <http://vanilla.machina-forum.io/>`_ contains a standard installation of *django-machina* without customization
+* the `demo project <http://demo.machina-forum.io/>`_ showcases the customization possibilities of django-machina
+
 Roadmap
 =======
 
