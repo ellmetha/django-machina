@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from haystack import indexes
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 
 Post = get_model('forum_conversation', 'Post')
@@ -16,8 +15,8 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
     """
     text = indexes.CharField(document=True, use_template=True, template_name='forum_search/post_text.txt')
 
-    poster = indexes.CharField(model_attr='poster', null=True)
-    poster_name = indexes.CharField(model_attr='poster__username', null=True)
+    poster = indexes.IntegerField(model_attr='poster_id', null=True)
+    poster_name = indexes.CharField()
 
     forum = indexes.IntegerField(model_attr='topic__forum_id')
     forum_slug = indexes.CharField()
@@ -34,8 +33,7 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def prepare_poster_name(self, obj):
-        poster = obj.topic.poster
-        return poster.username if poster else ''
+        return obj.poster.username if obj.poster else obj.username
 
     def prepare_forum_slug(self, obj):
         return obj.topic.forum.slug

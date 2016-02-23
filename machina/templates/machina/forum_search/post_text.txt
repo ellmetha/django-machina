@@ -1,3 +1,2 @@
 {{ object.subject }}
-{{ object.poster.get_full_name }}
 {{ object.content.rendered }}
