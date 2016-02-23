@@ -51,6 +51,11 @@ Code coverage should not decrease with pull request! You can easily get the code
 
     $ make coverage
 
+Contributing translations
+=========================
+
+The translation work on *django-machina* is done using `Transifex <https://www.transifex.com/django-machina-team/django-machina/>`_. Don't hesitate to apply for a lanaguage if you want to improve the internationalization of the project.
+
 Using the issue tracker
 =======================
 
