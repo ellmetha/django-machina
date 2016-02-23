@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.forum_attachments.app import application as attachments_app
 from machina.apps.forum_conversation.forum_polls.app import application as polls_app
 from machina.core.app import Application
@@ -55,7 +52,7 @@ class PollsApp(Application):
     def get_urls(self):
         urls = super(PollsApp, self).get_urls()
         urls += [
-            url(_(r'^'), include(self.polls_app.urls)),
+            url(r'^', include(self.polls_app.urls)),
         ]
         return urls
 
@@ -67,7 +64,7 @@ class AttachmentsApp(Application):
     def get_urls(self):
         urls = super(AttachmentsApp, self).get_urls()
         urls += [
-            url(_(r'^'), include(self.attachments_app.urls)),
+            url(r'^', include(self.attachments_app.urls)),
         ]
         return urls
 
