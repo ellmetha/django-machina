@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 import os
 
-# Third party imports
-# Local application / specific library imports
-
-__version__ = '0.0.1.dev0'
+__version__ = '0.1a1.dev'
 
 
 MACHINA_VANILLA_APPS = [
