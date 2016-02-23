@@ -14,11 +14,11 @@
 						{% if can_be_completed and not view_results_action %}
 							{% if not has_been_completed or change_vote_action %}
 								{% if poll.max_options == 1 %}
-									{% blocktrans %}
+									{% blocktrans trimmed %}
 										You may select <b>1</b> option
 									{% endblocktrans %}
 								{% else %}
-									{% blocktrans with max_options=poll.max_options %}
+									{% blocktrans trimmed with max_options=poll.max_options %}
 										You may select up to <b>{{ max_options }}</b> options
 									{% endblocktrans %}
 								{% endif %}

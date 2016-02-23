@@ -45,7 +45,16 @@
                                             <a href="{% url 'forum_moderation:queued_post' post.pk %}" class="post-name-link">{{ post.subject }}</a>
                                             <div>
                                                 <div class="post-created">
-                                                    {% trans "By:" %} {% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}">{{ post.poster.username }}</a>{% else %}{{ post.username }}{% endif %} {% trans "on" %} {{ post.created }}
+                                                  {% if post.poster %}
+                                                    {% url 'forum_member:profile' post.poster_id as poster_url %}
+                                                    {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                                                      By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+                                                    {% endblocktrans %}
+                                                  {% else %}
+                                                    {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
+                                                      By: {{ poster_username }} on {{ creation_date }}
+                                                    {% endblocktrans %}
+                                                  {% endif %}
                                                 </div>
                                             </div>
                                         </td>

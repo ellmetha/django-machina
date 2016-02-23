@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-4 forum-actions-block">
                 <p class="text-muted">
-                           {% blocktrans count number_of_results=page.paginator.count %}
+                           {% blocktrans trimmed count number_of_results=page.paginator.count %}
                                 Your search has returned <b>{{ number_of_results }}</b> result
                             {% plural %}
                                 Your search has returned <b>{{ number_of_results }}</b> results

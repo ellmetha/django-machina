@@ -35,7 +35,16 @@
                                             <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
                                             <div>
                                                 <div class="topic-created">
-                                                    {% trans "By:" %} {% if topic.poster %}<a href="{% url 'forum_member:profile' topic.poster_id %}">{{ topic.poster.username }}</a>{% else %}{{ topic.first_post.username }}{% endif %} {% trans "on" %} {{ topic.created }}
+                                                  {% if topic.poster %}
+                                                    {% url 'forum_member:profile' topic.poster_id as poster_url %}
+                                                    {% blocktrans trimmed with poster_url=poster_url username=topic.poster.username creation_date=topic.created %}
+                                                      By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+                                                    {% endblocktrans %}
+                                                  {% else %}
+                                                    {% blocktrans trimmed with poster_username=topic.first_post.username creation_date=topic.created %}
+                                                      By: {{ poster_username }} on {{ creation_date }}
+                                                    {% endblocktrans %}
+                                                  {% endif %}
                                                 </div>
                                             </div>
                                         </td>
@@ -46,9 +55,19 @@
                             <div class="col-md-1 topic-count hidden-sm hidden-xs">{{ topic.views_count }}</div>
                             <div class="col-md-2 col-sm-3 hidden-xs topic-last-post">
                                 {% with last_post=topic.last_post %}
-                                    {% trans "By:" %} {% if last_post.poster %}<a href="{% url 'forum_member:profile' last_post.poster_id %}">{{ last_post.poster.username }}</a>{% else %}{{ last_post.username }}{% endif %}&nbsp;<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
-                                    <br />
-                                    {{ last_post.created }}
+                                  {% if last_post.poster %}
+                                    {% url 'forum_member:profile' last_post.poster_id as poster_url %}
+                                    {% blocktrans trimmed with poster_url=poster_url username=last_post.poster.username %}
+                                      By: <a href="{{ poster_url }}">{{ username }}</a>
+                                    {% endblocktrans %}
+                                  {% else %}
+                                    {% blocktrans trimmed with poster_username=last_post.username %}
+                                      By: {{ poster_username }}
+                                    {% endblocktrans %}
+                                  {% endif %}
+                                  &nbsp;<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                  <br />
+                                  {{ last_post.created }}
                                 {% endwith %}
                             </div>
                         </div>

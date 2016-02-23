@@ -10,11 +10,11 @@
 						<hr />
 						<div class="max-options-indication">
 							{% if post_form.poll_max_options.value == '1' %}
-								{% blocktrans %}
+								{% blocktrans trimmed %}
 									You may select <b>1</b> option
 								{% endblocktrans %}
 							{% else %}
-								{% blocktrans with max_options=post_form.poll_max_options.value %}
+								{% blocktrans trimmed with max_options=post_form.poll_max_options.value %}
 									You may select up to <b>{{ max_options }}</b> options
 								{% endblocktrans %}
 							{% endif %}
