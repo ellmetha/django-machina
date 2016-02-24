@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -13,7 +13,6 @@ from django.views.generic import FormView
 from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.signals import topic_viewed
 from machina.apps.forum_conversation.utils import get_client_ip
 from machina.conf import settings as machina_settings
@@ -422,11 +421,16 @@ class BaseTopicFormView(BasePostFormView):
         self.attachment_preview = self.preview if attachment_formset_valid else None
         self.poll_preview = self.preview if poll_option_formset_valid else None
 
+        poll_options_validated = poll_option_formset_valid is not None
         if post_form_valid and attachment_formset_valid is not False \
                 and poll_option_formset_valid is not False:
-            return self.form_valid(post_form, attachment_formset, poll_option_formset)
+            return self.form_valid(
+                post_form, attachment_formset, poll_option_formset,
+                poll_options_validated=poll_options_validated)
         else:
-            return self.form_invalid(post_form, attachment_formset, poll_option_formset)
+            return self.form_invalid(
+                post_form, attachment_formset, poll_option_formset,
+                poll_options_validated=poll_options_validated)
 
     def get_poll_option_formset_class(self):
         """
@@ -477,12 +481,12 @@ class BaseTopicFormView(BasePostFormView):
 
         return context
 
-    def form_valid(self, post_form, attachment_formset, poll_option_formset):
+    def form_valid(self, post_form, attachment_formset, poll_option_formset, **kwargs):
         save_poll_option_formset = poll_option_formset is not None \
             and not self.preview
 
         valid = super(BaseTopicFormView, self).form_valid(
-            post_form, attachment_formset, poll_option_formset=poll_option_formset)
+            post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
 
         if save_poll_option_formset:
             poll_option_formset.topic = self.forum_post.topic
@@ -495,13 +499,13 @@ class BaseTopicFormView(BasePostFormView):
 
         return valid
 
-    def form_invalid(self, post_form, attachment_formset, poll_option_formset):
+    def form_invalid(self, post_form, attachment_formset, poll_option_formset, **kwargs):
         if poll_option_formset and not poll_option_formset.is_valid() \
                 and len(post_form.cleaned_data['poll_question']):
             messages.error(self.request, self.poll_option_formset_general_error_message)
 
         return super(BaseTopicFormView, self).form_invalid(
-            post_form, attachment_formset, poll_option_formset=poll_option_formset)
+            post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
 
 
 class PostFormView(SingleObjectMixin, BasePostFormView):
