@@ -50,7 +50,6 @@
 							{% include "partials/form_field.html" with field=post_form.poll_question %}
 							{% include "partials/form_field.html" with field=post_form.poll_max_options %}
 							{% include "partials/form_field.html" with field=post_form.poll_duration %}
-							{% include "partials/form_field.html" with field=post_form.poll_duration %}
 							<div{% if post_form.poll_user_changes.errors %} class="has-error"{% endif %}>
 								<div class="checkbox">
 									<label for="{{ post_form.poll_user_changes.auto_id }}">
