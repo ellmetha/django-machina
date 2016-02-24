@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 
-# Local application / specific library imports
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -131,7 +128,7 @@ class TopicForm(PostForm):
             self.fields['poll_duration'] = forms.IntegerField(
                 label=_('For how many days the poll should be run?'), required=False,
                 help_text=_('Enter 0 or leave blank for a never ending poll.'),
-                initial=0)
+                min_value=0, initial=0)
             self.fields['poll_user_changes'] = forms.BooleanField(
                 label=_('Allow re-voting?'), required=False,
                 help_text=_('If enabled users are able to change their vote.'),
