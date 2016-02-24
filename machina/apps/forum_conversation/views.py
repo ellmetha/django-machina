@@ -500,8 +500,9 @@ class BaseTopicFormView(BasePostFormView):
         return valid
 
     def form_invalid(self, post_form, attachment_formset, poll_option_formset, **kwargs):
-        if poll_option_formset and not poll_option_formset.is_valid() \
-                and len(post_form.cleaned_data['poll_question']):
+        poll_errors = [k for k in post_form.errors.keys() if k.startswith('poll_')]
+        if poll_errors or (poll_option_formset and not poll_option_formset.is_valid() and
+                           len(post_form.cleaned_data['poll_question'])):
             messages.error(self.request, self.poll_option_formset_general_error_message)
 
         return super(BaseTopicFormView, self).form_invalid(
