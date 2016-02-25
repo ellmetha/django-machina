@@ -74,7 +74,7 @@ Roadmap
 Authors
 =======
 
-Morgan Aubert (@ellmetha) and contributors_
+Morgan Aubert (`@ellmetha <https://github.com/ellmetha.>`_) and contributors_
 
 .. _contributors: https://github.com/ellmetha/django-machina/contributors
 
