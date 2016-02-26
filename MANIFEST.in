@@ -5,3 +5,4 @@ recursive-include machina/static *
 recursive-include machina/locale *
 recursive-include machina *.html
 global-exclude *.pyc
+recursive-exclude tests *
