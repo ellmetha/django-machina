@@ -13,10 +13,6 @@ django-machina
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: Latest Version
 
-.. image:: http://img.shields.io/pypi/dm/django-machina.svg?style=flat-square
-    :target: https://pypi.python.org/pypi//django-machina/
-    :alt: Download
-
 .. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
     :target: http://travis-ci.org/ellmetha/django-machina
     :alt: Build status
