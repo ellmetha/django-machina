@@ -21,11 +21,11 @@ setup(
     version=machina.__version__,
     author='Morgan Aubert',
     author_email='morgan.aubert@zoho.com',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests*']),
     include_package_data=True,
     url='https://github.com/ellmetha/django-machina',
     license='BSD',
-    description='A Django forum engine for building powerful and pretty community driven websites.',
+    description='A Django forum engine for building powerful community driven websites.',
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
     install_requires=[
@@ -48,7 +48,7 @@ setup(
         'django-widget-tweaks>=1.4',
     ],
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
