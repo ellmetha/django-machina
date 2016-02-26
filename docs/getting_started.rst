@@ -33,11 +33,11 @@ Installation
 
 Install *django-machina* using::
 
-  pip install git+git://github.com/ellmetha/django-machina.git
+  pip install django-machina
 
 .. note::
 
-	Please remember that *django-machina* is still in heavy development. It is not yet suitable for production environments.
+	Please remember that *django-machina* is currently in alpha. It is not yet suitable for production environments.
 
 Project configuration
 ---------------------
