@@ -5,6 +5,18 @@ django-machina
    :target: http://django-machina.readthedocs.org/en/latest/
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/pypi/l/django-machina.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-machina/
+    :alt: License
+
+.. image:: http://img.shields.io/pypi/v/django-machina.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-machina/
+    :alt: Latest Version
+
+.. image:: http://img.shields.io/pypi/dm/django-machina.svg?style=flat-square
+    :target: https://pypi.python.org/pypi//django-machina/
+    :alt: Download
+
 .. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
     :target: http://travis-ci.org/ellmetha/django-machina
     :alt: Build status
