@@ -2,14 +2,6 @@
 Welcome to django-machina's documentation!
 ##########################################
 
-.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
-    :target: http://travis-ci.org/ellmetha/django-machina
-    :alt: Build status
-
-.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
-    :target: https://codecov.io/github/ellmetha/django-machina
-    :alt: Codecov status
-
 |
 
 *Django-machina* is a forum engine for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution that is designed to be used inside existing Django applications.
