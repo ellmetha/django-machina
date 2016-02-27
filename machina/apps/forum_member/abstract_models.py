@@ -3,12 +3,12 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.core import validators
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
+from machina.core import validators
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
@@ -18,7 +18,8 @@ class AbstractForumProfile(models.Model):
     """
     Represents the profile associated with each forum user.
     """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('User'), related_name='forum_profile')
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, verbose_name=_('User'), related_name='forum_profile')
 
     # The user's avatar
     avatar = ExtendedImageField(
@@ -29,7 +30,8 @@ class AbstractForumProfile(models.Model):
     # The user's signature
     signature = MarkupTextField(
         verbose_name=_('Signature'), blank=True, null=True,
-        validators=[validators.MaxLengthValidator(machina_settings.PROFILE_SIGNATURE_MAX_LENGTH)])
+        validators=[validators.NullableMaxLengthValidator(
+            machina_settings.PROFILE_SIGNATURE_MAX_LENGTH)])
 
     # The amount of posts the user has posted
     posts_count = models.PositiveIntegerField(verbose_name=_('Total posts'), blank=True, default=0)
