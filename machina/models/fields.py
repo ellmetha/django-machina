@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 from os import path
 
-# Third party imports
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
@@ -19,7 +17,6 @@ from django.utils.safestring import SafeData
 from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
 
-# Local application / specific library imports
 from machina.conf import settings as machina_settings
 
 
@@ -135,7 +132,7 @@ class MarkupTextField(models.TextField):
         self.add_rendered_field = not kwargs.pop('no_rendered_field', False)
         super(MarkupTextField, self).__init__(*args, **kwargs)
 
-    def deconstruct(self):
+    def deconstruct(self):  # pragma: no cover
         """
         As outlined in the Django 1.7 documentation, this method tells Django how to take an instance
         of a new field in order to reduce it to a serialized form. This can be used to configure what

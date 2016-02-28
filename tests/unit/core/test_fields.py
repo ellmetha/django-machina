@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 try:
     from imp import reload
 except ImportError:
     pass
 
-# Third party imports
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -17,7 +15,6 @@ from django.utils.encoding import force_text
 from django.utils.six import BytesIO
 import pytest
 
-# Local application / specific library imports
 from machina.conf import settings as machina_settings
 from machina.core.compat import PILImage as Image
 from machina.models import fields
@@ -97,14 +94,18 @@ class TestMarkupTextField(object):
 
     def test_should_use_a_default_text_input_widget_with_formfields(self):
         # Setup
+        machina_settings.MACHINA_MARKUP_WIDGET = None
+
         class TestableForm(forms.ModelForm):
             class Meta:
                 model = DummyModel
                 exclude = []
+
         # Run
         form = TestableForm()
+
         # Check
-        assert isinstance(form.fields['content'].widget, forms.Textarea)
+        assert type(form.fields['content'].widget) == forms.Textarea
 
     def test_can_use_a_custom_form_widget(self):
         # Setup
