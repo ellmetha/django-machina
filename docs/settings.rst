@@ -71,6 +71,13 @@ Default: ``'Re:'``
 
 This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* in the reply form.
 
+``MACHINA_POST_CONTENT_MAX_LENGTH``
+-----------------------------------
+
+Default: ``None``
+
+The maximum number of characters that can be used in a forum post. A value of ``None`` means that there is no maximum length for forum posts.
+
 ``MACHINA_TOPIC_POSTS_NUMBER_PER_PAGE``
 ---------------------------------------
 
@@ -191,7 +198,7 @@ The maximum avatar size for forum member profiles (the size must be expressed in
 
 Default: ``255``
 
-The maximum number of characters that can be used in a member signature. A value of ``None`` means that there is no maximum length for member signatures. 
+The maximum number of characters that can be used in a member signature. A value of ``None`` means that there is no maximum length for member signatures.
 
 ``MACHINA_PROFILE_RECENT_POSTS_NUMBER``
 ---------------------------------------

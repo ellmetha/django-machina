@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -14,7 +12,8 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
-# Local application / specific library imports
+from machina.conf import settings as machina_settings
+from machina.core import validators
 from machina.core.loading import get_class
 from machina.core.shortcuts import refresh
 from machina.models.abstract_models import DatedModel
@@ -42,7 +41,8 @@ class AbstractTopic(DatedModel):
     Represents a forum topic.
     """
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Topic forum'), related_name='topics')
-    poster = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Poster'), blank=True, null=True)
+    poster = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('Poster'), blank=True, null=True)
 
     # The subject of the thread should correspond to the one associated with the first post
     subject = models.CharField(max_length=255, verbose_name=_('Subject'))
@@ -50,27 +50,33 @@ class AbstractTopic(DatedModel):
 
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
     TYPE_CHOICES = TOPIC_TYPES
-    type = models.PositiveSmallIntegerField(choices=TOPIC_TYPES, verbose_name=_('Topic type'), db_index=True)
+    type = models.PositiveSmallIntegerField(
+        choices=TOPIC_TYPES, verbose_name=_('Topic type'), db_index=True)
 
     # A topic can be locked, unlocked or moved
     STATUS_CHOICES = TOPIC_STATUSES
-    status = models.PositiveIntegerField(choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
+    status = models.PositiveIntegerField(
+        choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
 
     # A topic can be approved before publishing ; defaults to True. The value of this flag
     # should correspond to the one associated with the first post
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
     # The number of posts included in this topic (only those that are approved)
-    posts_count = models.PositiveIntegerField(verbose_name=_('Posts count'), editable=False, blank=True, default=0)
+    posts_count = models.PositiveIntegerField(
+        verbose_name=_('Posts count'), editable=False, blank=True, default=0)
 
     # The number of time the topic has been viewed
-    views_count = models.PositiveIntegerField(verbose_name=_('Views count'), editable=False, blank=True, default=0)
+    views_count = models.PositiveIntegerField(
+        verbose_name=_('Views count'), editable=False, blank=True, default=0)
 
     # The date of the latest post
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Many users can subscribe to this topic
-    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='subscriptions', verbose_name=_('Subscribers'), blank=True)
+    subscribers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='subscriptions',
+        verbose_name=_('Subscribers'), blank=True)
 
     objects = models.Manager()
     approved_objects = ApprovedManager()
@@ -205,17 +211,24 @@ class AbstractPost(DatedModel):
     """
     Represents a forum post. A forum post is always linked to a topic.
     """
-    topic = models.ForeignKey('forum_conversation.Topic', verbose_name=_('Topic'), related_name='posts')
-    poster = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', verbose_name=_('Poster'), blank=True, null=True)
-    poster_ip = models.GenericIPAddressField(verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0')
-    anonymous_key = models.CharField(max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
+    topic = models.ForeignKey(
+        'forum_conversation.Topic', verbose_name=_('Topic'), related_name='posts')
+    poster = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='posts',
+        verbose_name=_('Poster'), blank=True, null=True)
+    poster_ip = models.GenericIPAddressField(
+        verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0')
+    anonymous_key = models.CharField(
+        max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
 
     # Each post can have its own subject. The subject of the thread corresponds to the
     # one associated with the first post
     subject = models.CharField(verbose_name=_('Subject'), max_length=255)
 
     # Content
-    content = MarkupTextField(verbose_name=_('Content'))
+    content = MarkupTextField(
+        verbose_name=_('Content'), validators=[validators.NullableMaxLengthValidator(
+            machina_settings.POST_CONTENT_MAX_LENGTH)])
 
     # Username: if the user creating a topic post is not authenticated, he must enter a username
     username = models.CharField(verbose_name=_('Username'), max_length=155, blank=True, null=True)
@@ -223,12 +236,17 @@ class AbstractPost(DatedModel):
     # A post can be approved before publishing ; defaults to True
     approved = models.BooleanField(verbose_name=_('Approved'), default=True)
 
-    # A post can be edited for several reason (eg. moderation) ; the reason why it has been updated can be specified
-    update_reason = models.CharField(max_length=255, verbose_name=_('Update reason'), blank=True, null=True)
+    # A post can be edited for several reason (eg. moderation) ; the reason why it has been
+    # updated can be specified
+    update_reason = models.CharField(
+        max_length=255, verbose_name=_('Update reason'), blank=True, null=True)
 
     # Tracking data
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Lastly updated by'), editable=False, blank=True, null=True)
-    updates_count = models.PositiveIntegerField(verbose_name=_('Updates count'), editable=False, blank=True, default=0)
+    updated_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('Lastly updated by'),
+        editable=False, blank=True, null=True)
+    updates_count = models.PositiveIntegerField(
+        verbose_name=_('Updates count'), editable=False, blank=True, default=0)
 
     objects = models.Manager()
     approved_objects = ApprovedManager()

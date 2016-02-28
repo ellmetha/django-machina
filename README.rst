@@ -76,7 +76,6 @@ Roadmap
 * Topic subscriptions: a user can get a list of all topics to which he subscribed
 * A view to get all the posts of a forum member
 * A setting to limit the maximum size of an attachment
-* A setting to limit the length of topic posts
 * A way to prevent users to submit too many posts in a given period
 
 Authors
