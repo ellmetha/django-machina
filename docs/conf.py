@@ -44,6 +44,9 @@ extensions = [
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+html_additional_pages = {
+    'index': 'indexcontent.html',
+}
 
 # The suffix of source filenames.
 source_suffix = '.rst'
@@ -165,10 +168,6 @@ html_static_path = ['_static']
 # Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
 
-# Additional templates that should be rendered to pages, maps page names to
-# template names.
-#html_additional_pages = {}
-
 # If false, no module index is generated.
 #html_domain_indices = True
 
@@ -197,6 +196,9 @@ html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'django-machinadoc'
+
+def setup(app):
+    app.add_stylesheet('custom_theme.css')
 
 
 # -- Options for LaTeX output ---------------------------------------------

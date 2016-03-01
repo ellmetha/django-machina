@@ -1,0 +1,14 @@
+#features_wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+#features_wrapper .feature {
+    margin: 0.5em;
+    padding: 0.5em;
+    flex: 1 1 auto;
+    width: 200px;
+    background: #eee;
+    border-radius: 2px;
+    border: 1px solid #dedede;
+    text-align: center;
+}
