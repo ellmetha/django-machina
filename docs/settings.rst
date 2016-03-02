@@ -71,6 +71,8 @@ Default: ``'Re:'``
 
 This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* in the reply form.
 
+.. _setting-post-content-max-length:
+
 ``MACHINA_POST_CONTENT_MAX_LENGTH``
 -----------------------------------
 
@@ -192,6 +194,8 @@ The imposed avatar maximum height for forum member profiles. This setting affect
 Default: ``0``
 
 The maximum avatar size for forum member profiles (the size must be expressed in bytes). A value of ``0`` means that there is no size limitation.
+
+.. _setting-profile-signature-max-length:
 
 ``MACHINA_PROFILE_SIGNATURE_MAX_LENGTH``
 ----------------------------------------
