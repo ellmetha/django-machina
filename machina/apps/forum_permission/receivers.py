@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 
-# Local application / specific library imports
 from machina.core.loading import get_class
+from machina.core.db.models import get_model
 
-ForumPermission = get_class('forum_permission.models', 'ForumPermission')
+ForumPermission = get_model('forum_permission', 'ForumPermission')
 PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 
 

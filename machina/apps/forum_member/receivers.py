@@ -9,12 +9,12 @@ from django.db.models.signals import pre_save
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from machina.core.loading import get_class
+from machina.core.db.models import get_model
 
 User = get_user_model()
 
-Post = get_class('forum_conversation.models', 'Post')
-ForumProfile = get_class('forum_member.models', 'ForumProfile')
+Post = get_model('forum_conversation', 'Post')
+ForumProfile = get_model('forum_member', 'ForumProfile')
 
 
 @receiver(pre_save, sender=Post)
