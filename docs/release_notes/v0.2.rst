@@ -16,3 +16,4 @@ Minor changes
 -------------
 
 * Add a way to disable the configurable max length of the forum profile ``signature`` field (see :ref:`MACHINA_PROFILE_SIGNATURE_MAX_LENGTH <setting-profile-signature-max-length>` settings)
+* Fix: fixed a bug that prevented to properly override some *django-machina* models
