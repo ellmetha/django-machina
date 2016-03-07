@@ -21,4 +21,4 @@ coverage:
 travis: install lint coverage
 
 docs:
-	cd docs && make html
+	cd docs && rm -rf _build && make html
