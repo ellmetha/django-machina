@@ -66,8 +66,6 @@ copyright = u'2013-2016, Morgan Aubert'
 # built documents.
 #
 
-import machina
-
 # The short X.Y version.
 version = machina.__version__
 # The full version, including alpha/beta/rc tags.
