@@ -5,11 +5,11 @@ staticfiles:
 .PHONY: install upgrade lint coverage travis docs
 
 install:
-	pip install -r dev-requirements.txt
+	pip install -r requirements-dev.txt
 	pip install -e .
 
 upgrade:
-	pip install -r dev-requirements.txt -U
+	pip install -r requirements-dev.txt -U
 	pip install -e . -U
 
 lint:
