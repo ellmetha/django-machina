@@ -1302,7 +1302,7 @@ msgstr "Par: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
 #: templates/machina/forum_search/search.html:89
 #, python-format
 msgid "By: %(poster_username)s on %(creation_date)s"
-msgstr "Par: %(poster_username)s on %(creation_date)s"
+msgstr "Par: %(poster_username)s le %(creation_date)s"
 
 #: templates/machina/forum_conversation/post_delete.html:5
 #: templates/machina/forum_conversation/post_delete.html:12
@@ -1359,7 +1359,7 @@ msgstr "Mis à jour"
 
 #: templates/machina/forum_conversation/topic_detail.html:80
 msgid "on"
-msgstr "à"
+msgstr "le"
 
 #: templates/machina/forum_conversation/topic_detail.html:80
 #, python-format
