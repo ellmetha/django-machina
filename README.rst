@@ -46,7 +46,7 @@ django-machina
 
 .. _django-oscar: https://github.com/django-oscar/django-oscar
 
-.. contents::
+.. contents:: :local:
 
 Documentation
 =============
