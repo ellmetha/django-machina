@@ -85,12 +85,20 @@ As previously stated, this step can be skipped if the application you want to ov
   from __future__ import unicode_literals
   from machina.apps.forum_conversation.admin import *  # noqa
 
-Use the application AppConfig
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Define the application AppConfig
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Most of *django-machina*'s applications define sublclasses of Django's ``AppConfig`` which can perform initialization operations. *Django-machina* ``AppConfig`` instances are defined inside sub-modules called ``registry_config``. You need to make sure the ``AppConfig`` subclass of the application you want to override is properly loaded. So your application's ``__init__.py`` should include the default app config to use::
+Most of *django-machina*'s applications define sublclasses of Django's ``AppConfig`` which can perform initialization operations. *Django-machina* ``AppConfig`` instances are defined inside sub-modules called ``registry_config``. You need to define an ``AppConfig`` subclass for your custom application by subclassing the overridden application ``AppConfig``. So your application's ``__init__.py`` should report the custom application ``AppConfig``::
 
-    default_app_config = 'machina.apps.forum_conversation.registry_config.ConversationRegistryConfig'
+    default_app_config = 'apps.forum_conversation.registry_config.ConversationRegistryConfig'
+
+And in ``registry_config.py`` in you application you have something like::
+
+    from machina.apps.forum_conversation.registry_config import ConversationRegistryConfig as BaseConversationRegistryConfig
+
+    class ConversationRegistryConfig(BaseConversationRegistryConfig):
+        name = 'apps.forum_conversation'
+
 
 Add the local application to your INSTALLED_APPS
 ------------------------------------------------
