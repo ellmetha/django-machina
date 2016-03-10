@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ValidationError
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
-from machina.core.shortcuts import refresh
 from machina.test.factories import build_category_forum
 from machina.test.factories import build_link_forum
 from machina.test.factories import create_category_forum
@@ -116,7 +112,7 @@ class TestForum(object):
         # Run
         p2 = PostFactory.create(topic=topic, poster=self.u1)
         # Check
-        sub_level_forum = refresh(sub_level_forum)
+        sub_level_forum.refresh_from_db()
         assert sub_level_forum.last_post_on == p2.created
 
     def test_can_reset_last_post_datetime_if_all_topics_have_been_deleted(self):
@@ -127,5 +123,5 @@ class TestForum(object):
         # Run
         topic.delete()
         # Check
-        sub_level_forum = refresh(sub_level_forum)
+        sub_level_forum.refresh_from_db()
         assert sub_level_forum.last_post_on is None

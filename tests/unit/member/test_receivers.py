@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
-from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
@@ -30,7 +26,7 @@ class TestIncreasePostsCountReceiver(object):
         # Run
         PostFactory.create(topic=topic, poster=u1, approved=True)
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count + 1
 
     def test_cannot_increase_the_posts_count_of_the_post_being_created_if_it_is_not_approved(self):
@@ -44,7 +40,7 @@ class TestIncreasePostsCountReceiver(object):
         # Run
         PostFactory.create(topic=topic, poster=u1, approved=False)
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count
 
     def test_can_increase_the_posts_count_of_a_post_being_approved(self):
@@ -60,7 +56,7 @@ class TestIncreasePostsCountReceiver(object):
         post.approved = True
         post.save()
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count + 1
 
     def test_do_nothing_if_the_poster_is_anonymous(self):
@@ -87,7 +83,7 @@ class TestDecreasePostsCountReceiver(object):
         # Run
         post.delete()
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count - 1
 
     def test_do_nothing_if_the_poster_is_anonymous(self):

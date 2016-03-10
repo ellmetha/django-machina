@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
@@ -123,15 +119,16 @@ class TestTopicPollOptionFormset(object):
             'form-TOTAL_FORMS': 2,
             'form-MAX_NUM_FORMS': 1000,
         }
+        self.topic.refresh_from_db()
         # Run
         form = TopicPollOptionFormset(
             data=form_data,
-            topic=refresh(self.topic))
+            topic=self.topic)
         valid = form.is_valid()
         # Check
         assert valid
         form.save()
-        option_1 = refresh(option_1)
+        option_1.refresh_from_db()
         assert option_1.text == form_data['form-0-text']
 
     def test_append_empty_forms_only_when_no_initial_data_is_provided(self):
@@ -148,11 +145,12 @@ class TestTopicPollOptionFormset(object):
             'form-TOTAL_FORMS': 2,
             'form-MAX_NUM_FORMS': 1000,
         }
+        self.topic.refresh_from_db()
         # Run
         form_1 = TopicPollOptionFormset(
             data=form_data_1,
-            topic=refresh(self.topic))
-        form_2 = TopicPollOptionFormset(topic=refresh(self.topic))  # poll already created
+            topic=self.topic)
+        form_2 = TopicPollOptionFormset(topic=self.topic)  # poll already created
         form_3 = TopicPollOptionFormset(topic=self.alt_topic)  # no poll
         # Check
         assert form_1.total_form_count() == 2

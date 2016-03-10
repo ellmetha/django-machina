@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ValidationError
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
-from machina.core.shortcuts import refresh
 from machina.test.factories import build_topic
 from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
@@ -87,8 +83,8 @@ class TestTopic(object):
         # Run & check
         middle_post = PostFactory.create(topic=self.topic, poster=self.u1)
         PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
-        topic = refresh(self.topic)
-        assert topic.last_post == middle_post
+        self.topic.refresh_from_db()
+        assert self.topic.last_post == middle_post
 
     def test_cannot_update_its_last_post_date_with_the_creation_date_of_a_non_approved_post(self):
         # Setup
@@ -96,8 +92,8 @@ class TestTopic(object):
         # Run & check
         middle_post = PostFactory.create(topic=self.topic, poster=self.u1)
         PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
-        topic = refresh(self.topic)
-        assert topic.last_post_on == middle_post.created
+        self.topic.refresh_from_db()
+        assert self.topic.last_post_on == middle_post.created
 
     def test_has_the_first_post_name_as_subject(self):
         # Run & check
@@ -213,7 +209,7 @@ class TestPost(object):
         # Run
         post.save()
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count + 1
 
     def test_save_cannot_trigger_the_update_of_the_member_posts_count_if_the_related_post_is_not_approved(self):
@@ -224,7 +220,7 @@ class TestPost(object):
         # Run
         post.save()
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count
 
     def test_save_trigger_the_update_of_the_member_posts_count_if_the_related_post_switch_to_approved(self):
@@ -236,7 +232,7 @@ class TestPost(object):
         post.approved = True
         post.save()
         # Check
-        profile = refresh(profile)
+        profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count + 1
 
     def test_cannot_be_cleaned_if_it_is_not_associated_with_a_user_or_an_anonymous_user(self):

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages import constants as MSG  # noqa
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -12,7 +10,6 @@ from django.utils.encoding import force_bytes
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.abstract_models import TOPIC_TYPES
 from machina.apps.forum_conversation.forum_attachments.forms import AttachmentFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
@@ -20,7 +17,6 @@ from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
 from machina.apps.forum_conversation.signals import topic_viewed
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.core.shortcuts import refresh
 from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import AttachmentFactory
 from machina.test.factories import create_forum
@@ -750,9 +746,9 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
-        option_2 = refresh(option_2)
+        option_2.refresh_from_db()
         assert option_2.text == post_data['poll-1-text']
-        poll = refresh(poll)
+        poll.refresh_from_db()
         assert poll.question == post_data['poll_question']
 
     def test_allows_poll_creations(self):
@@ -859,7 +855,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
-        attachment = refresh(attachment)
+        attachment.refresh_from_db()
         assert attachment.comment == post_data['attachment-0-comment']
 
     def test_allows_attachment_creations(self):

@@ -15,7 +15,6 @@ from model_utils import Choices
 from machina.conf import settings as machina_settings
 from machina.core import validators
 from machina.core.loading import get_class
-from machina.core.shortcuts import refresh
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
 
@@ -168,7 +167,8 @@ class AbstractTopic(DatedModel):
             self.update_trackers()
             # The previous parent forum counters should also be updated
             if old_instance.forum:
-                old_forum = refresh(old_instance.forum)
+                old_forum = old_instance.forum
+                old_forum.refresh_from_db()
                 old_forum.update_trackers()
 
     def _simple_save(self, *args, **kwargs):

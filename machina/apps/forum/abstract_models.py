@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import force_text
@@ -14,12 +12,10 @@ from model_utils import Choices
 from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
 
-# Local application / specific library imports
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.core.shortcuts import refresh
 from machina.models import ActiveModel
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
@@ -149,7 +145,8 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
             self.update_trackers()
             # The previous parent trackers should also be updated
             if old_instance.parent:
-                old_parent = refresh(old_instance.parent)
+                old_parent = old_instance.parent
+                old_parent.refresh_from_db()
                 old_parent.update_trackers()
             # Trigger the 'forum_moved' signal
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)

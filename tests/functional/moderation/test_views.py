@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.core.loading import get_class
 from machina.core.db.models import get_model
-from machina.core.shortcuts import refresh
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
@@ -75,8 +71,8 @@ class TestTopicLockView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.is_locked
+        self.topic.refresh_from_db()
+        assert self.topic.is_locked
 
     def test_redirects_to_the_topic_view(self):
         # Setup
@@ -150,8 +146,8 @@ class TestTopicUnlockView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert not topic.is_locked
+        self.topic.refresh_from_db()
+        assert not self.topic.is_locked
 
     def test_redirects_to_the_topic_view(self):
         # Setup
@@ -300,8 +296,8 @@ class TestTopicMoveView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.forum == self.other_forum
+        self.topic.refresh_from_db()
+        assert self.topic.forum == self.other_forum
 
     def test_can_move_and_lock_topics(self):
         # Setup
@@ -315,9 +311,9 @@ class TestTopicMoveView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.forum == self.other_forum
-        assert topic.is_locked
+        self.topic.refresh_from_db()
+        assert self.topic.forum == self.other_forum
+        assert self.topic.is_locked
 
     def test_can_move_and_unlock_a_topic_if_it_was_locked(self):
         # Setup
@@ -333,9 +329,9 @@ class TestTopicMoveView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, post_data, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.forum == self.other_forum
-        assert not topic.is_locked
+        self.topic.refresh_from_db()
+        assert self.topic.forum == self.other_forum
+        assert not self.topic.is_locked
 
     def test_cannot_be_browsed_by_users_who_cannot_move_topics(self):
         # Setup
@@ -394,8 +390,8 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.is_topic
+        self.topic.refresh_from_db()
+        assert self.topic.is_topic
 
     def test_redirects_to_the_topic_view(self):
         # Setup
@@ -470,8 +466,8 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.is_sticky
+        self.topic.refresh_from_db()
+        assert self.topic.is_sticky
 
     def test_redirects_to_the_topic_view(self):
         # Setup
@@ -546,8 +542,8 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        topic = refresh(self.topic)
-        assert topic.is_announce
+        self.topic.refresh_from_db()
+        assert self.topic.is_announce
 
     def test_redirects_to_the_topic_view(self):
         # Setup
@@ -742,8 +738,8 @@ class TestPostApproveView(BaseClientTestCase):
         # Run
         self.client.post(correct_url, follow=True)
         # Check
-        post = refresh(self.post)
-        assert post.approved
+        self.post.refresh_from_db()
+        assert self.post.approved
 
     def test_redirects_to_the_moderation_queue(self):
         # Setup
