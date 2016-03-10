@@ -180,6 +180,10 @@ class TestPost(object):
         post = PostFactory.create(topic=self.topic, poster=self.u1)
         assert post.is_topic_tail
 
+    def test_knows_if_it_is_alone_in_the_topic(self):
+        # Run & check
+        assert self.post.is_alone
+
     def test_knows_its_position_inside_the_topic(self):
         # Setup
         post_2 = PostFactory.create(topic=self.topic, poster=self.u1)
@@ -196,6 +200,15 @@ class TestPost(object):
 
     def test_deletion_should_result_in_the_topic_deletion_if_it_is_alone_in_the_topic(self):
         # Run
+        self.post.delete()
+        # Check
+        with pytest.raises(Topic.DoesNotExist):
+            Topic.objects.get(pk=self.topic_pk)
+
+    def test_deletion_should_result_in_the_topic_deletion_if_it_is_alone_in_the_topic_and_not_approved(self):
+        # Run
+        self.post.approved = False
+        self.post.save()
         self.post.delete()
         # Check
         with pytest.raises(Topic.DoesNotExist):

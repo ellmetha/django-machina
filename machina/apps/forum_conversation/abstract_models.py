@@ -277,6 +277,13 @@ class AbstractPost(DatedModel):
         return self.topic.last_post.id == self.id
 
     @property
+    def is_alone(self):
+        """
+        Returns True if the post is the only single post of the topic.
+        """
+        return self.topic.posts.count() == 1
+
+    @property
     def position(self):
         """
         Returns an integer corresponding to the position of the post in the topic.
@@ -312,7 +319,7 @@ class AbstractPost(DatedModel):
         self.topic.update_trackers()
 
     def delete(self, using=None):
-        if self.is_topic_head and self.is_topic_tail:
+        if self.is_alone:
             # The default way of operating is to trigger the deletion of the associated topic
             # only if the considered post is the only post embedded in the topic
             self.topic.delete()
