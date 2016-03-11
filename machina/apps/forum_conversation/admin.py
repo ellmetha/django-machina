@@ -19,11 +19,6 @@ class AttachmentInline(admin.TabularInline):
     extra = 1
 
 
-class PostInline(admin.TabularInline):
-    model = Post
-    extra = 1
-
-
 class PostAdmin(admin.ModelAdmin):
     inlines = [AttachmentInline, ]
     list_display = ('__str__', 'topic', 'poster', 'updated', 'approved')
@@ -38,7 +33,6 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class TopicAdmin(admin.ModelAdmin):
-    inlines = (PostInline,)
     list_display = ('subject', 'forum', 'created', 'first_post', 'last_post', 'posts_count', 'approved')
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', 'subscribers', )

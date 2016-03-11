@@ -16,8 +16,10 @@ Minor changes
 -------------
 
 * Add a way to disable the configurable max length of the forum profile ``signature`` field (see :ref:`MACHINA_PROFILE_SIGNATURE_MAX_LENGTH <setting-profile-signature-max-length>` settings)
+* Fix: remove unnecessary ``Post`` inline form in ``Topic`` admin form (`#11`_)
 * Fix: fixed a bug that prevented to properly override some *django-machina* models (`#7`_)
 * Fix: fixed a bug that prevented to properly delete an unnaproved post (`#9`_)
 
 .. _`#7`: https://github.com/ellmetha/django-machina/issues/7
 .. _`#9`: https://github.com/ellmetha/django-machina/issues/9
+.. _`#11`: https://github.com/ellmetha/django-machina/issues/11
