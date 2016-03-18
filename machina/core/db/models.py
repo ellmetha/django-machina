@@ -58,4 +58,4 @@ def model_factory(abstract_class):
     model_name = abstract_class.__name__.replace('Abstract', '')
 
     if not is_model_registered(app_label, model_name):
-        return type(model_name, (abstract_class, ), {'__module__': __name__, })
+        return type(str(model_name), (abstract_class, ), {'__module__': __name__, })
