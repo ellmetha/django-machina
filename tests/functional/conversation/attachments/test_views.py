@@ -5,6 +5,7 @@ import os
 
 from django.conf import settings
 from django.core.files import File
+from django.core.urlresolvers import reverse
 from faker import Factory as FakerFactory
 import pytest
 
@@ -71,7 +72,7 @@ class TestAttachmentView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = self.attachment.get_absolute_url()
+        correct_url = reverse('forum_conversation:attachment', kwargs={'pk': self.attachment.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -80,7 +81,7 @@ class TestAttachmentView(BaseClientTestCase):
     def test_cannot_be_browsed_by_users_who_cannot_download_forum_files(self):
         # Setup
         remove_perm('can_download_file', self.user, self.top_level_forum)
-        correct_url = self.attachment.get_absolute_url()
+        correct_url = reverse('forum_conversation:attachment', kwargs={'pk': self.attachment.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -88,7 +89,7 @@ class TestAttachmentView(BaseClientTestCase):
 
     def test_embed_the_correct_http_headers_in_the_response(self):
         # Setup
-        correct_url = self.attachment.get_absolute_url()
+        correct_url = reverse('forum_conversation:attachment', kwargs={'pk': self.attachment.id})
         filename = os.path.basename(self.attachment.file.name)
         # Run
         response = self.client.get(correct_url, follow=True)
@@ -103,7 +104,7 @@ class TestAttachmentView(BaseClientTestCase):
         attachment_file = File(f)
         attachment = AttachmentFactory.create(
             post=self.post, file=attachment_file)
-        correct_url = attachment.get_absolute_url()
+        correct_url = reverse('forum_conversation:attachment', kwargs={'pk': attachment.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check

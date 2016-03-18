@@ -189,7 +189,3 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         # Trigger the parent trackers update if necessary
         if self.parent:
             self.parent.update_trackers()
-
-    def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('forum:forum', kwargs={'slug': self.slug, 'pk': str(self.id)})

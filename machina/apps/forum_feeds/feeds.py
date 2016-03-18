@@ -48,5 +48,10 @@ class LastTopicsFeed(Feed):
     def items(self):
         return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-last_post_on')
 
+    def item_link(self, item):
+        return reverse_lazy('forum_conversation:topic', kwargs={
+            'forum_slug': item.forum.slug, 'forum_pk': item.forum.pk,
+            'slug': item.slug, 'pk': item.id})
+
     def item_pubdate(self, item):
         return item.created

@@ -61,7 +61,9 @@ class TestTopicView(BaseClientTestCase):
 
     def test_browsing_works(self):
         # Setup
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -69,7 +71,9 @@ class TestTopicView(BaseClientTestCase):
 
     def test_triggers_a_viewed_signal(self):
         # Setup
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run & check
         with mock_signal_receiver(topic_viewed) as receiver:
             self.client.get(correct_url, follow=True)
@@ -77,7 +81,9 @@ class TestTopicView(BaseClientTestCase):
 
     def test_increases_the_views_counter_of_the_topic(self):
         # Setup
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         initial_views_count = self.topic.views_count
         # Run
         self.client.get(correct_url)
@@ -87,7 +93,9 @@ class TestTopicView(BaseClientTestCase):
 
     def test_cannot_change_the_updated_date_of_the_topic(self):
         # Setup
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         initial_updated_date = self.topic.updated
         # Run
         self.client.get(correct_url)
@@ -102,7 +110,9 @@ class TestTopicView(BaseClientTestCase):
         TopicReadTrackFactory.create(topic=new_topic, user=self.user)
         TopicReadTrackFactory.create(topic=self.topic, user=self.user)
         PostFactory.create(topic=self.topic, poster=self.user)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run
         self.client.get(correct_url)
         # Check
@@ -118,7 +128,9 @@ class TestTopicView(BaseClientTestCase):
         new_topic = create_topic(forum=self.top_level_forum, poster=self.user)
         PostFactory.create(topic=new_topic, poster=self.user)
         PostFactory.create(topic=self.topic, poster=self.user)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run
         self.client.get(correct_url)
         # Check
@@ -133,7 +145,9 @@ class TestTopicView(BaseClientTestCase):
         topic_alt = create_topic(forum=top_level_forum_alt, poster=self.user)
         PostFactory.create(topic=topic_alt, poster=self.user)
         assign_perm('can_read_forum', self.user, top_level_forum_alt)
-        correct_url = topic_alt.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': top_level_forum_alt.slug, 'forum_pk': top_level_forum_alt.pk,
+            'slug': topic_alt.slug, 'pk': topic_alt.id})
         # Run
         self.client.get(correct_url)
         # Check
@@ -147,7 +161,9 @@ class TestTopicView(BaseClientTestCase):
         ForumReadTrack.objects.all().delete()
         assign_perm('can_read_forum', AnonymousUser(), self.top_level_forum)
         self.client.logout()
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run
         self.client.get(correct_url)
         # Check
@@ -161,7 +177,9 @@ class TestTopicView(BaseClientTestCase):
         for _ in range(0, 40):
             # 15 posts per page
             PostFactory.create(topic=self.topic, poster=self.user)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run & check
         first_post_pk = self.topic.first_post.pk
         response = self.client.get(correct_url, {'post': first_post_pk}, follow=True)
@@ -178,7 +196,9 @@ class TestTopicView(BaseClientTestCase):
         for _ in range(0, 40):
             # 15 posts per page
             PostFactory.create(topic=self.topic, poster=self.user)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run & check
         bad_post_pk = self.topic.first_post.pk + 50000
         response = self.client.get(correct_url, {'post': bad_post_pk}, follow=True)
@@ -191,7 +211,9 @@ class TestTopicView(BaseClientTestCase):
         poll = TopicPollFactory.create(topic=self.topic)
         TopicPollOptionFactory.create(poll=poll)
         TopicPollOptionFactory.create(poll=poll)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run & check
         response = self.client.get(correct_url)
         assert response.context_data['poll'] == poll
@@ -200,7 +222,9 @@ class TestTopicView(BaseClientTestCase):
     def test_cannot_be_browsed_by_users_who_cannot_browse_the_related_forum(self):
         # Setup
         remove_perm('can_read_forum', self.user, self.top_level_forum)
-        correct_url = self.topic.get_absolute_url()
+        correct_url = reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
+            'slug': self.topic.slug, 'pk': self.topic.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
