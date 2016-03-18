@@ -43,7 +43,8 @@
                 {% endif %}
             </div>
         </div>
-        {% with topic_list_title="Announcements" topics=announces hide_if_empty=True %}
+        {% trans "Announcements" as announcements_title_trans %}
+        {% with topic_list_title=announcements_title_trans topics=announces hide_if_empty=True %}
             {% include "forum_conversation/topic_list.html" %}
         {% endwith %}
         {% with "Topics" as topic_list_title %}

@@ -19,11 +19,13 @@ Minor changes
 * Fix: remove unnecessary ``Post`` inline form in ``Topic`` admin form (`#11`_)
 * Fix: fixed a bug that prevented to properly override some *django-machina* models (`#7`_)
 * Fix: fixed a bug that prevented to properly delete an unnaproved post (`#9`_)
+* Fix: add a missing translation in the forum detail view template (`#12`_)
 * Fix: fixed a bug that prevented models from some applications(``forum_attachments`` and ``forum_polls``) to be overridden
 
 .. _`#7`: https://github.com/ellmetha/django-machina/issues/7
 .. _`#9`: https://github.com/ellmetha/django-machina/issues/9
 .. _`#11`: https://github.com/ellmetha/django-machina/issues/11
+.. _`#12`: https://github.com/ellmetha/django-machina/issues/12
 
 Backwards incompatible changes
 ------------------------------
