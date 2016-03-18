@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_moderation.forms import TopicMoveForm
 from machina.core.loading import get_class
 from machina.core.db.models import get_model

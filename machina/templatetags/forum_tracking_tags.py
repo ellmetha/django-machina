@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django import template
 
-# Local application / specific library imports
 from machina.core.loading import get_class
 
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')

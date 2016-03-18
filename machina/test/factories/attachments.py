@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 import factory
 from faker import Factory as FakerFactory
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.test.factories.conversation import PostFactory
 

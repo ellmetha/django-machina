@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.db.models import F
 from django.dispatch import receiver
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.signals import topic_viewed
 
 

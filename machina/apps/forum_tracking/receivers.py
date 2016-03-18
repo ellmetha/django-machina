@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.dispatch import receiver
 
-# Local application / specific library imports
 from machina.core.loading import get_class
 
 topic_viewed = get_class('forum_conversation.signals', 'topic_viewed')

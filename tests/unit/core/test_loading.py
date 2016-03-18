@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.conf import settings
 from django.test.utils import override_settings
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import AppNotFoundError
 from machina.core.loading import ClassNotFoundError

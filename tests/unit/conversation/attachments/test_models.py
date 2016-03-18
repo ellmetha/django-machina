@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.encoding import force_bytes
 import pytest
 
-# Local application / specific library imports
 from machina.test.factories import AttachmentFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic

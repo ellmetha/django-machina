@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.test.client import RequestFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_feeds.feeds import LastTopicsFeed
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

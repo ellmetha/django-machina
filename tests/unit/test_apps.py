@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
-# Local application / specific library imports
 from machina import get_apps
 from machina import MACHINA_VANILLA_APPS
 

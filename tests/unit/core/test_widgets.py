@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from faker import Factory as FakerFactory
 
-# Local application / specific library imports
 from machina.forms.widgets import SelectWithDisabled
 
 faker = FakerFactory.create()

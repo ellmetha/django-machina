@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
 from django.utils.translation import ugettext_lazy as _
 
-# Local application / specific library imports
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.shortcuts import get_object_or_none

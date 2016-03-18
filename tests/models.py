@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.db import models
 
-# Local application / specific library imports
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 

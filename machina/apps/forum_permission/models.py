@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
-# Local application / specific library imports
+from __future__ import unicode_literals
+
 from machina.apps.forum_permission.abstract_models import AbstractForumPermission
 from machina.apps.forum_permission.abstract_models import AbstractGroupForumPermission
 from machina.apps.forum_permission.abstract_models import AbstractUserForumPermission

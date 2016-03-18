@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
-
-# Local application / specific library imports
 
 
 class TrackingRegistryConfig(AppConfig):

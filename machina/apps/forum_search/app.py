@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.conf.urls import url
 from haystack.views import search_view_factory
 
-# Local application / specific library imports
 from machina.core.app import Application
 from machina.core.loading import get_class
 

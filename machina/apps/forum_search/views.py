@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
-from haystack import views
+from __future__ import unicode_literals
 
-# Local application / specific library imports
+from haystack import views
 
 
 class FacetedSearchView(views.FacetedSearchView):

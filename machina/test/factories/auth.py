@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 import factory
 from faker import Factory as FakerFactory
-
-# Local application / specific library imports
 
 faker = FakerFactory.create()
 

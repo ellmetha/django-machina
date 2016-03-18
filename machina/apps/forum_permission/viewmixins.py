@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+from __future__ import unicode_literals
 from collections import Iterable
 
-# Third party imports
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import PermissionDenied
@@ -11,8 +10,6 @@ from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.utils.six import string_types
-
-# Local application / specific library imports
 
 
 class PermissionRequiredMixin(object):

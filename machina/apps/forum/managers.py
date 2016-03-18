@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.db.models import Q
 from mptt.managers import TreeManager
-
-# Local application / specific library imports
 
 
 class ForumManager(TreeManager):

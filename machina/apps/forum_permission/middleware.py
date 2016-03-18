@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 import uuid
 
-# Third party imports
-# Local application / specific library imports
 from machina.core.loading import get_class
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')

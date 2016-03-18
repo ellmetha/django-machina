@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
 import pytest
-
-# Local application / specific library imports
 
 
 class TestRenderedTag(object):

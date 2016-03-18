@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_permission.checker import ForumPermissionChecker
 from machina.apps.forum_permission.shortcuts import assign_perm
 from machina.apps.forum_permission.models import ForumPermission

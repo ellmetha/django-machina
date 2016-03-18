@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 import shutil
 
-# Third party imports
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from faker import Factory as FakerFactory
@@ -13,7 +11,6 @@ from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum

@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 from collections import OrderedDict
-
-# Third party imports
-# Local application / specific library imports
 
 
 class PermissionConfig(object):

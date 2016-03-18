@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.contrib import admin
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 
 ForumPermission = get_model('forum_permission', 'ForumPermission')

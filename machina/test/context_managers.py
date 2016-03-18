@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 import contextlib
-# Third party imports
-import mock
 
-# Local application / specific library imports
+import mock
 
 
 # Originaly comes from mock-django (https://github.com/dcramer/mock-django)

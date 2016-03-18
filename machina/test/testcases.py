@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.contrib.auth.models import User
 from django.test.client import Client
 import pytest
-
-# Local application / specific library imports
 
 
 @pytest.mark.django_db

@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
-from django.db import models
+from __future__ import unicode_literals
 
-# Local application / specific library imports
+from django.db import models
 
 
 class ForumReadTrackManager(models.Manager):

@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+from __future__ import unicode_literals
 from importlib import import_module
 
-# Third party imports
 from django.apps import apps
 from django.apps.config import MODELS_MODULE_NAME
 from django.core.exceptions import AppRegistryNotReady
-
-# Local application / specific library imports
 
 
 # The following is mainly inspired from the model loading tools provided

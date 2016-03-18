@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.template import Context
 from django.template.base import Template
@@ -11,7 +9,6 @@ from django.template.loader import render_to_string
 from django.test.client import RequestFactory
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import create_category_forum

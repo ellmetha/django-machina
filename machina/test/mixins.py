@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.urlresolvers import reverse
-
-# Local application / specific library imports
 
 
 class AdminBaseViewTestMixin(object):

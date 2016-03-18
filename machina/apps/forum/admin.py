@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+from __future__ import unicode_literals
 from collections import OrderedDict
 
-# Third party imports
 from django import forms
 from django.conf.urls import url
 from django.contrib import admin
@@ -21,7 +20,6 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.forms import TreeNodeChoiceField
 from mptt.exceptions import InvalidMove
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.models.fields import MarkupTextField

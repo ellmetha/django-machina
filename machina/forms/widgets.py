@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.forms.widgets import Select
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape
 from django.utils.html import escape
-
-# Local application / specific library imports
 
 
 # Originaly comes from https://djangosnippets.org/snippets/2453/

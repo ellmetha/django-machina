@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
-# Local application / specific library imports
+from __future__ import unicode_literals
+
 from machina.conf import settings as machina_settings
 
 

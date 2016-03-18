@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 import os
 
-# Third party imports
 from django.conf import settings
 from django.core.files import File
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import AttachmentFactory

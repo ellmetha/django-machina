@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum.signals import forum_viewed
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

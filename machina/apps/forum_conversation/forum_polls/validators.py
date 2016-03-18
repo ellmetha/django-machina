@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
-# Third party imports
+from __future__ import unicode_literals
+
 from django.core import validators
 
-# Local application / specific library imports
 from machina.conf import settings as machina_settings
 
 

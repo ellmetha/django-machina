@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+from __future__ import unicode_literals
 import mimetypes
 import os
 
-# Third party imports
 from django.http import HttpResponse
 from django.views.generic import DetailView
 
-# Local application / specific library imports
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 

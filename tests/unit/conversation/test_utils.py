@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.test import RequestFactory
 from faker import Factory as FakerFactory
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.utils import get_client_ip
 
 faker = FakerFactory.create()

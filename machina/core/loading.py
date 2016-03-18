@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
+from __future__ import unicode_literals
 import sys
 import traceback
 
-# Third party imports
 from django.conf import settings
-
-# Local application / specific library imports
 
 
 class AppNotFoundError(Exception):

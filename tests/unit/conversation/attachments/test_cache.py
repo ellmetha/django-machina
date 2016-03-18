@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Standard library imports
 from __future__ import unicode_literals
 
-# Third party imports
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -11,7 +9,6 @@ from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.utils.encoding import force_bytes
 import pytest
 
-# Local application / specific library imports
 from machina.apps.forum_conversation.forum_attachments.cache import cache
 from machina.conf import settings as machina_settings
 
