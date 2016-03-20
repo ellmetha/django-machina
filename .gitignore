@@ -11,7 +11,9 @@ build/
 docs/_build/
 public/
 whoosh_index/
+node_modules/
 .tox
+npm-debug.log
 tests/_testdata/media/machina
 tests/settings_local.py
 

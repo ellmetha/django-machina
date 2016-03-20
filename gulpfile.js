@@ -3,21 +3,22 @@
 
 /* Include Gulp & Tools we'll use */
 var gulp = require('gulp'),
-    path = require('path'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-	less = require('gulp-less'),
-    minifyCSS = require('gulp-minify-css');
+  path = require('path'),
+  concat = require('gulp-concat'),
+  uglify = require('gulp-uglify'),
+  rename = require('gulp-rename'),
+  less = require('gulp-less'),
+  minifyCSS = require('gulp-minify-css');
 
 /* Global variables */
 var application_name = 'machina';
 
 /* DIRS */
-var build_dir = 'build';
-var bower_dir = '_libs';
-var less_dir = 'less';
-var js_dir = 'js';
+var static_dir = 'machina/static/machina';
+var build_dir = static_dir + '/build';
+var bower_dir = static_dir + '/_libs';
+var less_dir = static_dir + '/less';
+var js_dir = static_dir + '/js';
 
 
 /* Include all needed javascript packages here. */

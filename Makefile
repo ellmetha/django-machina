@@ -1,5 +1,5 @@
 staticfiles:
-	cd machina/static/machina && gulp build-application
+	npm run gulp -- build-application
 
 
 .PHONY: install upgrade lint coverage travis docs
