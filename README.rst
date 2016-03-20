@@ -70,14 +70,6 @@ Two demo sites can be tested:
 * the `vanilla project <http://vanilla.machina-forum.io/>`_ contains a standard installation of *django-machina* without customization
 * the `demo project <http://demo.machina-forum.io/>`_ showcases the customization possibilities of *django-machina*
 
-Roadmap
-=======
-
-* Topic subscriptions: a user can get a list of all topics to which he subscribed
-* A view to get all the posts of a forum member
-* A setting to limit the maximum size of an attachment
-* A way to prevent users to submit too many posts in a given period
-
 Authors
 =======
 
