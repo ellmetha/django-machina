@@ -79,7 +79,7 @@ Then update your ``TEMPLATE_CONTEXT_PROCESSORS`` setting as follows::
     'machina.core.context_processors.metadata',
   )
 
-Next add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` to your ``MIDDLEWARE_CLASSES`` setting::
+Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` to your ``MIDDLEWARE_CLASSES`` setting::
 
   MIDDLEWARE_CLASSES = (
       # ...
@@ -87,7 +87,7 @@ Next add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddlewar
       'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
   )
 
-Then edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina*'s template directory::
+Edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina*'s template directory::
 
   from machina import MACHINA_MAIN_TEMPLATE_DIR
 
@@ -96,7 +96,7 @@ Then edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina
     MACHINA_MAIN_TEMPLATE_DIR,
   )
 
-Then edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory::
+Edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory::
 
   from machina import MACHINA_MAIN_STATIC_DIR
 
