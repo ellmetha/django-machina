@@ -24,6 +24,7 @@ You should first fork the `django-machina's repository <https://github.com/ellme
     $ git clone git@github.com:<username>/django-machina.git
     $ cd django-machina && mkvirtualenv machina
     (machina) $ make install
+    (machina) $ npm install
 
 Coding style
 ------------
