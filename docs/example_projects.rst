@@ -15,6 +15,7 @@ To run this project locally, you can follow these instructions:
 
 .. code-block:: bash
 
+  $ npm install -g less
   $ git clone https://github.com/ellmetha/django-machina
   $ cd django-machina
   $ mkvirtualenv machina_vanilla_project
@@ -41,6 +42,7 @@ To run this project locally, you can follow these instructions:
 
 .. code-block:: bash
 
+  $ npm install -g lesss
   $ git clone https://github.com/ellmetha/django-machina
   $ cd django-machina
   $ mkvirtualenv machina_demo_project
