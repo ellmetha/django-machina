@@ -44,7 +44,7 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
         """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.status = Topic.STATUS_CHOICES.topic_locked
+        self.object.status = Topic.TOPIC_LOCKED
         self.object.save()
         return HttpResponseRedirect(success_url)
 
@@ -94,7 +94,7 @@ class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.status = Topic.STATUS_CHOICES.topic_unlocked
+        self.object.status = Topic.TOPIC_UNLOCKED
         self.object.save()
         return HttpResponseRedirect(success_url)
 
@@ -224,9 +224,9 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
 
         # Eventually lock the topic
         if form.cleaned_data['lock_topic']:
-            topic.status = Topic.STATUS_CHOICES.topic_locked
+            topic.status = Topic.TOPIC_LOCKED
         else:
-            topic.status = Topic.STATUS_CHOICES.topic_moved
+            topic.status = Topic.TOPIC_MOVED
 
         topic.save()
         old_forum.save()
@@ -303,7 +303,7 @@ class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateRespo
 
 
 class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
-    target_type = Topic.TYPE_CHOICES.topic_post
+    target_type = Topic.TOPIC_POST
     question = _('Would you want to change this topic to a default topic?')
 
     # Permissions checks
@@ -313,7 +313,7 @@ class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
 
 
 class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
-    target_type = Topic.TYPE_CHOICES.topic_sticky
+    target_type = Topic.TOPIC_STICKY
     question = _('Would you want to change this topic to a sticky topic?')
 
     # Permissions checks
@@ -323,7 +323,7 @@ class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
 
 
 class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
-    target_type = Topic.TYPE_CHOICES.topic_announce
+    target_type = Topic.TOPIC_ANNOUNCE
     question = _('Would you want to change this topic to an announce?')
 
     # Permissions checks

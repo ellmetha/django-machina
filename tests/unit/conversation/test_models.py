@@ -42,7 +42,7 @@ class TestTopic(object):
         # Setup
         sticky_topic = create_topic(
             forum=self.top_level_forum, poster=self.u1,
-            type=Topic.TYPE_CHOICES.topic_sticky)
+            type=Topic.TOPIC_STICKY)
         # Run & check
         assert sticky_topic.is_sticky
 
@@ -50,14 +50,14 @@ class TestTopic(object):
         # Setup
         announce = create_topic(
             forum=self.top_level_forum, poster=self.u1,
-            type=Topic.TYPE_CHOICES.topic_announce)
+            type=Topic.TOPIC_ANNOUNCE)
         # Run & check
         assert announce.is_announce
 
     def test_knows_if_it_is_locked(self):
         # Run & check
         assert not self.topic.is_locked
-        self.topic.status = self.topic.STATUS_CHOICES.topic_locked
+        self.topic.status = self.topic.TOPIC_LOCKED
         self.topic.save()
         assert self.topic.is_locked
 

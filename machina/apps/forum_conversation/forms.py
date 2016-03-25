@@ -105,12 +105,12 @@ class TopicForm(PostForm):
 
         if not self.can_add_stickies:
             choices = filter(
-                lambda t: t[0] != Topic.TYPE_CHOICES.topic_sticky,
+                lambda t: t[0] != Topic.TOPIC_STICKY,
                 self.fields['topic_type'].choices)
             self.fields['topic_type'].choices = choices
         if not self.can_add_announcements:
             choices = filter(
-                lambda t: t[0] != Topic.TYPE_CHOICES.topic_announce,
+                lambda t: t[0] != Topic.TOPIC_ANNOUNCE,
                 self.fields['topic_type'].choices)
             self.fields['topic_type'].choices = choices
 
@@ -153,13 +153,13 @@ class TopicForm(PostForm):
             if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
                 topic_type = self.cleaned_data['topic_type']
             else:
-                topic_type = Topic.TYPE_CHOICES.topic_post
+                topic_type = Topic.TOPIC_POST
 
             topic = Topic(
                 forum=self.forum,
                 subject=self.cleaned_data['subject'],  # The topic's name is the post's name
                 type=topic_type,
-                status=Topic.STATUS_CHOICES.topic_unlocked,
+                status=Topic.TOPIC_UNLOCKED,
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user))
             if not self.user.is_anonymous():
                 topic.poster = self.user

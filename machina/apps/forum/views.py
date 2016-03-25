@@ -70,7 +70,7 @@ class ForumView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         self.forum = self.get_forum()
-        qs = self.forum.topics.exclude(type=Topic.TYPE_CHOICES.topic_announce).exclude(approved=False) \
+        qs = self.forum.topics.exclude(type=Topic.TOPIC_ANNOUNCE).exclude(approved=False) \
             .select_related('poster')
         return qs
 
@@ -89,7 +89,7 @@ class ForumView(PermissionRequiredMixin, ListView):
             .forum_list_filter(sub_forums, self.request.user)
 
         # The announces will be displayed on each page of the forum
-        context['announces'] = self.get_forum().topics.filter(type=Topic.TYPE_CHOICES.topic_announce)
+        context['announces'] = self.get_forum().topics.filter(type=Topic.TOPIC_ANNOUNCE)
 
         return context
 

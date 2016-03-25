@@ -20,7 +20,7 @@ Topic = get_model('forum_conversation', 'Topic')
 class TopicFactory(factory.DjangoModelFactory):
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
-    status = Topic.STATUS_CHOICES.topic_unlocked
+    status = Topic.TOPIC_UNLOCKED
     subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
     slug = factory.LazyAttribute(lambda t: slugify(t.subject))
 
@@ -40,7 +40,7 @@ class PostFactory(factory.DjangoModelFactory):
 
 def build_topic(**attrs):
     """Create a new unlocked topic but do not save it."""
-    params_dict = {'type': Topic.TYPE_CHOICES.topic_post}
+    params_dict = {'type': Topic.TOPIC_POST}
     params_dict.update(attrs)
     topic = TopicFactory.build(**params_dict)
     return topic

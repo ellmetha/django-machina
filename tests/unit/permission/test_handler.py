@@ -56,7 +56,7 @@ class TestPermissionHandler(object):
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_3_topic = create_topic(forum=self.forum_3, poster=self.u1)
         self.forum_3_topic_2 = create_topic(
-            forum=self.forum_3, poster=self.u1, status=Topic.STATUS_CHOICES.topic_locked)
+            forum=self.forum_3, poster=self.u1, status=Topic.TOPIC_LOCKED)
 
         # Set up some posts
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
@@ -301,7 +301,7 @@ class TestPermissionHandler(object):
     def test_knows_that_a_user_cannot_add_posts_to_a_locked_topic(self):
         # Setup
         assign_perm('can_reply_to_topics', self.u1, self.forum_1)
-        self.forum_1_topic.status = self.forum_1_topic.STATUS_CHOICES.topic_locked
+        self.forum_1_topic.status = self.forum_1_topic.TOPIC_LOCKED
         self.forum_1_topic.save()
         # Run & check
         assert not self.perm_handler.can_add_post(self.forum_1_topic, self.u1)
@@ -311,7 +311,7 @@ class TestPermissionHandler(object):
         assign_perm('can_reply_to_topics', self.u1, self.forum_1)
         assign_perm('can_reply_to_locked_topics', self.u1, self.forum_1)
         u2 = UserFactory.create()
-        self.forum_1_topic.status = self.forum_1_topic.STATUS_CHOICES.topic_locked
+        self.forum_1_topic.status = self.forum_1_topic.TOPIC_LOCKED
         self.forum_1_topic.save()
         # Run & check
         assert self.perm_handler.can_add_post(self.forum_1_topic, self.u1)
@@ -529,7 +529,7 @@ class TestPermissionHandler(object):
         # Run & check
         assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
         assert set(self.perm_handler.get_target_forums_for_moved_topics(u2)) == set(Forum.objects.filter(
-            type=Forum.TYPE_CHOICES.forum_post))
+            type=Forum.FORUM_POST))
         assert list(self.perm_handler.get_target_forums_for_moved_topics(u3)) == []
 
     def test_cannot_allow_forum_categories_to_receive_moved_topics(self):

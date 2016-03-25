@@ -10,7 +10,6 @@ from django.utils.encoding import force_bytes
 from faker import Factory as FakerFactory
 import pytest
 
-from machina.apps.forum_conversation.abstract_models import TOPIC_TYPES
 from machina.apps.forum_conversation.forum_attachments.forms import AttachmentFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
@@ -287,7 +286,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
         }
         # Run
@@ -302,7 +301,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -323,7 +322,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -361,7 +360,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
@@ -387,7 +386,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
@@ -419,7 +418,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data_1 = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
@@ -432,7 +431,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data_2 = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
@@ -482,7 +481,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'attachment-0-id': '',
             'attachment-0-file': f,
@@ -505,7 +504,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data_1 = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'attachment-0-id': '',
             'attachment-0-file': f,
@@ -517,7 +516,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data_2 = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'attachment-0-id': '',
             'attachment-0-file': '',
@@ -544,7 +543,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'attachment-0-id': '',
             'attachment-0-file': f,
             'attachment-0-comment': '',
@@ -568,7 +567,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'attachment-0-id': '',
             'attachment-0-file': f,
             'attachment-0-comment': faker.text(max_nb_chars=100) * 1000,
@@ -590,7 +589,7 @@ class TestTopicCreateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '',
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
         }
         # Run
         response = self.client.post(correct_url, post_data, follow=True)
@@ -663,7 +662,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
         }
         # Run
@@ -724,7 +723,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
@@ -755,7 +754,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'poll_question': faker.text(max_nb_chars=155),
             'poll_max_options': 1,
             'poll_duration': 0,
@@ -785,7 +784,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'poll_question': faker.text(max_nb_chars=100),
             'poll_max_options': 1,
             'poll_duration': 0,
@@ -842,7 +841,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'preview': 'Preview',
             'attachment-0-id': '',
             'attachment-0-file': f,
@@ -868,7 +867,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'attachment-0-id': attachment.pk,
             'attachment-0-file': attachment.file,
             'attachment-0-comment': 'new comment',
@@ -895,7 +894,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         post_data = {
             'subject': faker.text(max_nb_chars=200),
             'content': '[b]{}[/b]'.format(faker.text()),
-            'topic_type': TOPIC_TYPES.topic_post,
+            'topic_type': Topic.TOPIC_POST,
             'attachment-0-id': attachment.pk,
             'attachment-0-file': attachment.file,
             'attachment-0-comment': 'new comment',

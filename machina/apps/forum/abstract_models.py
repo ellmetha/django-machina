@@ -8,7 +8,6 @@ from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from model_utils import Choices
 from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
 
@@ -22,13 +21,6 @@ from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
 ForumManager = get_class('forum.managers', 'ForumManager')
-
-
-FORUM_TYPES = Choices(
-    (0, 'forum_post', _('Default forum')),
-    (1, 'forum_cat', _('Category forum')),
-    (2, 'forum_link', _('Link forum')),
-)
 
 
 @python_2_unicode_compatible
@@ -59,7 +51,12 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
                                          default=False)
 
     # Category, Default forum or Link ; that's what a forum can be
-    TYPE_CHOICES = FORUM_TYPES
+    FORUM_POST, FORUM_CAT, FORUM_LINK = 0, 1, 2
+    TYPE_CHOICES = (
+        (FORUM_POST, _('Default forum')),
+        (FORUM_CAT, _('Category forum')),
+        (FORUM_LINK, _('Link forum')),
+    )
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
     # Tracking data (only approved topics and posts are recorded)
@@ -99,21 +96,21 @@ class AbstractForum(MPTTModel, ActiveModel, DatedModel):
         """
         Returns True if the forum is a category.
         """
-        return self.type == FORUM_TYPES.forum_cat
+        return self.type == self.FORUM_CAT
 
     @property
     def is_forum(self):
         """
         Returns True if the forum is a a default forum.
         """
-        return self.type == FORUM_TYPES.forum_post
+        return self.type == self.FORUM_POST
 
     @property
     def is_link(self):
         """
         Returns True if the forum is a link.
         """
-        return self.type == FORUM_TYPES.forum_link
+        return self.type == self.FORUM_LINK
 
     def clean(self):
         super(AbstractForum, self).clean()

@@ -10,7 +10,6 @@ from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from model_utils import Choices
 
 from machina.conf import settings as machina_settings
 from machina.core import validators
@@ -19,19 +18,6 @@ from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
 
 ApprovedManager = get_class('forum_conversation.managers', 'ApprovedManager')
-
-
-TOPIC_TYPES = Choices(
-    (0, 'topic_post', _('Default topic')),
-    (1, 'topic_sticky', _('Sticky')),
-    (2, 'topic_announce', _('Announce')),
-)
-
-TOPIC_STATUSES = Choices(
-    (0, 'topic_unlocked', _('Topic unlocked')),
-    (1, 'topic_locked', _('Topic locked')),
-    (2, 'topic_moved', _('Topic moved')),
-)
 
 
 @python_2_unicode_compatible
@@ -48,14 +34,24 @@ class AbstractTopic(DatedModel):
     slug = models.SlugField(max_length=300, verbose_name=_('Slug'))
 
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
-    TYPE_CHOICES = TOPIC_TYPES
+    TOPIC_POST, TOPIC_STICKY, TOPIC_ANNOUNCE = 0, 1, 2
+    TYPE_CHOICES = (
+        (TOPIC_POST, _('Default topic')),
+        (TOPIC_STICKY, _('Sticky')),
+        (TOPIC_ANNOUNCE, _('Announce')),
+    )
     type = models.PositiveSmallIntegerField(
-        choices=TOPIC_TYPES, verbose_name=_('Topic type'), db_index=True)
+        choices=TYPE_CHOICES, verbose_name=_('Topic type'), db_index=True)
 
     # A topic can be locked, unlocked or moved
-    STATUS_CHOICES = TOPIC_STATUSES
+    TOPIC_UNLOCKED, TOPIC_LOCKED, TOPIC_MOVED = 0, 1, 2
+    STATUS_CHOICES = (
+        (TOPIC_UNLOCKED, _('Topic unlocked')),
+        (TOPIC_LOCKED, _('Topic locked')),
+        (TOPIC_MOVED, _('Topic moved')),
+    )
     status = models.PositiveIntegerField(
-        choices=TOPIC_STATUSES, verbose_name=_('Topic status'), db_index=True)
+        choices=STATUS_CHOICES, verbose_name=_('Topic status'), db_index=True)
 
     # A topic can be approved before publishing ; defaults to True. The value of this flag
     # should correspond to the one associated with the first post
@@ -99,28 +95,28 @@ class AbstractTopic(DatedModel):
         """
         Returns True if the topic is a default topic.
         """
-        return self.type == self.TYPE_CHOICES.topic_post
+        return self.type == self.TOPIC_POST
 
     @property
     def is_sticky(self):
         """
         Returns True if the topic is a sticky topic.
         """
-        return self.type == self.TYPE_CHOICES.topic_sticky
+        return self.type == self.TOPIC_STICKY
 
     @property
     def is_announce(self):
         """
         Returns True if the topic is an announce.
         """
-        return self.type == self.TYPE_CHOICES.topic_announce
+        return self.type == self.TOPIC_ANNOUNCE
 
     @property
     def is_locked(self):
         """
         Returns True if the topic is locked.
         """
-        return self.status == self.STATUS_CHOICES.topic_locked
+        return self.status == self.TOPIC_LOCKED
 
     @property
     def first_post(self):

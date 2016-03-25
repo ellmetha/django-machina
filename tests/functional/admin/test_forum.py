@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 import pytest
 
 from machina.apps.forum.admin import PickUserForm
-from machina.apps.forum.abstract_models import FORUM_TYPES
 from machina.apps.forum_permission.models import ForumPermission
 from machina.apps.forum_permission.models import GroupForumPermission
 from machina.apps.forum_permission.models import UserForumPermission
@@ -28,16 +27,16 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
     @pytest.fixture(autouse=True)
     def setup(self):
         # Set up a top-level category
-        top_level_cat = Forum.objects.create(name='top_level_cat', type=FORUM_TYPES.forum_cat)
+        top_level_cat = Forum.objects.create(name='top_level_cat', type=Forum.FORUM_CAT)
         self.top_level_cat = top_level_cat
 
         # Set up some sub forums
-        self.sub_forum_1 = Forum.objects.create(name='top_level_forum_1', type=FORUM_TYPES.forum_post, parent=top_level_cat)
-        self.sub_forum_2 = Forum.objects.create(name='top_level_forum_2', type=FORUM_TYPES.forum_post, parent=top_level_cat)
-        self.sub_forum_3 = Forum.objects.create(name='top_level_forum_3', type=FORUM_TYPES.forum_post, parent=top_level_cat)
+        self.sub_forum_1 = Forum.objects.create(name='top_level_forum_1', type=Forum.FORUM_POST, parent=top_level_cat)
+        self.sub_forum_2 = Forum.objects.create(name='top_level_forum_2', type=Forum.FORUM_POST, parent=top_level_cat)
+        self.sub_forum_3 = Forum.objects.create(name='top_level_forum_3', type=Forum.FORUM_POST, parent=top_level_cat)
 
         # Set up a top-level forum
-        self.top_level_forum = Forum.objects.create(name='top_level_forum', type=FORUM_TYPES.forum_post)
+        self.top_level_forum = Forum.objects.create(name='top_level_forum', type=Forum.FORUM_POST)
 
     def test_can_move_a_forum_upward(self):
         # Setup

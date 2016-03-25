@@ -26,7 +26,7 @@ class ForumFactory(factory.DjangoModelFactory):
 
 def build_forum(**attrs):
     """Create a new forum but do not save it."""
-    params_dict = {'type': Forum.TYPE_CHOICES.forum_post}
+    params_dict = {'type': Forum.FORUM_POST}
     params_dict.update(attrs)
     forum = ForumFactory.build(**params_dict)
     return forum
@@ -41,7 +41,7 @@ def create_forum(**attrs):
 
 def build_category_forum(**attrs):
     """Create a new category forum but do not save it."""
-    params_dict = {'type': Forum.TYPE_CHOICES.forum_cat}
+    params_dict = {'type': Forum.FORUM_CAT}
     params_dict.update(attrs)
     category = ForumFactory.build(**params_dict)
     return category
@@ -56,7 +56,7 @@ def create_category_forum(**attrs):
 
 def build_link_forum(**attrs):
     """Create a new link forum but do not save it."""
-    params_dict = {'type': Forum.TYPE_CHOICES.forum_link}
+    params_dict = {'type': Forum.FORUM_LINK}
     params_dict.update(attrs)
     link = ForumFactory.build(**params_dict)
     return link

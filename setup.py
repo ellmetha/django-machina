@@ -30,7 +30,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'django>=1.8',
-        'django-model-utils>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
         'django-mptt>=0.8.0',

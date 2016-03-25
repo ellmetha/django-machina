@@ -114,7 +114,7 @@ class TestTopicUnlockView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -317,7 +317,7 @@ class TestTopicMoveView(BaseClientTestCase):
 
     def test_can_move_and_unlock_a_topic_if_it_was_locked(self):
         # Setup
-        self.topic.status = self.topic.STATUS_CHOICES.topic_locked
+        self.topic.status = self.topic.TOPIC_LOCKED
         self.topic.save()
         correct_url = reverse(
             'forum_moderation:topic_move',
@@ -357,8 +357,8 @@ class TestTopicUpdateToNormalTopicView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            type=Topic.TYPE_CHOICES.topic_post,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            type=Topic.TOPIC_POST,
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -433,7 +433,7 @@ class TestTopicUpdateToStickyTopicView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -509,7 +509,7 @@ class TestTopicUpdateToAnnounceView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -585,7 +585,7 @@ class TestModerationQueueListView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
@@ -654,7 +654,7 @@ class TestModerationQueueDetailView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
 
@@ -710,7 +710,7 @@ class TestPostApproveView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
 
@@ -778,7 +778,7 @@ class TestPostDisapproveView(BaseClientTestCase):
         # Set up a topic and some posts
         self.topic = create_topic(
             forum=self.top_level_forum, poster=self.user,
-            status=Topic.STATUS_CHOICES.topic_locked)
+            status=Topic.TOPIC_LOCKED)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
 

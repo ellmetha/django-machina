@@ -247,7 +247,7 @@ class PermissionHandler(object):
         that have been moved from another forum.
         """
         return self._get_forums_for_user(user, ['can_move_topics', ]) \
-            .filter(type=Forum.TYPE_CHOICES.forum_post)
+            .filter(type=Forum.FORUM_POST)
 
     def can_delete_topics(self, forum, user):
         """

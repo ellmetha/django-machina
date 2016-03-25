@@ -7,7 +7,6 @@ Requirements
 * `Python`_ 2.7, 3.3, 3.4 or 3.5
 * `Django`_ 1.8.x or 1.9.x
 * `Pillow`_ 2.2. or higher
-* `Django-model-utils`_ 2.0. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-markdown`_ 0.7. or higher
@@ -22,7 +21,6 @@ Requirements
 .. _Python: https://www.python.org
 .. _Django: https://www.djangoproject.com
 .. _Pillow: http://python-pillow.github.io/
-.. _Django-model-utils: https://github.com/carljm/django-model-utils
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
 .. _Django-markdown: https://github.com/klen/django_markdown

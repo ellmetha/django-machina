@@ -138,7 +138,7 @@ class TestTopicMoveForm(object):
         # Setup
         assign_perm('can_move_topics', self.user, self.top_level_forum)
         assign_perm('can_move_topics', self.user, self.other_forum)
-        self.topic.status = Topic.STATUS_CHOICES.topic_locked
+        self.topic.status = Topic.TOPIC_LOCKED
         self.topic.save()
         form = TopicMoveForm(
             data={
