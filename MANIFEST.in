@@ -1,9 +1,10 @@
 include LICENSE
 include MANIFEST.in
 include *.rst
-recursive-include machina/static *
+graft machina/static/machina/build
+prune machina/static/machina/_libs
 recursive-include machina/locale *
 recursive-include machina *.html
-recursive-include machina *.txt
+recursive-include machina/templates *.txt
 global-exclude *.pyc
 recursive-exclude tests *
