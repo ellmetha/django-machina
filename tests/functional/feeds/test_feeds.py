@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 
+from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
 import pytest
 
@@ -120,3 +121,15 @@ class TestLastTopicsFeed(object):
         request.user = self.user
         # Run & check
         assert feed.item_pubdate(self.topic_2) == self.topic_2.created
+
+    def test_can_return_the_proper_item_link(self):
+        # Setup
+        feed = LastTopicsFeed()
+        request = self.factory.get('/')
+        request.user = self.user
+        # Run & check
+        assert feed.item_link(self.topic_2) == reverse(
+            'forum_conversation:topic', kwargs={
+                'forum_slug': self.topic_2.forum.slug, 'forum_pk': self.topic_2.forum.pk,
+                'slug': self.topic_2.slug, 'pk': self.topic_2.id,
+            })
