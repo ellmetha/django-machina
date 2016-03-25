@@ -147,7 +147,7 @@ Database and migrations
 URLs configuration
 ------------------
 
-Finally you have to update your main ``urls.py`` module in order to include the forum' URLs and the *django-markdown*' URLs::
+Finally you have to update your main ``urls.py`` module in order to include the forum's URLs and the *django-markdown*'s URLs::
 
   from machina.app import board
 
