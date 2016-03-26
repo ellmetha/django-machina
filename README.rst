@@ -33,6 +33,7 @@ django-machina
 * Anonymous posting
 * Polls and attachments
 * Moderation and pre-moderation
+* Forum conversations search
 * ...
 
 .. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
