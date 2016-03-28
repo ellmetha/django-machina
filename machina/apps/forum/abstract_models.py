@@ -15,7 +15,6 @@ from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.models import ActiveModel
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
@@ -24,7 +23,7 @@ ForumManager = get_class('forum.managers', 'ForumManager')
 
 
 @python_2_unicode_compatible
-class AbstractForum(MPTTModel, ActiveModel, DatedModel):
+class AbstractForum(MPTTModel, DatedModel):
     """
     The main forum model.
     The tree hierarchy of forums and categories is managed by the MPTTModel
