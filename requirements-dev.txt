@@ -17,5 +17,8 @@ flake8>=2.2.5
 Sphinx>=1.3
 sphinx-rtd-theme>=0.1
 
+# Application server
+uwsgi>=2.0
+
 # Search indexes
 Whoosh>=2.6.0

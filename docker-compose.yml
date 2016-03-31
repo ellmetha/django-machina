@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  demo:
+    build:
+      context: .
+      args:
+        - ppath=/opt/code/example_projects/demo
+    ports:
+      - 8081:8080
+    command: uwsgi --ini /opt/code/example_projects/demo/uwsgi.ini
+
+  vanilla:
+    build:
+      context: .
+      args:
+        - ppath=/opt/code/example_projects/vanilla
+    ports:
+      - 8082:8080
+    command: uwsgi --ini /opt/code/example_projects/vanilla/uwsgi.ini
