@@ -29,7 +29,8 @@ class AbstractForum(MPTTModel, DatedModel):
     The tree hierarchy of forums and categories is managed by the MPTTModel
     which is part of django-mptt.
     """
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=_('Parent'))
+    parent = TreeForeignKey(
+        'self', null=True, blank=True, related_name='children', verbose_name=_('Parent'))
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
@@ -45,9 +46,9 @@ class AbstractForum(MPTTModel, DatedModel):
 
     # Forums can be simple links (eg. wiki, documentation, etc)
     link = models.URLField(verbose_name=_('Forum link'), null=True, blank=True)
-    link_redirects = models.BooleanField(verbose_name=_('Track link redirects count'),
-                                         help_text=_('Records the number of times a forum link was clicked'),
-                                         default=False)
+    link_redirects = models.BooleanField(
+        verbose_name=_('Track link redirects count'),
+        help_text=_('Records the number of times a forum link was clicked'), default=False)
 
     # Category, Default forum or Link ; that's what a forum can be
     FORUM_POST, FORUM_CAT, FORUM_LINK = 0, 1, 2
@@ -56,19 +57,23 @@ class AbstractForum(MPTTModel, DatedModel):
         (FORUM_CAT, _('Category forum')),
         (FORUM_LINK, _('Link forum')),
     )
-    type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
+    type = models.PositiveSmallIntegerField(
+        choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
     # Tracking data (only approved topics and posts are recorded)
-    posts_count = models.PositiveIntegerField(verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
-    topics_count = models.PositiveIntegerField(verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
-    link_redirects_count = models.PositiveIntegerField(verbose_name=_('Track link redirects count'),
-                                                       editable=False, blank=True, default=0)
+    posts_count = models.PositiveIntegerField(
+        verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
+    topics_count = models.PositiveIntegerField(
+        verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
+    link_redirects_count = models.PositiveIntegerField(
+        verbose_name=_('Track link redirects count'), editable=False, blank=True, default=0)
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Display options
-    display_sub_forum_list = models.BooleanField(verbose_name=_('Display in parent-forums legend'),
-                                                 help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
-                                                 default=True)
+    display_sub_forum_list = models.BooleanField(
+        verbose_name=_('Display in parent-forums legend'),
+        help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
+        default=True)
 
     objects = ForumManager()
 

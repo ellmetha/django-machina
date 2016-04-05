@@ -152,7 +152,7 @@ class TestTopic(object):
         self.topic.forum = new_top_level_forum
         self.topic.save()
         # Check
-        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)  # Reload the forum from DB
+        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)
         assert self.topic.forum == new_top_level_forum
         assert self.top_level_forum.topics_count == 0
         assert self.top_level_forum.posts_count == 0
@@ -205,7 +205,7 @@ class TestPost(object):
         with pytest.raises(Topic.DoesNotExist):
             Topic.objects.get(pk=self.topic_pk)
 
-    def test_deletion_should_result_in_the_topic_deletion_if_it_is_alone_in_the_topic_and_not_approved(self):
+    def test_deletion_should_result_in_the_topic_deletion_if_it_is_alone_in_the_topic_and_not_approved(self):  # noqa
         # Run
         self.post.approved = False
         self.post.save()
@@ -214,7 +214,7 @@ class TestPost(object):
         with pytest.raises(Topic.DoesNotExist):
             Topic.objects.get(pk=self.topic_pk)
 
-    def test_save_triggers_the_update_of_the_member_posts_count_if_the_related_post_is_approved(self):
+    def test_save_triggers_the_update_of_the_member_posts_count_if_the_related_post_is_approved(self):  # noqa
         # Setup
         post = PostFactory.build(topic=self.topic, poster=self.u1)
         profile = ForumProfile.objects.get(user=self.u1)
@@ -225,7 +225,7 @@ class TestPost(object):
         profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count + 1
 
-    def test_save_cannot_trigger_the_update_of_the_member_posts_count_if_the_related_post_is_not_approved(self):
+    def test_save_cannot_trigger_the_update_of_the_member_posts_count_if_the_related_post_is_not_approved(self):  # noqa
         # Setup
         post = PostFactory.build(topic=self.topic, poster=self.u1, approved=False)
         profile = ForumProfile.objects.get(user=self.u1)
@@ -236,7 +236,7 @@ class TestPost(object):
         profile.refresh_from_db()
         assert profile.posts_count == initial_posts_count
 
-    def test_save_trigger_the_update_of_the_member_posts_count_if_the_related_post_switch_to_approved(self):
+    def test_save_trigger_the_update_of_the_member_posts_count_if_the_related_post_switch_to_approved(self):  # noqa
         # Setup
         post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
         profile = ForumProfile.objects.get(user=self.u1)

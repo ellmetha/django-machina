@@ -32,7 +32,8 @@ class AttachmentCache(object):
             cache = caches[machina_settings.ATTACHMENT_CACHE_NAME]
         except InvalidCacheBackendError:
             raise ImproperlyConfigured(
-                'The attachment cache backend ({}) is not configured'.format(machina_settings.ATTACHMENT_CACHE_NAME))
+                'The attachment cache backend ({}) is not configured'.format(
+                    machina_settings.ATTACHMENT_CACHE_NAME))
         return cache
 
     def set(self, key, files):

@@ -83,7 +83,7 @@ class TestForumReadTrackManager(object):
         # Check
         assert self.forum_2_child_2 in unread_forums
 
-    def test_cannot_consider_a_forum_without_tracks_as_unread_if_it_has_only_unapproved_topics(self):
+    def test_cannot_consider_a_forum_without_tracks_as_unread_if_it_has_only_unapproved_topics(self):  # noqa
         # Setup
         new_topic = create_topic(forum=self.forum_2_child_2, poster=self.u2)
         PostFactory.create(topic=new_topic, poster=self.u2, approved=False)

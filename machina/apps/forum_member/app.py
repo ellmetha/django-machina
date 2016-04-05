@@ -18,8 +18,10 @@ class MemberApp(Application):
 
     def get_urls(self):
         return [
-            url(_(r'^profile/(?P<pk>\d+)/$'), self.forum_profile_detail_view.as_view(), name='profile'),
-            url(_(r'^profile/edit/$'), self.forum_profile_update_view.as_view(), name='profile_update'),
+            url(_(r'^profile/(?P<pk>\d+)/$'),
+                self.forum_profile_detail_view.as_view(), name='profile'),
+            url(_(r'^profile/edit/$'),
+                self.forum_profile_update_view.as_view(), name='profile_update'),
             url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
         ]
 

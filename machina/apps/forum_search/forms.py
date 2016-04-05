@@ -21,11 +21,13 @@ class SearchForm(FacetedSearchForm):
         label=_('Search only in topic subjects'), required=False)
 
     search_poster_name = forms.CharField(
-        label=_('Search for poster'), help_text=_('Enter a user name to limit the search to a specific user.'),
+        label=_('Search for poster'),
+        help_text=_('Enter a user name to limit the search to a specific user.'),
         max_length=255, required=False)
 
     search_forums = forms.MultipleChoiceField(
-        label=_('Search in specific forums'), help_text=_('Select the forums you wish to search in.'),
+        label=_('Search in specific forums'),
+        help_text=_('Select the forums you wish to search in.'),
         required=False)
 
     def __init__(self, *args, **kwargs):
@@ -40,7 +42,8 @@ class SearchForm(FacetedSearchForm):
 
         self.allowed_forums = perm_handler.forum_list_filter(Forum.objects.all(), user)
         if self.allowed_forums:
-            self.fields['search_forums'].choices = [(f.id, '{} {}'.format('-' * f.margin_level, f.name)) for f in self.allowed_forums]
+            self.fields['search_forums'].choices = [
+                (f.id, '{} {}'.format('-' * f.margin_level, f.name)) for f in self.allowed_forums]
         else:
             # The user cannot view any single forum, the 'search_forums' field can be deleted
             del self.fields['search_forums']

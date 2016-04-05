@@ -55,8 +55,8 @@ class PermissionRequiredMixin(object):
         else:
             raise ImproperlyConfigured(
                 '\'PermissionRequiredMixin\' requires \'permission_required\' '
-                'attribute to be set to \'<app_label>.<permission codename>\' but is set to {} instead'.format(
-                    self.permission_required)
+                'attribute to be set to \'<app_label>.<permission codename>\' but is set to {} '
+                'instead'.format(self.permission_required)
             )
         return perms
 

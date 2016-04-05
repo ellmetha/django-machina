@@ -20,7 +20,8 @@ UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 ForumPermissionChecker = get_class('forum_permission.checker', 'ForumPermissionChecker')
 
-get_anonymous_user_forum_key = get_class('forum_permission.shortcuts', 'get_anonymous_user_forum_key')
+get_anonymous_user_forum_key = get_class(
+    'forum_permission.shortcuts', 'get_anonymous_user_forum_key')
 
 
 class PermissionHandler(object):
@@ -118,9 +119,11 @@ class PermissionHandler(object):
         """
         Given a topic, checks whether the user can append posts to it.
         """
-        can_add_post = self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_topics') \
-            and (not topic.is_locked or
-                 self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_locked_topics'))
+        can_add_post = self._perform_basic_permission_check(
+            topic.forum, user, 'can_reply_to_topics') and (
+                not topic.is_locked or
+                self._perform_basic_permission_check(
+                    topic.forum, user, 'can_reply_to_locked_topics'))
         return can_add_post
 
     def can_edit_post(self, post, user):
@@ -174,8 +177,8 @@ class PermissionHandler(object):
                 return False
 
         # Is this user allowed to vote in polls in the current forum ?
-        can_vote = self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls') \
-            and not poll.topic.is_locked
+        can_vote = self._perform_basic_permission_check(
+            poll.topic.forum, user, 'can_vote_in_polls') and not poll.topic.is_locked
 
         # Retrieve the user votes for the considered poll
         user_votes = TopicPollVote.objects.filter(
@@ -361,22 +364,30 @@ class PermissionHandler(object):
                 .filter(**user_kwargs_filter) \
                 .filter(permission__codename__in=perm_codenames)
 
-            globally_granted_user_perms = list(filter(lambda p: p.has_perm and p.forum is None, user_perms))
-            per_forum_granted_user_perms = list(filter(lambda p: p.has_perm and p.forum is not None, user_perms))
-            per_forum_nongranted_user_perms = list(filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
+            globally_granted_user_perms = list(
+                filter(lambda p: p.has_perm and p.forum is None, user_perms))
+            per_forum_granted_user_perms = list(
+                filter(lambda p: p.has_perm and p.forum is not None, user_perms))
+            per_forum_nongranted_user_perms = list(
+                filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
 
             user_granted_forum_ids = [p.forum_id for p in per_forum_granted_user_perms]
             user_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
 
             if not user.is_anonymous():
+                user_model = get_user_model()
                 # Get all the group permissions for the considered user.
                 group_perms = GroupForumPermission.objects \
-                    .filter(**{'group__{0}'.format(get_user_model().groups.field.related_query_name()): user}) \
+                    .filter(**{
+                        'group__{0}'.format(user_model.groups.field.related_query_name()): user}) \
                     .filter(permission__codename__in=perm_codenames)
 
-                globally_granted_group_perms = list(filter(lambda p: p.has_perm and p.forum is None, group_perms))
-                per_forum_granted_group_perms = list(filter(lambda p: p.has_perm and p.forum is not None, group_perms))
-                per_forum_nongranted_group_perms = list(filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
+                globally_granted_group_perms = list(
+                    filter(lambda p: p.has_perm and p.forum is None, group_perms))
+                per_forum_granted_group_perms = list(
+                    filter(lambda p: p.has_perm and p.forum is not None, group_perms))
+                per_forum_nongranted_group_perms = list(
+                    filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
 
                 group_granted_forum_ids = [p.forum_id for p in per_forum_granted_group_perms]
                 group_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_group_perms]
@@ -395,8 +406,9 @@ class PermissionHandler(object):
                     forum_objects = forum_queryset.filter(Q(pk__in=user_granted_forum_ids)) \
                         .filter(~Q(pk__in=user_nongranted_forum_ids))
 
-            if not user.is_anonymous() and not forum_objects.exists() and set(perm_codenames).issubset(set(
-                    machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
+            if not user.is_anonymous() and not forum_objects.exists() \
+                    and set(perm_codenames).issubset(set(
+                        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
                 forum_objects = forum_queryset
 
         self._granted_forums_cache[granted_forums_cache_key] = forum_objects

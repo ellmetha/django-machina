@@ -79,7 +79,8 @@ class TestUnreadForumsTag(BaseTrackingTagsTestCase):
             request = self.get_request()
             request.user = user
             ForumPermissionMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_unread_forums forums request.user as unread_forums %}')
+            t = Template(
+                self.loadstatement + '{% get_unread_forums forums request.user as unread_forums %}')
             c = Context({'forums': forums, 'request': request})
             rendered = t.render(c)
 
@@ -88,7 +89,8 @@ class TestUnreadForumsTag(BaseTrackingTagsTestCase):
         # Run & check
         context, rendered = get_rendered(Forum.objects.all(), self.u2)
         assert rendered == ''
-        assert set(context['unread_forums']) == set([self.top_level_cat, self.forum_1, self.forum_2, ])
+        assert set(context['unread_forums']) \
+            == set([self.top_level_cat, self.forum_1, self.forum_2, ])
 
         # forum_1 and forum_2 are now read
         ForumReadTrackFactory.create(forum=self.forum_1, user=self.u2)
@@ -111,7 +113,8 @@ class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
             request = self.get_request()
             request.user = user
             ForumPermissionMiddleware().process_request(request)
-            t = Template(self.loadstatement + '{% get_unread_topics topics request.user as unread_topics %}')
+            t = Template(
+                self.loadstatement + '{% get_unread_topics topics request.user as unread_topics %}')
             c = Context({'topics': topics, 'request': request})
             rendered = t.render(c)
 

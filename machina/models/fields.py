@@ -92,11 +92,11 @@ class MarkupText(SafeData):
 
 class MarkupTextDescriptor(object):
     """
-    Acts as the Django's default attribute descriptor class (enabled via the SubfieldBase metaclass).
-    The main difference is that it does not call to_python() on the MarkupTextField class. Instead, it
-    stores the two different values of a markup content (the raw and the rendered data) separately.
-    These values can be separately updated when something is assigned. When the field is accessed,
-    a MarkupText instance will be returned ; this one is built with the current data.
+    Acts as the Django's default attribute descriptor class, enabled via the SubfieldBase metaclass.
+    The main difference is that it does not call to_python() on the MarkupTextField class. Instead,
+    it stores the two different values of a markup content (the raw and the rendered data)
+    separately. These values can be separately updated when something is assigned. When the field is
+    accessed, a MarkupText instance will be returned ; this one is built with the current data.
     """
     def __init__(self, field):
         self.field = field
@@ -127,18 +127,18 @@ class MarkupTextField(models.TextField):
     """
     def __init__(self, *args, **kwargs):
         # For Django 1.7 migration serializer compatibility: the frozen version of a
-        # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field itself
-        # is frozen / serialized as well.
+        # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field
+        # itself is frozen / serialized as well.
         self.add_rendered_field = not kwargs.pop('no_rendered_field', False)
         super(MarkupTextField, self).__init__(*args, **kwargs)
 
     def deconstruct(self):  # pragma: no cover
         """
-        As outlined in the Django 1.7 documentation, this method tells Django how to take an instance
-        of a new field in order to reduce it to a serialized form. This can be used to configure what
-        arguments need to be passed to the __init__() method of the field in order to re-create it.
-        We use it in order to pass the 'no_rendered_field' to the __init__() method. This will allow
-        the _rendered field to not be added to the model class twice.
+        As outlined in the Django 1.7 documentation, this method tells Django how to take an
+        instance of a new field in order to reduce it to a serialized form. This can be used to
+        configure what arguments need to be passed to the __init__() method of the field in order to
+        re-create it. We use it in order to pass the 'no_rendered_field' to the __init__() method.
+        This will allow the _rendered field to not be added to the model class twice.
         """
         name, import_path, args, kwargs = super(MarkupTextField, self).deconstruct()
         kwargs['no_rendered_field'] = True
@@ -224,13 +224,17 @@ class ExtendedImageField(models.ImageField):
 
         # Controls the image size
         image_width, image_height = get_image_dimensions(data)
-        if (self.min_width and self.max_width and not self.min_width <= image_width <= self.max_width):
+        if self.min_width and self.max_width \
+                and not self.min_width <= image_width <= self.max_width:
             raise ValidationError(
-                _('Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px').format(
+                _('Images of width lesser than {}px or greater than {}px or are not allowed. '
+                  'The width of your image is {}px').format(
                     self.min_width, self.max_width, image_width))
-        if self.min_height and self.max_height and not self.min_height <= image_height <= self.max_height:
+        if self.min_height and self.max_height \
+                and not self.min_height <= image_height <= self.max_height:
             raise ValidationError(
-                _('Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px').format(
+                _('Images of height lesser than {}px or greater than {}px or are not allowed. '
+                  'The height of your image is {}px').format(
                     self.min_height, self.max_height, image_height))
 
         return data

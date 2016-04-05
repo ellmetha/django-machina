@@ -43,7 +43,8 @@ setup(
         # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
         'django-markdown>=0.7.0',
 
-        # Machina's default templates use django-widget-tweaks to render form fields ; but you can override this
+        # Machina's default templates use django-widget-tweaks to render form fields ; but you can
+        # override this
         'django-widget-tweaks>=1.4',
     ],
     classifiers=[

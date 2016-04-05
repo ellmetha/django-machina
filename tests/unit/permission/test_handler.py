@@ -527,9 +527,10 @@ class TestPermissionHandler(object):
         u2 = UserFactory.create(is_superuser=True)
         u3 = UserFactory.create()
         # Run & check
-        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
-        assert set(self.perm_handler.get_target_forums_for_moved_topics(u2)) == set(Forum.objects.filter(
-            type=Forum.FORUM_POST))
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) \
+            == set([self.forum_1, ])
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(u2)) \
+            == set(Forum.objects.filter(type=Forum.FORUM_POST))
         assert list(self.perm_handler.get_target_forums_for_moved_topics(u3)) == []
 
     def test_cannot_allow_forum_categories_to_receive_moved_topics(self):
@@ -537,14 +538,16 @@ class TestPermissionHandler(object):
         assign_perm('can_move_topics', self.u1, self.forum_1)
         assign_perm('can_move_topics', self.u1, self.top_level_cat)
         # Run & check
-        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) \
+            == set([self.forum_1, ])
 
     def test_cannot_allow_forum_links_to_receive_moved_topics(self):
         # Setup
         assign_perm('can_move_topics', self.u1, self.forum_1)
         assign_perm('can_move_topics', self.u1, self.forum_3)
         # Run & check
-        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) == set([self.forum_1, ])
+        assert set(self.perm_handler.get_target_forums_for_moved_topics(self.u1)) \
+            == set([self.forum_1, ])
 
     def test_knows_if_a_user_can_delete_topics(self):
         # Setup
@@ -626,5 +629,6 @@ class TestPermissionHandler(object):
         ]
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = codenames
         # Run & check
-        assert set(self.perm_handler._get_forums_for_user(self.u1, codenames)) == set(Forum.objects.all())
+        assert set(self.perm_handler._get_forums_for_user(self.u1, codenames)) \
+            == set(Forum.objects.all())
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []

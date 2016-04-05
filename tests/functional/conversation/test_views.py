@@ -138,7 +138,7 @@ class TestTopicView(BaseClientTestCase):
         assert topic_tracks[0].topic == self.topic
         assert topic_tracks[0].user == self.user
 
-    def test_marks_the_related_topic_as_read_even_if_no_track_is_registered_for_the_related_forum(self):
+    def test_marks_the_related_topic_as_read_even_if_no_track_is_registered_for_the_related_forum(self):  # noqa
         # Setup
         top_level_forum_alt = create_forum()
         topic_alt = create_topic(forum=top_level_forum_alt, poster=self.user)
@@ -309,7 +309,8 @@ class TestTopicCreateView(BaseClientTestCase):
         topic_url = reverse(
             'forum_conversation:topic',
             kwargs={'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
-                    'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
+                    'slug': response.context_data['topic'].slug,
+                    'pk': response.context_data['topic'].pk})
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url
@@ -464,7 +465,7 @@ class TestTopicCreateView(BaseClientTestCase):
         assert 'attachment_formset' in response.context_data
         assert isinstance(response.context_data['attachment_formset'], AttachmentFormset)
 
-    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
+    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):  # noqa
         # Setup
         correct_url = reverse('forum_conversation:topic_create', kwargs={
             'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
@@ -495,7 +496,7 @@ class TestTopicCreateView(BaseClientTestCase):
         # Check
         assert response.context_data['attachment_preview']
 
-    def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):
+    def test_can_handle_multiple_attachment_previews_and_the_persistence_of_the_uploaded_files(self):  # noqa
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)
         correct_url = reverse('forum_conversation:topic_create', kwargs={
@@ -820,7 +821,7 @@ class TestTopicUpdateView(BaseClientTestCase):
         assert 'attachment_formset' in response.context_data
         assert isinstance(response.context_data['attachment_formset'], AttachmentFormset)
 
-    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):
+    def test_cannot_embed_an_attachment_formset_in_the_context_if_the_user_canot_create_attachments(self):  # noqa
         # Setup
         correct_url = reverse(
             'forum_conversation:topic_update',
@@ -1027,7 +1028,8 @@ class TestPostCreateView(BaseClientTestCase):
             'forum_conversation:topic',
             kwargs={
                 'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk,
-                'slug': response.context_data['topic'].slug, 'pk': response.context_data['topic'].pk})
+                'slug': response.context_data['topic'].slug,
+                'pk': response.context_data['topic'].pk})
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert topic_url in last_url

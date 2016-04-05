@@ -32,7 +32,8 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('subject', 'forum', 'created', 'first_post', 'last_post', 'posts_count', 'approved')
+    list_display = (
+        'subject', 'forum', 'created', 'first_post', 'last_post', 'posts_count', 'approved')
     list_filter = ('created', 'updated',)
     raw_id_fields = ('poster', 'subscribers', )
     search_fields = ('subject',)

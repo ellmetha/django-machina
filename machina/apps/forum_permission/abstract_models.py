@@ -16,7 +16,8 @@ class AbstractForumPermission(models.Model):
     Represents a single forum permission.
     """
     codename = models.CharField(max_length=150, verbose_name=_('Permission codename'), unique=True)
-    name = models.CharField(max_length=255, verbose_name=_('Permission name'), blank=True, null=True)
+    name = models.CharField(
+        max_length=255, verbose_name=_('Permission name'), blank=True, null=True)
 
     is_global = models.BooleanField(
         verbose_name=_('Global permission'),
@@ -48,7 +49,8 @@ class BaseAuthForumPermission(models.Model):
     """
     Represents a per-auth-component forum object permission.
     """
-    permission = models.ForeignKey('forum_permission.ForumPermission', verbose_name=_('Forum permission'))
+    permission = models.ForeignKey(
+        'forum_permission.ForumPermission', verbose_name=_('Forum permission'))
     has_perm = models.BooleanField(verbose_name=_('Has perm'), default=True)
 
     # The forum related to a UserForumPermission instance can be null if the
@@ -62,7 +64,8 @@ class BaseAuthForumPermission(models.Model):
         super(BaseAuthForumPermission, self).clean()
         if self.forum is None and not self.permission.is_global:
             raise ValidationError(
-                _('The following permission cannot be granted globally: {}'.format(self.permission)))
+                _('The following permission cannot be granted globally: {}'.format(
+                    self.permission)))
 
 
 @python_2_unicode_compatible
@@ -70,7 +73,8 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     """
     Represents a per-user forum object permission.
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
     anonymous_user = models.BooleanField(verbose_name=_('Target anonymous user'), default=False)
 
     class Meta:
@@ -89,7 +93,8 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
         super(AbstractUserForumPermission, self).clean()
         if (self.user is None and not self.anonymous_user) \
                 or (self.user and self.anonymous_user):
-            raise ValidationError(_('A permission should target either a user or an anonymous user'))
+            raise ValidationError(
+                _('A permission should target either a user or an anonymous user'))
 
 
 @python_2_unicode_compatible

@@ -7,8 +7,10 @@ from django.conf import settings
 
 # General
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
-MACHINA_MARKUP_LANGUAGE = getattr(settings, 'MACHINA_MARKUP_LANGUAGE', ('django_markdown.utils.markdown', {}))
-MACHINA_MARKUP_WIDGET = getattr(settings, 'MACHINA_MARKUP_WIDGET', 'django_markdown.widgets.MarkdownWidget')
+MACHINA_MARKUP_LANGUAGE = getattr(
+    settings, 'MACHINA_MARKUP_LANGUAGE', ('django_markdown.utils.markdown', {}))
+MACHINA_MARKUP_WIDGET = getattr(
+    settings, 'MACHINA_MARKUP_WIDGET', 'django_markdown.widgets.MarkdownWidget')
 
 
 # Forum
@@ -38,12 +40,14 @@ POLL_MAX_OPTIONS_PER_USER = getattr(settings, 'MACHINA_POLL_MAX_OPTIONS_PER_USER
 
 
 # Attachments
-ATTACHMENT_FILE_UPLOAD_TO = getattr(settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments')
+ATTACHMENT_FILE_UPLOAD_TO = getattr(
+    settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments')
 ATTACHMENT_CACHE_NAME = getattr(settings, 'MACHINA_ATTACHMENT_CACHE_NAME', 'machina_attachments')
 ATTACHMENT_MAX_FILES_PER_POST = getattr(settings, 'MACHINA_ATTACHMENT_MAX_FILES_PER_POST', 15)
 
 # Member
-PROFILE_AVATAR_UPLOAD_TO = getattr(settings, 'MACHINA_PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')
+PROFILE_AVATAR_UPLOAD_TO = getattr(
+    settings, 'MACHINA_PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')
 
 PROFILE_AVATAR_WIDTH = getattr(settings, 'MACHINA_PROFILE_AVATAR_WIDTH', 150)
 PROFILE_AVATAR_HEIGHT = getattr(settings, 'MACHINA_PROFILE_AVATAR_HEIGHT', 250)

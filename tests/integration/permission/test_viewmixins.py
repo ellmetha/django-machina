@@ -101,7 +101,7 @@ class TestPermissionRequiredMixin(object):
         # Check
         assert response.status_code == 200
 
-    def test_should_consider_controlled_object_prior_to_builtin_objet_or_get_object_attributes(self):
+    def test_should_consider_controlled_object_prior_to_builtin_objet_or_get_object_attributes(self):  # noqa
         forum = self.forum
 
         # Setup

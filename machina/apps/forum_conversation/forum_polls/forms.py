@@ -62,7 +62,8 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         # At least two options must be defined
         number_of_options = 0
         for form in self.forms:
-            if not ((self.can_delete and self._should_delete_form(form)) or len(form.cleaned_data) == 0):
+            if not ((self.can_delete and self._should_delete_form(form)) or
+                    len(form.cleaned_data) == 0):
                 number_of_options += 1
         if number_of_options < 2:
             raise forms.ValidationError('At least two poll options must be defined.')

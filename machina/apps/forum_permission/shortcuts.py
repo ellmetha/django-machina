@@ -54,7 +54,8 @@ def remove_perm(perm, user_or_group, forum=None):
 
 def get_identity(identity):
     """
-    Returns a (user_obj, None) tuple or a (None, group_obj) tuple depending on the considered instance.
+    Returns a (user_obj, None) tuple or a (None, group_obj) tuple depending on the considered
+    instance.
     """
     if isinstance(identity, AnonymousUser):
         return identity, None

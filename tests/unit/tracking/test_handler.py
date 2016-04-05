@@ -101,7 +101,7 @@ class TestTrackingHandler(object):
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.u2)
         assert not len(unread_topics)
 
-    def test_says_that_a_topic_with_a_creation_date_greater_than_the_forum_mark_time_is_unread(self):
+    def test_says_that_a_topic_with_a_creation_date_greater_than_the_forum_mark_time_is_unread(self):  # noqa
         # Setup
         new_topic = create_topic(forum=self.forum_2, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
@@ -110,7 +110,7 @@ class TestTrackingHandler(object):
         # Check
         assert unread_topics == [new_topic, ]
 
-    def test_says_that_a_topic_with_a_last_post_date_greater_than_the_forum_mark_time_is_unread(self):
+    def test_says_that_a_topic_with_a_last_post_date_greater_than_the_forum_mark_time_is_unread(self):  # noqa
         # Setup
         PostFactory.create(topic=self.topic, poster=self.u1)
         # Run
@@ -159,7 +159,7 @@ class TestTrackingHandler(object):
         assert not len(unread_forums)
         assert not len(unread_topics)
 
-    def test_cannot_say_that_a_forum_is_unread_if_it_has_been_updated_without_new_topics_or_posts(self):
+    def test_cannot_say_that_a_forum_is_unread_if_it_has_been_updated_without_new_topics_or_posts(self):  # noqa
         # Setup
         self.forum_2.save()
         # Run
@@ -188,7 +188,7 @@ class TestTrackingHandler(object):
             Forum.objects.all(), self.u2)) == []
         assert ForumReadTrack.objects.filter(user=self.u2).count() == 3
 
-    def test_cannot_mark_parent_forums_as_read_when_marking_a_list_of_forums_as_read_if_they_have_unread_topics(self):
+    def test_cannot_mark_parent_forums_as_read_when_marking_a_list_of_forums_as_read_if_they_have_unread_topics(self):  # noqa
         # Setup
         new_topic_1 = create_topic(forum=self.forum_2_child_2, poster=self.u1)
         new_topic_2 = create_topic(forum=self.forum_2, poster=self.u1)

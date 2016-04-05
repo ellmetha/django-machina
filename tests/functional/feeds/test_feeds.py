@@ -92,7 +92,7 @@ class TestLastTopicsFeed(object):
         # Check
         assert list(topics) == [self.topic_3, self.topic_2, self.topic_1, ]
 
-    def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_without_its_descendants(self):
+    def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_without_its_descendants(self):  # noqa
         # Setup
         feed = LastTopicsFeed()
         request = self.factory.get('/')
@@ -103,7 +103,7 @@ class TestLastTopicsFeed(object):
         # Check
         assert list(topics) == [self.topic_2, ]
 
-    def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_including_its_descendants(self):
+    def test_can_return_all_the_topics_that_can_be_read_by_the_current_user_in_a_forum_including_its_descendants(self):  # noqa
         # Setup
         feed = LastTopicsFeed()
         request = self.factory.get('/')

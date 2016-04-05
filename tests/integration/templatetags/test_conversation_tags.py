@@ -86,7 +86,9 @@ class TestPostedByTag(BaseConversationTagsTestCase):
         def get_rendered(post, user):
             request = self.get_request()
             request.user = user
-            t = Template(self.loadstatement + '{% if post|posted_by:request.user %}OWNER{% else %}NO_OWNER{% endif %}')
+            t = Template(
+                self.loadstatement +
+                '{% if post|posted_by:request.user %}OWNER{% else %}NO_OWNER{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
 

@@ -143,7 +143,8 @@ class AbstractTopic(DatedModel):
     def clean(self):
         super(AbstractTopic, self).clean()
         if self.forum.is_category or self.forum.is_link:
-            raise ValidationError(_('A topic can not be associated with a category or a link forum'))
+            raise ValidationError(
+                _('A topic can not be associated with a category or a link forum'))
 
     def save(self, *args, **kwargs):
         # It is vital to track the changes of the forum associated with a topic in order to
@@ -287,7 +288,8 @@ class AbstractPost(DatedModel):
         # At least a poster (user) or a session key must be associated with
         # the post.
         if self.poster is None and self.anonymous_key is None:
-            raise ValidationError(_('A user id or an anonymous key must be associated with a post.'))
+            raise ValidationError(
+                _('A user id or an anonymous key must be associated with a post.'))
         if self.poster and self.anonymous_key:
             raise ValidationError(_('A user id or an anonymous key must be associated with a post, '
                                     'but not both.'))

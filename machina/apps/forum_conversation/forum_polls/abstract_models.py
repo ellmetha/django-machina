@@ -19,13 +19,15 @@ class AbstractTopicPoll(DatedModel):
     """
     Represents a poll embedded in a forum topic.
     """
-    topic = models.OneToOneField('forum_conversation.Topic', verbose_name=_('Topic'), related_name='poll')
+    topic = models.OneToOneField(
+        'forum_conversation.Topic', verbose_name=_('Topic'), related_name='poll')
 
     # A poll is defined by a single question
     question = models.CharField(max_length=255, verbose_name=_('Poll question'))
 
     # A poll can have a duration
-    duration = models.PositiveIntegerField(verbose_name=_('Poll duration, in days'), blank=True, null=True)
+    duration = models.PositiveIntegerField(
+        verbose_name=_('Poll duration, in days'), blank=True, null=True)
 
     # Users can possibly select more than one option associated with a poll
     max_options = models.PositiveSmallIntegerField(
@@ -62,7 +64,8 @@ class AbstractTopicPollOption(models.Model):
     """
     Represents a poll option.
     """
-    poll = models.ForeignKey('forum_polls.TopicPoll', verbose_name=_('Poll'), related_name='options')
+    poll = models.ForeignKey(
+        'forum_polls.TopicPoll', verbose_name=_('Poll'), related_name='options')
     text = models.CharField(max_length=255, verbose_name=_('Poll option text'))
 
     class Meta:
@@ -87,11 +90,13 @@ class AbstractTopicPollVote(models.Model):
     Represents a poll vote.
     """
     voter = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes', blank=True, null=True)
+        settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes',
+        blank=True, null=True)
     anonymous_key = models.CharField(
         max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
 
-    poll_option = models.ForeignKey('forum_polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
+    poll_option = models.ForeignKey(
+        'forum_polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Vote\'s date'))
 
     class Meta:

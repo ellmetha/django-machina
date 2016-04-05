@@ -53,7 +53,8 @@ class TestClassLoadingFunctionsWithOverrides(object):
     @pytest.fixture(autouse=True)
     def setup(self):
         self.installed_apps = list(settings.INSTALLED_APPS)
-        self.installed_apps[self.installed_apps.index('machina.apps.forum')] = 'tests._testsite.apps.forum'
+        self.installed_apps[self.installed_apps.index('machina.apps.forum')] = \
+            'tests._testsite.apps.forum'
 
     def test_can_load_a_class_defined_in_a_local_module(self):
         with override_settings(INSTALLED_APPS=self.installed_apps):

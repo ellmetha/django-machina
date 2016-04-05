@@ -84,7 +84,9 @@ class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
         def get_rendered(poll, user):
             request = self.request_factory.get('/')
             request.user = user
-            t = Template(self.loadstatement + '{% if poll|has_been_completed_by:request.user %}HAS_VOTED{% else %}HAS_NOT_VOTED{% endif %}')
+            t = Template(
+                self.loadstatement + '{% if poll|has_been_completed_by:request.user %}HAS_VOTED'
+                                     '{% else %}HAS_NOT_VOTED{% endif %}')
             c = Context({'poll': poll, 'request': request})
             rendered = t.render(c)
 
@@ -104,7 +106,8 @@ class TestHasBeenCompletedByTag(BasePollsTagsTestCase):
         def get_rendered(poll, user):
             request = self.request_factory.get('/')
             request.user = user
-            t = Template(self.loadstatement + '{% if poll|has_been_completed_by:request.user %}HAS_VOTED{% else %}HAS_NOT_VOTED{% endif %}')
+            t = Template(self.loadstatement + '{% if poll|has_been_completed_by:request.user %}'
+                                              'HAS_VOTED{% else %}HAS_NOT_VOTED{% endif %}')
             c = Context({'poll': poll, 'request': request})
             rendered = t.render(c)
 

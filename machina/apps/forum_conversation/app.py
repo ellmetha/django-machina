@@ -26,10 +26,12 @@ class BaseConversationApp(Application):
         urls = super(BaseConversationApp, self).get_urls()
 
         conversation_patterns = [
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'), self.topic_view.as_view(), name='topic'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'),
+                self.topic_view.as_view(), name='topic'),
 
             url(_(r'^topic/create/$'), self.topic_create_view.as_view(), name='topic_create'),
-            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/update/$'), self.topic_update_view.as_view(), name='topic_update'),
+            url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/update/$'),
+                self.topic_update_view.as_view(), name='topic_update'),
 
             url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/post/create/$'),
                 self.post_create_view.as_view(), name='post_create'),
@@ -40,7 +42,8 @@ class BaseConversationApp(Application):
         ]
 
         urls += [
-            url(_(r'forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/'), include(conversation_patterns)),
+            url(_(r'forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/'),
+                include(conversation_patterns)),
         ]
         return urls
 

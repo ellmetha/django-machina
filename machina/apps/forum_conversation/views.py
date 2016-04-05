@@ -123,7 +123,8 @@ class BasePostFormView(FormView):
 
     success_message = _('This message has been posted successfully.')
     approval_required_message = _('This message will be validated before appearing on the forum.')
-    attachment_formset_general_error_message = _('There are some errors in the attachments you submitted.')
+    attachment_formset_general_error_message = _(
+        'There are some errors in the attachments you submitted.')
 
     def get(self, request, *args, **kwargs):
         self.init_attachment_cache()
@@ -379,7 +380,8 @@ class BaseTopicFormView(BasePostFormView):
 
     poll_option_formset_class = TopicPollOptionFormset
 
-    poll_option_formset_general_error_message = _('There are some errors in the poll options you submitted.')
+    poll_option_formset_general_error_message = _(
+        'There are some errors in the poll options you submitted.')
 
     def get(self, request, *args, **kwargs):
         self.init_attachment_cache()

@@ -63,7 +63,8 @@ class ForumAdmin(admin.ModelAdmin):
 
     editpermissions_index_view_template_name = 'admin/forum/forum/editpermissions_index.html'
     editpermissions_user_view_template_name = 'admin/forum/forum/editpermissions_user.html'
-    editpermissions_anonymous_user_view_template_name = 'admin/forum/forum/editpermissions_anonymous_user.html'
+    editpermissions_anonymous_user_view_template_name = \
+        'admin/forum/forum/editpermissions_anonymous_user.html'
     editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
 
     def get_urls(self):
@@ -358,7 +359,8 @@ class PickUserForm(forms.Form):
     anonymous_user = forms.BooleanField(
         label=_('Anonymous'),
         initial=False,
-        help_text=_('Please select this option if you want to edit the permissions of the anonymous user'))
+        help_text=_(
+            'Please select this option if you want to edit the permissions of the anonymous user'))
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')

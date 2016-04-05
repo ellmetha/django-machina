@@ -70,7 +70,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
     def test_browsing_works(self):
         # Setup
         correct_url_1 = reverse('forum_tracking:mark_all_forums_read')
-        correct_url_2 = reverse('forum_tracking:mark_subforums_read', kwargs={'pk': self.top_level_cat_1.pk})
+        correct_url_2 = reverse(
+            'forum_tracking:mark_subforums_read', kwargs={'pk': self.top_level_cat_1.pk})
         # Run
         response_1 = self.client.get(correct_url_1, follow=True)
         response_2 = self.client.get(correct_url_2, follow=True)
@@ -96,7 +97,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
         PostFactory.create(topic=new_topic, poster=self.u1)
         new_topic = create_topic(forum=self.forum_4, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
-        correct_url = reverse('forum_tracking:mark_subforums_read', kwargs={'pk': self.top_level_cat_1.pk})
+        correct_url = reverse(
+            'forum_tracking:mark_subforums_read', kwargs={'pk': self.top_level_cat_1.pk})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
@@ -166,7 +168,8 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
-        assert list(self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.user)) == []
+        assert list(self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.user)) \
+            == []
 
     def test_do_not_perform_anything_if_the_user_has_not_the_required_permission(self):
         # Setup

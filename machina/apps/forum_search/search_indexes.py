@@ -13,7 +13,8 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
     """
     Defines the data stored in the Post indexes.
     """
-    text = indexes.CharField(document=True, use_template=True, template_name='forum_search/post_text.txt')
+    text = indexes.CharField(
+        document=True, use_template=True, template_name='forum_search/post_text.txt')
 
     poster = indexes.IntegerField(model_attr='poster_id', null=True)
     poster_name = indexes.CharField()

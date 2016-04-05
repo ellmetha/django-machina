@@ -20,7 +20,8 @@ class FeedsApp(Application):
             url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/$'),
                 self.latest_topics_feed(), name='forum_latest_topics'),
             url(_(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/all/$'),
-                self.latest_topics_feed(), {'descendants': True}, name='forum_latest_topics_with_descendants'),
+                self.latest_topics_feed(), {'descendants': True},
+                name='forum_latest_topics_with_descendants'),
         ]
 
 

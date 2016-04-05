@@ -85,5 +85,6 @@ class TestForumView(BaseClientTestCase):
         # Run
         self.client.get(correct_url)
         # Check
-        top_level_link = self.top_level_link.__class__._default_manager.get(pk=self.top_level_link.pk)
+        top_level_link = self.top_level_link.__class__._default_manager.get(
+            pk=self.top_level_link.pk)
         assert top_level_link.link_redirects_count == initial_redirects_count + 1

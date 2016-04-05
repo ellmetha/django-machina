@@ -250,9 +250,11 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return self.request.forum_permission_handler.can_move_topics(obj, user)
 
 
-class TopicUpdateTypeBaseView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+class TopicUpdateTypeBaseView(
+        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
     """
-    A view providing the ability to change the type of forum topics: normal, sticky topic or announce.
+    A view providing the ability to change the type of forum topics: normal, sticky topic or
+    announce.
     """
     template_name = 'forum_moderation/topic_update_type.html'
     context_object_name = 'topic'
@@ -373,7 +375,8 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
 
         if not post.is_topic_head:
             # Add the topic review
-            previous_posts = topic.posts.filter(approved=True, created__lte=post.created).order_by('-created')
+            previous_posts = topic.posts.filter(approved=True, created__lte=post.created) \
+                .order_by('-created')
             previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
             context['previous_posts'] = previous_posts
 
@@ -428,7 +431,8 @@ class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         return self.request.forum_permission_handler.can_approve_posts(obj, user)
 
 
-class PostDisapproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+class PostDisapproveView(
+        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
     """
     A view providing the ability to disapprove queued forum posts.
     """

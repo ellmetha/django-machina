@@ -626,7 +626,7 @@ class TestModerationQueueListView(BaseClientTestCase):
         assert response.status_code == 200
         assert set(response.context_data['posts']) == set([post2, ])
 
-    def test_display_only_posts_whose_forums_are_eligible_to_the_moderation_queue_for_the_given_user(self):
+    def test_display_only_posts_whose_forums_are_eligible_to_the_moderation_queue_for_the_given_user(self):  # noqa
         # Setup
         post2 = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
         f1 = create_forum()

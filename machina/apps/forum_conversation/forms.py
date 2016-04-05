@@ -17,7 +17,8 @@ TopicPoll = get_model('forum_polls', 'TopicPoll')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
-get_anonymous_user_forum_key = get_class('forum_permission.shortcuts', 'get_anonymous_user_forum_key')
+get_anonymous_user_forum_key = get_class(
+    'forum_permission.shortcuts', 'get_anonymous_user_forum_key')
 
 
 class PostForm(forms.ModelForm):
@@ -93,7 +94,8 @@ class PostForm(forms.ModelForm):
 
 
 class TopicForm(PostForm):
-    topic_type = forms.ChoiceField(label=_('Post topic as'), choices=Topic.TYPE_CHOICES, required=False)
+    topic_type = forms.ChoiceField(
+        label=_('Post topic as'), choices=Topic.TYPE_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(TopicForm, self).__init__(*args, **kwargs)
@@ -118,7 +120,8 @@ class TopicForm(PostForm):
         if self.can_create_polls:
             self.fields['poll_question'] = forms.CharField(
                 label=_('Poll question'), required=False,
-                help_text=_('Enter a question to associate a poll with the topic or leave blank to not create a poll.'),
+                help_text=_('Enter a question to associate a poll with the topic or leave blank to '
+                            'not create a poll.'),
                 max_length=TopicPoll._meta.get_field('question').max_length)
             self.fields['poll_max_options'] = forms.IntegerField(
                 label=_('Maximum number of poll options per user'), required=False,

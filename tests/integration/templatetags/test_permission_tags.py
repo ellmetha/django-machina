@@ -73,8 +73,9 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_access_moderation_queue\' request.user as user_can_access_moderation_queue %}'
-                '{% if user_can_access_moderation_queue %}CAN_ACCESS{% else %}CANNOT_ACCESS{% endif %}')
+                self.loadstatement +
+                '{% get_permission \'can_access_moderation_queue\' request.user as user_can_access_moderation_queue %}'  # noqa
+                '{% if user_can_access_moderation_queue %}CAN_ACCESS{% else %}CANNOT_ACCESS{% endif %}')  # noqa
             c = Context({'request': request})
             rendered = t.render(c)
 
@@ -94,7 +95,8 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_download_files\' post.topic.forum request.user as user_can_download_files %}'
+                self.loadstatement +
+                '{% get_permission \'can_download_files\' post.topic.forum request.user as user_can_download_files %}'  # noqa
                 '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -127,7 +129,8 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_edit_post\' post request.user as user_can_edit_post %}'
+                self.loadstatement +
+                '{% get_permission \'can_edit_post\' post request.user as user_can_edit_post %}'
                 '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -159,7 +162,8 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_delete_post\' post request.user as user_can_delete_post %}'
+                self.loadstatement +
+                '{% get_permission \'can_delete_post\' post request.user as user_can_delete_post %}'
                 '{% if user_can_delete_post %}CAN_DELETE{% else %}CANNOT_DELETE{% endif %}')
             c = Context({'post': post, 'request': request})
             rendered = t.render(c)
@@ -191,7 +195,8 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_add_post\' topic request.user as user_can_add_post %}'
+                self.loadstatement +
+                '{% get_permission \'can_add_post\' topic request.user as user_can_add_post %}'
                 '{% if user_can_add_post %}CAN_ADD_POST{% else %}CANNOT_ADD_POST{% endif %}')
             c = Context({'topic': topic, 'request': request})
             rendered = t.render(c)
@@ -223,7 +228,8 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_vote_in_poll\' poll request.user as user_can_vote_in_poll %}'
+                self.loadstatement +
+                '{% get_permission \'can_vote_in_poll\' poll request.user as user_can_vote_in_poll %}'  # noqa
                 '{% if user_can_vote_in_poll %}CAN_VOTE{% else %}CANNOT_VOTE{% endif %}')
             c = Context({'poll': poll, 'request': request})
             rendered = t.render(c)
@@ -259,8 +265,9 @@ class TestGetPermissionTag(object):
             request.user = user
             ForumPermissionMiddleware().process_request(request)
             t = Template(
-                self.loadstatement + '{% get_permission \'can_add_topic\' forum request.user as user_can_add_topic %}'
-                '{% if user_can_add_topic %}CAN_START_TOPICS{% else %}CANNOT_START_TOPICS{% endif %}')
+                self.loadstatement +
+                '{% get_permission \'can_add_topic\' forum request.user as user_can_add_topic %}'
+                '{% if user_can_add_topic %}CAN_START_TOPICS{% else %}CANNOT_START_TOPICS{% endif %}')  # noqa
             c = Context({'forum': forum, 'request': request})
             rendered = t.render(c)
 
@@ -310,7 +317,7 @@ class TestGetPermissionTag(object):
         context = Context({'request': request})
 
         templates = [
-            '{% get_permission \'can_download_files_unknown\' request.user as user_can_download_files %}'
+            '{% get_permission \'can_download_files_unknown\' request.user as user_can_download_files %}'    # noqa
             '{% if user_can_download_files %}CAN_DOWNLOAD{% else %}CANNOT_DOWNLOAD{% endif %}',
             '{% get_permission \'can_edit_post___\' request.user as user_can_edit_post %}'
             '{% if user_can_edit_post %}CAN_EDIT{% else %}CANNOT_EDIT{% endif %}',
