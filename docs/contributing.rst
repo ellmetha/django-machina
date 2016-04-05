@@ -29,7 +29,7 @@ You should first fork the `django-machina's repository <https://github.com/ellme
 Coding style
 ------------
 
-Please make sure that your code is compliant with the `PEP8 style guide <https://www.python.org/dev/peps/pep-0008/>`_. You can ignore the "Maximum Line Length" requirement but you should still pay attention to the length of your lines. Remember that your code will be checked using `flake8 <https://pypi.python.org/pypi/flake8>`_. You can use the *django-machina*'s `tox <https://pypi.python.org/pypi/tox>`_ configuration to perform this validation:
+Please make sure that your code is compliant with the `PEP8 style guide <https://www.python.org/dev/peps/pep-0008/>`_. You can ignore the "Maximum Line Length" requirement but the length of your lines should not exceed 100 characters. Remember that your code will be checked using `flake8 <https://pypi.python.org/pypi/flake8>`_. You can use the *django-machina*'s `tox <https://pypi.python.org/pypi/tox>`_ configuration to perform this validation:
 
 .. code-block:: bash
 
