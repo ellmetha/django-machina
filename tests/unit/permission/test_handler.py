@@ -632,3 +632,45 @@ class TestPermissionHandler(object):
         assert set(self.perm_handler._get_forums_for_user(self.u1, codenames)) \
             == set(Forum.objects.all())
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
+
+    def test_knows_if_a_user_can_subscribe_to_topics(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_read_forum', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_subscribe_to_topic(self.forum_1_topic, self.u1)
+        assert not self.perm_handler.can_subscribe_to_topic(self.forum_1_topic, u2)
+
+    def test_knows_that_a_superuser_can_subscribe_to_topics(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_subscribe_to_topic(self.forum_1_topic, u2)
+
+    def test_knows_that_an_anonymous_user_cannot_subscribe_to_topics(self):
+        # Setup
+        u2 = AnonymousUser()
+        assign_perm('can_read_forum', u2, self.forum_1)
+        # Run & check
+        assert not self.perm_handler.can_subscribe_to_topic(self.forum_1_topic, u2)
+
+    def test_knows_if_a_user_can_unsubscribe_from_topics(self):
+        # Setup
+        u2 = UserFactory.create()
+        assign_perm('can_read_forum', self.u1, self.forum_1)
+        # Run & check
+        assert self.perm_handler.can_unsubscribe_from_topic(self.forum_1_topic, self.u1)
+        assert not self.perm_handler.can_unsubscribe_from_topic(self.forum_1_topic, u2)
+
+    def test_knows_that_a_superuser_can_unsubscribe_from_topics(self):
+        # Setup
+        u2 = UserFactory.create(is_superuser=True)
+        # Run & check
+        assert self.perm_handler.can_unsubscribe_from_topic(self.forum_1_topic, u2)
+
+    def test_knows_that_an_anonymous_user_cannot_unsubscribe_from_topics(self):
+        # Setup
+        u2 = AnonymousUser()
+        assign_perm('can_read_forum', u2, self.forum_1)
+        # Run & check
+        assert not self.perm_handler.can_unsubscribe_from_topic(self.forum_1_topic, u2)

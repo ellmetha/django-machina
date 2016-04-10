@@ -215,6 +215,26 @@ class PermissionHandler(object):
         """
         return self._perform_basic_permission_check(forum, user, 'can_download_file')
 
+    # Topic subscription
+
+    def can_subscribe_to_topic(self, topic, user):
+        """
+        Given a topic, checks whether the user can add it to his subscription list.
+        """
+        # A user can subscribe to topics if he is authenticated and if he has the permission to read
+        # the related forum.
+        return user.is_authenticated() \
+            and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+
+    def can_unsubscribe_from_topic(self, topic, user):
+        """
+        Given a topic, checks whether the user can remove it from his subscription list.
+        """
+        # A user can unsubscribe from topics if he is authenticated and if he has the permission to
+        # read the related forum.
+        return user.is_authenticated() \
+            and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+
     # Moderation
 
     def get_moderation_queue_forums(self, user):
