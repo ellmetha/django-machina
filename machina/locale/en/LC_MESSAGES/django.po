@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-18 03:17+0100\n"
+"POT-Creation-Date: 2016-04-25 00:16+0200\n"
 "PO-Revision-Date: 2016-02-22 22:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,58 +38,58 @@ msgstr ""
 msgid "^tracking/"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:28
-msgid "Default forum"
-msgstr ""
-
-#: machina/apps/forum/abstract_models.py:29
-msgid "Category forum"
-msgstr ""
-
-#: machina/apps/forum/abstract_models.py:30
-msgid "Link forum"
-msgstr ""
-
-#: machina/apps/forum/abstract_models.py:41
+#: machina/apps/forum/abstract_models.py:33
 msgid "Parent"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:43
+#: machina/apps/forum/abstract_models.py:35
 #: machina/templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:44
-#: machina/apps/forum_conversation/abstract_models.py:48
+#: machina/apps/forum/abstract_models.py:36
+#: machina/apps/forum_conversation/abstract_models.py:34
 msgid "Slug"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:47
+#: machina/apps/forum/abstract_models.py:39
 msgid "Description"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:51
+#: machina/apps/forum/abstract_models.py:43
 msgid "Forum image"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:56
+#: machina/apps/forum/abstract_models.py:48
 msgid "Forum link"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:57
-#: machina/apps/forum/abstract_models.py:68
+#: machina/apps/forum/abstract_models.py:50
+#: machina/apps/forum/abstract_models.py:69
 msgid "Track link redirects count"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:58
+#: machina/apps/forum/abstract_models.py:51
 msgid "Records the number of times a forum link was clicked"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:63
+#: machina/apps/forum/abstract_models.py:56
+msgid "Default forum"
+msgstr ""
+
+#: machina/apps/forum/abstract_models.py:57
+msgid "Category forum"
+msgstr ""
+
+#: machina/apps/forum/abstract_models.py:58
+msgid "Link forum"
+msgstr ""
+
+#: machina/apps/forum/abstract_models.py:61
 msgid "Forum type"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:66
+#: machina/apps/forum/abstract_models.py:65
 msgid "Number of posts"
 msgstr ""
 
@@ -98,40 +98,40 @@ msgid "Number of topics"
 msgstr ""
 
 #: machina/apps/forum/abstract_models.py:70
-#: machina/apps/forum_conversation/abstract_models.py:73
+#: machina/apps/forum_conversation/abstract_models.py:69
 msgid "Last post added on"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:73
+#: machina/apps/forum/abstract_models.py:74
 msgid "Display in parent-forums legend"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:74
+#: machina/apps/forum/abstract_models.py:75
 msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:83
-#: machina/apps/forum_permission/abstract_models.py:56
-#: machina/apps/forum_tracking/abstract_models.py:21
+#: machina/apps/forum/abstract_models.py:84
+#: machina/apps/forum_permission/abstract_models.py:58
+#: machina/apps/forum_tracking/abstract_models.py:22
 #: machina/templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:84
+#: machina/apps/forum/abstract_models.py:85
 #: machina/templates/machina/forum/forum_list.html:36
 #: machina/templates/machina/forum/forum_list.html:220
 msgid "Forums"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:122
+#: machina/apps/forum/abstract_models.py:123
 msgid "A forum can not have a link forum as parent"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:125
+#: machina/apps/forum/abstract_models.py:126
 msgid "A category can not have another category as parent"
 msgstr ""
 
-#: machina/apps/forum/abstract_models.py:128
+#: machina/apps/forum/abstract_models.py:129
 msgid "A link forum must have a link associated with it"
 msgstr ""
 
@@ -143,67 +143,67 @@ msgstr ""
 msgid "Link forum settings"
 msgstr ""
 
-#: machina/apps/forum/admin.py:143
+#: machina/apps/forum/admin.py:144
 msgid "'{}' forum successfully moved"
 msgstr ""
 
-#: machina/apps/forum/admin.py:157 machina/apps/forum/admin.py:231
-#: machina/apps/forum/admin.py:249 machina/apps/forum/admin.py:268
-#: machina/apps/forum_permission/abstract_models.py:34
+#: machina/apps/forum/admin.py:158 machina/apps/forum/admin.py:232
+#: machina/apps/forum/admin.py:250 machina/apps/forum/admin.py:269
+#: machina/apps/forum_permission/abstract_models.py:35
 #: machina/templates/admin/forum/forum/change_form.html:5
 #: machina/templates/admin/forum/forum/editpermissions_form.html:20
 #: machina/templates/admin/forum/forum/editpermissions_index.html:15
 msgid "Forum permissions"
 msgstr ""
 
-#: machina/apps/forum/admin.py:158
+#: machina/apps/forum/admin.py:159
 #: machina/templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr ""
 
-#: machina/apps/forum/admin.py:166
+#: machina/apps/forum/admin.py:167
 msgid "Permissions successfully copied"
 msgstr ""
 
-#: machina/apps/forum/admin.py:187
+#: machina/apps/forum/admin.py:188
 msgid "Choose either a user ID, a group ID or the anonymous user"
 msgstr ""
 
-#: machina/apps/forum/admin.py:249
+#: machina/apps/forum/admin.py:250
 #: machina/templates/machina/forum_conversation/topic_detail.html:104
 #: machina/templates/machina/forum_moderation/moderation_queue/detail.html:119
 msgid "Anonymous user"
 msgstr ""
 
-#: machina/apps/forum/admin.py:319
+#: machina/apps/forum/admin.py:320
 msgid "Permissions successfully applied"
 msgstr ""
 
-#: machina/apps/forum/admin.py:359
+#: machina/apps/forum/admin.py:360
 msgid "Anonymous"
 msgstr ""
 
-#: machina/apps/forum/admin.py:361
+#: machina/apps/forum/admin.py:363
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
 msgstr ""
 
-#: machina/apps/forum/admin.py:380
+#: machina/apps/forum/admin.py:382
 msgid "Choose either a user ID or select the anonymous user"
 msgstr ""
 
-#: machina/apps/forum/admin.py:409
+#: machina/apps/forum/admin.py:411
 #: machina/templates/admin/forum/forum/editpermissions_form.html:35
 msgid "Not set"
 msgstr ""
 
-#: machina/apps/forum/admin.py:410
+#: machina/apps/forum/admin.py:412
 #: machina/templates/admin/forum/forum/editpermissions_form.html:36
 msgid "Granted"
 msgstr ""
 
-#: machina/apps/forum/admin.py:411
+#: machina/apps/forum/admin.py:413
 #: machina/templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr ""
@@ -216,73 +216,73 @@ msgstr ""
 msgid "Machina: Forum"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:25
-msgid "Default topic"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:26
-msgid "Sticky"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:27
-msgid "Announce"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:31
-msgid "Topic unlocked"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:32
-msgid "Topic locked"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:33
-msgid "Topic moved"
-msgstr ""
-
-#: machina/apps/forum_conversation/abstract_models.py:42
+#: machina/apps/forum_conversation/abstract_models.py:28
 msgid "Topic forum"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:44
-#: machina/apps/forum_conversation/abstract_models.py:212
+#: machina/apps/forum_conversation/abstract_models.py:30
+#: machina/apps/forum_conversation/abstract_models.py:209
 msgid "Poster"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:47
-#: machina/apps/forum_conversation/abstract_models.py:220
+#: machina/apps/forum_conversation/abstract_models.py:33
+#: machina/apps/forum_conversation/abstract_models.py:217
 msgid "Subject"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:53
+#: machina/apps/forum_conversation/abstract_models.py:39
+msgid "Default topic"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:40
+msgid "Sticky"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:41
+msgid "Announce"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:44
 msgid "Topic type"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:58
+#: machina/apps/forum_conversation/abstract_models.py:49
+msgid "Topic unlocked"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:50
+msgid "Topic locked"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:51
+msgid "Topic moved"
+msgstr ""
+
+#: machina/apps/forum_conversation/abstract_models.py:54
 msgid "Topic status"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:62
-#: machina/apps/forum_conversation/abstract_models.py:231
+#: machina/apps/forum_conversation/abstract_models.py:58
+#: machina/apps/forum_conversation/abstract_models.py:228
 msgid "Approved"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:66
+#: machina/apps/forum_conversation/abstract_models.py:62
 msgid "Posts count"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:70
+#: machina/apps/forum_conversation/abstract_models.py:66
 msgid "Views count"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:78
+#: machina/apps/forum_conversation/abstract_models.py:74
 msgid "Subscribers"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:88
-#: machina/apps/forum_conversation/abstract_models.py:209
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:22
-#: machina/apps/forum_tracking/abstract_models.py:43
+#: machina/apps/forum_conversation/abstract_models.py:84
+#: machina/apps/forum_conversation/abstract_models.py:206
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:23
+#: machina/apps/forum_tracking/abstract_models.py:46
 #: machina/templates/machina/forum_member/forum_profile_detail.html:50
 #: machina/templates/machina/forum_moderation/moderation_queue/list.html:34
 msgid "Topic"
@@ -290,71 +290,71 @@ msgid_plural "Topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: machina/apps/forum_conversation/abstract_models.py:89
+#: machina/apps/forum_conversation/abstract_models.py:85
 #: machina/templates/machina/forum/forum_list.html:20
 #: machina/templates/machina/forum/forum_list.html:38
 #: machina/templates/machina/forum/forum_list.html:222
 msgid "Topics"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:150
+#: machina/apps/forum_conversation/abstract_models.py:147
 msgid "A topic can not be associated with a category or a link forum"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:214
+#: machina/apps/forum_conversation/abstract_models.py:211
 msgid "Poster IP address"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:216
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:92
+#: machina/apps/forum_conversation/abstract_models.py:213
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:96
 msgid "Anonymous user forum key"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:224
+#: machina/apps/forum_conversation/abstract_models.py:221
 msgid "Content"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:228
+#: machina/apps/forum_conversation/abstract_models.py:225
 msgid "Username"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:236
+#: machina/apps/forum_conversation/abstract_models.py:233
 msgid "Update reason"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:240
+#: machina/apps/forum_conversation/abstract_models.py:237
 msgid "Lastly updated by"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:243
+#: machina/apps/forum_conversation/abstract_models.py:240
 msgid "Updates count"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:253
-#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:18
+#: machina/apps/forum_conversation/abstract_models.py:250
+#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:19
 #: machina/templates/machina/forum_member/forum_profile_detail.html:46
 msgid "Post"
 msgid_plural "Posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: machina/apps/forum_conversation/abstract_models.py:254
+#: machina/apps/forum_conversation/abstract_models.py:251
 #: machina/templates/machina/forum/forum_list.html:21
 #: machina/templates/machina/forum/forum_list.html:39
 #: machina/templates/machina/forum/forum_list.html:223
 msgid "Posts"
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:294
+#: machina/apps/forum_conversation/abstract_models.py:292
 msgid "A user id or an anonymous key must be associated with a post."
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:296
+#: machina/apps/forum_conversation/abstract_models.py:294
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
 msgstr ""
 
-#: machina/apps/forum_conversation/abstract_models.py:300
+#: machina/apps/forum_conversation/abstract_models.py:298
 msgid "A username must be specified if the poster is anonymous"
 msgstr ""
 
@@ -362,97 +362,97 @@ msgstr ""
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 msgstr ""
 
-#: machina/apps/forum_conversation/app.py:31
+#: machina/apps/forum_conversation/app.py:32
 msgid "^topic/create/$"
 msgstr ""
 
-#: machina/apps/forum_conversation/app.py:32
+#: machina/apps/forum_conversation/app.py:33
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
 msgstr ""
 
-#: machina/apps/forum_conversation/app.py:34
-msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgstr ""
-
 #: machina/apps/forum_conversation/app.py:36
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr ""
 
 #: machina/apps/forum_conversation/app.py:38
 msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgstr ""
+
+#: machina/apps/forum_conversation/app.py:40
+msgid ""
 "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 msgstr ""
 
-#: machina/apps/forum_conversation/app.py:43
+#: machina/apps/forum_conversation/app.py:45
 msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:39
+#: machina/apps/forum_conversation/forms.py:40
 msgid "Enter your subject"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:40
+#: machina/apps/forum_conversation/forms.py:41
 msgid "Message"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:41
+#: machina/apps/forum_conversation/forms.py:42
 msgid "Enter your message"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:96
+#: machina/apps/forum_conversation/forms.py:98
 msgid "Post topic as"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:120
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:25
+#: machina/apps/forum_conversation/forms.py:122
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:26
 msgid "Poll question"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:121
+#: machina/apps/forum_conversation/forms.py:123
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:124
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:32
+#: machina/apps/forum_conversation/forms.py:127
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:34
 msgid "Maximum number of poll options per user"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:125
+#: machina/apps/forum_conversation/forms.py:128
 msgid "This is the number of options each user may select when voting."
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:129
+#: machina/apps/forum_conversation/forms.py:132
 msgid "For how many days the poll should be run?"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:130
+#: machina/apps/forum_conversation/forms.py:133
 msgid "Enter 0 or leave blank for a never ending poll."
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:133
+#: machina/apps/forum_conversation/forms.py:136
 msgid "Allow re-voting?"
 msgstr ""
 
-#: machina/apps/forum_conversation/forms.py:134
+#: machina/apps/forum_conversation/forms.py:137
 msgid "If enabled users are able to change their vote."
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:19
+#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:21
 msgid "File"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:20
+#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:22
 msgid "Comment"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:25
+#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:27
 msgid "Attachment"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:26
+#: machina/apps/forum_conversation/forum_attachments/abstract_models.py:28
 #: machina/templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
 #: machina/templates/machina/forum_conversation/forum_attachments/attachments_preview.html:7
 #: machina/templates/machina/forum_conversation/partials/topic_form.html:27
@@ -465,64 +465,64 @@ msgstr ""
 msgid "Machina: Forum attachments"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:28
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:30
 msgid "Poll duration, in days"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:36
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:38
 msgid "Allow vote changes"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:43
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:45
 msgid "Topic poll"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:44
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:46
 msgid "Topic polls"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:65
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:68
 #: machina/templates/machina/forum_conversation/partials/topic_form.html:24
 msgid "Poll"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:66
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:69
 msgid "Poll option text"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:71
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:74
 msgid "Topic poll option"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:72
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:75
 msgid "Topic poll options"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:90
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:93
 msgid "Voter"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:94
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:99
 msgid "Poll option"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:95
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:100
 msgid "Vote's date"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:100
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:105
 msgid "Topic poll vote"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:101
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:106
 msgid "Topic poll votes"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:112
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:117
 msgid "A user id or an anonymous key must be used."
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/abstract_models.py:114
+#: machina/apps/forum_conversation/forum_polls/abstract_models.py:119
 msgid "A user id or an anonymous key must be used, but not both."
 msgstr ""
 
@@ -530,11 +530,11 @@ msgstr ""
 msgid "Enter a poll option"
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/forms.py:121
+#: machina/apps/forum_conversation/forum_polls/forms.py:122
 msgid "You must specify an option when voting."
 msgstr ""
 
-#: machina/apps/forum_conversation/forum_polls/forms.py:126
+#: machina/apps/forum_conversation/forum_polls/forms.py:127
 msgid "You have tried to vote for too many options."
 msgstr ""
 
@@ -558,20 +558,20 @@ msgstr ""
 msgid "This message will be validated before appearing on the forum."
 msgstr ""
 
-#: machina/apps/forum_conversation/views.py:126
+#: machina/apps/forum_conversation/views.py:127
 msgid "There are some errors in the attachments you submitted."
 msgstr ""
 
-#: machina/apps/forum_conversation/views.py:382
+#: machina/apps/forum_conversation/views.py:384
 msgid "There are some errors in the poll options you submitted."
 msgstr ""
 
-#: machina/apps/forum_conversation/views.py:568
-#: machina/apps/forum_conversation/views.py:650
+#: machina/apps/forum_conversation/views.py:570
+#: machina/apps/forum_conversation/views.py:652
 msgid "This message has been edited successfully."
 msgstr ""
 
-#: machina/apps/forum_conversation/views.py:687
+#: machina/apps/forum_conversation/views.py:689
 msgid "This message has been deleted successfully."
 msgstr ""
 
@@ -600,9 +600,9 @@ msgid "Machina: Forum feeds"
 msgstr ""
 
 #: machina/apps/forum_member/abstract_models.py:22
-#: machina/apps/forum_permission/abstract_models.py:73
-#: machina/apps/forum_tracking/abstract_models.py:20
-#: machina/apps/forum_tracking/abstract_models.py:42
+#: machina/apps/forum_permission/abstract_models.py:77
+#: machina/apps/forum_tracking/abstract_models.py:21
+#: machina/apps/forum_tracking/abstract_models.py:44
 msgid "User"
 msgstr ""
 
@@ -626,67 +626,83 @@ msgstr ""
 msgid "Forum profiles"
 msgstr ""
 
-#: machina/apps/forum_member/app.py:21
+#: machina/apps/forum_member/app.py:23
 msgid "^profile/(?P<pk>\\d+)/$"
 msgstr ""
 
-#: machina/apps/forum_member/app.py:22
+#: machina/apps/forum_member/app.py:25
 msgid "^profile/edit/$"
 msgstr ""
 
-#: machina/apps/forum_member/app.py:23
+#: machina/apps/forum_member/app.py:27
 msgid "^ego/topics/$"
+msgstr ""
+
+#: machina/apps/forum_member/app.py:28
+msgid "^topic/(?P<pk>\\d+)/subscribe/$"
+msgstr ""
+
+#: machina/apps/forum_member/app.py:30
+msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
 msgstr ""
 
 #: machina/apps/forum_member/registry_config.py:12
 msgid "Machina: Forum members"
 msgstr ""
 
-#: machina/apps/forum_member/views.py:92
+#: machina/apps/forum_member/views.py:97
 msgid "The profile has been edited successfully."
 msgstr ""
 
-#: machina/apps/forum_moderation/app.py:29
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+#: machina/apps/forum_member/views.py:122
+msgid "You subscribed to this topic successfully."
 msgstr ""
 
-#: machina/apps/forum_moderation/app.py:30
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
+#: machina/apps/forum_member/views.py:161
+msgid "You unsubscribed from this topic successfully."
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:31
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgstr ""
-
-#: machina/apps/forum_moderation/app.py:32
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:33
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:35
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:37
-msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:39
-msgid "^queue/$"
-msgstr ""
-
-#: machina/apps/forum_moderation/app.py:40
-msgid "^queue/(?P<pk>\\d+)/$"
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
 msgstr ""
 
 #: machina/apps/forum_moderation/app.py:41
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+msgstr ""
+
+#: machina/apps/forum_moderation/app.py:43
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+msgstr ""
+
+#: machina/apps/forum_moderation/app.py:45
+msgid "^queue/$"
+msgstr ""
+
+#: machina/apps/forum_moderation/app.py:46
+msgid "^queue/(?P<pk>\\d+)/$"
+msgstr ""
+
+#: machina/apps/forum_moderation/app.py:48
 msgid "^queue/(?P<pk>\\d+)/approve/$"
 msgstr ""
 
-#: machina/apps/forum_moderation/app.py:42
+#: machina/apps/forum_moderation/app.py:50
 msgid "^queue/(?P<pk>\\d+)/disapprove/$"
 msgstr ""
 
@@ -695,7 +711,7 @@ msgid "Select a destination forum"
 msgstr ""
 
 #: machina/apps/forum_moderation/forms.py:22
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:19
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: machina/templates/machina/forum_moderation/topic_lock.html:5
 #: machina/templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
@@ -721,27 +737,27 @@ msgstr ""
 msgid "This topic has been moved successfully."
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:260
+#: machina/apps/forum_moderation/views.py:262
 msgid "This topic type has been changed successfully."
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:307
+#: machina/apps/forum_moderation/views.py:309
 msgid "Would you want to change this topic to a default topic?"
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:317
+#: machina/apps/forum_moderation/views.py:319
 msgid "Would you want to change this topic to a sticky topic?"
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:327
+#: machina/apps/forum_moderation/views.py:329
 msgid "Would you want to change this topic to an announce?"
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:397
+#: machina/apps/forum_moderation/views.py:400
 msgid "This post has been approved successfully."
 msgstr ""
 
-#: machina/apps/forum_moderation/views.py:437
+#: machina/apps/forum_moderation/views.py:441
 msgid "This post has been disapproved successfully."
 msgstr ""
 
@@ -749,68 +765,68 @@ msgstr ""
 msgid "Permission codename"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:19
+#: machina/apps/forum_permission/abstract_models.py:20
 msgid "Permission name"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:22
+#: machina/apps/forum_permission/abstract_models.py:23
 msgid "Global permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:23
+#: machina/apps/forum_permission/abstract_models.py:24
 msgid "This permission can be granted globally to all the forums"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:26
+#: machina/apps/forum_permission/abstract_models.py:27
 msgid "Local permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:27
+#: machina/apps/forum_permission/abstract_models.py:28
 msgid "This permission can be granted individually for each forum"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:33
-#: machina/apps/forum_permission/abstract_models.py:51
+#: machina/apps/forum_permission/abstract_models.py:34
+#: machina/apps/forum_permission/abstract_models.py:53
 msgid "Forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:44
+#: machina/apps/forum_permission/abstract_models.py:45
 msgid "A forum permission should be at least either global or local"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:52
+#: machina/apps/forum_permission/abstract_models.py:54
 msgid "Has perm"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:65
+#: machina/apps/forum_permission/abstract_models.py:67
 msgid "The following permission cannot be granted globally: {}"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:74
+#: machina/apps/forum_permission/abstract_models.py:78
 msgid "Target anonymous user"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:80
+#: machina/apps/forum_permission/abstract_models.py:84
 msgid "User forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:81
+#: machina/apps/forum_permission/abstract_models.py:85
 msgid "User forum permissions"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:92
+#: machina/apps/forum_permission/abstract_models.py:97
 msgid "A permission should target either a user or an anonymous user"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:100
+#: machina/apps/forum_permission/abstract_models.py:105
 msgid "Group"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:106
+#: machina/apps/forum_permission/abstract_models.py:111
 msgid "Group forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:107
+#: machina/apps/forum_permission/abstract_models.py:112
 msgid "Group forum permissions"
 msgstr ""
 
@@ -826,27 +842,27 @@ msgstr ""
 msgid "Search for poster"
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:24
+#: machina/apps/forum_search/forms.py:25
 msgid "Enter a user name to limit the search to a specific user."
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:28
+#: machina/apps/forum_search/forms.py:29
 msgid "Search in specific forums"
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:28
+#: machina/apps/forum_search/forms.py:30
 msgid "Select the forums you wish to search in."
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:37
+#: machina/apps/forum_search/forms.py:39
 msgid "Search for keywords"
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:38
+#: machina/apps/forum_search/forms.py:40
 msgid "Keywords or phrase"
 msgstr ""
 
-#: machina/apps/forum_search/forms.py:39
+#: machina/apps/forum_search/forms.py:41
 msgid "Poster name"
 msgstr ""
 
@@ -854,19 +870,19 @@ msgstr ""
 msgid "Machina: Forum searches"
 msgstr ""
 
-#: machina/apps/forum_tracking/abstract_models.py:30
+#: machina/apps/forum_tracking/abstract_models.py:31
 msgid "Forum track"
 msgstr ""
 
-#: machina/apps/forum_tracking/abstract_models.py:31
+#: machina/apps/forum_tracking/abstract_models.py:32
 msgid "Forum tracks"
 msgstr ""
 
-#: machina/apps/forum_tracking/abstract_models.py:50
+#: machina/apps/forum_tracking/abstract_models.py:53
 msgid "Topic track"
 msgstr ""
 
-#: machina/apps/forum_tracking/abstract_models.py:51
+#: machina/apps/forum_tracking/abstract_models.py:54
 msgid "Topic tracks"
 msgstr ""
 
@@ -874,15 +890,15 @@ msgstr ""
 msgid "^mark/forums/$"
 msgstr ""
 
-#: machina/apps/forum_tracking/app.py:22
+#: machina/apps/forum_tracking/app.py:23
 msgid "^mark/forums/(?P<pk>\\d+)/$"
 msgstr ""
 
-#: machina/apps/forum_tracking/app.py:23
+#: machina/apps/forum_tracking/app.py:25
 msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
 msgstr ""
 
-#: machina/apps/forum_tracking/app.py:24
+#: machina/apps/forum_tracking/app.py:27
 msgid "^unread-topics/$"
 msgstr ""
 
@@ -902,11 +918,11 @@ msgstr ""
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr ""
 
-#: machina/models/abstract_models.py:36
+#: machina/models/abstract_models.py:14
 msgid "Creation date"
 msgstr ""
 
-#: machina/models/abstract_models.py:37
+#: machina/models/abstract_models.py:15
 msgid "Update date"
 msgstr ""
 
@@ -930,13 +946,13 @@ msgstr ""
 msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr ""
 
-#: machina/models/fields.py:229
+#: machina/models/fields.py:230
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
 msgstr ""
 
-#: machina/models/fields.py:233
+#: machina/models/fields.py:236
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
@@ -1227,41 +1243,49 @@ msgstr ""
 msgid "View results"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:13
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:15
 msgid "Post reply"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:20
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:18
+msgid "Subscribe"
+msgstr ""
+
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:20
+msgid "Unsubscribe"
+msgstr ""
+
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: machina/templates/machina/forum_moderation/topic_unlock.html:5
 #: machina/templates/machina/forum_moderation/topic_unlock.html:12
 #: machina/templates/machina/forum_moderation/topic_update_type.html:5
 msgid "Unlock topic"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:21
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:28
 #: machina/templates/machina/forum_moderation/topic_delete.html:5
 #: machina/templates/machina/forum_moderation/topic_delete.html:12
 msgid "Delete topic"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:22
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:29
 #: machina/templates/machina/forum_moderation/topic_move.html:5
 #: machina/templates/machina/forum_moderation/topic_move.html:12
 msgid "Move topic"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:24
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:31
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:31
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:38
 msgid "Change to sticky topic"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:25
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:28
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:32
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:35
 msgid "Change to announce"
 msgstr ""
 
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:27
-#: machina/templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:30
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:34
+#: machina/templates/machina/forum_conversation/partials/topic_detail_actions.html:37
 msgid "Change to standard topic"
 msgstr ""
 
@@ -1317,6 +1341,8 @@ msgid "Are you sure you want to delete this post?"
 msgstr ""
 
 #: machina/templates/machina/forum_conversation/post_delete.html:18
+#: machina/templates/machina/forum_member/topic_subscribe.html:18
+#: machina/templates/machina/forum_member/topic_unsubscribe.html:18
 #: machina/templates/machina/forum_moderation/moderation_queue/post_approve.html:18
 #: machina/templates/machina/forum_moderation/moderation_queue/post_disapprove.html:18
 #: machina/templates/machina/forum_moderation/topic_delete.html:18
@@ -1327,6 +1353,8 @@ msgid "Yes"
 msgstr ""
 
 #: machina/templates/machina/forum_conversation/post_delete.html:19
+#: machina/templates/machina/forum_member/topic_subscribe.html:19
+#: machina/templates/machina/forum_member/topic_unsubscribe.html:19
 #: machina/templates/machina/forum_moderation/moderation_queue/post_approve.html:19
 #: machina/templates/machina/forum_moderation/moderation_queue/post_disapprove.html:19
 #: machina/templates/machina/forum_moderation/topic_delete.html:19
@@ -1417,6 +1445,24 @@ msgstr ""
 #: machina/templates/machina/forum_member/forum_profile_update.html:4
 #: machina/templates/machina/forum_member/forum_profile_update.html:12
 msgid "Edit forum profile"
+msgstr ""
+
+#: machina/templates/machina/forum_member/topic_subscribe.html:5
+#: machina/templates/machina/forum_member/topic_subscribe.html:12
+msgid "Subscribe to topic"
+msgstr ""
+
+#: machina/templates/machina/forum_member/topic_subscribe.html:15
+msgid "Would you like to subscribe to this topic?"
+msgstr ""
+
+#: machina/templates/machina/forum_member/topic_unsubscribe.html:5
+#: machina/templates/machina/forum_member/topic_unsubscribe.html:12
+msgid "Unsubscribe from topic"
+msgstr ""
+
+#: machina/templates/machina/forum_member/topic_unsubscribe.html:15
+msgid "Would you like to unsubscribe from this topic?"
 msgstr ""
 
 #: machina/templates/machina/forum_member/user_topics_list.html:17
