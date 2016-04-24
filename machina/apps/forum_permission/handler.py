@@ -222,8 +222,9 @@ class PermissionHandler(object):
         Given a topic, checks whether the user can add it to his subscription list.
         """
         # A user can subscribe to topics if he is authenticated and if he has the permission to read
-        # the related forum.
-        return user.is_authenticated() \
+        # the related forum. Of course a user can subscribe only if he has not already subscribed to
+        # the considered topic.
+        return user.is_authenticated() and not topic.subscribers.filter(id=user.id).exists() \
             and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
 
     def can_unsubscribe_from_topic(self, topic, user):
@@ -231,8 +232,9 @@ class PermissionHandler(object):
         Given a topic, checks whether the user can remove it from his subscription list.
         """
         # A user can unsubscribe from topics if he is authenticated and if he has the permission to
-        # read the related forum.
-        return user.is_authenticated() \
+        # read the related forum. Of course a user can unsubscribe only if he is already a
+        # a subscriber of the considered topic.
+        return user.is_authenticated() and topic.subscribers.filter(id=user.id).exists() \
             and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
 
     # Moderation

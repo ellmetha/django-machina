@@ -656,6 +656,7 @@ class TestPermissionHandler(object):
 
     def test_knows_if_a_user_can_unsubscribe_from_topics(self):
         # Setup
+        self.forum_1_topic.subscribers.add(self.u1)
         u2 = UserFactory.create()
         assign_perm('can_read_forum', self.u1, self.forum_1)
         # Run & check
@@ -665,6 +666,7 @@ class TestPermissionHandler(object):
     def test_knows_that_a_superuser_can_unsubscribe_from_topics(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
+        self.forum_1_topic.subscribers.add(u2)
         # Run & check
         assert self.perm_handler.can_unsubscribe_from_topic(self.forum_1_topic, u2)
 
