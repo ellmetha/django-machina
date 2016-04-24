@@ -6,11 +6,14 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic.detail import BaseDetailView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
@@ -22,6 +25,8 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 ForumProfileForm = get_class('forum_member.forms', 'ForumProfileForm')
+
+PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 perm_handler = PermissionHandler()
@@ -106,3 +111,81 @@ class ForumProfileUpdateView(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(ForumProfileUpdateView, self).dispatch(request, *args, **kwargs)
+
+
+class TopicSubscribeView(
+        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    Allows a user to subscribe to a specific topic.
+    """
+    model = Topic
+    success_message = _('You subscribed to this topic successfully.')
+    template_name = 'forum_member/topic_subscribe.html'
+
+    def subscribe(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.subscribers.add(request.user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def post(self, request, *args, **kwargs):
+        return self.subscribe(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicSubscribeView, self).get_context_data(**kwargs)
+        context['topic'] = self.object
+        context['forum'] = self.object.forum
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.object.forum.slug, 'forum_pk': self.object.forum.pk,
+            'slug': self.object.slug, 'pk': self.object.pk})
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TopicSubscribeView, self).dispatch(request, *args, **kwargs)
+
+    # Permissions checks
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_subscribe_to_topic(obj, user)
+
+
+class TopicUnsubscribeView(
+        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    """
+    Allows a user to unsubscribe from a specific topic.
+    """
+    model = Topic
+    success_message = _('You unsubscribed from this topic successfully.')
+    template_name = 'forum_member/topic_unsubscribe.html'
+
+    def unsubscribe(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.subscribers.remove(request.user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def post(self, request, *args, **kwargs):
+        return self.unsubscribe(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicUnsubscribeView, self).get_context_data(**kwargs)
+        context['topic'] = self.object
+        context['forum'] = self.object.forum
+        return context
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse('forum_conversation:topic', kwargs={
+            'forum_slug': self.object.forum.slug, 'forum_pk': self.object.forum.pk,
+            'slug': self.object.slug, 'pk': self.object.pk})
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TopicUnsubscribeView, self).dispatch(request, *args, **kwargs)
+
+    # Permissions checks
+
+    def perform_permissions_check(self, user, obj, perms):
+        return self.request.forum_permission_handler.can_unsubscribe_from_topic(obj, user)
