@@ -246,7 +246,7 @@ class TestTopicSubscribeView(BaseClientTestCase):
         response = self.client.post(correct_url, follow=False)
         # Check
         assert response.status_code == 302
-        assert self.topic_1 in self.user.subscriptions.all()
+        assert self.topic_1 in self.user.topic_subscriptions.all()
 
     def test_cannot_be_browsed_by_anonymous_users(self):
         # Setup
@@ -316,7 +316,7 @@ class TestTopicUnsubscribeView(BaseClientTestCase):
         response = self.client.post(correct_url, follow=False)
         # Check
         assert response.status_code == 302
-        assert not self.user.subscriptions.all()
+        assert not self.user.topic_subscriptions.all()
 
     def test_cannot_be_browsed_by_anonymous_users(self):
         # Setup

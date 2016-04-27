@@ -70,7 +70,7 @@ class AbstractTopic(DatedModel):
 
     # Many users can subscribe to this topic
     subscribers = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name='subscriptions',
+        settings.AUTH_USER_MODEL, related_name='topic_subscriptions',
         verbose_name=_('Subscribers'), blank=True)
 
     objects = models.Manager()
