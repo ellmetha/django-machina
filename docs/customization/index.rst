@@ -16,14 +16,24 @@ Templates and static files
 
 If you wish to personalize the look and feel of your forum you can take advantage of the Django's template loading system. Thus you can easily override forum layouts and styles if Django is configured to look in your project first for templates before using the *django-machina*'s templates.
 
-For example, you can easily override *django-machina*'s templates by configuring the ``TEMPLATE_DIRS`` setting as follows::
+For example, you can easily override *django-machina*'s templates by configuring your template directories as follows in your ``TEMPLATES`` setting::
 
   import os
 
-  TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'src/vanilla_project/templates'),
-    MACHINA_MAIN_TEMPLATE_DIR,
-  )
+  TEMPLATES = [
+    {
+      'BACKEND': 'django.template.backends.django.DjangoTemplates',
+      'DIRS': [
+        os.path.join(PROJECT_PATH, 'src/vanilla_project/templates'),
+        MACHINA_MAIN_TEMPLATE_DIR,
+      ],
+      'OPTIONS': {
+        'context_processors': [
+          # [...]
+        ],
+      },
+    },
+  ]
 
 Advanced customization mechanisms
 ---------------------------------
