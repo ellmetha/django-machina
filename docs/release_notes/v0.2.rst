@@ -10,7 +10,10 @@ Python 2.7, 3.3, 3.4 and 3.5. Django 1.8 and 1.9.
 New features
 ------------
 
+* Topic subscription: a user can now subscribe to topics and access to his subscription list (`#16`_)
 * A new settings has been addded in order to allow limiting the length of topic posts: :ref:`MACHINA_POST_CONTENT_MAX_LENGTH <setting-post-content-max-length>`
+
+.. _`#16`: https://github.com/ellmetha/django-machina/issues/16
 
 Minor changes
 -------------
