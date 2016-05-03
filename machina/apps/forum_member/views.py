@@ -189,3 +189,19 @@ class TopicUnsubscribeView(
 
     def perform_permissions_check(self, user, obj, perms):
         return self.request.forum_permission_handler.can_unsubscribe_from_topic(obj, user)
+
+
+class TopicSubscribtionListView(ListView):
+    """
+    Provides a list of all topics to which the current user has subscribed.
+    """
+    model = Topic
+    context_object_name = 'topics'
+    template_name = 'forum_member/subscription_topic_list.html'
+
+    def get_queryset(self):
+        return self.request.user.topic_subscriptions.all()
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TopicSubscribtionListView, self).dispatch(request, *args, **kwargs)

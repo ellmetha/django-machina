@@ -343,3 +343,68 @@ class TestTopicUnsubscribeView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 403
+
+
+class TestTopicSubscribtionListView(BaseClientTestCase):
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        # Add some users
+        self.u1 = UserFactory.create()
+        self.g1 = GroupFactory.create()
+        self.u1.groups.add(self.g1)
+        self.user.groups.add(self.g1)
+
+        # Permission handler
+        self.perm_handler = PermissionHandler()
+
+        self.top_level_cat_1 = create_category_forum()
+
+        self.forum_1 = create_forum(parent=self.top_level_cat_1)
+        self.forum_2 = create_forum(parent=self.top_level_cat_1)
+        self.forum_3 = create_forum(parent=self.top_level_cat_1)
+
+        self.topic_1 = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=self.topic_1, poster=self.u1)
+        PostFactory.create(topic=self.topic_1, poster=self.user)
+
+        self.topic_2 = create_topic(forum=self.forum_1, poster=self.user)
+        PostFactory.create(topic=self.topic_2, poster=self.user)
+        PostFactory.create(topic=self.topic_2, poster=self.u1)
+
+        self.topic_3 = create_topic(forum=self.forum_2, poster=self.u1)
+        PostFactory.create(topic=self.topic_3, poster=self.u1)
+
+        self.topic_4 = create_topic(forum=self.forum_2, poster=self.user)
+        PostFactory.create(topic=self.topic_4, poster=self.user)
+
+        # Assign some permissions
+        assign_perm('can_read_forum', self.g1, self.top_level_cat_1)
+        assign_perm('can_read_forum', self.g1, self.forum_1)
+        assign_perm('can_read_forum', self.g1, self.forum_2)
+
+    def test_browsing_works(self):
+        # Setup
+        correct_url = reverse('forum_member:user_subscriptions')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+
+    def test_cannot_be_browsed_by_anonymous_users(self):
+        # Setup
+        correct_url = reverse('forum_member:user_subscriptions')
+        self.client.logout()
+        # Run
+        response = self.client.get(correct_url, follow=False)
+        # Check
+        assert response.status_code == 302
+
+    def test_displays_only_topics_the_user_is_subscribed_to(self):
+        # Setup
+        self.user.topic_subscriptions.add(self.topic_2)
+        correct_url = reverse('forum_member:user_subscriptions')
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 200
+        assert list(response.context_data['topics']) == [self.topic_2, ]

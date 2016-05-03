@@ -17,6 +17,7 @@ class MemberApp(Application):
     forum_profile_update_view = get_class('forum_member.views', 'ForumProfileUpdateView')
     topic_subscribe_view = get_class('forum_member.views', 'TopicSubscribeView')
     topic_unsubscribe_view = get_class('forum_member.views', 'TopicUnsubscribeView')
+    topic_subscription_list_view = get_class('forum_member.views', 'TopicSubscribtionListView')
 
     def get_urls(self):
         return [
@@ -25,6 +26,8 @@ class MemberApp(Application):
             url(_(r'^profile/edit/$'),
                 self.forum_profile_update_view.as_view(), name='profile_update'),
             url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
+            url(_(r'^ego/subscriptions/$'), self.topic_subscription_list_view.as_view(),
+                name='user_subscriptions'),
             url(_(r'^topic/(?P<pk>\d+)/subscribe/$'),
                 self.topic_subscribe_view.as_view(), name='topic_subscribe'),
             url(_(r'^topic/(?P<pk>\d+)/unsubscribe/$'),
