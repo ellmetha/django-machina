@@ -28,17 +28,17 @@
             <div class="panel panel-default postmoderationlist">
                 <div class="panel-heading">
                     <div class="row panel-row">
-                        <div class="col-md-8 post-name-col">
+                        <div class="col-xs-12 col-md-8 post-name-col">
                             <h3 class="panel-title">{% trans "Moderation queue" %}</h3>
                         </div>
-                        <div class="col-md-2 moderation-col">{% trans "Topic" %}</div>
-                        <div class="col-md-2 moderation-col">{% trans "Forum" %}</div>
+                        <div class="col-md-2 hidden-xs moderation-col">{% trans "Topic" %}</div>
+                        <div class="col-md-2 hidden-xs moderation-col">{% trans "Forum" %}</div>
                     </div>
                 </div>
                 <div class="panel-body">
                     {% for post in posts %}
                         <div class="row panel-row">
-                            <div class="col-md-8 post-name">
+                            <div class="col-xs-12 col-md-8 post-name">
                                 <table class="post-data-table">
                                     <tr>
                                         <td class="post-name">
@@ -61,14 +61,14 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-2 topic-name">
+                            <div class="hidden-xs col-md-2 topic-name">
                                 {% if post.is_topic_head %}
                                     <span class="label label-default">{% trans "New topic" %}</span>
                                 {% else %}
                                     <a href="{% url 'forum_conversation:topic' forum_slug=post.topic.forum.slug forum_pk=post.topic.forum.pk slug=post.topic.slug pk=post.topic.pk %}" class="post-name-link">{{ post.topic.subject }}</a>
                                 {% endif %}
                             </div>
-                            <div class="col-md-2 forum-name">
+                            <div class="hidden-xs col-md-2 forum-name">
                                 <a href="{% url 'forum:forum' slug=post.topic.forum.slug pk=post.topic.forum.pk %}" class="post-name-link">{{ post.topic.forum.name }}</a>
                             </div>
                         </div>
