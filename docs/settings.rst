@@ -211,6 +211,13 @@ Default: ``15``
 
 The maximum number of recent posts that can be displayed in forum member profiles.
 
+``MACHINA_PROFILE_POSTS_NUMBER_PER_PAGE``
+-----------------------------------------
+
+Default: ``15``
+
+The number of posts displayed inside one page of a forum member's posts list.
+
 Permission
 **********
 

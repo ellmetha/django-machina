@@ -7,7 +7,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -28,9 +30,6 @@ ForumProfileForm = get_class('forum_member.forms', 'ForumProfileForm')
 
 PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
-
 
 class UserTopicsView(ListView):
     """
@@ -42,7 +41,7 @@ class UserTopicsView(ListView):
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
 
     def get_queryset(self):
-        forums = perm_handler.forum_list_filter(
+        forums = self.request.forum_permission_handler.forum_list_filter(
             Forum.objects.all(), self.request.user)
         topics = Topic.objects.filter(
             forum__in=forums,
@@ -53,6 +52,38 @@ class UserTopicsView(ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(UserTopicsView, self).dispatch(request, *args, **kwargs)
+
+
+class UserPostsView(ListView):
+    """
+    Provides a list of all the posts submitted by a given a user.
+    """
+    context_object_name = 'posts'
+    paginate_by = machina_settings.PROFILE_POSTS_NUMBER_PER_PAGE
+    template_name = 'forum_member/user_posts_list.html'
+    user_pk_url_kwarg = 'pk'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserPostsView, self).get_context_data(**kwargs)
+        context['poster'] = self.poster
+        return context
+
+    def get_queryset(self):
+        # Determines the forums that can be accessed by the current user
+        forums = self.request.forum_permission_handler.forum_list_filter(
+            Forum.objects.all(), self.request.user)
+
+        # Returns the posts submitted by the considered user.
+        return Post.objects \
+            .select_related('topic', 'topic__forum', 'poster') \
+            .prefetch_related('poster__forum_profile') \
+            .filter(poster=self.poster, topic__forum__in=forums).order_by('-created')
+
+    @cached_property
+    def poster(self):
+        """ Returns the considered user. """
+        user_model = get_user_model()
+        return get_object_or_404(user_model, pk=self.kwargs[self.user_pk_url_kwarg])
 
 
 class ForumProfileDetailView(DetailView):
