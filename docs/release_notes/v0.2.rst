@@ -38,3 +38,4 @@ Backwards incompatible changes
 
 * The ``get_absolute_url`` method was removed from *django-machina* models
 * The ``Topic.subscribers`` related name was update to ``topic_subscriptions`` (instead of ``subscriptions``)
+* The ``forum_member.views.UserTopicsView`` view was replaced by the ``forum_member.views.UserPostsView`` view

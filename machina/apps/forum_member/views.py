@@ -31,29 +31,6 @@ ForumProfileForm = get_class('forum_member.forms', 'ForumProfileForm')
 PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 
 
-class UserTopicsView(ListView):
-    """
-    Provides a list of all the topics in which the current user has
-    posted messages.
-    """
-    template_name = 'forum_member/user_topics_list.html'
-    context_object_name = 'topics'
-    paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
-
-    def get_queryset(self):
-        forums = self.request.forum_permission_handler.forum_list_filter(
-            Forum.objects.all(), self.request.user)
-        topics = Topic.objects.filter(
-            forum__in=forums,
-            posts__poster_id=self.request.user.id,
-            posts__approved=True)
-        return topics.order_by('-updated')
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(UserTopicsView, self).dispatch(request, *args, **kwargs)
-
-
 class UserPostsView(ListView):
     """
     Provides a list of all the posts submitted by a given a user.

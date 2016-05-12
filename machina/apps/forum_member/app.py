@@ -13,7 +13,6 @@ class MemberApp(Application):
     name = 'forum_member'
 
     user_posts_list = get_class('forum_member.views', 'UserPostsView')
-    user_topics_view = get_class('forum_member.views', 'UserTopicsView')
     forum_profile_detail_view = get_class('forum_member.views', 'ForumProfileDetailView')
     forum_profile_update_view = get_class('forum_member.views', 'ForumProfileUpdateView')
     topic_subscribe_view = get_class('forum_member.views', 'TopicSubscribeView')
@@ -30,8 +29,7 @@ class MemberApp(Application):
             url(_(r'^profile/edit/$'),
                 self.forum_profile_update_view.as_view(), name='profile_update'),
 
-            url(_(r'^ego/topics/$'), self.user_topics_view.as_view(), name='user_topics'),
-            url(_(r'^ego/subscriptions/$'), self.topic_subscription_list_view.as_view(),
+            url(_(r'^subscriptions/$'), self.topic_subscription_list_view.as_view(),
                 name='user_subscriptions'),
 
             url(_(r'^topic/(?P<pk>\d+)/subscribe/$'),
