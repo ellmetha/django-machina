@@ -70,7 +70,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="pull-right"><i class="fa fa-comments-o"></i></div>
-              {% trans "Recent posts" %}
+              {% trans "Recent posts" %}{% if recent_posts %}&nbsp;(<a href="{% url 'forum_member:user_posts' profile.user_id %}">{% trans "View all" %}</a>){% endif %}
             </div>
             <div class="panel-body">
               {% for post in recent_posts %}
