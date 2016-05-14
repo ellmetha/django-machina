@@ -8,13 +8,9 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.db.models import get_model
-from machina.core.loading import get_class
 
 Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
-
-PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-perm_handler = PermissionHandler()
 
 
 class LastTopicsFeed(Feed):
@@ -39,10 +35,10 @@ class LastTopicsFeed(Feed):
             forum = get_object_or_404(Forum, pk=forum_pk)
             forums_qs = forum.get_descendants(include_self=True) if descendants \
                 else Forum.objects.filter(pk=forum_pk)
-            self.forums = perm_handler.forum_list_filter(
+            self.forums = request.forum_permission_handler.forum_list_filter(
                 forums_qs, request.user)
         else:
-            self.forums = perm_handler.forum_list_filter(
+            self.forums = request.forum_permission_handler.forum_list_filter(
                 Forum.objects.all(), request.user)
 
     def items(self):

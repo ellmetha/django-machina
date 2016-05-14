@@ -86,6 +86,7 @@ class TestLastTopicsFeed(object):
         feed = LastTopicsFeed()
         request = self.factory.get('/')
         request.user = self.user
+        request.forum_permission_handler = PermissionHandler()
         # Run
         feed.get_object(request)
         topics = feed.items()
@@ -97,6 +98,7 @@ class TestLastTopicsFeed(object):
         feed = LastTopicsFeed()
         request = self.factory.get('/')
         request.user = self.user
+        request.forum_permission_handler = PermissionHandler()
         # Run
         feed.get_object(request, forum_pk=self.forum_2.pk, descendants=False)
         topics = feed.items()
@@ -108,6 +110,7 @@ class TestLastTopicsFeed(object):
         feed = LastTopicsFeed()
         request = self.factory.get('/')
         request.user = self.user
+        request.forum_permission_handler = PermissionHandler()
         # Run
         feed.get_object(request, forum_pk=self.forum_2.pk, descendants=True)
         topics = feed.items()
@@ -119,6 +122,7 @@ class TestLastTopicsFeed(object):
         feed = LastTopicsFeed()
         request = self.factory.get('/')
         request.user = self.user
+        request.forum_permission_handler = PermissionHandler()
         # Run & check
         assert feed.item_pubdate(self.topic_2) == self.topic_2.created
 
@@ -127,6 +131,7 @@ class TestLastTopicsFeed(object):
         feed = LastTopicsFeed()
         request = self.factory.get('/')
         request.user = self.user
+        request.forum_permission_handler = PermissionHandler()
         # Run & check
         assert feed.item_link(self.topic_2) == reverse(
             'forum_conversation:topic', kwargs={
