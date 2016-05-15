@@ -23,7 +23,7 @@ django-machina
 
 |
 
-**This application is currently in alpha. It should not be used in production environments.**
+**This application is currently in beta. It should not be used in production environments.**
 
 *Django-machina* is a forum framework for Django providing a way to build community-driven websites. It offers a full-featured yet very extensible forum solution:
 

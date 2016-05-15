@@ -35,7 +35,7 @@ Install *django-machina* using::
 
 .. note::
 
-	Please remember that *django-machina* is currently in alpha. It is not yet suitable for production environments.
+	Please remember that *django-machina* is currently in beta. It is not yet suitable for production environments.
 
 Project configuration
 ---------------------
