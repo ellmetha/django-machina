@@ -1,7 +1,7 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
 
-{% block sub-title %}{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans with username=poster.username %}{{ username }}'s posts{% endblocktrans %}{% endif %}{% endblock sub-title %}
+{% block sub_title %}{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans with username=poster.username %}{{ username }}'s posts{% endblocktrans %}{% endif %}{% endblock sub_title %}
 
 {% block content %}
 <div class="row">
