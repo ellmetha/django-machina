@@ -13,3 +13,4 @@ Django-machina 0.2
     :maxdepth: 1
 
     v0.2
+    v0.3
