@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        {% get_unread_forums forums user as unread_forums %}
+        {% get_unread_forums user as unread_forums %}
         {% if forums %}
             {% recursetree forums %}
                 {% if node.level == root_level %}

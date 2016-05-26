@@ -88,8 +88,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
-        assert list(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.user)) == []
+        assert list(self.tracks_handler.get_unread_forums(self.user)) == []
 
     def test_can_mark_subforums_read(self):
         # Setup
@@ -103,10 +102,8 @@ class TestMarkForumsReadView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
-        assert list(self.tracks_handler.get_unread_forums(
-            self.top_level_cat_1.get_descendants(include_self=True), self.user)) == []
-        assert set(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.user)) == set([self.top_level_cat_2, self.forum_4, ])
+        assert set(self.tracks_handler.get_unread_forums(self.user)) \
+            == set([self.top_level_cat_2, self.forum_4, ])
 
 
 class TestMarkTopicsReadView(BaseClientTestCase):

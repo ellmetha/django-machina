@@ -75,7 +75,7 @@ class TestTrackingHandler(object):
         # Setup
         u3 = get_user(Client())
         # Run
-        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), u3)
+        unread_forums = self.tracks_handler.get_unread_forums(u3)
         # Check
         assert not len(unread_forums)
 
@@ -84,7 +84,7 @@ class TestTrackingHandler(object):
         new_topic = create_topic(forum=self.forum_3, poster=self.u1)
         PostFactory.create(topic=new_topic, poster=self.u1)
         # Run
-        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
+        unread_forums = self.tracks_handler.get_unread_forums(self.u2)
         # Check
         assert self.forum_3 not in unread_forums
 
@@ -153,7 +153,7 @@ class TestTrackingHandler(object):
         post.content = faker.text()
         post.save()
         # Run
-        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
+        unread_forums = self.tracks_handler.get_unread_forums(self.u2)
         unread_topics = self.tracks_handler.get_unread_topics(self.forum_2.topics.all(), self.u2)
         # Check
         assert not len(unread_forums)
@@ -163,7 +163,7 @@ class TestTrackingHandler(object):
         # Setup
         self.forum_2.save()
         # Run
-        unread_forums = self.tracks_handler.get_unread_forums(Forum.objects.all(), self.u2)
+        unread_forums = self.tracks_handler.get_unread_forums(self.u2)
         # Check
         assert not len(unread_forums)
 
@@ -174,8 +174,7 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_forums_read(Forum.objects.all(), self.u2)
         # Check
-        assert list(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.u2)) == []
+        assert list(self.tracks_handler.get_unread_forums(self.u2)) == []
 
     def test_marks_parent_forums_as_read_when_marking_a_list_of_forums_as_read(self):
         # Setup
@@ -184,8 +183,7 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_forums_read([self.forum_2_child_2, ], self.u2)
         # Check
-        assert list(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.u2)) == []
+        assert list(self.tracks_handler.get_unread_forums(self.u2)) == []
         assert ForumReadTrack.objects.filter(user=self.u2).count() == 3
 
     def test_cannot_mark_parent_forums_as_read_when_marking_a_list_of_forums_as_read_if_they_have_unread_topics(self):  # noqa
@@ -197,8 +195,8 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_forums_read([self.forum_2_child_2, ], self.u2)
         # Check
-        assert set(self.tracks_handler.get_unread_forums(
-            Forum.objects.all(), self.u2)) == set([self.top_level_cat_1, self.forum_2, ])
+        assert set(self.tracks_handler.get_unread_forums(self.u2)) \
+            == set([self.top_level_cat_1, self.forum_2, ])
         assert ForumReadTrack.objects.filter(user=self.u2).count() == 2
 
     def test_cannot_mark_forums_read_for_anonymous_users(self):
@@ -218,8 +216,7 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_topic_read(new_topic, self.u2)
         # Check
-        assert list(self.tracks_handler.get_unread_forums(
-            [new_topic.forum, ], self.u2)) == []
+        assert list(self.tracks_handler.get_unread_forums(self.u2)) == []
 
     def test_marks_parent_forums_as_read_when_marking_a_topic_as_read(self):
         # Setup
@@ -228,8 +225,7 @@ class TestTrackingHandler(object):
         # Run
         self.tracks_handler.mark_topic_read(new_topic, self.u2)
         # Check
-        assert list(self.tracks_handler.get_unread_forums(
-            [self.forum_2_child_2, self.forum_2, self.top_level_cat_1, ], self.u2)) == []
+        assert list(self.tracks_handler.get_unread_forums(self.u2)) == []
         assert ForumReadTrack.objects.filter(user=self.u2).count() == 3
         assert not TopicReadTrack.objects.filter(user=self.u2).exists()
 
