@@ -54,35 +54,30 @@ class TrackingHandler(object):
         if not user.is_authenticated() or topics is None or not len(topics):
             return unread_topics
 
-        # Note: this is done to Prevent MySQL NotSupportedError errors with
-        # LIMIT & IN/ALL/ANY/SOME subqueries.
-        topic_ids = list(topics.values_list('id', flat=True))
-
         # A topic can be unread if a track for itself exists with a mark time that
         # is less important than its update date.
+        topic_ids = [topic.id for topic in topics]
         topic_tracks = TopicReadTrack.objects.filter(topic__in=topic_ids, user=user)
-        tracked_topics = topic_tracks.values_list('topic__pk', flat=True)
+        tracked_topics = dict(topic_tracks.values_list('topic__pk', 'mark_time'))
 
-        if topic_tracks.exists():
-            tracks_dict = dict(topic_tracks.values_list('topic__pk', 'mark_time'))
+        if tracked_topics:
             for topic in topics:
                 topic_last_modification_date = topic.last_post_on or topic.created
-                if topic.id in tracks_dict.keys() \
-                        and topic_last_modification_date > tracks_dict[topic.id]:
+                if topic.id in tracked_topics.keys() \
+                        and topic_last_modification_date > tracked_topics[topic.id]:
                     unread_topics.append(topic)
 
         # A topic can be unread if a track for its associated forum exists with
         # a mark time that is less important than its creation or update date.
         forum_ids = [topic.forum_id for topic in topics]
         forum_tracks = ForumReadTrack.objects.filter(forum_id__in=forum_ids, user=user)
-        tracked_forums = forum_tracks.values_list('forum__pk', flat=True)
+        tracked_forums = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
 
-        if forum_tracks.exists():
-            tracks_dict = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
+        if tracked_forums:
             for topic in topics:
                 topic_last_modification_date = topic.last_post_on or topic.created
-                if ((topic.forum_id in tracks_dict.keys() and topic.id not in tracked_topics) and
-                        topic_last_modification_date > tracks_dict[topic.forum_id]):
+                if ((topic.forum_id in tracked_forums.keys() and topic.id not in tracked_topics) and
+                        topic_last_modification_date > tracked_forums[topic.forum_id]):
                     unread_topics.append(topic)
 
         # A topic can be unread if no tracks exists for it

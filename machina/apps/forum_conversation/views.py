@@ -72,7 +72,8 @@ class TopicView(PermissionRequiredMixin, ListView):
         Returns the topic to consider.
         """
         if not hasattr(self, 'topic'):
-            self.topic = get_object_or_404(Topic, pk=self.kwargs['pk'])
+            self.topic = get_object_or_404(
+                Topic.objects.select_related('forum').all(), pk=self.kwargs['pk'])
         return self.topic
 
     def get_queryset(self):
