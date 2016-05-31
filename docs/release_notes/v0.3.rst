@@ -11,6 +11,7 @@ Minor changes
 -------------
 
 * Improve forum views performances by reducing the number of DB hits related to tracking logic
+* Many improvements on performances
 
 Backwards incompatible changes
 ------------------------------
