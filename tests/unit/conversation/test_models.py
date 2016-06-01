@@ -157,6 +157,14 @@ class TestTopic(object):
         assert self.top_level_forum.topics_count == 0
         assert self.top_level_forum.posts_count == 0
 
+    def test_knows_if_a_user_has_subscribed_to_the_topic(self):
+        # Setup
+        self.topic.subscribers.add(self.u1)
+        u2 = UserFactory.create()
+        # Run & check
+        assert self.topic.has_subscriber(self.u1)
+        assert not self.topic.has_subscriber(u2)
+
 
 @pytest.mark.django_db
 class TestPost(object):

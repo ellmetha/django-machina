@@ -140,6 +140,14 @@ class AbstractTopic(DatedModel):
             self._last_post = posts[0] if len(posts) else None
         return self._last_post
 
+    def has_subscriber(self, user):
+        """
+        Returns True if the given user is a subscriber of this topic.
+        """
+        if not hasattr(self, '_subscribers'):
+            self._subscribers = list(self.subscribers.all())
+        return user in self._subscribers
+
     def clean(self):
         super(AbstractTopic, self).clean()
         if self.forum.is_category or self.forum.is_link:
