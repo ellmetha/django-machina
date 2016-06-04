@@ -12,6 +12,9 @@ Minor changes
 
 * Improve forum views performances by reducing the number of DB hits related to tracking logic
 * Many improvements on performances
+* Fixed a security issue related to the usage of *django-markdown*'s ``markdown`` function (`#20`_)
+
+.. _`#20`: https://github.com/ellmetha/django-machina/issues/20
 
 Backwards incompatible changes
 ------------------------------
