@@ -1,0 +1,20 @@
+####################################################
+Django-machina 0.3 release notes - UNDER DEVELOPMENT
+####################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4 and 3.5. Django 1.8 and 1.9.
+
+Minor changes
+-------------
+
+* Improve forum views performances by reducing the number of DB hits related to tracking logic
+* Many improvements on performances
+
+Backwards incompatible changes
+------------------------------
+
+* The ``TrackingHandler.get_unread_forums`` method now takes only a user instance as input
+* The ``get_unread_forums`` templatetag now takes only the context and a user instance as input
