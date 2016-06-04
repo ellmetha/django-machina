@@ -61,3 +61,8 @@ Using the issue tracker
 =======================
 
 You should use the `project's issue tracker <https://github.com/ellmetha/django-machina/issues>`_ if you've found a bug or if you want to propose a new feature. Don't forget to include as many details as possible in your tickets (eg. tracebacks if this is appropriate).
+
+Security
+========
+
+If you've found a security issue please **do not open a Github issue**. Instead, send an email at ``security@machina-forum.io``. We'll then investigate together to resolve the problem so we can make an announcement about a solution along with the vulnerability.
