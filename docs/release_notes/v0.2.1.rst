@@ -1,0 +1,15 @@
+################################
+Django-machina 0.3 release notes
+################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4 and 3.5. Django 1.8 and 1.9.
+
+Minor changes
+-------------
+
+* Fixed a security issue related to the usage of *django-markdown*'s ``markdown`` function (`#20`_)
+
+.. _`#20`: https://github.com/ellmetha/django-machina/issues/20
