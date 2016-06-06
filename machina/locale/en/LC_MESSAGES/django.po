@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-04 18:40+0200\n"
+"POT-Creation-Date: 2016-06-06 05:35+0200\n"
 "PO-Revision-Date: 2016-02-22 22:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1001,7 +1001,7 @@ msgstr ""
 
 #: machina/templates/admin/forum/forum/change_list_table.html:47
 #: machina/templates/machina/forum_conversation/topic_detail.html:101
-#: machina/templates/machina/forum_member/user_posts_list.html:67
+#: machina/templates/machina/forum_member/user_posts_list.html:69
 #: machina/templates/machina/forum_moderation/moderation_queue/detail.html:116
 msgid "Posts:"
 msgstr ""
@@ -1319,7 +1319,7 @@ msgstr ""
 #: machina/templates/machina/forum_conversation/post_create.html:60
 #: machina/templates/machina/forum_conversation/topic_detail.html:56
 #: machina/templates/machina/forum_conversation/topic_list.html:40
-#: machina/templates/machina/forum_member/user_posts_list.html:48
+#: machina/templates/machina/forum_member/user_posts_list.html:50
 #: machina/templates/machina/forum_moderation/moderation_queue/detail.html:85
 #: machina/templates/machina/forum_moderation/moderation_queue/detail.html:144
 #: machina/templates/machina/forum_moderation/moderation_queue/list.html:50
@@ -1510,6 +1510,10 @@ msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
 msgstr[0] ""
 msgstr[1] ""
+
+#: machina/templates/machina/forum_member/user_posts_list.html:24
+msgid "No posts found"
+msgstr ""
 
 #: machina/templates/machina/forum_moderation/moderation_queue/detail.html:14
 msgid "Disapprove"
