@@ -55,7 +55,7 @@ class AbstractTopic(DatedModel):
 
     # A topic can be approved before publishing ; defaults to True. The value of this flag
     # should correspond to the one associated with the first post
-    approved = models.BooleanField(verbose_name=_('Approved'), default=True)
+    approved = models.BooleanField(verbose_name=_('Approved'), default=True, db_index=True)
 
     # The number of posts included in this topic (only those that are approved)
     posts_count = models.PositiveIntegerField(
@@ -233,7 +233,7 @@ class AbstractPost(DatedModel):
     username = models.CharField(verbose_name=_('Username'), max_length=155, blank=True, null=True)
 
     # A post can be approved before publishing ; defaults to True
-    approved = models.BooleanField(verbose_name=_('Approved'), default=True)
+    approved = models.BooleanField(verbose_name=_('Approved'), default=True, db_index=True)
 
     # A post can be edited for several reason (eg. moderation) ; the reason why it has been
     # updated can be specified
