@@ -15,18 +15,19 @@ class AbstractForumPermission(models.Model):
     """
     Represents a single forum permission.
     """
-    codename = models.CharField(max_length=150, verbose_name=_('Permission codename'), unique=True)
+    codename = models.CharField(
+        max_length=150, verbose_name=_('Permission codename'), unique=True, db_index=True)
     name = models.CharField(
         max_length=255, verbose_name=_('Permission name'), blank=True, null=True)
 
     is_global = models.BooleanField(
         verbose_name=_('Global permission'),
         help_text=_('This permission can be granted globally to all the forums'),
-        default=False)
+        default=False, db_index=True)
     is_local = models.BooleanField(
         verbose_name=_('Local permission'),
         help_text=_('This permission can be granted individually for each forum'),
-        default=True)
+        default=True, db_index=True)
 
     class Meta:
         abstract = True
@@ -51,7 +52,7 @@ class BaseAuthForumPermission(models.Model):
     """
     permission = models.ForeignKey(
         'forum_permission.ForumPermission', verbose_name=_('Forum permission'))
-    has_perm = models.BooleanField(verbose_name=_('Has perm'), default=True)
+    has_perm = models.BooleanField(verbose_name=_('Has perm'), default=True, db_index=True)
 
     # The forum related to a UserForumPermission instance can be null if the
     # considered permission should be granted globally.
@@ -75,7 +76,8 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     """
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
-    anonymous_user = models.BooleanField(verbose_name=_('Target anonymous user'), default=False)
+    anonymous_user = models.BooleanField(
+        verbose_name=_('Target anonymous user'), default=False, db_index=True)
 
     class Meta:
         abstract = True
