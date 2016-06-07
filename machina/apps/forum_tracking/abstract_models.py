@@ -20,7 +20,7 @@ class AbstractForumReadTrack(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='forum_tracks', verbose_name=_('User'))
     forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), related_name='tracks')
-    mark_time = models.DateTimeField(auto_now=True)
+    mark_time = models.DateTimeField(auto_now=True, db_index=True)
 
     objects = ForumReadTrackManager()
 
@@ -44,7 +44,7 @@ class AbstractTopicReadTrack(models.Model):
         settings.AUTH_USER_MODEL, related_name='topic_tracks', verbose_name=_('User'))
     topic = models.ForeignKey(
         'forum_conversation.Topic', verbose_name=_('Topic'), related_name='tracks')
-    mark_time = models.DateTimeField(auto_now=True)
+    mark_time = models.DateTimeField(auto_now=True, db_index=True)
 
     class Meta:
         abstract = True
