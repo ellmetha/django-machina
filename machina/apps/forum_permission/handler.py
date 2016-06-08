@@ -2,11 +2,13 @@
 
 from __future__ import unicode_literals
 import datetime as dt
+from functools import reduce
 
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import _get_queryset
 from django.utils.timezone import now
+from mptt.utils import get_cached_trees
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
@@ -324,42 +326,18 @@ class PermissionHandler(object):
         Given a set of forums and a user, returns the list of forums that are not visible
         by this user.
         """
-        visible_forums = self._get_forums_for_user(user, ['can_see_forum', 'can_read_forum', ])
-        hidden_forums = []
+        visible_forums = self._get_forums_for_user(
+            user, ['can_see_forum', 'can_read_forum', ], use_tree_hierarchy=True)
+        return forums.exclude(id__in=[f.id for f in visible_forums])
 
-        for forum in forums:
-            if forum.id not in hidden_forums:
-                # First cheks if any of the forum ancestors is hidden
-                forum_ancestor_ids = set(self._get_forum_ancestors_ids(forum))
-                ancestors_visible = forum_ancestor_ids.issubset(set(f.id for f in visible_forums)) \
-                    if forum.parent_id else True
-
-                if (ancestors_visible is False) or (forum not in visible_forums):
-                    # If one forum can not be seen by a given user, all of its descendants
-                    # should also be hidden.
-                    forum_and_descendants = forum.get_descendants(include_self=True)
-                    hidden_forums.extend(forum_and_descendants.values_list('id', flat=True))
-
-        return hidden_forums
-
-    def _get_forum_ancestors_ids(self, forum):
-        """
-        Returns the ancestor IDs of the given forum. These parent forum identifiers are
-        stored inside a local cache for further use.
-        """
-        forum_ancestors_cache_key = '{}__ancestors'.format(forum.pk)
-
-        if forum_ancestors_cache_key in self._forum_ancestors_cache:
-            return self._forum_ancestors_cache[forum_ancestors_cache_key]
-
-        forum_ancestor_ids = list(forum.get_ancestors().values_list('id', flat=True))
-        self._forum_ancestors_cache[forum_ancestors_cache_key] = forum_ancestor_ids
-        return forum_ancestor_ids
-
-    def _get_forums_for_user(self, user, perm_codenames):
+    def _get_forums_for_user(self, user, perm_codenames, use_tree_hierarchy=False):
         """
         Returns all the forums that satisfy the given list of permission
         codenames. User and group forum permissions are used.
+
+        If the ``use_tree_hierarchy`` keyword argument is set the granted forums will be filtered
+        so that a forum which has an ancestor which is not in the granted forums set will not be
+        returned.
         """
         granted_forums_cache_key = '{}__{}'.format(
             ':'.join(perm_codenames),
@@ -433,8 +411,29 @@ class PermissionHandler(object):
                         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
                 forum_objects = forum_queryset
 
+            if use_tree_hierarchy:
+                forum_objects = self._filter_granted_forums_using_tree(forum_objects)
+
         self._granted_forums_cache[granted_forums_cache_key] = forum_objects
         return forum_objects
+
+    def _filter_granted_forums_using_tree(self, granted_forums):
+        top_nodes = self._get_top_nodes()
+        d = reduce(
+            lambda a, b: a + self._filter_granted_node_using_tree(b, granted_forums), top_nodes, [])
+        return Forum.objects.filter(id__in=d)
+
+    def _filter_granted_node_using_tree(self, f, granted_forums):
+        if f in granted_forums:
+            return [f.id, ] + reduce(
+                lambda a, b: a + self._filter_granted_node_using_tree(b, granted_forums),
+                f.get_children(), [])
+        return []
+
+    def _get_top_nodes(self):
+        if not hasattr(self, '_top_nodes'):
+            self._top_nodes = get_cached_trees(Forum.objects.all())
+        return self._top_nodes
 
     def _perform_basic_permission_check(self, forum, user, permission):
         """
