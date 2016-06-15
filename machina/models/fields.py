@@ -7,6 +7,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
 from django.db.models import signals
+from django.forms import Textarea
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.encoding import python_2_unicode_compatible
@@ -26,6 +27,7 @@ _rendered_field_name = lambda name: '_{}_rendered'.format(name)
 def _get_markup_widget():
     dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
     try:
+        assert dotted_path is not None
         module, widget = dotted_path.rsplit('.', 1)
         module, widget = smart_str(module), smart_str(widget)
         widget = getattr(__import__(module, {}, {}, [widget]), widget)
@@ -34,6 +36,8 @@ def _get_markup_widget():
         raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
             machina_settings.MACHINA_MARKUP_WIDGET,
             e))
+    except AssertionError:
+        return Textarea
 
 MarkupTextFieldWidget = _get_markup_widget()
 
@@ -179,13 +183,9 @@ class MarkupTextField(models.TextField):
         setattr(instance, _rendered_field_name(self.attname), rendered)
 
     def formfield(self, **kwargs):
-        if machina_settings.MACHINA_MARKUP_WIDGET:
-            widget = _get_markup_widget()
-            defaults = {'widget': widget}
-            defaults.update(kwargs)
-        else:
-            defaults = kwargs
-
+        widget = _get_markup_widget()
+        defaults = {'widget': widget}
+        defaults.update(kwargs)
         field = super(MarkupTextField, self).formfield(**defaults)
         return field
 

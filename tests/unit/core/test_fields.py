@@ -107,6 +107,14 @@ class TestMarkupTextField(object):
         # Check
         assert type(form.fields['content'].widget) == forms.Textarea
 
+    def test_sets_the_markup_widget_to_a_textarea_if_it_is_none(self):
+        # Setup
+        machina_settings.MACHINA_MARKUP_WIDGET = None
+        # Run
+        widget_class = fields._get_markup_widget()
+        # Check
+        assert widget_class == forms.Textarea
+
     def test_can_use_a_custom_form_widget(self):
         # Setup
         machina_settings.MACHINA_MARKUP_WIDGET = 'django.forms.HiddenInput'
