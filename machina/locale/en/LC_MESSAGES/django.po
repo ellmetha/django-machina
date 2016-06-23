@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-06 05:35+0200\n"
+"POT-Creation-Date: 2016-06-23 05:02+0200\n"
 "PO-Revision-Date: 2016-02-22 22:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -111,7 +111,7 @@ msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
 #: machina/apps/forum/abstract_models.py:84
-#: machina/apps/forum_permission/abstract_models.py:58
+#: machina/apps/forum_permission/abstract_models.py:59
 #: machina/apps/forum_tracking/abstract_models.py:22
 #: machina/templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
@@ -149,7 +149,7 @@ msgstr ""
 
 #: machina/apps/forum/admin.py:158 machina/apps/forum/admin.py:232
 #: machina/apps/forum/admin.py:250 machina/apps/forum/admin.py:269
-#: machina/apps/forum_permission/abstract_models.py:35
+#: machina/apps/forum_permission/abstract_models.py:36
 #: machina/templates/admin/forum/forum/change_form.html:5
 #: machina/templates/admin/forum/forum/editpermissions_form.html:20
 #: machina/templates/admin/forum/forum/editpermissions_index.html:15
@@ -600,7 +600,7 @@ msgid "Machina: Forum feeds"
 msgstr ""
 
 #: machina/apps/forum_member/abstract_models.py:22
-#: machina/apps/forum_permission/abstract_models.py:77
+#: machina/apps/forum_permission/abstract_models.py:78
 #: machina/apps/forum_tracking/abstract_models.py:21
 #: machina/apps/forum_tracking/abstract_models.py:44
 msgid "User"
@@ -765,72 +765,72 @@ msgstr ""
 msgid "This post has been disapproved successfully."
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:18
+#: machina/apps/forum_permission/abstract_models.py:19
 msgid "Permission codename"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:20
+#: machina/apps/forum_permission/abstract_models.py:21
 msgid "Permission name"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:23
+#: machina/apps/forum_permission/abstract_models.py:24
 msgid "Global permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:24
+#: machina/apps/forum_permission/abstract_models.py:25
 msgid "This permission can be granted globally to all the forums"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:27
+#: machina/apps/forum_permission/abstract_models.py:28
 msgid "Local permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:28
+#: machina/apps/forum_permission/abstract_models.py:29
 msgid "This permission can be granted individually for each forum"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:34
-#: machina/apps/forum_permission/abstract_models.py:53
+#: machina/apps/forum_permission/abstract_models.py:35
+#: machina/apps/forum_permission/abstract_models.py:54
 msgid "Forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:45
+#: machina/apps/forum_permission/abstract_models.py:46
 msgid "A forum permission should be at least either global or local"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:54
+#: machina/apps/forum_permission/abstract_models.py:55
 msgid "Has perm"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:67
+#: machina/apps/forum_permission/abstract_models.py:68
 msgid "The following permission cannot be granted globally: {}"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:78
+#: machina/apps/forum_permission/abstract_models.py:80
 msgid "Target anonymous user"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:84
+#: machina/apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:85
+#: machina/apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:97
+#: machina/apps/forum_permission/abstract_models.py:99
 msgid "A permission should target either a user or an anonymous user"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:105
+#: machina/apps/forum_permission/abstract_models.py:107
 msgid "Group"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:111
+#: machina/apps/forum_permission/abstract_models.py:113
 msgid "Group forum permission"
 msgstr ""
 
-#: machina/apps/forum_permission/abstract_models.py:112
+#: machina/apps/forum_permission/abstract_models.py:114
 msgid "Group forum permissions"
 msgstr ""
 
@@ -930,19 +930,19 @@ msgstr ""
 msgid "Update date"
 msgstr ""
 
-#: machina/models/fields.py:34
+#: machina/models/fields.py:36
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr ""
 
-#: machina/models/fields.py:53
+#: machina/models/fields.py:57
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
 msgstr ""
 
-#: machina/models/fields.py:57
+#: machina/models/fields.py:61
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
 msgstr ""
 
-#: machina/models/fields.py:107
+#: machina/models/fields.py:111
 msgid "Can only be accessed via an instance."
 msgstr ""
 
