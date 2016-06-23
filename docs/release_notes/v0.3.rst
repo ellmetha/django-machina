@@ -10,9 +10,12 @@ Python 2.7, 3.3, 3.4 and 3.5. Django 1.8 and 1.9.
 Minor changes
 -------------
 
+* Fix an issue with slug generation for topic subjects containing non latin characters (`#21`_)
 * Fix an ``AttributeError`` that occured when setting the ``MACHINA_MARKUP_WIDGET`` setting to ``None``
 * Improve forum views performances by reducing the number of DB hits related to tracking logic
 * Many improvements on performances
+
+.. _`#21`: https://github.com/ellmetha/django-machina/issues/21
 
 Backwards incompatible changes
 ------------------------------

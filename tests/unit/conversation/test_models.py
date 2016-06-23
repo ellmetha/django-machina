@@ -165,6 +165,11 @@ class TestTopic(object):
         assert self.topic.has_subscriber(self.u1)
         assert not self.topic.has_subscriber(u2)
 
+    def test_can_properly_create_the_slug_for_topic_titles_containing_non_latin_words(self):
+        # Run & check
+        topic = create_topic(forum=self.top_level_forum, poster=self.u1, subject='你好')
+        assert topic.slug == '你好'
+
 
 @pytest.mark.django_db
 class TestPost(object):
