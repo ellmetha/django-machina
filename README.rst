@@ -5,6 +5,10 @@ django-machina
    :target: http://django-machina.readthedocs.org/en/stable/
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/gitter/room/ellmetha/django-machina.svg?maxAge=2592000&style=flat-square
+   :target: https://gitter.im/ellmetha/django-machina
+   :alt: Join chat
+
 .. image:: https://img.shields.io/pypi/l/django-machina.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: License
