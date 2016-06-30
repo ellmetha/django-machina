@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+import codecs
 from os.path import abspath
 from os.path import dirname
 from os.path import join
@@ -12,7 +15,7 @@ def read_relative_file(filename):
     Returns contents of the given file, whose path is supposed relative
     to this module.
     """
-    with open(join(dirname(abspath(__file__)), filename)) as f:
+    with codecs.open(join(dirname(abspath(__file__)), filename), encoding='utf-8') as f:
         return f.read()
 
 
