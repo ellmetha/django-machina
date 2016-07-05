@@ -33,10 +33,6 @@ Install *django-machina* using::
 
   pip install django-machina
 
-.. note::
-
-	Please remember that *django-machina* is currently in beta. It is not yet suitable for production environments.
-
 Project configuration
 ---------------------
 
@@ -140,7 +136,7 @@ You can also decide to use a more powerfull backend such as *Solr* or *Whoosh*::
 Database and migrations
 -----------------------
 
-*Django-machina* only provides new-style migrations. So if you are using Django 1.8 or higher, just use the ``syncdb`` or ``migrate`` commands::
+Just use the ``migrate`` command to install the models::
 
   python manage.py migrate
 
