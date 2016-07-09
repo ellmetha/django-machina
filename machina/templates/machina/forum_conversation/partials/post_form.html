@@ -16,3 +16,43 @@
 {% if post_form.update_reason %}
     {% include "partials/form_field.html" with field=post_form.update_reason %}
 {% endif %}
+<!-- Sub "forms" tabs -->
+<ul class="nav nav-tabs nav-justified">
+  <li class="active"><a href="#options" data-toggle="tab">{% trans "Options" %}</a></li>
+  {% if attachment_formset %}
+    <li><a href="#attachments" data-toggle="tab">{% trans "Attachments" %}</a></li>
+  {% endif %}
+</ul>
+<!-- Sub "forms" panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="options">
+    <div class="form-group">
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          {% with field=post_form.enable_signature %}
+          <div class="checkbox">
+            <label for="{{ field.auto_id }}">
+              {{ field }}
+              {{ field.label }}
+            </label>
+          </div>
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if attachment_formset %}
+  <div class="tab-pane" id="attachments">
+    <div class="form-group">
+      <br />
+      <div class="row">
+        <div id="attachment_formset" class="col-md-12">
+           <p class="lead attachments-title">{% trans "Attachments" %}</p>
+          {% include "forum_conversation/forum_attachments/attachment_formset.html" %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>

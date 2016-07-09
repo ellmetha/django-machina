@@ -24,7 +24,7 @@ get_anonymous_user_forum_key = get_class(
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['subject', 'content', 'username', 'update_reason', ]
+        fields = ['subject', 'content', 'username', 'update_reason', 'enable_signature', ]
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -80,7 +80,8 @@ class PostForm(forms.ModelForm):
                 poster_ip=self.user_ip,
                 subject=self.cleaned_data['subject'],
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
-                content=self.cleaned_data['content'])
+                content=self.cleaned_data['content'],
+                enable_signature=self.cleaned_data['enable_signature'])
             if not self.user.is_anonymous():
                 post.poster = self.user
             else:

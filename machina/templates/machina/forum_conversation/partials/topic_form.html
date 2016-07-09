@@ -2,86 +2,94 @@
 {% load widget_tweaks %}
 
 <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
-    {% for error in post_form.non_field_errors %}
-        <div class="alert alert-danger">
-            <i class="icon-exclamation-sign"></i> {{ error }}
+  {% for error in post_form.non_field_errors %}
+  <div class="alert alert-danger">
+    <i class="icon-exclamation-sign"></i> {{ error }}
+  </div>
+  {% endfor %}
+
+  {% include "partials/form_field.html" with field=post_form.subject %}
+  {% include "partials/form_field.html" with field=post_form.content %}
+  {% if post_form.username %}
+    {% include "partials/form_field.html" with field=post_form.username %}
+  {% endif %}
+  {% if post_form.update_reason %}
+    {% include "partials/form_field.html" with field=post_form.update_reason %}
+  {% endif %}
+
+  <!-- Sub "forms" tabs -->
+  <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#options" data-toggle="tab">{% trans "Options" %}</a></li>
+    {% if poll_option_formset %}
+      <li><a href="#poll" data-toggle="tab">{% trans "Poll" %}</a></li>
+    {% endif %}
+    {% if attachment_formset %}
+      <li><a href="#attachments" data-toggle="tab">{% trans "Attachments" %}</a></li>
+    {% endif %}
+  </ul>
+
+  <!-- Sub "forms" panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="options">
+      <div class="form-group">
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            {% include "partials/form_field.html" with field=post_form.topic_type %}
+            {% with field=post_form.enable_signature %}
+            <div class="checkbox">
+              <label for="{{ field.auto_id }}">
+                {{ field }}
+                {{ field.label }}
+              </label>
+            </div>
+            {% endwith %}
+          </div>
         </div>
-    {% endfor %}
+      </div>
+    </div>
+    {% if poll_option_formset %}
+    <div class="tab-pane" id="poll">
+      <div class="form-group">
+        <br />
+        {% if poll_options_validated and poll_option_formset.non_form_errors %}<div class="alert alert-danger">{{ poll_option_formset.non_form_errors|striptags }}</div>{% endif %}
+        <div class="row">
+          <div class="col-md-6">
+            {% include "partials/form_field.html" with field=post_form.poll_question %}
+            {% include "partials/form_field.html" with field=post_form.poll_max_options %}
+            {% include "partials/form_field.html" with field=post_form.poll_duration %}
+            <div{% if post_form.poll_user_changes.errors %} class="has-error"{% endif %}>
+              <div class="checkbox">
+                <label for="{{ post_form.poll_user_changes.auto_id }}">
+                  {{ post_form.poll_user_changes }}
+                  {{ post_form.poll_user_changes.label }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div id="poll_formset" class="col-md-6">
+            {% include "forum_conversation/forum_polls/poll_option_formset.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if attachment_formset %}
+    <div class="tab-pane" id="attachments">
+      <div class="form-group">
+        <br />
+        <div class="row">
+          <div id="attachment_formset" class="col-md-12">
+            {% include "forum_conversation/forum_attachments/attachment_formset.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
 
-	{% include "partials/form_field.html" with field=post_form.subject %}
-	{% include "partials/form_field.html" with field=post_form.content %}
-	{% if post_form.username %}
-	    {% include "partials/form_field.html" with field=post_form.username %}
-	{% endif %}
-	{% if post_form.update_reason %}
-	    {% include "partials/form_field.html" with field=post_form.update_reason %}
-	{% endif %}
-
-	<!-- Sub "forms" tabs -->
-	<ul class="nav nav-tabs nav-justified">
-		<li class="active"><a href="#options" data-toggle="tab">{% trans "Options" %}</a></li>
-		{% if poll_option_formset %}
-			<li><a href="#poll" data-toggle="tab">{% trans "Poll" %}</a></li>
-		{% endif %}
-		{% if attachment_formset %}
-			<li><a href="#attachments" data-toggle="tab">{% trans "Attachments" %}</a></li>
-		{% endif %}
-	</ul>
-
-	<!-- Sub "forms" panes -->
-	<div class="tab-content">
-		<div class="tab-pane active" id="options">
-			<div class="form-group">
-				<br />
-				<div class="row">
-					<div class="col-md-12">
-						{% include "partials/form_field.html" with field=post_form.topic_type %}
-					</div>
-				</div>
-			</div>
-		</div>
-		{% if poll_option_formset %}
-			<div class="tab-pane" id="poll">
-				<div class="form-group">
-					<br />
-					{% if poll_options_validated and poll_option_formset.non_form_errors %}<div class="alert alert-danger">{{ poll_option_formset.non_form_errors|striptags }}</div>{% endif %}
-					<div class="row">
-						<div class="col-md-6">
-							{% include "partials/form_field.html" with field=post_form.poll_question %}
-							{% include "partials/form_field.html" with field=post_form.poll_max_options %}
-							{% include "partials/form_field.html" with field=post_form.poll_duration %}
-							<div{% if post_form.poll_user_changes.errors %} class="has-error"{% endif %}>
-								<div class="checkbox">
-									<label for="{{ post_form.poll_user_changes.auto_id }}">
-										{{ post_form.poll_user_changes }}
-										{{ post_form.poll_user_changes.label }}
-									</label>
-								</div>
-							</div>
-						</div>
-						<div id="poll_formset" class="col-md-6">
-							{% include "forum_conversation/forum_polls/poll_option_formset.html" %}
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-		{% if attachment_formset %}
-			<div class="tab-pane" id="attachments">
-				<div class="form-group">
-					<br />
-					<div class="row">
-						<div id="attachment_formset" class="col-md-12">
-							{% include "forum_conversation/forum_attachments/attachment_formset.html" %}
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-	</div>
-
-	<div class="form-actions">
-		<input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
-		<input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
-	</div>
+  <div class="form-actions">
+    <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+    <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+  </div>
 </form>

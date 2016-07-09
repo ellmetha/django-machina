@@ -5,52 +5,42 @@
 {% block sub_title %}{% trans "Edit post" %}{% endblock sub_title %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{ topic.subject }}</h1>
-        </div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{ topic.subject }}</h1>
+  </div>
+</div>
+{% if preview %}
+  {% include "forum_conversation/post_preview.html" %}
+{% endif %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default post-edit">
+      <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Edit post" %}</h3>
+      </div>
+      <div class="panel-body">
+        <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+          {% include "forum_conversation/partials/post_form.html" %}
+          <div class="form-actions">
+            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
+            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
+          </div>
+        </form>
+      </div>
     </div>
-    {% if preview %}
-        {% include "forum_conversation/post_preview.html" %}
-    {% endif %}
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default post-edit">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Edit post" %}</h3>
-                </div>
-                <div class="panel-body">
-                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
-                        {% include "forum_conversation/partials/post_form.html" %}
-                        {% if attachment_formset %}
-                            <div class="form-group">
-                                <div class="row">
-                                    <div id="attachment_formset" class="col-md-12">
-                                         <p class="lead attachments-title">{% trans "Attachments" %}</p>
-                                        {% include "forum_conversation/forum_attachments/attachment_formset.html" %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                        <div class="form-actions">
-                            <input type="submit" name="preview" class="btn btn-large btn-default" value="{% trans "Preview" %}" />&nbsp;
-                            <input type="submit" class="btn btn-large btn-primary" value="{% trans "Submit" %}" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block onbodyload %}
-    machina.attachment.init();
+  machina.attachment.init();
 {% endblock onbodyload %}
 
 {% block extra_css %}
-    {{ post_form.media.css }}
+  {{ post_form.media.css }}
 {% endblock extra_css %}
 
 {% block extra_js %}
-    {{ post_form.media.js }}
+  {{ post_form.media.js }}
 {% endblock extra_js %}

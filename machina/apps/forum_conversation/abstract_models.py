@@ -235,6 +235,10 @@ class AbstractPost(DatedModel):
     # A post can be approved before publishing ; defaults to True
     approved = models.BooleanField(verbose_name=_('Approved'), default=True, db_index=True)
 
+    # The user can choose if he wants to display his signature with the content of the post
+    enable_signature = models.BooleanField(
+        verbose_name=_('Attach a signature'), default=True, db_index=True)
+
     # A post can be edited for several reason (eg. moderation) ; the reason why it has been
     # updated can be specified
     update_reason = models.CharField(
