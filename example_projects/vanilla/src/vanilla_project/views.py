@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
@@ -80,6 +81,7 @@ class UserPasswordUpdateView(MenuItemMixin, FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _('Your password has been successfully updated'))
+        update_session_auth_hash(self.request, form.user)
         return super(UserPasswordUpdateView, self).form_valid(form)
 
     def get_success_url(self):
