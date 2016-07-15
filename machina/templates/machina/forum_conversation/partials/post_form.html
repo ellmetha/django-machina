@@ -38,6 +38,16 @@
             </label>
           </div>
           {% endwith %}
+          {% if post_form.lock_topic %}
+          {% with field=post_form.lock_topic %}
+          <div class="checkbox">
+            <label for="{{ field.auto_id }}">
+              {{ field }}
+              {{ field.label }}
+            </label>
+          </div>
+          {% endwith %}
+          {% endif %}
         </div>
       </div>
     </div>

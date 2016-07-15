@@ -61,6 +61,14 @@ class PostForm(forms.ModelForm):
         if not self.instance.pk:
             del self.fields['update_reason']
 
+        # Inserts a field to allow the user to lock the current topic if he has the permissions to
+        # do so.
+        if (self.instance.pk or self.topic) \
+                and self.perm_handler.can_lock_topics(self.forum, self.user):
+            self.fields['lock_topic'] = forms.BooleanField(
+                label=_('Lock topic'), required=False,
+                initial=self.topic.status == Topic.TOPIC_LOCKED)
+
     def clean(self):
         if not self.user.is_anonymous():
             self.instance.poster = self.user
@@ -87,6 +95,12 @@ class PostForm(forms.ModelForm):
             else:
                 post.username = self.cleaned_data['username']
                 post.anonymous_key = get_anonymous_user_forum_key(self.user)
+
+        # Locks the topic if appropriate.
+        lock_topic = self.cleaned_data.get('lock_topic', False)
+        if lock_topic:
+            self.topic.status = Topic.TOPIC_LOCKED
+            self.topic.save()
 
         if commit:
             post.save()

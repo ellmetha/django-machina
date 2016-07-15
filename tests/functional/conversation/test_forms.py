@@ -174,6 +174,51 @@ class TestPostForm(object):
         post = form.save()
         assert post.update_reason == 'X'
 
+    def test_can_allow_a_user_to_lock_a_topic_if_he_has_the_permission_to_lock_topics(self):
+        # Setup
+        assign_perm('can_lock_topics', self.user, self.top_level_forum)
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': faker.text(),
+            'lock_topic': True,
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        assert 'lock_topic' in form.fields
+        assert form.is_valid()
+        post = form.save()
+        post.refresh_from_db()
+        assert post.topic.is_locked
+
+    def test_cannot_allow_a_user_to_lock_a_topic_if_he_has_not_the_permission_to_lock_topics(self):
+        # Setup
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': faker.text(),
+            'lock_topic': True,
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        assert 'lock_topic' not in form.fields
+        assert form.is_valid()
+        post = form.save()
+        post.refresh_from_db()
+        assert not post.topic.is_locked
+
 
 @pytest.mark.django_db
 class TestTopicForm(object):

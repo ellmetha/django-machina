@@ -11,3 +11,4 @@ New features
 ------------
 
 * Add a way to disable signature when posting a message
+* Add a way to lock a topic when posting a new message (only if the user has the permission to do so)
