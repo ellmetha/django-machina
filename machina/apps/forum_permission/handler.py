@@ -140,7 +140,10 @@ class PermissionHandler(object):
         #     he belongs to the forum moderators
         is_author = self._is_post_author(post, user)
         can_edit = (user.is_superuser or
-                    (is_author and checker.has_perm('can_edit_own_posts', post.topic.forum)) or
+                    (
+                        is_author and checker.has_perm('can_edit_own_posts', post.topic.forum) and
+                        not post.topic.is_locked
+                    ) or
                     checker.has_perm('can_edit_posts', post.topic.forum))
         return can_edit
 

@@ -6,118 +6,114 @@
 {% block sub_title %}{{ topic.subject }}{% endblock sub_title %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{ topic.subject }}</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-4 topic-actions-block">
-            {% include "forum_conversation/partials/topic_detail_actions.html" %}
-        </div>
-        <div class="col-xs-12 col-md-8 pagination-block">
-            {% with "pagination-sm" as pagination_size %}
-                {% include "partials/pagination.html" %}
-            {% endwith %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            {% for post in posts %}
-                {% if forloop.first and post.is_topic_head and poll %}
-                    {% include "forum_conversation/forum_polls/poll_detail.html" %}
+<div class="row"><div class="col-xs-12"><h1>{{ topic.subject }}</h1></div></div>
+<div class="row">
+  <div class="col-xs-12 col-md-4 topic-actions-block">
+  {% include "forum_conversation/partials/topic_detail_actions.html" %}
+  </div>
+  <div class="col-xs-12 col-md-8 pagination-block">
+  {% with "pagination-sm" as pagination_size %}
+  {% include "partials/pagination.html" %}
+  {% endwith %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+  {% for post in posts %}
+    {% if forloop.first and post.is_topic_head and poll %}
+    {% include "forum_conversation/forum_polls/poll_detail.html" %}
+    {% endif %}
+    <div id="{{ post.id }}" class="panel panel-default post">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-10 post-content-wrapper">
+            <div class="pull-right post-controls">
+              {% get_permission 'can_edit_post' post request.user as user_can_edit_post %}
+              {% if user_can_edit_post %}
+              <a href="{% if post.is_topic_head %}{% url 'forum_conversation:topic_update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum_conversation:post_update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
+              {% endif %}
+              {% get_permission 'can_delete_post' post request.user as user_can_delete_post %}
+              {% if user_can_delete_post %}
+              <a href="{% url 'forum_conversation:post_delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+              {% endif %}
+            </div>
+              {% spaceless %}
+              <h4 class="subject">
+                {{ post.subject }}
+                &nbsp;<a href="{% url 'forum_conversation:topic' forum.slug forum.pk topic.slug topic.pk %}?post={{ post.pk }}#{{ post.pk }}">&#182;</a>
+              </h4>
+              {% endspaceless %}
+              <p>
+                <small class="text-muted">
+                {% spaceless %}
+                <i class="fa fa-clock-o"></i>&nbsp;
+                {% if post.poster %}
+                  {% url 'forum_member:profile' post.poster_id as poster_url %}
+                  {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                    By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+                  {% endblocktrans %}
+                {% else %}
+                  {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
+                    By: {{ poster_username }} on {{ creation_date }}
+                  {% endblocktrans %}
                 {% endif %}
-                <div id="{{ post.id }}" class="panel panel-default post">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-10 post-content-wrapper">
-                                <div class="pull-right post-controls">
-                                    {% get_permission 'can_edit_post' post request.user as user_can_edit_post %}
-                                    {% if user_can_edit_post %}
-                                        <a href="{% if post.is_topic_head %}{% url 'forum_conversation:topic_update' forum.slug forum.pk topic.slug topic.pk %}{% else %}{% url 'forum_conversation:post_update' forum.slug forum.pk topic.slug topic.pk post.pk %}{% endif %}" class="btn btn-warning btn-xs" title="{% trans "Edit" %}"><i class="fa fa-edit"></i>&nbsp;{% trans "Edit" %}</a>
-                                    {% endif %}
-                                    {% get_permission 'can_delete_post' post request.user as user_can_delete_post %}
-                                    {% if user_can_delete_post %}
-                                        <a href="{% url 'forum_conversation:post_delete' forum.slug forum.pk topic.slug topic.pk post.pk %}" class="btn btn-danger btn-xs" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
-                                    {% endif %}
-                                </div>
-                                {% spaceless %}
-                                <h4 class="subject">
-                                  {{ post.subject }}
-                                  &nbsp;<a href="{% url 'forum_conversation:topic' forum.slug forum.pk topic.slug topic.pk %}?post={{ post.pk }}#{{ post.pk }}">&#182;</a>
-                                </h4>
-                                {% endspaceless %}
-                                <p>
-                                    <small class="text-muted">
-                                    {% spaceless %}
-                                      <i class="fa fa-clock-o"></i>&nbsp;
-                                      {% if post.poster %}
-                                        {% url 'forum_member:profile' post.poster_id as poster_url %}
-                                        {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
-                                          By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
-                                        {% endblocktrans %}
-                                      {% else %}
-                                        {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
-                                          By: {{ poster_username }} on {{ creation_date }}
-                                        {% endblocktrans %}
-                                      {% endif %}
-                                    {% endspaceless %}
-                                    </small>
-                                </p>
-                                <div class="post-content">
-                                    {{ post.content.rendered }}
-                                </div>
-                                {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
-                                {% if post.enable_signature and post.poster.forum_profile.signature %}
-                                    <div class="post-signature">
-                                        {{ post.poster.forum_profile.signature.rendered }}
-                                    </div>
-                                {% endif %}
-                                {% if post.updates_count %}
-                                    <div class="edit-info">
-                                        <br />
-                                        <small class="text-muted">
-                                            <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
-                                        </small>
-                                        {% if post.update_reason %}
-                                            <br />
-                                            <small class="text-muted">
-                                                <b>{% trans "Reason:" %}</b>&nbsp;{{ post.update_reason }}
-                                            </small>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-2 post-sidebar">
-                                {% if post.poster %}
-                                    {% if post.poster.forum_profile.avatar %}
-                                        <div class="avatar">
-                                            <a href="{% url 'forum_member:profile' post.poster_id %}">
-                                                <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                    <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
-                                    <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
-                                {% else %}
-                                    <div class="username"><b>{{ post.username }}</b></div>
-                                    <div class="username text-muted">{% trans "Anonymous user" %}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
+                {% endspaceless %}
+                </small>
+              </p>
+              <div class="post-content">
+                {{ post.content.rendered }}
+              </div>
+              {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
+              {% if post.enable_signature and post.poster.forum_profile.signature %}
+              <div class="post-signature">
+                {{ post.poster.forum_profile.signature.rendered }}
+              </div>
+              {% endif %}
+              {% if post.updates_count %}
+              <div class="edit-info">
+                <br />
+                <small class="text-muted">
+                  <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
+                </small>
+                {% if post.update_reason %}
+                  <br />
+                  <small class="text-muted">
+                    <b>{% trans "Reason:" %}</b>&nbsp;{{ post.update_reason }}
+                  </small>
+                {% endif %}
+              </div>
+              {% endif %}
+          </div>
+          <div class="col-md-2 post-sidebar">
+            {% if post.poster %}
+              {% if post.poster.forum_profile.avatar %}
+                <div class="avatar">
+                  <a href="{% url 'forum_member:profile' post.poster_id %}">
+                    <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
+                  </a>
                 </div>
-            {% endfor %}
+              {% endif %}
+              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
+              <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
+            {% else %}
+              <div class="username"><b>{{ post.username }}</b></div>
+              <div class="username text-muted">{% trans "Anonymous user" %}</div>
+            {% endif %}
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-xs-6 col-md-4 topic-actions-block">
-            {% include "forum_conversation/partials/topic_detail_actions.html" %}
-        </div>
-        <div class="col-xs-12 col-md-8 pagination-block">
-            {% with "pagination-sm" as pagination_size %}
-                {% include "partials/pagination.html" %}
-            {% endwith %}
-        </div>
+  {% endfor %}
+  </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-md-4 topic-actions-block">
+        {% include "forum_conversation/partials/topic_detail_actions.html" %}
     </div>
+    <div class="col-xs-12 col-md-8 pagination-block">
+        {% with "pagination-sm" as pagination_size %}
+            {% include "partials/pagination.html" %}
+        {% endwith %}
+    </div>
+</div>
 {% endblock content %}

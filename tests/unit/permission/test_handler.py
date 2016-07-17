@@ -172,6 +172,14 @@ class TestPermissionHandler(object):
         assert not self.perm_handler.can_edit_post(self.post_2, self.u1)
         assert not self.perm_handler.can_edit_post(self.post_1, u2)
 
+    def test_knows_that_the_owner_of_a_post_cannot_edit_it_if_the_topic_is_locked(self):
+        # Setup
+        self.post_1.topic.status = Topic.TOPIC_LOCKED
+        self.post_1.topic.save()
+        assign_perm('can_edit_own_posts', self.u1, self.forum_1)
+        # Run & check
+        assert not self.perm_handler.can_edit_post(self.post_1, self.u1)
+
     def test_knows_if_an_anonymous_owner_of_a_post_can_edit_it(self):
         # Setup
         u1 = AnonymousUser()
