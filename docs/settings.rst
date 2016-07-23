@@ -30,6 +30,13 @@ Default: ``'django_markdown.widgets.MarkdownWidget'``
 
 This setting defines the widget used inside topic and post forms. It should be a Python dotted path to a Django form widget.
 
+``MACHINA_MARKUP_WIDGET_KWARGS``
+--------------------------------
+
+Default: ``{}``
+
+This setting defines the keyword arguments that will be used when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting.
+
 Forum
 *****
 

@@ -184,7 +184,7 @@ class MarkupTextField(models.TextField):
 
     def formfield(self, **kwargs):
         widget = _get_markup_widget()
-        defaults = {'widget': widget}
+        defaults = {'widget': widget(**machina_settings.MACHINA_MARKUP_WIDGET_KWARGS)}
         defaults.update(kwargs)
         field = super(MarkupTextField, self).formfield(**defaults)
         return field

@@ -11,6 +11,7 @@ MACHINA_MARKUP_LANGUAGE = getattr(
     settings, 'MACHINA_MARKUP_LANGUAGE', ('django_markdown.utils.markdown', {'safe': True}))
 MACHINA_MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'django_markdown.widgets.MarkdownWidget')
+MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
 
 
 # Forum

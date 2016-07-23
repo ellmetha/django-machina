@@ -12,6 +12,7 @@ New features
 
 * Add a way to disable signature when posting a message
 * Add a way to lock a topic when posting a new message (only if the user has the permission to do so)
+* Add a ``MACHINA_MARKUP_WIDGET_KWARGS`` setting to configure the keyword arguments that are passed when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting
 
 Minor changes
 -------------
