@@ -8,7 +8,7 @@ from django.conf import settings
 # General
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(
-    settings, 'MACHINA_MARKUP_LANGUAGE', ('markdown2.markdown', {'safe_mode': True}))
+    settings, 'MACHINA_MARKUP_LANGUAGE', ('markdown.markdown', {'safe_mode': True}))
 MACHINA_MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'pagedown.widgets.PagedownWidget')
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})

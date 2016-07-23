@@ -10,7 +10,7 @@ Requirements
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Django-pagedown`_ 0.1. or higher
-* `Markdown2`_ 2.0. or higher
+* `Markdown`_ 2.6. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
 
 
@@ -25,7 +25,7 @@ Requirements
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
 .. _Django-pagedown: https://github.com/timmyomahony/django-pagedown
-.. _Markdown2: https://github.com/trentm/python-markdown2
+.. _Markdown: https://github.com/waylan/Python-Markdown
 .. _Django-widget-tweaks: https://github.com/kmike/django-widget-tweaks
 
 Installation
