@@ -385,10 +385,10 @@ class TestPermissionHandler(object):
     def test_knows_that_a_user_should_no_vote_in_a_completed_poll(self):
         # Setup
         poll = TopicPollFactory.create(topic=self.forum_1_topic, duration=2)
-        poll._meta.get_field_by_name('updated')[0].auto_now = False
+        poll._meta.get_field('updated').auto_now = False
         poll.created = dt.datetime(2000, 1, 12)
         poll.save()
-        poll._meta.get_field_by_name('updated')[0].auto_now = True
+        poll._meta.get_field('updated').auto_now = True
         assign_perm('can_vote_in_polls', self.u1, self.forum_1)
         # Run & check
         assert not self.perm_handler.can_vote_in_poll(poll, self.u1)

@@ -153,7 +153,7 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'widget_tweaks',
-    'django_markdown',
+    'pagedown',
 
     # Local apps
     'vanilla_project',

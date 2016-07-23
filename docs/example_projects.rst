@@ -46,7 +46,7 @@ The demo project
 The "demo" project aims to show the possibilities of *django-machina* in terms of personalization and customization. It showcases how *django-machina* can be used to integrate a forum into a Django project. Some of the customisations that are included in this "demo" project are listed bellow:
 
 * a new theme
-* the use of `django-ckeditor <https://github.com/django-ckeditor/django-ckeditor/>`_ instead of `django-markdown <https://github.com/klen/django_markdown/>`_
+* the use of `django-ckeditor <https://github.com/django-ckeditor/django-ckeditor/>`_ instead of `django-pagedown <https://github.com/timmyomahony/django-pagedown>`_
 
 To run this project locally, you can follow these instructions:
 

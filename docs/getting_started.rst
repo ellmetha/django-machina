@@ -9,13 +9,14 @@ Requirements
 * `Pillow`_ 2.2. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
-* `Django-markdown`_ 0.7. or higher
+* `Django-pagedown`_ 0.1. or higher
+* `Markdown2`_ 2.0. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
 
 
 .. note::
 
-	*Django-machina* uses Markdown (*django-markdown*) by default as a syntax for forum messages, but you can change this
+	*Django-machina* uses Markdown by default as a syntax for forum messages, but you can change this
 	in your settings.
 
 .. _Python: https://www.python.org
@@ -23,7 +24,8 @@ Requirements
 .. _Pillow: http://python-pillow.github.io/
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
-.. _Django-markdown: https://github.com/klen/django_markdown
+.. _Django-pagedown: https://github.com/timmyomahony/django-pagedown
+.. _Markdown2: https://github.com/trentm/python-markdown2
 .. _Django-widget-tweaks: https://github.com/kmike/django-widget-tweaks
 
 Installation
@@ -56,7 +58,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     'mptt',
     'haystack',
     'widget_tweaks',
-    'django_markdown',
+    'pagedown',
   ] + get_machina_apps()
 
 .. note::
@@ -143,7 +145,7 @@ Just use the ``migrate`` command to install the models::
 URLs configuration
 ------------------
 
-Finally you have to update your main ``urls.py`` module in order to include the forum's URLs and the *django-markdown*'s URLs::
+Finally you have to update your main ``urls.py`` module in order to include the forum's URLs::
 
   from machina.app import board
 
@@ -151,7 +153,6 @@ Finally you have to update your main ``urls.py`` module in order to include the 
     # [...]
 
     # Apps
-    url(r'^markdown/', include( 'django_markdown.urls')),
     url(r'^forum/', include(board.urls)),
   )
 

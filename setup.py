@@ -35,16 +35,17 @@ setup(
         'django>=1.8',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
-        'django-mptt>=0.8.0',
+        'django-mptt>=0.8',
 
         # Machina uses Django-haystack to provide search support
-        'django-haystack>=2.1.0',
+        'django-haystack>=2.1',
 
         # Pillow is required for image fields
         'pillow>=2.2',
 
         # Machina uses Markdown by default as a syntax for forum messages ; but you can change this
-        'django-markdown>=0.7.0',
+        'django-pagedown>=0.1',
+        'markdown2>=2.0',
 
         # Machina's default templates use django-widget-tweaks to render form fields ; but you can
         # override this

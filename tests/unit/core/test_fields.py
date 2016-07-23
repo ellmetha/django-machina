@@ -25,11 +25,6 @@ from tests.models import DummyModel
 
 @pytest.mark.django_db
 class TestMarkupTextField(object):
-    # The following tests involve the django-markdown
-    # app. This one can be used with Machina in order to
-    # provide a support for the Markdown syntax. But instead
-    # we can use another Django app providing support for
-    # other syntax (eg. BBCode).
     MARKUP_TEXT_FIELD_TESTS = (
         ('**hello _world!_**', '<p><strong>hello <em>world!</em></strong></p>'),
         ('[goto google](http://google.com)', '<p><a href="http://google.com">goto google</a></p>'),
@@ -53,7 +48,7 @@ class TestMarkupTextField(object):
             test = DummyModel()
             test.content = markup_text
             test.save()
-            assert test.content.rendered == expected_html_text
+            assert test.content.rendered.rstrip() == expected_html_text
 
     def test_provides_access_to_the_raw_text_and_to_the_rendered_text(self):
         # Setup
@@ -70,7 +65,7 @@ class TestMarkupTextField(object):
         test.save()
         # Check
         assert field.value_to_string(test) == markup_content
-        assert test.content.rendered == '<p><strong>hello world!</strong></p>'
+        assert test.content.rendered.rstrip() == '<p><strong>hello world!</strong></p>'
         assert len(test.content) == markup_content_len
         with pytest.raises(AttributeError):
             print(DummyModel.content.rendered)
@@ -95,6 +90,7 @@ class TestMarkupTextField(object):
     def test_should_use_a_default_text_input_widget_with_formfields(self):
         # Setup
         machina_settings.MACHINA_MARKUP_WIDGET = None
+        machina_settings.MACHINA_MARKUP_WIDGET_KWARGS = {}
 
         class TestableForm(forms.ModelForm):
             class Meta:
@@ -118,6 +114,7 @@ class TestMarkupTextField(object):
     def test_can_use_a_custom_form_widget(self):
         # Setup
         machina_settings.MACHINA_MARKUP_WIDGET = 'django.forms.HiddenInput'
+        machina_settings.MACHINA_MARKUP_WIDGET_KWARGS = {}
 
         class TestableForm(forms.ModelForm):
             class Meta:

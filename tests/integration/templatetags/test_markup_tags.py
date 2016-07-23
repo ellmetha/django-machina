@@ -24,4 +24,5 @@ class TestRenderedTag(object):
 
             return rendered
 
-        assert get_rendered('**This is a test**') == '<p><strong>This is a test</strong></p>'
+        assert get_rendered('**This is a test**').rstrip() \
+            == '<p><strong>This is a test</strong></p>'

@@ -5,14 +5,19 @@ Django-machina 0.4 release notes - UNDER DEVELOPMENT
 Requirements and compatibility
 ------------------------------
 
-Python 2.7, 3.3, 3.4 and 3.5. Django 1.8 and 1.9.
+Python 2.7, 3.3, 3.4 and 3.5. Django 1.8, 1.9 and 1.10.
 
 New features
 ------------
 
 * Add a way to disable signature when posting a message
 * Add a way to lock a topic when posting a new message (only if the user has the permission to do so)
-* Add a ``MACHINA_MARKUP_WIDGET_KWARGS`` setting to configure the keyword arguments that are passed when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting
+* Add a ``MACHINA_MARKUP_WIDGET_KWARGS`` setting to configure the keyword arguments that will be used when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting
+
+Major changes
+-------------
+
+* The ``django-markdown`` editor has been replaced by the widget provided by the ``django-pagedown`` module. If you were using the *django-machina*'s default settings you will have to replace ``django_markdown`` by ``pagedown`` in your ``INSTALLED_APPS``
 
 Minor changes
 -------------
