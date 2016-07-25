@@ -29,10 +29,10 @@
                                 <table class="topic-data-table">
                                     <tr>
                                         <td class="topic-icon {% if topic in unread_topics or force_all_unread %}unread{% endif %}">
-                                            <i class="fa {% if topic.is_sticky %}fa-map-pin{% elif topic.is_announce %}fa-info-circle{% else %}fa-dot-circle-o{% endif %} fa-2x"></i>{% if topic.is_locked %}<i class="fa fa-times locked-indicator"></i>{% endif %}
+                                            <i class="fa {% if topic.is_sticky %}fa-map-pin{% elif topic.is_announce %}fa-info-circle{% else %}fa-dot-circle-o{% endif %} fa-2x"></i>
                                         </td>
                                         <td class="topic-name">
-                                            <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>
+                                            <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>{% if topic.is_locked %}&nbsp;<i class="fa fa-times-circle locked-indicator" title="{% trans 'This topic is locked' %}"></i>{% endif %}
                                             <div>
                                                 <div class="topic-created">
                                                   {% if topic.poster %}
