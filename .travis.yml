@@ -25,9 +25,9 @@ env:
   - DJANGO_ENV="django>=1.9,<1.10" DB=sqlite
   - DJANGO_ENV="django>=1.9,<1.10" DB=postgres
   - DJANGO_ENV="django>=1.9,<1.10" DB=mysql
-  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=sqlite
-  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=postgres
-  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=mysql
+  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=sqlite
+  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=postgres
+  - DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=mysql
 
 matrix:
   exclude:
@@ -38,11 +38,11 @@ matrix:
   - python: "3.3"
     env: DJANGO_ENV="django>=1.9,<1.10" DB=mysql
   - python: "3.3"
-    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=sqlite
+    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=sqlite
   - python: "3.3"
-    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=postgres
+    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=postgres
   - python: "3.3"
-    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git@dj110" DB=mysql
+    env: DJANGO_ENV="django>=1.10,<1.11 git+git://github.com/django-mptt/django-mptt.git" DB=mysql
 
 install:
   - if [[ $DB == "mysql" ]]; then pip install -q mysqlclient; fi
