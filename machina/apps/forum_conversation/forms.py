@@ -142,7 +142,7 @@ class TopicForm(PostForm):
                 label=_('Maximum number of poll options per user'), required=False,
                 help_text=_('This is the number of options each user may select when voting.'),
                 validators=TopicPoll._meta.get_field('max_options').validators,
-                initial=1)
+                initial=TopicPoll._meta.get_field('max_options').default)
             self.fields['poll_duration'] = forms.IntegerField(
                 label=_('For how many days the poll should be run?'), required=False,
                 help_text=_('Enter 0 or leave blank for a never ending poll.'),
@@ -164,6 +164,15 @@ class TopicForm(PostForm):
                     self.fields['poll_user_changes'].initial = self.instance.topic.poll.user_changes
         except ObjectDoesNotExist:
             pass
+
+    def clean(self):
+        if self.cleaned_data.get('poll_question', None) \
+                and not self.cleaned_data.get('poll_max_options', None):
+            self.add_error(
+                'poll_max_options',
+                _('You must set the maximum number of poll options per user when creating polls'))
+
+        super(TopicForm, self).clean()
 
     def save(self, commit=True):
         if not self.instance.pk:

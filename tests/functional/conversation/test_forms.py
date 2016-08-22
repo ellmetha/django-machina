@@ -455,3 +455,25 @@ class TestTopicForm(object):
         assert form.fields['poll_max_options'].initial == poll.max_options
         assert form.fields['poll_duration'].initial == poll.duration
         assert form.fields['poll_user_changes'].initial == poll.user_changes
+
+    def test_cannot_allow_users_to_create_polls_without_settings_the_maximum_options_number(self):
+        # Setup
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TOPIC_STICKY,
+            'poll_question': faker.text(max_nb_chars=100),
+        }
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
+        # Run
+        form = TopicForm(
+            data=form_data,
+            user=self.user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        valid = form.is_valid()
+        assert not valid
+        assert 'poll_max_options' in form.errors

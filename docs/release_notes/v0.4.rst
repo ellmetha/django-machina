@@ -23,4 +23,5 @@ Minor changes
 -------------
 
 * Fix: prevent users from editting their posts when the related topic is locked
+* Fix: prevent users from submitting polls without required fields
 * Improve layout for locked topics
