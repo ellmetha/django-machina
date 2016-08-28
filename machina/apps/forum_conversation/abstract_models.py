@@ -8,6 +8,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
@@ -118,27 +119,22 @@ class AbstractTopic(DatedModel):
         """
         return self.status == self.TOPIC_LOCKED
 
-    @property
+    @cached_property
     def first_post(self):
         """
         Try to fetch the first post associated with the current topic and caches it to
         lighten the next request.
         """
-        if not hasattr(self, '_first_post'):
-            posts = self.posts.select_related('poster').all().order_by('created')
-            self._first_post = posts[0] if len(posts) else None
-        return self._first_post
+        return self.posts.select_related('poster').all().order_by('created').first()
 
-    @property
+    @cached_property
     def last_post(self):
         """
         Try to fetch the last post associated with the current topic and caches it to
         lighten the next request.
         """
-        if not hasattr(self, '_last_post'):
-            posts = self.posts.select_related('poster').filter(approved=True).order_by('-created')
-            self._last_post = posts[0] if len(posts) else None
-        return self._last_post
+        return self.posts.select_related('poster').filter(approved=True) \
+            .order_by('-created').first()
 
     def has_subscriber(self, user):
         """

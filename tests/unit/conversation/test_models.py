@@ -74,7 +74,8 @@ class TestTopic(object):
         middle_post = PostFactory.create(topic=self.topic, poster=self.u1)
         assert self.topic.last_post == middle_post
         new_last_post = Post.objects.create(topic=self.topic, poster=self.u1, content='last')
-        assert self.topic.last_post == new_last_post
+        topic = Topic.objects.get(pk=self.topic.pk)
+        assert topic.last_post == new_last_post
         assert new_topic.last_post is None
 
     def test_cannot_tell_that_a_non_approved_post_is_the_last_post(self):
