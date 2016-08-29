@@ -3,17 +3,17 @@
 
 {% get_permission 'can_download_files' post.topic.forum request.user as user_can_download_files %}
 {% if post.attachments.exists and user_can_download_files %}
-    <div class="row attachments">
-        <div class="col-md-12">
-            <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
-        </div>
-        {% for attachment in post.attachments.all %}
-            <div class="col-md-12 attachment">
-                <a href="{% url 'forum_conversation:attachment' pk=attachment.id %}"><i class="fa fa-file"></i>&nbsp;{{ attachment.filename }}</a>
-                {% if attachment.comment %}
-                    <p class="text-muted"><em>{{ attachment.comment }}</em></p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+<div class="row attachments">
+  <div class="col-md-12">
+    <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
+  </div>
+  {% for attachment in post.attachments.all %}
+  <div class="col-md-12 attachment">
+    <a href="{% url 'forum_conversation:attachment' pk=attachment.id %}"><i class="fa fa-file"></i>&nbsp;{{ attachment.filename }} ({{ attachment.file.size|filesizeformat }})</a>
+    {% if attachment.comment %}
+    <p class="text-muted"><em>{{ attachment.comment }}</em></p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
 {% endif %}
