@@ -16,10 +16,7 @@
                         <div class="col-md-2 col-sm-3 hidden-xs topic-last-post-col">{% trans "Last post" %}</div>
                     </div>
                 </div>
-                <div class="panel-body">
-                    {% if not force_all_unread %}
-                        {% get_unread_topics topics request.user as unread_topics %}
-                    {% endif %}
+                <div class="panel-body">{% if not force_all_unread and unread_topics is None %}{% get_unread_topics topics request.user as unread_topics %}{% endif %}
                     {% for topic in topics %}
                         <div class="row panel-row">
                             <div class="col-md-8 col-sm-9 col-xs-11 topic-name">

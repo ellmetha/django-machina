@@ -15,6 +15,7 @@ Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
 
 PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
+TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 
 class IndexView(ListView):
@@ -89,7 +90,11 @@ class ForumView(PermissionRequiredMixin, ListView):
             .forum_list_filter(sub_forums, self.request.user)
 
         # The announces will be displayed on each page of the forum
-        context['announces'] = self.get_forum().topics.filter(type=Topic.TOPIC_ANNOUNCE)
+        context['announces'] = list(self.get_forum().topics.filter(type=Topic.TOPIC_ANNOUNCE))
+
+        # Determines the topics that have not been read by the current user
+        context['unread_topics'] = TrackingHandler(self.request).get_unread_topics(
+            list(context[self.context_object_name]) + context['announces'], self.request.user)
 
         return context
 
