@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('update_reason', models.CharField(max_length=255, null=True, verbose_name='Update reason', blank=True)),
                 ('updates_count', models.PositiveIntegerField(default=0, verbose_name='Updates count', editable=False, blank=True)),
                 ('_content_rendered', models.TextField(null=True, editable=False, blank=True)),
-                ('poster', models.ForeignKey(related_name='posts', verbose_name='Poster', to=settings.AUTH_USER_MODEL)),
+                ('poster', models.ForeignKey(related_name='posts', verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'ordering': ['created'],
@@ -37,7 +37,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Post',
                 'verbose_name_plural': 'Posts',
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Topic',
@@ -54,8 +53,8 @@ class Migration(migrations.Migration):
                 ('views_count', models.PositiveIntegerField(default=0, verbose_name='Views count', editable=False, blank=True)),
                 ('last_post_on', models.DateTimeField(null=True, verbose_name='Last post added on', blank=True)),
                 ('forum', models.ForeignKey(related_name='topics', verbose_name='Topic forum', to='forum.Forum')),
-                ('poster', models.ForeignKey(verbose_name='Poster', to=settings.AUTH_USER_MODEL)),
-                ('subscribers', models.ManyToManyField(related_name='subscriptions', null=True, verbose_name='Subscribers', to=settings.AUTH_USER_MODEL, blank=True)),
+                ('poster', models.ForeignKey(verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('subscribers', models.ManyToManyField(related_name='subscriptions', verbose_name='Subscribers', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
             options={
                 'ordering': ['-type', '-last_post_on'],
@@ -64,18 +63,15 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Topic',
                 'verbose_name_plural': 'Topics',
             },
-            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='post',
             name='topic',
             field=models.ForeignKey(related_name='posts', verbose_name='Topic', to='forum_conversation.Topic'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='post',
             name='updated_by',
             field=models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Lastly updated by'),
-            preserve_default=True,
         ),
     ]
