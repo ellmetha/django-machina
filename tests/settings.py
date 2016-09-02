@@ -7,6 +7,14 @@ from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 
+class DisableMigrations(object):
+    def __contains__(self, item):
+        return True
+
+    def __getitem__(self, item):
+        return 'nomigrations'
+
+
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Helper function to extract absolute path
@@ -25,6 +33,7 @@ if DB_CONFIG == 'sqlite':
             'NAME': ':memory:'
         }
     }
+    MIGRATION_MODULES = DisableMigrations()
 elif DB_CONFIG == 'postgres':
     DATABASES = {
         'default': {
