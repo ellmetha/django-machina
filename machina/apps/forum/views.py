@@ -72,7 +72,7 @@ class ForumView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         self.forum = self.get_forum()
         qs = self.forum.topics.exclude(type=Topic.TOPIC_ANNOUNCE).exclude(approved=False) \
-            .select_related('poster')
+            .select_related('poster', 'last_post', 'last_post__poster')
         return qs
 
     def get_controlled_object(self):

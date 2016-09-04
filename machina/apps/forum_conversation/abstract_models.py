@@ -8,7 +8,6 @@ from django.db import models
 from django.db.models import Q
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
@@ -69,6 +68,15 @@ class AbstractTopic(DatedModel):
     # The date of the latest post
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
+    # The first post and the last post of the topic. The first post can be unnaproved. The last post
+    # must be approved
+    first_post = models.ForeignKey(
+        'forum_conversation.Post', verbose_name=_('Last post'), editable=False, related_name='+',
+        blank=True, null=True, on_delete=models.SET_NULL)
+    last_post = models.ForeignKey(
+        'forum_conversation.Post', verbose_name=_('Last post'), editable=False, related_name='+',
+        blank=True, null=True, on_delete=models.SET_NULL)
+
     # Many users can subscribe to this topic
     subscribers = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='topic_subscriptions',
@@ -118,23 +126,6 @@ class AbstractTopic(DatedModel):
         Returns True if the topic is locked.
         """
         return self.status == self.TOPIC_LOCKED
-
-    @cached_property
-    def first_post(self):
-        """
-        Try to fetch the first post associated with the current topic and caches it to
-        lighten the next request.
-        """
-        return self.posts.select_related('poster').all().order_by('created').first()
-
-    @cached_property
-    def last_post(self):
-        """
-        Try to fetch the last post associated with the current topic and caches it to
-        lighten the next request.
-        """
-        return self.posts.select_related('poster').filter(approved=True) \
-            .order_by('-created').first()
 
     def has_subscriber(self, user):
         """
@@ -193,9 +184,11 @@ class AbstractTopic(DatedModel):
         associated with the current topic.
         """
         self.posts_count = self.posts.filter(approved=True).count()
-        posts = self.posts.filter(approved=True).order_by('-created')
-        self._last_post = posts[0] if posts.exists() else None
-        self.last_post_on = self._last_post.created if self._last_post else None
+        first_post = self.posts.all().order_by('created').first()
+        last_post = self.posts.filter(approved=True).order_by('-created').first()
+        self.first_post = first_post
+        self.last_post = last_post
+        self.last_post_on = last_post.created if last_post else None
         self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
@@ -266,14 +259,14 @@ class AbstractPost(DatedModel):
         """
         Returns True if the post is the first post of the topic.
         """
-        return self.topic.first_post.id == self.id
+        return self.topic.first_post.id == self.id if self.topic.first_post else False
 
     @property
     def is_topic_tail(self):
         """
         Returns True if the post is the last post of the topic.
         """
-        return self.topic.last_post.id == self.id
+        return self.topic.last_post.id == self.id if self.topic.last_post else False
 
     @property
     def is_alone(self):
@@ -306,11 +299,12 @@ class AbstractPost(DatedModel):
             raise ValidationError(_('A username must be specified if the poster is anonymous'))
 
     def save(self, *args, **kwargs):
+        new_post = self.pk is None
         super(AbstractPost, self).save(*args, **kwargs)
 
         # Ensures that the subject of the thread corresponds to the one associated
         # with the first post. Do the same with the 'approved' flag.
-        if self.is_topic_head:
+        if (new_post and self.topic.first_post is None) or self.is_topic_head:
             if self.subject != self.topic.subject or self.approved != self.topic.approved:
                 self.topic.subject = self.subject
                 self.topic.approved = self.approved

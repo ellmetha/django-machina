@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('forum_conversation', '0006_post_enable_signature'),
+        ('forum_conversation', '0008_auto_20160903_0512'),
     ]
 
     operations = [
