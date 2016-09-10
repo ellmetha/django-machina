@@ -9,8 +9,7 @@ Requirements
 * `Pillow`_ 2.2. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
-* `Django-pagedown`_ 0.1. or higher
-* `Markdown`_ 2.6. or higher
+* `Markdown2`_ 2.3. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
 
 
@@ -24,8 +23,7 @@ Requirements
 .. _Pillow: http://python-pillow.github.io/
 .. _Django-mptt: https://github.com/django-mptt/django-mptt
 .. _Django-haystack: https://github.com/django-haystack/django-haystack
-.. _Django-pagedown: https://github.com/timmyomahony/django-pagedown
-.. _Markdown: https://github.com/waylan/Python-Markdown
+.. _Markdown2: https://github.com/trentm/python-markdown2
 .. _Django-widget-tweaks: https://github.com/kmike/django-widget-tweaks
 
 Installation
@@ -58,7 +56,6 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
     'mptt',
     'haystack',
     'widget_tweaks',
-    'pagedown',
   ] + get_machina_apps()
 
 .. note::

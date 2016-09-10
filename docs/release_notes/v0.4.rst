@@ -17,7 +17,7 @@ New features
 Major changes
 -------------
 
-* The ``django-markdown`` editor has been replaced by the widget provided by the ``django-pagedown`` module. If you were using the *django-machina*'s default settings you will have to replace ``django_markdown`` by ``pagedown`` in your ``INSTALLED_APPS``
+* The ``django-markdown`` editor has been replaced by a built-in widget using the `SimpleMDE Markdown editor <https://github.com/NextStepWebs/simplemde-markdown-editor>`_. If you were using the *django-machina*'s default settings you will have to remove ``django_markdown`` from your ``INSTALLED_APPS``
 
 Minor changes
 -------------

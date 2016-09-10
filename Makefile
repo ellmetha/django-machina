@@ -1,5 +1,5 @@
 staticfiles:
-	npm run gulp -- build-application
+	npm run gulp
 
 
 .PHONY: install upgrade lint coverage travis docs

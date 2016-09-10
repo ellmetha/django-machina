@@ -28,7 +28,7 @@ To run this project locally, you can follow these instructions:
 
 .. note::
 
-	The previous steps assume you have `Virtualenvwrapper <https://virtualenvwrapper.readthedocs.org/en/latest/>`_ installed on your system.
+	The previous steps assumes you have `Virtualenvwrapper <https://virtualenvwrapper.readthedocs.org/en/latest/>`_ installed on your system.
 
 If you have `Docker <https://www.docker.com/>`_ and `Docker Compose <https://docs.docker.com/compose/>`_ installed on your system you can also run the "vanilla" project using the following commands:
 
@@ -46,7 +46,7 @@ The demo project
 The "demo" project aims to show the possibilities of *django-machina* in terms of personalization and customization. It showcases how *django-machina* can be used to integrate a forum into a Django project. Some of the customisations that are included in this "demo" project are listed bellow:
 
 * a new theme
-* the use of `django-ckeditor <https://github.com/django-ckeditor/django-ckeditor/>`_ instead of `django-pagedown <https://github.com/timmyomahony/django-pagedown>`_
+* the use of `django-ckeditor <https://github.com/django-ckeditor/django-ckeditor/>`_ instead of the default Markdown editor
 
 To run this project locally, you can follow these instructions:
 

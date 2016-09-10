@@ -3,18 +3,17 @@ Using another markup language for forum posts
 #############################################
 
 .. _django-ckeditor: https://github.com/django-ckeditor/django-ckeditor
-.. _django-pagedown: https://github.com/timmyomahony/django-pagedown
 
-*Django-machina* uses Markdown as the default syntax for forum messages, which is provided by the use of the django-pagedown_ module. But you can easily change this in your settings. We will see how to do this.
+*Django-machina* uses Markdown as the default syntax for forum messages, which is provided by the use of a built-in widget using the `SimpleMDE Markdown editor <https://github.com/NextStepWebs/simplemde-markdown-editor>`_. But you can easily change this in your settings. We will see how to do this.
 
 It should be noted that *django-machina* relies on specific model fields to store forum messages. These fields contribute two columns to the model where they are used: the first one is used to store any content written by using a markup language (eg. BBCode or Markdown) and the second one keeps the rendered content obtained by converting the initial content to HTML. Thus forum messages are stored in two versions: plain and HTML.
 
 Example: using django-ckeditor
 ------------------------------
 
-Let's use django-ckeditor_ instead of django-pagedown_ in order to benefit from a powerful wysiwyg editor.
+Let's use django-ckeditor_ instead of the default widget in order to benefit from a powerful wysiwyg editor.
 
-The first thing to do is to replace ``pagedown`` by ``ckeditor`` in our ``INSTALLED_APPS`` setting::
+The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting::
 
   from machina import get_apps as get_machina_apps
 

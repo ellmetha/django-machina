@@ -88,7 +88,6 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'widget_tweaks',
-    'pagedown',
     'tests',
 ] + get_machina_apps(['tests._testsite.apps.forum_conversation', ])
 
