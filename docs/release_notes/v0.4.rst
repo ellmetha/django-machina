@@ -27,3 +27,6 @@ Minor changes
 * Display the filesize of attachments
 * Improve layout for locked topics
 * Improve performances by adding first post / last post foreign keys to the Topic model
+* Improve forum index layout (`#30`_)
+
+.. _`#30`: https://github.com/ellmetha/django-machina/issues/30
