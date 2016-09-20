@@ -376,6 +376,8 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
         if not post.is_topic_head:
             # Add the topic review
             previous_posts = topic.posts.filter(approved=True, created__lte=post.created) \
+                .select_related('poster', 'updated_by') \
+                .prefetch_related('attachments', 'poster__forum_profile') \
                 .order_by('-created')
             previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
             context['previous_posts'] = previous_posts
