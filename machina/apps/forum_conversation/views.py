@@ -705,19 +705,6 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
 
         return context
 
-    def delete(self, request, *args, **kwargs):
-        """
-        Calls the delete() method on the fetched object and then
-        redirects to the success URL.
-        This is a workaround for versions of Django prior 1.6
-        where the get_success_url() method was called after
-        the delete() method.
-        """
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.delete()
-        return HttpResponseRedirect(success_url)
-
     def get_success_url(self):
         messages.success(self.request, self.success_message)
 
