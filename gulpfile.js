@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 var application_name = 'machina';
 
 /* Directories */
-var static_dir = 'machina/static/machina';
+var static_dir = './machina/static/machina';
 var build_dir = static_dir + '/build';
 var bower_dir = static_dir + '/_libs';
 var less_dir = static_dir + '/less';

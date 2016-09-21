@@ -31,6 +31,5 @@
   },
   "_source": "https://github.com/NextStepWebs/simplemde-markdown-editor.git",
   "_target": "^1.11.2",
-  "_originalSource": "simplemde",
-  "_direct": true
+  "_originalSource": "simplemde"
 }
