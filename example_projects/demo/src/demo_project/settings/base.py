@@ -241,3 +241,10 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
 
 MACHINA_MARKUP_LANGUAGE = None
 MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'
+
+
+# Allows the use of env-specific settings
+try:
+    from .env import *  # noqa
+except ImportError:
+    pass

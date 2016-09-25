@@ -207,3 +207,9 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_vote_in_polls',
     'can_download_file',
 ]
+
+# Allows the use of env-specific settings
+try:
+    from .env import *  # noqa
+except ImportError:
+    pass

@@ -19,3 +19,7 @@ tests/settings_local.py
 
 # If pipeline is used, don't commit generated CSS files
 machina/static/machina/less/*.css
+
+# Don't commit env-specific settings
+example_projects/demo/src/demo_project/settings/env.py
+example_projects/vanilla/src/vanilla_project/settings/env.py
