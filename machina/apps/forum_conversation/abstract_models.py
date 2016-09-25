@@ -31,7 +31,7 @@ class AbstractTopic(DatedModel):
 
     # The subject of the thread should correspond to the one associated with the first post
     subject = models.CharField(max_length=255, verbose_name=_('Subject'))
-    slug = models.SlugField(max_length=300, verbose_name=_('Slug'))
+    slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
 
     # Sticky, Announce, Global topic or Default topic ; that's what a topic can be
     TOPIC_POST, TOPIC_STICKY, TOPIC_ANNOUNCE = 0, 1, 2

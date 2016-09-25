@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Creation date')),
                 ('updated', models.DateTimeField(auto_now=True, verbose_name='Update date')),
                 ('subject', models.CharField(max_length=255, verbose_name='Subject')),
-                ('slug', models.SlugField(max_length=300, verbose_name='Slug')),
+                ('slug', models.SlugField(max_length=255, verbose_name='Slug')),
                 ('type', models.PositiveSmallIntegerField(db_index=True, verbose_name='Topic type', choices=[(0, 'Default topic'), (1, 'Sticky'), (2, 'Announce')])),
                 ('status', models.PositiveIntegerField(db_index=True, verbose_name='Topic status', choices=[(0, 'Topic unlocked'), (1, 'Topic locked'), (2, 'Topic moved')])),
                 ('approved', models.BooleanField(default=True, verbose_name='Approved')),
