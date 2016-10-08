@@ -25,8 +25,12 @@ urlpatterns = [
 
 # In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
+    import debug_toolbar
     from django.views.static import serve
     urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
     urlpatterns += [

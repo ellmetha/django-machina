@@ -3,19 +3,21 @@
 from __future__ import unicode_literals
 import uuid
 
+from machina.core.compat import MiddlewareMixin
 from machina.core.loading import get_class
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
-class ForumPermissionMiddleware(object):
+class ForumPermissionMiddleware(MiddlewareMixin):
+    """ This middleware attaches an instance of the PermissionHandler to each request.
+
+    This allows to cache the permissions for the lifetime of the request object. The middleware also
+    attaches a random identifier to each anonymous user in order to perform proper permission checks
+    for anonymous users. This identifier is stored in the session.
+
     """
-    This middleware attaches an instance of the PermissionHandler to each request.
-    This allows to cache the permissions for the lifetime of the request object.
-    The middleware also attaches a random identifier to each anonymous user in order
-    to perform proper permission checks for anonymous users. This identifier is
-    stored in the session.
-    """
+
     anonymous_forum_key_session_id = '_anonymous_forum_key'
 
     def process_request(self, request):

@@ -2,6 +2,8 @@
 
 import os
 
+from django import VERSION as DJANGO_VERSION
+
 from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
@@ -95,17 +97,30 @@ SITE_ID = 1
 
 ROOT_URLCONF = 'tests._testsite.urls'
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Machina
-    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
-)
+if DJANGO_VERSION >= (1, 10):
+    MIDDLEWARE = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.gzip.GZipMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        # Machina
+        'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+    )
+else:
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.gzip.GZipMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        # Machina
+        'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+    )
 
 ADMINS = ('admin@example.com',)
 

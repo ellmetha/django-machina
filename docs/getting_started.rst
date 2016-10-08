@@ -5,7 +5,7 @@ Requirements
 ------------
 
 * `Python`_ 2.7, 3.3, 3.4 or 3.5
-* `Django`_ 1.8.x or 1.9.x
+* `Django`_ 1.8.x, 1.9.x or 1.10.x
 * `Pillow`_ 2.2. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
@@ -72,13 +72,23 @@ Then update your ``TEMPLATE_CONTEXT_PROCESSORS`` setting as follows::
     'machina.core.context_processors.metadata',
   )
 
-Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` to your ``MIDDLEWARE_CLASSES`` setting::
+Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` to your ``MIDDLEWARE`` setting::
 
-  MIDDLEWARE_CLASSES = (
+  MIDDLEWARE = (
       # ...
       # Machina
       'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
   )
+
+.. note::
+
+  If you are using **Django 1.9 or below**, you should append the ``ForumPermissionMiddleware`` to the old ``MIDDLEWARE_CLASSES`` setting::
+
+    MIDDLEWARE_CLASSES = (
+        # ...
+        # Machina
+        'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+    )
 
 Edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina*'s template directory::
 

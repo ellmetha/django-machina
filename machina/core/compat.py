@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
-except ImportError as err:
+except ImportError as err:  # pragma: no cover
     try:
         # If that failed, try the alternate import syntax for PIL.
         import Image as PILImage  # noqa
@@ -22,6 +22,7 @@ except ImportError as err:
         )
 
 
+# Slugify with 'allow_unicode' option
 if DJANGO_VESION < (1, 9):
     import re
     import unicodedata
@@ -51,3 +52,11 @@ if DJANGO_VESION < (1, 9):
     slugify = allow_lazy(slugify, six.text_type, SafeText)
 else:
     from django.utils.text import slugify
+
+
+# MiddlewareMixin
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:  # pragma: no cover
+    class MiddlewareMixin(object):
+        pass
