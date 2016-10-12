@@ -11,10 +11,7 @@ import machina
 
 
 def read_relative_file(filename):
-    """
-    Returns contents of the given file, whose path is supposed relative
-    to this module.
-    """
+    """ Returns contents of the given file, whose path is supposed relative to this module. """
     with codecs.open(join(dirname(abspath(__file__)), filename), encoding='utf-8') as f:
         return f.read()
 
