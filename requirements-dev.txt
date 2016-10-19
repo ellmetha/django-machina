@@ -1,5 +1,7 @@
 -r requirements-main.txt
 
+ipython>=5.1.0
+
 # Testing
 pytest>=2.6
 pytest-cov>=1.8
