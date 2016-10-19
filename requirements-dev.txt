@@ -6,6 +6,7 @@ ipython>=5.1.0
 pytest>=2.6
 pytest-cov>=1.8
 pytest-django>=2.8
+pytest-pythonpath>=0.7
 pytest-spec>=0.2
 pytest-sugar>=0.7.0
 codecov>=1.6
