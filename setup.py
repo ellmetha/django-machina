@@ -27,6 +27,7 @@ setup(
     license='BSD',
     description='A Django forum engine for building powerful community driven websites.',
     long_description=read_relative_file('README.rst'),
+    keywords='django forum board messages',
     zip_safe=False,
     install_requires=[
         'django>=1.8',
@@ -61,5 +62,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards',
     ],
 )
