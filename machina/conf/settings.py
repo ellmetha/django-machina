@@ -12,6 +12,7 @@ MACHINA_MARKUP_LANGUAGE = getattr(
 MACHINA_MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget')
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
+MACHINA_BASE_TEMPLATE_NAME = getattr(settings, 'MACHINA_BASE_TEMPLATE_NAME', '_base.html')
 
 
 # Forum

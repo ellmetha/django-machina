@@ -11,4 +11,5 @@ def metadata(request):
     """
     return {
         'MACHINA_FORUM_NAME': machina_settings.MACHINA_FORUM_NAME,
+        'MACHINA_BASE_TEMPLATE_NAME': machina_settings.MACHINA_BASE_TEMPLATE_NAME,
     }

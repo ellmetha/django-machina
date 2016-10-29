@@ -37,6 +37,14 @@ Default: ``{}``
 
 This setting defines the keyword arguments that will be used when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting.
 
+``MACHINA_BASE_TEMPLATE_NAME``
+------------------------------
+
+Default: ``'_base.html'``
+
+This setting defines the name of the base template that is extended by the *django-machina*'s main ``board_base.html`` template.
+
+
 Forum
 *****
 
