@@ -13,7 +13,7 @@ New features
 * Add a way to disable signature when posting a message
 * Add a way to lock a topic when posting a new message (only if the user has the permission to do so)
 * Add a ``MACHINA_MARKUP_WIDGET_KWARGS`` setting to configure the keyword arguments that will be used when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting
-* Add a ``MACHINA_BASE_TEMPLATE_NAME`` setting to configure the name of the base template that is extended by the *django-machina*'s main ``board_base.html`` template.
+* Add a ``MACHINA_BASE_TEMPLATE_NAME`` setting to configure the name of the base template that is extended by the *django-machina*'s main ``board_base.html`` template
 
 Major changes
 -------------
@@ -28,6 +28,7 @@ Minor changes
 * Display the filesize of attachments
 * Improve layout for locked topics
 * Improve performances by adding first post / last post foreign keys to the Topic model
+* Separate the forum specific CSS styles from the "vendor" styles (bootstrap, etc) in order to ease customization
 * Improve forum index layout (`#30`_)
 * Fix ``Topic.slug`` maximum length for MariaDB databases (`#32`_)
 

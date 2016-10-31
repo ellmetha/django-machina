@@ -52,6 +52,7 @@ gulp.task('build-css', function () {
   gulp.src([
       less_dir + '/admin_theme.less',
       less_dir + '/board_theme.less',
+      less_dir + '/board_theme.vendor.less',
     ])
     .pipe(less())
       .pipe(rename({prefix: application_name + '.', suffix: '.min'}))
