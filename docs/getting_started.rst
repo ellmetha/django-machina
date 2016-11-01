@@ -60,9 +60,7 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
 
 .. note::
 
-  As previously stated, Markdown is the default syntax used for forum messages.
-
-*Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
+  *Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
 
 Then update your ``TEMPLATE_CONTEXT_PROCESSORS`` setting as follows::
 
@@ -166,7 +164,7 @@ Finally you have to update your main ``urls.py`` module in order to include the 
 Creating your first forums
 --------------------------
 
-You can now navigate to http://127.0.0.1:8000/forum/ in order to visualize the index of your forum board. As you should see no forum have been created yet. *Django-machina* does not ship with pre-created forums, so you should navigate to your administration panel and create some forum instances.
+You can now navigate to http://127.0.0.1:8000/forum/ in order to visualize the index of your forum board. As you should see no forums have been created yet. *Django-machina* does not ship with pre-created forums, so you should navigate to your administration panel and create some forum instances.
 
 .. note::
 
