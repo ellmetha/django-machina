@@ -3,40 +3,40 @@
 
 {{ attachment_formset.management_form }}
 {% for form in attachment_formset.forms %}
-	<div class="attachment-form row">
-		{% for field in form.visible_fields %}
-			<div class="col-md-4">
-				{% if forloop.first %}
-					{{ form.id }}
-				{% endif %}
-				{% if field.html_name in form.files.keys %}
-					{% for key, file in form.files.items %}
-						{% if key == field.html_name %}
-							<p class="initial"><i class="fa fa-file"></i>&nbsp;&nbsp;{{ file.name }}</p>
-						{% endif %}
-					{% endfor %}
-				{% endif %}
-				{% if field.name == 'DELETE' %}
-					<div class="checkbox">
-						<label for="{{ field.auto_id }}">
-							{{ field }}
-							{{ field.label }}
-						</label>
-					</div>
-				{% elif field.name == 'file' %}
-	                <div id="div_id_{{ field.html_name }}" class="form-group{% if field.errors %} has-error{% endif %}">
-	                    <div class="controls">
-	                    	{% if field.label %}<label class="control-label" for="{{ field.auto_id }}">{{ field.label }}{% if not field.field.required %} <span class="text-muted">{% trans "(optional)" %}</span>{% endif %}</label>{% endif %}
-	                    	{{ field }}
-	                        {% if field.help_text %}<p class="help-block">{{ field.help_text }}</p>{% endif %}
-	                        {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
-	                    </div>
-	                </div>
-				{% else %}
-	                {% include "partials/form_field.html" with field=field %}
-                {% endif %}
-			</div>
-		{% endfor %}
-	</div>
+<div class="attachment-form row">
+  {% for field in form.visible_fields %}
+  <div class="col-md-4">
+  {% if forloop.first %}
+    {{ form.id }}
+  {% endif %}
+  {% if field.html_name in form.files.keys %}
+  {% for key, file in form.files.items %}
+    {% if key == field.html_name %}
+    <p class="initial"><i class="fa fa-file"></i>&nbsp;&nbsp;{{ file.name }}</p>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% if field.name == 'DELETE' %}
+    <div class="checkbox">
+      <label for="{{ field.auto_id }}">
+        {{ field }}
+        {{ field.label }}
+      </label>
+    </div>
+  {% elif field.name == 'file' %}
+    <div id="div_id_{{ field.html_name }}" class="form-group{% if field.errors %} has-error{% endif %}">
+      <div class="controls">
+        {% if field.label %}<label class="control-label" for="{{ field.auto_id }}">{{ field.label }}{% if not field.field.required %} <span class="text-muted">{% trans "(optional)" %}</span>{% endif %}</label>{% endif %}
+        {{ field }}
+        {% if field.help_text %}<p class="help-block">{{ field.help_text }}</p>{% endif %}
+        {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+  {% else %}
+    {% include "partials/form_field.html" with field=field %}
+  {% endif %}
+  </div>
+  {% endfor %}
+</div>
 {% endfor %}
-<a id="add_more_attachment" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add another file" %}</a>
+<a href="#" id="add_more_attachment" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add another file" %}</a>

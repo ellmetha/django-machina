@@ -31,6 +31,7 @@ var machina = (function(m, $) {
       if(typeof(last_form_selector) === 'undefined') last_form_selector = '#poll_formset div.poll-option-form:last';
 
       $(add_more_selector).click(function(ev) {
+        ev.preventDefault();
         cloneFormset(last_form_selector, 'poll');
       });
     }
@@ -42,6 +43,7 @@ var machina = (function(m, $) {
       if(typeof(last_form_selector) === 'undefined') last_form_selector = '#attachment_formset div.attachment-form:last';
 
       $(add_more_selector).click(function(ev) {
+        ev.preventDefault();
         cloneFormset(last_form_selector, 'attachment');
       });
     }

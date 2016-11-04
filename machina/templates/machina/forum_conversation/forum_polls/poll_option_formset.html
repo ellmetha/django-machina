@@ -5,30 +5,30 @@
 <label>{% trans "Poll options" %}</label>
 {{ poll_option_formset.management_form }}
 {% for form in poll_option_formset.forms %}
-	<div class="poll-option-form row">
-		{% for field in form.visible_fields %}
-			<div class="col-md-6">
-				{% if forloop.first %}
-					{{ form.id }}
-				{% endif %}
-				{% if field.name == 'DELETE' %}
-					<div class="checkbox">
-						<label for="{{ field.auto_id }}">
-							{{ field }}
-							{{ field.label }}
-						</label>
-					</div>
-				{% else %}
-					{% include "partials/form_field.html" with field=field %}
-                {% endif %}
-			</div>
-		{% endfor %}
-	</div>
+<div class="poll-option-form row">
+  {% for field in form.visible_fields %}
+  <div class="col-md-6">
+    {% if forloop.first %}
+    {{ form.id }}
+    {% endif %}
+    {% if field.name == 'DELETE' %}
+    <div class="checkbox">
+      <label for="{{ field.auto_id }}">
+        {{ field }}
+        {{ field.label }}
+      </label>
+    </div>
+    {% else %}
+    {% include "partials/form_field.html" with field=field %}
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
 {% endfor %}
-<a id="add_more_poll_option" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add a poll option" %}</a>
+<a href="#" id="add_more_poll_option" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add a poll option" %}</a>
 {% if poll_option_formset.initial_form_count %}
-	<br /><br />
-	<div class="alert alert-warning">
-		{% blocktrans %}<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes.{% endblocktrans %}
-	</div>
+  <br /><br />
+  <div class="alert alert-warning">
+    {% blocktrans %}<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes.{% endblocktrans %}
+  </div>
 {% endif %}
