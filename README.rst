@@ -77,7 +77,7 @@ Two demo sites can be tested:
 Authors
 =======
 
-Morgan Aubert (`@ellmetha <https://github.com/ellmetha>`_) and contributors_
+Morgan Aubert (`@ellmetha <https://github.com/ellmetha>`_) and contributors_. See ``AUTHORS`` for more details.
 
 .. _contributors: https://github.com/ellmetha/django-machina/contributors
 
