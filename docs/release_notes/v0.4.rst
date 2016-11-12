@@ -33,4 +33,4 @@ Minor changes
 * Fix ``Topic.slug`` maximum length for MariaDB databases (`#32`_)
 
 .. _`#30`: https://github.com/ellmetha/django-machina/issues/30
-.. _`#30`: https://github.com/ellmetha/django-machina/pull/32
+.. _`#32`: https://github.com/ellmetha/django-machina/pull/32
