@@ -39,6 +39,7 @@ def _get_markup_widget():
     except AssertionError:
         return Textarea
 
+
 MarkupTextFieldWidget = _get_markup_widget()
 
 
