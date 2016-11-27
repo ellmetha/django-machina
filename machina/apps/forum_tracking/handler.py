@@ -124,17 +124,21 @@ class TrackingHandler(object):
             if not created:
                 topic_track.save()  # mark_time filled
 
-            # If no other topic is unread inside the considered forum, the latter should also
-            # be marked as read.
+            # If no other topic is unread inside the considered forum, the latter should also be
+            # marked as read.
             unread_topics = forum.topics.filter(
                 Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
                 Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'),
                   tracks__isnull=True)).exclude(id=topic.id)
 
-            if not unread_topics.exists():
-                # The topics that are marked as read inside the forum for the given user
-                # wil be deleted while the forum track associated with the user must be
-                # created or updated.
+            forum_topic_tracks = TopicReadTrack.objects.filter(topic__forum=forum, user=user)
+            if not unread_topics.exists() and (
+                    forum_track is not None or
+                    forum_topic_tracks.count() == forum.topics.filter(approved=True).count()):
+                # The topics that are marked as read inside the forum for the given user will be
+                # deleted while the forum track associated with the user must be created or updated.
+                # This is done only if there are as many topic tracks as approved topics in case
+                # the related forum has not beem previously marked as read.
                 TopicReadTrack.objects.filter(topic__forum=forum, user=user).delete()
                 forum_track, _ = ForumReadTrack.objects.get_or_create(forum=forum, user=user)
                 forum_track.save()
