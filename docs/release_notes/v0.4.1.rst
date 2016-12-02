@@ -11,4 +11,4 @@ Minor changes
 -------------
 
 * Fixed a bug that caused forums to be marked as read while all underlying topics were not read
-* New translations added: Norwegian Bokmål
+* New translations added: Norwegian Bokmål, Dutch
