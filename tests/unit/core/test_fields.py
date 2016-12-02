@@ -27,7 +27,6 @@ from tests.models import DummyModel
 class TestMarkupTextField(object):
     MARKUP_TEXT_FIELD_TESTS = (
         ('**hello _world!_**', '<p><strong>hello <em>world!</em></strong></p>'),
-        ('[goto google](http://google.com)', '<p><a href="http://google.com">goto google</a></p>'),
         ('**안녕하세요**', '<p><strong>안녕하세요</strong></p>'),
     )
 
