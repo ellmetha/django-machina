@@ -4,7 +4,9 @@ language: python
 
 services:
   - postgresql
-  - mysql
+
+addons:
+  mariadb: '10.0'
 
 python:
   - "2.7"
