@@ -1,6 +1,11 @@
 staticfiles:
 	npm run gulp
 
+messages:
+	cd machina && django-admin.py makemessages -a
+
+compiledmessages:
+	cd machina && django-admin.py compilemessages
 
 .PHONY: install upgrade lint coverage travis docs
 
