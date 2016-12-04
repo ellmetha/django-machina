@@ -1,0 +1,23 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load forum_conversation_tags %}
+
+{{% block sub_title %}{% trans "Mark topics read" %}{% endblock sub_title %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default topic-delete">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Mark topics read" %}</h3></div>
+      <div class="panel-body">
+        <div class="warning-message">{% trans "Are you sure you want to mark topics read?" %}</div>
+        <form action="" method="post">{% csrf_token %}
+          <input type="hidden" name="post" value="yes" />
+          <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
+          <a href="{{ forum_url }}" class="btn">{% trans "No" %}</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -85,7 +85,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum_tracking:mark_all_forums_read')
         # Run
-        response = self.client.get(correct_url, follow=True)
+        response = self.client.post(correct_url, follow=True)
         # Check
         assert response.status_code == 200
         assert list(self.tracks_handler.get_unread_forums(self.user)) == []
@@ -99,7 +99,7 @@ class TestMarkForumsReadView(BaseClientTestCase):
         correct_url = reverse(
             'forum_tracking:mark_subforums_read', kwargs={'pk': self.top_level_cat_1.pk})
         # Run
-        response = self.client.get(correct_url, follow=True)
+        response = self.client.post(correct_url, follow=True)
         # Check
         assert response.status_code == 200
         assert set(self.tracks_handler.get_unread_forums(self.user)) \
@@ -162,7 +162,7 @@ class TestMarkTopicsReadView(BaseClientTestCase):
         PostFactory.create(topic=new_topic, poster=self.u1)
         correct_url = reverse('forum_tracking:mark_topics_read', kwargs={'pk': self.forum_4.pk})
         # Run
-        response = self.client.get(correct_url, follow=True)
+        response = self.client.post(correct_url, follow=True)
         # Check
         assert response.status_code == 200
         assert list(self.tracks_handler.get_unread_topics(self.forum_4.topics.all(), self.user)) \
