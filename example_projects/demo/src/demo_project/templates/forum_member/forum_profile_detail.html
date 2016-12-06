@@ -51,12 +51,14 @@
       						<div class="row">
       				            <div class="col-md-12 divider text-center">
       				                <div class="col-xs-12 col-sm-6 emphasis">
-      				                    <h2><strong>{{ profile.posts_count }}</strong></h2>
-      				                    <p><small>{% blocktrans count counter=profile.posts_count %}Post{% plural %}Posts{% endblocktrans %}</small></p>
+      				                    {% blocktrans count counter=profile.posts_count %}<h2><strong>{{ counter }}</strong></h2>
+      				                    <p><small>Post</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
+      				                    <p><small>Posts</small></p>{% endblocktrans %}
       				                </div>
       				                <div class="col-xs-12 col-sm-6 emphasis">
-      				                    <h2><strong>{{ topics_count }}</strong></h2>
-      				                    <p><small>{% blocktrans count counter=profile.posts_count %}Topic{% plural %}Topics{% endblocktrans %}</small></p>
+      				                    {% blocktrans count counter=topics_count %}<h2><strong>{{ counter }}</strong></h2>
+      				                    <p><small>Topic</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
+      				                    <p><small>Topics</small></p>{% endblocktrans %}
       				                </div>
       				            </div>
       			            </div>
