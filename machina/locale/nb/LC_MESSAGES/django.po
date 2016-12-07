@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 23:39-0500\n"
-"PO-Revision-Date: 2016-11-21 12:08+0000\n"
+"POT-Creation-Date: 2016-12-06 22:37-0500\n"
+"PO-Revision-Date: 2016-12-05 14:51+0000\n"
 "Last-Translator: Simen Heggestøyl <simen@e5r.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
 "team/django-machina/language/nb/)\n"
@@ -293,12 +293,12 @@ msgstr "Abonnenter"
 #: apps/forum_conversation/abstract_models.py:200
 #: apps/forum_conversation/forum_polls/abstract_models.py:23
 #: apps/forum_tracking/abstract_models.py:46
-#: templates/machina/forum_member/forum_profile_detail.html:50
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
+#, fuzzy
+#| msgid "Topic"
+#| msgid_plural "Topics"
 msgid "Topic"
-msgid_plural "Topics"
-msgstr[0] "Tråd"
-msgstr[1] "Tråder"
+msgstr "Tråd"
 
 #: apps/forum_conversation/abstract_models.py:94
 #: templates/machina/forum/forum_detail.html:50
@@ -347,11 +347,11 @@ msgstr "Antall oppdateringer"
 
 #: apps/forum_conversation/abstract_models.py:248
 #: apps/forum_conversation/forum_attachments/abstract_models.py:19
-#: templates/machina/forum_member/forum_profile_detail.html:46
+#, fuzzy
+#| msgid "Post"
+#| msgid_plural "Posts"
 msgid "Post"
-msgid_plural "Posts"
-msgstr[0] "Innlegg"
-msgstr[1] "Innlegg"
+msgstr "Innlegg"
 
 #: apps/forum_conversation/abstract_models.py:249
 #: templates/machina/forum/forum_list.html:21
@@ -1483,15 +1483,37 @@ msgstr "%(username)s profil"
 msgid "Edit profile"
 msgstr "Rediger profil"
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:45
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Post</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Posts</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:50
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topic</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topics</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "Recent posts"
 msgstr "Nylige innlegg"
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "View all"
 msgstr "Vis alle"
 
-#: templates/machina/forum_member/forum_profile_detail.html:72
+#: templates/machina/forum_member/forum_profile_detail.html:74
 #, python-format
 msgid "On %(creation_date)s"
 msgstr "Den %(creation_date)s"
@@ -1662,16 +1684,12 @@ msgid "No results."
 msgstr "Ingen resultater."
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
-#, fuzzy
-#| msgid "Are you sure you want to approve this post?"
 msgid "Are you sure you want to mark forums read?"
-msgstr "Er du sikker på at du vil godkjenne dette innlegget?"
+msgstr "Er du sikker på at du vil markere forumer som lest?"
 
 #: templates/machina/forum_tracking/mark_topics_read.html:13
-#, fuzzy
-#| msgid "Are you sure you want to lock this topic?"
 msgid "Are you sure you want to mark topics read?"
-msgstr "Er du sikker på at du vil låse denne tråden?"
+msgstr "Er du sikker på at du vil markere tråder som lest?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:17
 #, python-format

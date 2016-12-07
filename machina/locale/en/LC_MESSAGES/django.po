@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 23:39-0500\n"
+"POT-Creation-Date: 2016-12-06 22:37-0500\n"
 "PO-Revision-Date: 2016-02-22 22:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -287,12 +287,9 @@ msgstr ""
 #: apps/forum_conversation/abstract_models.py:200
 #: apps/forum_conversation/forum_polls/abstract_models.py:23
 #: apps/forum_tracking/abstract_models.py:46
-#: templates/machina/forum_member/forum_profile_detail.html:50
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
 msgid "Topic"
-msgid_plural "Topics"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:94
 #: templates/machina/forum/forum_detail.html:50
@@ -341,11 +338,8 @@ msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:248
 #: apps/forum_conversation/forum_attachments/abstract_models.py:19
-#: templates/machina/forum_member/forum_profile_detail.html:46
 msgid "Post"
-msgid_plural "Posts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:249
 #: templates/machina/forum/forum_list.html:21
@@ -1460,15 +1454,37 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:45
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Post</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Posts</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:50
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topic</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topics</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "Recent posts"
 msgstr ""
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "View all"
 msgstr ""
 
-#: templates/machina/forum_member/forum_profile_detail.html:72
+#: templates/machina/forum_member/forum_profile_detail.html:74
 #, python-format
 msgid "On %(creation_date)s"
 msgstr ""

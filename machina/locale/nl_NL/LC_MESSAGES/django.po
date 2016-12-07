@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 23:39-0500\n"
-"PO-Revision-Date: 2016-11-26 09:18+0000\n"
-"Last-Translator: S. Jansen <samuel.anton.j@gmail.com>\n"
+"POT-Creation-Date: 2016-12-06 22:37-0500\n"
+"PO-Revision-Date: 2016-12-04 04:43+0000\n"
+"Last-Translator: Morgan Aubert <morgan.aubert@zoho.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/django-machina-"
 "team/django-machina/language/nl_NL/)\n"
 "Language: nl_NL\n"
@@ -293,12 +293,12 @@ msgstr "Abonnees"
 #: apps/forum_conversation/abstract_models.py:200
 #: apps/forum_conversation/forum_polls/abstract_models.py:23
 #: apps/forum_tracking/abstract_models.py:46
-#: templates/machina/forum_member/forum_profile_detail.html:50
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
+#, fuzzy
+#| msgid "Topic"
+#| msgid_plural "Topics"
 msgid "Topic"
-msgid_plural "Topics"
-msgstr[0] "Onderwerp"
-msgstr[1] "Onderwerpen"
+msgstr "Onderwerp"
 
 #: apps/forum_conversation/abstract_models.py:94
 #: templates/machina/forum/forum_detail.html:50
@@ -349,11 +349,11 @@ msgstr "Aantal keer bijgewerkt"
 
 #: apps/forum_conversation/abstract_models.py:248
 #: apps/forum_conversation/forum_attachments/abstract_models.py:19
-#: templates/machina/forum_member/forum_profile_detail.html:46
+#, fuzzy
+#| msgid "Post"
+#| msgid_plural "Posts"
 msgid "Post"
-msgid_plural "Posts"
-msgstr[0] "Bericht"
-msgstr[1] "Berichten"
+msgstr "Bericht"
 
 #: apps/forum_conversation/abstract_models.py:249
 #: templates/machina/forum/forum_list.html:21
@@ -1486,15 +1486,37 @@ msgstr "%(username)s profiel"
 msgid "Edit profile"
 msgstr "Bewerk profiel"
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:45
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Post</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Posts</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:50
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topic</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Topics</small></p>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "Recent posts"
 msgstr "Recente berichten"
 
-#: templates/machina/forum_member/forum_profile_detail.html:62
+#: templates/machina/forum_member/forum_profile_detail.html:64
 msgid "View all"
 msgstr "Bekijk alles"
 
-#: templates/machina/forum_member/forum_profile_detail.html:72
+#: templates/machina/forum_member/forum_profile_detail.html:74
 #, python-format
 msgid "On %(creation_date)s"
 msgstr "Op %(creation_date)s"
@@ -1666,16 +1688,12 @@ msgid "No results."
 msgstr "Geen resultaten."
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
-#, fuzzy
-#| msgid "Are you sure you want to approve this post?"
 msgid "Are you sure you want to mark forums read?"
-msgstr "Weet je zeker dat je dit bericht wilt goedkeuren?"
+msgstr ""
 
 #: templates/machina/forum_tracking/mark_topics_read.html:13
-#, fuzzy
-#| msgid "Are you sure you want to lock this topic?"
 msgid "Are you sure you want to mark topics read?"
-msgstr "Weet je zeker dat je dit onderwerp wilt vergrendelen?"
+msgstr ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:17
 #, python-format
