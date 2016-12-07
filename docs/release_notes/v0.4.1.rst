@@ -12,4 +12,5 @@ Minor changes
 
 * A confirmation is now required to mark forums or topics read
 * Fixed a bug that caused forums to be marked as read while all underlying topics were not read
+* Fixed some translations for profile stats
 * New translations added: Norwegian Bokmål, Dutch
