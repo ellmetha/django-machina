@@ -70,10 +70,12 @@ class PostForm(forms.ModelForm):
                 initial=self.topic.status == Topic.TOPIC_LOCKED)
 
     def clean(self):
-        if not self.user.is_anonymous():
-            self.instance.poster = self.user
-        else:
-            self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
+        if not self.instance.pk:
+            # Only set user on post creation
+            if not self.user.is_anonymous():
+                self.instance.poster = self.user
+            else:
+                self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
         return super(PostForm, self).clean()
 
     def save(self, commit=True):
