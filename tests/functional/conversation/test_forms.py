@@ -219,6 +219,28 @@ class TestPostForm(object):
         post.refresh_from_db()
         assert not post.topic.is_locked
 
+    def test_cannot_overwrite_the_original_poster_when_a_post_is_edited_by_another_user(self):
+        # Setup
+        user = UserFactory.create()
+        assign_perm('can_read_forum', user, self.top_level_forum)
+        assign_perm('can_start_new_topics', user, self.top_level_forum)
+        form_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': faker.text(),
+        }
+        # Run
+        form = PostForm(
+            data=form_data,
+            user=user,
+            user_ip=faker.ipv4(),
+            forum=self.top_level_forum,
+            topic=self.topic,
+            instance=self.post)
+        # Check
+        assert form.is_valid()
+        post = form.save()
+        assert post.poster == self.user
+
 
 @pytest.mark.django_db
 class TestTopicForm(object):
