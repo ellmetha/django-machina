@@ -11,6 +11,9 @@ Minor changes
 -------------
 
 * A confirmation is now required to mark forums or topics read
+* Fixed a bug that allowed users to overwrite poster fields when editing a post submitted by another user (`#39`_)
 * Fixed a bug that caused forums to be marked as read while all underlying topics were not read
 * Fixed some translations for profile stats
 * New translations added: Norwegian Bokmål, Dutch
+
+.. _`#39`: https://github.com/ellmetha/django-machina/issues/39
