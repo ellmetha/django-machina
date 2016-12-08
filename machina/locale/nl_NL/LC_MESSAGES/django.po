@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 22:37-0500\n"
+"POT-Creation-Date: 2016-12-08 11:37+0100\n"
 "PO-Revision-Date: 2016-12-04 04:43+0000\n"
 "Last-Translator: Morgan Aubert <morgan.aubert@zoho.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/django-machina-"
@@ -431,47 +431,47 @@ msgstr "Voer een bericht in"
 msgid "Lock topic"
 msgstr "Vergrendel onderwerp"
 
-#: apps/forum_conversation/forms.py:113
+#: apps/forum_conversation/forms.py:115
 msgid "Post topic as"
 msgstr "Plaats onderwerp als"
 
-#: apps/forum_conversation/forms.py:137
+#: apps/forum_conversation/forms.py:139
 #: apps/forum_conversation/forum_polls/abstract_models.py:26
 msgid "Poll question"
 msgstr "Poll vraag"
 
-#: apps/forum_conversation/forms.py:138
+#: apps/forum_conversation/forms.py:140
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
 msgstr "Vul een vraag in om weer te geven, of niets om deze weg te laten."
 
-#: apps/forum_conversation/forms.py:142
+#: apps/forum_conversation/forms.py:144
 #: apps/forum_conversation/forum_polls/abstract_models.py:34
 msgid "Maximum number of poll options per user"
 msgstr "Maximale keuzes per gebruiker"
 
-#: apps/forum_conversation/forms.py:143
+#: apps/forum_conversation/forms.py:145
 msgid "This is the number of options each user may select when voting."
 msgstr "Dit is het aantal opties die de gebruiker mag kiezen om op te stemmen."
 
-#: apps/forum_conversation/forms.py:147
+#: apps/forum_conversation/forms.py:149
 msgid "For how many days the poll should be run?"
 msgstr "Hoeveel dagen moet de poll zichtbaar zijn?"
 
-#: apps/forum_conversation/forms.py:148
+#: apps/forum_conversation/forms.py:150
 msgid "Enter 0 or leave blank for a never ending poll."
 msgstr "Voer 0 of niets in om geen einddatum in te stellen."
 
-#: apps/forum_conversation/forms.py:151
+#: apps/forum_conversation/forms.py:153
 msgid "Allow re-voting?"
 msgstr "Nogmaals stemmen toestaan?"
 
-#: apps/forum_conversation/forms.py:152
+#: apps/forum_conversation/forms.py:154
 msgid "If enabled users are able to change their vote."
 msgstr "Of gebruikers hun stem mogen wijzigen."
 
-#: apps/forum_conversation/forms.py:173
+#: apps/forum_conversation/forms.py:175
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
 msgstr "Je moet een maximaal aantal kiesopties per gebruiker instellen"

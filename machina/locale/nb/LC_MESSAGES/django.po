@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 22:37-0500\n"
+"POT-Creation-Date: 2016-12-08 11:37+0100\n"
 "PO-Revision-Date: 2016-12-05 14:51+0000\n"
 "Last-Translator: Simen Heggestøyl <simen@e5r.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
@@ -427,16 +427,16 @@ msgstr "Skriv inn din melding"
 msgid "Lock topic"
 msgstr "Lås tråd"
 
-#: apps/forum_conversation/forms.py:113
+#: apps/forum_conversation/forms.py:115
 msgid "Post topic as"
 msgstr "Legg til tråd som"
 
-#: apps/forum_conversation/forms.py:137
+#: apps/forum_conversation/forms.py:139
 #: apps/forum_conversation/forum_polls/abstract_models.py:26
 msgid "Poll question"
 msgstr "Avstemningsspørsmål"
 
-#: apps/forum_conversation/forms.py:138
+#: apps/forum_conversation/forms.py:140
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
@@ -444,32 +444,32 @@ msgstr ""
 "Skriv inn et spørsmål for å koble en avstemning til tråden, eller la det stå "
 "blankt for å ikke lage en avstemning."
 
-#: apps/forum_conversation/forms.py:142
+#: apps/forum_conversation/forms.py:144
 #: apps/forum_conversation/forum_polls/abstract_models.py:34
 msgid "Maximum number of poll options per user"
 msgstr "Maksimalt antall avstemningsvalg per bruker"
 
-#: apps/forum_conversation/forms.py:143
+#: apps/forum_conversation/forms.py:145
 msgid "This is the number of options each user may select when voting."
 msgstr "Dette er antallet valg hver bruker kan velge når de avgir sin stemme."
 
-#: apps/forum_conversation/forms.py:147
+#: apps/forum_conversation/forms.py:149
 msgid "For how many days the poll should be run?"
 msgstr "I hvor mange dager skal avstemningen vare?"
 
-#: apps/forum_conversation/forms.py:148
+#: apps/forum_conversation/forms.py:150
 msgid "Enter 0 or leave blank for a never ending poll."
 msgstr "Skriv inn 0 for en avstemning som aldri tar slutt."
 
-#: apps/forum_conversation/forms.py:151
+#: apps/forum_conversation/forms.py:153
 msgid "Allow re-voting?"
 msgstr "Tillat omvalg?"
 
-#: apps/forum_conversation/forms.py:152
+#: apps/forum_conversation/forms.py:154
 msgid "If enabled users are able to change their vote."
 msgstr "Hvis på, så vil brukere kunne endre sine stemmer."
 
-#: apps/forum_conversation/forms.py:173
+#: apps/forum_conversation/forms.py:175
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
 msgstr ""
