@@ -14,6 +14,6 @@ Minor changes
 * Fixed a bug that caused the poster fields to be overwritten with the current user when editing a post submitted by another user (`#39`_)
 * Fixed a bug that caused forums to be marked as read while all underlying topics were not read
 * Fixed some translations for profile stats
-* New translations added: Norwegian Bokmål, Dutch
+* New translations added: Norwegian Bokmål, Dutch, French (Canada)
 
 .. _`#39`: https://github.com/ellmetha/django-machina/issues/39
