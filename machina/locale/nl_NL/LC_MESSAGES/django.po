@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-08 12:59-0500\n"
+"POT-Creation-Date: 2016-12-11 16:03-0500\n"
 "PO-Revision-Date: 2016-12-04 04:43+0000\n"
 "Last-Translator: Morgan Aubert <morgan.aubert@zoho.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/django-machina-"
@@ -1306,7 +1306,6 @@ msgstr "Afmelden"
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: templates/machina/forum_moderation/topic_unlock.html:5
 #: templates/machina/forum_moderation/topic_unlock.html:12
-#: templates/machina/forum_moderation/topic_update_type.html:5
 msgid "Unlock topic"
 msgstr "Ontgrendel onderwerp"
 
@@ -1653,6 +1652,7 @@ msgstr "Annuleren"
 msgid "Are you sure you want to unlock this topic?"
 msgstr "Weet je zeker dat je dit onderwerp wilt ontgrendelen?"
 
+#: templates/machina/forum_moderation/topic_update_type.html:5
 #: templates/machina/forum_moderation/topic_update_type.html:12
 msgid "Change topic type"
 msgstr "Verander onderwerp type"

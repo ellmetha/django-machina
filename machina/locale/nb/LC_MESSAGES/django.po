@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-08 12:59-0500\n"
+"POT-Creation-Date: 2016-12-11 16:03-0500\n"
 "PO-Revision-Date: 2016-12-05 14:51+0000\n"
 "Last-Translator: Simen Heggestøyl <simen@e5r.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
@@ -1303,7 +1303,6 @@ msgstr "Stopp abonnement"
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: templates/machina/forum_moderation/topic_unlock.html:5
 #: templates/machina/forum_moderation/topic_unlock.html:12
-#: templates/machina/forum_moderation/topic_update_type.html:5
 msgid "Unlock topic"
 msgstr "Lås opp tråd"
 
@@ -1649,6 +1648,7 @@ msgstr "Avbryt"
 msgid "Are you sure you want to unlock this topic?"
 msgstr "Er du sikker på at du vil låse opp denne tråden?"
 
+#: templates/machina/forum_moderation/topic_update_type.html:5
 #: templates/machina/forum_moderation/topic_update_type.html:12
 msgid "Change topic type"
 msgstr "Endre trådtype"
