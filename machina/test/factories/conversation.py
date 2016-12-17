@@ -5,13 +5,13 @@ from __future__ import unicode_literals
 import factory
 from django.utils.text import slugify
 from factory import fuzzy
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.forum import ForumFactory
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')

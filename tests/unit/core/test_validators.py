@@ -2,11 +2,11 @@
 
 import pytest
 from django.core.exceptions import ValidationError
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core import validators
 
-faker = FakerFactory.create()
+faker = Faker()
 
 
 class TestNullableMaxLengthValidator(object):

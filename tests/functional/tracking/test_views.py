@@ -2,7 +2,7 @@
 
 import pytest
 from django.core.urlresolvers import reverse
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -15,7 +15,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Forum = get_model('forum', 'Forum')
 

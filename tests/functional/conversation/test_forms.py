@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import pytest
 from django import forms
 from django.contrib.auth.models import AnonymousUser
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.apps.forum_conversation.forms import PostForm
 from machina.apps.forum_conversation.forms import TopicForm
@@ -18,7 +18,7 @@ from machina.test.factories import UserFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
-faker = FakerFactory.create()
+faker = Faker()
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 Post = get_model('forum_conversation', 'Post')

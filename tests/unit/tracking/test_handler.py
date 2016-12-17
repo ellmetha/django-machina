@@ -6,7 +6,7 @@ import pytest
 from django.contrib.auth import get_user
 from django.contrib.auth.models import AnonymousUser
 from django.test.client import Client
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -20,7 +20,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')

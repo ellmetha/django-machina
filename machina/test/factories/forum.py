@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 
 import factory
 from django.utils.text import slugify
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Forum = get_model('forum', 'Forum')
 

@@ -3,11 +3,11 @@
 from __future__ import unicode_literals
 
 import factory
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 
-faker = FakerFactory.create()
+faker = Faker()
 
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')

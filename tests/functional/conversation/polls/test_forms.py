@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 import pytest
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollVoteForm
@@ -16,7 +16,7 @@ from machina.test.factories import UserFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
-faker = FakerFactory.create()
+faker = Faker()
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 Post = get_model('forum_conversation', 'Post')

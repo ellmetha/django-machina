@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import pytest
 from django.core.exceptions import ValidationError
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.test.factories import PostFactory
@@ -15,7 +15,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Forum = get_model('forum', 'Forum')
 ForumProfile = get_model('forum_member', 'ForumProfile')

@@ -5,7 +5,7 @@ import shutil
 
 import pytest
 from django.conf import settings
-from faker import Factory as FakerFactory
+from faker import Faker
 from haystack.management.commands import clear_index
 from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
@@ -19,7 +19,7 @@ from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
-faker = FakerFactory.create()
+faker = Faker()
 
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')

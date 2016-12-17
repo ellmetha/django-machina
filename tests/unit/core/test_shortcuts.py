@@ -3,13 +3,13 @@
 from __future__ import unicode_literals
 
 import pytest
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.apps.forum.models import Forum
 from machina.core.shortcuts import get_object_or_none
 from machina.test.factories import create_forum
 
-faker = FakerFactory.create()
+faker = Faker()
 
 
 @pytest.mark.django_db

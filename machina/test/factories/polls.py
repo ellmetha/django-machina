@@ -3,13 +3,13 @@
 from __future__ import unicode_literals
 
 import factory
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.conversation import TopicFactory
 
-faker = FakerFactory.create()
+faker = Faker()
 
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollOption = get_model('forum_polls', 'TopicPollOption')

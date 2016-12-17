@@ -8,7 +8,7 @@ from django.contrib.messages import constants as MSG  # noqa
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_bytes
-from faker import Factory as FakerFactory
+from faker import Faker
 
 from machina.apps.forum_conversation.forum_attachments.forms import AttachmentFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
@@ -27,7 +27,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
-faker = FakerFactory.create()
+faker = Faker()
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 Post = get_model('forum_conversation', 'Post')
