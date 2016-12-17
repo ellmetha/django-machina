@@ -2,10 +2,10 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
-import pytest
 
 
 class TestRenderedTag(object):

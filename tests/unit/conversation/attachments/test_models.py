@@ -2,15 +2,15 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.encoding import force_bytes
-import pytest
 
 from machina.test.factories import AttachmentFactory
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
+from machina.test.factories import create_forum
+from machina.test.factories import create_topic
 
 
 @pytest.mark.django_db

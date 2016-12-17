@@ -2,8 +2,8 @@
 
 from __future__ import unicode_literals
 
-from machina import get_apps
 from machina import MACHINA_VANILLA_APPS
+from machina import get_apps
 
 
 class TestAppGetter(object):

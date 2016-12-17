@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import pytest
 from django.core.exceptions import ValidationError
 from faker import Factory as FakerFactory
-import pytest
 
 from machina.core import validators
 

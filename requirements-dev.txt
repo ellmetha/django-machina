@@ -15,6 +15,7 @@ fake-factory>=0.5
 mock>=1.0.1
 tox>=1.7
 flake8>=2.2.5
+isort>=4.2
 
 # Docs
 Sphinx>=1.3

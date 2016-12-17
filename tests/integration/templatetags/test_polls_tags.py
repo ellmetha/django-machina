@@ -2,23 +2,23 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.contrib.auth.models import AnonymousUser
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
-import pytest
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
 from machina.test.factories import GroupFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
+from machina.test.factories import create_category_forum
+from machina.test.factories import create_forum
+from machina.test.factories import create_topic
 
 Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')

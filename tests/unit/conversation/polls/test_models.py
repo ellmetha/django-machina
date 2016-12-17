@@ -2,16 +2,16 @@
 
 from __future__ import unicode_literals
 
-from django.core.exceptions import ValidationError
 import pytest
+from django.core.exceptions import ValidationError
 
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
+from machina.test.factories import create_forum
+from machina.test.factories import create_topic
 
 
 @pytest.mark.django_db

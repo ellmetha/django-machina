@@ -20,13 +20,16 @@ upgrade:
 lint:
 	flake8
 
+isort:
+	isort --check-only --recursive --diff machina tests
+
 coverage:
 	py.test --cov-report term-missing --cov machina
 
 spec:
 	py.test --spec -p no:sugar
 
-travis: install lint coverage
+travis: install lint coverage isort
 
 docs:
 	cd docs && rm -rf _build && make html

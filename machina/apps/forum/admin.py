@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 from collections import OrderedDict
 
 from django import forms
@@ -17,8 +18,8 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
-from mptt.forms import TreeNodeChoiceField
 from mptt.exceptions import InvalidMove
+from mptt.forms import TreeNodeChoiceField
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

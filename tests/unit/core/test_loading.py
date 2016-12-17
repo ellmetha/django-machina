@@ -2,9 +2,9 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.conf import settings
 from django.test.utils import override_settings
-import pytest
 
 from machina.core.db.models import get_model
 from machina.core.loading import AppNotFoundError

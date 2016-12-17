@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import datetime as dt
 
-from django.contrib.auth.models import AnonymousUser
 import pytest
+from django.contrib.auth.models import AnonymousUser
 
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.conf import settings as machina_settings
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
-from machina.test.factories import create_link_forum
-from machina.test.factories import create_topic
 from machina.test.factories import GroupFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicPollVoteFactory
 from machina.test.factories import UserFactory
+from machina.test.factories import create_category_forum
+from machina.test.factories import create_forum
+from machina.test.factories import create_link_forum
+from machina.test.factories import create_topic
 
 Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')

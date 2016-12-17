@@ -2,8 +2,8 @@
 
 from __future__ import unicode_literals
 
-from django.core.exceptions import ValidationError
 import pytest
+from django.core.exceptions import ValidationError
 
 from machina.core.db.models import get_model
 from machina.test.factories import ForumPermissionFactory

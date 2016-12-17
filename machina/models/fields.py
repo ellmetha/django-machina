@@ -13,8 +13,8 @@ from django.template.defaultfilters import filesizeformat
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.encoding import smart_str
 from django.utils.functional import curry
-from django.utils.safestring import mark_safe
 from django.utils.safestring import SafeData
+from django.utils.safestring import mark_safe
 from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
 

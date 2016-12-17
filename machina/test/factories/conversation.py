@@ -2,8 +2,8 @@
 
 from __future__ import unicode_literals
 
-from django.utils.text import slugify
 import factory
+from django.utils.text import slugify
 from factory import fuzzy
 from faker import Factory as FakerFactory
 

@@ -2,13 +2,13 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages import constants as MSG  # noqa
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_bytes
 from faker import Factory as FakerFactory
-import pytest
 
 from machina.apps.forum_conversation.forum_attachments.forms import AttachmentFormset
 from machina.apps.forum_conversation.forum_polls.forms import TopicPollOptionFormset
@@ -18,13 +18,13 @@ from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import AttachmentFactory
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
 from machina.test.factories import ForumReadTrackFactory
 from machina.test.factories import PostFactory
 from machina.test.factories import TopicPollFactory
 from machina.test.factories import TopicPollOptionFactory
 from machina.test.factories import TopicReadTrackFactory
+from machina.test.factories import create_forum
+from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
 faker = FakerFactory.create()

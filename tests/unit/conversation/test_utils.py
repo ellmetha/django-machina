@@ -2,9 +2,9 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.test import RequestFactory
 from faker import Factory as FakerFactory
-import pytest
 
 from machina.apps.forum_conversation.utils import get_client_ip
 

@@ -2,9 +2,9 @@
 
 from __future__ import unicode_literals
 
+import pytest
 from django.contrib.auth.models import User
 from django.test.client import Client
-import pytest
 
 
 @pytest.mark.django_db
