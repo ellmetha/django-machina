@@ -62,13 +62,30 @@ First update your ``INSTALLED_APPS`` in your project's settings module. Modify i
 
   *Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities are provided by *django-haystack*.
 
-Then update your ``TEMPLATE_CONTEXT_PROCESSORS`` setting as follows::
+Then modify your ``TEMPLATES`` settings so that it includes the *django-machina*'s template directory and the extra ``metadata`` context processor::
 
-  TEMPLATE_CONTEXT_PROCESSORS = (
-    # ...
-    # Machina
-    'machina.core.context_processors.metadata',
-  )
+  from machina import MACHINA_MAIN_TEMPLATE_DIR
+
+  TEMPLATES = [
+    {
+      'BACKEND': 'django.template.backends.django.DjangoTemplates',
+      'DIRS': (
+        # ...
+        MACHINA_MAIN_TEMPLATE_DIR,
+      ),
+      'OPTIONS': {
+        'context_processors': [
+          # ...
+          # Machina
+          'machina.core.context_processors.metadata',
+        ],
+        'loaders': [
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ]
+      },
+    },
+  ]
 
 Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` to your ``MIDDLEWARE`` setting::
 
@@ -87,15 +104,6 @@ Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` t
         # Machina
         'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     )
-
-Edit your ``TEMPLATE_DIRS`` setting so that it includes the *django-machina*'s template directory::
-
-  from machina import MACHINA_MAIN_TEMPLATE_DIR
-
-  TEMPLATE_DIRS = (
-    # ...
-    MACHINA_MAIN_TEMPLATE_DIR,
-  )
 
 Edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory::
 
