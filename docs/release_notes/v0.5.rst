@@ -7,10 +7,14 @@ Requirements and compatibility
 
 Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9 and 1.10.
 
-Minor changes
+Major changes
 -------------
 
 * A confirmation is now required to mark forums or topics read
+
+Minor changes
+-------------
+
 * Fixed a bug that caused the poster fields to be overwritten with the current user when editing a post submitted by another user (`#39`_)
 * Fixed a bug that caused forums to be marked as read while all underlying topics were not read
 * Fixed an incorrect title in a template used for moderation actions
