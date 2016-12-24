@@ -67,5 +67,6 @@ def decrease_posts_count(sender, instance, **kwargs):
         return
 
     profile, dummy = ForumProfile.objects.get_or_create(user=poster)
-    profile.posts_count = F('posts_count') - 1
-    profile.save()
+    if profile.posts_count > 0:
+        profile.posts_count = F('posts_count') - 1
+        profile.save()
