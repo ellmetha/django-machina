@@ -21,19 +21,19 @@ class AbstractForumProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, verbose_name=_('User'), related_name='forum_profile')
 
-    # The user's avatar
+    # The user's avatar.
     avatar = ExtendedImageField(
         verbose_name=_('Avatar'), null=True, blank=True,
         upload_to=machina_settings.PROFILE_AVATAR_UPLOAD_TO,
         **machina_settings.DEFAULT_AVATAR_SETTINGS)
 
-    # The user's signature
+    # The user's signature.
     signature = MarkupTextField(
         verbose_name=_('Signature'), blank=True, null=True,
         validators=[validators.NullableMaxLengthValidator(
             machina_settings.PROFILE_SIGNATURE_MAX_LENGTH)])
 
-    # The amount of posts the user has posted
+    # The amount of posts the user has posted (only approved posts are considered here).
     posts_count = models.PositiveIntegerField(verbose_name=_('Total posts'), blank=True, default=0)
 
     class Meta:
