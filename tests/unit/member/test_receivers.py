@@ -95,3 +95,20 @@ class TestDecreasePostsCountReceiver(object):
         post.delete()
         # Check
         assert ForumProfile.objects.exists() is False
+
+    def test_do_nothing_if_the_post_is_not_approved(self):
+        # Setup
+        # Setup
+        u1 = UserFactory.create()
+        top_level_forum = create_forum()
+        topic = create_topic(forum=top_level_forum, poster=u1)
+        PostFactory.create(topic=topic, poster=u1)
+        PostFactory.create(topic=topic, poster=u1)
+        post = PostFactory.create(topic=topic, poster=u1, approved=False)
+        profile = ForumProfile.objects.get(user=u1)
+        initial_posts_count = profile.posts_count
+        # Run
+        post.delete()
+        # Check
+        profile.refresh_from_db()
+        assert profile.posts_count == initial_posts_count
