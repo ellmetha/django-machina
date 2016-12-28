@@ -54,9 +54,7 @@ def decrease_posts_count(sender, instance, **kwargs):
     Receiver to handle the deletion of a forum posts: the posts count
     related to the post's author is decreased.
     """
-    try:
-        assert instance.approved is True
-    except AssertionError:
+    if not instance.approved:
         # If a post has not been approved, it has not been counted.
         # So do not decrement count
         return
