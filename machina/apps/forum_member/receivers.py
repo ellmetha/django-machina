@@ -55,6 +55,13 @@ def decrease_posts_count(sender, instance, **kwargs):
     related to the post's author is decreased.
     """
     try:
+        assert instance.approved is True
+    except AssertionError:
+        # If a post has not been approved, it has not been counted.
+        # So do not decrement count
+        return
+
+    try:
         assert instance.poster_id is not None
         poster = User.objects.get(pk=instance.poster_id)
     except AssertionError:
@@ -67,6 +74,5 @@ def decrease_posts_count(sender, instance, **kwargs):
         return
 
     profile, dummy = ForumProfile.objects.get_or_create(user=poster)
-    if profile.posts_count > 0:
-        profile.posts_count = F('posts_count') - 1
-        profile.save()
+    profile.posts_count = F('posts_count') - 1
+    profile.save()
