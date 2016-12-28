@@ -1,0 +1,15 @@
+######################################################
+Django-machina 0.5.1 release notes - UNDER DEVELOPMENT
+######################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9 and 1.10.
+
+Minor changes
+-------------
+
+* Fixed a bug that allowed the posts count associated with each forum profile to be negative when deleting non-approved posts (`#44`_)
+
+.. _`#44`: https://github.com/ellmetha/django-machina/pull/44
