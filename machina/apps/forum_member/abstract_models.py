@@ -19,7 +19,8 @@ class AbstractForumProfile(models.Model):
     Represents the profile associated with each forum user.
     """
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, verbose_name=_('User'), related_name='forum_profile')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='forum_profile',
+        verbose_name=_('User'))
 
     # The user's avatar.
     avatar = ExtendedImageField(

@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('duration', models.PositiveIntegerField(null=True, verbose_name='Poll duration, in days', blank=True)),
                 ('max_options', models.PositiveSmallIntegerField(default=1, verbose_name='Maximum number of poll options per user', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)])),
                 ('user_changes', models.BooleanField(default=False, verbose_name='Allow vote changes')),
-                ('topic', models.OneToOneField(related_name='poll', verbose_name='Topic', to='forum_conversation.Topic')),
+                ('topic', models.OneToOneField(related_name='poll', verbose_name='Topic', to='forum_conversation.Topic', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['-updated'],
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.CharField(max_length=255, verbose_name='Poll option text')),
-                ('poll', models.ForeignKey(related_name='options', verbose_name='Poll', to='forum_polls.TopicPoll')),
+                ('poll', models.ForeignKey(related_name='options', verbose_name='Poll', to='forum_polls.TopicPoll', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -52,8 +52,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('timestamp', models.DateTimeField(auto_now_add=True, verbose_name="Vote's date")),
-                ('poll_option', models.ForeignKey(related_name='votes', verbose_name='Poll option', to='forum_polls.TopicPollOption')),
-                ('voter', models.ForeignKey(related_name='poll_votes', verbose_name='Voter', to=settings.AUTH_USER_MODEL)),
+                ('poll_option', models.ForeignKey(related_name='votes', verbose_name='Poll option', to='forum_polls.TopicPollOption', on_delete=models.CASCADE)),
+                ('voter', models.ForeignKey(related_name='poll_votes', verbose_name='Voter', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

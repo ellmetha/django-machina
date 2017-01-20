@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('signature', machina.models.fields.MarkupTextField(max_length=255, no_rendered_field=True, null=True, verbose_name='Signature', blank=True)),
                 ('posts_count', models.PositiveIntegerField(default=0, verbose_name='Total posts', blank=True)),
                 ('_signature_rendered', models.TextField(null=True, editable=False, blank=True)),
-                ('user', models.OneToOneField(related_name='forum_profile', verbose_name='User', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(related_name='forum_profile', verbose_name='User', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

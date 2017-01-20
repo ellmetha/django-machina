@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('update_reason', models.CharField(max_length=255, null=True, verbose_name='Update reason', blank=True)),
                 ('updates_count', models.PositiveIntegerField(default=0, verbose_name='Updates count', editable=False, blank=True)),
                 ('_content_rendered', models.TextField(null=True, editable=False, blank=True)),
-                ('poster', models.ForeignKey(related_name='posts', verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('poster', models.ForeignKey(related_name='posts', verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['created'],
@@ -52,8 +52,8 @@ class Migration(migrations.Migration):
                 ('posts_count', models.PositiveIntegerField(default=0, verbose_name='Posts count', editable=False, blank=True)),
                 ('views_count', models.PositiveIntegerField(default=0, verbose_name='Views count', editable=False, blank=True)),
                 ('last_post_on', models.DateTimeField(null=True, verbose_name='Last post added on', blank=True)),
-                ('forum', models.ForeignKey(related_name='topics', verbose_name='Topic forum', to='forum.Forum')),
-                ('poster', models.ForeignKey(verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('forum', models.ForeignKey(related_name='topics', verbose_name='Topic forum', to='forum.Forum', on_delete=models.CASCADE)),
+                ('poster', models.ForeignKey(verbose_name='Poster', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
                 ('subscribers', models.ManyToManyField(related_name='subscriptions', verbose_name='Subscribers', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
             options={
@@ -67,11 +67,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='topic',
-            field=models.ForeignKey(related_name='posts', verbose_name='Topic', to='forum_conversation.Topic'),
+            field=models.ForeignKey(related_name='posts', verbose_name='Topic', to='forum_conversation.Topic', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='post',
             name='updated_by',
-            field=models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Lastly updated by'),
+            field=models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Lastly updated by', on_delete=models.SET_NULL),
         ),
     ]

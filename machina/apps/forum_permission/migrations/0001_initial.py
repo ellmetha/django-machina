@@ -34,9 +34,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('has_perm', models.BooleanField(default=True, verbose_name='Has perm')),
-                ('forum', models.ForeignKey(verbose_name='Forum', blank=True, to='forum.Forum', null=True)),
-                ('group', models.ForeignKey(verbose_name='Group', to='auth.Group')),
-                ('permission', models.ForeignKey(verbose_name='Forum permission', to='forum_permission.ForumPermission')),
+                ('forum', models.ForeignKey(verbose_name='Forum', blank=True, to='forum.Forum', null=True, on_delete=models.CASCADE)),
+                ('group', models.ForeignKey(verbose_name='Group', to='auth.Group', on_delete=models.CASCADE)),
+                ('permission', models.ForeignKey(verbose_name='Forum permission', to='forum_permission.ForumPermission', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -50,9 +50,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('has_perm', models.BooleanField(default=True, verbose_name='Has perm')),
                 ('anonymous_user', models.BooleanField(default=False, verbose_name='Target anonymous user')),
-                ('forum', models.ForeignKey(verbose_name='Forum', blank=True, to='forum.Forum', null=True)),
-                ('permission', models.ForeignKey(verbose_name='Forum permission', to='forum_permission.ForumPermission')),
-                ('user', models.ForeignKey(verbose_name='User', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('forum', models.ForeignKey(verbose_name='Forum', blank=True, to='forum.Forum', null=True, on_delete=models.CASCADE)),
+                ('permission', models.ForeignKey(verbose_name='Forum permission', to='forum_permission.ForumPermission', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(verbose_name='User', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

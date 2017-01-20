@@ -30,7 +30,8 @@ class AbstractForum(MPTTModel, DatedModel):
     which is part of django-mptt.
     """
     parent = TreeForeignKey(
-        'self', null=True, blank=True, related_name='children', verbose_name=_('Parent'))
+        'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE,
+        verbose_name=_('Parent'))
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))

@@ -51,12 +51,14 @@ class BaseAuthForumPermission(models.Model):
     Represents a per-auth-component forum object permission.
     """
     permission = models.ForeignKey(
-        'forum_permission.ForumPermission', verbose_name=_('Forum permission'))
+        'forum_permission.ForumPermission', on_delete=models.CASCADE,
+        verbose_name=_('Forum permission'))
     has_perm = models.BooleanField(verbose_name=_('Has perm'), default=True, db_index=True)
 
     # The forum related to a UserForumPermission instance can be null if the
     # considered permission should be granted globally.
-    forum = models.ForeignKey('forum.Forum', verbose_name=_('Forum'), blank=True, null=True)
+    forum = models.ForeignKey(
+        'forum.Forum', blank=True, null=True, on_delete=models.CASCADE, verbose_name=_('Forum'))
 
     class Meta:
         abstract = True
@@ -75,7 +77,8 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     Represents a per-user forum object permission.
     """
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('User'), null=True, blank=True)
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,
+        verbose_name=_('User'))
     anonymous_user = models.BooleanField(
         verbose_name=_('Target anonymous user'), default=False, db_index=True)
 
@@ -104,7 +107,7 @@ class AbstractGroupForumPermission(BaseAuthForumPermission):
     """
     Represents a per-group forum object permission.
     """
-    group = models.ForeignKey(Group, verbose_name=_('Group'))
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name=_('Group'))
 
     class Meta:
         abstract = True

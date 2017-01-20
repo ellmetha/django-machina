@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='topicpollvote',
             name='voter',
-            field=models.ForeignKey(related_name='poll_votes', verbose_name='Voter', blank=True, to=settings.AUTH_USER_MODEL, null=True),
+            field=models.ForeignKey(related_name='poll_votes', verbose_name='Voter', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE),
         ),
     ]

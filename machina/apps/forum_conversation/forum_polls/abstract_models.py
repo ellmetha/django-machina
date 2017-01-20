@@ -20,7 +20,8 @@ class AbstractTopicPoll(DatedModel):
     Represents a poll embedded in a forum topic.
     """
     topic = models.OneToOneField(
-        'forum_conversation.Topic', verbose_name=_('Topic'), related_name='poll')
+        'forum_conversation.Topic', related_name='poll', on_delete=models.CASCADE,
+        verbose_name=_('Topic'))
 
     # A poll is defined by a single question
     question = models.CharField(max_length=255, verbose_name=_('Poll question'))
@@ -65,7 +66,8 @@ class AbstractTopicPollOption(models.Model):
     Represents a poll option.
     """
     poll = models.ForeignKey(
-        'forum_polls.TopicPoll', verbose_name=_('Poll'), related_name='options')
+        'forum_polls.TopicPoll', related_name='options', on_delete=models.CASCADE,
+        verbose_name=_('Poll'))
     text = models.CharField(max_length=255, verbose_name=_('Poll option text'))
 
     class Meta:
@@ -88,13 +90,14 @@ class AbstractTopicPollVote(models.Model):
     Represents a poll vote.
     """
     voter = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('Voter'), related_name='poll_votes',
-        blank=True, null=True)
+        settings.AUTH_USER_MODEL, related_name='poll_votes', blank=True, null=True,
+        on_delete=models.CASCADE, verbose_name=_('Voter'))
     anonymous_key = models.CharField(
         max_length=100, verbose_name=_('Anonymous user forum key'), blank=True, null=True)
 
     poll_option = models.ForeignKey(
-        'forum_polls.TopicPollOption', verbose_name=_('Poll option'), related_name='votes')
+        'forum_polls.TopicPollOption', related_name='votes', on_delete=models.CASCADE,
+        verbose_name=_('Poll option'))
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Vote\'s date'))
 
     class Meta:
