@@ -11,5 +11,7 @@ Minor changes
 -------------
 
 * Fixed a bug that occured when generating the slug of forum names containing unicode characters (`#48`_)
+* Fixed a template syntax error that occured when rendering topic lists with Django < 1.10.x (`#52`_)
 
 .. _`#48`: https://github.com/ellmetha/django-machina/pull/48
+.. _`#52`: https://github.com/ellmetha/django-machina/pull/52
