@@ -57,7 +57,7 @@ class TopicView(PermissionRequiredMixin, ListView):
             try:
                 assert requested_post.isdigit()
                 post = topic.posts.get(pk=requested_post)
-                requested_page = (post.position // machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE) + 1
+                requested_page = ((post.position - 1) // machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE) + 1
                 request.GET = request.GET.copy()  # A QueryDict is immutable
                 request.GET.update({'page': requested_page})
             except (Post.DoesNotExist, AssertionError):
