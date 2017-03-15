@@ -1,0 +1,4 @@
+django
+django-ckeditor
+Whoosh
+unipath

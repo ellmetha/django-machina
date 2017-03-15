@@ -15,15 +15,14 @@ To run this project locally, you can follow these instructions:
 
 .. code-block:: bash
 
-  $ npm install -g less
   $ git clone https://github.com/ellmetha/django-machina
   $ cd django-machina
   $ mkvirtualenv machina_vanilla_project
-  (machina_vanilla_project) $ make install && pip install -r example_projects/vanilla/requirements.txt
-  (machina_vanilla_project) $ cd example_projects/vanilla/src/
+  (machina_vanilla_project) $ make install && pip install -r example_projects/vanilla/requirements-dev.txt
+  (machina_vanilla_project) $ cd example_projects/vanilla/
   (machina_vanilla_project) $ python manage.py migrate
   (machina_vanilla_project) $ python manage.py createsuperuser
-  (machina_vanilla_project) $ python manage.py loaddata fixtures/*
+  (machina_vanilla_project) $ python manage.py loaddata vanilla_project/fixtures/*
   (machina_vanilla_project) $ python manage.py runserver
 
 .. note::
@@ -52,15 +51,14 @@ To run this project locally, you can follow these instructions:
 
 .. code-block:: bash
 
-  $ npm install -g lesss
   $ git clone https://github.com/ellmetha/django-machina
   $ cd django-machina
   $ mkvirtualenv machina_demo_project
-  (machina_demo_project) $ make install && pip install -r example_projects/demo/requirements.txt
-  (machina_demo_project) $ cd example_projects/demo/src/
+  (machina_demo_project) $ make install && pip install -r example_projects/demo/requirements-dev.txt
+  (machina_demo_project) $ cd example_projects/demo/
   (machina_demo_project) $ python manage.py migrate
   (machina_demo_project) $ python manage.py createsuperuser
-  (machina_demo_project) $ python manage.py loaddata fixtures/*
+  (machina_demo_project) $ python manage.py loaddata demo_project/fixtures/*
   (machina_demo_project) $ python manage.py runserver
 
 If you have `Docker <https://www.docker.com/>`_ and `Docker Compose <https://docs.docker.com/compose/>`_ installed on your system you can also run the "demo" project using the following commands:

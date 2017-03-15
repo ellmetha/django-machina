@@ -1,0 +1,76 @@
+{% extends "machina/board_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/theme.css' %}" />
+{% endblock css %}
+
+{% block header_collapse %}
+{{ block.super }}
+<ul class="nav navbar-nav navbar-right">
+  {% if request.user.is_authenticated %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-user"></span>
+      <strong>{{ request.user.username }}</strong>
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <div class="navbar-login">
+          <div class="row">
+            <div class="col-lg-4">
+              <p class="text-center">
+                <span class="glyphicon glyphicon-user icon-size"></span>
+              </p>
+            </div>
+            <div class="col-lg-8">
+              <p class="text-left"><strong>{{ request.user.username }}</strong></p>
+              <p class="text-left small">{{ request.user.email }}</p>
+              <p class="text-left">
+                <a href="{% url 'forum_member:profile_update' %}" class="btn btn-primary btn-block btn-sm">{% trans "Profile" %}</a>
+                <a href="{% url 'account-parameters' %}" class="btn btn-info btn-block btn-sm">{% trans "Account" %}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <div class="navbar-login navbar-login-session">
+          <div class="row">
+            <div class="col-lg-12">
+              <p>
+                <a href="{% url 'logout' %}?next=/" class="btn btn-danger btn-block">{% trans "Sign out" %}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {% else %}
+  <li><a href="{% url 'register' %}">{% trans "Sign up" %}</a></li>
+  <li><a href="{% url 'login' %}">{% trans "Sign in" %}</a></li>
+  {% endif %}
+</ul>
+{% endblock header_collapse %}
+
+{% block body %}
+<div id="wrap">
+  {{ block.super }}
+  <div id="push"></div>
+</div>
+<footer id="footer">
+  <div class="container">
+    <div class="pull-right">
+      <p class="text-muted">
+        {% trans "Powered by: "%}&nbsp;
+        <a href="https://www.djangoproject.com/">Django</a>,&nbsp;<a href="https://github.com/ellmetha/django-machina">django-machina</a>
+      </p>
+    </div>
+  </div>
+</footer>
+{% endblock body %}
