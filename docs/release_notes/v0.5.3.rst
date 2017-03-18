@@ -11,5 +11,6 @@ Minor changes
 -------------
 
 * Fixed incorrect pagination calculations for posts (`#53`_)
+* Updated translations (nl_NL)
 
 .. _`#53`: https://github.com/ellmetha/django-machina/issues/53
