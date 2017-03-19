@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load widget_tweaks %}
 
 <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
   {% for error in post_form.non_field_errors %}
