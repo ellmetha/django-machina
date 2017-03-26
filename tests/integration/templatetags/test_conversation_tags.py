@@ -9,6 +9,7 @@ from django.template.base import Template
 from django.template.loader import render_to_string
 from django.test.client import RequestFactory
 
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import GroupFactory
@@ -56,8 +57,10 @@ class BaseConversationTagsTestCase(object):
         # Set up some topics and posts
         self.forum_1_topic = create_topic(forum=self.forum_1, poster=self.u1)
         self.forum_2_topic = create_topic(forum=self.forum_2, poster=self.u2)
+        self.forum_3_topic = create_topic(forum=self.forum_2, poster=self.u2)
         self.post_1 = PostFactory.create(topic=self.forum_1_topic, poster=self.u1)
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.u2)
+        self.post_3 = PostFactory.create(topic=self.forum_3_topic, poster=self.u2)
 
         # Assign some permissions
         assign_perm('can_see_forum', self.g1, self.forum_1)
@@ -130,10 +133,22 @@ class TestTopicPagesInlineListTag(BaseConversationTagsTestCase):
             }
         )
 
+        for i in range(0, 2 * machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE - 1):
+            PostFactory.create(topic=self.forum_3_topic, poster=self.u1)
+        expected_out_multiple = render_to_string(
+            'machina/forum_conversation/topic_pages_inline_list.html',
+            {
+                'topic': self.forum_3_topic,
+                'first_pages': [1, 2, ],
+            }
+        )
+
         # Run
         rendered_small = get_rendered(self.forum_1_topic)
         rendered_huge = get_rendered(self.forum_2_topic)
+        rendered_multiple = get_rendered(self.forum_3_topic)
 
         # Check
         assert rendered_small == expected_out_small
         assert rendered_huge == expected_out_huge
+        assert rendered_multiple == expected_out_multiple

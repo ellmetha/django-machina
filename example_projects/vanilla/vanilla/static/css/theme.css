@@ -1,0 +1,49 @@
+html{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+body{
+  height: 100%;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+.vertical-offset-100{
+  padding-top:100px;
+}
+
+.navbar-login{
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.navbar-login-session{
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.icon-size{
+  font-size: 87px;
+}
+
+#push{
+  height: 60px;
+}
+
+#footer{
+  background: #eee;
+}
+
+#footer p{
+  margin: 20px 0;
+}
