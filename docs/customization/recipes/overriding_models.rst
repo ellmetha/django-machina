@@ -35,6 +35,7 @@ For example, in order to define a custom version of the ``Topic`` model it is ne
 
   from __future__ import unicode_literals
 
+  from django.db import models
   from machina.apps.forum_conversation.abstract_models import AbstractTopic
 
   # Custom models should be declared before importing
@@ -56,4 +57,4 @@ As stated previously, you should've copied the content of the ``migration`` fold
 
 .. code-block:: bash
 
-  $ django-admin makemigrations forum_conversations
+  $ django-admin makemigrations forum_conversation
