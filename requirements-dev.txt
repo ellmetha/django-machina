@@ -9,6 +9,7 @@ pytest-django>=2.8
 pytest-pythonpath>=0.7
 pytest-spec>=0.2
 pytest-sugar>=0.7.0
+pytest-xdist>=1.15
 codecov>=1.6
 factory-boy>=2.4
 Faker>=0.7
