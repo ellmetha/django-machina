@@ -10,7 +10,7 @@
                         <h4 class="subject">{% trans "Preview:" %}&nbsp;{{ post_form.subject.value }}</h4>
                         <hr />
                         <div class="post-content">
-                            {{ post_form.content.value|safe|rendered }}
+                            {{ post_form.content.value|safe|rendered|linebreaks }}
                         </div>
                         {% include "forum_conversation/forum_attachments/attachments_preview.html" %}
                     </div>
