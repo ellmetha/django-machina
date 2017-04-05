@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{{ obj.last_post.content.rendered|safe }}
+{{ obj.last_post.content.rendered|safe|linebreaks }}
 <br /><br />
 <i>{% trans "Posted by" %} {{ obj.poster.username }} - {{ obj.created }}</i>
