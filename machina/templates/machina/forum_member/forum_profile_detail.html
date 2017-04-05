@@ -75,7 +75,7 @@
                   </small>
                 </p>
                 <div class="post-content">
-                  {{ post.content.rendered|truncatechars_html:160 }}
+                  {{ post.content.rendered|linebreaks|truncatechars_html:160 }}
                 </div>
               </div>
             </div>
