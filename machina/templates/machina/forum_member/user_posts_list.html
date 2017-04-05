@@ -54,7 +54,7 @@
                   </small>
                 </p>
                 <div class="post-content">
-                  {{ post.content.rendered|truncatechars_html:250 }}
+                  {{ post.content.rendered|linebreaks|truncatechars_html:250 }}
                 </div>
             </div>
             <div class="col-md-2 post-sidebar">
