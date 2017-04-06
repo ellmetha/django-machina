@@ -1,5 +1,5 @@
 ######################################################
-Django-machina 0.5.3 release notes - UNDER DEVELOPMENT
+Django-machina 0.5.3 release notes (UNDER DEVELOPMENT)
 ######################################################
 
 Requirements and compatibility
