@@ -35,10 +35,10 @@ class LastTopicsFeed(Feed):
             forum = get_object_or_404(Forum, pk=forum_pk)
             forums_qs = forum.get_descendants(include_self=True) if descendants \
                 else Forum.objects.filter(pk=forum_pk)
-            self.forums = request.forum_permission_handler.forum_list_filter(
+            self.forums = request.forum_permission_handler.get_readable_forums(
                 forums_qs, request.user)
         else:
-            self.forums = request.forum_permission_handler.forum_list_filter(
+            self.forums = request.forum_permission_handler.get_readable_forums(
                 Forum.objects.all(), request.user)
 
     def items(self):

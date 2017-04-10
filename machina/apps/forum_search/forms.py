@@ -39,7 +39,7 @@ class SearchForm(FacetedSearchForm):
         self.fields['q'].widget.attrs['placeholder'] = _('Keywords or phrase')
         self.fields['search_poster_name'].widget.attrs['placeholder'] = _('Poster name')
 
-        self.allowed_forums = PermissionHandler().forum_list_filter(Forum.objects.all(), user)
+        self.allowed_forums = PermissionHandler().get_readable_forums(Forum.objects.all(), user)
         if self.allowed_forums:
             self.fields['search_forums'].choices = [
                 (f.id, '{} {}'.format('-' * f.margin_level, f.name)) for f in self.allowed_forums]

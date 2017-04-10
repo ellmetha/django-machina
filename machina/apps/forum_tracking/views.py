@@ -59,10 +59,10 @@ class MarkForumsReadView(TemplateView):
     def mark_as_read(self, request, pk):
         """ Marks the considered forums as read. """
         if self.top_level_forum is not None:
-            forums = request.forum_permission_handler.forum_list_filter(
+            forums = request.forum_permission_handler.get_readable_forums(
                 self.top_level_forum.get_descendants(include_self=True), request.user)
         else:
-            forums = request.forum_permission_handler.forum_list_filter(
+            forums = request.forum_permission_handler.get_readable_forums(
                 Forum.objects.all(), request.user)
 
         # Marks forums as read
@@ -127,7 +127,7 @@ class UnreadTopicsView(ListView):
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
 
     def get_queryset(self):
-        forums = self.request.forum_permission_handler.forum_list_filter(
+        forums = self.request.forum_permission_handler.get_readable_forums(
             Forum.objects.all(), self.request.user)
         topics = Topic.objects.filter(forum__in=forums)
         topics_pk = map(lambda t: t.pk, track_handler.get_unread_topics(topics, self.request.user))
