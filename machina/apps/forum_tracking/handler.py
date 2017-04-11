@@ -11,9 +11,9 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
+Post = get_model('forum_conversation', 'Post')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
-
 
 class TrackingHandler(object):
     """
@@ -86,6 +86,34 @@ class TrackingHandler(object):
                 unread_topics.append(topic)
 
         return list(set(unread_topics))
+
+    def get_oldest_unread_post(self, topic, user):
+
+        if not user.is_authenticated() or topic is None:
+            return None
+
+        mark_time = None
+
+        topic_tracks = TopicReadTrack.objects.filter(topic=topic.id, user=user).order_by('mark_time')[:1]
+        forum_tracks = ForumReadTrack.objects.filter(forum=topic.forum.id, user=user).order_by('mark_time')[:1]
+
+        # A track for this topic exists. Any post newer than the tracked mark time is unread
+        if topic_tracks:
+            mark_time = topic_tracks.first().mark_time
+
+        # A track for the forum exists. If its mark time is older than that of the topic track,
+        # use the oldest one. Or if there is no topic track, use the forum track mark time.
+        if forum_tracks:
+            if (mark_time and forum_tracks.first().mark_time < mark_time) or not mark_time:
+                mark_time = forum_tracks.first().mark_time
+
+        # Get the oldest post with a date after the mark time
+        if topic_tracks or forum_tracks:
+            unread_posts = Post.objects.filter(topic=topic, created__gt=mark_time).order_by('created')[:1]
+            for post in  unread_posts:
+                mark_time = post.pk
+
+        return mark_time
 
     def mark_forums_read(self, forums, user):
         """
