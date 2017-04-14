@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+import datetime
+
 from django.db.models import F
 from django.db.models import Q
 
@@ -47,6 +49,9 @@ class TrackingHandler(object):
         Returns a list of unread topics for the given user from a given
         set of topics.
         """
+
+        startTime1 = datetime.datetime.now()
+
         unread_topics = []
 
         # A user which is not authenticated will never see a topic as unread.
@@ -54,11 +59,17 @@ class TrackingHandler(object):
         if not user.is_authenticated() or topics is None or not len(topics):
             return unread_topics
 
+        startTime = datetime.datetime.now()
+
         # A topic can be unread if a track for itself exists with a mark time that
         # is less important than its update date.
         topic_ids = [topic.id for topic in topics]
         topic_tracks = TopicReadTrack.objects.filter(topic__in=topic_ids, user=user)
         tracked_topics = dict(topic_tracks.values_list('topic__pk', 'mark_time'))
+
+        print("(%s) get tracked topics (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime))
+
+        startTime = datetime.datetime.now()
 
         if tracked_topics:
             for topic in topics:
@@ -67,11 +78,21 @@ class TrackingHandler(object):
                         and topic_last_modification_date > tracked_topics[topic.id]:
                     unread_topics.append(topic)
 
+                startTime = datetime.datetime.now()
+
+        print("(%s) get unread topic from tracked topics (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime))
+
+        startTime = datetime.datetime.now()
+
         # A topic can be unread if a track for its associated forum exists with
         # a mark time that is less important than its creation or update date.
         forum_ids = [topic.forum_id for topic in topics]
         forum_tracks = ForumReadTrack.objects.filter(forum_id__in=forum_ids, user=user)
         tracked_forums = dict(forum_tracks.values_list('forum__pk', 'mark_time'))
+
+        print("(%s) get tracked forums (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime))
+
+        startTime = datetime.datetime.now()
 
         if tracked_forums:
             for topic in topics:
@@ -80,10 +101,18 @@ class TrackingHandler(object):
                         topic_last_modification_date > tracked_forums[topic.forum_id]):
                     unread_topics.append(topic)
 
+        print("(%s) get unread topics from tracked forums (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime))
+
+        startTime = datetime.datetime.now()
+
         # A topic can be unread if no tracks exists for it
         for topic in topics:
             if topic.forum_id not in tracked_forums and topic.id not in tracked_topics:
                 unread_topics.append(topic)
+
+        print("(%s) get untracked topics (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime))
+
+        print("*** (%s) TOTOAL (TrackingHandler.get_unread_topics)" % (datetime.datetime.now() - startTime1))
 
         return list(set(unread_topics))
 
