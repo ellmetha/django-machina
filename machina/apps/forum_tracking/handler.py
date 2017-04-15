@@ -50,6 +50,12 @@ class TrackingHandler(object):
         Returns a list of unread topics for the given user from a given
         set of topics.
         """
+
+        # A user which is not authenticated will never see a topic as unread.
+        # If there are no topics to consider, we stop here.
+        if not user.is_authenticated() or topics is None or not len(topics):
+            return []
+
         topic_ids = [topic.id for topic in topics]
 
         # build query constraints
