@@ -98,7 +98,6 @@ class TrackingHandler(object):
                                                     ).order_by('created')[:1]
 
         if unread_posts:
-            print(unread_posts[0].pk)
             return unread_posts[0].pk
         else:
             return None
