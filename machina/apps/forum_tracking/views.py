@@ -159,7 +159,8 @@ class UnreadTopicsView(ListView):
                                                             | (updated_after_last_read_forum
                                                                & ~updated_before_last_read_topic)
                                                             | not_tracked)) \
-            .order_by('-last_post_on').distinct().prefetch_related('poster',
+            .order_by('-last_post_on').distinct().select_related('poster',
+                                                                   'forum',
                                                                    'last_post',
                                                                    'last_post__poster')
 
