@@ -39,7 +39,7 @@ class TrackingHandler(object):
         if not user.is_authenticated():
             return unread_forums
 
-        readable_forums = self.perm_handler.forum_list_filter(Forum.objects.all(), user)
+        readable_forums = self.perm_handler.get_readable_forums(Forum.objects.all(), user)
         unread = ForumReadTrack.objects.get_unread_forums_from_list(readable_forums, user)
         unread_forums.extend(unread)
 

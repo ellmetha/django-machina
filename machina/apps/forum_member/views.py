@@ -47,7 +47,7 @@ class UserPostsView(ListView):
 
     def get_queryset(self):
         # Determines the forums that can be accessed by the current user
-        forums = self.request.forum_permission_handler.forum_list_filter(
+        forums = self.request.forum_permission_handler.get_readable_forums(
             Forum.objects.all(), self.request.user)
 
         # Returns the posts submitted by the considered user.
@@ -87,7 +87,7 @@ class ForumProfileDetailView(DetailView):
             approved=True, poster=self.object.user).count()
 
         # Fetches the recent posts added by the considered user
-        forums = self.request.forum_permission_handler.forum_list_filter(
+        forums = self.request.forum_permission_handler.get_readable_forums(
             Forum.objects.all(), self.request.user)
         recent_posts = Post.approved_objects.filter(
             topic__forum__in=forums, poster=self.object.user).order_by('-created')

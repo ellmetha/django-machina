@@ -50,8 +50,8 @@ class TestForumLastPostTag(object):
         self.post_2 = PostFactory.create(topic=self.forum_2_topic, poster=self.user)
 
         # Assign some permissions
-        assign_perm('can_see_forum', self.user, self.top_level_cat)
-        assign_perm('can_see_forum', self.user, self.forum_1)
+        assign_perm('can_read_forum', self.user, self.top_level_cat)
+        assign_perm('can_read_forum', self.user, self.forum_1)
 
     def test_can_provide_the_last_post_of_a_forum(self):
         # Setup

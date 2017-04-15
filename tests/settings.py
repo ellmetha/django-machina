@@ -35,7 +35,7 @@ if DB_CONFIG == 'sqlite':
             'NAME': ':memory:'
         }
     }
-    MIGRATION_MODULES = DisableMigrations()
+    MIGRATION_MODULES = DisableMigrations() if DJANGO_VERSION < (1, 11) else {}
 elif DB_CONFIG == 'postgres':
     DATABASES = {
         'default': {

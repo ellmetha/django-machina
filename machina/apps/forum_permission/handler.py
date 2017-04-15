@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+import collections
 import datetime as dt
 from functools import reduce
 
@@ -50,7 +51,7 @@ class PermissionHandler(object):
 
     def forum_list_filter(self, qs, user):
         """
-        Filters the given queryset in order to return a list of forums that can be seen or read
+        Filters the given queryset in order to return a list of forums that can be seen and read
         by the specified user (at least).
         """
         # Any superuser should see all the forums
@@ -63,18 +64,25 @@ class PermissionHandler(object):
         return qs.exclude(id__in=forums_to_hide)
 
     def get_forum_last_post(self, forum, user):
-        """
-        Given a forum, fetch the last post that can be read by the passed user.
-        """
+        """ Given a forum, fetch the last post that can be read by the passed user. """
         forums = forum.get_descendants(include_self=True)
-        hidden_forums = []
 
         # Only non-superusers permissions are checked against the considered forums
         if not user.is_superuser:
-            hidden_forums = self._get_hidden_forum_ids(forums, user)
+            forums = self.get_readable_forums(forums, user)
 
-        forums = forums.exclude(id__in=hidden_forums)
         return Post.approved_objects.filter(topic__forum__in=forums).order_by('-created').first()
+
+    def get_readable_forums(self, qs, user):
+        """ Returns a queryset of forums that can be read by the considered user. """
+        # Any superuser should be able to read all the forums.
+        if user.is_superuser:
+            return qs
+
+        # Fetches the forums that can be read by the given user.
+        readable_forums = self._get_forums_for_user(
+            user, ['can_read_forum', ], use_tree_hierarchy=True)
+        return qs.filter(id__in=[f.id for f in readable_forums])
 
     # Verification methods
     # --
@@ -330,39 +338,40 @@ class PermissionHandler(object):
         return forums.exclude(id__in=[f.id for f in visible_forums])
 
     def _get_forums_for_user(self, user, perm_codenames, use_tree_hierarchy=False):
-        """
-        Returns all the forums that satisfy the given list of permission
-        codenames. User and group forum permissions are used.
+        """ Returns all the forums that satisfy the given list of permission codenames.
 
-        If the ``use_tree_hierarchy`` keyword argument is set the granted forums will be filtered
-        so that a forum which has an ancestor which is not in the granted forums set will not be
+        User and group forum permissions are used.
+
+        If the ``use_tree_hierarchy`` keyword argument is set the granted forums will be filtered so
+        that a forum which has an ancestor which is not in the granted forums set will not be
         returned.
         """
         granted_forums_cache_key = '{}__{}'.format(
-            ':'.join(perm_codenames),
-            user.id if not user.is_anonymous() else 'anonymous')
+            ':'.join(perm_codenames), user.id if not user.is_anonymous() else 'anonymous')
 
         if granted_forums_cache_key in self._granted_forums_cache:
             return self._granted_forums_cache[granted_forums_cache_key]
 
         forum_queryset = _get_queryset(Forum)
 
-        # First check if the user is a superuser and if so, returns the forum
-        # queryset immediately.
+        # First check if the user is a superuser and if so, returns the forum queryset immediately.
         if user.is_superuser:  # pragma: no cover
             forum_objects = forum_queryset
 
         else:
-            # Generates the appropriate queryset filter in order to handle both
-            # authenticated users and anonymous users.
-            user_kwargs_filter = {'anonymous_user': True} if user.is_anonymous() \
-                else {'user': user}
+            # Generates the appropriate queryset filter in order to handle both authenticated users
+            # and anonymous users.
+            user_kwargs_filter = {'anonymous_user': True} if user.is_anonymous() else {'user': user}
 
             # Get all the user permissions for the considered user.
             user_perms = UserForumPermission.objects \
                 .filter(**user_kwargs_filter) \
                 .filter(permission__codename__in=perm_codenames)
 
+            # The first thing to do is to compute three lists of permissions: one containing only
+            # globally granted permissions, one containing granted permissions (these permissions
+            # are associated with specific forums) and one containing non granted permissions (the
+            # latest are also associated with specific forums).
             globally_granted_user_perms = list(
                 filter(lambda p: p.has_perm and p.forum is None, user_perms))
             per_forum_granted_user_perms = list(
@@ -370,17 +379,35 @@ class PermissionHandler(object):
             per_forum_nongranted_user_perms = list(
                 filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
 
-            user_granted_forum_ids = [p.forum_id for p in per_forum_granted_user_perms]
-            user_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
+            # Using the previous lists we are able to compute a list of forums ids for which
+            # permissions are explicitly not granted.
+            nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
+
+            required_perm_codenames_count = len(perm_codenames)
+            initial_forum_ids = forum_queryset.values_list('id', flat=True)
+
+            # Now we build a dictionary allowing to associate each forum ID of the initial queryset
+            # with a set of permissions that are granted for the considered forum.
+            granted_permissions_per_forum = collections.defaultdict(set)
+            for perm in per_forum_granted_user_perms:
+                granted_permissions_per_forum[perm.forum_id].add(perm.permission_id)
+            for forum_id in initial_forum_ids:
+                granted_permissions_per_forum[forum_id].update(
+                    [perm.permission_id for perm in globally_granted_user_perms])
 
             if not user.is_anonymous():
                 user_model = get_user_model()
+
                 # Get all the group permissions for the considered user.
                 group_perms = GroupForumPermission.objects \
                     .filter(**{
                         'group__{0}'.format(user_model.groups.field.related_query_name()): user}) \
                     .filter(permission__codename__in=perm_codenames)
 
+                # Again, we compute three lists of permissions. But this time we are considering
+                # group permissions. The first list contains only globally granted permissions. The
+                # second one contains only granted permissions that are associated with specific
+                # forums. The third list contains non granted permissions.
                 globally_granted_group_perms = list(
                     filter(lambda p: p.has_perm and p.forum is None, group_perms))
                 per_forum_granted_group_perms = list(
@@ -388,22 +415,31 @@ class PermissionHandler(object):
                 per_forum_nongranted_group_perms = list(
                     filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
 
-                group_granted_forum_ids = [p.forum_id for p in per_forum_granted_group_perms]
-                group_nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_group_perms]
+                # Now we can update the list of forums ids for which permissions are explicitly not
+                # granted.
+                nongranted_forum_ids += [p.forum_id for p in per_forum_nongranted_group_perms]
 
-                if globally_granted_user_perms or globally_granted_group_perms:
-                    forum_objects = forum_queryset.filter(
-                        ~Q(pk__in=(user_nongranted_forum_ids + group_nongranted_forum_ids)))
-                else:
-                    forum_objects = forum_queryset.filter(
-                        Q(pk__in=user_granted_forum_ids) | Q(pk__in=group_granted_forum_ids)) \
-                        .filter(~Q(pk__in=(user_nongranted_forum_ids + group_nongranted_forum_ids)))
-            else:
-                if globally_granted_user_perms:
-                    forum_objects = forum_queryset.filter(~Q(pk__in=user_nongranted_forum_ids))
-                else:
-                    forum_objects = forum_queryset.filter(Q(pk__in=user_granted_forum_ids)) \
-                        .filter(~Q(pk__in=user_nongranted_forum_ids))
+                # Now we will update our previous dictionary that associated each forum ID with a
+                # set of granted permissions (at the user level). We will update it with the new
+                # permissions we've computed for the user's groups.
+                for perm in per_forum_granted_group_perms:
+                    granted_permissions_per_forum[perm.forum_id].add(perm.permission_id)
+                for forum_id in initial_forum_ids:
+                    granted_permissions_per_forum[forum_id].update(
+                        [perm.permission_id for perm in globally_granted_group_perms])
+
+            # We keep only the forum IDs for which the length of the set containing the granted
+            # permissions is equal to the number of initial permission codenames. The other forums
+            # have not all the required granted permissions, so we just throw them away.
+            for forum_id in list(granted_permissions_per_forum):
+                if len(granted_permissions_per_forum[forum_id]) < required_perm_codenames_count:
+                    del granted_permissions_per_forum[forum_id]
+
+            # Alright! It is now possible to filter the initial queryset using the forums associated
+            # with the granted permissions and the list of forums for which permissions are
+            # explicitly not granted.
+            forum_objects = forum_queryset.filter(pk__in=granted_permissions_per_forum) \
+                .filter(~Q(pk__in=nongranted_forum_ids))
 
             if not user.is_anonymous() and not forum_objects.exists() \
                     and set(perm_codenames).issubset(set(
