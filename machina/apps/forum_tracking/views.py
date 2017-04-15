@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -13,6 +15,9 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
+
+from django.db.models import F
+from django.db.models import Q
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
@@ -79,7 +84,7 @@ class MarkForumsReadView(TemplateView):
 
 
 class MarkTopicsReadView(
-        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
     """ Marks a set of topics as read. """
 
     model = Forum
@@ -127,11 +132,35 @@ class UnreadTopicsView(ListView):
     paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
 
     def get_queryset(self):
+        # select the forums the user has permission to read
         forums = self.request.forum_permission_handler.forum_list_filter(
             Forum.objects.all(), self.request.user)
-        topics = Topic.objects.filter(forum__in=forums)
-        topics_pk = map(lambda t: t.pk, track_handler.get_unread_topics(topics, self.request.user))
-        return Topic.approved_objects.filter(pk__in=topics_pk).order_by('-last_post_on')
+
+        # build query constraints
+
+        in_forums = Q(forum__in=forums)
+
+        updated_after_last_read_topic = (Q(tracks__user=self.request.user)
+                                         & (Q(tracks__mark_time__lt=F('last_post_on'))
+                                            | (Q(tracks__mark_time__lt=F('created')))))
+
+        updated_after_last_read_forum = (Q(forum__tracks__user=self.request.user)
+                                         & (Q(forum__tracks__mark_time__lt=F('last_post_on'))
+                                            | (Q(forum__tracks__mark_time__lt=F('created')))))
+
+        updated_before_last_read_topic = (Q(tracks__user=self.request.user)
+                                          & (Q(tracks__mark_time__gte=F('last_post_on'))
+                                             | (Q(tracks__mark_time__gte=F('created')))))
+
+        untracked = (~Q(tracks__user=self.request.user) & ~Q(forum__tracks__user=self.request.user))
+
+        # run query
+        topics = Topic.objects.filter(in_forums & ((updated_after_last_read_topic
+                                                    | (updated_after_last_read_forum
+                                                       & ~updated_before_last_read_topic))
+                                                   | untracked))
+
+        return topics
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
