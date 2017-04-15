@@ -35,3 +35,16 @@ def get_unread_topics(context, topics, user):
     """
     request = context.get('request', None)
     return TrackingHandler(request=request).get_unread_topics(topics, user)
+
+
+@register.assignment_tag(takes_context=True)
+def get_oldest_unread_post(context, topic, user):
+    """
+    This will return the oldest unread post for the given user from a given topic.
+
+    Usage::
+
+        {% get_oldest_unread_post topic request.user as oldest_unread_post %}
+    """
+    request = context.get('request', None)
+    return TrackingHandler(request=request).get_oldest_unread_post(topic, user)
