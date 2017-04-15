@@ -93,6 +93,7 @@ class AbstractTopic(DatedModel):
         app_label = 'forum_conversation'
         ordering = ['-type', '-last_post_on', ]
         get_latest_by = 'last_post_on'
+        index_together = ['type', 'last_post_on']
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
 
