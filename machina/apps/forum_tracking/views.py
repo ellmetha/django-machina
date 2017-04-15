@@ -2,11 +2,11 @@
 
 from __future__ import unicode_literals
 
-from datetime import datetime
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import F
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -15,9 +15,6 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
-
-from django.db.models import F
-from django.db.models import Q
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
@@ -161,8 +158,10 @@ class UnreadTopicsView(ListView):
         topics = Topic.approved_objects.filter(in_forums & (updated_after_last_read_topic
                                                             | (updated_after_last_read_forum
                                                                & ~updated_before_last_read_topic)
-                                                            | not_tracked)
-                                               ).order_by('-last_post_on').distinct()
+                                                            | not_tracked)) \
+            .order_by('-last_post_on').distinct().prefetch_related('poster',
+                                                                   'last_post',
+                                                                   'last_post__poster')
 
         return topics
 
