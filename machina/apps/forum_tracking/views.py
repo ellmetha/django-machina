@@ -154,11 +154,17 @@ class UnreadTopicsView(ListView):
 
         untracked = ~(Q(tracks__user=self.request.user) | Q(forum__tracks__user=self.request.user))
 
+        untracked_ids = Topic.approved_objects.filter(in_forums & untracked).values_list('id', flat=True)
+
+        not_tracked = Q(id__in=untracked_ids)
+
         # run query
-        topics = Topic.approved_objects.filter(in_forums & ((updated_after_last_read_topic
-                                                    | (updated_after_last_read_forum
-                                                       & ~updated_before_last_read_topic))
-                                                   | untracked)).order_by('-last_post_on').distinct()
+        topics = Topic.approved_objects.filter(in_forums & (updated_after_last_read_topic
+                                                            | (updated_after_last_read_forum
+                                                               & ~updated_before_last_read_topic)
+                                                            | not_tracked)
+                                               ).order_by('-last_post_on').distinct()
+
         return topics
 
     @method_decorator(login_required)

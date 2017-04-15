@@ -70,11 +70,15 @@ class TrackingHandler(object):
 
         untracked = (~Q(tracks__user=self.request.user) & ~Q(forum__tracks__user=user))
 
+        untracked_ids = Topic.approved_objects.filter(in_topics & untracked).values_list('id', flat=True)
+
+        not_tracked = Q(id__in=untracked_ids)
+
         # run query
-        unread_topics = Topic.objects.filter(in_topics & ((updated_after_last_read_topic
+        unread_topics = Topic.approved_objects.filter(in_topics & ((updated_after_last_read_topic
                                                            | (updated_after_last_read_forum
                                                               & ~updated_before_last_read_topic))
-                                                          | untracked))
+                                                          | not_tracked))
 
         return unread_topics
 
@@ -83,17 +87,21 @@ class TrackingHandler(object):
         if not user.is_authenticated() or topic is None:
             return None
 
-        oldest_unread_post = None
+        read_posts = Post.approved_objects.filter(Q(topic=topic)
+                                                  & Q(topic__tracks__mark_time__gte=F('created'))
+                                                  ).values_list("id", flat=True)
 
-        unread_posts = Post.objects.filter(Q(topic=topic)
-                                           & (Q(topic__tracks__mark_time__lt=F('created'))
-                                              | Q(topic__forum__tracks__mark_time__lt=F('created')))
-                                           ).order_by('created')[:1]
+        unread_posts = Post.approved_objects.filter(Q(topic=topic)
+                                                    & (Q(topic__tracks__mark_time__lt=F('created'))
+                                                       | (Q(topic__forum__tracks__mark_time__lt=F('created'))
+                                                          & ~Q(id__in=read_posts)))
+                                                    ).order_by('created')[:1]
 
-        for post in unread_posts:
-            oldest_unread_post = post.pk
-
-        return oldest_unread_post
+        if unread_posts:
+            print(unread_posts[0].pk)
+            return unread_posts[0].pk
+        else:
+            return None
 
     def mark_forums_read(self, forums, user):
         """
