@@ -152,14 +152,13 @@ class UnreadTopicsView(ListView):
                                           & (Q(tracks__mark_time__gte=F('last_post_on'))
                                              | (Q(tracks__mark_time__gte=F('created')))))
 
-        untracked = (~Q(tracks__user=self.request.user) & ~Q(forum__tracks__user=self.request.user))
+        untracked = ~(Q(tracks__user=self.request.user) | Q(forum__tracks__user=self.request.user))
 
         # run query
-        topics = Topic.objects.filter(in_forums & ((updated_after_last_read_topic
+        topics = Topic.approved_objects.filter(in_forums & ((updated_after_last_read_topic
                                                     | (updated_after_last_read_forum
                                                        & ~updated_before_last_read_topic))
-                                                   | untracked))
-
+                                                   | untracked)).order_by('-last_post_on').distinct()
         return topics
 
     @method_decorator(login_required)
