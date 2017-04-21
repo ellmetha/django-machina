@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-11 16:03-0500\n"
+"POT-Creation-Date: 2017-04-20 22:55-0400\n"
 "PO-Revision-Date: 2016-12-05 14:51+0000\n"
 "Last-Translator: Simen Heggestøyl <simen@e5r.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
@@ -40,135 +40,135 @@ msgstr "^søk/"
 msgid "^tracking/"
 msgstr "^sporing/"
 
-#: apps/forum/abstract_models.py:33
+#: apps/forum/abstract_models.py:34
 msgid "Parent"
 msgstr "Forelder"
 
-#: apps/forum/abstract_models.py:35
+#: apps/forum/abstract_models.py:36
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
 msgstr "Navn"
 
-#: apps/forum/abstract_models.py:36
-#: apps/forum_conversation/abstract_models.py:34
+#: apps/forum/abstract_models.py:37
+#: apps/forum_conversation/abstract_models.py:37
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/forum/abstract_models.py:39
+#: apps/forum/abstract_models.py:40
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: apps/forum/abstract_models.py:43
+#: apps/forum/abstract_models.py:44
 msgid "Forum image"
 msgstr "Forumbilde"
 
-#: apps/forum/abstract_models.py:48
+#: apps/forum/abstract_models.py:49
 msgid "Forum link"
 msgstr "Forumlenke"
 
-#: apps/forum/abstract_models.py:50 apps/forum/abstract_models.py:69
+#: apps/forum/abstract_models.py:51 apps/forum/abstract_models.py:70
 msgid "Track link redirects count"
 msgstr "Antall sporede klikk"
 
-#: apps/forum/abstract_models.py:51
+#: apps/forum/abstract_models.py:52
 msgid "Records the number of times a forum link was clicked"
 msgstr "Fører opp antall klikk på en forumlenke"
 
-#: apps/forum/abstract_models.py:56
+#: apps/forum/abstract_models.py:57
 msgid "Default forum"
 msgstr "Standardforum"
 
-#: apps/forum/abstract_models.py:57
+#: apps/forum/abstract_models.py:58
 msgid "Category forum"
 msgstr "Kategoriforum"
 
-#: apps/forum/abstract_models.py:58
+#: apps/forum/abstract_models.py:59
 msgid "Link forum"
 msgstr "Lenkeforum"
 
-#: apps/forum/abstract_models.py:61
+#: apps/forum/abstract_models.py:62
 msgid "Forum type"
 msgstr "Forumtype"
 
-#: apps/forum/abstract_models.py:65
+#: apps/forum/abstract_models.py:66
 msgid "Number of posts"
 msgstr "Antall innlegg"
 
-#: apps/forum/abstract_models.py:67
+#: apps/forum/abstract_models.py:68
 msgid "Number of topics"
 msgstr "Antall tråder"
 
-#: apps/forum/abstract_models.py:70
-#: apps/forum_conversation/abstract_models.py:69
+#: apps/forum/abstract_models.py:71
+#: apps/forum_conversation/abstract_models.py:72
 msgid "Last post added on"
 msgstr "Siste innlegg lagt til"
 
-#: apps/forum/abstract_models.py:74
+#: apps/forum/abstract_models.py:75
 msgid "Display in parent-forums legend"
 msgstr "Vis i foreldreforumets forklaring"
 
-#: apps/forum/abstract_models.py:75
+#: apps/forum/abstract_models.py:76
 msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 "Viser dette forumet i forklaringen til dets foreldreforum (underforumer "
 "listes opp)"
 
-#: apps/forum/abstract_models.py:84 apps/forum_permission/abstract_models.py:59
-#: apps/forum_tracking/abstract_models.py:22
+#: apps/forum/abstract_models.py:85 apps/forum_permission/abstract_models.py:72
+#: apps/forum_tracking/abstract_models.py:24
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:85 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:86 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:220
 msgid "Forums"
 msgstr "Forumer"
 
-#: apps/forum/abstract_models.py:123
+#: apps/forum/abstract_models.py:124
 msgid "A forum can not have a link forum as parent"
 msgstr "Et forum kan ikke ha et lenkeforum som forelder"
 
-#: apps/forum/abstract_models.py:126
+#: apps/forum/abstract_models.py:127
 msgid "A category can not have another category as parent"
 msgstr "En kategori kan ikke ha en annen kategori som forelder"
 
-#: apps/forum/abstract_models.py:129
+#: apps/forum/abstract_models.py:130
 msgid "A link forum must have a link associated with it"
 msgstr "Et lenkeforum må være tilknyttet en lenke"
 
-#: apps/forum/admin.py:52
+#: apps/forum/admin.py:53
 msgid "Forum settings"
 msgstr "Foruminnstillinger"
 
-#: apps/forum/admin.py:56
+#: apps/forum/admin.py:57
 msgid "Link forum settings"
 msgstr "Innstillinger for lenkeforum"
 
-#: apps/forum/admin.py:144
+#: apps/forum/admin.py:145
 msgid "'{}' forum successfully moved"
 msgstr "Flyttingen av forumet {} var vellykket"
 
-#: apps/forum/admin.py:158 apps/forum/admin.py:232 apps/forum/admin.py:250
-#: apps/forum/admin.py:269 apps/forum_permission/abstract_models.py:36
+#: apps/forum/admin.py:159 apps/forum/admin.py:233 apps/forum/admin.py:251
+#: apps/forum/admin.py:270 apps/forum_permission/abstract_models.py:45
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
 msgid "Forum permissions"
 msgstr "Forumrettigheter"
 
-#: apps/forum/admin.py:159 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:160 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "Globale forumrettigheter"
 
-#: apps/forum/admin.py:167
+#: apps/forum/admin.py:168
 msgid "Permissions successfully copied"
 msgstr "Kopieringen av rettigheter var vellykket"
 
-#: apps/forum/admin.py:188
+#: apps/forum/admin.py:189
 msgid "Choose either a user ID, a group ID or the anonymous user"
 msgstr "Velg enten en bruker-ID, en gruppe-ID, eller den anonyme brukeren"
 
-#: apps/forum/admin.py:250
+#: apps/forum/admin.py:251
 #: templates/machina/forum_conversation/topic_detail.html:100
 #: templates/machina/forum_moderation/moderation_queue/detail.html:119
 msgid "Anonymous user"
@@ -217,67 +217,72 @@ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 msgid "Machina: Forum"
 msgstr "Machina: Forum"
 
-#: apps/forum_conversation/abstract_models.py:28
+#: apps/forum_conversation/abstract_models.py:30
 msgid "Topic forum"
 msgstr "Trådforum"
 
-#: apps/forum_conversation/abstract_models.py:30
-#: apps/forum_conversation/abstract_models.py:203
+#: apps/forum_conversation/abstract_models.py:33
+#: apps/forum_conversation/abstract_models.py:207
 msgid "Poster"
 msgstr "Forfatter"
 
-#: apps/forum_conversation/abstract_models.py:33
-#: apps/forum_conversation/abstract_models.py:211
+#: apps/forum_conversation/abstract_models.py:36
+#: apps/forum_conversation/abstract_models.py:215
 msgid "Subject"
 msgstr "Emne"
 
-#: apps/forum_conversation/abstract_models.py:39
+#: apps/forum_conversation/abstract_models.py:42
 msgid "Default topic"
 msgstr "Standardtråd"
 
-#: apps/forum_conversation/abstract_models.py:40
+#: apps/forum_conversation/abstract_models.py:43
 msgid "Sticky"
 msgstr "Klistret"
 
-#: apps/forum_conversation/abstract_models.py:41
+#: apps/forum_conversation/abstract_models.py:44
 msgid "Announce"
 msgstr "Kunngjøring"
 
-#: apps/forum_conversation/abstract_models.py:44
+#: apps/forum_conversation/abstract_models.py:47
 msgid "Topic type"
 msgstr "Trådtype"
 
-#: apps/forum_conversation/abstract_models.py:49
+#: apps/forum_conversation/abstract_models.py:52
 msgid "Topic unlocked"
 msgstr "Tråd låst opp"
 
-#: apps/forum_conversation/abstract_models.py:50
+#: apps/forum_conversation/abstract_models.py:53
 msgid "Topic locked"
 msgstr "Tråd låst"
 
-#: apps/forum_conversation/abstract_models.py:51
+#: apps/forum_conversation/abstract_models.py:54
 msgid "Topic moved"
 msgstr "Tråd flyttet"
 
-#: apps/forum_conversation/abstract_models.py:54
+#: apps/forum_conversation/abstract_models.py:57
 msgid "Topic status"
 msgstr "Trådstatus"
 
-#: apps/forum_conversation/abstract_models.py:58
-#: apps/forum_conversation/abstract_models.py:222
+#: apps/forum_conversation/abstract_models.py:61
+#: apps/forum_conversation/abstract_models.py:226
 msgid "Approved"
 msgstr "Godkjent"
 
-#: apps/forum_conversation/abstract_models.py:62
+#: apps/forum_conversation/abstract_models.py:65
 msgid "Posts count"
 msgstr "Antall innlegg"
 
-#: apps/forum_conversation/abstract_models.py:66
+#: apps/forum_conversation/abstract_models.py:69
 msgid "Views count"
 msgstr "Antall visninger"
 
-#: apps/forum_conversation/abstract_models.py:74
-#: apps/forum_conversation/abstract_models.py:77
+#: apps/forum_conversation/abstract_models.py:78
+#, fuzzy
+#| msgid "Last post"
+msgid "First post"
+msgstr "Siste innlegg"
+
+#: apps/forum_conversation/abstract_models.py:81
 #: templates/machina/forum/forum_list.html:22
 #: templates/machina/forum/forum_list.html:40
 #: templates/machina/forum/forum_list.html:224
@@ -285,14 +290,14 @@ msgstr "Antall visninger"
 msgid "Last post"
 msgstr "Siste innlegg"
 
-#: apps/forum_conversation/abstract_models.py:83
+#: apps/forum_conversation/abstract_models.py:86
 msgid "Subscribers"
 msgstr "Abonnenter"
 
-#: apps/forum_conversation/abstract_models.py:93
-#: apps/forum_conversation/abstract_models.py:200
-#: apps/forum_conversation/forum_polls/abstract_models.py:23
-#: apps/forum_tracking/abstract_models.py:46
+#: apps/forum_conversation/abstract_models.py:96
+#: apps/forum_conversation/abstract_models.py:204
+#: apps/forum_conversation/forum_polls/abstract_models.py:24
+#: apps/forum_tracking/abstract_models.py:50
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
 #, fuzzy
 #| msgid "Topic"
@@ -300,7 +305,7 @@ msgstr "Abonnenter"
 msgid "Topic"
 msgstr "Tråd"
 
-#: apps/forum_conversation/abstract_models.py:94
+#: apps/forum_conversation/abstract_models.py:97
 #: templates/machina/forum/forum_detail.html:50
 #: templates/machina/forum/forum_list.html:20
 #: templates/machina/forum/forum_list.html:38
@@ -308,70 +313,70 @@ msgstr "Tråd"
 msgid "Topics"
 msgstr "Tråder"
 
-#: apps/forum_conversation/abstract_models.py:139
+#: apps/forum_conversation/abstract_models.py:142
 msgid "A topic can not be associated with a category or a link forum"
 msgstr "En tråd kan ikke tilknyttes et kategoriforum eller et lenkeforum"
 
-#: apps/forum_conversation/abstract_models.py:205
+#: apps/forum_conversation/abstract_models.py:209
 msgid "Poster IP address"
 msgstr "Forfatterens IP-adresse"
 
-#: apps/forum_conversation/abstract_models.py:207
-#: apps/forum_conversation/forum_polls/abstract_models.py:94
+#: apps/forum_conversation/abstract_models.py:211
+#: apps/forum_conversation/forum_polls/abstract_models.py:96
 msgid "Anonymous user forum key"
 msgstr "Forumnøkkel for anonym bruker"
 
-#: apps/forum_conversation/abstract_models.py:215
+#: apps/forum_conversation/abstract_models.py:219
 msgid "Content"
 msgstr "Innhold"
 
-#: apps/forum_conversation/abstract_models.py:219
+#: apps/forum_conversation/abstract_models.py:223
 msgid "Username"
 msgstr "Brukernavn"
 
-#: apps/forum_conversation/abstract_models.py:226
+#: apps/forum_conversation/abstract_models.py:230
 msgid "Attach a signature"
 msgstr "Legg ved en signatur"
 
-#: apps/forum_conversation/abstract_models.py:231
+#: apps/forum_conversation/abstract_models.py:235
 msgid "Update reason"
 msgstr "Oppdater grunn"
 
-#: apps/forum_conversation/abstract_models.py:235
+#: apps/forum_conversation/abstract_models.py:240
 msgid "Lastly updated by"
 msgstr "Sist oppdatert av"
 
-#: apps/forum_conversation/abstract_models.py:238
+#: apps/forum_conversation/abstract_models.py:242
 msgid "Updates count"
 msgstr "Antall oppdateringer"
 
-#: apps/forum_conversation/abstract_models.py:248
-#: apps/forum_conversation/forum_attachments/abstract_models.py:19
+#: apps/forum_conversation/abstract_models.py:252
+#: apps/forum_conversation/forum_attachments/abstract_models.py:20
 #, fuzzy
 #| msgid "Post"
 #| msgid_plural "Posts"
 msgid "Post"
 msgstr "Innlegg"
 
-#: apps/forum_conversation/abstract_models.py:249
+#: apps/forum_conversation/abstract_models.py:253
 #: templates/machina/forum/forum_list.html:21
 #: templates/machina/forum/forum_list.html:39
 #: templates/machina/forum/forum_list.html:223
 msgid "Posts"
 msgstr "Innlegg"
 
-#: apps/forum_conversation/abstract_models.py:290
+#: apps/forum_conversation/abstract_models.py:294
 msgid "A user id or an anonymous key must be associated with a post."
 msgstr "En bruker-ID eller en anonym nøkkel må tilknyttes et innlegg."
 
-#: apps/forum_conversation/abstract_models.py:292
+#: apps/forum_conversation/abstract_models.py:296
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
 msgstr ""
 "Enten en bruker-ID eller en anonym nøkkel må tilknyttes et innlegg, men ikke "
 "begge."
 
-#: apps/forum_conversation/abstract_models.py:296
+#: apps/forum_conversation/abstract_models.py:300
 msgid "A username must be specified if the poster is anonymous"
 msgstr "Et brukernavn må oppgis når forfatteren er anonym"
 
@@ -432,7 +437,7 @@ msgid "Post topic as"
 msgstr "Legg til tråd som"
 
 #: apps/forum_conversation/forms.py:139
-#: apps/forum_conversation/forum_polls/abstract_models.py:26
+#: apps/forum_conversation/forum_polls/abstract_models.py:27
 msgid "Poll question"
 msgstr "Avstemningsspørsmål"
 
@@ -445,7 +450,7 @@ msgstr ""
 "blankt for å ikke lage en avstemning."
 
 #: apps/forum_conversation/forms.py:144
-#: apps/forum_conversation/forum_polls/abstract_models.py:34
+#: apps/forum_conversation/forum_polls/abstract_models.py:35
 msgid "Maximum number of poll options per user"
 msgstr "Maksimalt antall avstemningsvalg per bruker"
 
@@ -476,24 +481,24 @@ msgstr ""
 "Du må angi et maksimalt antall avstemningsvalg per bruker når du lager "
 "avstemninger"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:21
+#: apps/forum_conversation/forum_attachments/abstract_models.py:22
 msgid "File"
 msgstr "Fil"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:22
+#: apps/forum_conversation/forum_attachments/abstract_models.py:23
 msgid "Comment"
 msgstr "Kommentar"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:27
+#: apps/forum_conversation/forum_attachments/abstract_models.py:28
 msgid "Attachment"
 msgstr "Vedlegg"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:28
+#: apps/forum_conversation/forum_attachments/abstract_models.py:29
 #: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
 #: templates/machina/forum_conversation/forum_attachments/attachments_preview.html:7
-#: templates/machina/forum_conversation/partials/post_form.html:23
-#: templates/machina/forum_conversation/partials/post_form.html:61
-#: templates/machina/forum_conversation/partials/topic_form.html:27
+#: templates/machina/forum_conversation/partials/post_form.html:22
+#: templates/machina/forum_conversation/partials/post_form.html:60
+#: templates/machina/forum_conversation/partials/topic_form.html:26
 msgid "Attachments"
 msgstr "Vedlegg"
 
@@ -501,64 +506,64 @@ msgstr "Vedlegg"
 msgid "Machina: Forum attachments"
 msgstr "Machina: Forumvedlegg"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:30
+#: apps/forum_conversation/forum_polls/abstract_models.py:31
 msgid "Poll duration, in days"
 msgstr "Varighet på avstemningen, i dager"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:38
+#: apps/forum_conversation/forum_polls/abstract_models.py:39
 msgid "Allow vote changes"
 msgstr "Tillat endring av stemmer"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:45
+#: apps/forum_conversation/forum_polls/abstract_models.py:46
 msgid "Topic poll"
 msgstr "Trådavstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:46
+#: apps/forum_conversation/forum_polls/abstract_models.py:47
 msgid "Topic polls"
 msgstr "Trådavstemninger"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:68
-#: templates/machina/forum_conversation/partials/topic_form.html:24
+#: apps/forum_conversation/forum_polls/abstract_models.py:70
+#: templates/machina/forum_conversation/partials/topic_form.html:23
 msgid "Poll"
 msgstr "Avstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:69
+#: apps/forum_conversation/forum_polls/abstract_models.py:71
 msgid "Poll option text"
 msgstr "Avstemingsvalg"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:74
+#: apps/forum_conversation/forum_polls/abstract_models.py:76
 msgid "Topic poll option"
 msgstr "Valg for trådavstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:75
+#: apps/forum_conversation/forum_polls/abstract_models.py:77
 msgid "Topic poll options"
 msgstr "Valg for trådavstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:91
+#: apps/forum_conversation/forum_polls/abstract_models.py:94
 msgid "Voter"
 msgstr "Stemmer"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:97
+#: apps/forum_conversation/forum_polls/abstract_models.py:100
 msgid "Poll option"
 msgstr "Avstemingsvalg"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:98
+#: apps/forum_conversation/forum_polls/abstract_models.py:101
 msgid "Vote's date"
 msgstr "Stemmens dato"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:103
+#: apps/forum_conversation/forum_polls/abstract_models.py:106
 msgid "Topic poll vote"
 msgstr "Stemme i trådavstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:104
+#: apps/forum_conversation/forum_polls/abstract_models.py:107
 msgid "Topic poll votes"
 msgstr "Stemmer i trådavstemning"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:115
+#: apps/forum_conversation/forum_polls/abstract_models.py:118
 msgid "A user id or an anonymous key must be used."
 msgstr "En bruker-ID eller en anonym nøkkel må brukes."
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:117
+#: apps/forum_conversation/forum_polls/abstract_models.py:120
 msgid "A user id or an anonymous key must be used, but not both."
 msgstr "Enten en bruker-ID eller en anonym nøkkel må brukes, men ikke begge."
 
@@ -586,27 +591,27 @@ msgstr "Din stemme er avgitt."
 msgid "Machina: Forum conversations"
 msgstr "Machina: Forumsamtaler"
 
-#: apps/forum_conversation/views.py:126
+#: apps/forum_conversation/views.py:127
 msgid "This message has been posted successfully."
 msgstr "Denne meldingen har blitt lagt til."
 
-#: apps/forum_conversation/views.py:127
+#: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
 msgstr "Denne meldingen vil bli sjekket før den dukker opp i forumet."
 
-#: apps/forum_conversation/views.py:129
+#: apps/forum_conversation/views.py:130
 msgid "There are some errors in the attachments you submitted."
 msgstr "Det er noe feil med vedleggene du sendte inn."
 
-#: apps/forum_conversation/views.py:386
+#: apps/forum_conversation/views.py:387
 msgid "There are some errors in the poll options you submitted."
 msgstr "Det er noen feil i avstemningsvalgene du sendte inn."
 
-#: apps/forum_conversation/views.py:572 apps/forum_conversation/views.py:657
+#: apps/forum_conversation/views.py:573 apps/forum_conversation/views.py:658
 msgid "This message has been edited successfully."
 msgstr "Redigeringen av denne meldingen var vellykket."
 
-#: apps/forum_conversation/views.py:694
+#: apps/forum_conversation/views.py:695
 msgid "This message has been deleted successfully."
 msgstr "Slettingen av denne meldingen var vellykket."
 
@@ -634,30 +639,30 @@ msgstr "Sist oppdaterte tråder i forumene"
 msgid "Machina: Forum feeds"
 msgstr "Machina: Forumkilder"
 
-#: apps/forum_member/abstract_models.py:22
-#: apps/forum_permission/abstract_models.py:78
-#: apps/forum_tracking/abstract_models.py:21
-#: apps/forum_tracking/abstract_models.py:44
+#: apps/forum_member/abstract_models.py:23
+#: apps/forum_permission/abstract_models.py:91
+#: apps/forum_tracking/abstract_models.py:22
+#: apps/forum_tracking/abstract_models.py:47
 msgid "User"
 msgstr "Bruker"
 
-#: apps/forum_member/abstract_models.py:26
+#: apps/forum_member/abstract_models.py:27
 msgid "Avatar"
 msgstr "Avatar"
 
-#: apps/forum_member/abstract_models.py:32
+#: apps/forum_member/abstract_models.py:33
 msgid "Signature"
 msgstr "Signatur"
 
-#: apps/forum_member/abstract_models.py:37
+#: apps/forum_member/abstract_models.py:38
 msgid "Total posts"
 msgstr "Antall innlegg totalt"
 
-#: apps/forum_member/abstract_models.py:42
+#: apps/forum_member/abstract_models.py:43
 msgid "Forum profile"
 msgstr "Forumprofil"
 
-#: apps/forum_member/abstract_models.py:43
+#: apps/forum_member/abstract_models.py:44
 msgid "Forum profiles"
 msgstr "Forumprofiler"
 
@@ -793,74 +798,174 @@ msgstr "Godkjenningen av innlegget var vellykket."
 msgid "This post has been disapproved successfully."
 msgstr "Avvisningen av innlegget var vellykket."
 
-#: apps/forum_permission/abstract_models.py:19
+#: apps/forum_permission/abstract_models.py:30
 msgid "Permission codename"
 msgstr "Rettighetskodenavn"
 
-#: apps/forum_permission/abstract_models.py:21
-msgid "Permission name"
-msgstr "Rettighetsnavn"
-
-#: apps/forum_permission/abstract_models.py:24
+#: apps/forum_permission/abstract_models.py:33
 msgid "Global permission"
 msgstr "Global rettighet"
 
-#: apps/forum_permission/abstract_models.py:25
+#: apps/forum_permission/abstract_models.py:34
 msgid "This permission can be granted globally to all the forums"
 msgstr "Denne rettigheten kan innvilges globalt til alle forumene"
 
-#: apps/forum_permission/abstract_models.py:28
+#: apps/forum_permission/abstract_models.py:37
 msgid "Local permission"
 msgstr "Lokal rettighet"
 
-#: apps/forum_permission/abstract_models.py:29
+#: apps/forum_permission/abstract_models.py:38
 msgid "This permission can be granted individually for each forum"
 msgstr "Denne rettigheten kan innvilges individuelt for hvert forum"
 
-#: apps/forum_permission/abstract_models.py:35
-#: apps/forum_permission/abstract_models.py:54
+#: apps/forum_permission/abstract_models.py:44
+#: apps/forum_permission/abstract_models.py:66
 msgid "Forum permission"
 msgstr "Forumrettighet"
 
-#: apps/forum_permission/abstract_models.py:46
+#: apps/forum_permission/abstract_models.py:53
 msgid "A forum permission should be at least either global or local"
 msgstr "En forumrettighet må i det minste være enten global eller lokal"
 
-#: apps/forum_permission/abstract_models.py:55
+#: apps/forum_permission/abstract_models.py:67
 msgid "Has perm"
 msgstr "Har rettighet"
 
-#: apps/forum_permission/abstract_models.py:68
+#: apps/forum_permission/abstract_models.py:81
 msgid "The following permission cannot be granted globally: {}"
 msgstr "Følgende rettighet kan ikke innvilges globalt: {}"
 
-#: apps/forum_permission/abstract_models.py:80
+#: apps/forum_permission/abstract_models.py:93
 msgid "Target anonymous user"
 msgstr "Angi for den anonyme brukeren"
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:99
 msgid "User forum permission"
 msgstr "Brukerforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:100
 msgid "User forum permissions"
 msgstr "Brukerforumrettigheter"
 
-#: apps/forum_permission/abstract_models.py:99
+#: apps/forum_permission/abstract_models.py:112
 msgid "A permission should target either a user or an anonymous user"
 msgstr "En rettighet bør gjelde for enten en bruker eller en anonym bruker"
 
-#: apps/forum_permission/abstract_models.py:107
+#: apps/forum_permission/abstract_models.py:119
 msgid "Group"
 msgstr "Gruppe"
 
-#: apps/forum_permission/abstract_models.py:113
+#: apps/forum_permission/abstract_models.py:125
 msgid "Group forum permission"
 msgstr "Gruppeforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:114
+#: apps/forum_permission/abstract_models.py:126
 msgid "Group forum permissions"
 msgstr "Gruppeforumrettigheter"
+
+#: apps/forum_permission/defaults.py:23
+#, fuzzy
+#| msgid "Category forum"
+msgid "Can see forum"
+msgstr "Kategoriforum"
+
+#: apps/forum_permission/defaults.py:28
+#, fuzzy
+#| msgid "Category forum"
+msgid "Can read forum"
+msgstr "Kategoriforum"
+
+#: apps/forum_permission/defaults.py:35
+#, fuzzy
+#| msgid "Post a new topic"
+msgid "Can start new topics"
+msgstr "Legg til en ny tråd"
+
+#: apps/forum_permission/defaults.py:40
+#, fuzzy
+#| msgid "Change to sticky topic"
+msgid "Can reply to topics"
+msgstr "Endre til klistret tråd"
+
+#: apps/forum_permission/defaults.py:45
+#, fuzzy
+#| msgid "Change to announce"
+msgid "Can post announcements"
+msgstr "Endre til kunngjøring"
+
+#: apps/forum_permission/defaults.py:50
+#, fuzzy
+#| msgid "Change to sticky topic"
+msgid "Can post stickies"
+msgstr "Endre til klistret tråd"
+
+#: apps/forum_permission/defaults.py:55
+#, fuzzy
+#| msgid "Delete post"
+msgid "Can delete own posts"
+msgstr "Slett innlegg"
+
+#: apps/forum_permission/defaults.py:60
+msgid "Can edit own posts"
+msgstr ""
+
+#: apps/forum_permission/defaults.py:66
+#, fuzzy
+#| msgid "No posts awaiting approval."
+msgid "Can post without approval"
+msgstr "Ingen innlegg venter på godkjenning."
+
+#: apps/forum_permission/defaults.py:73
+msgid "Can create polls"
+msgstr ""
+
+#: apps/forum_permission/defaults.py:78
+msgid "Can vote in polls"
+msgstr ""
+
+#: apps/forum_permission/defaults.py:85
+msgid "Can attach file"
+msgstr ""
+
+#: apps/forum_permission/defaults.py:90
+msgid "Can download file"
+msgstr ""
+
+#: apps/forum_permission/defaults.py:97
+#, fuzzy
+#| msgid "Unlock topic"
+msgid "Can lock topics"
+msgstr "Lås opp tråd"
+
+#: apps/forum_permission/defaults.py:102
+#, fuzzy
+#| msgid "Move topic"
+msgid "Can move topics"
+msgstr "Flytt tråd"
+
+#: apps/forum_permission/defaults.py:107
+#, fuzzy
+#| msgid "Edit post"
+msgid "Can edit posts"
+msgstr "Rediger innlegg"
+
+#: apps/forum_permission/defaults.py:112
+#, fuzzy
+#| msgid "Delete post"
+msgid "Can delete posts"
+msgstr "Slett innlegg"
+
+#: apps/forum_permission/defaults.py:117
+#, fuzzy
+#| msgid "Approve post"
+msgid "Can approve posts"
+msgstr "Godkjenn innlegg"
+
+#: apps/forum_permission/defaults.py:123
+#, fuzzy
+#| msgid "Change to sticky topic"
+msgid "Can add posts in locked topics"
+msgstr "Endre til klistret tråd"
 
 #: apps/forum_permission/registry_config.py:12
 msgid "Machina: Forum permissions"
@@ -902,19 +1007,19 @@ msgstr "Forfatternavn"
 msgid "Machina: Forum searches"
 msgstr "Machina: Forumsøk"
 
-#: apps/forum_tracking/abstract_models.py:31
+#: apps/forum_tracking/abstract_models.py:33
 msgid "Forum track"
 msgstr "Forumsporing"
 
-#: apps/forum_tracking/abstract_models.py:32
+#: apps/forum_tracking/abstract_models.py:34
 msgid "Forum tracks"
 msgstr "Forumsporinger"
 
-#: apps/forum_tracking/abstract_models.py:53
+#: apps/forum_tracking/abstract_models.py:57
 msgid "Topic track"
 msgstr "Trådsporing"
 
-#: apps/forum_tracking/abstract_models.py:54
+#: apps/forum_tracking/abstract_models.py:58
 msgid "Topic tracks"
 msgstr "Trådsporinger"
 
@@ -1217,13 +1322,13 @@ msgstr "Antall innlegg totalt:"
 msgid "Total topics:"
 msgstr "Antall tråder totalt:"
 
-#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:29
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:28
 #: templates/machina/forum_member/forum_profile_update.html:20
 #: templates/machina/partials/form_field.html:6
 msgid "(optional)"
 msgstr "(valgfri)"
 
-#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:42
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:41
 msgid "Add another file"
 msgstr "Legg til enda en fil"
 
@@ -1246,15 +1351,15 @@ msgstr "Stem"
 msgid "Change your vote"
 msgstr "Endre din stemme"
 
-#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:5
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:3
 msgid "Poll options"
 msgstr "Avstemingsvalg"
 
-#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:28
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:26
 msgid "Add a poll option"
 msgstr "Legg til et avstemingsvalg"
 
-#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:32
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:30
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
@@ -1272,7 +1377,7 @@ msgid "Total votes:"
 msgstr "Antall stemmer totalt:"
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
-#: templates/machina/forum_conversation/partials/topic_form.html:103
+#: templates/machina/forum_conversation/partials/topic_form.html:102
 #: templates/machina/forum_conversation/post_create.html:27
 #: templates/machina/forum_conversation/post_update.html:27
 #: templates/machina/forum_member/forum_profile_update.html:36
@@ -1283,8 +1388,8 @@ msgstr "Send inn"
 msgid "View results"
 msgstr "Vis resultater"
 
-#: templates/machina/forum_conversation/partials/post_form.html:21
-#: templates/machina/forum_conversation/partials/topic_form.html:22
+#: templates/machina/forum_conversation/partials/post_form.html:20
+#: templates/machina/forum_conversation/partials/topic_form.html:21
 msgid "Options"
 msgstr "Valg"
 
@@ -1333,7 +1438,7 @@ msgstr "Endre til kunngjøring"
 msgid "Change to standard topic"
 msgstr "Endre til standardtråd"
 
-#: templates/machina/forum_conversation/partials/topic_form.html:102
+#: templates/machina/forum_conversation/partials/topic_form.html:101
 #: templates/machina/forum_conversation/post_create.html:26
 #: templates/machina/forum_conversation/post_update.html:26
 msgid "Preview"
@@ -1703,3 +1808,6 @@ msgstr "Det er ingen uleste tråder."
 #: templates/machina/partials/breadcrumb.html:4
 msgid "Forum index"
 msgstr "Forumindeks"
+
+#~ msgid "Permission name"
+#~ msgstr "Rettighetsnavn"
