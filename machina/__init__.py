@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import os
 
-__version__ = '0.5.4.dev'
+__version__ = '0.6.dev'
 
 
 MACHINA_VANILLA_APPS = [
@@ -38,8 +38,8 @@ def get_apps(overrides=None):
     if not overrides:
         return MACHINA_VANILLA_APPS
 
-    def get_app_label(app_label):
+    def _get_app_label(app_label):
         pattern = app_label.replace('machina.apps.', '')
         return next((o for o in overrides if o.endswith(pattern)), app_label)
 
-    return list(map(get_app_label, MACHINA_VANILLA_APPS))
+    return list(map(_get_app_label, MACHINA_VANILLA_APPS))
