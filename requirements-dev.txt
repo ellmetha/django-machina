@@ -27,3 +27,6 @@ uwsgi>=2.0
 
 # Search indexes
 Whoosh>=2.6.0
+
+# Translations
+transifex-client
