@@ -1,0 +1,13 @@
+####################################################
+Django-machina 0.6 release notes (UNDER DEVELOPMENT)
+####################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9, 1.10 and 1.11.
+
+Minor changes
+-------------
+
+* Permission name strings are now translatable

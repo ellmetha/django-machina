@@ -6,6 +6,14 @@ Release notes
 
 Here are listed the release notes for each version of *django-machina*.
 
+Django-machina 0.6
+------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    v0.6
+
 Django-machina 0.5
 ------------------
 

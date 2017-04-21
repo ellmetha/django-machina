@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import collections
 import datetime as dt
 from functools import reduce
@@ -28,22 +29,25 @@ get_anonymous_user_forum_key = get_class(
 
 
 class PermissionHandler(object):
+    """ Defines filter / access logic related to forums.
+
+    The ``PermissionHandler`` class allows to filter lists of forums and to perform permission
+    verifications on forums. It uses the ``ForumPermissionChecker`` class to perform these
+    verifications.
+
     """
-    The PermissionHandler allows to filter lists of forums and to perform
-    permission verifications on forums. It uses the ForumPermissionChecker
-    class to perform these verifications.
-    """
+
     def __init__(self):
-        # This dictionary will store the forums that are granted for a specific
-        # lit of permission codenames and a given user.
+        # This dictionary will store the forums that are granted for a specific lit of permission
+        # codenames and a given user.
         self._granted_forums_cache = {}
 
-        # This one will store the ancestors of the forums that will be used to
-        # perform permission checks.
+        # This one will store the ancestors of the forums that will be used to perform permission
+        # checks.
         self._forum_ancestors_cache = {}
 
-        # This one will store ForumPermissionChecker instances for users whose
-        # permissions will be checked.
+        # This one will store ForumPermissionChecker instances for users whose permissions will be
+        # checked.
         self._user_perm_checkers_cache = {}
 
     # Filtering methods

@@ -7,18 +7,27 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+
+from machina.core.loading import get_class
+
+PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 
 
 @python_2_unicode_compatible
 class AbstractForumPermission(models.Model):
+    """ Represents a single forum permission.
+
+    The models that subclass ``AbstractForumPermission`` can be used to define forum permissions. A
+    forum permission is basically defined by a codename and some booleans indicating if the
+    considered permission can be granted globally (in that case the permission applies to all
+    forums) or not.
+
     """
-    Represents a single forum permission.
-    """
+
     codename = models.CharField(
         max_length=150, verbose_name=_('Permission codename'), unique=True, db_index=True)
-    name = models.CharField(
-        max_length=255, verbose_name=_('Permission name'), blank=True, null=True)
 
     is_global = models.BooleanField(
         verbose_name=_('Global permission'),
@@ -36,20 +45,22 @@ class AbstractForumPermission(models.Model):
         verbose_name_plural = _('Forum permissions')
 
     def __str__(self):
-        if self.name:
-            return '{} - {}'.format(self.codename, self.name)
-        return self.codename
+        return '{} - {}'.format(self.codename, self.name)
 
     def clean(self):
         super(AbstractForumPermission, self).clean()
         if not self.is_global and not self.is_local:
             raise ValidationError(_('A forum permission should be at least either global or local'))
 
+    @cached_property
+    def name(self):
+        perm_config = PermissionConfig().get(self.codename)
+        return perm_config['label'] if perm_config else None
+
 
 class BaseAuthForumPermission(models.Model):
-    """
-    Represents a per-auth-component forum object permission.
-    """
+    """ Represents a per-auth-component forum object permission. """
+
     permission = models.ForeignKey(
         'forum_permission.ForumPermission', on_delete=models.CASCADE,
         verbose_name=_('Forum permission'))
@@ -73,9 +84,8 @@ class BaseAuthForumPermission(models.Model):
 
 @python_2_unicode_compatible
 class AbstractUserForumPermission(BaseAuthForumPermission):
-    """
-    Represents a per-user forum object permission.
-    """
+    """ Represents a per-user forum object permission. """
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,
         verbose_name=_('User'))
@@ -104,9 +114,8 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
 
 @python_2_unicode_compatible
 class AbstractGroupForumPermission(BaseAuthForumPermission):
-    """
-    Represents a per-group forum object permission.
-    """
+    """ Represents a per-group forum object permission. """
+
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name=_('Group'))
 
     class Meta:
