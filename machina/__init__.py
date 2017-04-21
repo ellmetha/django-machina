@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+    Django-machina
+    ==============
+
+    Django-machina is a Django forum engine for building powerful community driven websites.
+
+"""
+
 from __future__ import unicode_literals
 import os
 

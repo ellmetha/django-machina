@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+    Machina apps
+    ============
+
+    This module defines the top-level applications that are publicly made available to the users of
+    the application through URLs.
+
+"""
+
 from __future__ import unicode_literals
 
 from django.conf.urls import include
@@ -11,6 +20,8 @@ from machina.core.loading import get_class
 
 
 class BoardApp(Application):
+    """ Defines the top-level machina public applications. """
+
     name = None
 
     forum_app = get_class('forum.app', 'application')
