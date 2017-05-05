@@ -11,3 +11,4 @@ Minor changes
 -------------
 
 * Permission name strings are now translatable
+* Improve performances related to tracking operations
