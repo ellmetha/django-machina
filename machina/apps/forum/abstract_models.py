@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Sum
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -66,6 +67,10 @@ class AbstractForum(MPTTModel, DatedModel):
         verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
     topics_count = models.PositiveIntegerField(
         verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
+    direct_posts_count = models.PositiveIntegerField(
+        verbose_name=_('Direct number of posts'), editable=False, blank=True, default=0)
+    direct_topics_count = models.PositiveIntegerField(
+        verbose_name=_('Direct number of topics'), editable=False, blank=True, default=0)
     link_redirects_count = models.PositiveIntegerField(
         verbose_name=_('Track link redirects count'), editable=False, blank=True, default=0)
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
@@ -168,24 +173,28 @@ class AbstractForum(MPTTModel, DatedModel):
         # Fetch the list of ids of all descendant forums including the current one
         forum_ids = self.get_descendants(include_self=True).values_list('id', flat=True)
 
-        # Determine the list of the associated topics, that is the list of topics
-        # associated with the current forum plus the list of all topics associated
-        # with the descendant forums.
+        # Determine the list of the associated topics, that is the list of topics associated with
+        # the current forum plus the list of all topics associated with the descendant forums.
         topic_klass = get_model('forum_conversation', 'Topic')
         topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-last_post_on')
         approved_topics = topics.filter(approved=True)
+        direct_approved_topics = self.topics.filter(approved=True)
 
+        # Compute the topics count and the direct topics count.
         self.topics_count = approved_topics.count()
-        # Compute the forum level posts count (only approved posts are recorded)
-        posts_count = sum(topic.posts_count for topic in topics)
-        self.posts_count = posts_count
+        self.direct_topics_count = direct_approved_topics.count()
+        # Compute the forum posts count and the direct posts count.
+        self.posts_count = approved_topics.aggregate(
+            total_posts_count=Sum('posts_count'))['total_posts_count'] or 0
+        self.direct_posts_count = direct_approved_topics.aggregate(
+            total_posts_count=Sum('posts_count'))['total_posts_count'] or 0
 
-        # Force the forum 'last_post_on' date to the one associated with the topic with
-        # the latest post.
+        # Force the forum 'last_post_on' date to the one associated with the topic with the latest
+        # post.
         self.last_post_on = approved_topics[0].last_post_on if len(approved_topics) else None
 
-        # Any save of a forum triggered from the update_tracker process will not result
-        # in checking for a change of the forum's parent.
+        # Any save of a forum triggered from the update_tracker process will not result in checking
+        # for a change of the forum's parent.
         self._simple_save()
 
         # Trigger the parent trackers update if necessary
