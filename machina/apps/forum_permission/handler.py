@@ -75,7 +75,8 @@ class PermissionHandler(object):
         if not user.is_superuser:
             forums = self.get_readable_forums(forums, user)
 
-        return Post.approved_objects.filter(topic__forum__in=forums).order_by('-created').first()
+        return Post.approved_objects.filter(topic__forum__in=forums).order_by('-created').first()\
+            .select_related('topic', 'poster')
 
     def get_readable_forums(self, qs, user):
         """ Returns a queryset of forums that can be read by the considered user. """
