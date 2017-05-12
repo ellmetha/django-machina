@@ -1,0 +1,14 @@
+###############################################
+Django-machina 0.5.4 release notes (2017-05-11)
+###############################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9, 1.10 and 1.11.
+
+Minor changes
+-------------
+
+* Fixed a security issue that allowed authenticated users to get permissions granted for forums when
+  using the ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting

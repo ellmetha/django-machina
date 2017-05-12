@@ -642,6 +642,19 @@ class TestPermissionHandler(object):
             == set(Forum.objects.all())
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
 
+    def test_filter_methods_can_fallback_to_default_permissions_but_prevent_access_to_non_granted_forums(self):  # noqa: E501
+        # Setup
+        codenames = [
+            'can_vote_in_polls',
+            'can_add_announcements',
+        ]
+        assign_perm('can_vote_in_polls', self.u1, forum=self.forum_2, has_perm=False)
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = codenames
+        # Run & check
+        assert set(self.perm_handler._get_forums_for_user(self.u1, codenames)) \
+            == set(Forum.objects.exclude(pk=self.forum_2.pk))
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
+
     def test_knows_if_a_user_can_subscribe_to_topics(self):
         # Setup
         u2 = UserFactory.create()
