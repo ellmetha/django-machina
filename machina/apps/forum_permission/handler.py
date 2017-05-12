@@ -448,7 +448,7 @@ class PermissionHandler(object):
             if not user.is_anonymous() and not forum_objects.exists() \
                     and set(perm_codenames).issubset(set(
                         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
-                forum_objects = forum_queryset
+                forum_objects = forum_queryset.filter(~Q(pk__in=nongranted_forum_ids))
 
             if use_tree_hierarchy:
                 forum_objects = self._filter_granted_forums_using_tree(forum_objects)
