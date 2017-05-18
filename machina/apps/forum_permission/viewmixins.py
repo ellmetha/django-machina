@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.shortcuts import resolve_url
 from django.utils.http import urlquote
 from django.utils.six import string_types
 
@@ -90,7 +91,7 @@ class PermissionRequiredMixin(object):
 
         if not has_permissions and not user.is_authenticated():
             return HttpResponseRedirect('{}?{}={}'.format(
-                self.login_url,
+                resolve_url(self.login_url),
                 self.redirect_field_name,
                 urlquote(request.get_full_path())
             ))
