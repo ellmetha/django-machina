@@ -2,19 +2,19 @@ django-machina
 ##############
 
 .. image:: https://readthedocs.org/projects/django-machina/badge/?style=flat-square&version=stable
-   :target: http://django-machina.readthedocs.org/en/stable/
+   :target: https://django-machina.readthedocs.org/en/stable/
    :alt: Documentation Status
 
 .. image:: https://img.shields.io/pypi/l/django-machina.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: License
 
-.. image:: http://img.shields.io/pypi/v/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/pypi/v/django-machina.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: Latest Version
 
-.. image:: http://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
-    :target: http://travis-ci.org/ellmetha/django-machina
+.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
+    :target: https://travis-ci.org/ellmetha/django-machina
     :alt: Build status
 
 .. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
@@ -36,7 +36,7 @@ It offers a full-featured yet very extensible forum solution:
 * ...
 
 .. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
-  :target: http://django-machina.readthedocs.org/
+  :target: https://django-machina.readthedocs.org/
 
 |
 
@@ -74,9 +74,9 @@ Demo sites
 
 Two demo sites can be tested:
 
-* the `vanilla project <http://vanilla.machina-forum.io/>`_ contains a standard installation of
+* the `vanilla project <https://vanilla.machina-forum.io/>`_ contains a standard installation of
   *django-machina* without customization
-* the `demo project <http://demo.machina-forum.io/>`_ showcases the customization possibilities of
+* the `demo project <https://demo.machina-forum.io/>`_ showcases the customization possibilities of
   *django-machina*
 
 Authors
