@@ -1,0 +1,15 @@
+###############################################
+Django-machina 0.5.5 release notes (2017-05-20)
+###############################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9, 1.10 and 1.11.
+
+Minor changes
+-------------
+
+* Fixed login url resolution to avoid DisallowedRedirect errors when permission checks fail (`#65`_)
+
+.. _`#65`: https://github.com/ellmetha/django-machina/pull/65
