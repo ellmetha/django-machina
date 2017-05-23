@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django import template
+from django.utils.safestring import mark_safe
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -16,12 +17,12 @@ register = template.Library()
 
 @register.assignment_tag(takes_context=True)
 def get_forum_last_post(context, forum, user):
-    """
-    This will return the last post that can be read by the passed user (permissions check).
+    """ Returns the last post that can be read by the passed user (permissions check).
 
     Usage::
 
         {% get_forum_last_post forum request.user as var %}
+
     """
     request = context.get('request', None)
     perm_handler = request.forum_permission_handler if request else PermissionHandler()
@@ -31,26 +32,62 @@ def get_forum_last_post(context, forum, user):
     return last_post
 
 
+class RecurseTreeForumVisibilityContentNode(template.Node):
+    def __init__(self, template_nodes, forums_contents_var):
+        self.template_nodes = template_nodes
+        self.forums_contents_var = forums_contents_var
+
+    def _render_node(self, context, node):
+        bits = []
+        context.push()
+        for child in node.children:
+            bits.append(self._render_node(context, child))
+        context['node'] = node
+        context['children'] = mark_safe(''.join(bits))
+        rendered = self.template_nodes.render(context)
+        context.pop()
+        return rendered
+
+    def render(self, context):
+        forums_contents = self.forums_contents_var.resolve(context)
+        roots = forums_contents.top_nodes
+        bits = [self._render_node(context, node) for node in roots]
+        return ''.join(bits)
+
+
+@register.tag
+def recurseforumcontents(parser, token):
+    """ Iterates over the content nodes and renders the contained forum block for each node. """
+    bits = token.contents.split()
+    forums_contents_var = template.Variable(bits[1])
+
+    template_nodes = parser.parse(('endrecurseforumcontents',))
+    parser.delete_first_token()
+
+    return RecurseTreeForumVisibilityContentNode(template_nodes, forums_contents_var)
+
+
 @register.inclusion_tag('forum/forum_list.html', takes_context=True)
-def forum_list(context, forums):
-    """
+def forum_list(context, forum_visibility_contents):
+    """ Renders the considered forum list.
+
     This will render the given list of forums by respecting the order and the depth of each
     forum in the forums tree.
 
     Usage::
 
         {% forum_list my_forums %}
+
     """
     request = context.get('request', None)
     data_dict = {
-        'forums': forums,
+        'forum_contents': forum_visibility_contents,
         'user': request.user,
         'request': request,
     }
 
-    forums_copy = sorted(forums, key=lambda forum: forum.level)
-    if forums_copy:
-        root_level = forums_copy[0].level
+    root_level = forum_visibility_contents.root_level
+    if root_level is not None:
         data_dict['root_level'] = root_level
         data_dict['root_level_middle'] = root_level + 1
         data_dict['root_level_sub'] = root_level + 2

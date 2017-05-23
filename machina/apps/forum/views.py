@@ -14,6 +14,7 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
 
+ForumVisibilityContentTree = get_class('forum.visibility', 'ForumVisibilityContentTree')
 PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRequiredMixin')
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
@@ -26,17 +27,18 @@ class IndexView(ListView):
     context_object_name = 'forums'
 
     def get_queryset(self):
-        return self.request.forum_permission_handler.forum_list_filter(
-            Forum.objects.displayable_subforums(),
-            self.request.user
-        )
+        return ForumVisibilityContentTree.from_forums(
+            self.request.forum_permission_handler.forum_list_filter(
+                Forum.objects.all(), self.request.user))
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        visiblity_content_tree = context['forums']
 
-        top_level_forums = context['forums'].filter(parent__isnull=True)
-        context['total_posts_count'] = sum(f.posts_count for f in top_level_forums)
-        context['total_topics_count'] = sum(f.topics_count for f in top_level_forums)
+        # Computes some global values.
+        context['total_posts_count'] = sum(n.posts_count for n in visiblity_content_tree.top_nodes)
+        context['total_topics_count'] = sum(
+            n.topics_count for n in visiblity_content_tree.top_nodes)
 
         return context
 
@@ -85,9 +87,9 @@ class ForumView(PermissionRequiredMixin, ListView):
         context['forum'] = self.get_forum()
 
         # Get the list of forums that have the current forum as parent
-        sub_forums = Forum.objects.displayable_subforums(start_from=self.forum)
-        context['sub_forums'] = self.request.forum_permission_handler \
-            .forum_list_filter(sub_forums, self.request.user)
+        context['sub_forums'] = ForumVisibilityContentTree.from_forums(
+            self.request.forum_permission_handler.forum_list_filter(
+                context['forum'].get_descendants(), self.request.user))
 
         # The announces will be displayed on each page of the forum
         context['announces'] = list(

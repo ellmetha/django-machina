@@ -1,0 +1,120 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+from django.utils.functional import cached_property
+
+
+class ForumVisibilityContentTree(object):
+    """ Represents a tree of ``ForumVisibilityContentNode`` instances.
+
+    Such a tree can be used to easily compute sums or "global" values associated with a given set of
+    forum instances. It can be useful to display forum information to a user (eg. in a list of
+    forums, etc.).
+
+    """
+
+    def __init__(self, nodes=None):
+        # The "nodes" argument should contain a list of ForumVisibilityContentNode instances. It
+        # should be a list of all the nodes contained in the considered tree (regardless their
+        # position in the tree of forum).
+        self.nodes = nodes or []
+
+    @classmethod
+    def from_forums(cls, forums):
+        root_level = None
+        current_path = []
+        nodes = []
+
+        for forum in forums:
+            level = forum.level
+
+            # Set the root level to the top node level at the first iteration.
+            if root_level is None:
+                root_level = level
+
+            # Initializes a visiblity forum node associated with current forum instance.
+            vcontent_node = ForumVisibilityContentNode(forum)
+
+            # Computes a relative level associated to the node.
+            relative_level = level - root_level
+            vcontent_node.relative_level = relative_level
+
+            # All children nodes will be stored in an array attached to the current node.
+            vcontent_node.children = []
+
+            # Removes the forum that are not in the current branch.
+            while len(current_path) > relative_level:
+                current_path.pop(-1)
+
+            if level != root_level:
+                # Update the parent of the current forum.
+                parent_node = current_path[-1]
+                vcontent_node.parent = parent_node
+                parent_node.children.append(vcontent_node)
+
+            # Sets visible flag if applicable.
+            vcontent_node.visible = (
+                (relative_level == 0) or (forum.display_sub_forum_list and relative_level == 1) or
+                (forum.is_category and relative_level == 1) or
+                (relative_level == 2 and vcontent_node.parent.parent.obj.is_category and
+                 vcontent_node.parent.obj.is_forum))
+
+            # Add the current forum to the end of the current branch and inserts the node inside the
+            # final node dictionary.
+            current_path.append(vcontent_node)
+            nodes.append(vcontent_node)
+
+        return cls(nodes=nodes)
+
+    def __iter__(self):
+        return iter(self.visible_nodes)
+
+    @cached_property
+    def root_level(self):
+        """ Returns the root level of the considered tree. """
+        return self.top_nodes[0].level if self.top_nodes else None
+
+    @cached_property
+    def top_nodes(self):
+        """ Returns only the node without immediate parent. """
+        return list(filter(lambda n: not n.relative_level, self.nodes))
+
+    @cached_property
+    def visible_forums(self):
+        """ Returns only the forum instances associated with the current tree. """
+        return [n.obj for n in self.visible_nodes]
+
+    @cached_property
+    def visible_nodes(self):
+        """ Returns only the visible nodes associated with the current tree. """
+        return list(filter(lambda n: n.visible, self.nodes))
+
+
+class ForumVisibilityContentNode(object):
+    """ Represents a forum object and its "visibility content".
+
+    This class provides common properties that should help computing values such as posts counts or
+    topics counts for a specific forum instance.
+    """
+
+    def __init__(self, obj):
+        self.obj = obj
+        self.level = obj.level
+        self.relative_level = None
+        self.parent = None
+        self.children = []
+        self.visible = False
+
+    @cached_property
+    def last_post_on(self):
+        children_last_post_on = max(n.last_post_on for n in self.children)
+        return max(self.obj.last_post_on, children_last_post_on)
+
+    @cached_property
+    def posts_count(self):
+        return self.obj.direct_posts_count + sum(n.posts_count for n in self.children)
+
+    @cached_property
+    def topics_count(self):
+        return self.obj.direct_topics_count + sum(n.topics_count for n in self.children)

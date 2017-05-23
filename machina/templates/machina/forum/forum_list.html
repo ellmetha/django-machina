@@ -7,15 +7,15 @@
 <div class="row">
     <div class="col-xs-12">
         {% get_unread_forums user as unread_forums %}
-        {% if forums %}
-            {% recursetree forums %}
+        {% if forum_contents %}
+            {% recurseforumcontents forum_contents %}
                 {% if node.level == root_level %}
-                    {% if node.is_category %}
+                    {% if node.obj.is_category %}
                         <div class="panel panel-default forumlist">
                             <div class="panel-heading">
                                 <div class="row panel-row">
                                     <div class="col-md-8 col-sm-9 col-xs-12 forum-name-col">
-                                        <h3 class="panel-title"><a href="{% url 'forum:forum' node.slug node.id %}" class="brand">{{ node.name }}</a></h3>
+                                        <h3 class="panel-title"><a href="{% url 'forum:forum' node.obj.slug node.obj.id %}" class="brand">{{ node.obj.name }}</a></h3>
                                     </div>
                                     <div class="col-md-1 forum-count-col hidden-sm hidden-xs">{% trans "Topics" %}</div>
                                     <div class="col-md-1 forum-count-col hidden-sm hidden-xs">{% trans "Posts" %}</div>
@@ -27,8 +27,8 @@
                             </div>
                         </div>
                     {% else %}
-                        {% with node.get_previous_sibling as previous_sibling %}
-                            {% if previous_sibling and previous_sibling.is_category or not previous_sibling in forums or not previous_sibling %}
+                        {% with node.obj.get_previous_sibling as previous_sibling %}
+                            {% if previous_sibling and previous_sibling.is_category or not previous_sibling in forum_contents.visible_forums or not previous_sibling %}
                                 <div class="panel panel-default forumlist">
                                     <div class="panel-heading">
                                         <div class="row panel-row">
@@ -44,7 +44,7 @@
                             {% endif %}
                         {% endwith %}
                         <div class="row panel-row">
-                            {% if not node.is_link %}
+                            {% if not node.obj.is_link %}
                                 <div class="col-md-7 col-sm-9 col-xs-11 forum-name">
                                     <table class="forum-data-table">
                                         <tr>
@@ -52,28 +52,28 @@
                                                 <i class="fa fa-circle-o fa-2x"></i>
                                             </td>
                                             <td>
-                                                {% if node.image %}
+                                                {% if node.obj.image %}
                                                     <td>
                                                         <div class="visible-md visible-lg forum-image">
-                                                            <img src="{{ node.image.url }}" alt="{{ node.name }}" />
+                                                            <img src="{{ node.obj.image.url }}" alt="{{ node.obj.name }}" />
                                                         </div>
                                                     </td>
                                                 {% endif %}
                                             <td>
-                                                <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
+                                                <a href="{% url 'forum:forum' node.obj.slug node.obj.id %}" class="forum-name-link">{{ node.obj.name }}</a>
                                                 <div class="forum-description">
-                                                    {{ node.description.rendered }}
+                                                    {{ node.obj.description.rendered }}
                                                 </div>
                                                 <div class="sub-forums">{{ children }}</div>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-md-1 forum-syndication hidden-sm hidden-xs"><a href="{% url 'forum_feeds:forum_latest_topics_with_descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></div>
+                                <div class="col-md-1 forum-syndication hidden-sm hidden-xs"><a href="{% url 'forum_feeds:forum_latest_topics_with_descendants' node.obj.slug node.obj.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs">{{ node.topics_count }}</div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs">{{ node.posts_count }}</div>
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-last-post">
-                                    {% get_forum_last_post node user as last_post %}
+                                    {% get_forum_last_post node.obj user as last_post %}
                                       {% if last_post %}
                                         {% if last_post.poster %}
                                           {% url 'forum_member:profile' last_post.poster_id as poster_url %}
@@ -85,7 +85,7 @@
                                             By: {{ poster_username }}
                                           {% endblocktrans %}
                                         {% endif %}
-                                        &nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                        &nbsp;<a href="{% url 'forum_conversation:topic' node.obj.slug node.obj.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                         <br />
                                         {{ last_post.created }}
                                     {% else %}
@@ -100,9 +100,9 @@
                                                 <i class="fa fa-link fa-2x"></i>
                                             </td>
                                             <td>
-                                                <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
+                                                <a href="{% url 'forum:forum' node.obj.slug node.obj.id %}" class="forum-name-link">{{ node.obj.name }}</a>
                                                 <div class="forum-description">
-                                                    {{ node.description.rendered }}
+                                                    {{ node.obj.description.rendered }}
                                                 </div>
                                             </td>
                                         </tr>
@@ -111,51 +111,51 @@
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs"></div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs"></div>
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-link-redirects">
-                                    {% if node.link_redirects %}
-                                        {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
+                                    {% if node.obj.link_redirects %}
+                                        {% trans "Total redirects:" %}&nbsp;{{ node.obj.link_redirects_count|default:"0" }}
                                     {% endif %}
                                 </div>
                             {% endif %}
                         </div>
-                        {% with node.get_next_sibling as next_sibling %}
-                            {% if next_sibling and next_sibling.is_category or not next_sibling in forums or not next_sibling %}
+                        {% with node.obj.get_next_sibling as next_sibling %}
+                            {% if next_sibling and next_sibling.is_category or not next_sibling in forum_contents.visible_forums or not next_sibling %}
                                     </div>
                                 </div>
                             {% endif %}
                         {% endwith %}
                     {% endif %}
                 {% elif node.level == root_level_middle %}
-                    {% if node.parent.is_category %}
+                    {% if node.parent.obj.is_category %}
                         <div class="row panel-row">
-                            {% if not node.is_link %}
+                            {% if not node.obj.is_link %}
                                 <div class="col-md-7 col-sm-9 col-xs-11 forum-name">
                                     <table class="forum-data-table">
                                         <tr>
                                             <td class="forum-icon {% if node in unread_forums %}unread{% endif %}">
                                                 <i class="fa fa-circle-o fa-2x"></i>
                                             </td>
-                                            {% if node.image %}
+                                            {% if node.obj.image %}
                                                 <td>
                                                     <div class="visible-md visible-lg forum-image">
-                                                        <img src="{{ node.image.url }}" alt="{{ node.name }}" />
+                                                        <img src="{{ node.obj.image.url }}" alt="{{ node.obj.name }}" />
                                                     </div>
                                                 </td>
                                             {% endif %}
                                             <td>
-                                                <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
+                                                <a href="{% url 'forum:forum' node.obj.slug node.obj.id %}" class="forum-name-link">{{ node.obj.name }}</a>
                                                 <div class="forum-description">
-                                                    {{ node.description.rendered }}
+                                                    {{ node.obj.description.rendered }}
                                                 </div>
                                                 <div class="sub-forums">{{ children }}</div>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-md-1 forum-syndication hidden-sm hidden-xs"><a href="{% url 'forum_feeds:forum_latest_topics_with_descendants' node.slug node.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></div>
+                                <div class="col-md-1 forum-syndication hidden-sm hidden-xs"><a href="{% url 'forum_feeds:forum_latest_topics_with_descendants' node.obj.slug node.obj.pk %}" title="{% trans 'RSS feed' %}"><i class="fa fa-rss-square"></i></a></div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs">{{ node.topics_count }}</div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs">{{ node.posts_count }}</div>
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-last-post">
-                                    {% get_forum_last_post node user as last_post %}
+                                    {% get_forum_last_post node.obj user as last_post %}
                                     {% if last_post %}
                                       {% if last_post.poster %}
                                         {% url 'forum_member:profile' last_post.poster_id as poster_url %}
@@ -167,7 +167,7 @@
                                           By: {{ poster_username }}
                                         {% endblocktrans %}
                                       {% endif %}
-                                        &nbsp;<a href="{% url 'forum_conversation:topic' node.slug node.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
+                                        &nbsp;<a href="{% url 'forum_conversation:topic' node.obj.slug node.obj.pk last_post.topic.slug last_post.topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fa fa-arrow-circle-o-right "></i></a>
                                         <br />
                                         {{ last_post.created }}
                                     {% else %}
@@ -182,9 +182,9 @@
                                                 <i class="fa fa-link fa-2x"></i>
                                             </td>
                                             <td>
-                                                <a href="{% url 'forum:forum' node.slug node.id %}" class="forum-name-link">{{ node.name }}</a>
+                                                <a href="{% url 'forum:forum' node.obj.slug node.obj.id %}" class="forum-name-link">{{ node.obj.name }}</a>
                                                 <div class="forum-description">
-                                                    {{ node.description.rendered }}
+                                                    {{ node.obj.description.rendered }}
                                                 </div>
                                             </td>
                                         </tr>
@@ -193,25 +193,25 @@
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs"></div>
                                 <div class="col-md-1 forum-count hidden-sm hidden-xs"></div>
                                 <div class="col-md-2 col-sm-3 hidden-xs forum-last-post forum-link-redirects">
-                                    {% if node.link_redirects %}
-                                        {% trans "Total redirects:" %}&nbsp;{{ node.link_redirects_count|default:"0" }}
+                                    {% if node.obj.link_redirects %}
+                                        {% trans "Total redirects:" %}&nbsp;{{ node.obj.link_redirects_count|default:"0" }}
                                     {% endif %}
                                 </div>
                             {% endif %}
                         </div>
                     {% else %}
-                        {% if not node.get_previous_sibling %}
+                        {% if not node.obj.get_previous_sibling %}
                             <b>{% trans "Subforums:" %}</b>&nbsp;
                         {% endif %}
-                        <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.slug node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+                        <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.obj.slug node.obj.id %}">{{ node.obj.name }}</a>&nbsp;&nbsp;
                     {% endif %}
                 {% elif node.level == root_level_sub %}
-                    {% if not node.get_previous_sibling %}
+                    {% if not node.obj.get_previous_sibling %}
                         <b>{% trans "Subforums:" %}</b>&nbsp;
                     {% endif %}
-                    <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.slug node.id %}">{{ node.name }}</a>&nbsp;&nbsp;
+                    <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.obj.slug node.obj.id %}">{{ node.obj.name }}</a>&nbsp;&nbsp;
                 {% endif %}
-            {% endrecursetree %}
+            {% endrecurseforumcontents %}
         {% else %}
             <div class="panel panel-default forumlist">
                 <div class="panel-heading">

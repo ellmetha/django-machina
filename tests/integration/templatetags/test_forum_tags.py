@@ -22,6 +22,7 @@ Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
+ForumVisibilityContentTree = get_class('forum.visibility', 'ForumVisibilityContentTree')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
@@ -91,11 +92,11 @@ class TestForumListTag(object):
         request.user = self.user
         ForumPermissionMiddleware().process_request(request)
         t = Template(self.loadstatement + '{% forum_list forums %}')
-        c = Context({'forums': forums, 'request': request})
+        c = Context({'forums': ForumVisibilityContentTree.from_forums(forums), 'request': request})
         expected_out = render_to_string(
             'machina/forum/forum_list.html',
             {
-                'forums': forums,
+                'forum_contents': ForumVisibilityContentTree.from_forums(forums),
                 'user': self.user,
                 'root_level': 0,
                 'root_level_middle': 1,
