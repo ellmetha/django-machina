@@ -16,11 +16,13 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TrackingHandler(object):
+    """ Provides utility methods to compute unread forums and topics.
+
+    The TrackingHandler allows to filter list of forums and list of topics in order to get only the
+    forums which contain unread topics or the unread topics.
+
     """
-    The TrackingHandler allows to filter list of forums and list of topics
-    in order to get only the forums which contain unread topics or the unread
-    topics.
-    """
+
     def __init__(self, request=None):
         self.request = request
         self.perm_handler = request.forum_permission_handler if request \

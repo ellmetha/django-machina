@@ -43,8 +43,8 @@
                     </div>
                 </td>
                 <td class="forum-details-cell">
-                    {% if forum.is_category or forum.is_forum %}
-                        {% trans "Topics:" %} <b>{{ forum.topics_count }}</b> / {% trans "Posts:" %} <b>{{ forum.posts_count }}</b>
+                    {% if forum.is_forum %}
+                        {% trans "Topics:" %} <b>{{ forum.direct_topics_count }}</b> / {% trans "Posts:" %} <b>{{ forum.direct_posts_count }}</b>
                     {% elif forum.is_link %}
                         {% trans "Link:" %} <a href="{{ forum.link }}">{{ forum.link|truncatechars:60 }}</a>
                     {% endif %}

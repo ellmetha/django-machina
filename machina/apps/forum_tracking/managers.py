@@ -4,6 +4,10 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from machina.core.loading import get_class
+
+ForumVisibilityContentTree = get_class('forum.visibility', 'ForumVisibilityContentTree')
+
 
 class ForumReadTrackManager(models.Manager):
     """ Provides useful manager methods for the ``ForumReadTrack`` model. """
@@ -16,6 +20,8 @@ class ForumReadTrackManager(models.Manager):
         final list.
         """
         unread_forums = []
+        visibility_contents = ForumVisibilityContentTree.from_forums(forums)
+        forum_ids_to_visibility_nodes = visibility_contents.as_dict
 
         tracks = super(ForumReadTrackManager, self).get_queryset().select_related('forum').filter(
             user=user,
@@ -23,7 +29,8 @@ class ForumReadTrackManager(models.Manager):
         tracked_forums = []
 
         for track in tracks:
-            if (track.forum.last_post_on and track.mark_time < track.forum.last_post_on) \
+            forum_last_post_on = forum_ids_to_visibility_nodes[track.forum_id].last_post_on
+            if (forum_last_post_on and track.mark_time < forum_last_post_on) \
                     and track.forum not in unread_forums:
                 unread_forums.extend(track.forum.get_ancestors(include_self=True))
             tracked_forums.append(track.forum)

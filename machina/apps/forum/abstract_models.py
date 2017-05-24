@@ -14,7 +14,6 @@ from mptt.models import TreeForeignKey
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import slugify
-from machina.core.db.models import get_model
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
@@ -160,15 +159,7 @@ class AbstractForum(MPTTModel, DatedModel):
         super(AbstractForum, self).save(*args, **kwargs)
 
     def update_trackers(self):
-        # Fetch the list of ids of all descendant forums including the current one
-        forum_ids = self.get_descendants(include_self=True).values_list('id', flat=True)
-
-        # Determine the list of the associated topics, that is the list of topics associated with
-        # the current forum plus the list of all topics associated with the descendant forums.
-        topic_klass = get_model('forum_conversation', 'Topic')
-        topics = topic_klass.objects.filter(forum__id__in=forum_ids).order_by('-last_post_on')
-        approved_topics = topics.filter(approved=True)
-        direct_approved_topics = self.topics.filter(approved=True)
+        direct_approved_topics = self.topics.filter(approved=True).order_by('-last_post_on')
 
         # Compute the direct topics count and the direct posts count.
         self.direct_topics_count = direct_approved_topics.count()
@@ -177,7 +168,8 @@ class AbstractForum(MPTTModel, DatedModel):
 
         # Force the forum 'last_post_on' date to the one associated with the topic with the latest
         # post.
-        self.last_post_on = approved_topics[0].last_post_on if len(approved_topics) else None
+        self.last_post_on = direct_approved_topics[0].last_post_on \
+            if direct_approved_topics.exists() else None
 
         # Any save of a forum triggered from the update_tracker process will not result in checking
         # for a change of the forum's parent.

@@ -33,7 +33,7 @@ class ForumVisibilityContentTree(object):
             if root_level is None:
                 root_level = level
 
-            # Initializes a visiblity forum node associated with current forum instance.
+            # Initializes a visibility forum node associated with current forum instance.
             vcontent_node = ForumVisibilityContentNode(forum)
 
             # Computes a relative level associated to the node.
@@ -85,6 +85,11 @@ class ForumVisibilityContentTree(object):
         return iter(self.visible_nodes)
 
     @cached_property
+    def as_dict(self):
+        """ Returns a dictionary of forum ID / related node. """
+        return {n.obj.id: n for n in self.nodes}
+
+    @cached_property
     def root_level(self):
         """ Returns the root level of the considered tree. """
         return self.top_nodes[0].level if self.top_nodes else None
@@ -122,8 +127,12 @@ class ForumVisibilityContentNode(object):
 
     @cached_property
     def last_post_on(self):
-        children_last_post_on = max(n.last_post_on for n in self.children)
-        return max(self.obj.last_post_on, children_last_post_on)
+        children_last_post_dates = [
+            n.last_post_on for n in self.children if n.last_post_on is not None]
+        children_last_post_on = max(children_last_post_dates) if children_last_post_dates else None
+        if children_last_post_on and self.obj.last_post_on:
+            return max(self.obj.last_post_on, children_last_post_on)
+        return children_last_post_on or self.obj.last_post_on
 
     @cached_property
     def posts_count(self):
