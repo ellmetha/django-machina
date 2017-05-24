@@ -59,7 +59,7 @@ class ForumAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }],
     )
-    list_display = ('name', 'type', 'topics_count', 'posts_count',)
+    list_display = ('name', 'type', 'direct_topics_count', 'direct_posts_count',)
     search_fields = ('name',)
 
     editpermissions_index_view_template_name = 'admin/forum/forum/editpermissions_index.html'

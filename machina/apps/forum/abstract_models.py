@@ -15,12 +15,9 @@ from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.core.compat import slugify
 from machina.core.db.models import get_model
-from machina.core.loading import get_class
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
-
-ForumManager = get_class('forum.managers', 'ForumManager')
 
 
 @python_2_unicode_compatible
@@ -37,14 +34,13 @@ class AbstractForum(MPTTModel, DatedModel):
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
 
-    description = MarkupTextField(
-        verbose_name=_('Description'),
-        null=True, blank=True)
+    description = MarkupTextField(verbose_name=_('Description'), null=True, blank=True)
 
     # A forum can come with an image (eg. a small logo)
-    image = ExtendedImageField(verbose_name=_('Forum image'), null=True, blank=True,
-                               upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
-                               **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS)
+    image = ExtendedImageField(
+        verbose_name=_('Forum image'), null=True, blank=True,
+        upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
+        **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS)
 
     # Forums can be simple links (eg. wiki, documentation, etc)
     link = models.URLField(verbose_name=_('Forum link'), null=True, blank=True)
@@ -63,10 +59,6 @@ class AbstractForum(MPTTModel, DatedModel):
         choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
 
     # Tracking data (only approved topics and posts are recorded)
-    posts_count = models.PositiveIntegerField(
-        verbose_name=_('Number of posts'), editable=False, blank=True, default=0)
-    topics_count = models.PositiveIntegerField(
-        verbose_name=_('Number of topics'), editable=False, blank=True, default=0)
     direct_posts_count = models.PositiveIntegerField(
         verbose_name=_('Direct number of posts'), editable=False, blank=True, default=0)
     direct_topics_count = models.PositiveIntegerField(
@@ -80,8 +72,6 @@ class AbstractForum(MPTTModel, DatedModel):
         verbose_name=_('Display in parent-forums legend'),
         help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
         default=True)
-
-    objects = ForumManager()
 
     class Meta:
         abstract = True
@@ -180,12 +170,8 @@ class AbstractForum(MPTTModel, DatedModel):
         approved_topics = topics.filter(approved=True)
         direct_approved_topics = self.topics.filter(approved=True)
 
-        # Compute the topics count and the direct topics count.
-        self.topics_count = approved_topics.count()
+        # Compute the direct topics count and the direct posts count.
         self.direct_topics_count = direct_approved_topics.count()
-        # Compute the forum posts count and the direct posts count.
-        self.posts_count = approved_topics.aggregate(
-            total_posts_count=Sum('posts_count'))['total_posts_count'] or 0
         self.direct_posts_count = direct_approved_topics.aggregate(
             total_posts_count=Sum('posts_count'))['total_posts_count'] or 0
 

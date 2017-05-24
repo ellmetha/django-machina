@@ -53,7 +53,21 @@ class ForumVisibilityContentTree(object):
                 vcontent_node.parent = parent_node
                 parent_node.children.append(vcontent_node)
 
-            # Sets visible flag if applicable.
+            # Sets visible flag if applicable. The visible flag is used to determine whether a forum
+            # can be seen in a forum list or not. A forum can be seen if one of the following
+            # statements is true:
+            #
+            # * the forum is a direct child of the starting forum for the considered level
+            # * the forum have a parent which is a category and this category is a direct child of
+            #   the starting forum
+            # * the forum have its 'display_sub_forum_list' option set to True and have a parent
+            #   which is another forum. The latter is a direct child of the starting forum
+            # * the forum have its 'display_sub_forum_list' option set to True and have a parent
+            #   which is another forum. The later have a parent which is a category and this
+            #   category is a direct child of the starting forum
+            #
+            # If forums at the root level don't have parents, the visible forums are those that can
+            # be seen from the root of the forums tree.
             vcontent_node.visible = (
                 (relative_level == 0) or (forum.display_sub_forum_list and relative_level == 1) or
                 (forum.is_category and relative_level == 1) or

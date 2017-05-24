@@ -143,8 +143,8 @@ class TestTopic(object):
         self.topic.save()
         # Check
         assert self.topic.forum == new_top_level_forum
-        assert new_top_level_forum.topics_count == 1
-        assert new_top_level_forum.posts_count == self.topic.posts_count
+        assert new_top_level_forum.direct_topics_count == 1
+        assert new_top_level_forum.direct_topics_count == self.topic.posts_count
 
     def test_can_trigger_the_update_of_the_counters_of_a_previous_forum(self):
         # Setup
@@ -155,8 +155,8 @@ class TestTopic(object):
         # Check
         self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)
         assert self.topic.forum == new_top_level_forum
-        assert self.top_level_forum.topics_count == 0
-        assert self.top_level_forum.posts_count == 0
+        assert self.top_level_forum.direct_topics_count == 0
+        assert self.top_level_forum.direct_posts_count == 0
 
     def test_knows_if_a_user_has_subscribed_to_the_topic(self):
         # Setup

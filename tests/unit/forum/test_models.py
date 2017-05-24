@@ -62,14 +62,14 @@ class TestForum(object):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
-        assert self.top_level_forum.posts_count == topic.posts.filter(approved=True).count()
-        assert self.top_level_forum.topics_count == self.top_level_forum.topics.count()
+        assert self.top_level_forum.direct_posts_count == topic.posts.filter(approved=True).count()
+        assert self.top_level_forum.direct_topics_count == self.top_level_forum.topics.count()
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
-        assert self.top_level_forum.posts_count == \
+        assert self.top_level_forum.direct_posts_count == \
             topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
-        assert self.top_level_forum.topics_count == \
+        assert self.top_level_forum.direct_topics_count == \
             self.top_level_forum.topics.filter(approved=True).count()
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
@@ -77,32 +77,6 @@ class TestForum(object):
         assert self.top_level_cat.is_category
         assert self.top_level_forum.is_forum
         assert self.top_level_link.is_link
-
-    def test_can_trigger_the_update_of_the_counters_of_a_new_parent(self):
-        # Setup
-        topic = create_topic(forum=self.top_level_forum, poster=self.u1)
-        PostFactory.create(topic=topic, poster=self.u1)
-        PostFactory.create(topic=topic, poster=self.u1)
-        # Run
-        self.top_level_forum.parent = self.top_level_cat
-        self.top_level_forum.save()
-        # Check
-        assert self.top_level_cat.posts_count == self.top_level_forum.posts_count
-        assert self.top_level_cat.topics_count == self.top_level_forum.topics_count
-
-    def test_can_trigger_the_update_of_the_counters_of_a_previous_parent(self):
-        # Setup
-        sub_level_forum = create_forum(parent=self.top_level_forum)
-        topic = create_topic(forum=sub_level_forum, poster=self.u1)
-        PostFactory.create(topic=topic, poster=self.u1)
-        PostFactory.create(topic=topic, poster=self.u1)
-        # Run
-        sub_level_forum.parent = self.top_level_cat
-        sub_level_forum.save()
-        # Check
-        self.top_level_forum = Forum.objects.get(pk=self.top_level_forum.pk)
-        assert self.top_level_forum.posts_count == 0
-        assert self.top_level_forum.topics_count == 0
 
     def test_stores_its_last_post_datetime(self):
         # Setup
