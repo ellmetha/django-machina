@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-xs-12">
         {% get_unread_forums user as unread_forums %}
-        {% if forum_contents %}
+        {% if forum_contents.nodes %}
             {% recurseforumcontents forum_contents %}
                 {% if node.level == root_level %}
                     {% if node.obj.is_category %}
