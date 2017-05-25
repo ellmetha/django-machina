@@ -6,7 +6,6 @@
 
 <div class="row">
     <div class="col-xs-12">
-        {% get_unread_forums user as unread_forums %}
         {% if forum_contents.nodes %}
             {% recurseforumcontents forum_contents %}
                 {% if node.level == root_level %}
@@ -27,7 +26,7 @@
                             </div>
                         </div>
                     {% else %}
-                        {% with node.obj.get_previous_sibling as previous_sibling %}
+                        {% with node.previous_sibling.obj as previous_sibling %}
                             {% if previous_sibling and previous_sibling.is_category or not previous_sibling in forum_contents.visible_forums or not previous_sibling %}
                                 <div class="panel panel-default forumlist">
                                     <div class="panel-heading">
@@ -117,7 +116,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% with node.obj.get_next_sibling as next_sibling %}
+                        {% with node.next_sibling.obj as next_sibling %}
                             {% if next_sibling and next_sibling.is_category or not next_sibling in forum_contents.visible_forums or not next_sibling %}
                                     </div>
                                 </div>
@@ -200,13 +199,13 @@
                             {% endif %}
                         </div>
                     {% else %}
-                        {% if not node.obj.get_previous_sibling %}
+                        {% if not node.previous_sibling %}
                             <b>{% trans "Subforums:" %}</b>&nbsp;
                         {% endif %}
                         <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.obj.slug node.obj.id %}">{{ node.obj.name }}</a>&nbsp;&nbsp;
                     {% endif %}
                 {% elif node.level == root_level_sub %}
-                    {% if not node.obj.get_previous_sibling %}
+                    {% if not node.previous_sibling %}
                         <b>{% trans "Subforums:" %}</b>&nbsp;
                     {% endif %}
                     <i class="fa fa-file"></i>&nbsp;<a href="{% url 'forum:forum' node.obj.slug node.obj.id %}">{{ node.obj.name }}</a>&nbsp;&nbsp;

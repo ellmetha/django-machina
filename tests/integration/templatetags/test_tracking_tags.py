@@ -72,40 +72,6 @@ class BaseTrackingTagsTestCase(object):
         return request
 
 
-class TestUnreadForumsTag(BaseTrackingTagsTestCase):
-    def test_can_determine_unread_forums(self):
-        # Setup
-        def get_rendered(user):
-            request = self.get_request()
-            request.user = user
-            ForumPermissionMiddleware().process_request(request)
-            t = Template(
-                self.loadstatement + '{% get_unread_forums request.user as unread_forums %}')
-            c = Context({'request': request})
-            rendered = t.render(c)
-
-            return c, rendered
-
-        # Run & check
-        context, rendered = get_rendered(self.u2)
-        assert rendered == ''
-        assert set(context['unread_forums']) \
-            == set([self.top_level_cat, self.forum_1, self.forum_2, ])
-
-        # forum_1 and forum_2 are now read
-        ForumReadTrackFactory.create(forum=self.forum_1, user=self.u2)
-        ForumReadTrackFactory.create(forum=self.forum_2, user=self.u2)
-        context, rendered = get_rendered(self.u2)
-        assert rendered == ''
-        assert not len(context['unread_forums'])
-
-        # A new post is created
-        PostFactory.create(topic=self.forum_2_topic, poster=self.u1)
-        context, rendered = get_rendered(self.u2)
-        assert rendered == ''
-        assert set(context['unread_forums']) == set([self.forum_2, self.top_level_cat])
-
-
 class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
     def test_can_determine_unread_forums(self):
         # Setup

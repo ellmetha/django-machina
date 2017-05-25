@@ -7,6 +7,7 @@ import datetime as dt
 from functools import reduce
 
 from django.contrib.auth import get_user_model
+from django.db import models
 from django.db.models import Q
 from django.shortcuts import _get_queryset
 from django.utils.timezone import now
@@ -78,16 +79,18 @@ class PermissionHandler(object):
         return Post.approved_objects.select_related('topic') \
             .filter(topic__forum__in=forums).order_by('-created').first()
 
-    def get_readable_forums(self, qs, user):
+    def get_readable_forums(self, forums, user):
         """ Returns a queryset of forums that can be read by the considered user. """
         # Any superuser should be able to read all the forums.
         if user.is_superuser:
-            return qs
+            return forums
 
         # Fetches the forums that can be read by the given user.
         readable_forums = self._get_forums_for_user(
             user, ['can_read_forum', ], use_tree_hierarchy=True)
-        return qs.filter(id__in=[f.id for f in readable_forums])
+        return forums.filter(id__in=[f.id for f in readable_forums]) \
+            if isinstance(forums, (models.Manager, models.QuerySet)) \
+            else list(filter(lambda f: f in readable_forums, forums))
 
     # Verification methods
     # --

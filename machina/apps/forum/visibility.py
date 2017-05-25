@@ -79,7 +79,11 @@ class ForumVisibilityContentTree(object):
             current_path.append(vcontent_node)
             nodes.append(vcontent_node)
 
-        return cls(nodes=nodes)
+        tree = cls(nodes=nodes)
+        for node in tree.nodes:
+            node.tree = tree
+
+        return tree
 
     def __iter__(self):
         return iter(self.visible_nodes)
@@ -88,6 +92,11 @@ class ForumVisibilityContentTree(object):
     def as_dict(self):
         """ Returns a dictionary of forum ID / related node. """
         return {n.obj.id: n for n in self.nodes}
+
+    @cached_property
+    def forums(self):
+        """ Returns a list of ``Forum`` instances associated with the underlying nodes. """
+        return [n.obj for n in self.nodes]
 
     @cached_property
     def root_level(self):
@@ -123,21 +132,58 @@ class ForumVisibilityContentNode(object):
         self.relative_level = None
         self.parent = None
         self.children = []
+        self.tree = None
         self.visible = False
 
     @cached_property
     def last_post_on(self):
-        children_last_post_dates = [
-            n.last_post_on for n in self.children if n.last_post_on is not None]
-        children_last_post_on = max(children_last_post_dates) if children_last_post_dates else None
+        """ Returns thee latest post date associated with the node or one of its descendants. """
+        dates = [n.last_post_on for n in self.children if n.last_post_on is not None]
+        children_last_post_on = max(dates) if dates else None
         if children_last_post_on and self.obj.last_post_on:
             return max(self.obj.last_post_on, children_last_post_on)
         return children_last_post_on or self.obj.last_post_on
 
     @cached_property
+    def next_sibling(self):
+        """ Returns the next sibling of the current node.
+
+        The next sibling is searched in the parent node if we are not considering a top-level node.
+        Otherwise it is searched inside the list of nodes (which should be sorted by tree ID) that
+        is associated with the considered tree instance.
+        """
+        if self.parent:
+            index = self.parent.index(self)
+            sibling = self.parent[index + 1] if index > len(self.parent) - 1 else None
+        else:
+            index = self.tree.nodes.index(self)
+            sibling = self.tree.nodes[index - 1] if index < len(self.tree.nodes) - 1 and \
+                self.tree.nodes[index + 1].level == self.level else None
+        return sibling
+
+    @cached_property
     def posts_count(self):
+        """ Returns the number of posts associated with the current node and its descendants. """
         return self.obj.direct_posts_count + sum(n.posts_count for n in self.children)
 
     @cached_property
+    def previous_sibling(self):
+        """ Returns the previous sibling of the current node.
+
+        The previous sibling is searched in the parent node if we are not considering a top-level
+        node. Otherwise it is searched inside the list of nodes (which should be sorted by tree ID)
+        that is associated with the considered tree instance.
+        """
+        if self.parent:
+            index = self.parent.index(self)
+            sibling = self.parent[index - 1] if index > 0 else None
+        else:
+            index = self.tree.nodes.index(self)
+            sibling = self.tree.nodes[index - 1] if index > 0 \
+                and self.tree.nodes[index - 1].level == self.level else None
+        return sibling
+
+    @cached_property
     def topics_count(self):
+        """ Returns the number of topics associated with the current node and its descendants. """
         return self.obj.direct_topics_count + sum(n.topics_count for n in self.children)

@@ -11,6 +11,7 @@ from machina.core.loading import get_class
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
+TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 register = template.Library()
 
@@ -79,9 +80,13 @@ def forum_list(context, forum_visibility_contents):
         {% forum_list my_forums %}
 
     """
-    request = context.get('request', None)
+    request = context.get('request')
+    tracking_handler = TrackingHandler(request=request)
+
     data_dict = {
         'forum_contents': forum_visibility_contents,
+        'unread_forums': tracking_handler.get_unread_forums_from_list(
+            request.user, forum_visibility_contents.forums),
         'user': request.user,
         'request': request,
     }

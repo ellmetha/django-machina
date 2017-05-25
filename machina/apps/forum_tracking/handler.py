@@ -29,26 +29,25 @@ class TrackingHandler(object):
             else PermissionHandler()
 
     def get_unread_forums(self, user):
-        """
-        Returns the list of unread forums for the given user.
-        """
+        """ Returns the list of unread forums for the given user. """
+        return self.get_unread_forums_from_list(
+            user, self.perm_handler.get_readable_forums(Forum.objects.all(), user))
+
+    def get_unread_forums_from_list(self, user, forums):
+        """ Returns the list of unread forums for the given user from a given list of forums. """
         unread_forums = []
 
         # A user which is not authenticated will never see a forum as unread
         if not user.is_authenticated():
             return unread_forums
 
-        readable_forums = self.perm_handler.get_readable_forums(Forum.objects.all(), user)
-        unread = ForumReadTrack.objects.get_unread_forums_from_list(readable_forums, user)
+        unread = ForumReadTrack.objects.get_unread_forums_from_list(forums, user)
         unread_forums.extend(unread)
 
         return unread_forums
 
     def get_unread_topics(self, topics, user):
-        """
-        Returns a list of unread topics for the given user from a given
-        set of topics.
-        """
+        """ Returns a list of unread topics for the given user from a given set of topics. """
         unread_topics = []
 
         # A user which is not authenticated will never see a topic as unread.
@@ -90,9 +89,7 @@ class TrackingHandler(object):
         return list(set(unread_topics))
 
     def mark_forums_read(self, forums, user):
-        """
-        Marks a list of forums as read.
-        """
+        """ Marks a list of forums as read. """
         if not forums or not user.is_authenticated():
             return
 
@@ -108,9 +105,7 @@ class TrackingHandler(object):
         self._update_parent_forum_tracks(forums[0], user)
 
     def mark_topic_read(self, topic, user):
-        """
-        Marks a topic as read.
-        """
+        """ Marks a topic as read. """
         if not user.is_authenticated():
             return
 
