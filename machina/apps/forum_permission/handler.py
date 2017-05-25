@@ -8,8 +8,6 @@ from functools import reduce
 
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import Q
-from django.shortcuts import _get_queryset
 from django.utils.timezone import now
 from mptt.utils import get_cached_trees
 
@@ -268,8 +266,7 @@ class PermissionHandler(object):
         Returns True if the passed user can access the moderation queue.  The latest
         allows the moderator to approve posts.
         """
-        moderated_forums = self.get_moderation_queue_forums(user)
-        return moderated_forums.exists()
+        return len(self.get_moderation_queue_forums(user)) > 0
 
     def can_lock_topics(self, forum, user):
         """
@@ -288,8 +285,7 @@ class PermissionHandler(object):
         Returns a list of forums in which the considered user can add topics
         that have been moved from another forum.
         """
-        return self._get_forums_for_user(user, ['can_move_topics', ]) \
-            .filter(type=Forum.FORUM_POST)
+        return [f for f in self._get_forums_for_user(user, ['can_move_topics', ]) if f.is_forum]
 
     def can_delete_topics(self, forum, user):
         """
@@ -360,11 +356,11 @@ class PermissionHandler(object):
         if granted_forums_cache_key in self._granted_forums_cache:
             return self._granted_forums_cache[granted_forums_cache_key]
 
-        forum_queryset = _get_queryset(Forum)
+        forums = self._get_all_forums()
 
         # First check if the user is a superuser and if so, returns the forum queryset immediately.
         if user.is_superuser:  # pragma: no cover
-            forum_objects = forum_queryset
+            forum_objects = forums
 
         else:
             # Generates the appropriate queryset filter in order to handle both authenticated users
@@ -381,18 +377,18 @@ class PermissionHandler(object):
             # are associated with specific forums) and one containing non granted permissions (the
             # latest are also associated with specific forums).
             globally_granted_user_perms = list(
-                filter(lambda p: p.has_perm and p.forum is None, user_perms))
+                filter(lambda p: p.has_perm and p.forum_id is None, user_perms))
             per_forum_granted_user_perms = list(
-                filter(lambda p: p.has_perm and p.forum is not None, user_perms))
+                filter(lambda p: p.has_perm and p.forum_id is not None, user_perms))
             per_forum_nongranted_user_perms = list(
-                filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
+                filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms))
 
             # Using the previous lists we are able to compute a list of forums ids for which
             # permissions are explicitly not granted.
             nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
 
             required_perm_codenames_count = len(perm_codenames)
-            initial_forum_ids = forum_queryset.values_list('id', flat=True)
+            initial_forum_ids = [f.id for f in forums]
 
             # Now we build a dictionary allowing to associate each forum ID of the initial queryset
             # with a set of permissions that are granted for the considered forum.
@@ -446,13 +442,14 @@ class PermissionHandler(object):
             # Alright! It is now possible to filter the initial queryset using the forums associated
             # with the granted permissions and the list of forums for which permissions are
             # explicitly not granted.
-            forum_objects = forum_queryset.filter(pk__in=granted_permissions_per_forum) \
-                .filter(~Q(pk__in=nongranted_forum_ids))
+            forum_objects = [
+                f for f in forums
+                if f.id in granted_permissions_per_forum and f.id not in nongranted_forum_ids]
 
-            if not user.is_anonymous() and not forum_objects.exists() \
+            if not user.is_anonymous() and not forum_objects \
                     and set(perm_codenames).issubset(set(
                         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
-                forum_objects = forum_queryset.filter(~Q(pk__in=nongranted_forum_ids))
+                forum_objects = [f for f in forums if f.id not in nongranted_forum_ids]
 
             if use_tree_hierarchy:
                 forum_objects = self._filter_granted_forums_using_tree(forum_objects)
@@ -507,3 +504,9 @@ class PermissionHandler(object):
         checker = ForumPermissionChecker(user)
         self._user_perm_checkers_cache[user_perm_checkers_cache_key] = checker
         return checker
+
+    def _get_all_forums(self):
+        """ Returns all forums. """
+        if not hasattr(self, '_all_forums'):
+            self._all_forums = list(Forum.objects.all())
+        return self._all_forums
