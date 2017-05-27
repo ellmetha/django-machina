@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 
+"""
+    The visibility module
+    =====================
+
+    This module provides helper classes to manage and compute values that should be displayed when
+    considering a tree of forums. This includes post counts, topic counts, siblings, ...
+
+"""
+
 from __future__ import unicode_literals
 
 from django.utils.functional import cached_property
@@ -85,9 +94,6 @@ class ForumVisibilityContentTree(object):
 
         return tree
 
-    def __iter__(self):
-        return iter(self.visible_nodes)
-
     @cached_property
     def as_dict(self):
         """ Returns a dictionary of forum ID / related node. """
@@ -153,12 +159,15 @@ class ForumVisibilityContentNode(object):
         is associated with the considered tree instance.
         """
         if self.parent:
-            index = self.parent.index(self)
-            sibling = self.parent[index + 1] if index > len(self.parent) - 1 else None
+            nodes = self.parent.children
+            index = nodes.index(self)
+            sibling = nodes[index + 1] if index < len(nodes) - 1 else None
         else:
-            index = self.tree.nodes.index(self)
-            sibling = self.tree.nodes[index - 1] if index < len(self.tree.nodes) - 1 and \
-                self.tree.nodes[index + 1].level == self.level else None
+            nodes = self.tree.nodes
+            index = nodes.index(self)
+            sibling = next(
+                filter(lambda n: n.level == self.level, nodes[index + 1:]), None) \
+                if index < len(nodes) - 1 else None
         return sibling
 
     @cached_property
@@ -175,12 +184,15 @@ class ForumVisibilityContentNode(object):
         that is associated with the considered tree instance.
         """
         if self.parent:
-            index = self.parent.index(self)
-            sibling = self.parent[index - 1] if index > 0 else None
+            nodes = self.parent.children
+            index = nodes.index(self)
+            sibling = nodes[index - 1] if index > 0 else None
         else:
-            index = self.tree.nodes.index(self)
-            sibling = self.tree.nodes[index - 1] if index > 0 \
-                and self.tree.nodes[index - 1].level == self.level else None
+            nodes = self.tree.nodes
+            index = nodes.index(self)
+            sibling = next(
+                filter(lambda n: n.level == self.level, reversed(nodes[:index])), None) \
+                if index > 0 else None
         return sibling
 
     @cached_property
