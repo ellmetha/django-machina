@@ -166,7 +166,7 @@ class ForumVisibilityContentNode(object):
             nodes = self.tree.nodes
             index = nodes.index(self)
             sibling = next(
-                filter(lambda n: n.level == self.level, nodes[index + 1:]), None) \
+                (n for n in nodes[index + 1:] if n.level == self.level), None) \
                 if index < len(nodes) - 1 else None
         return sibling
 
@@ -191,7 +191,7 @@ class ForumVisibilityContentNode(object):
             nodes = self.tree.nodes
             index = nodes.index(self)
             sibling = next(
-                filter(lambda n: n.level == self.level, reversed(nodes[:index])), None) \
+                (n for n in reversed(nodes[:index]) if n.level == self.level), None) \
                 if index > 0 else None
         return sibling
 
