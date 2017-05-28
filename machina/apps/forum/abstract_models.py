@@ -139,11 +139,6 @@ class AbstractForum(MPTTModel, DatedModel):
         # If any change has been made to the forum parent, trigger the update of the counters
         if old_instance and old_instance.parent != self.parent:
             self.update_trackers()
-            # The previous parent trackers should also be updated
-            if old_instance.parent:
-                old_parent = old_instance.parent
-                old_parent.refresh_from_db()
-                old_parent.update_trackers()
             # Trigger the 'forum_moved' signal
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
 
@@ -174,7 +169,3 @@ class AbstractForum(MPTTModel, DatedModel):
         # Any save of a forum triggered from the update_tracker process will not result in checking
         # for a change of the forum's parent.
         self._simple_save()
-
-        # Trigger the parent trackers update if necessary
-        if self.parent:
-            self.parent.update_trackers()

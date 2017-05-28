@@ -5,7 +5,9 @@ from __future__ import unicode_literals
 import pytest
 from django.core.exceptions import ValidationError
 
+from machina.apps.forum.signals import forum_moved
 from machina.core.db.models import get_model
+from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import PostFactory
 from machina.test.factories import UserFactory
 from machina.test.factories import build_category_forum
@@ -99,3 +101,14 @@ class TestForum(object):
         # Check
         sub_level_forum.refresh_from_db()
         assert sub_level_forum.last_post_on is None
+
+    def test_can_send_a_specific_signal_when_a_forum_is_moved(self):
+        # Setup
+        topic = create_topic(forum=self.top_level_forum, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        PostFactory.create(topic=topic, poster=self.u1)
+        # Run & check
+        with mock_signal_receiver(forum_moved) as receiver:
+            self.top_level_forum.parent = self.top_level_cat
+            self.top_level_forum.save()
+            assert receiver.call_count == 1
