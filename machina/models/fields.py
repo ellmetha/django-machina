@@ -109,7 +109,7 @@ class MarkupTextDescriptor(object):
 
     def __get__(self, instance, owner):
         if instance is None:
-            raise AttributeError(_('Can only be accessed via an instance.'))
+            return None
         raw = instance.__dict__[self.field.name]
         if raw is None:
             return None
