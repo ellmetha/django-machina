@@ -9,7 +9,7 @@ Example projects
 The vanilla project
 -------------------
 
-The "vanilla" project contains a minimum installation of *django-machina* where no customizations have been made. The project uses the default forum settings and can be usefull for discovering *django-machina*'s functionnalities.
+The "vanilla" project contains a minimum installation of *django-machina* where no customizations have been made. The project uses the default forum settings and can be usefull for discovering *django-machina*'s functionalities.
 
 To run this project locally, you can follow these instructions:
 
