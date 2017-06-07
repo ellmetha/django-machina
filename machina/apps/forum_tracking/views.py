@@ -19,6 +19,7 @@ from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.core.loading import get_classes
 
+
 Forum = get_model('forum', 'Forum')
 ForumReadTrack, TopicReadTrack = get_classes('forum_tracking.models',
                                              ['ForumReadTrack', 'TopicReadTrack'])

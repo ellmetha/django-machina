@@ -20,6 +20,7 @@ from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
+
 Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')

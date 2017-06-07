@@ -15,6 +15,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
+
 faker = Faker()
 
 Forum = get_model('forum', 'Forum')

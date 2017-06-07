@@ -8,6 +8,7 @@ from django.utils.safestring import mark_safe
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')

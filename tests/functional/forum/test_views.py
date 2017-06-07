@@ -13,6 +13,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
 from machina.test.testcases import BaseClientTestCase
 
+
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 

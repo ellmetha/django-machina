@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 
+
 ForumReadTrackManager = get_class('forum_tracking.managers', 'ForumReadTrackManager')
 
 

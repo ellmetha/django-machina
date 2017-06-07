@@ -11,6 +11,7 @@ from machina.core.db.models import get_model
 from machina.test.factories.auth import UserFactory
 from machina.test.factories.forum import ForumFactory
 
+
 faker = Faker()
 
 Post = get_model('forum_conversation', 'Post')

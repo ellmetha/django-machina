@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from machina.core.db.models import get_model
 
+
 Attachment = get_model('forum_attachments', 'Attachment')
 
 

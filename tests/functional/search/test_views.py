@@ -20,6 +20,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
+
 faker = Faker()
 
 Post = get_model('forum_conversation', 'Post')

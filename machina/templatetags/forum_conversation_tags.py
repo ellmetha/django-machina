@@ -6,6 +6,7 @@ from django import template
 
 from machina.conf import settings as machina_settings
 
+
 register = template.Library()
 
 

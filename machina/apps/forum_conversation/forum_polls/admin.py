@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from machina.core.db.models import get_model
 
+
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollOption = get_model('forum_polls', 'TopicPollOption')
 TopicPollVote = get_model('forum_polls', 'TopicPollVote')

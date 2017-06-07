@@ -16,6 +16,7 @@ from machina.test.factories import UserFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
+
 faker = Faker()
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')

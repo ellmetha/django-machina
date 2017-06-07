@@ -8,6 +8,7 @@ from machina.core.db.models import get_model
 from machina.models.fields import MarkupTextField
 from machina.models.fields import MarkupTextFieldWidget
 
+
 ForumProfile = get_model('forum_member', 'ForumProfile')
 
 

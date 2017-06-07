@@ -7,6 +7,7 @@ from django import template
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+
 TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 
 get_anonymous_user_forum_key = get_class(

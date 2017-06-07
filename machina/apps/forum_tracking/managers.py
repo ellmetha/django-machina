@@ -6,6 +6,7 @@ from django.db import models
 
 from machina.core.loading import get_class
 
+
 ForumVisibilityContentTree = get_class('forum.visibility', 'ForumVisibilityContentTree')
 
 

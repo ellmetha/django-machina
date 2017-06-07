@@ -9,6 +9,7 @@ from machina.apps.forum.models import Forum
 from machina.core.shortcuts import get_object_or_none
 from machina.test.factories import create_forum
 
+
 faker = Faker()
 
 

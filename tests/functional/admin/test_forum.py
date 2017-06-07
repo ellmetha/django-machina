@@ -18,6 +18,7 @@ from machina.test.factories import UserForumPermissionFactory
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 
+
 Forum = get_model('forum', 'Forum')
 
 

@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group
 
 from machina.core.db.models import get_model
 
+
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')

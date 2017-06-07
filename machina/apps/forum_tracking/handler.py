@@ -8,6 +8,7 @@ from django.db.models import Q
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+
 Forum = get_model('forum', 'Forum')
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')

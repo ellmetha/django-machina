@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from machina.core.db.models import get_model
 
+
 Forum = get_model('forum', 'Forum')
 Topic = get_model('forum_conversation', 'Topic')
 

@@ -13,6 +13,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_link_forum
 from machina.test.factories import create_topic
 
+
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 
 

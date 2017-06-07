@@ -17,6 +17,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
+
 faker = Faker()
 
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')

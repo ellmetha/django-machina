@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import inspect
 
 from django import template
 
 from machina.core.loading import get_class
+
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 

@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 from machina.core.loading import get_class
 
+
 topic_viewed = get_class('forum_conversation.signals', 'topic_viewed')
 
 

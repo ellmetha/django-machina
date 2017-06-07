@@ -10,6 +10,7 @@ from machina.test.factories import ForumPermissionFactory
 from machina.test.factories import UserFactory
 from machina.test.factories import UserForumPermissionFactory
 
+
 Forum = get_model('forum', 'Forum')
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')

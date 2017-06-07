@@ -26,6 +26,7 @@ from machina.core.loading import get_class
 from machina.models.fields import MarkupTextField
 from machina.models.fields import MarkupTextFieldWidget
 
+
 Forum = get_model('forum', 'Forum')
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')

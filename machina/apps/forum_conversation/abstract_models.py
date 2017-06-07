@@ -17,6 +17,7 @@ from machina.core.loading import get_class
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
 
+
 ApprovedManager = get_class('forum_conversation.managers', 'ApprovedManager')
 
 

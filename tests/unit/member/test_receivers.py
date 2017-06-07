@@ -10,6 +10,7 @@ from machina.test.factories import UserFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
+
 ForumProfile = get_model('forum_member', 'ForumProfile')
 
 

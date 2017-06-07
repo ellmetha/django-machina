@@ -6,6 +6,7 @@ from django import template
 
 from machina.core.loading import get_class
 
+
 TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 
 register = template.Library()

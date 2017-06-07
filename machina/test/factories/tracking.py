@@ -9,6 +9,7 @@ from machina.test.factories.auth import UserFactory
 from machina.test.factories.conversation import TopicFactory
 from machina.test.factories.forum import ForumFactory
 
+
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 

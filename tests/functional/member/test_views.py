@@ -17,6 +17,7 @@ from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
 
+
 ForumProfile = get_model('forum_member', 'ForumProfile')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')

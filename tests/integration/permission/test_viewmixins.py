@@ -17,6 +17,7 @@ from machina.core.loading import get_class
 from machina.test.factories import UserFactory
 from machina.test.factories import create_forum
 
+
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')

@@ -6,6 +6,7 @@ from faker import Faker
 
 from machina.forms.widgets import SelectWithDisabled
 
+
 faker = Faker()
 
 

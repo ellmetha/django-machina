@@ -20,6 +20,7 @@ from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+
 Forum = get_model('forum', 'Forum')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')

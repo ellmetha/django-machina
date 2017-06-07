@@ -10,6 +10,7 @@ from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
+
 Forum = get_model('forum', 'Forum')
 
 ForumVisibilityContentTree = get_class('forum.visibility', 'ForumVisibilityContentTree')

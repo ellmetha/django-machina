@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import uuid
 
 from machina.core.compat import MiddlewareMixin
 from machina.core.loading import get_class
+
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 

@@ -9,6 +9,7 @@ from django.forms.models import modelformset_factory
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 
+
 Attachment = get_model('forum_attachments', 'Attachment')
 
 

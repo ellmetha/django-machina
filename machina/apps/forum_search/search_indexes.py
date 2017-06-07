@@ -6,6 +6,7 @@ from haystack import indexes
 
 from machina.core.db.models import get_model
 
+
 Post = get_model('forum_conversation', 'Post')
 
 

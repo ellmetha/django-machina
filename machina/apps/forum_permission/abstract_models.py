@@ -12,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 
+
 PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 
 

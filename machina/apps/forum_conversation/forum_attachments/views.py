@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import mimetypes
 import os
 
@@ -9,6 +10,7 @@ from django.views.generic import DetailView
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
+
 
 Attachment = get_model('forum_attachments', 'Attachment')
 

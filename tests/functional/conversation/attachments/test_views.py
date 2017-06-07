@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
 import os
 
 import pytest
@@ -17,6 +18,7 @@ from machina.test.factories import PostFactory
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 from machina.test.testcases import BaseClientTestCase
+
 
 faker = Faker()
 

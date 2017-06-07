@@ -14,6 +14,7 @@ from django.views.generic.edit import ModelFormMixin
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
+
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollVote = get_model('forum_polls', 'TopicPollVote')
 

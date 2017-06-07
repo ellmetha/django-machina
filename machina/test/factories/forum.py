@@ -8,6 +8,7 @@ from faker import Faker
 
 from machina.core.db.models import get_model
 
+
 faker = Faker()
 
 Forum = get_model('forum', 'Forum')

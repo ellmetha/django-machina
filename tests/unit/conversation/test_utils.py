@@ -8,6 +8,7 @@ from faker import Faker
 
 from machina.apps.forum_conversation.utils import get_client_ip
 
+
 faker = Faker()
 
 

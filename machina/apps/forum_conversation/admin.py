@@ -8,6 +8,7 @@ from machina.core.db.models import get_model
 from machina.models.fields import MarkupTextField
 from machina.models.fields import MarkupTextFieldWidget
 
+
 Attachment = get_model('forum_attachments', 'Attachment')
 Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')

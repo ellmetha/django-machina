@@ -12,6 +12,7 @@ from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.shortcuts import get_object_or_none
 
+
 TopicPoll = get_model('forum_polls', 'TopicPoll')
 TopicPollOption = get_model('forum_polls', 'TopicPollOption')
 

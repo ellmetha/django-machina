@@ -6,6 +6,7 @@ from faker import Faker
 
 from machina.core import validators
 
+
 faker = Faker()
 
 

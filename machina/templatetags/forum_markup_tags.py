@@ -5,6 +5,7 @@ from django.template.defaultfilters import stringfilter
 
 from machina.models.fields import render_func
 
+
 register = template.Library()
 
 

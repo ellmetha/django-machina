@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from machina.core.db.models import get_model
 
+
 ForumReadTrack = get_model('forum_tracking', 'ForumReadTrack')
 TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 

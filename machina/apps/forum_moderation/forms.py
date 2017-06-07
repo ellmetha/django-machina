@@ -9,6 +9,7 @@ from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.forms.widgets import SelectWithDisabled
 
+
 Forum = get_model('forum', 'Forum')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')

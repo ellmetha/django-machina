@@ -20,6 +20,7 @@ from machina.test.factories import create_category_forum
 from machina.test.factories import create_forum
 from machina.test.factories import create_topic
 
+
 Forum = get_model('forum', 'Forum')
 
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
