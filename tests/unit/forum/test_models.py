@@ -113,3 +113,9 @@ class TestForum(object):
             self.top_level_forum.parent = self.top_level_cat
             self.top_level_forum.save()
             assert receiver.call_count == 1
+
+    def test_get_or_create(self):
+        forum, created = Forum.objects.get_or_create(name="Test Forum", type=0)
+        assert created is True
+        assert isinstance(forum, Forum)
+        assert forum.name == "Test Forum"
