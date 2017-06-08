@@ -125,3 +125,9 @@ class TestForum(object):
         # Check
         sub_level_forum.refresh_from_db()
         assert sub_level_forum.last_post_on is None
+
+    def test_get_or_create(self):
+        forum, created = Forum.objects.get_or_create(name="Test Forum", type=0)
+        assert created is True
+        assert isinstance(forum, Forum)
+        assert forum.name == "Test Forum"
