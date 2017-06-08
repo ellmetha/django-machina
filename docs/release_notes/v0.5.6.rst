@@ -1,0 +1,16 @@
+###############################################
+Django-machina 0.5.6 release notes (2017-06-07)
+###############################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9, 1.10 and 1.11.
+
+Minor changes
+-------------
+
+* Fixed error occuring when using ``get_or_create`` with model instances providing contents using
+  markup languages (`#66`_)
+
+.. _`#66`: https://github.com/ellmetha/django-machina/pull/66
