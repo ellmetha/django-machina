@@ -1,0 +1,1544 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-09 09:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app.py:29
+msgid "^feeds/"
+msgstr "fil"
+
+#: app.py:30
+msgid "^member/"
+msgstr "^membre/"
+
+#: app.py:31
+msgid "^moderation/"
+msgstr "^modération/"
+
+#: app.py:32
+msgid "^search/"
+msgstr "^recherche/"
+
+#: app.py:33
+msgid "^tracking/"
+msgstr "^tracking/"
+
+#: apps/forum/abstract_models.py:32
+msgid "Default forum"
+msgstr "Forum par défaut"
+
+#: apps/forum/abstract_models.py:33
+msgid "Category forum"
+msgstr "Forum de catégorie"
+
+#: apps/forum/abstract_models.py:34
+msgid "Link forum"
+msgstr "Forum de liens"
+
+#: apps/forum/abstract_models.py:45
+msgid "Parent"
+msgstr "Parent"
+
+#: apps/forum/abstract_models.py:47
+#: templates/admin/forum/forum/change_list_table.html:9
+msgid "Name"
+msgstr "Nom"
+
+#: apps/forum/abstract_models.py:48
+#: apps/forum_conversation/abstract_models.py:49
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/forum/abstract_models.py:51
+msgid "Description"
+msgstr "Description"
+
+#: apps/forum/abstract_models.py:55
+msgid "Forum image"
+msgstr "Image de forum"
+
+#: apps/forum/abstract_models.py:60
+msgid "Forum link"
+msgstr "Lien de forum"
+
+#: apps/forum/abstract_models.py:61 apps/forum/abstract_models.py:72
+msgid "Track link redirects count"
+msgstr "Tracker les redirection de liens"
+
+#: apps/forum/abstract_models.py:62
+msgid "Records the number of times a forum link was clicked"
+msgstr "Enregistrer le nombre de fois qu'un lien de forum a été cliqué"
+
+#: apps/forum/abstract_models.py:67
+msgid "Forum type"
+msgstr "Type de forum"
+
+#: apps/forum/abstract_models.py:70
+msgid "Number of posts"
+msgstr "Nombre de posts"
+
+#: apps/forum/abstract_models.py:71
+msgid "Number of topics"
+msgstr "Nombre de sujets"
+
+#: apps/forum/abstract_models.py:74
+#: apps/forum_conversation/abstract_models.py:70
+msgid "Last post added on"
+msgstr "Dernier post ajouté le"
+
+#: apps/forum/abstract_models.py:77
+msgid "Display in parent-forums legend"
+msgstr "Afficher la légende dans les forums parents"
+
+#: apps/forum/abstract_models.py:78
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "Afficher la légende de ce forum dans les forums parents (liste de sous-forums)"
+
+#: apps/forum/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:60
+#: apps/forum_tracking/abstract_models.py:24
+#: templates/machina/forum_moderation/moderation_queue/list.html:35
+msgid "Forum"
+msgstr "Forum"
+
+#: apps/forum/abstract_models.py:88 templates/machina/forum/forum_list.html:36
+#: templates/machina/forum/forum_list.html:220
+msgid "Forums"
+msgstr "Forums"
+
+#: apps/forum/abstract_models.py:126
+msgid "A forum can not have a link forum as parent"
+msgstr "Un forum ne peut pas avoir un forum de lien comme parent"
+
+#: apps/forum/abstract_models.py:129
+msgid "A category can not have another category as parent"
+msgstr "Une catégorie ne peut pas avoir une autre catégorie pour parent"
+
+#: apps/forum/abstract_models.py:132
+msgid "A link forum must have a link associated with it"
+msgstr "A forum de lien doit avoir un lien associé"
+
+#: apps/forum/admin.py:54
+msgid "Forum settings"
+msgstr "Réglages du forum"
+
+#: apps/forum/admin.py:58
+msgid "Link forum settings"
+msgstr "Réglages du forum de lien"
+
+#: apps/forum/admin.py:145
+msgid "'{}' forum successfully moved"
+msgstr "'{}' forum déplacé"
+
+#: apps/forum/admin.py:159 apps/forum/admin.py:233 apps/forum/admin.py:251
+#: apps/forum/admin.py:270 apps/forum_permission/abstract_models.py:38
+#: templates/admin/forum/forum/change_form.html:5
+#: templates/admin/forum/forum/editpermissions_form.html:20
+#: templates/admin/forum/forum/editpermissions_index.html:15
+msgid "Forum permissions"
+msgstr "Permissions de forum"
+
+#: apps/forum/admin.py:160 templates/admin/forum/forum/change_list.html:15
+msgid "Global forum permissions"
+msgstr "Permissions globales de forum"
+
+#: apps/forum/admin.py:168
+msgid "Permissions successfully copied"
+msgstr "Permissions copiées"
+
+#: apps/forum/admin.py:189
+msgid "Choose either a user ID, a group ID or the anonymous user"
+msgstr "Choisir soit un user ID soit un group ID ou l'utilisateur anonyme"
+
+#: apps/forum/admin.py:251
+#: templates/machina/forum_conversation/topic_detail.html:104
+#: templates/machina/forum_moderation/moderation_queue/detail.html:119
+msgid "Anonymous user"
+msgstr "Utilisateur anonyme"
+
+#: apps/forum/admin.py:321
+msgid "Permissions successfully applied"
+msgstr "Permissions appliquées"
+
+#: apps/forum/admin.py:361
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/forum/admin.py:363
+msgid ""
+"Please select this option if you want to edit the permissions of the "
+"anonymous user"
+msgstr "Merci de séléctionner cette option si vous voulez éditer les permissions de l'utilisateur anonyme"
+
+#: apps/forum/admin.py:382
+msgid "Choose either a user ID or select the anonymous user"
+msgstr "Choisir soit un user ID soit l'utilisateur anonyme"
+
+#: apps/forum/admin.py:411
+#: templates/admin/forum/forum/editpermissions_form.html:35
+msgid "Not set"
+msgstr "Non réglé"
+
+#: apps/forum/admin.py:412
+#: templates/admin/forum/forum/editpermissions_form.html:36
+msgid "Granted"
+msgstr "Accordé"
+
+#: apps/forum/admin.py:413
+#: templates/admin/forum/forum/editpermissions_form.html:37
+msgid "Not granted"
+msgstr "Non accordé"
+
+#: apps/forum/app.py:24
+msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+msgstr "forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+
+#: apps/forum/registry_config.py:14
+msgid "Machina: Forum"
+msgstr "Forum"
+
+#: apps/forum_conversation/abstract_models.py:27
+msgid "Default topic"
+msgstr "Sujet par défaut"
+
+#: apps/forum_conversation/abstract_models.py:28
+msgid "Sticky"
+msgstr "Collant"
+
+#: apps/forum_conversation/abstract_models.py:29
+msgid "Announce"
+msgstr "Annonce"
+
+#: apps/forum_conversation/abstract_models.py:33
+msgid "Topic unlocked"
+msgstr "Sujet déverouillé"
+
+#: apps/forum_conversation/abstract_models.py:34
+msgid "Topic locked"
+msgstr "Sujet verouillé"
+
+#: apps/forum_conversation/abstract_models.py:35
+msgid "Topic moved"
+msgstr "Sujet déplacé"
+
+#: apps/forum_conversation/abstract_models.py:44
+msgid "Topic forum"
+msgstr "Forum de sujet"
+
+#: apps/forum_conversation/abstract_models.py:45
+#: apps/forum_conversation/abstract_models.py:209
+msgid "Poster"
+msgstr "Poster"
+
+#: apps/forum_conversation/abstract_models.py:48
+#: apps/forum_conversation/abstract_models.py:215
+msgid "Subject"
+msgstr "Sujet"
+
+#: apps/forum_conversation/abstract_models.py:53
+msgid "Topic type"
+msgstr "Type de sujet"
+
+#: apps/forum_conversation/abstract_models.py:57
+msgid "Topic status"
+msgstr "Status du sujet"
+
+#: apps/forum_conversation/abstract_models.py:61
+#: apps/forum_conversation/abstract_models.py:224
+msgid "Approved"
+msgstr "Approuvé"
+
+#: apps/forum_conversation/abstract_models.py:64
+msgid "Posts count"
+msgstr "Nombre de de posts"
+
+#: apps/forum_conversation/abstract_models.py:67
+msgid "Views count"
+msgstr "Nombre de vues"
+
+#: apps/forum_conversation/abstract_models.py:73
+msgid "Subscribers"
+msgstr "Souscripteurs"
+
+#: apps/forum_conversation/abstract_models.py:83
+#: apps/forum_conversation/abstract_models.py:208
+#: apps/forum_conversation/forum_polls/abstract_models.py:25
+#: apps/forum_tracking/abstract_models.py:46
+#: templates/machina/forum_member/forum_profile_detail.html:50
+#: templates/machina/forum_moderation/moderation_queue/list.html:34
+#, fuzzy
+msgid "Topic"
+msgstr "Sujet"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+
+#: apps/forum_conversation/abstract_models.py:84
+#: templates/machina/forum/forum_list.html:20
+#: templates/machina/forum/forum_list.html:38
+#: templates/machina/forum/forum_list.html:222
+msgid "Topics"
+msgstr "Sujets"
+
+#: apps/forum_conversation/abstract_models.py:145
+msgid "A topic can not be associated with a category or a link forum"
+msgstr "Un sujet ne peut pas être associé à une catégorie ou a un forum de lien"
+
+#: apps/forum_conversation/abstract_models.py:210
+msgid "Poster IP address"
+msgstr "Poster l'adresse IP"
+
+#: apps/forum_conversation/abstract_models.py:211
+#: apps/forum_conversation/forum_polls/abstract_models.py:95
+msgid "Anonymous user forum key"
+msgstr "Clé d'utilisateur de forum anonyme"
+
+#: apps/forum_conversation/abstract_models.py:218
+msgid "Content"
+msgstr "Contenu"
+
+#: apps/forum_conversation/abstract_models.py:221
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: apps/forum_conversation/abstract_models.py:227
+msgid "Update reason"
+msgstr "Raison de la mise à jour"
+
+#: apps/forum_conversation/abstract_models.py:230
+msgid "Lastly updated by"
+msgstr "Mis à jour par"
+
+#: apps/forum_conversation/abstract_models.py:231
+msgid "Updates count"
+msgstr "Nombre de mises à jour"
+
+#: apps/forum_conversation/abstract_models.py:241
+#: apps/forum_conversation/forum_attachments/abstract_models.py:21
+#: templates/machina/forum_member/forum_profile_detail.html:46
+#, fuzzy
+msgid "Post"
+msgstr "Poster"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+
+#: apps/forum_conversation/abstract_models.py:242
+#: templates/machina/forum/forum_list.html:21
+#: templates/machina/forum/forum_list.html:39
+#: templates/machina/forum/forum_list.html:223
+msgid "Posts"
+msgstr "Posts"
+
+#: apps/forum_conversation/abstract_models.py:275
+msgid "A user id or an anonymous key must be associated with a post."
+msgstr "Un id d'utilisateur ou une clé d'utilisateur anonyme doit être associée à un post."
+
+#: apps/forum_conversation/abstract_models.py:277
+msgid ""
+"A user id or an anonymous key must be associated with a post, but not both."
+msgstr "Un id d'utilisateur ou une clé d'utilisateur anonyme doit être associée à un post, mais pas les deux."
+
+#: apps/forum_conversation/abstract_models.py:281
+msgid "A username must be specified if the poster is anonymous"
+msgstr "Un nom d'utilisateur doit être spécifié si le posteur est anonyme"
+
+#: apps/forum_conversation/app.py:29
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+
+#: apps/forum_conversation/app.py:31
+msgid "^topic/create/$"
+msgstr "^sujet/create/"
+
+#: apps/forum_conversation/app.py:32
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
+
+#: apps/forum_conversation/app.py:34
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
+msgstr "^sujet/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
+
+#: apps/forum_conversation/app.py:36
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgstr "^sujet/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+
+#: apps/forum_conversation/app.py:38
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgstr "^sujet/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+
+#: apps/forum_conversation/app.py:43
+msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+msgstr ""
+
+#: apps/forum_conversation/forms.py:39
+msgid "Enter your subject"
+msgstr "Entrez votre sujet"
+
+#: apps/forum_conversation/forms.py:40
+msgid "Message"
+msgstr ""
+
+#: apps/forum_conversation/forms.py:41
+msgid "Enter your message"
+msgstr "Entrez votre message"
+
+#: apps/forum_conversation/forms.py:96
+msgid "Post topic as"
+msgstr "Poster un sujet comme"
+
+#: apps/forum_conversation/forms.py:120
+#: apps/forum_conversation/forum_polls/abstract_models.py:28
+msgid "Poll question"
+msgstr "Question de sondage"
+
+#: apps/forum_conversation/forms.py:121
+msgid ""
+"Enter a question to associate a poll with the topic or leave blank to not "
+"create a poll."
+msgstr "Entrez une question pour associer un sondage à un sujet ou laisser vide sinon "
+
+#: apps/forum_conversation/forms.py:124
+#: apps/forum_conversation/forum_polls/abstract_models.py:35
+msgid "Maximum number of poll options per user"
+msgstr "Nombre maximum d'options de sondage par utilisateur"
+
+#: apps/forum_conversation/forms.py:125
+msgid "This is the number of options each user may select when voting."
+msgstr "Ceci est le nombre d'options que chaque utilisateur peut séléctionner pour voter."
+
+#: apps/forum_conversation/forms.py:129
+msgid "For how many days the poll should be run?"
+msgstr "Pour combien de temps le sondage doit il être actif?"
+
+#: apps/forum_conversation/forms.py:130
+msgid "Enter 0 or leave blank for a never ending poll."
+msgstr "Entrez 0 ou laissez vide pour un sondage sans date de fin"
+
+#: apps/forum_conversation/forms.py:133
+msgid "Allow re-voting?"
+msgstr "Accepter le re-vote"
+
+#: apps/forum_conversation/forms.py:134
+msgid "If enabled users are able to change their vote."
+msgstr "Si les utilisateurs acceptés peuvent changer leur vote."
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:22
+msgid "File"
+msgstr "Fichier"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:23
+msgid "Comment"
+msgstr "Commentaire"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:28
+msgid "Attachment"
+msgstr "Attachement"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:29
+#: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
+#: templates/machina/forum_conversation/forum_attachments/attachments_preview.html:7
+#: templates/machina/forum_conversation/partials/topic_form.html:27
+#: templates/machina/forum_conversation/post_create.html:29
+#: templates/machina/forum_conversation/post_update.html:29
+msgid "Attachments"
+msgstr "Attachements"
+
+#: apps/forum_conversation/forum_attachments/registry_config.py:14
+msgid "Machina: Forum attachments"
+msgstr "Attachements de forum"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:31
+msgid "Poll duration, in days"
+msgstr "Durée du sondage, en jours"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:39
+msgid "Allow vote changes"
+msgstr "Accepter le changement de vote"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:46
+msgid "Topic poll"
+msgstr "Sondage de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:47
+msgid "Topic polls"
+msgstr "Sondages de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:68
+#: templates/machina/forum_conversation/partials/topic_form.html:24
+msgid "Poll"
+msgstr "Sondage"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:69
+msgid "Poll option text"
+msgstr "Texte de l'option de sondage"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:74
+msgid "Topic poll option"
+msgstr "Option de sondage de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:75
+msgid "Topic poll options"
+msgstr "Options de sondage de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:93
+msgid "Voter"
+msgstr "Votant"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:97
+msgid "Poll option"
+msgstr "Option de sondage"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:98
+msgid "Vote's date"
+msgstr "Date du vote"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:103
+msgid "Topic poll vote"
+msgstr "Vote de sondage de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:104
+msgid "Topic poll votes"
+msgstr "Votes de sondage de sujet"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:115
+msgid "A user id or an anonymous key must be used."
+msgstr "Un user id ou une clé anonyme doit être utilisé."
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:117
+msgid "A user id or an anonymous key must be used, but not both."
+msgstr "Un user id ou une clé anonyme doit être utilisé, mais pas les deux."
+
+#: apps/forum_conversation/forum_polls/forms.py:32
+msgid "Enter a poll option"
+msgstr "Entrez une option de sondage"
+
+#: apps/forum_conversation/forum_polls/forms.py:124
+msgid "You must specify an option when voting."
+msgstr "Vous devez spécifier une option quand vous votez"
+
+#: apps/forum_conversation/forum_polls/forms.py:129
+msgid "You have tried to vote for too many options."
+msgstr "Vous avez essayé de voter pour trop d'options"
+
+#: apps/forum_conversation/forum_polls/registry_config.py:14
+msgid "Machina: Forum polls"
+msgstr "Sondages de forum"
+
+#: apps/forum_conversation/forum_polls/views.py:67
+msgid "Your vote has been cast."
+msgstr "Votre vote a été enregistré."
+
+#: apps/forum_conversation/registry_config.py:14
+msgid "Machina: Forum conversations"
+msgstr "Conversations de forum"
+
+#: apps/forum_conversation/views.py:124
+msgid "This message has been posted successfully."
+msgstr "Ce message a été posté."
+
+#: apps/forum_conversation/views.py:125
+msgid "This message will be validated before appearing on the forum."
+msgstr "Ce message doit être validé avant d'apparaitre sur le forum"
+
+#: apps/forum_conversation/views.py:126
+msgid "There are some errors in the attachments you submitted."
+msgstr "Il y a des erreurs dans la pièce jointe que vous avez envoyée."
+
+#: apps/forum_conversation/views.py:382
+msgid "There are some errors in the poll options you submitted."
+msgstr "Il y a des erreurs dans l'option de sondage que vous avez envoyé."
+
+#: apps/forum_conversation/views.py:568 apps/forum_conversation/views.py:650
+msgid "This message has been edited successfully."
+msgstr "Ce message a été édité."
+
+#: apps/forum_conversation/views.py:687
+msgid "This message has been deleted successfully."
+msgstr "Ce message a été effacé."
+
+#: apps/forum_feeds/app.py:22
+msgid "^topics/$"
+msgstr "^sujets/$"
+
+#: apps/forum_feeds/app.py:23
+msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
+msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/sujets/$"
+
+#: apps/forum_feeds/app.py:25
+msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
+msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/sujets/tout/$"
+
+#: apps/forum_feeds/feeds.py:26
+msgid "Latest topics"
+msgstr "Derniers sujets"
+
+#: apps/forum_feeds/feeds.py:27
+msgid "Latest topics updated on the forums"
+msgstr "Derniers sujets mis à jour sur le forum"
+
+#: apps/forum_feeds/registry_config.py:14
+msgid "Machina: Forum feeds"
+msgstr "Fils de forum"
+
+#: apps/forum_member/abstract_models.py:21
+#: apps/forum_permission/abstract_models.py:77
+#: apps/forum_tracking/abstract_models.py:23
+#: apps/forum_tracking/abstract_models.py:45
+msgid "User"
+msgstr "Utilisateur"
+
+#: apps/forum_member/abstract_models.py:25
+msgid "Avatar"
+msgstr ""
+
+#: apps/forum_member/abstract_models.py:31
+msgid "Signature"
+msgstr ""
+
+#: apps/forum_member/abstract_models.py:35
+msgid "Total posts"
+msgstr "Total des posts"
+
+#: apps/forum_member/abstract_models.py:40
+msgid "Forum profile"
+msgstr "Profil de forum"
+
+#: apps/forum_member/abstract_models.py:41
+msgid "Forum profiles"
+msgstr "Profils de forum"
+
+#: apps/forum_member/app.py:24
+msgid "^profile/(?P<pk>\\d+)/$"
+msgstr "^profil/(?P<pk>\\d+)/$"
+
+#: apps/forum_member/app.py:25
+msgid "^profile/edit/$"
+msgstr "^profil/editer/$"
+
+#: apps/forum_member/app.py:26
+msgid "^ego/topics/$"
+msgstr "^ego/sujets/$"
+
+#: apps/forum_member/registry_config.py:14
+msgid "Machina: Forum members"
+msgstr "Membres de forums"
+
+#: apps/forum_member/views.py:95
+msgid "The profile has been edited successfully."
+msgstr "Ce profil a été édité."
+
+#: apps/forum_moderation/app.py:32
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/verouiller/$"
+
+#: apps/forum_moderation/app.py:33
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/deverouiller/$"
+
+#: apps/forum_moderation/app.py:34
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/effacer/$"
+
+#: apps/forum_moderation/app.py:35
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/deplacer/$"
+
+#: apps/forum_moderation/app.py:36
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/changer/sujets/$"
+
+#: apps/forum_moderation/app.py:38
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/changer/collant/$"
+
+#: apps/forum_moderation/app.py:40
+msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+msgstr "^sujet/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/changer/annonce/$"
+
+#: apps/forum_moderation/app.py:42
+msgid "^queue/$"
+msgstr ""
+
+#: apps/forum_moderation/app.py:43
+msgid "^queue/(?P<pk>\\d+)/$"
+msgstr ""
+
+#: apps/forum_moderation/app.py:44
+msgid "^queue/(?P<pk>\\d+)/approve/$"
+msgstr ""
+
+#: apps/forum_moderation/app.py:45
+msgid "^queue/(?P<pk>\\d+)/disapprove/$"
+msgstr ""
+
+#: apps/forum_moderation/forms.py:22
+msgid "Select a destination forum"
+msgstr "Séléctionner un forum de destination"
+
+#: apps/forum_moderation/forms.py:25
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:19
+#: templates/machina/forum_moderation/topic_lock.html:5
+#: templates/machina/forum_moderation/topic_lock.html:12
+msgid "Lock topic"
+msgstr "Verouiller le sujet"
+
+#: apps/forum_moderation/registry_config.py:14
+msgid "Machina: Forum moderation"
+msgstr "Modération de forum"
+
+#: apps/forum_moderation/views.py:41
+msgid "This topic has been locked successfully."
+msgstr "Ce sujet a été verouillé."
+
+#: apps/forum_moderation/views.py:91
+msgid "This topic has been unlocked successfully."
+msgstr "Ce sujet a été déverouillé."
+
+#: apps/forum_moderation/views.py:141
+msgid "This topic has been deleted successfully."
+msgstr "Ce sujet a été effacé."
+
+#: apps/forum_moderation/views.py:192
+msgid "This topic has been moved successfully."
+msgstr "Ce sujet a été déplacé."
+
+#: apps/forum_moderation/views.py:263
+msgid "This topic type has been changed successfully."
+msgstr "Ce sujet a été modifié."
+
+#: apps/forum_moderation/views.py:310
+msgid "Would you want to change this topic to a default topic?"
+msgstr "Voulez vous faire de ce sujet le sujet par défaut?"
+
+#: apps/forum_moderation/views.py:320
+msgid "Would you want to change this topic to a sticky topic?"
+msgstr "Voulez vous faire de ce sujet un sujet collant?"
+
+#: apps/forum_moderation/views.py:330
+msgid "Would you want to change this topic to an announce?"
+msgstr "Voulez vous faire de ce sujet une annonce?"
+
+#: apps/forum_moderation/views.py:400
+msgid "This post has been approved successfully."
+msgstr "Ce post a été approuvé."
+
+#: apps/forum_moderation/views.py:440
+msgid "This post has been disapproved successfully."
+msgstr "Ce post a été désapprouvé."
+
+#: apps/forum_permission/abstract_models.py:22
+msgid "Permission codename"
+msgstr "Nom de code de la permission"
+
+#: apps/forum_permission/abstract_models.py:23
+msgid "Permission name"
+msgstr "Nom de la permission"
+
+#: apps/forum_permission/abstract_models.py:26
+msgid "Global permission"
+msgstr "Permission globale"
+
+#: apps/forum_permission/abstract_models.py:27
+msgid "This permission can be granted globally to all the forums"
+msgstr "Cette permission peut être accordée globalement à tous les forums"
+
+#: apps/forum_permission/abstract_models.py:30
+msgid "Local permission"
+msgstr "Permission locale"
+
+#: apps/forum_permission/abstract_models.py:31
+msgid "This permission can be granted individually for each forum"
+msgstr "Cette permission peut être accordée individuellement pour chaque forum"
+
+#: apps/forum_permission/abstract_models.py:37
+#: apps/forum_permission/abstract_models.py:55
+msgid "Forum permission"
+msgstr "Permission de forum"
+
+#: apps/forum_permission/abstract_models.py:48
+msgid "A forum permission should be at least either global or local"
+msgstr "Une permission de forum doit être au moins globale ou locale"
+
+#: apps/forum_permission/abstract_models.py:56
+msgid "Has perm"
+msgstr "A la permission"
+
+#: apps/forum_permission/abstract_models.py:69
+msgid "The following permission cannot be granted globally: {}"
+msgstr "Les permisions suivantes ne peuvent être accordées globalement: {}"
+
+#: apps/forum_permission/abstract_models.py:78
+msgid "Target anonymous user"
+msgstr "Cibler l'utilisateur anonyme"
+
+#: apps/forum_permission/abstract_models.py:84
+msgid "User forum permission"
+msgstr "Permission d'utilisateur de forum"
+
+#: apps/forum_permission/abstract_models.py:85
+msgid "User forum permissions"
+msgstr "Permissions d'utilisateur de forum"
+
+#: apps/forum_permission/abstract_models.py:96
+msgid "A permission should target either a user or an anonymous user"
+msgstr "Une permission doit clibler soit un utilisateur soit un utilisateur anonyme"
+
+#: apps/forum_permission/abstract_models.py:104
+msgid "Group"
+msgstr "Groupe"
+
+#: apps/forum_permission/abstract_models.py:110
+msgid "Group forum permission"
+msgstr "Permision de forum de groupe"
+
+#: apps/forum_permission/abstract_models.py:111
+msgid "Group forum permissions"
+msgstr "Permisions de forum de groupe"
+
+#: apps/forum_permission/registry_config.py:14
+msgid "Machina: Forum permissions"
+msgstr "Permissions de forum"
+
+#: apps/forum_search/forms.py:22
+msgid "Search only in topic subjects"
+msgstr "Chercher uniquement dans les sujets"
+
+#: apps/forum_search/forms.py:25
+msgid "Search for poster"
+msgstr "Chercher un posteur"
+
+#: apps/forum_search/forms.py:25
+msgid "Enter a user name to limit the search to a specific user."
+msgstr "Entrer un nom d'utilisateur pour limiter les recherches à un utilisateur particulier"
+
+#: apps/forum_search/forms.py:29
+msgid "Search in specific forums"
+msgstr "Chercher des des forums particuliers"
+
+#: apps/forum_search/forms.py:29
+msgid "Select the forums you wish to search in."
+msgstr "Séléctionner les forums où vous voulez chercher."
+
+#: apps/forum_search/forms.py:38
+msgid "Search for keywords"
+msgstr "Chercher des mots clé"
+
+#: apps/forum_search/forms.py:39
+msgid "Keywords or phrase"
+msgstr "Mot clé ou phrase"
+
+#: apps/forum_search/forms.py:40
+msgid "Poster name"
+msgstr "Nom du posteur"
+
+#: apps/forum_search/registry_config.py:14
+msgid "Machina: Forum searches"
+msgstr "Recherches de forum"
+
+#: apps/forum_tracking/abstract_models.py:33
+msgid "Forum track"
+msgstr ""
+
+#: apps/forum_tracking/abstract_models.py:34
+msgid "Forum tracks"
+msgstr ""
+
+#: apps/forum_tracking/abstract_models.py:53
+msgid "Topic track"
+msgstr "Sujet track"
+
+#: apps/forum_tracking/abstract_models.py:54
+msgid "Topic tracks"
+msgstr "Sujet tracks"
+
+#: apps/forum_tracking/app.py:24
+msgid "^mark/forums/$"
+msgstr ""
+
+#: apps/forum_tracking/app.py:25
+msgid "^mark/forums/(?P<pk>\\d+)/$"
+msgstr ""
+
+#: apps/forum_tracking/app.py:26
+msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+msgstr ""
+
+#: apps/forum_tracking/app.py:27
+msgid "^unread-topics/$"
+msgstr "^sujets-non-lus/$"
+
+#: apps/forum_tracking/registry_config.py:14
+msgid "Machina: Forum tracking"
+msgstr "Forum tracking"
+
+#: apps/forum_tracking/views.py:36
+msgid "Forums have been marked read."
+msgstr "Les forums ont été marqués comme lus"
+
+#: apps/forum_tracking/views.py:68
+msgid "Topics have been marked read."
+msgstr "Les sujets ont été marqués comme lus"
+
+#: core/compat.py:20
+msgid "Neither Pillow nor PIL could be imported: {}"
+msgstr "Ni Pillow ni PIL ne peuvent être importés: {} "
+
+#: models/abstract_models.py:44
+msgid "Creation date"
+msgstr "Date de création"
+
+#: models/abstract_models.py:45
+msgid "Update date"
+msgstr "Date de mise à jour"
+
+#: models/fields.py:37
+msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
+msgstr ""
+
+#: models/fields.py:56
+msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgstr ""
+
+#: models/fields.py:60
+msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgstr ""
+
+#: models/fields.py:110
+msgid "Can only be accessed via an instance."
+msgstr ""
+
+#: models/fields.py:222
+msgid "Files of size greater than {} are not allowed. Your file is {}"
+msgstr "Les fichiers de taille supérieure à {} ne sont pas admis. Votre fichier fait {}"
+
+#: models/fields.py:232
+msgid ""
+"Images of width lesser than {}px or greater than {}px or are not allowed. "
+"The width of your image is {}px"
+msgstr "Les images avec une largeur de moins de {}px ou de plus de {}px ne sont pas acceptées."
+
+#: models/fields.py:236
+msgid ""
+"Images of height lesser than {}px or greater than {}px or are not allowed. "
+"The height of your image is {}px"
+msgstr "Les images avec une hauteur de moins de {}px ou de plus de {}px ne sont pas acceptées. La hateur de votre image est {}px"
+
+#: templates/admin/forum/forum/change_list.html:7
+msgid "List of forums"
+msgstr "Liste des forums"
+
+#: templates/admin/forum/forum/change_list_table.html:10
+msgid "Quick actions"
+msgstr "Actions rapides"
+
+#: templates/admin/forum/forum/change_list_table.html:11
+msgid "Type"
+msgstr ""
+
+#: templates/admin/forum/forum/change_list_table.html:12
+msgid "Details"
+msgstr "Détails"
+
+#: templates/admin/forum/forum/change_list_table.html:28
+msgid "Move up"
+msgstr "Monter"
+
+#: templates/admin/forum/forum/change_list_table.html:33
+msgid "Move down"
+msgstr "Descendre"
+
+#: templates/admin/forum/forum/change_list_table.html:37
+msgid "Add a sub-forum"
+msgstr "Ajouter un sous-forum"
+
+#: templates/admin/forum/forum/change_list_table.html:38
+#: templates/machina/forum_conversation/topic_detail.html:41
+msgid "Delete"
+msgstr "Effacer"
+
+#: templates/admin/forum/forum/change_list_table.html:47
+msgid "Topics:"
+msgstr "Sujets"
+
+#: templates/admin/forum/forum/change_list_table.html:47
+#: templates/machina/forum_conversation/topic_detail.html:101
+#: templates/machina/forum_moderation/moderation_queue/detail.html:116
+msgid "Posts:"
+msgstr ""
+
+#: templates/admin/forum/forum/change_list_table.html:49
+msgid "Link:"
+msgstr "Lien:"
+
+#: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
+#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_user.html:4
+msgid "Edit user permissions"
+msgstr "Editer les permissions utilisateur"
+
+#: templates/admin/forum/forum/editpermissions_form.html:16
+#: templates/admin/forum/forum/editpermissions_index.html:11
+msgid "Home"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:34
+msgid "Permission"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:63
+msgid "Save"
+msgstr "Enregisrer"
+
+#: templates/admin/forum/forum/editpermissions_group.html:4
+#: templates/admin/forum/forum/editpermissions_index.html:57
+msgid "Edit group permissions"
+msgstr "Editer les permissions de groupe"
+
+#: templates/admin/forum/forum/editpermissions_index.html:25
+msgid "Please correct the error below."
+msgstr "Merci de corriger l'erreur ci-dessous."
+
+#: templates/admin/forum/forum/editpermissions_index.html:25
+msgid "Please correct the errors below."
+msgstr "Merci de corriger les erreurs ci-dessous."
+
+#: templates/admin/forum/forum/editpermissions_index.html:31
+msgid "Please select a user in order to update its permissions"
+msgstr "Merci de séléctionner un utilisateur pour pouvoir modifier ses permissions"
+
+#: templates/admin/forum/forum/editpermissions_index.html:51
+#: templates/admin/forum/forum/editpermissions_index.html:78
+msgid "Select"
+msgstr "Sélectionner"
+
+#: templates/admin/forum/forum/editpermissions_index.html:58
+msgid "Please select a group in order to update its permissions"
+msgstr "Merci de séléctionner un groupe pour pouvoir modifier ses permissions"
+
+#: templates/admin/forum/forum/editpermissions_index.html:85
+msgid "Copy permissions from another forum"
+msgstr "Copier les permissions depuis un autre forum"
+
+#: templates/admin/forum/forum/editpermissions_index.html:86
+msgid ""
+"Please select a forum in order to copy its permissions configuration to the "
+"current forum"
+msgstr "Merci de séléctionner un forum pour copier ses permissions dans le forum courrant"
+
+#: templates/admin/forum/forum/editpermissions_index.html:106
+msgid "Copy"
+msgstr "Copier"
+
+#: templates/machina/board_base.html:32
+msgid "Search..."
+msgstr "Rechercher..."
+
+#: templates/machina/board_base.html:39
+msgid "Advanced search"
+msgstr "Recherche avancée"
+
+#: templates/machina/board_base.html:56
+#: templates/machina/forum_member/user_topics_list.html:4
+#: templates/machina/forum_member/user_topics_list.html:10
+msgid "View my messages"
+msgstr "Voir mes messages"
+
+#: templates/machina/board_base.html:60
+#: templates/machina/forum_moderation/moderation_queue/detail.html:4
+#: templates/machina/forum_moderation/moderation_queue/detail.html:9
+#: templates/machina/forum_moderation/moderation_queue/list.html:4
+#: templates/machina/forum_moderation/moderation_queue/list.html:9
+#: templates/machina/forum_moderation/moderation_queue/list.html:32
+msgid "Moderation queue"
+msgstr "File de modération"
+
+#: templates/machina/forum/forum_detail.html:22
+msgid "Mark subforums read"
+msgstr "Marque les sous-forums comme lus"
+
+#: templates/machina/forum/forum_detail.html:34
+#: templates/machina/forum/forum_detail.html:55
+#: templates/machina/forum_moderation/moderation_queue/detail.html:18
+#: templates/machina/forum_moderation/moderation_queue/list.html:66
+msgid "New topic"
+msgstr "Nouveau sujet"
+
+#: templates/machina/forum/forum_detail.html:42
+#: templates/machina/forum/forum_detail.html:63
+msgid "Mark topics read"
+msgstr "Marquer les sujets comme lus"
+
+#: templates/machina/forum/forum_list.html:22
+#: templates/machina/forum/forum_list.html:40
+#: templates/machina/forum/forum_list.html:224
+#: templates/machina/forum_conversation/topic_list.html:16
+msgid "Last post"
+msgstr "Dernier post"
+
+#: templates/machina/forum/forum_list.html:72
+#: templates/machina/forum/forum_list.html:154
+msgid "RSS feed"
+msgstr "Fil RSS"
+
+#: templates/machina/forum/forum_list.html:80
+#: templates/machina/forum/forum_list.html:162
+#: templates/machina/forum_conversation/topic_list.html:60
+#, python-format
+msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
+msgstr "Par: <a href=\"%(poster_url)s\">%(username)s</a>"
+
+#: templates/machina/forum/forum_list.html:84
+#: templates/machina/forum/forum_list.html:166
+#: templates/machina/forum_conversation/topic_list.html:64
+#, python-format
+msgid "By: %(poster_username)s"
+msgstr "Par: %(poster_username)s"
+
+#: templates/machina/forum/forum_list.html:92
+#: templates/machina/forum/forum_list.html:174
+msgid "No posts"
+msgstr "Pas de posts"
+
+#: templates/machina/forum/forum_list.html:115
+#: templates/machina/forum/forum_list.html:197
+msgid "Total redirects:"
+msgstr "Total des redirections:"
+
+#: templates/machina/forum/forum_list.html:204
+#: templates/machina/forum/forum_list.html:210
+msgid "Subforums:"
+msgstr "Sous-forums"
+
+#: templates/machina/forum/forum_list.html:230
+msgid "No forums."
+msgstr "Pas de forums."
+
+#: templates/machina/forum/index.html:6
+msgid "Index"
+msgstr "Sommaire"
+
+#: templates/machina/forum/index.html:14
+msgid "Mark forums read"
+msgstr "Marquer les forums comme lus"
+
+#: templates/machina/forum/index.html:16
+#: templates/machina/forum_tracking/unread_topic_list.html:4
+#: templates/machina/forum_tracking/unread_topic_list.html:10
+msgid "View unread topics"
+msgstr "Voir les sujets non lus"
+
+#: templates/machina/forum/index.html:21
+#: templates/machina/forum_member/forum_profile_detail.html:40
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: templates/machina/forum/index.html:22
+msgid "Total posts:"
+msgstr "Total des posts:"
+
+#: templates/machina/forum/index.html:22
+msgid "Total topics:"
+msgstr "Total des sujets:"
+
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:29
+#: templates/machina/forum_member/forum_profile_update.html:20
+#: templates/machina/partials/form_field.html:6
+msgid "(optional)"
+msgstr "(optionnel)"
+
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:42
+msgid "Add another file"
+msgstr "Ajouter un autre fichier"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:17
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:13
+msgid "You may select <b>1</b> option"
+msgstr "Merci de séléctionner <b>1</b> option"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:21
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:17
+#, python-format
+msgid "You may select up to <b>%(max_options)s</b> options"
+msgstr "Vous pouvez séléctionner jusqu'à <b>%(max_options)s</b> options"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:40
+msgid "Vote"
+msgstr "Voter"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:44
+msgid "Change your vote"
+msgstr "Changer votre vote"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:5
+msgid "Poll options"
+msgstr "Options de sondage"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:28
+msgid "Add a poll option"
+msgstr "Ajouter une option de sondage"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:32
+msgid ""
+"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
+"associated votes."
+msgstr "Note:</b>&nbsp;Effacer une option de sondage d'un sondage existant effacer les votes associés"
+
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
+#: templates/machina/forum_conversation/post_preview.html:10
+msgid "Preview:"
+msgstr "Prévisualiser"
+
+#: templates/machina/forum_conversation/forum_polls/poll_results.html:19
+msgid "Total votes:"
+msgstr "Total des votes"
+
+#: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
+#: templates/machina/forum_conversation/partials/topic_form.html:85
+#: templates/machina/forum_conversation/post_create.html:37
+#: templates/machina/forum_conversation/post_update.html:37
+#: templates/machina/forum_member/forum_profile_update.html:36
+msgid "Submit"
+msgstr "Envoyer"
+
+#: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:36
+msgid "View results"
+msgstr "Voir les résultats"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:13
+msgid "Post reply"
+msgstr "Poster une réponse"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:20
+#: templates/machina/forum_moderation/topic_unlock.html:5
+#: templates/machina/forum_moderation/topic_unlock.html:12
+#: templates/machina/forum_moderation/topic_update_type.html:5
+msgid "Unlock topic"
+msgstr "Déverouiller le sujet"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:21
+#: templates/machina/forum_moderation/topic_delete.html:5
+#: templates/machina/forum_moderation/topic_delete.html:12
+msgid "Delete topic"
+msgstr "Effacer le sujet"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:22
+#: templates/machina/forum_moderation/topic_move.html:5
+#: templates/machina/forum_moderation/topic_move.html:12
+msgid "Move topic"
+msgstr "Déplacer le sujet"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:24
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:31
+msgid "Change to sticky topic"
+msgstr "Changer en sujet collant"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:25
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:28
+msgid "Change to announce"
+msgstr "Changer en annonce"
+
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:27
+#: templates/machina/forum_conversation/partials/topic_detail_moderation_actions.html:30
+msgid "Change to standard topic"
+msgstr "Changer en sujet normal"
+
+#: templates/machina/forum_conversation/partials/topic_form.html:22
+msgid "Options"
+msgstr ""
+
+#: templates/machina/forum_conversation/partials/topic_form.html:84
+#: templates/machina/forum_conversation/post_create.html:36
+#: templates/machina/forum_conversation/post_update.html:36
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: templates/machina/forum_conversation/post_create.html:5
+#: templates/machina/forum_conversation/post_create.html:20
+msgid "Post a reply"
+msgstr "Poster une réponse"
+
+#: templates/machina/forum_conversation/post_create.html:48
+#: templates/machina/forum_moderation/moderation_queue/detail.html:132
+msgid "Topic review"
+msgstr "Prévisualisation de sujet"
+
+#: templates/machina/forum_conversation/post_create.html:60
+#: templates/machina/forum_conversation/topic_detail.html:56
+#: templates/machina/forum_conversation/topic_list.html:40
+#: templates/machina/forum_moderation/moderation_queue/detail.html:85
+#: templates/machina/forum_moderation/moderation_queue/detail.html:144
+#: templates/machina/forum_moderation/moderation_queue/list.html:50
+#: templates/machina/forum_search/search.html:85
+#, python-format
+msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
+msgstr "Par: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
+
+#: templates/machina/forum_conversation/post_create.html:64
+#: templates/machina/forum_conversation/topic_detail.html:60
+#: templates/machina/forum_conversation/topic_list.html:44
+#: templates/machina/forum_moderation/moderation_queue/detail.html:89
+#: templates/machina/forum_moderation/moderation_queue/detail.html:148
+#: templates/machina/forum_moderation/moderation_queue/list.html:54
+#: templates/machina/forum_search/search.html:89
+#, python-format
+msgid "By: %(poster_username)s on %(creation_date)s"
+msgstr "Par: %(poster_username)s le %(creation_date)s"
+
+#: templates/machina/forum_conversation/post_delete.html:5
+#: templates/machina/forum_conversation/post_delete.html:12
+msgid "Delete post"
+msgstr "Effacer le post"
+
+#: templates/machina/forum_conversation/post_delete.html:15
+msgid "Are you sure you want to delete this post?"
+msgstr "Etes-vous sûr de vouloir effacer ce post?"
+
+#: templates/machina/forum_conversation/post_delete.html:18
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:18
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:18
+#: templates/machina/forum_moderation/topic_delete.html:18
+#: templates/machina/forum_moderation/topic_lock.html:18
+#: templates/machina/forum_moderation/topic_unlock.html:18
+#: templates/machina/forum_moderation/topic_update_type.html:18
+msgid "Yes"
+msgstr "Oui"
+
+#: templates/machina/forum_conversation/post_delete.html:19
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:19
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:19
+#: templates/machina/forum_moderation/topic_delete.html:19
+#: templates/machina/forum_moderation/topic_lock.html:19
+#: templates/machina/forum_moderation/topic_unlock.html:19
+#: templates/machina/forum_moderation/topic_update_type.html:19
+msgid "No"
+msgstr "Non"
+
+#: templates/machina/forum_conversation/post_update.html:5
+#: templates/machina/forum_conversation/post_update.html:20
+#: templates/machina/forum_conversation/topic_update.html:5
+#: templates/machina/forum_conversation/topic_update.html:23
+msgid "Edit post"
+msgstr "Editer le post"
+
+#: templates/machina/forum_conversation/topic_create.html:5
+#: templates/machina/forum_conversation/topic_create.html:23
+msgid "Post a new topic"
+msgstr "Poster un nouveau sujet"
+
+#: templates/machina/forum_conversation/topic_detail.html:37
+msgid "Edit"
+msgstr "Editer"
+
+#: templates/machina/forum_conversation/topic_detail.html:80
+msgid "Last edited by:"
+msgstr "Edité en dernier par:"
+
+#: templates/machina/forum_conversation/topic_detail.html:80
+msgid "Updated"
+msgstr "Mis à jour"
+
+#: templates/machina/forum_conversation/topic_detail.html:80
+msgid "on"
+msgstr "le"
+
+#: templates/machina/forum_conversation/topic_detail.html:80
+#, python-format
+msgid "edited %(counter)s time in total."
+msgid_plural "edited %(counter)s times in total."
+msgstr[0] "edité %(counter)s fois au total."
+msgstr[1] "edité %(counter)s fois au total."
+
+#: templates/machina/forum_conversation/topic_detail.html:85
+msgid "Reason:"
+msgstr "Raison:"
+
+#: templates/machina/forum_conversation/topic_list.html:14
+msgid "Replies"
+msgstr "Réponses"
+
+#: templates/machina/forum_conversation/topic_list.html:15
+msgid "Views"
+msgstr "Vues"
+
+#: templates/machina/forum_conversation/topic_list.html:80
+msgid "There are no topics in this forum."
+msgstr "Il n'y a pas de sujets dans ce forum."
+
+#: templates/machina/forum_conversation/topic_pages_inline_list.html:5
+msgid "Go to the page:"
+msgstr "Aller à la page:"
+
+#: templates/machina/forum_feeds/topics_description.html:5
+msgid "Posted by"
+msgstr "Posté par"
+
+#: templates/machina/forum_member/forum_profile_detail.html:4
+#: templates/machina/forum_member/forum_profile_detail.html:9
+#, python-format
+msgid "%(username)s profile"
+msgstr "profil de %(username)s"
+
+#: templates/machina/forum_member/forum_profile_detail.html:32
+msgid "Edit profile"
+msgstr "Editer le profil"
+
+#: templates/machina/forum_member/forum_profile_detail.html:62
+msgid "Recent posts"
+msgstr "Posts récents"
+
+#: templates/machina/forum_member/forum_profile_detail.html:72
+#, python-format
+msgid "On %(creation_date)s"
+msgstr "A %(creation_date)s"
+
+#: templates/machina/forum_member/forum_profile_update.html:4
+#: templates/machina/forum_member/forum_profile_update.html:12
+msgid "Edit forum profile"
+msgstr "Editer le profil de forum"
+
+#: templates/machina/forum_member/user_topics_list.html:17
+#, python-format
+msgid "%(counter)s topic found"
+msgid_plural "%(counter)s topics found"
+msgstr[0] "%(counter)s sujets trouvés"
+msgstr[1] "%(counter)s sujets trouvés"
+
+#: templates/machina/forum_member/user_topics_list.html:31
+msgid "Not topics found."
+msgstr "Aucun sujet trouvé"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:14
+msgid "Disapprove"
+msgstr "Désapprouver"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:15
+msgid "Approve"
+msgstr "Approuver"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:18
+msgid "New post"
+msgstr "Nouveau post"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:31
+msgid "<b>1</b> option may be selected"
+msgstr "<b>1</b> option doit être séléctionnée"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:35
+#, python-format
+msgid "Up to <b>%(max_options)s</b> options may be selected"
+msgstr "Jusqu'à <b>%(max_options)s</b> options peuvent être séléctionnées"
+
+#: templates/machina/forum_moderation/moderation_queue/list.html:16
+#, python-format
+msgid "%(topic_length)s posts found"
+msgstr "%(topic_length)s posts trouvés"
+
+#: templates/machina/forum_moderation/moderation_queue/list.html:78
+msgid "Not posts awaiting approval."
+msgstr "Aucun post en attente d'approbation."
+
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:5
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:12
+msgid "Approve post"
+msgstr "Approuver le post"
+
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:15
+msgid "Are you sure you want to approve this post?"
+msgstr "Etes vous sûr de vouloir approuver ce post?"
+
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:5
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:12
+msgid "Disapprove post"
+msgstr "Désapprouver le post"
+
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
+msgid ""
+"Are you sure you want to disapprove this post? This post will be deleted."
+msgstr "Etes-vous sûr de vouloir désapprouver ce post? Il sera effacé."
+
+#: templates/machina/forum_moderation/topic_delete.html:15
+msgid "Are you sure you want to delete this topic?"
+msgstr "Etes-vous sûr de vouloir effacer ce sujet?"
+
+#: templates/machina/forum_moderation/topic_lock.html:15
+msgid "Are you sure you want to lock this topic?"
+msgstr ""
+
+#: templates/machina/forum_moderation/topic_move.html:23
+msgid "Move"
+msgstr "Déplacer"
+
+#: templates/machina/forum_moderation/topic_move.html:24
+msgid "Cancel"
+msgstr "Annuler"
+
+#: templates/machina/forum_moderation/topic_unlock.html:15
+msgid "Are you sure you want to unlock this topic?"
+msgstr "Etes-vous sûr de vouloir déverouiller ce sujet?"
+
+#: templates/machina/forum_moderation/topic_update_type.html:12
+msgid "Change topic type"
+msgstr "Changer le type de sujet"
+
+#: templates/machina/forum_search/search.html:5
+#: templates/machina/forum_search/search.html:12
+#: templates/machina/forum_search/search.html:33
+#: templates/machina/forum_search/search.html:43
+msgid "Search"
+msgstr "Chercher"
+
+#: templates/machina/forum_search/search.html:19
+msgid "Search forums"
+msgstr "Chercher dans les forums"
+
+#: templates/machina/forum_search/search.html:45
+msgid "New search"
+msgstr "Nouvelle recherche"
+
+#: templates/machina/forum_search/search.html:51
+#, python-format
+msgid "Your search has returned <b>%(number_of_results)s</b> result"
+msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
+msgstr[0] "Votre recherche a retourné <b>%(number_of_results)s</b> resultat"
+msgstr[1] "Votre recherche a retourné <b>%(number_of_results)s</b> resultats"
+
+#: templates/machina/forum_search/search.html:71
+msgid "Results"
+msgstr "Résultats"
+
+#: templates/machina/forum_search/search.html:103
+msgid "No results."
+msgstr "Aucun résultat"
+
+#: templates/machina/forum_tracking/unread_topic_list.html:17
+#, python-format
+msgid "%(topic_length)s unread topics found"
+msgstr "%(topic_length)s sujets non lus trouvés"
+
+#: templates/machina/forum_tracking/unread_topic_list.html:27
+msgid "There are no unread topics."
+msgstr "Il n'y a pas de sujets non lus"
+
+#: templates/machina/partials/breadcrumb.html:4
+msgid "Forum index"
+msgstr "Sommaire du forum"
