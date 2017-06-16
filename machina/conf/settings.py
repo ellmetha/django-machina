@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 
+"""
+    Django-machina settings
+    =======================
+
+    This module define the settings of the django-machina forum framework. Each setting can be
+    overriden in the Django project's settings. These settings allow to customize many aspects of
+    the forum application, such as conversations, polls, permissions, members, ...
+
+"""
+
 from __future__ import unicode_literals
 
 from django.conf import settings
@@ -8,7 +18,8 @@ from django.conf import settings
 # General
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(
-    settings, 'MACHINA_MARKUP_LANGUAGE', ('machina.core.markdown.markdown', {'safe_mode': True}))
+    settings, 'MACHINA_MARKUP_LANGUAGE',
+    ('machina.core.markdown.markdown', {'safe_mode': True, 'extras': {'break-on-newline': True}}))
 MACHINA_MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget')
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
