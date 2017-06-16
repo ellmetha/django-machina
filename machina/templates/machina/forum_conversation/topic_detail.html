@@ -61,7 +61,7 @@
                 </small>
               </p>
               <div class="post-content">
-                {{ post.content.rendered }}
+                {{ post.content.rendered|linebreaks }}
               </div>
               {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
               {% if post.enable_signature and post.poster.forum_profile.signature %}

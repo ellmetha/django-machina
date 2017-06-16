@@ -1,2 +1,2 @@
 {{ object.subject }}
-{{ object.content.rendered }}
+{{ object.content.rendered|linebreaks }}
