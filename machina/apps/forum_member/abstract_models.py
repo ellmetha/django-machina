@@ -37,6 +37,13 @@ class AbstractForumProfile(models.Model):
     # The amount of posts the user has posted (only approved posts are considered here).
     posts_count = models.PositiveIntegerField(verbose_name=_('Total posts'), blank=True, default=0)
 
+    auto_subscribe_topics = models.BooleanField(
+        verbose_name=_('Automatically subscribe to topics you create.'), default=False)
+
+    notify_subscribed_topics = models.BooleanField(
+        verbose_name=_('Receive an email notification on new replies on subscribed topics.'),
+        default=False)
+
     class Meta:
         abstract = True
         app_label = 'forum_member'
