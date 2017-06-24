@@ -1,0 +1,52 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% blocktrans %}Forum notification{% endblocktrans %}</title>
+  <style type="text/css">
+    #outlook a {padding:0;}
+    body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+    #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+    img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
+    a img {border:none;}
+    p {margin: 0 0 15px 0;font-size:14px;}
+    h1, h2 {color: black !important;margin: 0 0 15px 0}
+    h1, h2, p {font-family:Arial, sans-serif;color:#000000;}
+    table td {border-collapse: collapse;}
+    table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+    a {color: #337ab7;}
+  </style>
+</head>
+<body>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
+<tr>
+  <td align="left" valign="top" style="padding:20px;color:#000000;font-size:14px;">
+    <h2>{% blocktrans %}Hello,{% endblocktrans %}</h2>
+    <p>
+      {% blocktrans %}
+        A user has replied to a topic that you subscribe to:
+      {% endblocktrans %}
+      <br/>
+      <strong>"{{ post.topic.subject }}"</strong>
+    </p>
+    <p>
+      <a href="http://{{ current_site.domain }}{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ post.pk }}#{{ post.pk }}">{% blocktrans %}View the reply here{% endblocktrans %}</a>
+    </p>
+    <p>
+      <em>
+        {% blocktrans %}
+          You can turn off email notifications under the profile pane on the forum.
+        {% endblocktrans %}
+      </em>
+    </p>
+    <p style="padding-top:10px;color:#888888;border-top:solid 1px #888888">
+      {{ current_site.name }}
+    </p>
+  </td>
+</tr>
+</table>
+</body>
+</html>

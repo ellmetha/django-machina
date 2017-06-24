@@ -1,0 +1,12 @@
+{% load i18n %}{% blocktrans %}Hello,{% endblocktrans %}
+
+{% blocktrans %}A user has replied to a topic that you subscribe to:{% endblocktrans %}
+"{{ post.topic.subject }}"
+
+{% blocktrans %}View the reply here:{% endblocktrans %}
+http://{{ current_site.domain }}{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ post.pk }}#{{ post.pk }}
+
+{% blocktrans %}You can turn off email notifications under the profile pane on the forum.{% endblocktrans %}
+
+--
+{{ current_site.name }}

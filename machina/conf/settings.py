@@ -24,7 +24,10 @@ MACHINA_MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget')
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
 MACHINA_BASE_TEMPLATE_NAME = getattr(settings, 'MACHINA_BASE_TEMPLATE_NAME', '_base.html')
+MACHINA_DEFAULT_FROM_EMAIL = getattr(
+    settings, 'MACHINA_DEFAULT_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
 MACHINA_ENABLE_EMAIL_NOTIFICATIONS = getattr(settings, 'MACHINA_ENABLE_EMAIL_NOTIFICATIONS', False)
+
 
 # Forum
 FORUM_IMAGE_UPLOAD_TO = getattr(settings, 'MACHINA_FORUM_IMAGE_UPLOAD_TO', 'machina/forum_images')
