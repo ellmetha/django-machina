@@ -20,6 +20,8 @@
     :target: https://codecov.io/github/ellmetha/django-machina
     :alt: Codecov status
 
+|
+
 Django-machina is a forum framework for Django providing a way to build community-driven websites.
 It offers a full-featured yet very extensible forum solution:
 
