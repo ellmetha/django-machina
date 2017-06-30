@@ -1,5 +1,4 @@
-django-machina
-##############
+.. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
 
 .. image:: https://readthedocs.org/projects/django-machina/badge/?style=flat-square&version=stable
     :target: https://django-machina.readthedocs.org/en/stable/
@@ -22,11 +21,7 @@ django-machina
     :alt: Codecov status
 
 Django-machina is a forum framework for Django providing a way to build community-driven websites.
-
-.. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
-    :target: https://django-machina.readthedocs.org/en/stable/
-
-Django-machina offers a full-featured yet very extensible forum solution:
+It offers a full-featured yet very extensible forum solution:
 
 * Topic and post editing
 * Forums tree management
