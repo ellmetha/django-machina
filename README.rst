@@ -2,8 +2,8 @@ django-machina
 ##############
 
 .. image:: https://readthedocs.org/projects/django-machina/badge/?style=flat-square&version=stable
-   :target: https://django-machina.readthedocs.org/en/stable/
-   :alt: Documentation Status
+    :target: https://django-machina.readthedocs.org/en/stable/
+    :alt: Documentation Status
 
 .. image:: https://img.shields.io/pypi/l/django-machina.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-machina/
@@ -21,10 +21,12 @@ django-machina
     :target: https://codecov.io/github/ellmetha/django-machina
     :alt: Codecov status
 
-|
+Django-machina is a forum framework for Django providing a way to build community-driven websites.
 
-*Django-machina* is a forum framework for Django providing a way to build community-driven websites.
-It offers a full-featured yet very extensible forum solution:
+.. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
+    :target: https://django-machina.readthedocs.org/en/stable/
+
+Django-machina offers a full-featured yet very extensible forum solution:
 
 * Topic and post editing
 * Forums tree management
@@ -36,16 +38,16 @@ It offers a full-featured yet very extensible forum solution:
 * ...
 
 .. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
-  :target: https://django-machina.readthedocs.org/
+    :target: https://django-machina.readthedocs.org/
 
 |
 
-*Django-machina* was built with integration in mind: the application is designed to be used inside
+Django-machina was built with integration in mind: the application is designed to be used inside
 existing Django applications. It is not a standalone forum solution.
 
-*Django-machina* was built with customization and extensibility in mind: each single functionality
+Django-machina was built with customization and extensibility in mind: each single functionality
 of the application can be customized or overriden to accommodate with your needs. In fact,
-*django-machina* uses the same techniques as those introduced by the famous django-oscar_ e-commerce
+django-machina uses the same techniques as those introduced by the famous django-oscar_ e-commerce
 framework to allow powerfull customizations.
 
 .. _django-oscar: https://github.com/django-oscar/django-oscar
@@ -75,9 +77,9 @@ Demo sites
 Two demo sites can be tested:
 
 * the `vanilla project <https://vanilla.machina-forum.io/>`_ contains a standard installation of
-  *django-machina* without customization
+  django-machina without customization
 * the `demo project <https://demo.machina-forum.io/>`_ showcases the customization possibilities of
-  *django-machina*
+  django-machina
 
 Authors
 =======
