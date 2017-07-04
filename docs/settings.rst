@@ -153,11 +153,17 @@ This setting can be used to configure the maximum number of attachments that can
 Member
 ******
 
+``MACHINA_PROFILE_AVATARS_ENABLED``
+------------------------------------
+
+Default: ``True``
+
+This setting enables the built-in avatar system. Set this to ``False`` if you want to disable it or are using a custom avatar template.
+
 ``MACHINA_PROFILE_AVATAR_UPLOAD_TO``
 ------------------------------------
 
 Default: ``'machina/avatar_images'``
-
 
 The media subdirectory where forum member avatars should be uploaded.
 

@@ -8,17 +8,18 @@
     override: hidden;
 
     .profile-avatar{
-      &.empty{
+      .avatar.empty{
         height: 150px;
         background: @gray-lighter;
         text-align: center;
+        display: inline-block;
 
         i.fa{
           margin-top: 50px;
         }
       }
 
-      img{
+      .avatar{
         width: 100%;
       }
     }
