@@ -109,11 +109,6 @@ class ForumProfileUpdateView(UpdateView):
         profile, dummy = ForumProfile.objects.get_or_create(user=self.request.user)
         return profile
 
-    def get_context_data(self, **kwargs):
-        ctx = super(UpdateView, self).get_context_data(**kwargs)
-        ctx['AVATARS_ENABLED'] = machina_settings.PROFILE_AVATARS_ENABLED
-        return ctx
-
     def form_valid(self, form):
         response = super(ForumProfileUpdateView, self).form_valid(form)
         messages.success(self.request, self.success_message)
