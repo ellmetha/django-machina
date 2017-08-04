@@ -86,13 +86,11 @@
           </div>
           <div class="col-md-2 hidden-xs hidden-sm post-sidebar">
             {% if post.poster %}
-              {% if post.poster.forum_profile.avatar %}
                 <div class="avatar">
                   <a href="{% url 'forum_member:profile' post.poster_id %}">
-                    <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
+                    {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
                   </a>
                 </div>
-              {% endif %}
               <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
               <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
             {% else %}

@@ -108,7 +108,7 @@
                                 {% if post.poster.forum_profile.avatar %}
                                     <div class="avatar">
                                         <a href="{% url 'forum_member:profile' post.poster_id %}">
-                                            <img src="{{ post.poster.forum_profile.avatar.url }}" alt="{{ post.poster.username }}" />
+                                            {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
                                         </a>
                                     </div>
                                 {% endif %}

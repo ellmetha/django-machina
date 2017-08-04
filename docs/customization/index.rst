@@ -58,3 +58,4 @@ Here is a list of simple guides demonstrating how to solve common customization 
 
     recipes/overriding_models
     recipes/using_another_markup_language
+    recipes/custom_avatar_backend

@@ -12,7 +12,7 @@
                     <h3 class="panel-title">{% trans "Edit forum profile" %}</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+                    <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}{% if form.avatar %}
                         <div class="row">
                             <div class="col-md-12">
 				                <div id="div_id_{{ form.avatar.html_name }}" class="form-group{% if form.avatar.errors %} has-error{% endif %}">
@@ -24,7 +24,7 @@
 				                    </div>
 				                </div>
                             </div>
-                        </div>
+                        </div>{% endif %}
                        	<div class="row">
                             <div class="col-md-12">
                                 {% include "partials/form_field.html" with field=form.signature %}
