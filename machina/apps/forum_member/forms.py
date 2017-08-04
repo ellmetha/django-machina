@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django import forms
 
-from machina.core.db.models import get_model
 from machina.conf import settings as machina_settings
+from machina.core.db.models import get_model
 
 
 ForumProfile = get_model('forum_member', 'ForumProfile')
