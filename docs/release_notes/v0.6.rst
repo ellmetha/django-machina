@@ -7,6 +7,12 @@ Requirements and compatibility
 
 Python 2.7, 3.3, 3.4, 3.5 and 3.6. Django 1.8, 1.9, 1.10 and 1.11.
 
+New features
+------------
+
+* Add a new ``MACHINA_PROFILE_AVATARS_ENABLED`` setting allowing to disable built-in avatar support
+  if desired (`#77 <https://github.com/ellmetha/django-machina/pull/77>`_)
+
 Minor changes
 -------------
 
