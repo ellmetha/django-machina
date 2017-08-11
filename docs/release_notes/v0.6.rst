@@ -19,3 +19,9 @@ Minor changes
 * Permission name strings are now translatable
 * Improve performances related to tracking operations
 * The Markdown configuration has been updated so that line breaks are correctly rendered
+
+Fixes
+-----
+
+* Fix a ``KeyError`` occuring when searching for permissions in the Django admin site
+  (`#79 <https://github.com/ellmetha/django-machina/issues/79>`_)
