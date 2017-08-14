@@ -87,3 +87,17 @@ class TestForumPermissionChecker(object):
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
+
+    def test_knows_that_granted_permissions_should_take_precedence_over_the_same_non_granted_permissions(self):  # noqa: E501
+        # Setup
+        user = UserFactory.create()
+        group_all_users = GroupFactory.create()
+        group_specific_access = GroupFactory.create()
+        user.groups.add(group_all_users)
+        user.groups.add(group_specific_access)
+        assign_perm('can_read_forum', group_all_users, None)  # global permission
+        assign_perm('can_read_forum', group_all_users, self.forum, has_perm=False)
+        assign_perm('can_read_forum', group_specific_access, self.forum, has_perm=True)
+        checker = ForumPermissionChecker(user)
+        # Run & check
+        assert checker.has_perm('can_read_forum', self.forum)

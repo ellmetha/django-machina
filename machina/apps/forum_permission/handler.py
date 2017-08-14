@@ -385,8 +385,12 @@ class PermissionHandler(object):
                 filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms))
 
             # Using the previous lists we are able to compute a list of forums ids for which
-            # permissions are explicitly not granted.
-            nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms]
+            # permissions are explicitly not granted. It should be noted that any permission that is
+            # explicitely set for a user will not be considered as non granted if a "non granted"
+            # permission also exists. The explicitly granted permissions always win precedence.
+            granted_user_forum_ids = [p.forum_id for p in per_forum_granted_user_perms]
+            nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms
+                                    if p.forum_id not in granted_user_forum_ids]
 
             required_perm_codenames_count = len(perm_codenames)
             initial_forum_ids = [f.id for f in forums]
@@ -422,7 +426,9 @@ class PermissionHandler(object):
 
                 # Now we can update the list of forums ids for which permissions are explicitly not
                 # granted.
-                nongranted_forum_ids += [p.forum_id for p in per_forum_nongranted_group_perms]
+                granted_group_forum_ids = [p.forum_id for p in per_forum_granted_group_perms]
+                nongranted_forum_ids += [p.forum_id for p in per_forum_nongranted_group_perms
+                                         if p.forum_id not in granted_group_forum_ids]
 
                 # Now we will update our previous dictionary that associated each forum ID with a
                 # set of granted permissions (at the user level). We will update it with the new

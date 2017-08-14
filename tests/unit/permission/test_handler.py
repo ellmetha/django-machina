@@ -671,6 +671,20 @@ class TestPermissionHandler(object):
             == set(Forum.objects.exclude(pk=self.forum_2.pk))
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
 
+    def test_filter_methods_ensure_that_granted_permissions_take_precedence_over_the_same_non_granted_permissions(self):  # noqa: E501
+        # Setup
+        user = UserFactory.create()
+        group_all_users = GroupFactory.create()
+        group_specific_access = GroupFactory.create()
+        user.groups.add(group_all_users)
+        user.groups.add(group_specific_access)
+        assign_perm('can_read_forum', group_all_users, None)  # global permission
+        assign_perm('can_read_forum', group_all_users, self.top_level_cat, has_perm=False)
+        assign_perm('can_read_forum', group_specific_access, self.top_level_cat, has_perm=True)
+        # Run & check
+        assert self.top_level_cat in \
+            set(self.perm_handler._get_forums_for_user(user, ['can_read_forum']))
+
     def test_knows_if_a_user_can_subscribe_to_topics(self):
         # Setup
         u2 = UserFactory.create()
