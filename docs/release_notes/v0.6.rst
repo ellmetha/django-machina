@@ -17,7 +17,7 @@ Minor changes
 -------------
 
 * Permission name strings are now translatable
-* Improve performances related to tracking operations
+* Improve performances related to tracking operations and forum visibility contents computations
 * The Markdown configuration has been updated so that line breaks are correctly rendered
 
 Fixes
