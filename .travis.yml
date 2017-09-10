@@ -1,12 +1,6 @@
-sudo: false
-
+dist: trusty
+sudo: true
 language: python
-
-services:
-  - postgresql
-
-addons:
-  mariadb: '10.0'
 
 python:
   - "2.7"
@@ -53,7 +47,7 @@ matrix:
     env: DJANGO_ENV="django>=1.11,<2.0" DB=mysql
 
 install:
-  - if [[ $DB == "mysql" ]]; then pip install mysqlclient; fi
+  - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
   - if [[ $DB == "postgres" ]]; then pip install psycopg2; fi
   - pip install $DJANGO_ENV
 before_script:
