@@ -1,22 +1,23 @@
 .. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
+    :target: https://django-machina.readthedocs.org/
 
-.. image:: https://readthedocs.org/projects/django-machina/badge/?style=flat-square&version=stable
+.. image:: https://readthedocs.org/projects/django-machina/badge/?version=stable
     :target: https://django-machina.readthedocs.org/en/stable/
     :alt: Documentation Status
 
-.. image:: https://img.shields.io/pypi/l/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/pypi/l/django-machina.svg
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: License
 
-.. image:: https://img.shields.io/pypi/v/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/pypi/v/django-machina.svg
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: Latest Version
 
-.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg
     :target: https://travis-ci.org/ellmetha/django-machina
     :alt: Build status
 
-.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg?style=flat-square
+.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg
     :target: https://codecov.io/github/ellmetha/django-machina
     :alt: Codecov status
 
