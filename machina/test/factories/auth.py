@@ -12,7 +12,7 @@ faker = Faker()
 
 
 class UserFactory(factory.DjangoModelFactory):
-    username = factory.LazyAttribute(lambda t: faker.user_name())
+    username = factory.Sequence(lambda n: '{}-{}'.format(faker.user_name(), n))
     email = factory.Sequence(lambda n: 'test{0}@example.com'.format(n))
     password = '1234'
     is_active = True
