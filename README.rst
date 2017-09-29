@@ -21,6 +21,9 @@
     :target: https://codecov.io/github/ellmetha/django-machina
     :alt: Codecov status
 
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+   :target: https://saythanks.io/to/ellmetha
+
 |
 
 Django-machina is a forum framework for Django providing a way to build community-driven websites.
