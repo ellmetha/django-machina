@@ -9,6 +9,9 @@
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: License
 
+.. image:: https://img.shields.io/pypi/pyversions/django-machina.svg
+    :target: https://pypi.python.org/pypi/django-machina
+
 .. image:: https://img.shields.io/pypi/v/django-machina.svg
     :target: https://pypi.python.org/pypi/django-machina/
     :alt: Latest Version
