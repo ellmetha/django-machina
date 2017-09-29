@@ -9,62 +9,62 @@
 {% block sub_title %}{{ forum.name }}{% endblock sub_title %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{ forum.name }}</h1>
-        </div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{ forum.name }}</h1>
+  </div>
+</div>
+{% if sub_forums %}
+<div class="row">
+  <div class="forumlist-top-controls col-xs-12">
+    {% if request.user.is_authenticated %}
+    <div class="pull-right">
+      <a href="{% url 'forum_tracking:mark_subforums_read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o">&nbsp;</i>{% trans "Mark subforums read" %}</a>
     </div>
-    {% if sub_forums %}
-        <div class="row">
-            <div class="forumlist-top-controls col-xs-12">
-                {% if request.user.is_authenticated %}
-                    <div class="pull-right">
-                        <a href="{% url 'forum_tracking:mark_subforums_read' forum.pk %}" class="btn btn-link"><i class="fa fa-check-circle-o">&nbsp;</i>{% trans "Mark subforums read" %}</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-        {% forum_list sub_forums %}
     {% endif %}
-    {% if forum.is_forum %}
-        <div class="row">
-            <div class="col-xs-6 col-md-4 forum-actions-block">
-                {% get_permission 'can_add_topic' forum request.user as user_can_add_topic %}
-                {% if user_can_add_topic %}
-                    <a href="{% url 'forum_conversation:topic_create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
-                {% endif %}
-            </div>
-            <div class="col-xs-12 col-md-8 pagination-block">
-                {% with "pagination-sm" as pagination_size %}
-                    {% include "partials/pagination.html" %}
-                {% endwith %}
-                {% if topics|length > 0 and request.user.is_authenticated %}
-                    <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
-                {% endif %}
-            </div>
-        </div>
-        {% trans "Announcements" as announcements_title_trans %}
-        {% with topic_list_title=announcements_title_trans topics=announces hide_if_empty=True unread_topics=unread_topics %}
-            {% include "forum_conversation/topic_list.html" %}
-        {% endwith %}
-        {% trans "Topics" as topics_title_trans %}
-        {% with topic_list_title=topics_title_trans unread_topics=unread_topics%}
-            {% include "forum_conversation/topic_list.html" %}
-        {% endwith %}
-        <div class="row">
-            <div class="col-xs-6 col-md-4 forum-actions-block">
-                {% if user_can_add_topic %}
-                    <a href="{% url 'forum_conversation:topic_create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
-                {% endif %}
-            </div>
-            <div class="col-xs-12 col-md-8 pagination-block">
-                {% with "pagination-sm" as pagination_size %}
-                    {% include "partials/pagination.html" %}
-                {% endwith %}
-                {% if topics|length > 0 and request.user.is_authenticated %}
-                    <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
-                {% endif %}
-            </div>
-        </div>
+  </div>
+</div>
+{% forum_list sub_forums %}
+{% endif %}
+{% if forum.is_forum %}
+<div class="row">
+  <div class="col-xs-6 col-md-4 forum-actions-block">
+    {% get_permission 'can_add_topic' forum request.user as user_can_add_topic %}
+    {% if user_can_add_topic %}
+    <a href="{% url 'forum_conversation:topic_create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
     {% endif %}
+  </div>
+  <div class="col-xs-12 col-md-8 pagination-block">
+    {% with "pagination-sm" as pagination_size %}
+    {% include "partials/pagination.html" %}
+    {% endwith %}
+    {% if topics|length > 0 and request.user.is_authenticated %}
+    <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+    {% endif %}
+  </div>
+</div>
+{% trans "Announcements" as announcements_title_trans %}
+{% with topic_list_title=announcements_title_trans topics=announces hide_if_empty=True unread_topics=unread_topics %}
+{% include "forum_conversation/topic_list.html" %}
+{% endwith %}
+{% trans "Topics" as topics_title_trans %}
+{% with topic_list_title=topics_title_trans unread_topics=unread_topics%}
+{% include "forum_conversation/topic_list.html" %}
+{% endwith %}
+<div class="row">
+  <div class="col-xs-6 col-md-4 forum-actions-block">
+    {% if user_can_add_topic %}
+    <a href="{% url 'forum_conversation:topic_create' forum.slug forum.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comments fa-lg"></i>&nbsp;{% trans "New topic" %}</a>
+    {% endif %}
+  </div>
+  <div class="col-xs-12 col-md-8 pagination-block">
+    {% with "pagination-sm" as pagination_size %}
+    {% include "partials/pagination.html" %}
+    {% endwith %}
+    {% if topics|length > 0 and request.user.is_authenticated %}
+    <a href="{% url 'forum_tracking:mark_topics_read' forum.pk %}" class="btn btn-link mark-topics-read">{% trans "Mark topics read" %}</a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
 {% endblock content %}
