@@ -152,6 +152,12 @@ class TestForumVisibilityContentNode(object):
         self.topic_3 = create_topic(forum=self.forum_2_child_1, poster=self.user)
         self.post_3 = PostFactory.create(topic=self.topic_3, poster=self.user)
 
+    def test_can_return_its_last_post(self):
+        # Setup
+        visibility_tree = ForumVisibilityContentTree.from_forums(Forum.objects.all())
+        # Run & check
+        assert visibility_tree.as_dict[self.top_level_cat.id].last_post == self.post_3
+
     def test_can_return_its_last_post_date(self):
         # Setup
         visibility_tree = ForumVisibilityContentTree.from_forums(Forum.objects.all())

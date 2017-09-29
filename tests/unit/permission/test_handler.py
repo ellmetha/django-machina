@@ -129,23 +129,6 @@ class TestPermissionHandler(object):
         # Check
         assert list(filtered_forums) == []
 
-    def test_knows_the_last_post_visible_inside_a_forum(self):
-        # Run & check : no forum hidden
-        last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
-        assert last_post == self.post_2
-
-        # Run & check : one forum hidden
-        self.perm_handler = PermissionHandler()
-        remove_perm('can_read_forum', self.g1, self.forum_3)
-        last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
-        assert last_post == self.post_1
-
-        # Run & check : all forums hidden
-        self.perm_handler = PermissionHandler()
-        remove_perm('can_read_forum', self.u1, self.forum_1)
-        last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
-        assert last_post is None
-
     def test_can_return_a_list_of_readable_forums(self):
         # Run
         u2 = UserFactory.create(is_superuser=True)
@@ -154,15 +137,6 @@ class TestPermissionHandler(object):
         # Check
         assert set(readable_forums_1) == set([self.top_level_cat, self.forum_1, self.forum_3, ])
         assert set(readable_forums_2) == set(Forum.objects.all())
-
-    def test_cannot_say_that_post_is_the_last_post_if_it_is_not_approved(self):
-        # Setup
-        PostFactory.create(topic=self.forum_1_topic, poster=self.u1, approved=False)
-        remove_perm('can_read_forum', self.g1, self.forum_3)
-        # Run
-        last_post = self.perm_handler.get_forum_last_post(self.top_level_cat, self.u1)
-        # Check
-        assert last_post == self.post_1
 
     def test_shows_all_forums_to_a_superuser(self):
         # Setup

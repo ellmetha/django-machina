@@ -67,17 +67,6 @@ class PermissionHandler(object):
 
         return qs.exclude(id__in=forums_to_hide)
 
-    def get_forum_last_post(self, forum, user):
-        """ Given a forum, fetch the last post that can be read by the passed user. """
-        forums = forum.get_descendants(include_self=True)
-
-        # Only non-superusers permissions are checked against the considered forums
-        if not user.is_superuser:
-            forums = self.get_readable_forums(forums, user)
-
-        return Post.approved_objects.select_related('topic') \
-            .filter(topic__forum__in=forums).order_by('-created').first()
-
     def get_readable_forums(self, forums, user):
         """ Returns a queryset of forums that can be read by the considered user. """
         # Any superuser should be able to read all the forums.

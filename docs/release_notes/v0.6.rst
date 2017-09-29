@@ -20,6 +20,11 @@ Minor changes
 * Improve performances related to tracking operations and forum visibility contents computations
 * The Markdown configuration has been updated so that line breaks are correctly rendered
 
+Backwards incompatible changes
+------------------------------
+
+* The ``PermissionHandler.get_forum_last_post`` method was removed
+
 Fixes
 -----
 

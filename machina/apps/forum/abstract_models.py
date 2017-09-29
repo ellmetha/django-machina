@@ -21,11 +21,13 @@ from machina.models.fields import MarkupTextField
 
 @python_2_unicode_compatible
 class AbstractForum(MPTTModel, DatedModel):
+    """ The main forum model.
+
+    The tree hierarchy of forums and categories is managed by the MPTTModel which is part of
+    django-mptt.
+
     """
-    The main forum model.
-    The tree hierarchy of forums and categories is managed by the MPTTModel
-    which is part of django-mptt.
-    """
+
     parent = TreeForeignKey(
         'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE,
         verbose_name=_('Parent'))
@@ -64,9 +66,17 @@ class AbstractForum(MPTTModel, DatedModel):
         verbose_name=_('Direct number of topics'), editable=False, blank=True, default=0)
     link_redirects_count = models.PositiveIntegerField(
         verbose_name=_('Track link redirects count'), editable=False, blank=True, default=0)
+
+    # The 'last_post' and 'last_post_on' fields contain values related to the direct topics/posts
+    # only (that is the topics/posts that are directly associated with the considered forum and not
+    # one of its sub-forums).
+    last_post = models.ForeignKey(
+        'forum_conversation.Post', editable=False, related_name='+', blank=True, null=True,
+        on_delete=models.SET_NULL, verbose_name=_('Last post'))
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
-    # Display options
+    # Display options ; these fields can be used to alter the display of the forums in the list of
+    # forums.
     display_sub_forum_list = models.BooleanField(
         verbose_name=_('Display in parent-forums legend'),
         help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
@@ -161,10 +171,14 @@ class AbstractForum(MPTTModel, DatedModel):
         self.direct_posts_count = direct_approved_topics.aggregate(
             total_posts_count=Sum('posts_count'))['total_posts_count'] or 0
 
-        # Force the forum 'last_post_on' date to the one associated with the topic with the latest
-        # post.
-        self.last_post_on = direct_approved_topics[0].last_post_on \
-            if direct_approved_topics.exists() else None
+        # Forces the forum's 'last_post' ID and 'last_post_on' date to the corresponding values
+        # associated with the topic with the latest post.
+        if direct_approved_topics.exists():
+            self.last_post_id = direct_approved_topics[0].last_post_id
+            self.last_post_on = direct_approved_topics[0].last_post_on
+        else:
+            self.last_post_id = None
+            self.last_post_on = None
 
         # Any save of a forum triggered from the update_tracker process will not result in checking
         # for a change of the forum's parent.

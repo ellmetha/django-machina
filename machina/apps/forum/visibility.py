@@ -11,6 +11,7 @@
 
 from __future__ import unicode_literals
 
+from django.db.models.query import QuerySet
 from django.utils.functional import cached_property
 
 
@@ -31,9 +32,15 @@ class ForumVisibilityContentTree(object):
 
     @classmethod
     def from_forums(cls, forums):
+        """ Initializes a ``ForumVisibilityContentTree`` instance from a list of forums. """
         root_level = None
         current_path = []
         nodes = []
+
+        # Ensures forums last posts and related poster relations are "followed" for better
+        # performance (only if we're considering a queryset).
+        forums = forums.select_related('last_post', 'last_post__poster') \
+            if isinstance(forums, QuerySet) else forums
 
         for forum in forums:
             level = forum.level
@@ -142,8 +149,17 @@ class ForumVisibilityContentNode(object):
         self.visible = False
 
     @cached_property
+    def last_post(self):
+        """ Returns the latest post associated with the node or one of its descendants. """
+        posts = [n.last_post for n in self.children if n.last_post is not None]
+        children_last_post = max(posts, key=lambda p: p.created) if posts else None
+        if children_last_post and self.obj.last_post_id:
+            return max(self.obj.last_post, children_last_post, key=lambda p: p.created)
+        return children_last_post or self.obj.last_post
+
+    @cached_property
     def last_post_on(self):
-        """ Returns thee latest post date associated with the node or one of its descendants. """
+        """ Returns the latest post date associated with the node or one of its descendants. """
         dates = [n.last_post_on for n in self.children if n.last_post_on is not None]
         children_last_post_on = max(dates) if dates else None
         if children_last_post_on and self.obj.last_post_on:

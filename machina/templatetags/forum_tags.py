@@ -17,23 +17,6 @@ TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
-def get_forum_last_post(context, forum, user):
-    """ Returns the last post that can be read by the passed user (permissions check).
-
-    Usage::
-
-        {% get_forum_last_post forum request.user as var %}
-
-    """
-    request = context.get('request', None)
-    perm_handler = request.forum_permission_handler if request else PermissionHandler()
-
-    # Retrieve the last post link associated with the current forum
-    last_post = perm_handler.get_forum_last_post(forum, user)
-    return last_post
-
-
 class RecurseTreeForumVisibilityContentNode(template.Node):
     def __init__(self, template_nodes, forums_contents_var):
         self.template_nodes = template_nodes
