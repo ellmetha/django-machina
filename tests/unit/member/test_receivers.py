@@ -71,7 +71,25 @@ class TestIncreasePostsCountReceiver(object):
 
 
 @pytest.mark.django_db
-class TestDecreasePostsCountReceiver(object):
+class TestDecreasePostsCountAfterPostUnaprovalReceiver(object):
+    def test_can_decrease_the_posts_count_of_a_post_being_set_as_not_approved(self):
+        # Setup
+        u1 = UserFactory.create()
+        top_level_forum = create_forum()
+        topic = create_topic(forum=top_level_forum, poster=u1)
+        PostFactory.create(topic=topic, poster=u1)
+        profile = ForumProfile.objects.get(user=u1)
+        post = PostFactory.create(topic=topic, poster=u1, approved=True)
+        # Run
+        post.approved = False
+        post.save()
+        # Check
+        profile.refresh_from_db()
+        assert profile.posts_count == 1
+
+
+@pytest.mark.django_db
+class TestDecreasePostsCountAfterPostDeletionReceiver(object):
     def test_can_decrease_the_posts_count_of_the_post_being_deleted(self):
         # Setup
         u1 = UserFactory.create()

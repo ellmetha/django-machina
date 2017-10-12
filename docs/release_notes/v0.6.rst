@@ -30,3 +30,5 @@ Fixes
 
 * Fix a ``KeyError`` occuring when searching for permissions in the Django admin site
   (`#79 <https://github.com/ellmetha/django-machina/issues/79>`_)
+* Fix an error in members' post counts calculation occuring when setting existing posts as unaproved
+  (`#89 <https://github.com/ellmetha/django-machina/issues/89>`_)
