@@ -98,7 +98,7 @@ class AbstractTopic(DatedModel):
         verbose_name_plural = _('Topics')
 
     def __str__(self):
-        return self.first_post.subject if self.first_post is not None else str(self.id)
+        return self.first_post.subject if self.first_post is not None else self.subject
 
     @property
     def is_topic(self):
