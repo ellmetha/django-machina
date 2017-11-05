@@ -13,5 +13,5 @@ def get_object_or_none(klass, *args, **kwargs):
     queryset = _get_queryset(klass)
     try:
         return queryset.get(*args, **kwargs)
-    except:
+    except:  # noqa: E722
         return None

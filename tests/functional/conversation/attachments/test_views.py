@@ -69,7 +69,7 @@ class TestAttachmentView(BaseClientTestCase):
         for attachment in attachments:
             try:
                 attachment.file.delete()
-            except:
+            except:  # noqa: E722
                 pass
 
     def test_browsing_works(self):
