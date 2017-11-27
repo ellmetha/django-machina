@@ -28,8 +28,8 @@ def assign_perm(perm, user_or_group, forum=None, has_perm=True):
         return UserForumPermission.objects.create(
             forum=forum,
             permission=perm,
-            user=user if not user.is_anonymous() else None,
-            anonymous_user=user.is_anonymous(),
+            user=user if not user.is_anonymous else None,
+            anonymous_user=user.is_anonymous,
             has_perm=has_perm)
     if group:
         return GroupForumPermission.objects.create(
@@ -46,8 +46,8 @@ def remove_perm(perm, user_or_group, forum=None):
         UserForumPermission.objects.filter(
             forum=forum,
             permission=perm,
-            user=user if not user.is_anonymous() else None,
-            anonymous_user=user.is_anonymous()).delete()
+            user=user if not user.is_anonymous else None,
+            anonymous_user=user.is_anonymous).delete()
     if group:
         GroupForumPermission.objects.filter(
             forum=forum, permission=perm, group=group).delete()

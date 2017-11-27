@@ -26,7 +26,7 @@ def has_been_completed_by(poll, user):
     """
     user_votes = TopicPollVote.objects.filter(
         poll_option__poll=poll)
-    if user.is_anonymous():
+    if user.is_anonymous:
         forum_key = get_anonymous_user_forum_key(user)
         user_votes = user_votes.filter(anonymous_key=forum_key) if forum_key \
             else user_votes.none()

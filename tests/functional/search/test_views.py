@@ -6,10 +6,9 @@ import shutil
 
 import pytest
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.core import management
+from django.urls import reverse
 from faker import Faker
-from haystack.management.commands import clear_index
-from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
 
 from machina.core.db.models import get_model
@@ -90,14 +89,15 @@ class TestFacetedSearchView(BaseClientTestCase):
 
         self.sqs = SearchQuerySet()
 
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
+        management.call_command('update_index', verbosity=0)
 
         yield
 
         # teardown
         # --
 
-        clear_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
 
     @classmethod
     def teardown_class(cls):

@@ -89,7 +89,7 @@ class PermissionRequiredMixin(object):
         # Check permissions
         has_permissions = self.perform_permissions_check(user, obj, perms)
 
-        if not has_permissions and not user.is_authenticated():
+        if not has_permissions and not user.is_authenticated:
             return HttpResponseRedirect('{}?{}={}'.format(
                 resolve_url(self.login_url),
                 self.redirect_field_name,

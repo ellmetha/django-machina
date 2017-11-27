@@ -6,9 +6,8 @@ import shutil
 
 import pytest
 from django.conf import settings
+from django.core import management
 from faker import Faker
-from haystack.management.commands import clear_index
-from haystack.management.commands import rebuild_index
 from haystack.query import SearchQuerySet
 
 from machina.apps.forum_search.forms import SearchForm
@@ -94,14 +93,15 @@ class TestSearchForm(object):
 
         self.sqs = SearchQuerySet()
 
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
+        management.call_command('update_index', verbosity=0)
 
         yield
 
         # teardown
         # --
 
-        clear_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
 
     @classmethod
     def teardown_class(cls):
@@ -170,7 +170,8 @@ class TestSearchForm(object):
         self.topic_2.first_post.save()
         self.topic_3.first_post.subject = 'newsubject'
         self.topic_3.first_post.save()
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
+        management.call_command('update_index', verbosity=0)
         form = SearchForm(
             {
                 'q': 'newsubject',
@@ -195,7 +196,8 @@ class TestSearchForm(object):
         self.topic_3.first_post.save()
         post_4 = PostFactory.create(
             subject='newsubject', topic=self.topic_3, poster=None, username='newtest')
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
+        management.call_command('update_index', verbosity=0)
         form = SearchForm(
             {
                 'q': 'newsubject',
@@ -214,7 +216,8 @@ class TestSearchForm(object):
         # Setup
         self.topic_2.first_post.subject = self.topic_1.subject
         self.topic_2.first_post.save()
-        rebuild_index.Command().handle(interactive=False, verbosity=-1)
+        management.call_command('clear_index', verbosity=0, interactive=False)
+        management.call_command('update_index', verbosity=0)
         form = SearchForm(
             {
                 'q': self.topic_1.subject,

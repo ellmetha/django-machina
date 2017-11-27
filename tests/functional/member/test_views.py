@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import pytest
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

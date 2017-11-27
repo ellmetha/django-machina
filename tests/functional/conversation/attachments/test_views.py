@@ -7,7 +7,7 @@ import os
 import pytest
 from django.conf import settings
 from django.core.files import File
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from faker import Faker
 
 from machina.core.db.models import get_model

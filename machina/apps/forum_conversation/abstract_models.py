@@ -8,11 +8,11 @@ from django.db import models
 from django.db.models import Q
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
 from machina.core import validators
-from machina.core.compat import slugify
 from machina.core.loading import get_class
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField

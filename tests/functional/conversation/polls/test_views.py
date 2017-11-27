@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from faker import Faker
 
 from machina.core.db.models import get_model

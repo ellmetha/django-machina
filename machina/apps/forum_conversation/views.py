@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 from django.views.generic import FormView

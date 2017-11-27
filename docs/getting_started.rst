@@ -5,7 +5,7 @@ Requirements
 ------------
 
 * `Python`_ 2.7, 3.3, 3.4, 3.5 and 3.6
-* `Django`_ 1.8.x, 1.9.x, 1.10.x and 1.11.x
+* `Django`_ 1.11.x and 2.0.x
 * `Pillow`_ 2.2. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
@@ -106,18 +106,6 @@ Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` t
         # Machina
         'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     )
-
-.. note::
-
-    If you are using **Django 1.9 or below**, you should append the ``ForumPermissionMiddleware`` to the old ``MIDDLEWARE_CLASSES`` setting:
-
-    .. code-block:: python
-
-        MIDDLEWARE_CLASSES = (
-            # ...
-            # Machina
-            'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
-        )
 
 Edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory:
 

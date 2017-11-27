@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 import pytest
-from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
+from django.urls import reverse
 
 from machina.apps.forum_feeds.feeds import LastTopicsFeed
 from machina.core.db.models import get_model

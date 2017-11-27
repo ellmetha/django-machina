@@ -11,12 +11,12 @@ from django.contrib.admin import helpers
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.core.urlresolvers import reverse
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from mptt.exceptions import InvalidMove
 from mptt.forms import TreeNodeChoiceField
@@ -369,8 +369,7 @@ class PickUserForm(forms.Form):
 
         self.fields['user'].required = False
         self.fields['user'].widget = ForeignKeyRawIdWidget(
-            UserForumPermission._meta.get_field('user').rel,
-            admin_site)
+            UserForumPermission._meta.get_field('user').remote_field, admin_site)
 
         self.fields['anonymous_user'].required = False
 
@@ -393,8 +392,7 @@ class PickGroupForm(forms.Form):
 
         self.fields['group'].required = False
         self.fields['group'].widget = ForeignKeyRawIdWidget(
-            GroupForumPermission._meta.get_field('group').rel,
-            admin_site)
+            GroupForumPermission._meta.get_field('group').remote_field, admin_site)
 
 
 class PickForumForm(forms.Form):

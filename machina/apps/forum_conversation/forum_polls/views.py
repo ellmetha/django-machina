@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic.edit import ModelFormMixin
@@ -37,7 +37,7 @@ class TopicPollVoteView(PermissionRequiredMixin, UpdateView):
         return kwargs
 
     def form_valid(self, form):
-        user_kwargs = {'voter': self.request.user} if self.request.user.is_authenticated() \
+        user_kwargs = {'voter': self.request.user} if self.request.user.is_authenticated \
             else {'anonymous_key': self.request.user.forum_key}
 
         if self.object.user_changes:

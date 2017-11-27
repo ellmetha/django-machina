@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 
 import uuid
 
-from machina.core.compat import MiddlewareMixin
+from django.utils.deprecation import MiddlewareMixin
+
 from machina.core.loading import get_class
 
 
@@ -23,7 +24,7 @@ class ForumPermissionMiddleware(MiddlewareMixin):
     anonymous_forum_key_session_id = '_anonymous_forum_key'
 
     def process_request(self, request):
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             # Get the anonymous forum key and attaches it the AnonymousUser instance.
             anonymous_forum_key = request.session.get(self.anonymous_forum_key_session_id, None)
             if anonymous_forum_key is None:

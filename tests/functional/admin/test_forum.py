@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import pytest
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from machina.apps.forum.admin import PickUserForm
 from machina.apps.forum_permission.models import ForumPermission

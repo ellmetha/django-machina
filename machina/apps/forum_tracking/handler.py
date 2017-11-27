@@ -39,7 +39,7 @@ class TrackingHandler(object):
         unread_forums = []
 
         # A user which is not authenticated will never see a forum as unread
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             return unread_forums
 
         unread = ForumReadTrack.objects.get_unread_forums_from_list(forums, user)
@@ -53,7 +53,7 @@ class TrackingHandler(object):
 
         # A user which is not authenticated will never see a topic as unread.
         # If there are no topics to consider, we stop here.
-        if not user.is_authenticated() or topics is None or not len(topics):
+        if not user.is_authenticated or topics is None or not len(topics):
             return unread_topics
 
         # A topic can be unread if a track for itself exists with a mark time that
@@ -91,7 +91,7 @@ class TrackingHandler(object):
 
     def mark_forums_read(self, forums, user):
         """ Marks a list of forums as read. """
-        if not forums or not user.is_authenticated():
+        if not forums or not user.is_authenticated:
             return
 
         forums = sorted(forums, key=lambda f: f.level)
@@ -107,7 +107,7 @@ class TrackingHandler(object):
 
     def mark_topic_read(self, topic, user):
         """ Marks a topic as read. """
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             return
 
         forum = topic.forum

@@ -11,8 +11,7 @@ class Application(object):
     """
     name = None
 
-    def __init__(self, app_name=None, **kwargs):
-        self.app_name = app_name
+    def __init__(self, **kwargs):
         # Set all kwargs as object attributes
         for key, value in kwargs.items():  # pragma: no cover
             setattr(self, key, value)
@@ -27,4 +26,4 @@ class Application(object):
     @property
     def urls(self):
         # We set the application and instance namespaces here
-        return self.get_urls(), self.app_name, self.name
+        return self.get_urls(), self.name

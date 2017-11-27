@@ -7,13 +7,13 @@ from django.db import models
 from django.db.models import Sum
 from django.utils.encoding import force_text
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
 
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
-from machina.core.compat import slugify
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField

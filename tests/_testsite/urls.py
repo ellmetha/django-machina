@@ -11,7 +11,7 @@ from machina.app import board
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'', include(board.urls)),
 ]
 urlpatterns += staticfiles_urlpatterns()

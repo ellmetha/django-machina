@@ -12,7 +12,7 @@ TrackingHandler = get_class('forum_tracking.handler', 'TrackingHandler')
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_unread_topics(context, topics, user):
     """
     This will return a list of unread topics for the given user from a given set of topics.

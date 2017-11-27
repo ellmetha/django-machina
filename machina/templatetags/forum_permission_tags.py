@@ -14,7 +14,7 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_permission(context, method, *args, **kwargs):
     """
     This will return a boolean indicating if the considered permission is

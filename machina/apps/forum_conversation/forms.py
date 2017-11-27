@@ -43,7 +43,7 @@ class PostForm(forms.ModelForm):
         self.fields['content'].widget.attrs['placeholder'] = _('Enter your message')
 
         # Handles anonymous users
-        if self.user and self.user.is_anonymous():
+        if self.user and self.user.is_anonymous:
             self.fields['username'].required = True
         else:
             # The 'username' field is not really usefull if the user is
@@ -73,7 +73,7 @@ class PostForm(forms.ModelForm):
     def clean(self):
         if not self.instance.pk:
             # Only set user on post creation
-            if not self.user.is_anonymous():
+            if not self.user.is_anonymous:
                 self.instance.poster = self.user
             else:
                 self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
@@ -93,7 +93,7 @@ class PostForm(forms.ModelForm):
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'],
                 enable_signature=self.cleaned_data['enable_signature'])
-            if not self.user.is_anonymous():
+            if not self.user.is_anonymous:
                 post.poster = self.user
             else:
                 post.username = self.cleaned_data['username']
@@ -191,7 +191,7 @@ class TopicForm(PostForm):
                 type=topic_type,
                 status=Topic.TOPIC_UNLOCKED,
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user))
-            if not self.user.is_anonymous():
+            if not self.user.is_anonymous:
                 topic.poster = self.user
             self.topic = topic
             if commit:
