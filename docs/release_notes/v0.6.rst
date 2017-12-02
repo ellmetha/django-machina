@@ -32,3 +32,5 @@ Fixes
   (`#79 <https://github.com/ellmetha/django-machina/issues/79>`_)
 * Fix an error in members' post counts calculation occuring when setting existing posts as unaproved
   (`#89 <https://github.com/ellmetha/django-machina/issues/89>`_)
+* Fix an inconsistent label for the ``forum_feeds`` application
+  (`#95 <https://github.com/ellmetha/django-machina/issues/95>`_)
