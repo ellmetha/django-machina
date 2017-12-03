@@ -19,10 +19,6 @@ messages:
 compiledmessages:
 	cd machina && pipenv run python -m django compilemessages
 
-# Installs all the project's dependencies.
-install:
-	pipenv install --dev
-
 # Builds the documentation.
 docs:
 	cd docs && rm -rf _build && pipenv run make html
