@@ -13,7 +13,7 @@ To run this project locally, you can follow these instructions:
 
   $ git clone https://github.com/ellmetha/django-machina
   $ cd django-machina
-  $ pipenv install --three --dev
+  $ make init
   $ cd example_project/
   $ pipenv run python manage.py migrate
   $ pipenv run python manage.py createsuperuser
