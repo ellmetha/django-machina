@@ -12,20 +12,20 @@ env:
   - DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
   - DJANGO_ENV="django>=1.11,<2.0" DB=postgres
   - DJANGO_ENV="django>=1.11,<2.0" DB=mysql
-  - DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=sqlite
-  - DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=postgres
-  - DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=mysql
+  - DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=sqlite
+  - DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=postgres
+  - DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=mysql
 
 matrix:
   allow_failures:
     - python: "3.7-dev"
   exclude:
   - python: "2.7"
-    env: DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=sqlite
+    env: DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=sqlite
   - python: "2.7"
-    env: DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=postgres
+    env: DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=postgres
   - python: "2.7"
-    env: DJANGO_ENV="django==2.0 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=mysql
+    env: DJANGO_ENV="django>=2.0,<2.1 git+git://github.com/django-mptt/django-mptt.git#egg=mptt" DB=mysql
 
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
