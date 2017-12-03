@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "959045c383fe2f60b2d5c8ec52d37ed4aafd3804cd293b70ad8177fe7b3ab46e"
+            "sha256": "33c4218f13c8f3a9e96293fbc21efc1323ad74ecf7ea941b815f9908c368898a"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -47,6 +47,7 @@
                 "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0",
                 "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"
             ],
+            "markers": "sys_platform == 'darwin'",
             "version": "==0.1.0"
         },
         "attrs": {
@@ -176,7 +177,7 @@
                 "sha256:8ad8c4783bf61ded74527bffb48ed9b54166685e4230386a9ed9b1279e2df5b1",
                 "sha256:2d81cbbe0e73112bdfe6ef8576f2238f2ba27dd0d55752a776c41d38b7da2850"
             ],
-            "markers": "python_version < '3.4'",
+            "markers": "python_version == '2.7'",
             "version": "==1.1.6"
         },
         "execnet": {
@@ -319,6 +320,7 @@
                 "sha256:2b50dd8caa5007b10b0afcf075095814780b104b4a5cf9d8fbdc8bbc754e5ca4",
                 "sha256:00ab0872f80f5db740499e7a1283a7c3b97bea542d72df84d83dea17d0afd2d9"
             ],
+            "markers": "sys_platform != 'win32'",
             "version": "==4.3.0"
         },
         "pickleshare": {
@@ -536,13 +538,6 @@
             ],
             "version": "==1.1"
         },
-        "tox": {
-            "hashes": [
-                "sha256:8af30fd835a11f3ff8e95176ccba5a4e60779df4d96a9dfefa1a1704af263225",
-                "sha256:752f5ec561c6c08c5ecb167d3b20f4f4ffc158c0ab78855701a75f5cef05f4b8"
-            ],
-            "version": "==2.9.1"
-        },
         "traitlets": {
             "hashes": [
                 "sha256:c6cb5e6f57c5a9bdaa40fa71ce7b4af30298fbab9ece9815b5d995ab6217c7d9",
@@ -578,14 +573,6 @@
                 "sha256:572ef9696b97595b4f44f6198fe8c06e6f4e6351d930d22e5330b071391272ff"
             ],
             "version": "==2.0.15"
-        },
-        "virtualenv": {
-            "hashes": [
-                "sha256:39d88b533b422825d644087a21e78c45cf5af0ef7a99a1fc9fbb7b481e5c85b0",
-                "sha256:02f8102c2436bb03b3ee6dede1919d1dac8a427541652e5ec95171ec8adbc93a"
-            ],
-            "markers": "python_version != '3.2'",
-            "version": "==15.1.0"
         },
         "wcwidth": {
             "hashes": [

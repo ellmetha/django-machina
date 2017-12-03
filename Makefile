@@ -60,13 +60,3 @@ coverage:
 # Run the tests in "spec" mode.
 spec:
 	pipenv run py.test --spec -p no:sugar
-
-
-# CONTINUOUS INTEGRATION
-# ~~~~~~~~~~~~~~~~~~~~~~
-# The following rules can be used to trigger operations that should be performed only in continuous
-# integration environments.
-# --------------------------------------------------------------------------------------------------
-
-# Performs operations required to build & test the project on Travis CI.
-travis: install qa coverage
