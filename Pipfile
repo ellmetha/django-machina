@@ -16,15 +16,19 @@ pytest-spec = "*"
 pytest-sugar = "*"
 pytest-xdist = "*"
 codecov = "*"
-factory_boy = "*"
-Faker = "*"
 mock = "*"
 "flake8" = "*"
 isort = "*"
-Sphinx = "*"
-sphinx_rtd_theme = "*"
-uWSGI = "*"
-Whoosh = "*"
 transifex-client = "*"
-"e1839a8" = {path = ".", editable = true}
 django-debug-toolbar = "*"
+factory-boy = "*"
+faker = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+whoosh = "*"
+unipath = "*"
+
+
+[packages]
+
+"e1839a8" = {path = ".", editable = true}

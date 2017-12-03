@@ -75,15 +75,11 @@ a full list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 
-Demo sites
-==========
+Demo site
+=========
 
-Two demo sites can be tested:
-
-* the `vanilla project <https://vanilla.machina-forum.io/>`_ contains a standard installation of
-  django-machina without customization
-* the `demo project <https://demo.machina-forum.io/>`_ showcases the customization possibilities of
-  django-machina
+A demo sites can be tested at https://vanilla.machina-forum.io/. It contains a standard installation
+of django-machina without any customizations.
 
 Authors
 =======

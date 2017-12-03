@@ -22,6 +22,11 @@ tips regarding pull requests.
 Development environment
 -----------------------
 
+.. note::
+
+    The following steps assumes you have `Pipenv <https://docs.pipenv.org/>`_ and
+    `npm <https://www.npmjs.com/>`_ installed on your system.
+
 You should first fork the
 `django-machina's repository <https://github.com/ellmetha/django-machina>`_. Then you can get a
 working copy of the project using the following commands:
@@ -30,8 +35,7 @@ working copy of the project using the following commands:
 
     $ git clone git@github.com:<username>/django-machina.git
     $ cd django-machina
-    $ pipenv install --three --dev
-    $ npm install
+    $ make && npm install
 
 Coding style
 ------------

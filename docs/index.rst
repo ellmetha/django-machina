@@ -9,7 +9,7 @@ Welcome to django-machina's documentation!
    :maxdepth: 2
 
    getting_started
-   example_projects
+   example_project
    settings
    glossary
    forum_permissions

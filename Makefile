@@ -1,4 +1,8 @@
-.PHONY: install qa lint tests spec coverage travis docs
+.PHONY: init install qa lint tests spec coverage travis docs
+
+
+init:
+	pipenv install --three --dev --skip-lock
 
 
 # DEVELOPMENT
