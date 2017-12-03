@@ -31,8 +31,8 @@ install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
   - if [[ $DB == "postgres" ]]; then pip install psycopg2; fi
   - pip install pip pipenv -U
+  - pipenv install --skip-lock $DJANGO_ENV
   - pipenv install --dev --skip-lock
-  - pipenv install $DJANGO_ENV
 before_script:
   - mysql -u root -e 'create database machina_test;'
   - psql -c 'create database machina_test;' -U postgres
