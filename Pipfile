@@ -1,0 +1,31 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+ipython = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-pythonpath = "*"
+pytest-spec = "*"
+pytest-sugar = "*"
+pytest-xdist = "*"
+codecov = "*"
+factory-boy = "*"
+faker = "*"
+mock = "*"
+tox = "*"
+"flake8" = "*"
+isort = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+uwsgi = "*"
+whoosh = "*"
+transifex-client = "*"
+"e1839a8" = {path = ".", editable = true}
+django-debug-toolbar = "*"
