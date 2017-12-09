@@ -2,7 +2,7 @@
 
 
 init:
-	pipenv install --three --dev --skip-lock
+	pipenv install --three --dev
 
 
 # DEVELOPMENT

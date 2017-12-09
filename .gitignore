@@ -20,4 +20,3 @@ tests/settings_local.py
 
 # Don't commit env-specific settings and files
 example_project/vanilla_project/settings/env.py
-Pipfile.lock
