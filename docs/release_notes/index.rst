@@ -4,7 +4,7 @@ Release notes
 
 
 
-Here are listed the release notes for each version of *django-machina*.
+Here are listed the release notes for each version of django-machina.
 
 Django-machina 0.6
 ------------------

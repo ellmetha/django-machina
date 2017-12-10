@@ -2,7 +2,8 @@
 Forum attachments
 #################
 
-The ``forum_attachments`` application handles all the attachments that can be associated with forum posts.
+The ``forum_attachments`` application handles all the attachments that can be associated with forum
+posts.
 
 Abstract models
 ---------------

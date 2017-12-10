@@ -2,7 +2,8 @@
 Forum polls
 ###########
 
-The ``forum_polls`` application handles all the polls that can be created in forum topics. It provides forms and tools for creating polls and for voting in forum polls.
+The ``forum_polls`` application handles all the polls that can be created in forum topics. It
+provides forms and tools for creating polls and for voting in forum polls.
 
 Abstract models
 ---------------

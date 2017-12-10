@@ -2,7 +2,8 @@
 Forum member
 ############
 
-The ``forum_member`` application provides functionalities to forum members and defines forum profile abstract models.
+The ``forum_member`` application provides functionalities to forum members and defines forum profile
+abstract models.
 
 Abstract models
 ---------------

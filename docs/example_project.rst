@@ -1,10 +1,10 @@
 Example project
 ===============
 
-*Django-machina* provides an example project containing a standard installation of *django-machina*
-without any customizations.
+Django-machina provides an example project containing a standard installation of the module without
+any customizations.
 
-This project uses the default forum settings and can be usefull for discovering *django-machina*'s
+This project uses the default forum settings and can be usefull for discovering django-machina's
 functionalities.
 
 To run this project locally, you can follow these instructions:

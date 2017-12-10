@@ -2,7 +2,8 @@
 Forum
 #####
 
-The ``forum`` application provides the ability to browse a tree of forums. It is based on a single ``AbstractForum`` abstract model.
+The ``forum`` application provides the ability to browse a tree of forums. It is based on a single
+``AbstractForum`` abstract model.
 
 Abstract models
 ---------------

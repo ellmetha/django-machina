@@ -15,8 +15,8 @@ Requirements
 
 .. note::
 
-    *Django-machina* uses Markdown by default as a syntax for forum messages, but you can change
-    this in your settings.
+    Django-machina uses Markdown by default as a syntax for forum messages, but you can change this
+    in your settings.
 
 .. _Python: https://www.python.org
 .. _Django: https://www.djangoproject.com
@@ -29,7 +29,7 @@ Requirements
 Installation
 ------------
 
-Install *django-machina* using:
+Install django-machina using:
 
 .. code-block:: console
 
@@ -42,7 +42,7 @@ Django settings
 ~~~~~~~~~~~~~~~
 
 First update your ``INSTALLED_APPS`` in your project's settings module. Modify it to be a list and
-append the *django-machina*'s  apps to this list:
+append the django-machina's  apps to this list:
 
 .. code-block:: python
 
@@ -65,10 +65,10 @@ append the *django-machina*'s  apps to this list:
 
 .. note::
 
-    *Django-machina* uses *django-mptt* to handle the tree of forum instances. Search capabilities
-    are provided by *django-haystack*.
+    Django-machina uses django-mptt to handle the tree of forum instances. Search capabilities are
+    provided by django-haystack.
 
-Then modify your ``TEMPLATES`` settings so that it includes the *django-machina*'s template
+Then modify your ``TEMPLATES`` settings so that it includes the django-machina's template
 directory and the extra ``metadata`` context processor:
 
 .. code-block:: python
@@ -107,7 +107,7 @@ Add the ``machina.apps.forum_permission.middleware.ForumPermissionMiddleware`` t
         'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     )
 
-Edit your ``STATICFILES_DIRS`` setting so that it includes the *django-machina*'s static directory:
+Edit your ``STATICFILES_DIRS`` setting so that it includes the django-machina's static directory:
 
 .. code-block:: python
 
@@ -137,11 +137,11 @@ post attachments. Note that this ``machina_attachments`` cache must use the
 Django-haystack settings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Django-machina* uses *django-haystack* to provide search for forum conversations. *Django-haystack*
+Django-machina uses django-haystack to provide search for forum conversations. Django-haystack
 allows you to plug in many search backends so you may want to choose the one that best suits your
 need.
 
-You can start using the basic search provided by the *django-haystack*'s simple backend:
+You can start using the basic search provided by the django-haystack's simple backend:
 
 .. code-block:: python
 
@@ -195,7 +195,7 @@ Creating your first forums
 --------------------------
 
 You can now navigate to http://127.0.0.1:8000/forum/ in order to visualize the index of your forum
-board. As you should see no forums have been created yet. *Django-machina* does not ship with
+board. As you should see no forums have been created yet. Django-machina does not ship with
 pre-created forums, so you should navigate to your administration panel and create some forum
 instances.
 

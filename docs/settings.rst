@@ -2,7 +2,7 @@
 Settings
 ########
 
-This is a comprehensive list of all the settings *django-machina* provides. All settings are optional.
+This is a comprehensive list of all the settings django-machina provides. All settings are optional.
 
 General
 *******
@@ -27,28 +27,31 @@ empty if the function does not require any argument). Note that if you do not wa
 language such as Markdown or BBCode (eg. if you are using a Wysiwyg editor), you can set this
 setting to ``None``.
 
-*Django-machina* uses Markdown as the default syntax for forum messages.
+Django-machina uses Markdown as the default syntax for forum messages.
 
 ``MACHINA_MARKUP_WIDGET``
 -------------------------
 
 Default: ``'machina.forms.widgets.MarkdownTextareaWidget'``
 
-This setting defines the widget used inside topic and post forms. It should be a Python dotted path to a Django form widget.
+This setting defines the widget used inside topic and post forms. It should be a Python dotted path
+to a Django form widget.
 
 ``MACHINA_MARKUP_WIDGET_KWARGS``
 --------------------------------
 
 Default: ``{}``
 
-This setting defines the keyword arguments that will be used when instanciating the widgets associated with the ``MACHINA_MARKUP_WIDGET`` setting.
+This setting defines the keyword arguments that will be used when instanciating the widgets
+associated with the ``MACHINA_MARKUP_WIDGET`` setting.
 
 ``MACHINA_BASE_TEMPLATE_NAME``
 ------------------------------
 
 Default: ``'_base.html'``
 
-This setting defines the name of the base template that is extended by the *django-machina*'s main ``board_base.html`` template.
+This setting defines the name of the base template that is extended by the django-machina's main
+``board_base.html`` template.
 
 
 Forum
@@ -66,14 +69,16 @@ The media subdirectory where forum images should be uploaded.
 
 Default: ``100``
 
-The width used to create the thumbnail that is displayed for each forum that has an image in the list of forums. The image is not resized if this setting is set to ``None``.
+The width used to create the thumbnail that is displayed for each forum that has an image in the
+list of forums. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_FORUM_IMAGE_HEIGHT``
 ------------------------------
 
 Default: ``70``
 
-The height used to create the thumbnail that is displayed for each forum that has an image in the list of forums. The image is not resized if this setting is set to ``None``.
+The height used to create the thumbnail that is displayed for each forum that has an image in the
+list of forums. The image is not resized if this setting is set to ``None``.
 
 ``MACHINA_FORUM_TOPICS_NUMBER_PER_PAGE``
 ----------------------------------------
@@ -90,7 +95,9 @@ Conversation
 
 Default: ``'Re:'``
 
-This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* in the reply form.
+This is the prefix used to pre-populate the subject of a topic reply. For example: if a reply is
+being posted for the *Lorem Ipsum* topic, the prefilled subject will be *Re: Lorem Ipsum* in the
+reply form.
 
 .. _setting-post-content-max-length:
 
@@ -99,7 +106,8 @@ This is the prefix used to pre-populate the subject of a topic reply. For exampl
 
 Default: ``None``
 
-The maximum number of characters that can be used in a forum post. A value of ``None`` means that there is no maximum length for forum posts.
+The maximum number of characters that can be used in a forum post. A value of ``None`` means that
+there is no maximum length for forum posts.
 
 ``MACHINA_TOPIC_POSTS_NUMBER_PER_PAGE``
 ---------------------------------------
@@ -113,7 +121,8 @@ The number of posts displayed inside one page of a forum topic.
 
 Default: ``10``
 
-The number of posts displayed when posting a reply. The posts displayed are related to the considered forum topic.
+The number of posts displayed when posting a reply. The posts displayed are related to the
+considered forum topic.
 
 Polls
 *****
@@ -123,14 +132,18 @@ Polls
 
 Default: ``30``
 
-This setting can be used to configure the maximum number of options that can be defined when creating a poll.
+This setting can be used to configure the maximum number of options that can be defined when
+creating a poll.
 
 ``MACHINA_POLL_MAX_OPTIONS_PER_USER``
 -------------------------------------
 
 Default: ``10``
 
-This setting defines the maximum number of poll options that can be selected by users when voting. Note that this setting does not impact the users who vote in a poll but only the poll creator. The latest has to choose the number of poll options allowed per user, and this value cannot exceed the value of this setting.
+This setting defines the maximum number of poll options that can be selected by users when voting.
+Note that this setting does not impact the users who vote in a poll but only the poll creator. The
+latest has to choose the number of poll options allowed per user, and this value cannot exceed the
+value of this setting.
 
 Attachments
 ***********
@@ -154,7 +167,8 @@ The name of the cache used to store temporary post attachments.
 
 Default: ``15``
 
-This setting can be used to configure the maximum number of attachments that can be associated to a forum post.
+This setting can be used to configure the maximum number of attachments that can be associated to a
+forum post.
 
 Member
 ******
@@ -164,7 +178,8 @@ Member
 
 Default: ``True``
 
-This setting enables the built-in avatar system. Set this to ``False`` if you want to disable it or are using a custom avatar template.
+This setting enables the built-in avatar system. Set this to ``False`` if you want to disable it or
+are using a custom avatar template.
 
 ``MACHINA_PROFILE_AVATAR_UPLOAD_TO``
 ------------------------------------
@@ -178,49 +193,60 @@ The media subdirectory where forum member avatars should be uploaded.
 
 Default: ``150``
 
-The width to use in order to resize forum profile avatars during upload. The image is not resized if this setting is set to ``None``.
+The width to use in order to resize forum profile avatars during upload. The image is not resized if
+this setting is set to ``None``.
 
 ``MACHINA_PROFILE_AVATAR_HEIGHT``
 ---------------------------------
 
 Default: ``250``
 
-The height to use in order to resize forum profile avatars during upload. The image is not resized if this setting is set to ``None``.
+The height to use in order to resize forum profile avatars during upload. The image is not resized
+if this setting is set to ``None``.
 
 ``MACHINA_PROFILE_AVATAR_MIN_WIDTH``
 ------------------------------------
 
 Default: ``None``
 
-The imposed avatar minimum width for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
+The imposed avatar minimum width for forum member profiles. This setting affects avatars validation
+rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and
+``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MIN_HEIGHT``
 -------------------------------------
 
 Default: ``None``
 
-The imposed avatar minimum height for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
+The imposed avatar minimum height for forum member profiles. This setting affects avatars validation
+rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and
+``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_WIDTH``
 ------------------------------------
 
 Default: ``None``
 
-The imposed avatar maximum width for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
+The imposed avatar maximum width for forum member profiles. This setting affects avatars validation
+rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and
+``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_HEIGHT``
 -------------------------------------
 
 Default: ``None``
 
-The imposed avatar maximum height for forum member profiles. This setting affects avatars validation rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and ``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
+The imposed avatar maximum height for forum member profiles. This setting affects avatars validation
+rules ; it should not be used jointly with the ``MACHINA_PROFILE_AVATAR_WIDTH`` and
+``MACHINA_PROFILE_AVATAR_HEIGHT`` settings.
 
 ``MACHINA_PROFILE_AVATAR_MAX_UPLOAD_SIZE``
 ------------------------------------------
 
 Default: ``0``
 
-The maximum avatar size for forum member profiles (the size must be expressed in bytes). A value of ``0`` means that there is no size limitation.
+The maximum avatar size for forum member profiles (the size must be expressed in bytes). A value of
+``0`` means that there is no size limitation.
 
 .. _setting-profile-signature-max-length:
 
@@ -229,7 +255,8 @@ The maximum avatar size for forum member profiles (the size must be expressed in
 
 Default: ``255``
 
-The maximum number of characters that can be used in a member signature. A value of ``None`` means that there is no maximum length for member signatures.
+The maximum number of characters that can be used in a member signature. A value of ``None`` means
+that there is no maximum length for member signatures.
 
 ``MACHINA_PROFILE_RECENT_POSTS_NUMBER``
 ---------------------------------------
@@ -253,7 +280,14 @@ Permission
 
 Default: ``[]``
 
-*Django-machina* relies on a permission system based on per-forum permissions. This allows you to define which permissions should be applied for each forum, for each user and for each group of users. However you might want to not have to deal with complex permissions and grant the same basic permissions to all the users and for all the forums you created. In that case, this setting can be used in order to define which permissions should be granted to all authenticated users. Note that the permissions specified in this list are granted only if the considered forum does not have any permission for the considered authenticated user. For example, the setting could be specified as follows::
+Django-machina relies on a permission system based on per-forum permissions. This allows you to
+define which permissions should be applied for each forum, for each user and for each group of
+users. However you might want to not have to deal with complex permissions and grant the same basic
+permissions to all the users and for all the forums you created. In that case, this setting can be
+used in order to define which permissions should be granted to all authenticated users. Note that
+the permissions specified in this list are granted only if the considered forum does not have any
+permission for the considered authenticated user. For example, the setting could be specified as
+follows::
 
 	MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
 	    'can_see_forum',
@@ -271,4 +305,8 @@ For a full list of the available forum permissions, please refer to :doc:`forum_
 
 .. warning::
 
-  Keep in mind that the permissions specified in the ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` list will be automatically granted for authenticated users if the targetted forum has no other permissions for these users. This behavior will apply if you create a new forum without a specific permission configuration ; so be careful with the permission code names you put in this setting.
+  Keep in mind that the permissions specified in the
+  ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` list will be automatically granted for
+  authenticated users if the targetted forum has no other permissions for these users. This behavior
+  will apply if you create a new forum without a specific permission configuration ; so be careful
+  with the permission code names you put in this setting.

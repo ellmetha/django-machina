@@ -2,7 +2,8 @@
 Forum permission
 ################
 
-The ``forum_permission`` application provides the proper tools to allow permission checks on forums. It defines permission abstract models and provides
+The ``forum_permission`` application provides the proper tools to allow permission checks on forums.
+It defines permission abstract models and provides
 
 Abstract models
 ---------------
