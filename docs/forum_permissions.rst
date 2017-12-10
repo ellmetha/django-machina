@@ -65,12 +65,12 @@ Built-in permissions
 |                               |           | the target can move topics to another forum      |
 +-------------------------------+-----------+--------------------------------------------------+
 | ``can_edit_posts``            | No        | **Moderation permission:** defines whether       |
-|                               |           | the target can edit forum posts that he did not  |
-|                               |           | write                                            |
+|                               |           | the target can edit forum posts that they did    |
+|                               |           | not write                                        |
 +-------------------------------+-----------+--------------------------------------------------+
 | ``can_delete_posts``          | No        | **Moderation permission:** defines whether       |
-|                               |           | the target can delete forum posts that he did    |
-|                               |           | not write                                        |
+|                               |           | the target can delete forum posts that they      |
+|                               |           | did not write                                    |
 +-------------------------------+-----------+--------------------------------------------------+
 | ``can_approve_posts``         | No        | **Moderation permission:** defines whether       |
 |                               |           | the target can approve unapproved posts          |
