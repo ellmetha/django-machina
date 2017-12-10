@@ -112,7 +112,7 @@ LANGUAGES = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = (
-    PROJECT_PATH.child('vanilla_project', 'locale'),
+    PROJECT_PATH.child('example_project', 'locale'),
 )
 
 
@@ -131,7 +131,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': (
-            PROJECT_PATH.child('vanilla', 'templates'),
+            PROJECT_PATH.child('example', 'templates'),
             MACHINA_MAIN_TEMPLATE_DIR,
         ),
         'OPTIONS': {
@@ -194,7 +194,7 @@ MEDIA_URL = '/media/'
 # URL CONFIGURATION
 # ------------------------------------------------------------------------------
 
-ROOT_URLCONF = 'vanilla_project.urls'
+ROOT_URLCONF = 'example_project.urls'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'

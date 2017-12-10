@@ -17,7 +17,7 @@ To run this project locally, you can follow these instructions:
   $ cd example_project/
   $ pipenv run python manage.py migrate
   $ pipenv run python manage.py createsuperuser
-  $ pipenv run python manage.py loaddata vanilla_project/fixtures/*
+  $ pipenv run python manage.py loaddata example_project/fixtures/*
   $ pipenv run python manage.py runserver
 
 .. note::

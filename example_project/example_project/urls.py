@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^' + settings.ADMIN_URL, admin.site.urls),
 
     # Apps
-    url(r'', include('vanilla.apps.auth.urls')),
+    url(r'', include('example.apps.auth.urls')),
     url(r'', include(board.urls)),
 ]
 
