@@ -11,7 +11,7 @@ New features
 ------------
 
 * A view has been added to get all the posts of a forum member (`#15`_)
-* Topic subscription: a user can now subscribe to topics and access to his subscription list (`#16`_)
+* Topic subscription: a user can now subscribe to topics and access to their subscription list (`#16`_)
 * A new settings has been addded in order to allow limiting the length of topic posts: :ref:`MACHINA_POST_CONTENT_MAX_LENGTH <setting-post-content-max-length>`
 
 .. _`#15`: https://github.com/ellmetha/django-machina/issues/15

@@ -95,7 +95,7 @@ class ForumPermissionChecker(object):
                 perms = granted_user_perms
 
                 # If the user is a registered user, we have to check the permissions
-                # of its groups in order to determine the additional permissions he could
+                # of its groups in order to determine the additional permissions they could
                 # have
                 if not self.user.is_anonymous:
                     group_perms = GroupForumPermission.objects.select_related() \
