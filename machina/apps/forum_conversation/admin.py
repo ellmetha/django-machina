@@ -23,7 +23,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [AttachmentInline, ]
     list_display = ('__str__', 'topic', 'poster', 'updated', 'approved')
     list_filter = ('created', 'updated',)
-    raw_id_fields = ('poster', )
+    raw_id_fields = ('poster', 'topic',)
     search_fields = ('content',)
     list_editable = ('approved',)
 
