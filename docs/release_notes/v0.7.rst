@@ -1,0 +1,14 @@
+####################################################
+Django-machina 0.7 release notes (UNDER DEVELOPMENT)
+####################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.4, 3.5 and 3.6. Django 1.11 and 2.0.
+
+Minor changes
+-------------
+
+* Topics are now a "raw ID field" in the post admin pages
+  (`#79 <https://github.com/ellmetha/django-machina/pull/99>`_)
