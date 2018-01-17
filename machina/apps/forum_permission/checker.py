@@ -64,19 +64,19 @@ class ForumPermissionChecker(object):
 
                 # Computes the list of permissions that are granted for all the forums
                 globally_granted_user_perms = list(
-                    filter(lambda p: p.has_perm and p.forum is None, user_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is None, user_perms))
                 globally_granted_user_perms = [
                     p.permission.codename for p in globally_granted_user_perms]
 
                 # Computes the list of permissions that are granted on a per-forum basis
                 per_forum_granted_user_perms = list(
-                    filter(lambda p: p.has_perm and p.forum is not None, user_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is not None, user_perms))
                 per_forum_granted_user_perms = [
                     p.permission.codename for p in per_forum_granted_user_perms]
 
                 # Computes the list of permissions that are not granted on a per-forum basis
                 per_forum_nongranted_user_perms = list(
-                    filter(lambda p: not p.has_perm and p.forum is not None, user_perms))
+                    filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms))
                 per_forum_nongranted_user_perms = [
                     p.permission.codename for p in per_forum_nongranted_user_perms]
 
@@ -103,17 +103,17 @@ class ForumPermissionChecker(object):
                         .filter(Q(forum__isnull=True) | Q(forum=forum))
 
                     globally_granted_group_perms = list(
-                        filter(lambda p: p.has_perm and p.forum is None, group_perms))
+                        filter(lambda p: p.has_perm and p.forum_id is None, group_perms))
                     globally_granted_group_perms = [
                         p.permission.codename for p in globally_granted_group_perms]
 
                     per_forum_granted_group_perms = list(
-                        filter(lambda p: p.has_perm and p.forum is not None, group_perms))
+                        filter(lambda p: p.has_perm and p.forum_id is not None, group_perms))
                     per_forum_granted_group_perms = [
                         p.permission.codename for p in per_forum_granted_group_perms]
 
                     per_forum_nongranted_group_perms = list(
-                        filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
+                        filter(lambda p: not p.has_perm and p.forum_id is not None, group_perms))
                     per_forum_nongranted_group_perms = [
                         p.permission.codename for p in per_forum_nongranted_group_perms]
 

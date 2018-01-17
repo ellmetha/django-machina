@@ -407,11 +407,11 @@ class PermissionHandler(object):
                 # second one contains only granted permissions that are associated with specific
                 # forums. The third list contains non granted permissions.
                 globally_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum is None, group_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is None, group_perms))
                 per_forum_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum is not None, group_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is not None, group_perms))
                 per_forum_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and p.forum is not None, group_perms))
+                    filter(lambda p: not p.has_perm and p.forum_id is not None, group_perms))
 
                 # Now we can update the list of forums ids for which permissions are explicitly not
                 # granted.
