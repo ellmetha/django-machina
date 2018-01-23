@@ -11,26 +11,35 @@ faker = Faker()
 
 
 class TestSelectWithDisabled(object):
-    def test_can_render_a_single_option(self):
+    def test_can_prepare_a_single_option(self):
         # Setup
         widget = SelectWithDisabled()
         # Run
-        rendered = widget.render_option([], '1', 'Test forum')
+        option = widget.create_option('test', '1', 'Test forum', False, 0)
         # Check
-        assert rendered == '<option value="1">Test forum</option>'
+        assert option['name'] == 'test'
+        assert option['label'] == 'Test forum'
+        assert option['index'] == '0'
 
-    def test_can_render_a_single_option_that_is_selected(self):
+    def test_can_prepare_a_single_option_that_is_selected(self):
         # Setup
         widget = SelectWithDisabled()
         # Run
-        rendered = widget.render_option(['1', ], '1', 'Test forum')
+        option = widget.create_option('test', '1', 'Test forum', True, 0)
         # Check
-        assert rendered == '<option value="1" selected="selected">Test forum</option>'
+        assert option['name'] == 'test'
+        assert option['label'] == 'Test forum'
+        assert option['index'] == '0'
+        assert option['attrs'] == {'selected': True}
 
-    def test_can_render_a_single_disabled_option(self):
+    def test_can_prepare_a_single_disabled_option(self):
         # Setup
         widget = SelectWithDisabled()
         # Run
-        rendered = widget.render_option([], '1', {'label': 'Test forum', 'disabled': True})
+        option = widget.create_option(
+            'test', '1', {'label': 'Test forum', 'disabled': True}, False, 0)
         # Check
-        assert rendered == '<option value="1" disabled="disabled">Test forum</option>'
+        assert option['name'] == 'test'
+        assert option['label'] == 'Test forum'
+        assert option['index'] == '0'
+        assert option['attrs'] == {'disabled': 'disabled'}
