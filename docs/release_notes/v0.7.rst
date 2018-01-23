@@ -11,4 +11,10 @@ Minor changes
 -------------
 
 * Topics are now a "raw ID field" in the post admin pages
-  (`#79 <https://github.com/ellmetha/django-machina/pull/99>`_)
+  (`#99 <https://github.com/ellmetha/django-machina/pull/99>`_)
+
+Fixes
+-----
+
+* Fix incorrect labels appearing when using the select widget associated with the forum tree
+  (`#102 <https://github.com/ellmetha/django-machina/issues/102>`_)
