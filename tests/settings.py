@@ -4,9 +4,9 @@ import os
 
 from django import VERSION as DJANGO_VERSION
 
-from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
+from machina import get_apps as get_machina_apps
 
 
 class DisableMigrations(object):
