@@ -1,5 +1,7 @@
 {% load i18n %}
+{% load forum_user_tags %}
 
 {{ obj.last_post.content.rendered|safe }}
 <br /><br />
-<i>{% trans "Posted by" %} {{ obj.poster.username }} - {{ obj.created }}</i>
+{% get_username obj.poster.id as username%}
+<i>{% trans "Posted by" %} {{ username }} - {{ obj.created }}</i>

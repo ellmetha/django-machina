@@ -1,12 +1,17 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
+{% load forum_user_tags %}
 
-{% block sub_title %}{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}{% endblock sub_title %}
+{% block sub_title %}
+  {% get_username profile.user.id as username%}
+  {% blocktrans%}{{ username }} profile{% endblocktrans %}
+{% endblock sub_title %}
 
 {% block content %}
+{% get_username profile.user.id as username%}
 <div class="row">
   <div class="col-xs-12">
-    <h1>{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}</h1>
+    <h1>{% blocktrans%}{{ username }} profile{% endblocktrans %}</h1>
     <br />
   </div>
 </div>
@@ -18,7 +23,7 @@
           {% include "partials/avatar.html" with profile=profile placeholder=True %}
         </div>
         <div class="profile-username">
-          <h3 class="text-center text-muted">{{ profile.user.username }}</h3>
+          <h3 class="text-center text-muted">{{ username }}</h3>
         </div>
       </div>
     </div>
