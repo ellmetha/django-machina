@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from haystack import indexes
 
+from machina.conf.settings import FORUM_SEARCH_REAL_USER_NAME
 from machina.core.db.models import get_model
 
 
@@ -35,7 +36,7 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def prepare_poster_name(self, obj):
-        return obj.poster.username if obj.poster else obj.username
+        return obj.poster.username + ((' ' + obj.poster.first_name + ' ' + obj.poster.last_name) if FORUM_SEARCH_REAL_USER_NAME else '') if obj.poster else obj.username
 
     def prepare_forum_slug(self, obj):
         return obj.topic.forum.slug

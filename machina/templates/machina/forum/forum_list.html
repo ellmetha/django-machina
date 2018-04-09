@@ -3,6 +3,7 @@
 {% load forum_tags %}
 {% load forum_conversation_tags %}
 {% load forum_tracking_tags %}
+{% load forum_user_tags %}
 
 <div class="row">
   <div class="col-xs-12">
@@ -73,7 +74,8 @@
         {% if node.last_post %}
         {% if node.last_post.poster %}
         {% url 'forum_member:profile' node.last_post.poster_id as poster_url %}
-        {% blocktrans trimmed with poster_url=poster_url username=node.last_post.poster.username %}
+        {% get_username node.last_post.poster_id as username%}
+        {% blocktrans trimmed with poster_url=poster_url%}
         By: <a href="{{ poster_url }}">{{ username }}</a>
         {% endblocktrans %}
         {% else %}
@@ -146,7 +148,8 @@
         {% if node.last_post %}
         {% if node.last_post.poster_id %}
         {% url 'forum_member:profile' node.last_post.poster_id as poster_url %}
-        {% blocktrans trimmed with poster_url=poster_url username=node.last_post.poster.username %}
+        {% get_username node.last_post.poster_id as username%}
+        {% blocktrans trimmed with poster_url=poster_url%}
         By: <a href="{{ poster_url }}">{{ username }}</a>
         {% endblocktrans %}
         {% else %}

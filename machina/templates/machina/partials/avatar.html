@@ -1,5 +1,7 @@
+{% load forum_user_tags %}
 {% if profile.avatar %}
-<img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.user.username }}" />
+{% get_username profile.user.id as username%}
+<img class="avatar" src="{{ profile.avatar.url }}" alt="{{ username }}" />
 {% elif placeholder %}
 <span class="avatar empty">
   <i class="fa fa-user fa-4x" ></i>

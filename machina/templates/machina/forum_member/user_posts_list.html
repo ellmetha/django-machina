@@ -1,12 +1,17 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
+{% load forum_user_tags %}
 
-{% block sub_title %}{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans with username=poster.username %}{{ username }}'s posts{% endblocktrans %}{% endif %}{% endblock sub_title %}
+{% block sub_title %}
+  {% get_username poster.id as username%}
+  {% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans%}{{ username }}'s posts{% endblocktrans %}{% endif %}
+{% endblock sub_title %}
 
 {% block content %}
+{% get_username poster.id as username%}
 <div class="row">
   <div class="col-xs-12">
-    <h1>{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans with username=poster.username %}{{ username }}'s posts{% endblocktrans %}{% endif %}</h1>
+    <h1>{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans%}{{ username }}'s posts{% endblocktrans %}{% endif %}</h1>
     <br />
   </div>
 </div>
@@ -36,6 +41,7 @@
       <div id="{{ post.id }}" class="panel panel-default post">
         <div class="panel-body">
           <div class="row">
+            {% get_username post.poster_id as username%}
             <div class="col-md-10 post-content-wrapper">
                 {% spaceless %}
                 <h4 class="subject">
@@ -47,7 +53,7 @@
                   {% spaceless %}
                     <i class="fa fa-clock-o"></i>&nbsp;
                     {% url 'forum_member:profile' post.poster_id as poster_url %}
-                    {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                    {% blocktrans trimmed with poster_url=poster_url creation_date=post.created %}
                       By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
                     {% endblocktrans %}
                   {% endspaceless %}
@@ -63,7 +69,7 @@
                     {% include "partials/avatar.html" with profile=post.poster placeholder=False %}
                   </a>
                 </div>
-              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
+              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ username }}</b></a></div>
               <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
             </div>
           </div>

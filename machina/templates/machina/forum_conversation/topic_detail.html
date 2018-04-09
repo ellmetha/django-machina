@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load forum_conversation_tags %}
 {% load forum_permission_tags %}
+{% load forum_user_tags %}
 
 {% block sub_title %}{{ topic.subject }}{% endblock sub_title %}
 
@@ -48,8 +49,9 @@
                 {% spaceless %}
                 <i class="fa fa-clock-o"></i>&nbsp;
                 {% if post.poster %}
+                  {% get_username post.poster.id as username%}
                   {% url 'forum_member:profile' post.poster_id as poster_url %}
-                  {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                  {% blocktrans trimmed with poster_url=poster_url username=username creation_date=post.created %}
                     By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
                   {% endblocktrans %}
                 {% else %}
@@ -73,7 +75,8 @@
               <div class="edit-info">
                 <br />
                 <small class="text-muted">
-                  <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ post.updated_by.username }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
+                  {% get_username post.updated_by.id as username_updated%}
+                  <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ username_updated }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
                 </small>
                 {% if post.update_reason %}
                   <br />
@@ -91,7 +94,7 @@
                     {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
                   </a>
                 </div>
-              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
+              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ username }}</b></a></div>
               <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
             {% else %}
               <div class="username"><b>{{ post.username }}</b></div>

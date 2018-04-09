@@ -1,6 +1,7 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
 {% load highlight %}
+{% load forum_user_tags %}
 
 {% block sub_title %}{% trans "Search" %}{% endblock sub_title %}
 
@@ -81,8 +82,9 @@
                                         <div>
                                             <div class="post-created">
                                               {% if result.poster %}
+                                                {% get_username result.poster as username%}
                                                 {% url 'forum_member:profile' result.poster as poster_url %}
-                                                {% blocktrans trimmed with poster_url=poster_url username=result.poster_name creation_date=result.created %}
+                                                {% blocktrans trimmed with poster_url=poster_url username=username creation_date=result.created %}
                                                   By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
                                                 {% endblocktrans %}
                                               {% else %}
