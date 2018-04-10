@@ -7,6 +7,7 @@ from haystack import indexes
 from machina.conf.settings import FORUM_SEARCH_REAL_USER_NAME
 from machina.core.db.models import get_model
 
+
 Post = get_model('forum_conversation', 'Post')
 
 

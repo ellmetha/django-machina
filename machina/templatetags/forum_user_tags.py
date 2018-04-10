@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 from django import template
 from django.contrib.auth.models import User
+
 from machina.conf.settings import FORUM_USER_DISPLAY
+
 
 register = template.Library()
 
