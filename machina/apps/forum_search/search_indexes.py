@@ -35,8 +35,10 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def prepare_poster_name(self, obj):
-        return obj.poster.username + ((' ' + obj.poster.first_name + ' ' + obj.poster.last_name)
-                                      if FORUM_SEARCH_REAL_USER_NAME else '') if obj.poster else obj.username
+        return (obj.poster.username + ((' ' + obj.poster.first_name + ' ' + obj.poster.last_name)
+                                       if FORUM_SEARCH_REAL_USER_NAME
+                                       else '')) \
+            if obj.poster else obj.username
 
     def prepare_forum_slug(self, obj):
         return obj.topic.forum.slug
