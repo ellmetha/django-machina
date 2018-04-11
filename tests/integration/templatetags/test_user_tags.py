@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+import sys
+
 import django
 import pytest
 from django.conf import settings
@@ -39,12 +41,15 @@ class TestGetForumUserName(object):
         assert rendered == ''
         assert context['username'] == self.u1.username
 
-        # Let's also try to chenge the setting and see if it still works
+        # Let's also try to change the setting and see if it still works
         settings.MACHINA_FORUM_USER_DISPLAY = "{{ user.get_full_name }}"
         django.setup()
-        import importlib
-        importlib.reload(machina.conf.settings)
-        importlib.reload(machina.templatetags.forum_user_tags)
+        if sys.version_info < (3, 4):
+            from imp import reload
+        else:
+            from importlib import reload
+        reload(machina.conf.settings)
+        reload(machina.templatetags.forum_user_tags)
 
         context, rendered = get_rendered(self.u1.pk)
         assert rendered == ''
