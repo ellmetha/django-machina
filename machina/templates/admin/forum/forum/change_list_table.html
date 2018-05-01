@@ -34,7 +34,11 @@
                     {% else %}
                         <i class="fa fa-arrow-circle-o-down fa-lg disabled"></i>
                     {% endif %}
-                    <a href="{% url 'admin:forum_forum_add' %}?parent={{ forum.id }}" class="success" title="{% trans "Add a sub-forum" %}"><i class="fa fa-plus-circle fa-lg"></i></a>
+                    {% if not forum.is_link %}
+                        <a href="{% url 'admin:forum_forum_add' %}?parent={{ forum.id }}" class="success" title="{% trans "Add a sub-forum" %}"><i class="fa fa-plus-circle fa-lg"></i></a>
+                    {% else %}
+                        <i class="fa fa-times-circle fa-lg disabled"></i>
+                    {% endif %}
                     <a href="{% url 'admin:forum_forum_delete' forum.id %}" class="danger" title="{% trans "Delete" %}"><i class="fa fa-times-circle fa-lg"></i></a>
                 </td>
                 <td class="type-cell">
