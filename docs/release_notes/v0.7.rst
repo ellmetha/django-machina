@@ -18,3 +18,5 @@ Fixes
 
 * Fix incorrect labels appearing when using the select widget associated with the forum tree
   (`#102 <https://github.com/ellmetha/django-machina/issues/102>`_)
+* Prevent user from trying to create forums under a link in the admin
+  (`#121 <https://github.com/ellmetha/django-machina/pull/121>`_)
