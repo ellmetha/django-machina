@@ -20,14 +20,14 @@ class ForumPermissionAdmin(admin.ModelAdmin):
 
 class GroupForumPermissionAdmin(admin.ModelAdmin):
     search_fields = ('permission__codename', 'group__name', )
-    list_display = ('group', 'permission', 'has_perm', )
+    list_display = ('group', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )
     raw_id_fields = ('group', )
 
 
 class UserForumPermissionAdmin(admin.ModelAdmin):
     search_fields = ('permission__codename', 'user__username', )
-    list_display = ('user', 'anonymous_user', 'permission', 'has_perm', )
+    list_display = ('user', 'anonymous_user', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )
     raw_id_fields = ('user', )
 
