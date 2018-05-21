@@ -20,3 +20,5 @@ Fixes
   (`#102 <https://github.com/ellmetha/django-machina/issues/102>`_)
 * Prevent user from trying to create forums under a link in the admin
   (`#121 <https://github.com/ellmetha/django-machina/pull/121>`_)
+* Ensured navbar brand text can be customized
+  (`#122 <https://github.com/ellmetha/django-machina/issues/122>`_)
