@@ -23,7 +23,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">django-machina</a>
+      <a class="navbar-brand" href="/">{% block brand %}{{ MACHINA_FORUM_NAME|default:"My forum" }}{% endblock %}</a>
     </div>
     <div class="collapse navbar-collapse">
       {% block header_collapse %}
