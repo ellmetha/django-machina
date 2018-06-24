@@ -32,5 +32,3 @@ unipath = "*"
 [packages]
 
 "e1839a8" = {path = ".", editable = true}
-django-mptt = "*"
-pytest = "<3.3"
