@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Simen Heggestøyl <simen@e5r.no>, 2016
+# Simen Heggestøyl <simenheg@gmail.com>, 2016
 # Stein Strindhaug <stein.strindhaug@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-22 21:47-1000\n"
-"PO-Revision-Date: 2017-09-23 07:48+0000\n"
+"POT-Creation-Date: 2018-07-02 16:28-0400\n"
+"PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-team/django-machina/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -40,99 +40,108 @@ msgstr "^søk/"
 msgid "^tracking/"
 msgstr "^sporing/"
 
-#: apps/forum/abstract_models.py:31
+#: apps/forum/abstract_models.py:33
 msgid "Parent"
 msgstr "Forelder"
 
-#: apps/forum/abstract_models.py:33
+#: apps/forum/abstract_models.py:35
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
 msgstr "Navn"
 
-#: apps/forum/abstract_models.py:34
+#: apps/forum/abstract_models.py:36
 #: apps/forum_conversation/abstract_models.py:38
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/forum/abstract_models.py:36
+#: apps/forum/abstract_models.py:38
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: apps/forum/abstract_models.py:40
+#: apps/forum/abstract_models.py:42
 msgid "Forum image"
 msgstr "Forumbilde"
 
-#: apps/forum/abstract_models.py:45
+#: apps/forum/abstract_models.py:47
 msgid "Forum link"
 msgstr "Forumlenke"
 
-#: apps/forum/abstract_models.py:47 apps/forum/abstract_models.py:66
+#: apps/forum/abstract_models.py:49 apps/forum/abstract_models.py:68
 msgid "Track link redirects count"
 msgstr "Antall sporede klikk"
 
-#: apps/forum/abstract_models.py:48
+#: apps/forum/abstract_models.py:50
 msgid "Records the number of times a forum link was clicked"
 msgstr "Fører opp antall klikk på en forumlenke"
 
-#: apps/forum/abstract_models.py:53
+#: apps/forum/abstract_models.py:55
 msgid "Default forum"
 msgstr "Standardforum"
 
-#: apps/forum/abstract_models.py:54
+#: apps/forum/abstract_models.py:56
 msgid "Category forum"
 msgstr "Kategoriforum"
 
-#: apps/forum/abstract_models.py:55
+#: apps/forum/abstract_models.py:57
 msgid "Link forum"
 msgstr "Lenkeforum"
 
-#: apps/forum/abstract_models.py:58
+#: apps/forum/abstract_models.py:60
 msgid "Forum type"
 msgstr "Forumtype"
 
-#: apps/forum/abstract_models.py:62
-msgid "Direct number of posts"
-msgstr ""
-
 #: apps/forum/abstract_models.py:64
-msgid "Direct number of topics"
-msgstr ""
+msgid "Direct number of posts"
+msgstr "Direkte antall innlegg"
 
-#: apps/forum/abstract_models.py:67
+#: apps/forum/abstract_models.py:66
+msgid "Direct number of topics"
+msgstr "Direkte antall tråder"
+
+#: apps/forum/abstract_models.py:75
+#: apps/forum_conversation/abstract_models.py:82
+#: templates/machina/forum/forum_list.html:21
+#: templates/machina/forum/forum_list.html:39
+#: templates/machina/forum/forum_list.html:207
+#: templates/machina/forum_conversation/topic_list.html:14
+msgid "Last post"
+msgstr "Siste innlegg"
+
+#: apps/forum/abstract_models.py:76
 #: apps/forum_conversation/abstract_models.py:73
 msgid "Last post added on"
 msgstr "Siste innlegg lagt til"
 
-#: apps/forum/abstract_models.py:71
+#: apps/forum/abstract_models.py:81
 msgid "Display in parent-forums legend"
 msgstr "Vis i foreldreforumets forklaring"
 
-#: apps/forum/abstract_models.py:72
+#: apps/forum/abstract_models.py:82
 msgid ""
 "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Viser dette forumet i forklaringen til dets foreldreforum (underforumer listes opp)"
 
-#: apps/forum/abstract_models.py:79
+#: apps/forum/abstract_models.py:89
 #: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:80 templates/machina/forum/forum_list.html:35
-#: templates/machina/forum/forum_list.html:219
+#: apps/forum/abstract_models.py:90 templates/machina/forum/forum_list.html:35
+#: templates/machina/forum/forum_list.html:203
 msgid "Forums"
 msgstr "Forumer"
 
-#: apps/forum/abstract_models.py:118
+#: apps/forum/abstract_models.py:128
 msgid "A forum can not have a link forum as parent"
 msgstr "Et forum kan ikke ha et lenkeforum som forelder"
 
-#: apps/forum/abstract_models.py:121
+#: apps/forum/abstract_models.py:131
 msgid "A category can not have another category as parent"
 msgstr "En kategori kan ikke ha en annen kategori som forelder"
 
-#: apps/forum/abstract_models.py:124
+#: apps/forum/abstract_models.py:134
 msgid "A link forum must have a link associated with it"
 msgstr "Et lenkeforum må være tilknyttet en lenke"
 
@@ -188,21 +197,21 @@ msgid ""
 "anonymous user"
 msgstr "Vennligst velg dette alternativet dersom du ønsker å redigere rettighetene til den anonyme brukeren"
 
-#: apps/forum/admin.py:383
+#: apps/forum/admin.py:382
 msgid "Choose either a user ID or select the anonymous user"
 msgstr "Velg enten en bruker-ID eller den anonyme brukeren"
 
-#: apps/forum/admin.py:412
+#: apps/forum/admin.py:410
 #: templates/admin/forum/forum/editpermissions_form.html:35
 msgid "Not set"
 msgstr "Ikke satt"
 
-#: apps/forum/admin.py:413
+#: apps/forum/admin.py:411
 #: templates/admin/forum/forum/editpermissions_form.html:36
 msgid "Granted"
 msgstr "Innvilget"
 
-#: apps/forum/admin.py:414
+#: apps/forum/admin.py:412
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "Ikke innvilget"
@@ -278,14 +287,6 @@ msgstr "Antall visninger"
 msgid "First post"
 msgstr "Første innlegg"
 
-#: apps/forum_conversation/abstract_models.py:82
-#: templates/machina/forum/forum_list.html:21
-#: templates/machina/forum/forum_list.html:39
-#: templates/machina/forum/forum_list.html:223
-#: templates/machina/forum_conversation/topic_list.html:14
-msgid "Last post"
-msgstr "Siste innlegg"
-
 #: apps/forum_conversation/abstract_models.py:87
 msgid "Subscribers"
 msgstr "Abonnenter"
@@ -302,7 +303,7 @@ msgstr "Tråd"
 #: templates/machina/forum/forum_detail.html:50
 #: templates/machina/forum/forum_list.html:19
 #: templates/machina/forum/forum_list.html:37
-#: templates/machina/forum/forum_list.html:221
+#: templates/machina/forum/forum_list.html:205
 msgid "Topics"
 msgstr "Tråder"
 
@@ -351,7 +352,7 @@ msgstr "Innlegg"
 #: apps/forum_conversation/abstract_models.py:254
 #: templates/machina/forum/forum_list.html:20
 #: templates/machina/forum/forum_list.html:38
-#: templates/machina/forum/forum_list.html:222
+#: templates/machina/forum/forum_list.html:206
 msgid "Posts"
 msgstr "Innlegg"
 
@@ -1002,7 +1003,7 @@ msgstr "Forumer har blitt markert som lest."
 msgid "Topics have been marked read."
 msgstr "Tråder har blitt markert som lest."
 
-#: core/compat.py:21
+#: core/compat.py:20
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Hverken Pillow eller PIL kunne importeres: {}"
 
@@ -1066,27 +1067,27 @@ msgstr "Flytt opp"
 msgid "Move down"
 msgstr "Flytt ned"
 
-#: templates/admin/forum/forum/change_list_table.html:37
+#: templates/admin/forum/forum/change_list_table.html:38
 msgid "Add a sub-forum"
 msgstr "Legg til underforum"
 
-#: templates/admin/forum/forum/change_list_table.html:38
+#: templates/admin/forum/forum/change_list_table.html:42
 #: templates/machina/forum_conversation/topic_detail.html:37
 msgid "Delete"
 msgstr "Slett"
 
-#: templates/admin/forum/forum/change_list_table.html:47
+#: templates/admin/forum/forum/change_list_table.html:51
 msgid "Topics:"
 msgstr "Tråder:"
 
-#: templates/admin/forum/forum/change_list_table.html:47
+#: templates/admin/forum/forum/change_list_table.html:51
 #: templates/machina/forum_conversation/topic_detail.html:95
 #: templates/machina/forum_member/user_posts_list.html:67
 #: templates/machina/forum_moderation/moderation_queue/detail.html:116
 msgid "Posts:"
 msgstr "Innlegg:"
 
-#: templates/admin/forum/forum/change_list_table.html:49
+#: templates/admin/forum/forum/change_list_table.html:53
 msgid "Link:"
 msgstr "Lenke:"
 
@@ -1162,8 +1163,8 @@ msgid "Subscriptions"
 msgstr "Abonnementer"
 
 #: templates/machina/board_base.html:57
-msgid "View my messages"
-msgstr "Vis mine meldinger"
+msgid "View my posts"
+msgstr ""
 
 #: templates/machina/board_base.html:61
 #: templates/machina/forum_moderation/moderation_queue/detail.html:4
@@ -1196,41 +1197,41 @@ msgstr "Marker tråder som lest"
 msgid "Announcements"
 msgstr "Kunngjøringer"
 
-#: templates/machina/forum/forum_list.html:71
-#: templates/machina/forum/forum_list.html:153
+#: templates/machina/forum/forum_list.html:69
+#: templates/machina/forum/forum_list.html:142
 msgid "RSS feed"
 msgstr "Nyhetskilde"
 
-#: templates/machina/forum/forum_list.html:79
-#: templates/machina/forum/forum_list.html:161
+#: templates/machina/forum/forum_list.html:76
+#: templates/machina/forum/forum_list.html:149
 #: templates/machina/forum_conversation/topic_list.html:53
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
 msgstr "Av: <a href=\"%(poster_url)s\">%(username)s</a>"
 
-#: templates/machina/forum/forum_list.html:83
-#: templates/machina/forum/forum_list.html:165
+#: templates/machina/forum/forum_list.html:80
+#: templates/machina/forum/forum_list.html:153
 #: templates/machina/forum_conversation/topic_list.html:57
 #, python-format
 msgid "By: %(poster_username)s"
 msgstr "Av: %(poster_username)s"
 
-#: templates/machina/forum/forum_list.html:91
-#: templates/machina/forum/forum_list.html:173
+#: templates/machina/forum/forum_list.html:88
+#: templates/machina/forum/forum_list.html:161
 msgid "No posts"
 msgstr "Ingen innlegg"
 
-#: templates/machina/forum/forum_list.html:114
-#: templates/machina/forum/forum_list.html:196
+#: templates/machina/forum/forum_list.html:107
+#: templates/machina/forum/forum_list.html:180
 msgid "Total redirects:"
 msgstr "Antall videresendinger totalt:"
 
-#: templates/machina/forum/forum_list.html:203
-#: templates/machina/forum/forum_list.html:209
+#: templates/machina/forum/forum_list.html:187
+#: templates/machina/forum/forum_list.html:193
 msgid "Subforums:"
 msgstr "Underforumer:"
 
-#: templates/machina/forum/forum_list.html:229
+#: templates/machina/forum/forum_list.html:212
 msgid "No forums."
 msgstr "Ingen forumer."
 

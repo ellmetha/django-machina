@@ -1,68 +1,71 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# yanceyy <20135224@stu.neu.edu.cn>, 2016
+# Neo Chang <me@neoto.xin>, 2017
+# yanceyy <20135224@stu.neu.edu.cn>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-02 16:28-0400\n"
-"PO-Revision-Date: 2016-02-22 22:24-0500\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/django-machina/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: app.py:39
 msgid "^feeds/"
-msgstr ""
+msgstr "^订阅列表/"
 
 #: app.py:40
 msgid "^member/"
-msgstr ""
+msgstr "成员"
 
 #: app.py:41
 msgid "^moderation/"
-msgstr ""
+msgstr "^审核/"
 
 #: app.py:42
 msgid "^search/"
-msgstr ""
+msgstr "搜索"
 
 #: app.py:43
 msgid "^tracking/"
-msgstr ""
+msgstr "追踪"
 
 #: apps/forum/abstract_models.py:33
 msgid "Parent"
-msgstr ""
+msgstr "父集"
 
 #: apps/forum/abstract_models.py:35
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
-msgstr ""
+msgstr "名字"
 
 #: apps/forum/abstract_models.py:36
 #: apps/forum_conversation/abstract_models.py:38
 msgid "Slug"
-msgstr ""
+msgstr "简介"
 
 #: apps/forum/abstract_models.py:38
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: apps/forum/abstract_models.py:42
 msgid "Forum image"
-msgstr ""
+msgstr "论坛图片"
 
 #: apps/forum/abstract_models.py:47
 msgid "Forum link"
-msgstr ""
+msgstr "论坛链接"
 
 #: apps/forum/abstract_models.py:49 apps/forum/abstract_models.py:68
 msgid "Track link redirects count"
@@ -70,23 +73,23 @@ msgstr ""
 
 #: apps/forum/abstract_models.py:50
 msgid "Records the number of times a forum link was clicked"
-msgstr ""
+msgstr "记录论坛链接被点击的次数"
 
 #: apps/forum/abstract_models.py:55
 msgid "Default forum"
-msgstr ""
+msgstr "默认论坛"
 
 #: apps/forum/abstract_models.py:56
 msgid "Category forum"
-msgstr ""
+msgstr "论坛目录"
 
 #: apps/forum/abstract_models.py:57
 msgid "Link forum"
-msgstr ""
+msgstr "链接论坛"
 
 #: apps/forum/abstract_models.py:60
 msgid "Forum type"
-msgstr ""
+msgstr "论坛类型"
 
 #: apps/forum/abstract_models.py:64
 msgid "Direct number of posts"
@@ -103,55 +106,57 @@ msgstr ""
 #: templates/machina/forum/forum_list.html:207
 #: templates/machina/forum_conversation/topic_list.html:14
 msgid "Last post"
-msgstr ""
+msgstr "最近发布"
 
 #: apps/forum/abstract_models.py:76
 #: apps/forum_conversation/abstract_models.py:73
 msgid "Last post added on"
-msgstr ""
+msgstr "最新的帖子增加在"
 
 #: apps/forum/abstract_models.py:81
 msgid "Display in parent-forums legend"
-msgstr ""
+msgstr "在父论坛图例中显示"
 
 #: apps/forum/abstract_models.py:82
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr ""
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 
-#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89
+#: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
-msgstr ""
+msgstr "论坛"
 
 #: apps/forum/abstract_models.py:90 templates/machina/forum/forum_list.html:35
 #: templates/machina/forum/forum_list.html:203
 msgid "Forums"
-msgstr ""
+msgstr "论坛"
 
 #: apps/forum/abstract_models.py:128
 msgid "A forum can not have a link forum as parent"
-msgstr ""
+msgstr "一个论坛不能以一个链接论坛作为父论坛"
 
 #: apps/forum/abstract_models.py:131
 msgid "A category can not have another category as parent"
-msgstr ""
+msgstr "一个类不能以另一个类作为父类"
 
 #: apps/forum/abstract_models.py:134
 msgid "A link forum must have a link associated with it"
-msgstr ""
+msgstr "一个链接论坛必须关联一个链接"
 
 #: apps/forum/admin.py:54
 msgid "Forum settings"
-msgstr ""
+msgstr "论坛设置"
 
 #: apps/forum/admin.py:58
 msgid "Link forum settings"
-msgstr ""
+msgstr "链接论坛设置"
 
 #: apps/forum/admin.py:146
 msgid "'{}' forum successfully moved"
-msgstr ""
+msgstr "成功移动 '{}' 论坛"
 
 #: apps/forum/admin.py:160 apps/forum/admin.py:234 apps/forum/admin.py:252
 #: apps/forum/admin.py:271 apps/forum_permission/abstract_models.py:46
@@ -159,58 +164,58 @@ msgstr ""
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
 msgid "Forum permissions"
-msgstr ""
+msgstr "论坛许可文件"
 
 #: apps/forum/admin.py:161 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
-msgstr ""
+msgstr "全局论坛许可文件"
 
 #: apps/forum/admin.py:169
 msgid "Permissions successfully copied"
-msgstr ""
+msgstr "许可文件复制成功"
 
 #: apps/forum/admin.py:190
 msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr ""
+msgstr "选择一个用户ID或群组ID或匿名用户"
 
 #: apps/forum/admin.py:252
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:119
 msgid "Anonymous user"
-msgstr ""
+msgstr "匿名用户"
 
 #: apps/forum/admin.py:321
 msgid "Permissions successfully applied"
-msgstr ""
+msgstr "许可文件应用成功"
 
 #: apps/forum/admin.py:361
 msgid "Anonymous"
-msgstr ""
+msgstr "匿名"
 
 #: apps/forum/admin.py:364
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr ""
+msgstr "请选择一个选项如果你想要编辑匿名用户许可文件"
 
 #: apps/forum/admin.py:382
 msgid "Choose either a user ID or select the anonymous user"
-msgstr ""
+msgstr "选择一个用户ID或匿名用户"
 
 #: apps/forum/admin.py:410
 #: templates/admin/forum/forum/editpermissions_form.html:35
 msgid "Not set"
-msgstr ""
+msgstr "未设置"
 
 #: apps/forum/admin.py:411
 #: templates/admin/forum/forum/editpermissions_form.html:36
 msgid "Granted"
-msgstr ""
+msgstr "已准许"
 
 #: apps/forum/admin.py:412
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
-msgstr ""
+msgstr "未被准许"
 
 #: apps/forum/app.py:21
 msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
@@ -218,74 +223,74 @@ msgstr ""
 
 #: apps/forum/registry_config.py:12
 msgid "Machina: Forum"
-msgstr ""
+msgstr "Machina:论坛"
 
 #: apps/forum_conversation/abstract_models.py:31
 msgid "Topic forum"
-msgstr ""
+msgstr "话题论坛"
 
 #: apps/forum_conversation/abstract_models.py:34
 #: apps/forum_conversation/abstract_models.py:208
 msgid "Poster"
-msgstr ""
+msgstr "发布者"
 
 #: apps/forum_conversation/abstract_models.py:37
 #: apps/forum_conversation/abstract_models.py:216
 msgid "Subject"
-msgstr ""
+msgstr "主题"
 
 #: apps/forum_conversation/abstract_models.py:43
 msgid "Default topic"
-msgstr ""
+msgstr "默认话题"
 
 #: apps/forum_conversation/abstract_models.py:44
 msgid "Sticky"
-msgstr ""
+msgstr "固定话题"
 
 #: apps/forum_conversation/abstract_models.py:45
 msgid "Announce"
-msgstr ""
+msgstr "公告"
 
 #: apps/forum_conversation/abstract_models.py:48
 msgid "Topic type"
-msgstr ""
+msgstr "话题类型"
 
 #: apps/forum_conversation/abstract_models.py:53
 msgid "Topic unlocked"
-msgstr ""
+msgstr "话题已解锁"
 
 #: apps/forum_conversation/abstract_models.py:54
 msgid "Topic locked"
-msgstr ""
+msgstr "话题已封锁"
 
 #: apps/forum_conversation/abstract_models.py:55
 msgid "Topic moved"
-msgstr ""
+msgstr "话题已移动"
 
 #: apps/forum_conversation/abstract_models.py:58
 msgid "Topic status"
-msgstr ""
+msgstr "话题状态"
 
 #: apps/forum_conversation/abstract_models.py:62
 #: apps/forum_conversation/abstract_models.py:227
 msgid "Approved"
-msgstr ""
+msgstr "审核通过"
 
 #: apps/forum_conversation/abstract_models.py:66
 msgid "Posts count"
-msgstr ""
+msgstr "帖子数量"
 
 #: apps/forum_conversation/abstract_models.py:70
 msgid "Views count"
-msgstr ""
+msgstr "发现数量"
 
 #: apps/forum_conversation/abstract_models.py:79
 msgid "First post"
-msgstr ""
+msgstr "首帖"
 
 #: apps/forum_conversation/abstract_models.py:87
 msgid "Subscribers"
-msgstr ""
+msgstr "订阅者"
 
 #: apps/forum_conversation/abstract_models.py:97
 #: apps/forum_conversation/abstract_models.py:205
@@ -293,7 +298,7 @@ msgstr ""
 #: apps/forum_tracking/abstract_models.py:51
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
 msgid "Topic"
-msgstr ""
+msgstr "话题"
 
 #: apps/forum_conversation/abstract_models.py:98
 #: templates/machina/forum/forum_detail.html:50
@@ -301,69 +306,69 @@ msgstr ""
 #: templates/machina/forum/forum_list.html:37
 #: templates/machina/forum/forum_list.html:205
 msgid "Topics"
-msgstr ""
+msgstr "话题"
 
 #: apps/forum_conversation/abstract_models.py:143
 msgid "A topic can not be associated with a category or a link forum"
-msgstr ""
+msgstr "一个话题不能与一个种类或链接论坛关联"
 
 #: apps/forum_conversation/abstract_models.py:210
 msgid "Poster IP address"
-msgstr ""
+msgstr "发布者IP地址"
 
 #: apps/forum_conversation/abstract_models.py:212
 #: apps/forum_conversation/forum_polls/abstract_models.py:96
 msgid "Anonymous user forum key"
-msgstr ""
+msgstr "匿名用户论坛密钥"
 
 #: apps/forum_conversation/abstract_models.py:220
 msgid "Content"
-msgstr ""
+msgstr "内容"
 
 #: apps/forum_conversation/abstract_models.py:224
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 #: apps/forum_conversation/abstract_models.py:231
 msgid "Attach a signature"
-msgstr ""
+msgstr "附加签名"
 
 #: apps/forum_conversation/abstract_models.py:236
 msgid "Update reason"
-msgstr ""
+msgstr "更新原因"
 
 #: apps/forum_conversation/abstract_models.py:241
 msgid "Lastly updated by"
-msgstr ""
+msgstr "由    最新更新"
 
 #: apps/forum_conversation/abstract_models.py:243
 msgid "Updates count"
-msgstr ""
+msgstr "更新数量"
 
 #: apps/forum_conversation/abstract_models.py:253
 #: apps/forum_conversation/forum_attachments/abstract_models.py:21
 msgid "Post"
-msgstr ""
+msgstr "帖子"
 
 #: apps/forum_conversation/abstract_models.py:254
 #: templates/machina/forum/forum_list.html:20
 #: templates/machina/forum/forum_list.html:38
 #: templates/machina/forum/forum_list.html:206
 msgid "Posts"
-msgstr ""
+msgstr "帖子"
 
 #: apps/forum_conversation/abstract_models.py:295
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr ""
+msgstr "一个帖子必须关联用户ID或匿名密钥其中之一"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr ""
+msgstr "一个帖子必须关联用户ID或匿名密钥其中之一"
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid "A username must be specified if the poster is anonymous"
-msgstr ""
+msgstr "用户名必须具体说明如果发布者是匿名的"
 
 #: apps/forum_conversation/app.py:29
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
@@ -382,13 +387,11 @@ msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:38
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:40
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:45
@@ -397,79 +400,79 @@ msgstr ""
 
 #: apps/forum_conversation/forms.py:41
 msgid "Enter your subject"
-msgstr ""
+msgstr "输入你的类别"
 
 #: apps/forum_conversation/forms.py:42
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #: apps/forum_conversation/forms.py:43
 msgid "Enter your message"
-msgstr ""
+msgstr "输入你的消息"
 
 #: apps/forum_conversation/forms.py:70 apps/forum_moderation/forms.py:23
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: templates/machina/forum_moderation/topic_lock.html:5
 #: templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
-msgstr ""
+msgstr "封锁话题"
 
 #: apps/forum_conversation/forms.py:116
 msgid "Post topic as"
-msgstr ""
+msgstr "发布话题作为"
 
 #: apps/forum_conversation/forms.py:140
 #: apps/forum_conversation/forum_polls/abstract_models.py:27
 msgid "Poll question"
-msgstr ""
+msgstr "投票问题"
 
 #: apps/forum_conversation/forms.py:141
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr ""
+msgstr "输入一个问题让投票关联一个话题或留下空白不创建一个投票"
 
 #: apps/forum_conversation/forms.py:145
 #: apps/forum_conversation/forum_polls/abstract_models.py:35
 msgid "Maximum number of poll options per user"
-msgstr ""
+msgstr "每个用户能选择的最大选项数量"
 
 #: apps/forum_conversation/forms.py:146
 msgid "This is the number of options each user may select when voting."
-msgstr ""
+msgstr "这是每个用户投票时能选择的选项数量"
 
 #: apps/forum_conversation/forms.py:150
 msgid "For how many days the poll should be run?"
-msgstr ""
+msgstr "投票持续多少天？"
 
 #: apps/forum_conversation/forms.py:151
 msgid "Enter 0 or leave blank for a never ending poll."
-msgstr ""
+msgstr "输入0或空格作为一个永久投票"
 
 #: apps/forum_conversation/forms.py:154
 msgid "Allow re-voting?"
-msgstr ""
+msgstr "允许重新投票？"
 
 #: apps/forum_conversation/forms.py:155
 msgid "If enabled users are able to change their vote."
-msgstr ""
+msgstr "是否授权给用户更改他们的投票"
 
 #: apps/forum_conversation/forms.py:176
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr ""
+msgstr "创建投票时，你必须设置每个用户可选择的最大投票选项数"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:23
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:24
 msgid "Comment"
-msgstr ""
+msgstr "讨论"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "Attachment"
-msgstr ""
+msgstr "附件"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:30
 #: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
@@ -478,124 +481,124 @@ msgstr ""
 #: templates/machina/forum_conversation/partials/post_form.html:60
 #: templates/machina/forum_conversation/partials/topic_form.html:26
 msgid "Attachments"
-msgstr ""
+msgstr "附件"
 
 #: apps/forum_conversation/forum_attachments/registry_config.py:12
 msgid "Machina: Forum attachments"
-msgstr ""
+msgstr "Machina:论坛附件"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:31
 msgid "Poll duration, in days"
-msgstr ""
+msgstr "投票持续时间"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:39
 msgid "Allow vote changes"
-msgstr ""
+msgstr "允许更改投票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:46
 msgid "Topic poll"
-msgstr ""
+msgstr "话题投票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:47
 msgid "Topic polls"
-msgstr ""
+msgstr "话题投票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:70
 #: templates/machina/forum_conversation/partials/topic_form.html:23
 msgid "Poll"
-msgstr ""
+msgstr "投票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:71
 msgid "Poll option text"
-msgstr ""
+msgstr "投票选项文本"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:76
 msgid "Topic poll option"
-msgstr ""
+msgstr "话题投票选项"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:77
 msgid "Topic poll options"
-msgstr ""
+msgstr "话题投票选项"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:94
 msgid "Voter"
-msgstr ""
+msgstr "投票人"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:100
 msgid "Poll option"
-msgstr ""
+msgstr "投票选项"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:101
 msgid "Vote's date"
-msgstr ""
+msgstr "投票日期"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:106
 msgid "Topic poll vote"
-msgstr ""
+msgstr "话题投票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:107
 msgid "Topic poll votes"
-msgstr ""
+msgstr "话题邮票"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:118
 msgid "A user id or an anonymous key must be used."
-msgstr ""
+msgstr "需要使用用户ID或匿名密钥"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:120
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr ""
+msgstr "需要使用用户ID或匿名密钥其中之一"
 
 #: apps/forum_conversation/forum_polls/forms.py:30
 msgid "Enter a poll option"
-msgstr ""
+msgstr "输入一个投票选项"
 
 #: apps/forum_conversation/forum_polls/forms.py:123
 msgid "You must specify an option when voting."
-msgstr ""
+msgstr "你需要在投票时对选项进行描述"
 
 #: apps/forum_conversation/forum_polls/forms.py:128
 msgid "You have tried to vote for too many options."
-msgstr ""
+msgstr "投票选项过多"
 
 #: apps/forum_conversation/forum_polls/registry_config.py:12
 msgid "Machina: Forum polls"
-msgstr ""
+msgstr "Machina:论坛投票"
 
 #: apps/forum_conversation/forum_polls/views.py:67
 msgid "Your vote has been cast."
-msgstr ""
+msgstr "已投票"
 
 #: apps/forum_conversation/registry_config.py:12
 msgid "Machina: Forum conversations"
-msgstr ""
+msgstr "Machina:论坛对话"
 
 #: apps/forum_conversation/views.py:128
 msgid "This message has been posted successfully."
-msgstr ""
+msgstr "消息发布成功"
 
 #: apps/forum_conversation/views.py:129
 msgid "This message will be validated before appearing on the forum."
-msgstr ""
+msgstr "这个消息再出现在论坛上之前需要被审核"
 
 #: apps/forum_conversation/views.py:131
 msgid "There are some errors in the attachments you submitted."
-msgstr ""
+msgstr "你提交的附件存在问题"
 
 #: apps/forum_conversation/views.py:388
 msgid "There are some errors in the poll options you submitted."
-msgstr ""
+msgstr "你提交的投票选项存在问题"
 
 #: apps/forum_conversation/views.py:574 apps/forum_conversation/views.py:659
 msgid "This message has been edited successfully."
-msgstr ""
+msgstr "消息编辑成功"
 
 #: apps/forum_conversation/views.py:696
 msgid "This message has been deleted successfully."
-msgstr ""
+msgstr "消息删除成功"
 
 #: apps/forum_feeds/app.py:19
 msgid "^topics/$"
-msgstr ""
+msgstr "主题"
 
 #: apps/forum_feeds/app.py:20
 msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
@@ -607,42 +610,42 @@ msgstr ""
 
 #: apps/forum_feeds/feeds.py:22
 msgid "Latest topics"
-msgstr ""
+msgstr "最新话题"
 
 #: apps/forum_feeds/feeds.py:23
 msgid "Latest topics updated on the forums"
-msgstr ""
+msgstr "论坛最新更新话题"
 
 #: apps/forum_feeds/registry_config.py:12
 msgid "Machina: Forum feeds"
-msgstr ""
+msgstr "Machina:论坛订阅"
 
 #: apps/forum_member/abstract_models.py:23
 #: apps/forum_permission/abstract_models.py:92
 #: apps/forum_tracking/abstract_models.py:23
 #: apps/forum_tracking/abstract_models.py:48
 msgid "User"
-msgstr ""
+msgstr "用户"
 
 #: apps/forum_member/abstract_models.py:27
 msgid "Avatar"
-msgstr ""
+msgstr "可移动图标"
 
 #: apps/forum_member/abstract_models.py:33
 msgid "Signature"
-msgstr ""
+msgstr "签字"
 
 #: apps/forum_member/abstract_models.py:38
 msgid "Total posts"
-msgstr ""
+msgstr "所有帖子"
 
 #: apps/forum_member/abstract_models.py:43
 msgid "Forum profile"
-msgstr ""
+msgstr "论坛资料"
 
 #: apps/forum_member/abstract_models.py:44
 msgid "Forum profiles"
-msgstr ""
+msgstr "论坛资料"
 
 #: apps/forum_member/app.py:25
 msgid "^profile/(?P<pk>\\d+)/$"
@@ -670,19 +673,19 @@ msgstr ""
 
 #: apps/forum_member/registry_config.py:12
 msgid "Machina: Forum members"
-msgstr ""
+msgstr "Machina:论坛成员"
 
 #: apps/forum_member/views.py:106
 msgid "The profile has been edited successfully."
-msgstr ""
+msgstr "资料编辑成功"
 
 #: apps/forum_member/views.py:131
 msgid "You subscribed to this topic successfully."
-msgstr ""
+msgstr "订阅话题成功"
 
 #: apps/forum_member/views.py:170
 msgid "You unsubscribed from this topic successfully."
-msgstr ""
+msgstr "取消订阅话题成功"
 
 #: apps/forum_moderation/app.py:31
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
@@ -698,467 +701,467 @@ msgstr ""
 
 #: apps/forum_moderation/app.py:37
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgstr ""
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_moderation/app.py:39
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgstr ""
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/话题/$"
 
 #: apps/forum_moderation/app.py:41
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgstr ""
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/置顶/$"
 
 #: apps/forum_moderation/app.py:43
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgstr ""
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/通告/$"
 
 #: apps/forum_moderation/app.py:45
 msgid "^queue/$"
-msgstr ""
+msgstr "^队列/$"
 
 #: apps/forum_moderation/app.py:46
 msgid "^queue/(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "^队列/(?P<pk>\\d+)/$"
 
 #: apps/forum_moderation/app.py:48
 msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgstr ""
+msgstr "^队列/(?P<pk>\\d+)/已通过/$"
 
 #: apps/forum_moderation/app.py:50
 msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgstr ""
+msgstr "^队列/(?P<pk>\\d+)/未通过/$"
 
 #: apps/forum_moderation/forms.py:20
 msgid "Select a destination forum"
-msgstr ""
+msgstr "选择目的论坛"
 
 #: apps/forum_moderation/registry_config.py:12
 msgid "Machina: Forum moderation"
-msgstr ""
+msgstr "Machina:论坛限制"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
-msgstr ""
+msgstr "话题封锁成功"
 
 #: apps/forum_moderation/views.py:89
 msgid "This topic has been unlocked successfully."
-msgstr ""
+msgstr "话题解锁成功"
 
 #: apps/forum_moderation/views.py:139
 msgid "This topic has been deleted successfully."
-msgstr ""
+msgstr "话题删除成功"
 
 #: apps/forum_moderation/views.py:190
 msgid "This topic has been moved successfully."
-msgstr ""
+msgstr "话题移动成功"
 
 #: apps/forum_moderation/views.py:263
 msgid "This topic type has been changed successfully."
-msgstr ""
+msgstr "话题类型修改成功"
 
 #: apps/forum_moderation/views.py:310
 msgid "Would you want to change this topic to a default topic?"
-msgstr ""
+msgstr "你想要将这个话题更改为默认话题吗？"
 
 #: apps/forum_moderation/views.py:320
 msgid "Would you want to change this topic to a sticky topic?"
-msgstr ""
+msgstr "你想要将这个话题更改为固定话题吗？"
 
 #: apps/forum_moderation/views.py:330
 msgid "Would you want to change this topic to an announce?"
-msgstr ""
+msgstr "你想要将这个话题更改为公告吗？"
 
 #: apps/forum_moderation/views.py:403
 msgid "This post has been approved successfully."
-msgstr ""
+msgstr "帖子审核通过"
 
 #: apps/forum_moderation/views.py:444
 msgid "This post has been disapproved successfully."
-msgstr ""
+msgstr "成功阻止帖子发布"
 
 #: apps/forum_permission/abstract_models.py:31
 msgid "Permission codename"
-msgstr ""
+msgstr "许可文件代码名"
 
 #: apps/forum_permission/abstract_models.py:34
 msgid "Global permission"
-msgstr ""
+msgstr "全局许可文件"
 
 #: apps/forum_permission/abstract_models.py:35
 msgid "This permission can be granted globally to all the forums"
-msgstr ""
+msgstr "这个许可文件能被所有论坛全局准许"
 
 #: apps/forum_permission/abstract_models.py:38
 msgid "Local permission"
-msgstr ""
+msgstr "局部许可文件"
 
 #: apps/forum_permission/abstract_models.py:39
 msgid "This permission can be granted individually for each forum"
-msgstr ""
+msgstr "这个许可文件能被各论坛分别准许"
 
 #: apps/forum_permission/abstract_models.py:45
 #: apps/forum_permission/abstract_models.py:67
 msgid "Forum permission"
-msgstr ""
+msgstr "论坛许可文件"
 
 #: apps/forum_permission/abstract_models.py:54
 msgid "A forum permission should be at least either global or local"
-msgstr ""
+msgstr "一个论坛许可文件应当至少是全局的或局部的"
 
 #: apps/forum_permission/abstract_models.py:68
 msgid "Has perm"
-msgstr ""
+msgstr "组合"
 
 #: apps/forum_permission/abstract_models.py:82
 msgid "The following permission cannot be granted globally: {}"
-msgstr ""
+msgstr "以下许可文件不能被全局准许"
 
 #: apps/forum_permission/abstract_models.py:94
 msgid "Target anonymous user"
-msgstr ""
+msgstr "针对匿名用户"
 
 #: apps/forum_permission/abstract_models.py:100
 msgid "User forum permission"
-msgstr ""
+msgstr "用户论坛许可文件"
 
 #: apps/forum_permission/abstract_models.py:101
 msgid "User forum permissions"
-msgstr ""
+msgstr "用户论坛许可文件"
 
 #: apps/forum_permission/abstract_models.py:113
 msgid "A permission should target either a user or an anonymous user"
-msgstr ""
+msgstr "许可文件应当针对用户及匿名用户"
 
 #: apps/forum_permission/abstract_models.py:120
 msgid "Group"
-msgstr ""
+msgstr "群组"
 
 #: apps/forum_permission/abstract_models.py:126
 msgid "Group forum permission"
-msgstr ""
+msgstr "群组论坛许可文件"
 
 #: apps/forum_permission/abstract_models.py:127
 msgid "Group forum permissions"
-msgstr ""
+msgstr "群组论坛许可文件"
 
 #: apps/forum_permission/defaults.py:23
 msgid "Can see forum"
-msgstr ""
+msgstr "允许查看论坛"
 
 #: apps/forum_permission/defaults.py:28
 msgid "Can read forum"
-msgstr ""
+msgstr "允许阅读论坛"
 
 #: apps/forum_permission/defaults.py:35
 msgid "Can start new topics"
-msgstr ""
+msgstr "允许发布新话题"
 
 #: apps/forum_permission/defaults.py:40
 msgid "Can reply to topics"
-msgstr ""
+msgstr "允许回复话题"
 
 #: apps/forum_permission/defaults.py:45
 msgid "Can post announcements"
-msgstr ""
+msgstr "允许发布通知"
 
 #: apps/forum_permission/defaults.py:50
 msgid "Can post stickies"
-msgstr ""
+msgstr "允许发布贴纸"
 
 #: apps/forum_permission/defaults.py:55
 msgid "Can delete own posts"
-msgstr ""
+msgstr "允许删除自己的帖子"
 
 #: apps/forum_permission/defaults.py:60
 msgid "Can edit own posts"
-msgstr ""
+msgstr "允许编辑自己的帖子"
 
 #: apps/forum_permission/defaults.py:66
 msgid "Can post without approval"
-msgstr ""
+msgstr "允许不经审核发帖"
 
 #: apps/forum_permission/defaults.py:73
 msgid "Can create polls"
-msgstr ""
+msgstr "允许创建投票"
 
 #: apps/forum_permission/defaults.py:78
 msgid "Can vote in polls"
-msgstr ""
+msgstr "允许投票"
 
 #: apps/forum_permission/defaults.py:85
 msgid "Can attach file"
-msgstr ""
+msgstr "允许添加附件"
 
 #: apps/forum_permission/defaults.py:90
 msgid "Can download file"
-msgstr ""
+msgstr "允许下载文件"
 
 #: apps/forum_permission/defaults.py:97
 msgid "Can lock topics"
-msgstr ""
+msgstr "允许锁定帖子"
 
 #: apps/forum_permission/defaults.py:102
 msgid "Can move topics"
-msgstr ""
+msgstr "允许移动帖子"
 
 #: apps/forum_permission/defaults.py:107
 msgid "Can edit posts"
-msgstr ""
+msgstr "允许编辑帖子"
 
 #: apps/forum_permission/defaults.py:112
 msgid "Can delete posts"
-msgstr ""
+msgstr "允许删除帖子"
 
 #: apps/forum_permission/defaults.py:117
 msgid "Can approve posts"
-msgstr ""
+msgstr "允许批准帖子"
 
 #: apps/forum_permission/defaults.py:123
 msgid "Can add posts in locked topics"
-msgstr ""
+msgstr "允许在锁定的话题中发布帖子"
 
 #: apps/forum_permission/registry_config.py:12
 msgid "Machina: Forum permissions"
-msgstr ""
+msgstr "Machina:论坛许可文件"
 
 #: apps/forum_search/forms.py:21
 msgid "Search only in topic subjects"
-msgstr ""
+msgstr "仅搜索话题主题"
 
 #: apps/forum_search/forms.py:24
 msgid "Search for poster"
-msgstr ""
+msgstr "搜索发帖人"
 
 #: apps/forum_search/forms.py:25
 msgid "Enter a user name to limit the search to a specific user."
-msgstr ""
+msgstr "输入用户姓名以限制对特定用户的搜索"
 
 #: apps/forum_search/forms.py:29
 msgid "Search in specific forums"
-msgstr ""
+msgstr "在特定论坛中搜索"
 
 #: apps/forum_search/forms.py:30
 msgid "Select the forums you wish to search in."
-msgstr ""
+msgstr "选择在其中搜索的论坛"
 
 #: apps/forum_search/forms.py:39
 msgid "Search for keywords"
-msgstr ""
+msgstr "关键字搜索"
 
 #: apps/forum_search/forms.py:40
 msgid "Keywords or phrase"
-msgstr ""
+msgstr "关键字或短语"
 
 #: apps/forum_search/forms.py:41
 msgid "Poster name"
-msgstr ""
+msgstr "发布者"
 
 #: apps/forum_search/registry_config.py:12
 msgid "Machina: Forum searches"
-msgstr ""
+msgstr "Machina:论坛搜索"
 
 #: apps/forum_tracking/abstract_models.py:34
 msgid "Forum track"
-msgstr ""
+msgstr "论坛追踪"
 
 #: apps/forum_tracking/abstract_models.py:35
 msgid "Forum tracks"
-msgstr ""
+msgstr "论坛追踪"
 
 #: apps/forum_tracking/abstract_models.py:58
 msgid "Topic track"
-msgstr ""
+msgstr "话题追踪"
 
 #: apps/forum_tracking/abstract_models.py:59
 msgid "Topic tracks"
-msgstr ""
+msgstr "话题追踪"
 
 #: apps/forum_tracking/app.py:21
 msgid "^mark/forums/$"
-msgstr ""
+msgstr "标记论坛"
 
 #: apps/forum_tracking/app.py:23
 msgid "^mark/forums/(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "标记论坛"
 
 #: apps/forum_tracking/app.py:25
 msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgstr ""
+msgstr "标记论坛话题"
 
 #: apps/forum_tracking/app.py:27
 msgid "^unread-topics/$"
-msgstr ""
+msgstr "未读话题"
 
 #: apps/forum_tracking/registry_config.py:12
 msgid "Machina: Forum tracking"
-msgstr ""
+msgstr "Machina:论坛追踪"
 
 #: apps/forum_tracking/views.py:37
 msgid "Forums have been marked read."
-msgstr ""
+msgstr "论坛已标记已读"
 
 #: apps/forum_tracking/views.py:87
 msgid "Topics have been marked read."
-msgstr ""
+msgstr "话题已标记已读"
 
 #: core/compat.py:20
 msgid "Neither Pillow nor PIL could be imported: {}"
-msgstr ""
+msgstr "缺乏相关变量"
 
 #: models/abstract_models.py:14
 msgid "Creation date"
-msgstr ""
+msgstr "创建日期"
 
 #: models/abstract_models.py:15
 msgid "Update date"
-msgstr ""
+msgstr "更新日期"
 
 #: models/fields.py:37
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
-msgstr ""
+msgstr "不能输入 MACHINA_MARKUP_WIDGET"
 
 #: models/fields.py:59
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
-msgstr ""
+msgstr "不能输入 MACHINA_MARKUP_LANGUAGE"
 
 #: models/fields.py:63
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
-msgstr ""
+msgstr "MACHINA_MARKUP_LANGUAGE符合设定要求"
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr ""
+msgstr "文件大小超过范围。你的文件大小为"
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
+msgstr "图片超过或小于要求。你的图片宽度是"
 
 #: models/fields.py:238
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
+msgstr "图片超过或小于要求。你的图片高度是"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
-msgstr ""
+msgstr "论坛列表"
 
 #: templates/admin/forum/forum/change_list_table.html:10
 msgid "Quick actions"
-msgstr ""
+msgstr "快速操作"
 
 #: templates/admin/forum/forum/change_list_table.html:11
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: templates/admin/forum/forum/change_list_table.html:12
 msgid "Details"
-msgstr ""
+msgstr "详细细节"
 
 #: templates/admin/forum/forum/change_list_table.html:28
 msgid "Move up"
-msgstr ""
+msgstr "向上移动"
 
 #: templates/admin/forum/forum/change_list_table.html:33
 msgid "Move down"
-msgstr ""
+msgstr "向下移动"
 
 #: templates/admin/forum/forum/change_list_table.html:38
 msgid "Add a sub-forum"
-msgstr ""
+msgstr "添加一个子论坛"
 
 #: templates/admin/forum/forum/change_list_table.html:42
 #: templates/machina/forum_conversation/topic_detail.html:37
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: templates/admin/forum/forum/change_list_table.html:51
 msgid "Topics:"
-msgstr ""
+msgstr "话题："
 
 #: templates/admin/forum/forum/change_list_table.html:51
 #: templates/machina/forum_conversation/topic_detail.html:95
 #: templates/machina/forum_member/user_posts_list.html:67
 #: templates/machina/forum_moderation/moderation_queue/detail.html:116
 msgid "Posts:"
-msgstr ""
+msgstr "帖子："
 
 #: templates/admin/forum/forum/change_list_table.html:53
 msgid "Link:"
-msgstr ""
+msgstr "链接："
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:30
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
-msgstr ""
+msgstr "编辑使用者许可文件"
 
 #: templates/admin/forum/forum/editpermissions_form.html:16
 #: templates/admin/forum/forum/editpermissions_index.html:11
 msgid "Home"
-msgstr ""
+msgstr "主页"
 
 #: templates/admin/forum/forum/editpermissions_form.html:34
 msgid "Permission"
-msgstr ""
+msgstr "许可文件"
 
 #: templates/admin/forum/forum/editpermissions_form.html:63
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:57
 msgid "Edit group permissions"
-msgstr ""
+msgstr "编辑群组许可文件"
 
 #: templates/admin/forum/forum/editpermissions_index.html:25
 msgid "Please correct the error below."
-msgstr ""
+msgstr "请修改以下错误"
 
 #: templates/admin/forum/forum/editpermissions_index.html:25
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "请更改以下错误"
 
 #: templates/admin/forum/forum/editpermissions_index.html:31
 msgid "Please select a user in order to update its permissions"
-msgstr ""
+msgstr "请选择一个用户更新许可文件"
 
 #: templates/admin/forum/forum/editpermissions_index.html:51
 #: templates/admin/forum/forum/editpermissions_index.html:78
 msgid "Select"
-msgstr ""
+msgstr "选择"
 
 #: templates/admin/forum/forum/editpermissions_index.html:58
 msgid "Please select a group in order to update its permissions"
-msgstr ""
+msgstr "请选择一个群组更新许可文件"
 
 #: templates/admin/forum/forum/editpermissions_index.html:85
 msgid "Copy permissions from another forum"
-msgstr ""
+msgstr "从另一个论坛复制许可文件"
 
 #: templates/admin/forum/forum/editpermissions_index.html:86
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr ""
+msgstr "请选择一个论坛复制它的许可结构为当前论坛"
 
 #: templates/admin/forum/forum/editpermissions_index.html:106
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: templates/machina/board_base.html:34
 msgid "Search..."
-msgstr ""
+msgstr "搜索"
 
 #: templates/machina/board_base.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "高级搜索"
 
 #: templates/machina/board_base.html:56
 msgid "Subscriptions"
-msgstr ""
+msgstr "订阅"
 
 #: templates/machina/board_base.html:57
 msgid "View my posts"
@@ -1171,148 +1174,148 @@ msgstr ""
 #: templates/machina/forum_moderation/moderation_queue/list.html:9
 #: templates/machina/forum_moderation/moderation_queue/list.html:32
 msgid "Moderation queue"
-msgstr ""
+msgstr "限制队列"
 
 #: templates/machina/forum/forum_detail.html:22
 msgid "Mark subforums read"
-msgstr ""
+msgstr "标记子论坛为已读"
 
 #: templates/machina/forum/forum_detail.html:34
 #: templates/machina/forum/forum_detail.html:57
 #: templates/machina/forum_moderation/moderation_queue/detail.html:18
 #: templates/machina/forum_moderation/moderation_queue/list.html:66
 msgid "New topic"
-msgstr ""
+msgstr "新的话题"
 
 #: templates/machina/forum/forum_detail.html:42
 #: templates/machina/forum/forum_detail.html:65
 #: templates/machina/forum_tracking/mark_topics_read.html:5
 #: templates/machina/forum_tracking/mark_topics_read.html:11
 msgid "Mark topics read"
-msgstr ""
+msgstr "标记话题为已读"
 
 #: templates/machina/forum/forum_detail.html:46
 msgid "Announcements"
-msgstr ""
+msgstr "公告"
 
 #: templates/machina/forum/forum_list.html:69
 #: templates/machina/forum/forum_list.html:142
 msgid "RSS feed"
-msgstr ""
+msgstr "RSS订阅"
 
 #: templates/machina/forum/forum_list.html:76
 #: templates/machina/forum/forum_list.html:149
 #: templates/machina/forum_conversation/topic_list.html:53
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
-msgstr ""
+msgstr "发帖人：<a href=\"%(poster_url)s\">%(username)s</a>"
 
 #: templates/machina/forum/forum_list.html:80
 #: templates/machina/forum/forum_list.html:153
 #: templates/machina/forum_conversation/topic_list.html:57
 #, python-format
 msgid "By: %(poster_username)s"
-msgstr ""
+msgstr "由%(poster_username)s："
 
 #: templates/machina/forum/forum_list.html:88
 #: templates/machina/forum/forum_list.html:161
 msgid "No posts"
-msgstr ""
+msgstr "没有相关帖子"
 
 #: templates/machina/forum/forum_list.html:107
 #: templates/machina/forum/forum_list.html:180
 msgid "Total redirects:"
-msgstr ""
+msgstr "总重新调配量"
 
 #: templates/machina/forum/forum_list.html:187
 #: templates/machina/forum/forum_list.html:193
 msgid "Subforums:"
-msgstr ""
+msgstr "子论坛："
 
 #: templates/machina/forum/forum_list.html:212
 msgid "No forums."
-msgstr ""
+msgstr "没有相关论坛"
 
 #: templates/machina/forum/index.html:6
 msgid "Index"
-msgstr ""
+msgstr "主页"
 
 #: templates/machina/forum/index.html:14
 #: templates/machina/forum_tracking/mark_forums_read.html:5
 #: templates/machina/forum_tracking/mark_forums_read.html:11
 msgid "Mark forums read"
-msgstr ""
+msgstr "标记已阅读的论坛"
 
 #: templates/machina/forum/index.html:16
 #: templates/machina/forum_tracking/unread_topic_list.html:4
 #: templates/machina/forum_tracking/unread_topic_list.html:10
 msgid "View unread topics"
-msgstr ""
+msgstr "查看未读话题"
 
 #: templates/machina/forum/index.html:23
 #: templates/machina/forum_member/forum_profile_detail.html:34
 msgid "Statistics"
-msgstr ""
+msgstr "统计数据"
 
 #: templates/machina/forum/index.html:24
 msgid "Total posts:"
-msgstr ""
+msgstr "所有帖子："
 
 #: templates/machina/forum/index.html:24
 msgid "Total topics:"
-msgstr ""
+msgstr "所有话题："
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:28
 #: templates/machina/forum_member/forum_profile_update.html:20
 #: templates/machina/partials/form_field.html:6
 msgid "(optional)"
-msgstr ""
+msgstr "（可选择的）"
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:41
 msgid "Add another file"
-msgstr ""
+msgstr "添加另一个文件"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:17
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:13
 msgid "You may select <b>1</b> option"
-msgstr ""
+msgstr "你只能选择一个选项"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:21
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:17
 #, python-format
 msgid "You may select up to <b>%(max_options)s</b> options"
-msgstr ""
+msgstr "你可以最多选择<b>%(max_options)s</b>个选项"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:40
 msgid "Vote"
-msgstr ""
+msgstr "投票"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:44
 msgid "Change your vote"
-msgstr ""
+msgstr "更改你的投票"
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:3
 msgid "Poll options"
-msgstr ""
+msgstr "投票选项"
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:26
 msgid "Add a poll option"
-msgstr ""
+msgstr "增加投票选项"
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:30
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
+msgstr "删除已存在的投票选项将会一并删除相关投票数"
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
 msgid "Preview:"
-msgstr ""
+msgstr "概要："
 
 #: templates/machina/forum_conversation/forum_polls/poll_results.html:19
 msgid "Total votes:"
-msgstr ""
+msgstr "总投票数："
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
 #: templates/machina/forum_conversation/partials/topic_form.html:102
@@ -1320,77 +1323,77 @@ msgstr ""
 #: templates/machina/forum_conversation/post_update.html:27
 #: templates/machina/forum_member/forum_profile_update.html:36
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:36
 msgid "View results"
-msgstr ""
+msgstr "显示结果"
 
 #: templates/machina/forum_conversation/partials/post_form.html:20
 #: templates/machina/forum_conversation/partials/topic_form.html:21
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:15
 msgid "Post reply"
-msgstr ""
+msgstr "回复"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:18
 msgid "Subscribe"
-msgstr ""
+msgstr "订阅"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:20
 msgid "Unsubscribe"
-msgstr ""
+msgstr "取消订阅"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: templates/machina/forum_moderation/topic_unlock.html:5
 #: templates/machina/forum_moderation/topic_unlock.html:12
 msgid "Unlock topic"
-msgstr ""
+msgstr "解锁话题"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:28
 #: templates/machina/forum_moderation/topic_delete.html:5
 #: templates/machina/forum_moderation/topic_delete.html:12
 msgid "Delete topic"
-msgstr ""
+msgstr "删除话题"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:29
 #: templates/machina/forum_moderation/topic_move.html:5
 #: templates/machina/forum_moderation/topic_move.html:12
 msgid "Move topic"
-msgstr ""
+msgstr "移动话题"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:31
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:38
 msgid "Change to sticky topic"
-msgstr ""
+msgstr "更改为固定话题"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:32
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:35
 msgid "Change to announce"
-msgstr ""
+msgstr "更改为公告"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:34
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:37
 msgid "Change to standard topic"
-msgstr ""
+msgstr "更改为标准话题"
 
 #: templates/machina/forum_conversation/partials/topic_form.html:101
 #: templates/machina/forum_conversation/post_create.html:26
 #: templates/machina/forum_conversation/post_update.html:26
 msgid "Preview"
-msgstr ""
+msgstr "概要"
 
 #: templates/machina/forum_conversation/post_create.html:5
 #: templates/machina/forum_conversation/post_create.html:20
 msgid "Post a reply"
-msgstr ""
+msgstr "回复"
 
 #: templates/machina/forum_conversation/post_create.html:38
 #: templates/machina/forum_moderation/moderation_queue/detail.html:132
 msgid "Topic review"
-msgstr ""
+msgstr "话题回顾"
 
 #: templates/machina/forum_conversation/post_create.html:50
 #: templates/machina/forum_conversation/topic_detail.html:52
@@ -1402,7 +1405,7 @@ msgstr ""
 #: templates/machina/forum_search/search.html:85
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr ""
+msgstr "由<a href=\"%(poster_url)s\">%(username)s</a>于%(creation_date)s："
 
 #: templates/machina/forum_conversation/post_create.html:54
 #: templates/machina/forum_conversation/topic_detail.html:56
@@ -1413,16 +1416,16 @@ msgstr ""
 #: templates/machina/forum_search/search.html:89
 #, python-format
 msgid "By: %(poster_username)s on %(creation_date)s"
-msgstr ""
+msgstr "由%(poster_username)s在%(creation_date)s创建"
 
 #: templates/machina/forum_conversation/post_delete.html:5
 #: templates/machina/forum_conversation/post_delete.html:12
 msgid "Delete post"
-msgstr ""
+msgstr "删除帖子"
 
 #: templates/machina/forum_conversation/post_delete.html:15
 msgid "Are you sure you want to delete this post?"
-msgstr ""
+msgstr "你确定要删除这个帖子吗？"
 
 #: templates/machina/forum_conversation/post_delete.html:18
 #: templates/machina/forum_member/topic_subscribe.html:18
@@ -1436,7 +1439,7 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:16
 #: templates/machina/forum_tracking/mark_topics_read.html:16
 msgid "Yes"
-msgstr ""
+msgstr "确认"
 
 #: templates/machina/forum_conversation/post_delete.html:19
 #: templates/machina/forum_member/topic_subscribe.html:19
@@ -1450,80 +1453,79 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:17
 #: templates/machina/forum_tracking/mark_topics_read.html:17
 msgid "No"
-msgstr ""
+msgstr "取消"
 
 #: templates/machina/forum_conversation/post_update.html:5
 #: templates/machina/forum_conversation/post_update.html:20
 #: templates/machina/forum_conversation/topic_update.html:5
 #: templates/machina/forum_conversation/topic_update.html:23
 msgid "Edit post"
-msgstr ""
+msgstr "编辑话题"
 
 #: templates/machina/forum_conversation/topic_create.html:5
 #: templates/machina/forum_conversation/topic_create.html:23
 msgid "Post a new topic"
-msgstr ""
+msgstr "发布一个新话题"
 
 #: templates/machina/forum_conversation/topic_detail.html:33
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Last edited by:"
-msgstr ""
+msgstr "最近编辑"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Updated"
-msgstr ""
+msgstr "更新"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "on"
-msgstr ""
+msgstr "在"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 #, python-format
 msgid "edited %(counter)s time in total."
 msgid_plural "edited %(counter)s times in total."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "总共被编辑%(counter)s 次"
 
 #: templates/machina/forum_conversation/topic_detail.html:81
 msgid "Reason:"
-msgstr ""
+msgstr "理由："
 
 #: templates/machina/forum_conversation/topic_list.html:12
 msgid "Replies"
-msgstr ""
+msgstr "回复"
 
 #: templates/machina/forum_conversation/topic_list.html:13
 msgid "Views"
-msgstr ""
+msgstr "发现"
 
 #: templates/machina/forum_conversation/topic_list.html:28
 msgid "This topic is locked"
-msgstr ""
+msgstr "该话题被锁定"
 
 #: templates/machina/forum_conversation/topic_list.html:73
 msgid "There are no topics in this forum."
-msgstr ""
+msgstr "论坛上没有相关话题"
 
 #: templates/machina/forum_conversation/topic_pages_inline_list.html:5
 msgid "Go to the page:"
-msgstr ""
+msgstr "跳转到页面"
 
 #: templates/machina/forum_feeds/topics_description.html:5
 msgid "Posted by"
-msgstr ""
+msgstr "发帖人"
 
 #: templates/machina/forum_member/forum_profile_detail.html:4
 #: templates/machina/forum_member/forum_profile_detail.html:9
 #, python-format
 msgid "%(username)s profile"
-msgstr ""
+msgstr "%(username)s的资料"
 
 #: templates/machina/forum_member/forum_profile_detail.html:26
 msgid "Edit profile"
-msgstr ""
+msgstr "编辑资料"
 
 #: templates/machina/forum_member/forum_profile_detail.html:39
 #, python-format
@@ -1533,8 +1535,7 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Posts</small></p>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>帖子</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:44
 #, python-format
@@ -1544,204 +1545,200 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Topics</small></p>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>话题</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "Recent posts"
-msgstr ""
+msgstr "最新的帖子"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "View all"
-msgstr ""
+msgstr "显示全部"
 
 #: templates/machina/forum_member/forum_profile_detail.html:68
 #, python-format
 msgid "On %(creation_date)s"
-msgstr ""
+msgstr " %(creation_date)s被创建"
 
 #: templates/machina/forum_member/forum_profile_update.html:4
 #: templates/machina/forum_member/forum_profile_update.html:12
 msgid "Edit forum profile"
-msgstr ""
+msgstr "编辑论坛资料"
 
 #: templates/machina/forum_member/subscription_topic_list.html:4
 #: templates/machina/forum_member/subscription_topic_list.html:10
 msgid "Topics that you are subscribed to"
-msgstr ""
+msgstr "你订阅的话题有"
 
 #: templates/machina/forum_member/subscription_topic_list.html:17
 #, python-format
 msgid "%(counter)s topic found"
 msgid_plural "%(counter)s topics found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s找到了话题"
 
 #: templates/machina/forum_member/subscription_topic_list.html:31
 msgid "Not topics found."
-msgstr ""
+msgstr "没有找到话题"
 
 #: templates/machina/forum_member/topic_subscribe.html:5
 #: templates/machina/forum_member/topic_subscribe.html:12
 msgid "Subscribe to topic"
-msgstr ""
+msgstr "订阅这个话题"
 
 #: templates/machina/forum_member/topic_subscribe.html:15
 msgid "Would you like to subscribe to this topic?"
-msgstr ""
+msgstr "你要订阅这个话题吗？"
 
 #: templates/machina/forum_member/topic_unsubscribe.html:5
 #: templates/machina/forum_member/topic_unsubscribe.html:12
 msgid "Unsubscribe from topic"
-msgstr ""
+msgstr "取消订阅这个话题"
 
 #: templates/machina/forum_member/topic_unsubscribe.html:15
 msgid "Would you like to unsubscribe from this topic?"
-msgstr ""
+msgstr "你要取消订阅这个话题吗？"
 
 #: templates/machina/forum_member/user_posts_list.html:4
 #: templates/machina/forum_member/user_posts_list.html:9
 msgid "My messages"
-msgstr ""
+msgstr "我的消息"
 
 #: templates/machina/forum_member/user_posts_list.html:4
 #: templates/machina/forum_member/user_posts_list.html:9
 #, python-format
 msgid "%(username)s's posts"
-msgstr ""
+msgstr "%(username)s的帖子"
 
 #: templates/machina/forum_member/user_posts_list.html:17
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s找到了帖子"
 
 #: templates/machina/forum_member/user_posts_list.html:24
 msgid "No posts found"
-msgstr ""
+msgstr "没有找到帖子"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:14
 msgid "Disapprove"
-msgstr ""
+msgstr "审核阻止"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:15
 msgid "Approve"
-msgstr ""
+msgstr "审核通过"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:18
 msgid "New post"
-msgstr ""
+msgstr "新的帖子"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:31
 msgid "<b>1</b> option may be selected"
-msgstr ""
+msgstr "选项将要被选择"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:35
 #, python-format
 msgid "Up to <b>%(max_options)s</b> options may be selected"
-msgstr ""
+msgstr "一共有<b>%(max_options)s</b>选项可供选择"
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:16
 #, python-format
 msgid "%(topic_length)s posts found"
-msgstr ""
+msgstr "找到了%(topic_length)s帖子"
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:78
 msgid "No posts awaiting approval."
-msgstr ""
+msgstr "没有等待审核的帖子"
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:12
 msgid "Approve post"
-msgstr ""
+msgstr "通过帖子的发布"
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:15
 msgid "Are you sure you want to approve this post?"
-msgstr ""
+msgstr "你确定要通过这个帖子的发布吗？"
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:12
 msgid "Disapprove post"
-msgstr ""
+msgstr "阻止帖子的发布"
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr ""
+msgstr "你确定要阻止这个帖子的发布吗？这个帖子将被删除"
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
-msgstr ""
+msgstr "你确定要删除这个话题吗？"
 
 #: templates/machina/forum_moderation/topic_lock.html:15
 msgid "Are you sure you want to lock this topic?"
-msgstr ""
+msgstr "你确定要封锁这个话题吗？"
 
 #: templates/machina/forum_moderation/topic_move.html:23
 msgid "Move"
-msgstr ""
+msgstr "移动"
 
 #: templates/machina/forum_moderation/topic_move.html:24
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: templates/machina/forum_moderation/topic_unlock.html:15
 msgid "Are you sure you want to unlock this topic?"
-msgstr ""
+msgstr "你确定要解锁这个话题吗？"
 
 #: templates/machina/forum_moderation/topic_update_type.html:5
 #: templates/machina/forum_moderation/topic_update_type.html:12
 msgid "Change topic type"
-msgstr ""
+msgstr "更改话题类型"
 
 #: templates/machina/forum_search/search.html:5
 #: templates/machina/forum_search/search.html:12
 #: templates/machina/forum_search/search.html:33
 #: templates/machina/forum_search/search.html:43
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: templates/machina/forum_search/search.html:19
 msgid "Search forums"
-msgstr ""
+msgstr "论坛搜索"
 
 #: templates/machina/forum_search/search.html:45
 msgid "New search"
-msgstr ""
+msgstr "新的搜索"
 
 #: templates/machina/forum_search/search.html:51
 #, python-format
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "你的搜索有<b>%(number_of_results)s</b>条结果 "
 
 #: templates/machina/forum_search/search.html:71
 msgid "Results"
-msgstr ""
+msgstr "结果"
 
 #: templates/machina/forum_search/search.html:103
 msgid "No results."
-msgstr ""
+msgstr "没有结果"
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
 msgid "Are you sure you want to mark forums read?"
-msgstr ""
+msgstr "你确定你要标记这些论坛为已读取？"
 
 #: templates/machina/forum_tracking/mark_topics_read.html:13
 msgid "Are you sure you want to mark topics read?"
-msgstr ""
+msgstr "你确定你要标记这些话题为已读取？"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:17
 #, python-format
 msgid "%(topic_length)s unread topics found"
-msgstr ""
+msgstr "找到了%(topic_length)s条未读话题"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:27
 msgid "There are no unread topics."
-msgstr ""
+msgstr "没有未读话题了"
 
 #: templates/machina/partials/breadcrumb.html:4
 msgid "Forum index"
-msgstr ""
+msgstr "论坛主页"

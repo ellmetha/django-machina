@@ -1,21 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Miha Frangež <miha.frangez@gmail.com>, 2016-2017
+# Miha Frangež <miha.frangez@gmail.com>, 2016
+# Miha Frangež <miha.frangez@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-02 16:28-0400\n"
-"PO-Revision-Date: 2016-02-22 22:24-0500\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-team/django-machina/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: app.py:39
@@ -24,15 +27,15 @@ msgstr ""
 
 #: app.py:40
 msgid "^member/"
-msgstr ""
+msgstr "^član/"
 
 #: app.py:41
 msgid "^moderation/"
-msgstr ""
+msgstr "^moderacija/"
 
 #: app.py:42
 msgid "^search/"
-msgstr ""
+msgstr "^iskanje/"
 
 #: app.py:43
 msgid "^tracking/"
@@ -40,12 +43,12 @@ msgstr ""
 
 #: apps/forum/abstract_models.py:33
 msgid "Parent"
-msgstr ""
+msgstr "Starš"
 
 #: apps/forum/abstract_models.py:35
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 #: apps/forum/abstract_models.py:36
 #: apps/forum_conversation/abstract_models.py:38
@@ -54,19 +57,19 @@ msgstr ""
 
 #: apps/forum/abstract_models.py:38
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #: apps/forum/abstract_models.py:42
 msgid "Forum image"
-msgstr ""
+msgstr "Slika"
 
 #: apps/forum/abstract_models.py:47
 msgid "Forum link"
-msgstr ""
+msgstr "Povezava"
 
 #: apps/forum/abstract_models.py:49 apps/forum/abstract_models.py:68
 msgid "Track link redirects count"
-msgstr ""
+msgstr "Sledi število preusmeritev"
 
 #: apps/forum/abstract_models.py:50
 msgid "Records the number of times a forum link was clicked"
@@ -74,19 +77,19 @@ msgstr ""
 
 #: apps/forum/abstract_models.py:55
 msgid "Default forum"
-msgstr ""
+msgstr "Navadni forum"
 
 #: apps/forum/abstract_models.py:56
 msgid "Category forum"
-msgstr ""
+msgstr "Kategorija"
 
 #: apps/forum/abstract_models.py:57
 msgid "Link forum"
-msgstr ""
+msgstr "Povezava"
 
 #: apps/forum/abstract_models.py:60
 msgid "Forum type"
-msgstr ""
+msgstr "Vrsta foruma"
 
 #: apps/forum/abstract_models.py:64
 msgid "Direct number of posts"
@@ -103,31 +106,33 @@ msgstr ""
 #: templates/machina/forum/forum_list.html:207
 #: templates/machina/forum_conversation/topic_list.html:14
 msgid "Last post"
-msgstr ""
+msgstr "Najnovejše objave"
 
 #: apps/forum/abstract_models.py:76
 #: apps/forum_conversation/abstract_models.py:73
 msgid "Last post added on"
-msgstr ""
+msgstr "Zadnja objava dodana: "
 
 #: apps/forum/abstract_models.py:81
 msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:82
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
-#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89
+#: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
 #: apps/forum/abstract_models.py:90 templates/machina/forum/forum_list.html:35
 #: templates/machina/forum/forum_list.html:203
 msgid "Forums"
-msgstr ""
+msgstr "Forumi"
 
 #: apps/forum/abstract_models.py:128
 msgid "A forum can not have a link forum as parent"
@@ -143,7 +148,7 @@ msgstr ""
 
 #: apps/forum/admin.py:54
 msgid "Forum settings"
-msgstr ""
+msgstr "Nastavitve foruma"
 
 #: apps/forum/admin.py:58
 msgid "Link forum settings"
@@ -151,7 +156,7 @@ msgstr ""
 
 #: apps/forum/admin.py:146
 msgid "'{}' forum successfully moved"
-msgstr ""
+msgstr "Forum '{}' premaknjen"
 
 #: apps/forum/admin.py:160 apps/forum/admin.py:234 apps/forum/admin.py:252
 #: apps/forum/admin.py:271 apps/forum_permission/abstract_models.py:46
@@ -159,7 +164,7 @@ msgstr ""
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
 msgid "Forum permissions"
-msgstr ""
+msgstr "Dovoljenja foruma"
 
 #: apps/forum/admin.py:161 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
@@ -167,7 +172,7 @@ msgstr ""
 
 #: apps/forum/admin.py:169
 msgid "Permissions successfully copied"
-msgstr ""
+msgstr "Dovoljenja kopirana"
 
 #: apps/forum/admin.py:190
 msgid "Choose either a user ID, a group ID or the anonymous user"
@@ -177,7 +182,7 @@ msgstr ""
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:119
 msgid "Anonymous user"
-msgstr ""
+msgstr "Anonimen uporabnik"
 
 #: apps/forum/admin.py:321
 msgid "Permissions successfully applied"
@@ -185,7 +190,7 @@ msgstr ""
 
 #: apps/forum/admin.py:361
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonimen"
 
 #: apps/forum/admin.py:364
 msgid ""
@@ -200,7 +205,7 @@ msgstr ""
 #: apps/forum/admin.py:410
 #: templates/admin/forum/forum/editpermissions_form.html:35
 msgid "Not set"
-msgstr ""
+msgstr "Ni nastavljeno"
 
 #: apps/forum/admin.py:411
 #: templates/admin/forum/forum/editpermissions_form.html:36
@@ -214,11 +219,11 @@ msgstr ""
 
 #: apps/forum/app.py:21
 msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 
 #: apps/forum/registry_config.py:12
 msgid "Machina: Forum"
-msgstr ""
+msgstr "Machina: Forum"
 
 #: apps/forum_conversation/abstract_models.py:31
 msgid "Topic forum"
@@ -227,65 +232,65 @@ msgstr ""
 #: apps/forum_conversation/abstract_models.py:34
 #: apps/forum_conversation/abstract_models.py:208
 msgid "Poster"
-msgstr ""
+msgstr "Avtor"
 
 #: apps/forum_conversation/abstract_models.py:37
 #: apps/forum_conversation/abstract_models.py:216
 msgid "Subject"
-msgstr ""
+msgstr "Zadeva"
 
 #: apps/forum_conversation/abstract_models.py:43
 msgid "Default topic"
-msgstr ""
+msgstr "Privzeta tema"
 
 #: apps/forum_conversation/abstract_models.py:44
 msgid "Sticky"
-msgstr ""
+msgstr "Pripeto"
 
 #: apps/forum_conversation/abstract_models.py:45
 msgid "Announce"
-msgstr ""
+msgstr "Razglas"
 
 #: apps/forum_conversation/abstract_models.py:48
 msgid "Topic type"
-msgstr ""
+msgstr "Vrsta teme"
 
 #: apps/forum_conversation/abstract_models.py:53
 msgid "Topic unlocked"
-msgstr ""
+msgstr "Tema odklenjena"
 
 #: apps/forum_conversation/abstract_models.py:54
 msgid "Topic locked"
-msgstr ""
+msgstr "Tema zaklenjena"
 
 #: apps/forum_conversation/abstract_models.py:55
 msgid "Topic moved"
-msgstr ""
+msgstr "Tema premaknjena"
 
 #: apps/forum_conversation/abstract_models.py:58
 msgid "Topic status"
-msgstr ""
+msgstr "Stanje teme"
 
 #: apps/forum_conversation/abstract_models.py:62
 #: apps/forum_conversation/abstract_models.py:227
 msgid "Approved"
-msgstr ""
+msgstr "Potrjeno"
 
 #: apps/forum_conversation/abstract_models.py:66
 msgid "Posts count"
-msgstr ""
+msgstr "Število objav"
 
 #: apps/forum_conversation/abstract_models.py:70
 msgid "Views count"
-msgstr ""
+msgstr "Število ogledov"
 
 #: apps/forum_conversation/abstract_models.py:79
 msgid "First post"
-msgstr ""
+msgstr "Prva objava"
 
 #: apps/forum_conversation/abstract_models.py:87
 msgid "Subscribers"
-msgstr ""
+msgstr "Naročniki"
 
 #: apps/forum_conversation/abstract_models.py:97
 #: apps/forum_conversation/abstract_models.py:205
@@ -293,7 +298,7 @@ msgstr ""
 #: apps/forum_tracking/abstract_models.py:51
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
 msgid "Topic"
-msgstr ""
+msgstr "Tema"
 
 #: apps/forum_conversation/abstract_models.py:98
 #: templates/machina/forum/forum_detail.html:50
@@ -301,7 +306,7 @@ msgstr ""
 #: templates/machina/forum/forum_list.html:37
 #: templates/machina/forum/forum_list.html:205
 msgid "Topics"
-msgstr ""
+msgstr "Teme"
 
 #: apps/forum_conversation/abstract_models.py:143
 msgid "A topic can not be associated with a category or a link forum"
@@ -309,7 +314,7 @@ msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:210
 msgid "Poster IP address"
-msgstr ""
+msgstr "IP naslov avtorja"
 
 #: apps/forum_conversation/abstract_models.py:212
 #: apps/forum_conversation/forum_polls/abstract_models.py:96
@@ -318,39 +323,39 @@ msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:220
 msgid "Content"
-msgstr ""
+msgstr "Vsebina"
 
 #: apps/forum_conversation/abstract_models.py:224
 msgid "Username"
-msgstr ""
+msgstr "Uporabniško ime"
 
 #: apps/forum_conversation/abstract_models.py:231
 msgid "Attach a signature"
-msgstr ""
+msgstr "Dodaj podpis"
 
 #: apps/forum_conversation/abstract_models.py:236
 msgid "Update reason"
-msgstr ""
+msgstr "Razlog posodobitve"
 
 #: apps/forum_conversation/abstract_models.py:241
 msgid "Lastly updated by"
-msgstr ""
+msgstr "Nazadnje posodobil"
 
 #: apps/forum_conversation/abstract_models.py:243
 msgid "Updates count"
-msgstr ""
+msgstr "Število posodobitev"
 
 #: apps/forum_conversation/abstract_models.py:253
 #: apps/forum_conversation/forum_attachments/abstract_models.py:21
 msgid "Post"
-msgstr ""
+msgstr "Objava"
 
 #: apps/forum_conversation/abstract_models.py:254
 #: templates/machina/forum/forum_list.html:20
 #: templates/machina/forum/forum_list.html:38
 #: templates/machina/forum/forum_list.html:206
 msgid "Posts"
-msgstr ""
+msgstr "Objave"
 
 #: apps/forum_conversation/abstract_models.py:295
 msgid "A user id or an anonymous key must be associated with a post."
@@ -367,61 +372,59 @@ msgstr ""
 
 #: apps/forum_conversation/app.py:29
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 
 #: apps/forum_conversation/app.py:32
 msgid "^topic/create/$"
-msgstr ""
+msgstr "^tema/ustvari/$"
 
 #: apps/forum_conversation/app.py:33
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/uredi/$"
 
 #: apps/forum_conversation/app.py:36
 msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgstr ""
+msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/objava/ustvari/$"
 
 #: apps/forum_conversation/app.py:38
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
-msgstr ""
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/uredi/$"
 
 #: apps/forum_conversation/app.py:40
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
-msgstr ""
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/izbriši/$"
 
 #: apps/forum_conversation/app.py:45
 msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgstr ""
+msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/forms.py:41
 msgid "Enter your subject"
-msgstr ""
+msgstr "Vpišite zadevo"
 
 #: apps/forum_conversation/forms.py:42
 msgid "Message"
-msgstr ""
+msgstr "Sporočilo"
 
 #: apps/forum_conversation/forms.py:43
 msgid "Enter your message"
-msgstr ""
+msgstr "Vpišite sporočilo"
 
 #: apps/forum_conversation/forms.py:70 apps/forum_moderation/forms.py:23
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: templates/machina/forum_moderation/topic_lock.html:5
 #: templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
-msgstr ""
+msgstr "Zakleni temo"
 
 #: apps/forum_conversation/forms.py:116
 msgid "Post topic as"
-msgstr ""
+msgstr "Objavi kot"
 
 #: apps/forum_conversation/forms.py:140
 #: apps/forum_conversation/forum_polls/abstract_models.py:27
 msgid "Poll question"
-msgstr ""
+msgstr "Vprašanje ankete"
 
 #: apps/forum_conversation/forms.py:141
 msgid ""
@@ -448,7 +451,7 @@ msgstr ""
 
 #: apps/forum_conversation/forms.py:154
 msgid "Allow re-voting?"
-msgstr ""
+msgstr "Dovolote ponovno glasovanje"
 
 #: apps/forum_conversation/forms.py:155
 msgid "If enabled users are able to change their vote."
@@ -461,15 +464,15 @@ msgstr ""
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:23
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:24
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "Attachment"
-msgstr ""
+msgstr "Priloga"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:30
 #: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
@@ -478,7 +481,7 @@ msgstr ""
 #: templates/machina/forum_conversation/partials/post_form.html:60
 #: templates/machina/forum_conversation/partials/topic_form.html:26
 msgid "Attachments"
-msgstr ""
+msgstr "Priloge"
 
 #: apps/forum_conversation/forum_attachments/registry_config.py:12
 msgid "Machina: Forum attachments"
@@ -486,11 +489,11 @@ msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:31
 msgid "Poll duration, in days"
-msgstr ""
+msgstr "Trajanje ankete, v dnevih"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:39
 msgid "Allow vote changes"
-msgstr ""
+msgstr "Dovoli spremembe glasov"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:46
 msgid "Topic poll"
@@ -503,7 +506,7 @@ msgstr ""
 #: apps/forum_conversation/forum_polls/abstract_models.py:70
 #: templates/machina/forum_conversation/partials/topic_form.html:23
 msgid "Poll"
-msgstr ""
+msgstr "Anketa"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:71
 msgid "Poll option text"
@@ -563,7 +566,7 @@ msgstr ""
 
 #: apps/forum_conversation/forum_polls/views.py:67
 msgid "Your vote has been cast."
-msgstr ""
+msgstr "Glas zabeležen"
 
 #: apps/forum_conversation/registry_config.py:12
 msgid "Machina: Forum conversations"
@@ -571,15 +574,15 @@ msgstr ""
 
 #: apps/forum_conversation/views.py:128
 msgid "This message has been posted successfully."
-msgstr ""
+msgstr "Sporočilo poslano"
 
 #: apps/forum_conversation/views.py:129
 msgid "This message will be validated before appearing on the forum."
-msgstr ""
+msgstr "Sporočilo bo pregledano pred objavo"
 
 #: apps/forum_conversation/views.py:131
 msgid "There are some errors in the attachments you submitted."
-msgstr ""
+msgstr "V prilogi so bile najdene napake"
 
 #: apps/forum_conversation/views.py:388
 msgid "There are some errors in the poll options you submitted."
@@ -587,31 +590,31 @@ msgstr ""
 
 #: apps/forum_conversation/views.py:574 apps/forum_conversation/views.py:659
 msgid "This message has been edited successfully."
-msgstr ""
+msgstr "Sporočilo spremenjeno"
 
 #: apps/forum_conversation/views.py:696
 msgid "This message has been deleted successfully."
-msgstr ""
+msgstr "Sporočilo izbrisano"
 
 #: apps/forum_feeds/app.py:19
 msgid "^topics/$"
-msgstr ""
+msgstr "^teme/$"
 
 #: apps/forum_feeds/app.py:20
 msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgstr ""
+msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/$"
 
 #: apps/forum_feeds/app.py:22
 msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgstr ""
+msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/vse/$"
 
 #: apps/forum_feeds/feeds.py:22
 msgid "Latest topics"
-msgstr ""
+msgstr "Najnovejše teme"
 
 #: apps/forum_feeds/feeds.py:23
 msgid "Latest topics updated on the forums"
-msgstr ""
+msgstr "Zadnje teme, posodobljene na forumu"
 
 #: apps/forum_feeds/registry_config.py:12
 msgid "Machina: Forum feeds"
@@ -622,51 +625,51 @@ msgstr ""
 #: apps/forum_tracking/abstract_models.py:23
 #: apps/forum_tracking/abstract_models.py:48
 msgid "User"
-msgstr ""
+msgstr "Uporabnik"
 
 #: apps/forum_member/abstract_models.py:27
 msgid "Avatar"
-msgstr ""
+msgstr "Slika"
 
 #: apps/forum_member/abstract_models.py:33
 msgid "Signature"
-msgstr ""
+msgstr "Podpis"
 
 #: apps/forum_member/abstract_models.py:38
 msgid "Total posts"
-msgstr ""
+msgstr "Število objav"
 
 #: apps/forum_member/abstract_models.py:43
 msgid "Forum profile"
-msgstr ""
+msgstr "Profil"
 
 #: apps/forum_member/abstract_models.py:44
 msgid "Forum profiles"
-msgstr ""
+msgstr "Profili"
 
 #: apps/forum_member/app.py:25
 msgid "^profile/(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "^profil/(?P<pk>\\d+)/$"
 
 #: apps/forum_member/app.py:27
 msgid "^profile/(?P<pk>\\d+)/posts/$"
-msgstr ""
+msgstr "^profil/(?P<pk>\\d+)/objave/$"
 
 #: apps/forum_member/app.py:29
 msgid "^profile/edit/$"
-msgstr ""
+msgstr "^profil/uredi/$"
 
 #: apps/forum_member/app.py:32
 msgid "^subscriptions/$"
-msgstr ""
+msgstr "^naročnine/$"
 
 #: apps/forum_member/app.py:35
 msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-msgstr ""
+msgstr "^tema/(?P<pk>\\d+)/naroči/$"
 
 #: apps/forum_member/app.py:37
 msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-msgstr ""
+msgstr "^tema/(?P<pk>\\d+)/odjavi/$"
 
 #: apps/forum_member/registry_config.py:12
 msgid "Machina: Forum members"
@@ -674,103 +677,103 @@ msgstr ""
 
 #: apps/forum_member/views.py:106
 msgid "The profile has been edited successfully."
-msgstr ""
+msgstr "Profil spremenjen"
 
 #: apps/forum_member/views.py:131
 msgid "You subscribed to this topic successfully."
-msgstr ""
+msgstr "Uspešno naročeni"
 
 #: apps/forum_member/views.py:170
 msgid "You unsubscribed from this topic successfully."
-msgstr ""
+msgstr "Naročnina preklicana"
 
 #: apps/forum_moderation/app.py:31
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zakleni/$"
 
 #: apps/forum_moderation/app.py:33
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/odkleni/$"
 
 #: apps/forum_moderation/app.py:35
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/izbriši/$"
 
 #: apps/forum_moderation/app.py:37
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/premakni/$"
 
 #: apps/forum_moderation/app.py:39
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/tema/$"
 
 #: apps/forum_moderation/app.py:41
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/pripeto/$"
 
 #: apps/forum_moderation/app.py:43
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgstr ""
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/razglas/$"
 
 #: apps/forum_moderation/app.py:45
 msgid "^queue/$"
-msgstr ""
+msgstr "^čakalna-vrsta/$"
 
 #: apps/forum_moderation/app.py:46
 msgid "^queue/(?P<pk>\\d+)/$"
-msgstr ""
+msgstr "^čakalna-vrsta/(?P<pk>\\d+)/$"
 
 #: apps/forum_moderation/app.py:48
 msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgstr ""
+msgstr "^čakalna-vrsta/(?P<pk>\\d+)/potrdi/$"
 
 #: apps/forum_moderation/app.py:50
 msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgstr ""
+msgstr "^čakalna-vrsta/(?P<pk>\\d+)/zavrni/$"
 
 #: apps/forum_moderation/forms.py:20
 msgid "Select a destination forum"
-msgstr ""
+msgstr "Izberi končni forum"
 
 #: apps/forum_moderation/registry_config.py:12
 msgid "Machina: Forum moderation"
-msgstr ""
+msgstr "Machina: Moderacija"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
-msgstr ""
+msgstr "Tema zaklenjena"
 
 #: apps/forum_moderation/views.py:89
 msgid "This topic has been unlocked successfully."
-msgstr ""
+msgstr "Tema odklenjena"
 
 #: apps/forum_moderation/views.py:139
 msgid "This topic has been deleted successfully."
-msgstr ""
+msgstr "Tema izbrisana"
 
 #: apps/forum_moderation/views.py:190
 msgid "This topic has been moved successfully."
-msgstr ""
+msgstr "Tema premaknjena"
 
 #: apps/forum_moderation/views.py:263
 msgid "This topic type has been changed successfully."
-msgstr ""
+msgstr "Vrsta spremenjena"
 
 #: apps/forum_moderation/views.py:310
 msgid "Would you want to change this topic to a default topic?"
-msgstr ""
+msgstr "Želite spremeniti temo v navadno?"
 
 #: apps/forum_moderation/views.py:320
 msgid "Would you want to change this topic to a sticky topic?"
-msgstr ""
+msgstr "Želite spremeniti temo v pripeto?"
 
 #: apps/forum_moderation/views.py:330
 msgid "Would you want to change this topic to an announce?"
-msgstr ""
+msgstr "Želite spremeniti temo v razglas?"
 
 #: apps/forum_moderation/views.py:403
 msgid "This post has been approved successfully."
-msgstr ""
+msgstr "Objava uspešno potrjena"
 
 #: apps/forum_moderation/views.py:444
 msgid "This post has been disapproved successfully."
@@ -778,11 +781,11 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:31
 msgid "Permission codename"
-msgstr ""
+msgstr "Koda dovoljenja"
 
 #: apps/forum_permission/abstract_models.py:34
 msgid "Global permission"
-msgstr ""
+msgstr "Globalno dovoljenje"
 
 #: apps/forum_permission/abstract_models.py:35
 msgid "This permission can be granted globally to all the forums"
@@ -790,7 +793,7 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:38
 msgid "Local permission"
-msgstr ""
+msgstr "Lokalno dovoljenje"
 
 #: apps/forum_permission/abstract_models.py:39
 msgid "This permission can be granted individually for each forum"
@@ -799,7 +802,7 @@ msgstr ""
 #: apps/forum_permission/abstract_models.py:45
 #: apps/forum_permission/abstract_models.py:67
 msgid "Forum permission"
-msgstr ""
+msgstr "Dovoljenje foruma"
 
 #: apps/forum_permission/abstract_models.py:54
 msgid "A forum permission should be at least either global or local"
@@ -807,11 +810,11 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:68
 msgid "Has perm"
-msgstr ""
+msgstr "Ima dovoljenje"
 
 #: apps/forum_permission/abstract_models.py:82
 msgid "The following permission cannot be granted globally: {}"
-msgstr ""
+msgstr "Dovoljenje '{}' ne more biti globalno"
 
 #: apps/forum_permission/abstract_models.py:94
 msgid "Target anonymous user"
@@ -831,7 +834,7 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:120
 msgid "Group"
-msgstr ""
+msgstr "Skupina"
 
 #: apps/forum_permission/abstract_models.py:126
 msgid "Group forum permission"
@@ -843,75 +846,75 @@ msgstr ""
 
 #: apps/forum_permission/defaults.py:23
 msgid "Can see forum"
-msgstr ""
+msgstr "Lahko vidi forum"
 
 #: apps/forum_permission/defaults.py:28
 msgid "Can read forum"
-msgstr ""
+msgstr "Lahko bere forum"
 
 #: apps/forum_permission/defaults.py:35
 msgid "Can start new topics"
-msgstr ""
+msgstr "Lahko objavlja nove teme"
 
 #: apps/forum_permission/defaults.py:40
 msgid "Can reply to topics"
-msgstr ""
+msgstr "Lahko odgovarja na objave"
 
 #: apps/forum_permission/defaults.py:45
 msgid "Can post announcements"
-msgstr ""
+msgstr "Lahko objavlja razglase"
 
 #: apps/forum_permission/defaults.py:50
 msgid "Can post stickies"
-msgstr ""
+msgstr "Lahko objavlja pripete objave"
 
 #: apps/forum_permission/defaults.py:55
 msgid "Can delete own posts"
-msgstr ""
+msgstr "Lahko briše lastne objave"
 
 #: apps/forum_permission/defaults.py:60
 msgid "Can edit own posts"
-msgstr ""
+msgstr "Lahko ureja lastne objave"
 
 #: apps/forum_permission/defaults.py:66
 msgid "Can post without approval"
-msgstr ""
+msgstr "Lahko objavlja brez potrditve"
 
 #: apps/forum_permission/defaults.py:73
 msgid "Can create polls"
-msgstr ""
+msgstr "Lahko ustvarja ankete"
 
 #: apps/forum_permission/defaults.py:78
 msgid "Can vote in polls"
-msgstr ""
+msgstr "Lahko glasuje v anketah"
 
 #: apps/forum_permission/defaults.py:85
 msgid "Can attach file"
-msgstr ""
+msgstr "Lahko pripenja datoteke"
 
 #: apps/forum_permission/defaults.py:90
 msgid "Can download file"
-msgstr ""
+msgstr "Lahko prenaša datoteke"
 
 #: apps/forum_permission/defaults.py:97
 msgid "Can lock topics"
-msgstr ""
+msgstr "Lahko zaklene teme"
 
 #: apps/forum_permission/defaults.py:102
 msgid "Can move topics"
-msgstr ""
+msgstr "Lahko premika teme"
 
 #: apps/forum_permission/defaults.py:107
 msgid "Can edit posts"
-msgstr ""
+msgstr "Lahko ureja objave"
 
 #: apps/forum_permission/defaults.py:112
 msgid "Can delete posts"
-msgstr ""
+msgstr "Lahko izbriše objave"
 
 #: apps/forum_permission/defaults.py:117
 msgid "Can approve posts"
-msgstr ""
+msgstr "Lahko potrdi objave"
 
 #: apps/forum_permission/defaults.py:123
 msgid "Can add posts in locked topics"
@@ -923,35 +926,35 @@ msgstr ""
 
 #: apps/forum_search/forms.py:21
 msgid "Search only in topic subjects"
-msgstr ""
+msgstr "Išči samo zadeve"
 
 #: apps/forum_search/forms.py:24
 msgid "Search for poster"
-msgstr ""
+msgstr "Išči po avtorju"
 
 #: apps/forum_search/forms.py:25
 msgid "Enter a user name to limit the search to a specific user."
-msgstr ""
+msgstr "Uporabniško ime avtorja"
 
 #: apps/forum_search/forms.py:29
 msgid "Search in specific forums"
-msgstr ""
+msgstr "Išči v forumih"
 
 #: apps/forum_search/forms.py:30
 msgid "Select the forums you wish to search in."
-msgstr ""
+msgstr "Izberi forume"
 
 #: apps/forum_search/forms.py:39
 msgid "Search for keywords"
-msgstr ""
+msgstr "Išči po ključnih besedah"
 
 #: apps/forum_search/forms.py:40
 msgid "Keywords or phrase"
-msgstr ""
+msgstr "Ključne besede"
 
 #: apps/forum_search/forms.py:41
 msgid "Poster name"
-msgstr ""
+msgstr "Ime avtorja"
 
 #: apps/forum_search/registry_config.py:12
 msgid "Machina: Forum searches"
@@ -987,7 +990,7 @@ msgstr ""
 
 #: apps/forum_tracking/app.py:27
 msgid "^unread-topics/$"
-msgstr ""
+msgstr "^neprebrane-teme/$"
 
 #: apps/forum_tracking/registry_config.py:12
 msgid "Machina: Forum tracking"
@@ -995,11 +998,11 @@ msgstr ""
 
 #: apps/forum_tracking/views.py:37
 msgid "Forums have been marked read."
-msgstr ""
+msgstr "Forumi označeni kot prebrani"
 
 #: apps/forum_tracking/views.py:87
 msgid "Topics have been marked read."
-msgstr ""
+msgstr "Objave označene kot prebrane"
 
 #: core/compat.py:20
 msgid "Neither Pillow nor PIL could be imported: {}"
@@ -1007,11 +1010,11 @@ msgstr ""
 
 #: models/abstract_models.py:14
 msgid "Creation date"
-msgstr ""
+msgstr "Datum nastanka"
 
 #: models/abstract_models.py:15
 msgid "Update date"
-msgstr ""
+msgstr "Datum spremembe"
 
 #: models/fields.py:37
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
@@ -1027,23 +1030,23 @@ msgstr ""
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr ""
+msgstr "Datoteke večje od {} niso dovoljene. Vaša datoteka je velika {}"
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
+msgstr "Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše slike je {}px"
 
 #: models/fields.py:238
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
+msgstr "Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše slike je {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
-msgstr ""
+msgstr "Seznam forumov"
 
 #: templates/admin/forum/forum/change_list_table.html:10
 msgid "Quick actions"
@@ -1051,67 +1054,67 @@ msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:11
 msgid "Type"
-msgstr ""
+msgstr "Vrsta"
 
 #: templates/admin/forum/forum/change_list_table.html:12
 msgid "Details"
-msgstr ""
+msgstr "Podrobnosti"
 
 #: templates/admin/forum/forum/change_list_table.html:28
 msgid "Move up"
-msgstr ""
+msgstr "Premakni gor"
 
 #: templates/admin/forum/forum/change_list_table.html:33
 msgid "Move down"
-msgstr ""
+msgstr "Premakni dol"
 
 #: templates/admin/forum/forum/change_list_table.html:38
 msgid "Add a sub-forum"
-msgstr ""
+msgstr "Dodaj pod-forum"
 
 #: templates/admin/forum/forum/change_list_table.html:42
 #: templates/machina/forum_conversation/topic_detail.html:37
 msgid "Delete"
-msgstr ""
+msgstr "Izbriši"
 
 #: templates/admin/forum/forum/change_list_table.html:51
 msgid "Topics:"
-msgstr ""
+msgstr "Teme:"
 
 #: templates/admin/forum/forum/change_list_table.html:51
 #: templates/machina/forum_conversation/topic_detail.html:95
 #: templates/machina/forum_member/user_posts_list.html:67
 #: templates/machina/forum_moderation/moderation_queue/detail.html:116
 msgid "Posts:"
-msgstr ""
+msgstr "Objave:"
 
 #: templates/admin/forum/forum/change_list_table.html:53
 msgid "Link:"
-msgstr ""
+msgstr "Povezave:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:30
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
-msgstr ""
+msgstr "Uredi dovoljenja uporabnika"
 
 #: templates/admin/forum/forum/editpermissions_form.html:16
 #: templates/admin/forum/forum/editpermissions_index.html:11
 msgid "Home"
-msgstr ""
+msgstr "Domov"
 
 #: templates/admin/forum/forum/editpermissions_form.html:34
 msgid "Permission"
-msgstr ""
+msgstr "Dovoljenje"
 
 #: templates/admin/forum/forum/editpermissions_form.html:63
 msgid "Save"
-msgstr ""
+msgstr "Shrani"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:57
 msgid "Edit group permissions"
-msgstr ""
+msgstr "Uredi dovoljenja skupine"
 
 #: templates/admin/forum/forum/editpermissions_index.html:25
 msgid "Please correct the error below."
@@ -1128,7 +1131,7 @@ msgstr ""
 #: templates/admin/forum/forum/editpermissions_index.html:51
 #: templates/admin/forum/forum/editpermissions_index.html:78
 msgid "Select"
-msgstr ""
+msgstr "Izberi"
 
 #: templates/admin/forum/forum/editpermissions_index.html:58
 msgid "Please select a group in order to update its permissions"
@@ -1146,19 +1149,19 @@ msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:106
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #: templates/machina/board_base.html:34
 msgid "Search..."
-msgstr ""
+msgstr "Iskanje"
 
 #: templates/machina/board_base.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Napredno iskanje"
 
 #: templates/machina/board_base.html:56
 msgid "Subscriptions"
-msgstr ""
+msgstr "Naročnine"
 
 #: templates/machina/board_base.html:57
 msgid "View my posts"
@@ -1171,29 +1174,29 @@ msgstr ""
 #: templates/machina/forum_moderation/moderation_queue/list.html:9
 #: templates/machina/forum_moderation/moderation_queue/list.html:32
 msgid "Moderation queue"
-msgstr ""
+msgstr "Moderacija"
 
 #: templates/machina/forum/forum_detail.html:22
 msgid "Mark subforums read"
-msgstr ""
+msgstr "Označi forume kot prebrane"
 
 #: templates/machina/forum/forum_detail.html:34
 #: templates/machina/forum/forum_detail.html:57
 #: templates/machina/forum_moderation/moderation_queue/detail.html:18
 #: templates/machina/forum_moderation/moderation_queue/list.html:66
 msgid "New topic"
-msgstr ""
+msgstr "Nova tema"
 
 #: templates/machina/forum/forum_detail.html:42
 #: templates/machina/forum/forum_detail.html:65
 #: templates/machina/forum_tracking/mark_topics_read.html:5
 #: templates/machina/forum_tracking/mark_topics_read.html:11
 msgid "Mark topics read"
-msgstr ""
+msgstr "Označi teme kot prebrane"
 
 #: templates/machina/forum/forum_detail.html:46
 msgid "Announcements"
-msgstr ""
+msgstr "Obvestila"
 
 #: templates/machina/forum/forum_list.html:69
 #: templates/machina/forum/forum_list.html:142
@@ -1205,72 +1208,72 @@ msgstr ""
 #: templates/machina/forum_conversation/topic_list.html:53
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
-msgstr ""
+msgstr "Avtor; <a href=\"%(poster_url)s\">%(username)s</a>"
 
 #: templates/machina/forum/forum_list.html:80
 #: templates/machina/forum/forum_list.html:153
 #: templates/machina/forum_conversation/topic_list.html:57
 #, python-format
 msgid "By: %(poster_username)s"
-msgstr ""
+msgstr "Avtor: %(poster_username)s"
 
 #: templates/machina/forum/forum_list.html:88
 #: templates/machina/forum/forum_list.html:161
 msgid "No posts"
-msgstr ""
+msgstr "Ni objav"
 
 #: templates/machina/forum/forum_list.html:107
 #: templates/machina/forum/forum_list.html:180
 msgid "Total redirects:"
-msgstr ""
+msgstr "Preusmeritve: "
 
 #: templates/machina/forum/forum_list.html:187
 #: templates/machina/forum/forum_list.html:193
 msgid "Subforums:"
-msgstr ""
+msgstr "Podforumi:"
 
 #: templates/machina/forum/forum_list.html:212
 msgid "No forums."
-msgstr ""
+msgstr "Ni forumov."
 
 #: templates/machina/forum/index.html:6
 msgid "Index"
-msgstr ""
+msgstr "Imenik"
 
 #: templates/machina/forum/index.html:14
 #: templates/machina/forum_tracking/mark_forums_read.html:5
 #: templates/machina/forum_tracking/mark_forums_read.html:11
 msgid "Mark forums read"
-msgstr ""
+msgstr "Označi forume kot prebrane"
 
 #: templates/machina/forum/index.html:16
 #: templates/machina/forum_tracking/unread_topic_list.html:4
 #: templates/machina/forum_tracking/unread_topic_list.html:10
 msgid "View unread topics"
-msgstr ""
+msgstr "Poglej neprebrane teme"
 
 #: templates/machina/forum/index.html:23
 #: templates/machina/forum_member/forum_profile_detail.html:34
 msgid "Statistics"
-msgstr ""
+msgstr "Statistika"
 
 #: templates/machina/forum/index.html:24
 msgid "Total posts:"
-msgstr ""
+msgstr "Število objav:"
 
 #: templates/machina/forum/index.html:24
 msgid "Total topics:"
-msgstr ""
+msgstr "Število tem:"
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:28
 #: templates/machina/forum_member/forum_profile_update.html:20
 #: templates/machina/partials/form_field.html:6
 msgid "(optional)"
-msgstr ""
+msgstr "(neobvezno)"
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:41
 msgid "Add another file"
-msgstr ""
+msgstr "Dodaj še eno datoteko"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:17
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:13
@@ -1285,11 +1288,11 @@ msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:40
 msgid "Vote"
-msgstr ""
+msgstr "Glasuj"
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:44
 msgid "Change your vote"
-msgstr ""
+msgstr "Spremeni glas"
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:3
 msgid "Poll options"
@@ -1308,11 +1311,11 @@ msgstr ""
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
 msgid "Preview:"
-msgstr ""
+msgstr "Predogled:"
 
 #: templates/machina/forum_conversation/forum_polls/poll_results.html:19
 msgid "Total votes:"
-msgstr ""
+msgstr "Število glasov:"
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
 #: templates/machina/forum_conversation/partials/topic_form.html:102
@@ -1320,77 +1323,77 @@ msgstr ""
 #: templates/machina/forum_conversation/post_update.html:27
 #: templates/machina/forum_member/forum_profile_update.html:36
 msgid "Submit"
-msgstr ""
+msgstr "Pošlji"
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:36
 msgid "View results"
-msgstr ""
+msgstr "Poglej rezultate"
 
 #: templates/machina/forum_conversation/partials/post_form.html:20
 #: templates/machina/forum_conversation/partials/topic_form.html:21
 msgid "Options"
-msgstr ""
+msgstr "Možnosti"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:15
 msgid "Post reply"
-msgstr ""
+msgstr "Odgovori"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:18
 msgid "Subscribe"
-msgstr ""
+msgstr "Naroči se"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:20
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Odjavi se"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: templates/machina/forum_moderation/topic_unlock.html:5
 #: templates/machina/forum_moderation/topic_unlock.html:12
 msgid "Unlock topic"
-msgstr ""
+msgstr "Odkleni temo"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:28
 #: templates/machina/forum_moderation/topic_delete.html:5
 #: templates/machina/forum_moderation/topic_delete.html:12
 msgid "Delete topic"
-msgstr ""
+msgstr "Izbriši temo"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:29
 #: templates/machina/forum_moderation/topic_move.html:5
 #: templates/machina/forum_moderation/topic_move.html:12
 msgid "Move topic"
-msgstr ""
+msgstr "Premakni temo"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:31
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:38
 msgid "Change to sticky topic"
-msgstr ""
+msgstr "Spremeni v pripeto temo"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:32
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:35
 msgid "Change to announce"
-msgstr ""
+msgstr "Spremeni v razglas"
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:34
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:37
 msgid "Change to standard topic"
-msgstr ""
+msgstr "Spremeni v navadno temo"
 
 #: templates/machina/forum_conversation/partials/topic_form.html:101
 #: templates/machina/forum_conversation/post_create.html:26
 #: templates/machina/forum_conversation/post_update.html:26
 msgid "Preview"
-msgstr ""
+msgstr "Predogled"
 
 #: templates/machina/forum_conversation/post_create.html:5
 #: templates/machina/forum_conversation/post_create.html:20
 msgid "Post a reply"
-msgstr ""
+msgstr "Odgovori"
 
 #: templates/machina/forum_conversation/post_create.html:38
 #: templates/machina/forum_moderation/moderation_queue/detail.html:132
 msgid "Topic review"
-msgstr ""
+msgstr "Predogled"
 
 #: templates/machina/forum_conversation/post_create.html:50
 #: templates/machina/forum_conversation/topic_detail.html:52
@@ -1402,7 +1405,7 @@ msgstr ""
 #: templates/machina/forum_search/search.html:85
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr ""
+msgstr "<a href=\"%(poster_url)s\">%(username)s</a>, %(creation_date)s"
 
 #: templates/machina/forum_conversation/post_create.html:54
 #: templates/machina/forum_conversation/topic_detail.html:56
@@ -1413,16 +1416,16 @@ msgstr ""
 #: templates/machina/forum_search/search.html:89
 #, python-format
 msgid "By: %(poster_username)s on %(creation_date)s"
-msgstr ""
+msgstr " %(poster_username)s, %(creation_date)s"
 
 #: templates/machina/forum_conversation/post_delete.html:5
 #: templates/machina/forum_conversation/post_delete.html:12
 msgid "Delete post"
-msgstr ""
+msgstr "Izbriši objavo"
 
 #: templates/machina/forum_conversation/post_delete.html:15
 msgid "Are you sure you want to delete this post?"
-msgstr ""
+msgstr "Res želite izbrisati to objavo?"
 
 #: templates/machina/forum_conversation/post_delete.html:18
 #: templates/machina/forum_member/topic_subscribe.html:18
@@ -1436,7 +1439,7 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:16
 #: templates/machina/forum_tracking/mark_topics_read.html:16
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: templates/machina/forum_conversation/post_delete.html:19
 #: templates/machina/forum_member/topic_subscribe.html:19
@@ -1450,80 +1453,82 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:17
 #: templates/machina/forum_tracking/mark_topics_read.html:17
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: templates/machina/forum_conversation/post_update.html:5
 #: templates/machina/forum_conversation/post_update.html:20
 #: templates/machina/forum_conversation/topic_update.html:5
 #: templates/machina/forum_conversation/topic_update.html:23
 msgid "Edit post"
-msgstr ""
+msgstr "Uredi objavo"
 
 #: templates/machina/forum_conversation/topic_create.html:5
 #: templates/machina/forum_conversation/topic_create.html:23
 msgid "Post a new topic"
-msgstr ""
+msgstr "Ustvari novo temo"
 
 #: templates/machina/forum_conversation/topic_detail.html:33
 msgid "Edit"
-msgstr ""
+msgstr "Uredi"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Last edited by:"
-msgstr ""
+msgstr "Nazadnje uredil: "
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Updated"
-msgstr ""
+msgstr "Posodobljeno"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "on"
-msgstr ""
+msgstr " "
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 #, python-format
 msgid "edited %(counter)s time in total."
 msgid_plural "edited %(counter)s times in total."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "urejeno %(counter)s-krat"
+msgstr[1] "urejeno %(counter)s-krat"
+msgstr[2] "urejeno %(counter)s-krat"
+msgstr[3] "urejeno %(counter)s-krat"
 
 #: templates/machina/forum_conversation/topic_detail.html:81
 msgid "Reason:"
-msgstr ""
+msgstr "Razlog:"
 
 #: templates/machina/forum_conversation/topic_list.html:12
 msgid "Replies"
-msgstr ""
+msgstr "Odgovori"
 
 #: templates/machina/forum_conversation/topic_list.html:13
 msgid "Views"
-msgstr ""
+msgstr "Ogledi"
 
 #: templates/machina/forum_conversation/topic_list.html:28
 msgid "This topic is locked"
-msgstr ""
+msgstr "Tema je zaklenjena"
 
 #: templates/machina/forum_conversation/topic_list.html:73
 msgid "There are no topics in this forum."
-msgstr ""
+msgstr "V tem forumu ni tem"
 
 #: templates/machina/forum_conversation/topic_pages_inline_list.html:5
 msgid "Go to the page:"
-msgstr ""
+msgstr "Pojdi na stran:"
 
 #: templates/machina/forum_feeds/topics_description.html:5
 msgid "Posted by"
-msgstr ""
+msgstr "Objavil "
 
 #: templates/machina/forum_member/forum_profile_detail.html:4
 #: templates/machina/forum_member/forum_profile_detail.html:9
 #, python-format
 msgid "%(username)s profile"
-msgstr ""
+msgstr "Profil uporabnika %(username)s"
 
 #: templates/machina/forum_member/forum_profile_detail.html:26
 msgid "Edit profile"
-msgstr ""
+msgstr "Uredi profil"
 
 #: templates/machina/forum_member/forum_profile_detail.html:39
 #, python-format
@@ -1533,8 +1538,10 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Posts</small></p>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objava</small></p>"
+msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objavi</small></p>"
+msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objave</small></p>"
+msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objav</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:44
 #, python-format
@@ -1544,126 +1551,132 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Topics</small></p>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Tema</small></p>"
+msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Temi</small></p>"
+msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Teme</small></p>"
+msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Tem</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "Recent posts"
-msgstr ""
+msgstr "Nove objave"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "View all"
-msgstr ""
+msgstr "Poglej vse"
 
 #: templates/machina/forum_member/forum_profile_detail.html:68
 #, python-format
 msgid "On %(creation_date)s"
-msgstr ""
+msgstr "%(creation_date)s"
 
 #: templates/machina/forum_member/forum_profile_update.html:4
 #: templates/machina/forum_member/forum_profile_update.html:12
 msgid "Edit forum profile"
-msgstr ""
+msgstr "Uredi profil"
 
 #: templates/machina/forum_member/subscription_topic_list.html:4
 #: templates/machina/forum_member/subscription_topic_list.html:10
 msgid "Topics that you are subscribed to"
-msgstr ""
+msgstr "Teme, na katere ste naročeni"
 
 #: templates/machina/forum_member/subscription_topic_list.html:17
 #, python-format
 msgid "%(counter)s topic found"
 msgid_plural "%(counter)s topics found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s tema najdena"
+msgstr[1] "%(counter)s temi najdeni"
+msgstr[2] "%(counter)s teme najdene"
+msgstr[3] "%(counter)s tem najdenih"
 
 #: templates/machina/forum_member/subscription_topic_list.html:31
 msgid "Not topics found."
-msgstr ""
+msgstr "Ni najdenih tem."
 
 #: templates/machina/forum_member/topic_subscribe.html:5
 #: templates/machina/forum_member/topic_subscribe.html:12
 msgid "Subscribe to topic"
-msgstr ""
+msgstr "Naroči se na temo"
 
 #: templates/machina/forum_member/topic_subscribe.html:15
 msgid "Would you like to subscribe to this topic?"
-msgstr ""
+msgstr "Se želite naročiti na to temo?"
 
 #: templates/machina/forum_member/topic_unsubscribe.html:5
 #: templates/machina/forum_member/topic_unsubscribe.html:12
 msgid "Unsubscribe from topic"
-msgstr ""
+msgstr "Prekliči naročnino"
 
 #: templates/machina/forum_member/topic_unsubscribe.html:15
 msgid "Would you like to unsubscribe from this topic?"
-msgstr ""
+msgstr "Se želite odjaviti od te teme?"
 
 #: templates/machina/forum_member/user_posts_list.html:4
 #: templates/machina/forum_member/user_posts_list.html:9
 msgid "My messages"
-msgstr ""
+msgstr "Sporočila"
 
 #: templates/machina/forum_member/user_posts_list.html:4
 #: templates/machina/forum_member/user_posts_list.html:9
 #, python-format
 msgid "%(username)s's posts"
-msgstr ""
+msgstr "Objave uporabnika %(username)s"
 
 #: templates/machina/forum_member/user_posts_list.html:17
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s objava najdena"
+msgstr[1] "%(counter)s objavi najdeni"
+msgstr[2] "%(counter)s objav najdenih"
+msgstr[3] "%(counter)s objav najdenih"
 
 #: templates/machina/forum_member/user_posts_list.html:24
 msgid "No posts found"
-msgstr ""
+msgstr "Ni najdenih objav"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:14
 msgid "Disapprove"
-msgstr ""
+msgstr "Zavrži"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:15
 msgid "Approve"
-msgstr ""
+msgstr "Potrdi"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:18
 msgid "New post"
-msgstr ""
+msgstr "Nova objava"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:31
 msgid "<b>1</b> option may be selected"
-msgstr ""
+msgstr "Izberete lahko največ <b>1</b> "
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:35
 #, python-format
 msgid "Up to <b>%(max_options)s</b> options may be selected"
-msgstr ""
+msgstr "Izberete lahko največ <b>%(max_options)s</b> "
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:16
 #, python-format
 msgid "%(topic_length)s posts found"
-msgstr ""
+msgstr "%(topic_length)s objav najdenih"
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:78
 msgid "No posts awaiting approval."
-msgstr ""
+msgstr "Ni nepotrjenih objav"
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:12
 msgid "Approve post"
-msgstr ""
+msgstr "Potrdi objavo"
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:15
 msgid "Are you sure you want to approve this post?"
-msgstr ""
+msgstr "Res želite potrditi to objavo?"
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:12
 msgid "Disapprove post"
-msgstr ""
+msgstr "Zavrži objavo"
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
@@ -1672,58 +1685,60 @@ msgstr ""
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
-msgstr ""
+msgstr "Res želite izbrisati to temo?"
 
 #: templates/machina/forum_moderation/topic_lock.html:15
 msgid "Are you sure you want to lock this topic?"
-msgstr ""
+msgstr "Res želite zakleniti to objavo?"
 
 #: templates/machina/forum_moderation/topic_move.html:23
 msgid "Move"
-msgstr ""
+msgstr "Premakni"
 
 #: templates/machina/forum_moderation/topic_move.html:24
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #: templates/machina/forum_moderation/topic_unlock.html:15
 msgid "Are you sure you want to unlock this topic?"
-msgstr ""
+msgstr "Res želite odkleniti to objavo?"
 
 #: templates/machina/forum_moderation/topic_update_type.html:5
 #: templates/machina/forum_moderation/topic_update_type.html:12
 msgid "Change topic type"
-msgstr ""
+msgstr "Spremeni vrsto teme"
 
 #: templates/machina/forum_search/search.html:5
 #: templates/machina/forum_search/search.html:12
 #: templates/machina/forum_search/search.html:33
 #: templates/machina/forum_search/search.html:43
 msgid "Search"
-msgstr ""
+msgstr "Iskanje"
 
 #: templates/machina/forum_search/search.html:19
 msgid "Search forums"
-msgstr ""
+msgstr "Išči po forumih"
 
 #: templates/machina/forum_search/search.html:45
 msgid "New search"
-msgstr ""
+msgstr "Novo iskanje"
 
 #: templates/machina/forum_search/search.html:51
 #, python-format
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vaše iskanje je vrnilo <b>%(number_of_results)s</b> rezultat"
+msgstr[1] "Vaše iskanje je vrnilo <b>%(number_of_results)s</b> rezultata"
+msgstr[2] "Vaše iskanje je vrnilo <b>%(number_of_results)s</b> rezultate"
+msgstr[3] "Vaše iskanje je vrnilo <b>%(number_of_results)s</b> rezultatov"
 
 #: templates/machina/forum_search/search.html:71
 msgid "Results"
-msgstr ""
+msgstr "Rezultati"
 
 #: templates/machina/forum_search/search.html:103
 msgid "No results."
-msgstr ""
+msgstr "Ni rezultatov"
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
 msgid "Are you sure you want to mark forums read?"
@@ -1736,12 +1751,12 @@ msgstr ""
 #: templates/machina/forum_tracking/unread_topic_list.html:17
 #, python-format
 msgid "%(topic_length)s unread topics found"
-msgstr ""
+msgstr "%(topic_length)s neprebranih tem najdenih"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:27
 msgid "There are no unread topics."
-msgstr ""
+msgstr "Ni novih tem"
 
 #: templates/machina/partials/breadcrumb.html:4
 msgid "Forum index"
-msgstr ""
+msgstr "Imenik foruma"
