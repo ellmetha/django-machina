@@ -2,6 +2,9 @@ dist: trusty
 sudo: true
 language: python
 
+addons:
+  postgresql: "9.4"
+
 python:
   - "2.7"
   - "3.4"
@@ -9,6 +12,7 @@ python:
   - "3.6"
   - "3.7-dev"
   - "3.8-dev"
+
 env:
   - DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
   - DJANGO_ENV="django>=1.11,<2.0" DB=postgres
