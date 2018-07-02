@@ -15,6 +15,9 @@ env:
   - DJANGO_ENV="django>=2.0,<2.1" DB=sqlite
   - DJANGO_ENV="django>=2.0,<2.1" DB=postgres
   - DJANGO_ENV="django>=2.0,<2.1" DB=mysql
+  - DJANGO_ENV="django==2.1b1" DB=sqlite
+  - DJANGO_ENV="django==2.1b1" DB=postgres
+  - DJANGO_ENV="django==2.1b1" DB=mysql
 
 matrix:
   allow_failures:
@@ -26,6 +29,18 @@ matrix:
     env: DJANGO_ENV="django>=2.0,<2.1" DB=postgres
   - python: "2.7"
     env: DJANGO_ENV="django>=2.0,<2.1" DB=mysql
+  - python: "2.7"
+    env: DJANGO_ENV="django==2.1b1" DB=sqlite
+  - python: "2.7"
+    env: DJANGO_ENV="django==2.1b1" DB=postgres
+  - python: "2.7"
+    env: DJANGO_ENV="django==2.1b1" DB=mysql
+  - python: "3.4"
+    env: DJANGO_ENV="django==2.1b1" DB=sqlite
+  - python: "3.4"
+    env: DJANGO_ENV="django==2.1b1" DB=postgres
+  - python: "3.4"
+    env: DJANGO_ENV="django==2.1b1" DB=mysql
 
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi

@@ -29,6 +29,7 @@ class SelectWithDisabled(Select):
 
 class MarkdownTextareaWidget(Textarea):
     """ A simple Textarea widget using the simplemde JS library to provide Markdown editor. """
+
     class Media:
         css = {
             'all': ('machina/build/css/vendor/simplemde.min.css', ),
@@ -38,8 +39,8 @@ class MarkdownTextareaWidget(Textarea):
             'machina/build/js/machina.editor.min.js',
         )
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, **kwargs):
         attrs = {} if attrs is None else attrs
         classes = attrs.get('classes', '')
         attrs['class'] = classes + ' machina-mde-markdown'
-        return super(MarkdownTextareaWidget, self).render(name, value, attrs)
+        return super(MarkdownTextareaWidget, self).render(name, value, attrs, **kwargs)
