@@ -8,6 +8,7 @@ python:
   - "3.5"
   - "3.6"
   - "3.7-dev"
+  - "3.8-dev"
 env:
   - DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
   - DJANGO_ENV="django>=1.11,<2.0" DB=postgres
@@ -22,6 +23,7 @@ env:
 matrix:
   allow_failures:
     - python: "3.7-dev"
+    - python: "3.8-dev"
   exclude:
   - python: "2.7"
     env: DJANGO_ENV="django>=2.0,<2.1" DB=sqlite
