@@ -46,19 +46,7 @@ def _get_setting_callable(settingname, defaultresult=None):
 
 
 def _get_markup_widget():
-    dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
-    try:
-        assert dotted_path is not None
-        module, widget = dotted_path.rsplit('.', 1)
-        module, widget = smart_str(module), smart_str(widget)
-        widget = getattr(__import__(module, {}, {}, [widget]), widget)
-        return widget
-    except ImportError as e:
-        raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
-            machina_settings.MACHINA_MARKUP_WIDGET,
-            e))
-    except AssertionError:
-        return Textarea
+    return _get_setting_callable('MACHINA_MARKUP_WIDGET', Textarea)
 
 
 MarkupTextFieldWidget = _get_markup_widget()
