@@ -310,3 +310,23 @@ For a full list of the available forum permissions, please refer to :doc:`forum_
   authenticated users if the targetted forum has no other permissions for these users. This behavior
   will apply if you create a new forum without a specific permission configuration ; so be careful
   with the permission code names you put in this setting.
+
+``FORUM_PERMISSIONS_USER_SELECT_WIDGET_FUNC``
+--------------------------------------------------------
+
+Default: ``'machina.apps.forum.admin.get_widget_for_select'``
+
+This setting defines the callable that is used to return the widget through which a user can be selected
+when editing forum permissions. In Django-machina this defaults to a function that returns the
+ForeignKeyRawIdWidget from Django itself, but if you want to define your own widget to use you can write
+your own callable and put the path to that callable in this setting.
+
+``FORUM_PERMISSIONS_GROUP_SELECT_WIDGET_FUNC``
+--------------------------------------------------------
+
+Default: ``'machina.apps.forum.admin.get_widget_for_select'``
+
+This setting defines the callable that is used to return the widget through which a group can be selected
+when editing forum permissions. In Django-machina this defaults to a function that returns the
+ForeignKeyRawIdWidget from Django itself, but if you want to define your own widget to use you can write
+your own callable and put the path to that callable in this setting.

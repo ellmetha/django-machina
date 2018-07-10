@@ -25,6 +25,26 @@ from machina.conf import settings as machina_settings
 _rendered_field_name = lambda name: '_{}_rendered'.format(name)
 
 
+def _get_setting_callable(settingname, defaultresult=None):
+    """
+    Transforms a string with dotted path to a callable
+    Example: path.to.my_function will return my_function as a callable
+    """
+    dotted_path = getattr(machina_settings, settingname)
+
+    if dotted_path is None:
+        return defaultresult
+
+    try:
+        module, func = dotted_path.rsplit('.', 1)
+        module, func = smart_str(module), smart_str(func)
+        func = getattr(__import__(module, {}, {}, [func]), func)
+        return func
+    except ImportError as e:
+        raise ImproperlyConfigured(_('Could not import {} {}: {}').format(settingname,
+                                                                          dotted_path, e))
+
+
 def _get_markup_widget():
     dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
     try:

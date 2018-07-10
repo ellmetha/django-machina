@@ -25,6 +25,7 @@ from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.models.fields import MarkupTextField
 from machina.models.fields import MarkupTextFieldWidget
+from machina.models.fields import _get_setting_callable
 
 
 Forum = get_model('forum', 'Forum')
@@ -374,6 +375,22 @@ class ForumAdmin(admin.ModelAdmin):
             new_perm.save()
 
 
+def get_widget_for_select(field, admin_site, **kwargs):
+    """
+    Returns a ready to use widget (which has already received the arguments it needs)
+    for selecting the id of one model instance.
+    This function is used because by default the following settings point to it:
+    FORUM_PERMISSIONS_USER_SELECT_WIDGET_FUNC
+    FORUM_PERMISSIONS_GROUP_SELECT_WIDGET_FUNC
+    These settings may be changed and a different function used, but the parameters stay the same
+    field         Formfield for the model of which the objects need to be selected
+    admin_site    Might come in handy for some widgets
+    **kwargs      For possible additional arguments in the future, without breaking
+                  existing usages
+    """
+    return ForeignKeyRawIdWidget(field.remote_field, admin_site)
+
+
 class PickUserForm(forms.Form):
     user = UserForumPermission._meta.get_field('user').formfield()
     anonymous_user = forms.BooleanField(
@@ -387,8 +404,11 @@ class PickUserForm(forms.Form):
         super(PickUserForm, self).__init__(*args, **kwargs)
 
         self.fields['user'].required = False
-        self.fields['user'].widget = ForeignKeyRawIdWidget(
-            UserForumPermission._meta.get_field('user').remote_field, admin_site)
+
+        callable_func = _get_setting_callable('FORUM_PERMISSIONS_USER_SELECT_WIDGET_FUNC')
+        field = UserForumPermission._meta.get_field('user')
+        widget = callable_func(field=field, admin_site=admin_site)
+        self.fields['user'].widget = widget
 
         self.fields['anonymous_user'].required = False
 
@@ -410,8 +430,11 @@ class PickGroupForm(forms.Form):
         super(PickGroupForm, self).__init__(*args, **kwargs)
 
         self.fields['group'].required = False
-        self.fields['group'].widget = ForeignKeyRawIdWidget(
-            GroupForumPermission._meta.get_field('group').remote_field, admin_site)
+
+        callable_func = _get_setting_callable('FORUM_PERMISSIONS_GROUP_SELECT_WIDGET_FUNC')
+        field = GroupForumPermission._meta.get_field('group')
+        widget = callable_func(field=field, admin_site=admin_site)
+        self.fields['group'].widget = widget
 
 
 class PickForumForm(forms.Form):
