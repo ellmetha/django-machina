@@ -46,6 +46,12 @@ matrix:
     env: DJANGO_ENV="django>=2.1,<2.2" DB=postgres
   - python: "3.4"
     env: DJANGO_ENV="django>=2.1,<2.2" DB=mysql
+  - python: "3.7-dev"
+    env: DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
+  - python: "3.7-dev"
+    env: DJANGO_ENV="django>=1.11,<2.0" DB=postgres
+  - python: "3.7-dev"
+    env: DJANGO_ENV="django>=1.11,<2.0" DB=mysql
 
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
