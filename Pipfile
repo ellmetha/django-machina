@@ -1,12 +1,9 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 ipython = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -28,7 +25,6 @@ sphinx-rtd-theme = "*"
 whoosh = "*"
 unipath = "*"
 
-
 [packages]
-
 "e1839a8" = {path = ".", editable = true}
+coverage = "*"
