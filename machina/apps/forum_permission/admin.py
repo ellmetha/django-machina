@@ -23,6 +23,7 @@ class GroupForumPermissionAdmin(admin.ModelAdmin):
     list_display = ('group', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )
     raw_id_fields = ('group', )
+    list_filter = ['forum', 'group']
 
 
 class UserForumPermissionAdmin(admin.ModelAdmin):
@@ -30,6 +31,7 @@ class UserForumPermissionAdmin(admin.ModelAdmin):
     list_display = ('user', 'anonymous_user', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )
     raw_id_fields = ('user', )
+    list_filter = ['forum']
 
 
 admin.site.register(ForumPermission, ForumPermissionAdmin)
