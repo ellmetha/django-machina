@@ -114,7 +114,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
-        response = self.client.post(url, {'user': self.user.id}, follow=True)
+        response = self.client.post(url, {'user': self.user.id, '_select_user': True}, follow=True)
         # Check
         editpermissions_user_raw_url = 'admin:{}_{}_editpermission_user'.format(
             model._meta.app_label, self._get_module_name(model._meta))
@@ -131,7 +131,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
-        response = self.client.post(url, {'anonymous_user': 1}, follow=True)
+        response = self.client.post(url, {'anonymous_user': 1, '_select_user': True}, follow=True)
         # Check
         editpermissions_anonymous_user_raw_url = 'admin:{}_{}_editpermission_anonymous_user'.format(
             model._meta.app_label, self._get_module_name(model._meta))
@@ -149,7 +149,7 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             model._meta.app_label, self._get_module_name(model._meta))
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
-        response = self.client.post(url, {'group': group.id}, follow=True)
+        response = self.client.post(url, {'group': group.id, '_select_group': True}, follow=True)
         # Check
         editpermissions_group_raw_url = 'admin:{}_{}_editpermission_group'.format(
             model._meta.app_label, self._get_module_name(model._meta))
