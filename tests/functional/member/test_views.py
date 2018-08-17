@@ -336,7 +336,7 @@ class TestTopicUnsubscribeView(BaseClientTestCase):
         assert response.status_code == 403
 
 
-class TestTopicSubscribtionListView(BaseClientTestCase):
+class TestTopicSubscriptionListView(BaseClientTestCase):
     @pytest.fixture(autouse=True)
     def setup(self):
         # Add some users
