@@ -17,7 +17,7 @@ class MemberApp(Application):
     forum_profile_update_view = get_class('forum_member.views', 'ForumProfileUpdateView')
     topic_subscribe_view = get_class('forum_member.views', 'TopicSubscribeView')
     topic_unsubscribe_view = get_class('forum_member.views', 'TopicUnsubscribeView')
-    topic_subscription_list_view = get_class('forum_member.views', 'TopicSubscribtionListView')
+    topic_subscription_list_view = get_class('forum_member.views', 'TopicSubscriptionListView')
 
     def get_urls(self):
         return [

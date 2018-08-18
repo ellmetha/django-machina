@@ -200,7 +200,7 @@ class TopicUnsubscribeView(
         return self.request.forum_permission_handler.can_unsubscribe_from_topic(obj, user)
 
 
-class TopicSubscribtionListView(ListView):
+class TopicSubscriptionListView(ListView):
     """
     Provides a list of all topics to which the current user has subscribed.
     """
@@ -213,4 +213,4 @@ class TopicSubscribtionListView(ListView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(TopicSubscribtionListView, self).dispatch(request, *args, **kwargs)
+        return super(TopicSubscriptionListView, self).dispatch(request, *args, **kwargs)
