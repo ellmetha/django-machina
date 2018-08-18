@@ -12,6 +12,8 @@ Minor changes
 
 * Topics are now a "raw ID field" in the post admin pages
   (`#99 <https://github.com/ellmetha/django-machina/pull/99>`_)
+* New filters are available in the admin interface for forum permissions
+  (`#137 <https://github.com/ellmetha/django-machina/pull/137>`_)
 
 Fixes
 -----
@@ -22,3 +24,9 @@ Fixes
   (`#121 <https://github.com/ellmetha/django-machina/pull/121>`_)
 * Ensured navbar brand text can be customized
   (`#122 <https://github.com/ellmetha/django-machina/issues/122>`_)
+
+Backwards incompatible changes
+------------------------------
+
+* The ``TopicSubscribtionListView`` view was renamed ``TopicSubscriptionListView``
+  (`#139 <https://github.com/ellmetha/django-machina/pull/139>`_)
