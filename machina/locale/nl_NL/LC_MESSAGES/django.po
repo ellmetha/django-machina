@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# Brenda H <brendahellenthal@gmail.com>, 2018
 # S. Jansen <samuel.anton.j@gmail.com>, 2016-2017
 # S. Jansen <samuel.anton.j@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-12 11:54-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
-"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"POT-Creation-Date: 2018-08-18 18:05-0400\n"
+"PO-Revision-Date: 2018-08-13 12:15+0000\n"
+"Last-Translator: Brenda H <brendahellenthal@gmail.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/django-machina-"
 "team/django-machina/language/nl_NL/)\n"
 "Language: nl_NL\n"
@@ -93,11 +94,11 @@ msgstr "Forum type"
 
 #: apps/forum/abstract_models.py:64
 msgid "Direct number of posts"
-msgstr ""
+msgstr "Aantal zichtbare berichten"
 
 #: apps/forum/abstract_models.py:66
 msgid "Direct number of topics"
-msgstr ""
+msgstr "Aantal zichtbare onderwerpen"
 
 #: apps/forum/abstract_models.py:75
 #: apps/forum_conversation/abstract_models.py:82
@@ -287,7 +288,7 @@ msgstr "Aantal keer bekeken"
 
 #: apps/forum_conversation/abstract_models.py:79
 msgid "First post"
-msgstr ""
+msgstr "Eerste reactie"
 
 #: apps/forum_conversation/abstract_models.py:87
 msgid "Subscribers"
@@ -863,79 +864,79 @@ msgstr "Forum rechten groep"
 
 #: apps/forum_permission/defaults.py:23
 msgid "Can see forum"
-msgstr ""
+msgstr "Mag forum zien"
 
 #: apps/forum_permission/defaults.py:28
 msgid "Can read forum"
-msgstr ""
+msgstr "Mag forum lezen"
 
 #: apps/forum_permission/defaults.py:35
 msgid "Can start new topics"
-msgstr ""
+msgstr "Mag nieuwe onderwerpen starten"
 
 #: apps/forum_permission/defaults.py:40
 msgid "Can reply to topics"
-msgstr ""
+msgstr "Mag reageren op onderwerpen"
 
 #: apps/forum_permission/defaults.py:45
 msgid "Can post announcements"
-msgstr ""
+msgstr "Mag mededelingen plaatsen"
 
 #: apps/forum_permission/defaults.py:50
 msgid "Can post stickies"
-msgstr ""
+msgstr "Mag sticky onderwerpen maken"
 
 #: apps/forum_permission/defaults.py:55
 msgid "Can delete own posts"
-msgstr ""
+msgstr "Mag eigen berichten verwijderen"
 
 #: apps/forum_permission/defaults.py:60
 msgid "Can edit own posts"
-msgstr ""
+msgstr "Mag eigen berichten aanpassen"
 
 #: apps/forum_permission/defaults.py:66
 msgid "Can post without approval"
-msgstr ""
+msgstr "Mag reageren zonder goedkeuring"
 
 #: apps/forum_permission/defaults.py:73
 msgid "Can create polls"
-msgstr ""
+msgstr "Mag polls aanmaken"
 
 #: apps/forum_permission/defaults.py:78
 msgid "Can vote in polls"
-msgstr ""
+msgstr "Mag stemmen in polls"
 
 #: apps/forum_permission/defaults.py:85
 msgid "Can attach file"
-msgstr ""
+msgstr "Mag bijlage toevoegen"
 
 #: apps/forum_permission/defaults.py:90
 msgid "Can download file"
-msgstr ""
+msgstr "Mag bijlage downloaden"
 
 #: apps/forum_permission/defaults.py:97
 msgid "Can lock topics"
-msgstr ""
+msgstr "Mag onderwerpen vergrendelen"
 
 #: apps/forum_permission/defaults.py:102
 msgid "Can move topics"
-msgstr ""
+msgstr "Mag onderwerpen verplaatsen"
 
 #: apps/forum_permission/defaults.py:107
 msgid "Can edit posts"
-msgstr ""
+msgstr "Mag berichten aanpassen"
 
 #: apps/forum_permission/defaults.py:112
 msgid "Can delete posts"
-msgstr ""
+msgstr "Mag berichten verwijderen"
 
 #: apps/forum_permission/defaults.py:117
 msgid "Can approve posts"
-msgstr ""
+msgstr "Mag berichten goedkeuren"
 
 #: apps/forum_permission/defaults.py:123
 msgid "Can add posts in locked topics"
-msgstr ""
+msgstr "Mag reageren in vergrendelde onderwerpen"
 
 #: apps/forum_permission/registry_config.py:12
 msgid "Machina: Forum permissions"
@@ -1186,7 +1187,7 @@ msgstr "Abonnementen"
 
 #: templates/machina/board_base.html:57
 msgid "View my posts"
-msgstr ""
+msgstr "Bekijk mijn reacties"
 
 #: templates/machina/board_base.html:61
 #: templates/machina/forum_moderation/moderation_queue/detail.html:4
