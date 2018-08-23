@@ -2,17 +2,11 @@
 
 from __future__ import unicode_literals
 
-import sys
-
-import django
 import pytest
-from django.conf import settings
 from django.template import Context
 from django.template.base import Template
 from django.test import RequestFactory
 
-import machina.conf.settings
-import machina.templatetags.forum_user_tags
 from machina.test.factories import UserFactory
 
 
