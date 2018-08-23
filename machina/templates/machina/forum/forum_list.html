@@ -74,7 +74,7 @@
         {% if node.last_post %}
         {% if node.last_post.poster %}
         {% url 'forum_member:profile' node.last_post.poster_id as poster_url %}
-        {% get_username node.last_post.poster_id as username%}
+        {% get_username node.last_post.poster as username%}
         {% blocktrans trimmed with poster_url=poster_url%}
         By: <a href="{{ poster_url }}">{{ username }}</a>
         {% endblocktrans %}
@@ -148,7 +148,7 @@
         {% if node.last_post %}
         {% if node.last_post.poster_id %}
         {% url 'forum_member:profile' node.last_post.poster_id as poster_url %}
-        {% get_username node.last_post.poster_id as username%}
+        {% get_username node.last_post.poster as username%}
         {% blocktrans trimmed with poster_url=poster_url%}
         By: <a href="{{ poster_url }}">{{ username }}</a>
         {% endblocktrans %}

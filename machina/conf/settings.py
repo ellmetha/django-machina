@@ -13,6 +13,8 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.utils.lru_cache import lru_cache
+from django.utils.module_loading import import_string
 
 
 # General
@@ -37,9 +39,6 @@ DEFAULT_FORUM_IMAGE_SETTINGS = {
 }
 
 FORUM_TOPICS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_FORUM_TOPICS_NUMBER_PER_PAGE', 20)
-
-FORUM_SEARCH_REAL_USER_NAME = getattr(settings, 'MACHINA_FORUM_SEARCH_REAL_USER_NAME', False)
-FORUM_USER_DISPLAY = getattr(settings, 'MACHINA_FORUM_USER_DISPLAY', '')
 
 # Conversation
 TOPIC_ANSWER_SUBJECT_PREFIX = getattr(settings, 'MACHINA_TOPIC_ANSWER_SUBJECT_PREFIX', 'Re:')
@@ -88,6 +87,15 @@ PROFILE_SIGNATURE_MAX_LENGTH = getattr(settings, 'MACHINA_PROFILE_SIGNATURE_MAX_
 PROFILE_RECENT_POSTS_NUMBER = getattr(settings, 'MACHINA_PROFILE_RECENT_POSTS_NUMBER', 15)
 PROFILE_POSTS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_PROFILE_POSTS_NUMBER_PER_PAGE', 15)
 
+PROFILE_USER_DISPLAY_NAME = getattr(
+    settings, 'MACHINA_PROFILE_USER_DISPLAY_NAME', 'machina.conf.username.username')
+
+
 # Permission
 DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(
     settings, 'MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS', [])
+
+
+@lru_cache()
+def get_user_display():
+    return import_string(PROFILE_USER_DISPLAY_NAME)

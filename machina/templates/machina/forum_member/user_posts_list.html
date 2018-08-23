@@ -3,12 +3,12 @@
 {% load forum_user_tags %}
 
 {% block sub_title %}
-  {% get_username poster.id as username%}
+  {% get_username poster as username%}
   {% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans%}{{ username }}'s posts{% endblocktrans %}{% endif %}
 {% endblock sub_title %}
 
 {% block content %}
-{% get_username poster.id as username%}
+{% get_username poster as username%}
 <div class="row">
   <div class="col-xs-12">
     <h1>{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans%}{{ username }}'s posts{% endblocktrans %}{% endif %}</h1>
@@ -41,7 +41,7 @@
       <div id="{{ post.id }}" class="panel panel-default post">
         <div class="panel-body">
           <div class="row">
-            {% get_username post.poster_id as username%}
+            {% get_username post.poster as username%}
             <div class="col-md-10 post-content-wrapper">
                 {% spaceless %}
                 <h4 class="subject">

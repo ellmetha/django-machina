@@ -48,7 +48,7 @@
                 <i class="fa fa-clock-o"></i>&nbsp;
                 {% if post.poster %}
                   {% url 'forum_member:profile' post.poster_id as poster_url %}
-                  {% get_username post.poster.id as username%}
+                  {% get_username post.poster as username%}
                   {% blocktrans trimmed with poster_url=poster_url username=username creation_date=post.created %}
                     By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
                   {% endblocktrans %}

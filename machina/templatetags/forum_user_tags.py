@@ -3,20 +3,13 @@
 from __future__ import unicode_literals
 
 from django import template
-from django.contrib.auth.models import User
 
-from machina.conf.settings import FORUM_USER_DISPLAY
+from machina.conf.settings import get_user_display
 
 
 register = template.Library()
 
 
 @register.simple_tag
-def get_username(user_id):
-    user = User.objects.get(pk=user_id)
-    if FORUM_USER_DISPLAY:
-        user = template.Context(dict(user=user))
-        t = template.Template(FORUM_USER_DISPLAY)
-        return t.render(user)
-    else:
-        return user.username
+def get_username(user):
+    return get_user_display()(user)

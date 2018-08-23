@@ -29,28 +29,14 @@ class TestGetForumUserName(object):
 
     def test_can_render_a_user_name(self):
         # Setup
-        def get_rendered(user_id):
+        def get_rendered(user):
             request = self.request_factory.get('/')
-            t = Template(self.loadstatement + '{% get_username user_id as username%}')
-            c = Context({'user_id': user_id, 'request': request})
+            t = Template(self.loadstatement + '{% get_username user as username%}')
+            c = Context({'user': user, 'request': request})
             rendered = t.render(c)
 
             return c, rendered
 
-        context, rendered = get_rendered(self.u1.pk)
+        context, rendered = get_rendered(self.u1)
         assert rendered == ''
         assert context['username'] == self.u1.username
-
-        # Let's also try to change the setting and see if it still works
-        settings.MACHINA_FORUM_USER_DISPLAY = "{{ user.get_full_name }}"
-        django.setup()
-        if sys.version_info < (3, 4):
-            from imp import reload
-        else:
-            from importlib import reload
-        reload(machina.conf.settings)
-        reload(machina.templatetags.forum_user_tags)
-
-        context, rendered = get_rendered(self.u1.pk)
-        assert rendered == ''
-        assert context['username'] == self.u1.get_full_name()

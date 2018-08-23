@@ -272,6 +272,14 @@ Default: ``15``
 
 The number of posts displayed inside one page of a forum member's posts list.
 
+``MACHINA_PROFILE_USER_DISPLAY_NAME``
+-----------------------------------------
+
+Default: ``'machina.conf.username.username'``
+
+This setting defines the function used to return displayed user name. It should be a Python dotted path
+to a function that accepts ``AUTH_USER_MODEL`` instance and  returns user name string.
+
 Permission
 **********
 

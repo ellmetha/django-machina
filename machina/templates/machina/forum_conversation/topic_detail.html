@@ -49,7 +49,7 @@
                 {% spaceless %}
                 <i class="fa fa-clock-o"></i>&nbsp;
                 {% if post.poster %}
-                  {% get_username post.poster.id as username%}
+                  {% get_username post.poster as username%}
                   {% url 'forum_member:profile' post.poster_id as poster_url %}
                   {% blocktrans trimmed with poster_url=poster_url username=username creation_date=post.created %}
                     By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
@@ -75,7 +75,7 @@
               <div class="edit-info">
                 <br />
                 <small class="text-muted">
-                  {% get_username post.updated_by.id as username_updated%}
+                  {% get_username post.updated_by as username_updated%}
                   <i class="fa fa-edit"></i>&nbsp;{% if post.updated_by %}{% trans "Last edited by:" %}&nbsp;<a href="{% url 'forum_member:profile' post.updated_by_id %}">{{ username_updated }}</a>&nbsp;{% else %}{% trans "Updated" %}&nbsp;{% endif %}{% trans "on" %}&nbsp;{{ post.updated }}, {% blocktrans count counter=post.updates_count %}edited {{counter }} time in total.{% plural %}edited {{counter }} times in total.{% endblocktrans %}
                 </small>
                 {% if post.update_reason %}
