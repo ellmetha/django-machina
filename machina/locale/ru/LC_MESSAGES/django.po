@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # alexander fedorov <elf607@gmail.com>, 2017
 # georgekpg <konstantinpopov@inbox.ru>, 2018
@@ -9,18 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-18 18:05-0400\n"
+"POT-Creation-Date: 2018-08-12 11:54-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-"
-"machina/language/ru/)\n"
-"Language: ru\n"
+"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-machina/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: app.py:39
@@ -120,11 +117,12 @@ msgid "Display in parent-forums legend"
 msgstr "Отображать в легенде родительских форумов"
 
 #: apps/forum/abstract_models.py:82
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr ""
-"Показывать этот форуум в легенде родительского форума (списке подфорумов)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "Показывать этот форуум в легенде родительского форума (списке подфорумов)"
 
-#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89
+#: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
@@ -177,8 +175,7 @@ msgstr "Разрешения успешно скопированы"
 
 #: apps/forum/admin.py:190
 msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr ""
-"Выберите или пользовательский ID или ID группы, или анонимного пользователя"
+msgstr "Выберите или пользовательский ID или ID группы, или анонимного пользователя"
 
 #: apps/forum/admin.py:252
 #: templates/machina/forum_conversation/topic_detail.html:98
@@ -198,9 +195,7 @@ msgstr "Аноним"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr ""
-"Выберите этот вариант, если вы хотите отредактировать разрешения анонимного "
-"пользоватея"
+msgstr "Выберите этот вариант, если вы хотите отредактировать разрешения анонимного пользоватея"
 
 #: apps/forum/admin.py:382
 msgid "Choose either a user ID or select the anonymous user"
@@ -363,21 +358,16 @@ msgstr "Сообщения"
 
 #: apps/forum_conversation/abstract_models.py:295
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
-"сообщением"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
-"сообщением, но не оба одновременно"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением, но не оба одновременно"
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid "A username must be specified if the poster is anonymous"
-msgstr ""
-"Имя пользователя должно быть указано, если автор - анонимный пользователь"
+msgstr "Имя пользователя должно быть указано, если автор - анонимный пользователь"
 
 #: apps/forum_conversation/app.py:29
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
@@ -396,13 +386,11 @@ msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:38
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:40
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:45
@@ -441,9 +429,7 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr ""
-"Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не "
-"создавать опрос"
+msgstr "Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не создавать опрос"
 
 #: apps/forum_conversation/forms.py:145
 #: apps/forum_conversation/forum_polls/abstract_models.py:35
@@ -452,9 +438,7 @@ msgstr "Максимальное количество вариантов для 
 
 #: apps/forum_conversation/forms.py:146
 msgid "This is the number of options each user may select when voting."
-msgstr ""
-"Это количество вариантов, которые пользователь сможет выбрать при "
-"голосовании."
+msgstr "Это количество вариантов, которые пользователь сможет выбрать при голосовании."
 
 #: apps/forum_conversation/forms.py:150
 msgid "For how many days the poll should be run?"
@@ -470,15 +454,12 @@ msgstr "Позволить голосовать заново?"
 
 #: apps/forum_conversation/forms.py:155
 msgid "If enabled users are able to change their vote."
-msgstr ""
-"Если отмечено, пользователи будут иметь возможность изменить своё выбор."
+msgstr "Если отмечено, пользователи будут иметь возможность изменить своё выбор."
 
 #: apps/forum_conversation/forms.py:176
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr ""
-"Вы должны установить максимальное количество вариантов, которые может "
-"выбрать пользователь, когда создаёте опрос"
+msgstr "Вы должны установить максимальное количество вариантов, которые может выбрать пользователь, когда создаёте опрос"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:23
 msgid "File"
@@ -560,14 +541,11 @@ msgstr "Голосования опроса темы"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:118
 msgid "A user id or an anonymous key must be used."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть использован"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:120
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть "
-"использован, но не оба одновременно"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован, но не оба одновременно"
 
 #: apps/forum_conversation/forum_polls/forms.py:30
 msgid "Enter a poll option"
@@ -1327,9 +1305,7 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
-"<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и "
-"связанные с ним голоса. "
+msgstr "<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и связанные с ним голоса. "
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10

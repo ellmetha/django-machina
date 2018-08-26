@@ -1,21 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-18 18:05-0400\n"
+"POT-Creation-Date: 2018-08-12 11:54-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Italian (http://www.transifex.com/django-machina-team/django-"
-"machina/language/it/)\n"
-"Language: it\n"
+"Language-Team: Italian (http://www.transifex.com/django-machina-team/django-machina/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -116,10 +115,12 @@ msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:82
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
-#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89
+#: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
@@ -383,13 +384,11 @@ msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:38
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:40
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:45

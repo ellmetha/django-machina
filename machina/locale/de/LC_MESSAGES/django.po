@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Marcel Lambert <marcel.lambert@wesualize.com>, 2017
+# Robert Gutschale <r.gutschale@blueshoe.de>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-18 18:05-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
-"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: German (http://www.transifex.com/django-machina-team/django-"
-"machina/language/de/)\n"
-"Language: de\n"
+"POT-Creation-Date: 2018-08-12 11:54-0400\n"
+"PO-Revision-Date: 2018-08-24 12:37+0000\n"
+"Last-Translator: Robert Gutschale <r.gutschale@blueshoe.de>\n"
+"Language-Team: German (http://www.transifex.com/django-machina-team/django-machina/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -117,10 +117,12 @@ msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:82
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
-#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89
+#: apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
@@ -328,7 +330,7 @@ msgstr "Benutzername"
 
 #: apps/forum_conversation/abstract_models.py:231
 msgid "Attach a signature"
-msgstr ""
+msgstr "Signatur anhängen"
 
 #: apps/forum_conversation/abstract_models.py:236
 msgid "Update reason"
@@ -336,7 +338,7 @@ msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:241
 msgid "Lastly updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert von"
 
 #: apps/forum_conversation/abstract_models.py:243
 msgid "Updates count"
@@ -384,13 +386,11 @@ msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:38
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:40
-msgid ""
-"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 msgstr ""
 
 #: apps/forum_conversation/app.py:45
@@ -399,22 +399,22 @@ msgstr ""
 
 #: apps/forum_conversation/forms.py:41
 msgid "Enter your subject"
-msgstr ""
+msgstr "Betreff eingeben"
 
 #: apps/forum_conversation/forms.py:42
 msgid "Message"
-msgstr ""
+msgstr "Nachricht"
 
 #: apps/forum_conversation/forms.py:43
 msgid "Enter your message"
-msgstr ""
+msgstr "Nachricht eingeben"
 
 #: apps/forum_conversation/forms.py:70 apps/forum_moderation/forms.py:23
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: templates/machina/forum_moderation/topic_lock.html:5
 #: templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
-msgstr ""
+msgstr "Thema schließen"
 
 #: apps/forum_conversation/forms.py:116
 msgid "Post topic as"
@@ -997,11 +997,11 @@ msgstr ""
 
 #: apps/forum_tracking/views.py:37
 msgid "Forums have been marked read."
-msgstr ""
+msgstr "Foren wurden als gelesen markiert."
 
 #: apps/forum_tracking/views.py:87
 msgid "Topics have been marked read."
-msgstr ""
+msgstr "Themen wurden als gelesen markiert."
 
 #: core/compat.py:20
 msgid "Neither Pillow nor PIL could be imported: {}"
@@ -1177,7 +1177,7 @@ msgstr ""
 
 #: templates/machina/forum/forum_detail.html:22
 msgid "Mark subforums read"
-msgstr ""
+msgstr "Subforen als gelesen markieren"
 
 #: templates/machina/forum/forum_detail.html:34
 #: templates/machina/forum/forum_detail.html:57
@@ -1191,7 +1191,7 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_topics_read.html:5
 #: templates/machina/forum_tracking/mark_topics_read.html:11
 msgid "Mark topics read"
-msgstr ""
+msgstr "Themen als gelesen markieren"
 
 #: templates/machina/forum/forum_detail.html:46
 msgid "Announcements"
@@ -1243,7 +1243,7 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:5
 #: templates/machina/forum_tracking/mark_forums_read.html:11
 msgid "Mark forums read"
-msgstr ""
+msgstr "Foren als gelesen markieren"
 
 #: templates/machina/forum/index.html:16
 #: templates/machina/forum_tracking/unread_topic_list.html:4
@@ -1729,11 +1729,11 @@ msgstr "Keine Ergebnisse."
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
 msgid "Are you sure you want to mark forums read?"
-msgstr "Bist du sicher dass du das Forum als gelesen markieren möchtest?"
+msgstr "Bist du sicher, dass du alle Foren als gelesen markieren möchtest?"
 
 #: templates/machina/forum_tracking/mark_topics_read.html:13
 msgid "Are you sure you want to mark topics read?"
-msgstr ""
+msgstr "Bist du sicher, dass du alle Themen als gelesen markieren möchtest?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:17
 #, python-format
