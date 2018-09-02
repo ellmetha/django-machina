@@ -1,13 +1,11 @@
 import os
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
 
 
-@python_2_unicode_compatible
 class AbstractAttachment(models.Model):
     """
     Represents a post attachment. An attachment is always linked to a post.

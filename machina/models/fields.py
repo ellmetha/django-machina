@@ -7,7 +7,6 @@ from django.db.models import signals
 from django.forms import Textarea
 from django.forms import ValidationError
 from django.template.defaultfilters import filesizeformat
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.encoding import smart_str
 from django.utils.functional import curry
 from django.utils.safestring import SafeData
@@ -59,7 +58,6 @@ except AttributeError as e:
     raise ImproperlyConfigured(_('MACHINA_MARKUP_LANGUAGE setting is required'))
 
 
-@python_2_unicode_compatible
 class MarkupText(SafeData):
     def __init__(self, instance, field_name, rendered_field_name):
         # Stores a reference to the instance along with field names

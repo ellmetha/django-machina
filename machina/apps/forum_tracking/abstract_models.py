@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
@@ -9,7 +8,6 @@ from machina.core.loading import get_class
 ForumReadTrackManager = get_class('forum_tracking.managers', 'ForumReadTrackManager')
 
 
-@python_2_unicode_compatible
 class AbstractForumReadTrack(models.Model):
     """
     Represents a track which records which forums have been read by a given user.
@@ -34,7 +32,6 @@ class AbstractForumReadTrack(models.Model):
         return '{} - {}'.format(self.user, self.forum)
 
 
-@python_2_unicode_compatible
 class AbstractTopicReadTrack(models.Model):
     """
     Represents a track which records which topics have been read by a given user.

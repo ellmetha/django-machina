@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,7 +11,6 @@ from machina.core.loading import get_class
 PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 
 
-@python_2_unicode_compatible
 class AbstractForumPermission(models.Model):
     """ Represents a single forum permission.
 
@@ -79,7 +77,6 @@ class BaseAuthForumPermission(models.Model):
                     self.permission)))
 
 
-@python_2_unicode_compatible
 class AbstractUserForumPermission(BaseAuthForumPermission):
     """ Represents a per-user forum object permission. """
 
@@ -109,7 +106,6 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
                 _('A permission should target either a user or an anonymous user'))
 
 
-@python_2_unicode_compatible
 class AbstractGroupForumPermission(BaseAuthForumPermission):
     """ Represents a per-group forum object permission. """
 

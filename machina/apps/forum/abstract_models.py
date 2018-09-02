@@ -2,7 +2,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
 from django.utils.encoding import force_text
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
@@ -15,7 +14,6 @@ from machina.models.fields import ExtendedImageField
 from machina.models.fields import MarkupTextField
 
 
-@python_2_unicode_compatible
 class AbstractForum(MPTTModel, DatedModel):
     """ The main forum model.
 

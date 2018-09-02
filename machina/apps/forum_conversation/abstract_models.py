@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.utils.encoding import force_text
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,7 +16,6 @@ from machina.models.fields import MarkupTextField
 ApprovedManager = get_class('forum_conversation.managers', 'ApprovedManager')
 
 
-@python_2_unicode_compatible
 class AbstractTopic(DatedModel):
     """
     Represents a forum topic.
@@ -191,7 +189,6 @@ class AbstractTopic(DatedModel):
         self.forum.update_trackers()
 
 
-@python_2_unicode_compatible
 class AbstractPost(DatedModel):
     """
     Represents a forum post. A forum post is always linked to a topic.
