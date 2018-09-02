@@ -1,0 +1,13 @@
+####################################################
+Django-machina 1.0 release notes (UNDER DEVELOPMENT)
+####################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.4, 3.5, 3.6 and 3.7. Django 1.11, 2.0 and 2.1.
+
+Backwards incompatible changes
+------------------------------
+
+* Support for Python 2.7 was dropped
