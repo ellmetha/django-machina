@@ -13,7 +13,7 @@ from __future__ import unicode_literals
 import os
 
 
-__version__ = '0.7.1'
+__version__ = '1.0.0.dev0'
 
 
 MACHINA_VANILLA_APPS = [
