@@ -1,0 +1,13 @@
+###############################################
+Django-machina 0.7.1 release notes (2018-09-01)
+###############################################
+
+Requirements and compatibility
+------------------------------
+
+Python 2.7, 3.4, 3.5, 3.6 and 3.7. Django 1.11, 2.0 and 2.1.
+
+Minor changes
+-------------
+
+* Updated translations (de)
