@@ -70,8 +70,8 @@ it to suit your needs.
 Requirements
 ============
 
-Python 2.7+ or 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for
-a full list of dependencies.
+Python 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for a full
+list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
 

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -137,7 +133,7 @@ class AbstractTopic(DatedModel):
         return user in self._subscribers
 
     def clean(self):
-        super(AbstractTopic, self).clean()
+        super().clean()
         if self.forum.is_category or self.forum.is_link:
             raise ValidationError(
                 _('A topic can not be associated with a category or a link forum'))
@@ -153,7 +149,7 @@ class AbstractTopic(DatedModel):
         self.slug = slugify(force_text(self.subject), allow_unicode=True)
 
         # Do the save
-        super(AbstractTopic, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
         # If any change has been made to the parent forum, trigger the update of the counters
         if old_instance and old_instance.forum != self.forum:
@@ -173,10 +169,10 @@ class AbstractTopic(DatedModel):
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a topic's forum.
         """
-        super(AbstractTopic, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def delete(self, using=None):
-        super(AbstractTopic, self).delete(using)
+        super().delete(using)
         self.forum.update_trackers()
 
     def update_trackers(self):
@@ -286,7 +282,7 @@ class AbstractPost(DatedModel):
         return position
 
     def clean(self):
-        super(AbstractPost, self).clean()
+        super().clean()
 
         # At least a poster (user) or a session key must be associated with
         # the post.
@@ -302,7 +298,7 @@ class AbstractPost(DatedModel):
 
     def save(self, *args, **kwargs):
         new_post = self.pk is None
-        super(AbstractPost, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
         # Ensures that the subject of the thread corresponds to the one associated
         # with the first post. Do the same with the 'approved' flag.

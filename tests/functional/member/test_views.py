@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 import pytest
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile

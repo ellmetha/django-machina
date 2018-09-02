@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -39,14 +35,14 @@ class MarkForumsReadView(TemplateView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(MarkForumsReadView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, pk=None):
         self.top_level_forum = get_object_or_404(Forum, pk=pk) if pk else None
-        return super(MarkForumsReadView, self).get(request, pk)
+        return super().get(request, pk)
 
     def get_context_data(self, **kwargs):
-        context = super(MarkForumsReadView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['top_level_forum'] = self.top_level_forum
         context['top_level_forum_url'] = self.get_top_level_forum_url()
         return context
@@ -90,14 +86,14 @@ class MarkTopicsReadView(
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(MarkTopicsReadView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, pk):
         self.forum = get_object_or_404(Forum, pk=pk)
-        return super(MarkTopicsReadView, self).get(request, pk)
+        return super().get(request, pk)
 
     def get_context_data(self, **kwargs):
-        context = super(MarkTopicsReadView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['forum_url'] = self.get_forum_url()
         return context
 
@@ -136,4 +132,4 @@ class UnreadTopicsView(ListView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(UnreadTopicsView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)

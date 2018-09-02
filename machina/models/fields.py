@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from os import path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -136,7 +132,7 @@ class MarkupTextField(models.TextField):
         # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field
         # itself is frozen / serialized as well.
         self.add_rendered_field = not kwargs.pop('no_rendered_field', False)
-        super(MarkupTextField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def deconstruct(self):  # pragma: no cover
         """
@@ -146,7 +142,7 @@ class MarkupTextField(models.TextField):
         re-create it. We use it in order to pass the 'no_rendered_field' to the __init__() method.
         This will allow the _rendered field to not be added to the model class twice.
         """
-        name, import_path, args, kwargs = super(MarkupTextField, self).deconstruct()
+        name, import_path, args, kwargs = super().deconstruct()
         kwargs['no_rendered_field'] = True
         return name, import_path, args, kwargs
 
@@ -159,7 +155,7 @@ class MarkupTextField(models.TextField):
         signals.pre_save.connect(self.render_data, sender=cls)
 
         # Add the default text field
-        super(MarkupTextField, self).contribute_to_class(cls, name)
+        super().contribute_to_class(cls, name)
 
         # Associates the name of this field to a special descriptor that will return
         # an appropriate Markup object each time the field is accessed
@@ -188,7 +184,7 @@ class MarkupTextField(models.TextField):
         widget = _get_markup_widget()
         defaults = {'widget': widget(**machina_settings.MACHINA_MARKUP_WIDGET_KWARGS)}
         defaults.update(kwargs)
-        field = super(MarkupTextField, self).formfield(**defaults)
+        field = super().formfield(**defaults)
         return field
 
 
@@ -207,11 +203,11 @@ class ExtendedImageField(models.ImageField):
         self.min_height = kwargs.pop('min_height', None)
         self.max_height = kwargs.pop('max_height', None)
         self.max_upload_size = kwargs.pop('max_upload_size', 0)
-        super(ExtendedImageField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean(self, *args, **kwargs):
         from django.core.files.images import get_image_dimensions
-        data = super(ExtendedImageField, self).clean(*args, **kwargs)
+        data = super().clean(*args, **kwargs)
         image = data.file
 
         # Controls the file size
@@ -251,7 +247,7 @@ class ExtendedImageField(models.ImageField):
 
             # Regenerate a File object
             data = SimpleUploadedFile(filename, content)
-        super(ExtendedImageField, self).save_form_data(instance, data)
+        super().save_form_data(instance, data)
 
     def resize_image(self, data, size):
         """

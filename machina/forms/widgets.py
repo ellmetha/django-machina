@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.forms.widgets import Select
 from django.forms.widgets import Textarea
 
@@ -20,7 +16,7 @@ class SelectWithDisabled(Select):
         disabled = False
         if isinstance(label, dict):
             label, disabled = label['label'], label['disabled']
-        option_dict = super(SelectWithDisabled, self).create_option(
+        option_dict = super().create_option(
             name, value, label, selected, index, subindex=subindex, attrs=attrs)
         if disabled:
             option_dict['attrs']['disabled'] = 'disabled'
@@ -43,4 +39,4 @@ class MarkdownTextareaWidget(Textarea):
         attrs = {} if attrs is None else attrs
         classes = attrs.get('classes', '')
         attrs['class'] = classes + ' machina-mde-markdown'
-        return super(MarkdownTextareaWidget, self).render(name, value, attrs, **kwargs)
+        return super().render(name, value, attrs, **kwargs)

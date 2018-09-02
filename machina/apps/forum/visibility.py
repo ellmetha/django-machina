@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
     The visibility module
     =====================
@@ -8,8 +6,6 @@
     considering a tree of forums. This includes post counts, topic counts, siblings, ...
 
 """
-
-from __future__ import unicode_literals
 
 from django.db.models.query import QuerySet
 from django.utils.functional import cached_property
@@ -85,10 +81,15 @@ class ForumVisibilityContentTree(object):
             # If forums at the root level don't have parents, the visible forums are those that can
             # be seen from the root of the forums tree.
             vcontent_node.visible = (
-                (relative_level == 0) or (forum.display_sub_forum_list and relative_level == 1) or
+                (relative_level == 0) or
+                (forum.display_sub_forum_list and relative_level == 1) or
                 (forum.is_category and relative_level == 1) or
-                (relative_level == 2 and vcontent_node.parent.parent.obj.is_category and
-                 vcontent_node.parent.obj.is_forum))
+                (
+                    relative_level == 2 and
+                    vcontent_node.parent.parent.obj.is_category and
+                    vcontent_node.parent.obj.is_forum
+                )
+            )
 
             # Add the current forum to the end of the current branch and inserts the node inside the
             # final node dictionary.

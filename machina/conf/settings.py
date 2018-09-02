@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
     Django-machina settings
     =======================
@@ -9,8 +7,6 @@
     the forum application, such as conversations, polls, permissions, members, ...
 
 """
-
-from __future__ import unicode_literals
 
 from django.conf import settings
 

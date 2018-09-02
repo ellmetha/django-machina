@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -42,7 +38,7 @@ class UserPostsView(ListView):
     user_pk_url_kwarg = 'pk'
 
     def get_context_data(self, **kwargs):
-        context = super(UserPostsView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['poster'] = self.poster
         return context
 
@@ -76,12 +72,12 @@ class ForumProfileDetailView(DetailView):
         return user_model.objects.all()
 
     def get_object(self, queryset=None):
-        user = super(ForumProfileDetailView, self).get_object(queryset)
+        user = super().get_object(queryset)
         profile, dummy = ForumProfile.objects.get_or_create(user=user)
         return profile
 
     def get_context_data(self, **kwargs):
-        context = super(ForumProfileDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Computes the number of topics added by the considered member
         context['topics_count'] = Topic.objects.filter(
@@ -110,7 +106,7 @@ class ForumProfileUpdateView(UpdateView):
         return profile
 
     def form_valid(self, form):
-        response = super(ForumProfileUpdateView, self).form_valid(form)
+        response = super().form_valid(form)
         messages.success(self.request, self.success_message)
         return response
 
@@ -119,7 +115,7 @@ class ForumProfileUpdateView(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(ForumProfileUpdateView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class TopicSubscribeView(
@@ -140,7 +136,7 @@ class TopicSubscribeView(
         return self.subscribe(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicSubscribeView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['topic'] = self.object
         context['forum'] = self.object.forum
         return context
@@ -153,7 +149,7 @@ class TopicSubscribeView(
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(TopicSubscribeView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     # Permissions checks
 
@@ -179,7 +175,7 @@ class TopicUnsubscribeView(
         return self.unsubscribe(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicUnsubscribeView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['topic'] = self.object
         context['forum'] = self.object.forum
         return context
@@ -192,7 +188,7 @@ class TopicUnsubscribeView(
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(TopicUnsubscribeView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     # Permissions checks
 
@@ -213,4 +209,4 @@ class TopicSubscriptionListView(ListView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(TopicSubscriptionListView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)

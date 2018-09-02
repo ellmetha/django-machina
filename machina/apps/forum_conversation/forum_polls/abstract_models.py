@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import division
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -110,7 +105,7 @@ class AbstractTopicPollVote(models.Model):
         return '{} - {}'.format(self.poll_option, self.voter)
 
     def clean(self):
-        super(AbstractTopicPollVote, self).clean()
+        super().clean()
 
         # At least a poster (user) or a session key must be associated with
         # the vote instance.

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from collections import Iterable
 
 from django.conf import settings
@@ -105,4 +101,4 @@ class PermissionRequiredMixin(object):
         response = self.check_permissions(request)
         if response:
             return response
-        return super(PermissionRequiredMixin, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)

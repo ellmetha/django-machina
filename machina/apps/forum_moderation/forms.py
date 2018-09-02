@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,7 +23,7 @@ class TopicMoveForm(forms.Form):
         self.user = kwargs.pop('user', None)
         self.perm_handler = PermissionHandler()
 
-        super(TopicMoveForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.allowed_forums = self.perm_handler.get_target_forums_for_moved_topics(self.user)
         forum_choices = []

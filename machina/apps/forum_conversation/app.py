@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
@@ -23,7 +19,7 @@ class BaseConversationApp(Application):
     post_delete_view = get_class('forum_conversation.views', 'PostDeleteView')
 
     def get_urls(self):
-        urls = super(BaseConversationApp, self).get_urls()
+        urls = super().get_urls()
 
         conversation_patterns = [
             url(_(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'),
@@ -53,7 +49,7 @@ class PollsApp(Application):
     polls_app = polls_app
 
     def get_urls(self):
-        urls = super(PollsApp, self).get_urls()
+        urls = super().get_urls()
         urls += [
             url(r'^', include(self.polls_app.urls)),
         ]
@@ -65,7 +61,7 @@ class AttachmentsApp(Application):
     attachments_app = attachments_app
 
     def get_urls(self):
-        urls = super(AttachmentsApp, self).get_urls()
+        urls = super().get_urls()
         urls += [
             url(r'^', include(self.attachments_app.urls)),
         ]

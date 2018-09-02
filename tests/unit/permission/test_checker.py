@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 import pytest
 
 from machina.apps.forum_permission.checker import ForumPermissionChecker

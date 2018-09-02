@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 import factory
 from django.utils.text import slugify
 from factory import fuzzy

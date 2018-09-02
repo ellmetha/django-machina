@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.contrib import messages
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django import forms
 from django.forms.models import BaseModelFormSet
 from django.forms.models import modelformset_factory
@@ -22,13 +18,13 @@ class AttachmentForm(forms.ModelForm):
 class BaseAttachmentFormset(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         self.post = kwargs.pop('post', None)
-        super(BaseAttachmentFormset, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def save(self, commit=True, **kwargs):
         if self.post:
             for form in self.forms:
                 form.instance.post = self.post
-        super(BaseAttachmentFormset, self).save(commit)
+        super().save(commit)
 
 
 AttachmentFormset = modelformset_factory(

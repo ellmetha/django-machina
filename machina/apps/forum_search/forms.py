@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import FacetedSearchForm
@@ -33,7 +29,7 @@ class SearchForm(FacetedSearchForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
 
-        super(SearchForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Update some fields
         self.fields['q'].label = _('Search for keywords')
@@ -49,7 +45,7 @@ class SearchForm(FacetedSearchForm):
             del self.fields['search_forums']
 
     def search(self):
-        sqs = super(SearchForm, self).search()
+        sqs = super().search()
 
         if not self.is_valid():
             return self.no_query_found()

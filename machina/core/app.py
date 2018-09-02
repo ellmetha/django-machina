@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
-
 class Application(object):
     """
     Machina's views and URLs use a tree of 'app' instances, each of which subclass this Application

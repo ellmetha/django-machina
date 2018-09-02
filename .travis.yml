@@ -6,7 +6,6 @@ addons:
   postgresql: "9.4"
 
 python:
-  - "2.7"
   - "3.4"
   - "3.5"
   - "3.6"
@@ -28,18 +27,6 @@ matrix:
   allow_failures:
     - python: "3.8-dev"
   exclude:
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.0,<2.1" DB=sqlite
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.0,<2.1" DB=postgres
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.0,<2.1" DB=mysql
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=sqlite
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=postgres
-  - python: "2.7"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=mysql
   - python: "3.4"
     env: DJANGO_ENV="django>=2.1,<2.2" DB=sqlite
   - python: "3.4"

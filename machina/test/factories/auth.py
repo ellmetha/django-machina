@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 import factory
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -23,7 +19,7 @@ class UserFactory(factory.DjangoModelFactory):
     @classmethod
     def _prepare(cls, create, **kwargs):
         password = kwargs.pop('password', None)
-        user = super(UserFactory, cls)._prepare(create, **kwargs)
+        user = super()._prepare(create, **kwargs)
         if password:
             user.set_password(password)
             if create:

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pytest
 from django.core.exceptions import ValidationError
 from faker import Faker

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
@@ -122,7 +118,7 @@ class AbstractForum(MPTTModel, DatedModel):
         return self.type == self.FORUM_LINK
 
     def clean(self):
-        super(AbstractForum, self).clean()
+        super().clean()
 
         if self.parent and self.parent.is_link:
                 raise ValidationError(_('A forum can not have a link forum as parent'))
@@ -144,7 +140,7 @@ class AbstractForum(MPTTModel, DatedModel):
         self.slug = slugify(force_text(self.name), allow_unicode=True)
 
         # Do the save
-        super(AbstractForum, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
         # If any change has been made to the forum parent, trigger the update of the counters
         if old_instance and old_instance.parent != self.parent:
@@ -161,7 +157,7 @@ class AbstractForum(MPTTModel, DatedModel):
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a forum parent.
         """
-        super(AbstractForum, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def update_trackers(self):
         direct_approved_topics = self.topics.filter(approved=True).order_by('-last_post_on')

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from collections import OrderedDict
 
 from django import forms
@@ -70,7 +66,7 @@ class ForumAdmin(admin.ModelAdmin):
     editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
 
     def get_urls(self):
-        urls = super(ForumAdmin, self).get_urls()
+        urls = super().get_urls()
         forum_admin_urls = [
             url(r'^(?P<forum_id>[0-9]+)/move-forum/(?P<direction>up|down)/$',
                 self.admin_site.admin_view(self.moveforum_view),
@@ -365,7 +361,7 @@ class PickUserForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')
-        super(PickUserForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['user'].required = False
         self.fields['user'].widget = ForeignKeyRawIdWidget(
@@ -374,7 +370,7 @@ class PickUserForm(forms.Form):
         self.fields['anonymous_user'].required = False
 
     def clean(self):
-        cleaned_data = super(PickUserForm, self).clean()
+        cleaned_data = super().clean()
         user = cleaned_data.get('user', None)
         anonymous_user = cleaned_data.get('anonymous_user', None)
         if user and anonymous_user:
@@ -388,7 +384,7 @@ class PickGroupForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')
-        super(PickGroupForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['group'].required = False
         self.fields['group'].widget = ForeignKeyRawIdWidget(
@@ -403,7 +399,7 @@ class PickForumForm(forms.Form):
 class PermissionsForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.permissions_dict = kwargs.pop('permissions_dict', {})
-        super(PermissionsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Initializes permission fields
         f_choices = (

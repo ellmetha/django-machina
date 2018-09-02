@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from machina import MACHINA_VANILLA_APPS
 from machina import get_apps
 

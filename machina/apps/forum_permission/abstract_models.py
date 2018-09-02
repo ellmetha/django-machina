@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
@@ -49,7 +45,7 @@ class AbstractForumPermission(models.Model):
         return '{} - {}'.format(self.codename, self.name)
 
     def clean(self):
-        super(AbstractForumPermission, self).clean()
+        super().clean()
         if not self.is_global and not self.is_local:
             raise ValidationError(_('A forum permission should be at least either global or local'))
 
@@ -76,7 +72,7 @@ class BaseAuthForumPermission(models.Model):
         abstract = True
 
     def clean(self):
-        super(BaseAuthForumPermission, self).clean()
+        super().clean()
         if self.forum is None and not self.permission.is_global:
             raise ValidationError(
                 _('The following permission cannot be granted globally: {}'.format(
@@ -106,7 +102,7 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
         return '{} - {}'.format(self.permission, self.user)
 
     def clean(self):
-        super(AbstractUserForumPermission, self).clean()
+        super().clean()
         if (self.user is None and not self.anonymous_user) \
                 or (self.user and self.anonymous_user):
             raise ValidationError(

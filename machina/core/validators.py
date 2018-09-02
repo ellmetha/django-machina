@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.core import validators
 
 
@@ -11,4 +9,4 @@ class NullableMaxLengthValidator(validators.MaxLengthValidator):
             # limit value at all. The default validation process is not
             # performed.
             return
-        super(NullableMaxLengthValidator, self).__call__(value)
+        super().__call__(value)

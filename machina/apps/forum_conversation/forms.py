@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
@@ -35,7 +31,7 @@ class PostForm(forms.ModelForm):
 
         self.perm_handler = PermissionHandler()
 
-        super(PostForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Updates the 'subject' and 'content' fields attributes
         self.fields['subject'].widget.attrs['placeholder'] = _('Enter your subject')
@@ -77,12 +73,12 @@ class PostForm(forms.ModelForm):
                 self.instance.poster = self.user
             else:
                 self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
-        return super(PostForm, self).clean()
+        return super().clean()
 
     def save(self, commit=True):
         if self.instance.pk:
             # First handle updates
-            post = super(PostForm, self).save(commit=False)
+            post = super().save(commit=False)
             post.updated_by = self.user
             post.updates_count = F('updates_count') + 1
         else:
@@ -116,7 +112,7 @@ class TopicForm(PostForm):
         label=_('Post topic as'), choices=Topic.TYPE_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
-        super(TopicForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Perform some checks before doing anything
         self.can_add_stickies = self.perm_handler.can_add_stickies(self.forum, self.user)
@@ -175,7 +171,7 @@ class TopicForm(PostForm):
                 'poll_max_options',
                 _('You must set the maximum number of poll options per user when creating polls'))
 
-        super(TopicForm, self).clean()
+        super().clean()
 
     def save(self, commit=True):
         if not self.instance.pk:
@@ -202,4 +198,4 @@ class TopicForm(PostForm):
                     self.instance.topic.type = self.cleaned_data['topic_type']
                     self.instance.topic._simple_save()
 
-        return super(TopicForm, self).save(commit)
+        return super().save(commit)

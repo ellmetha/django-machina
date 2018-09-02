@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -53,7 +49,7 @@ class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, 
         return self.lock(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicLockView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Append the forum associated with the topic being locked
         # to the context
@@ -103,7 +99,7 @@ class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         return self.unlock(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicUnlockView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Append the forum associated with the topic being locked
         # to the context
@@ -140,7 +136,7 @@ class TopicDeleteView(PermissionRequiredMixin, DeleteView):
     model = Topic
 
     def get_context_data(self, **kwargs):
-        context = super(TopicDeleteView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Append the forum associated with the topic being deleted
         # to the context
@@ -192,14 +188,14 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(TopicMoveView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(TopicMoveView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicMoveView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Append the forum associated with the topic being deleted
         # to the context
@@ -209,7 +205,7 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return context
 
     def get_form_kwargs(self):
-        kwargs = super(TopicMoveView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs.update({
             'topic': self.object,
             'user': self.request.user,
@@ -280,7 +276,7 @@ class TopicUpdateTypeBaseView(
         return self.update_type(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TopicUpdateTypeBaseView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['question'] = self.question
 
         # Append the forum associated with the topic being locked
@@ -344,7 +340,7 @@ class ModerationQueueListView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         forums = self.request.forum_permission_handler.get_moderation_queue_forums(
             self.request.user)
-        qs = super(ModerationQueueListView, self).get_queryset()
+        qs = super().get_queryset()
         qs = qs.filter(topic__forum__in=forums, approved=False)
         return qs.order_by('-created')
 
@@ -360,7 +356,7 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
     model = Post
 
     def get_context_data(self, **kwargs):
-        context = super(ModerationQueueDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         post = self.object
         topic = post.topic
@@ -417,7 +413,7 @@ class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         return self.approve(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PostApproveView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['forum'] = self.get_object().topic.forum
         return context
 
@@ -457,7 +453,7 @@ class PostDisapproveView(
         return self.disapprove(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PostDisapproveView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['forum'] = self.get_object().topic.forum
         return context
 

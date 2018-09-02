@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.models import BaseModelFormSet
@@ -23,7 +19,7 @@ class TopicPollOptionForm(forms.ModelForm):
         fields = ['text', ]
 
     def __init__(self, *args, **kwargs):
-        super(TopicPollOptionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Update the 'text' field
         self.fields['text'].label = ''
@@ -40,7 +36,7 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         if self.topic:
             self.poll = get_object_or_none(TopicPoll, topic=self.topic)
 
-        super(BaseTopicPollOptionFormset, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         if self.poll is not None:
             for form in self.forms:
@@ -51,7 +47,7 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         This rewrite of total_form_count allows to add an empty form to the formset only when
         no initial data is provided.
         """
-        total_forms = super(BaseTopicPollOptionFormset, self).total_form_count()
+        total_forms = super().total_form_count()
         if not self.data and not self.files and self.initial_form_count() > 0:
             total_forms -= self.extra
         return total_forms
@@ -86,7 +82,7 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
 
             for form in self.forms:
                 form.instance.poll = poll
-        super(BaseTopicPollOptionFormset, self).save(commit)
+        super().save(commit)
 
 
 TopicPollOptionFormset = modelformset_factory(
@@ -99,7 +95,7 @@ TopicPollOptionFormset = modelformset_factory(
 class TopicPollVoteForm(forms.Form):
     def __init__(self, poll, *args, **kwargs):
         self.poll = poll
-        super(TopicPollVoteForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         if poll.max_options == 1:
             self.fields['options'] = forms.ModelChoiceField(
@@ -117,7 +113,7 @@ class TopicPollVoteForm(forms.Form):
         return options
 
     def clean(self):
-        cleaned_data = super(TopicPollVoteForm, self).clean()
+        cleaned_data = super().clean()
 
         if 'options' not in cleaned_data:
             msg = _('You must specify an option when voting.')

@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Standard library imports
-# Third party imports
 from django.db import models
-
-# Local application / specific library imports
 from machina.apps.forum_conversation.abstract_models import AbstractTopic
 
 

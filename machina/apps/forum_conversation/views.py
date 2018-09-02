@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -65,7 +61,7 @@ class TopicView(PermissionRequiredMixin, ListView):
             except (Post.DoesNotExist, AssertionError):
                 pass
 
-        response = super(TopicView, self).get(request, **kwargs)
+        response = super().get(request, **kwargs)
         self.send_signal(request, response, topic)
         return response
 
@@ -89,7 +85,7 @@ class TopicView(PermissionRequiredMixin, ListView):
         return self.get_topic().forum
 
     def get_context_data(self, **kwargs):
-        context = super(TopicView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Insert the considered topic and the associated forum into the context
         topic = self.get_topic()
@@ -475,7 +471,7 @@ class BaseTopicFormView(BasePostFormView):
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(BaseTopicFormView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Handles the preview of the poll
         if context['poll_option_formset']:
@@ -491,7 +487,7 @@ class BaseTopicFormView(BasePostFormView):
         save_poll_option_formset = poll_option_formset is not None \
             and not self.preview
 
-        valid = super(BaseTopicFormView, self).form_valid(
+        valid = super().form_valid(
             post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
 
         if save_poll_option_formset:
@@ -511,7 +507,7 @@ class BaseTopicFormView(BasePostFormView):
                            len(post_form.cleaned_data['poll_question'])):
             messages.error(self.request, self.poll_option_formset_general_error_message)
 
-        return super(BaseTopicFormView, self).form_invalid(
+        return super().form_invalid(
             post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
 
 
@@ -542,11 +538,11 @@ class TopicCreateView(PermissionRequiredMixin, TopicFormView):
 
     def get(self, request, *args, **kwargs):
         self.object = None
-        return super(TopicCreateView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = None
-        return super(TopicCreateView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
         if not self.forum_post.approved:
@@ -575,11 +571,11 @@ class TopicUpdateView(PermissionRequiredMixin, TopicFormView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(TopicUpdateView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(TopicUpdateView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         return self.get_topic()
@@ -616,14 +612,14 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
 
     def get(self, request, *args, **kwargs):
         self.object = None
-        return super(PostCreateView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = None
-        return super(PostCreateView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PostCreateView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         topic = self.get_topic()
 
         # Add the previous posts to the context
@@ -661,11 +657,11 @@ class PostUpdateView(PermissionRequiredMixin, PostFormView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(PostUpdateView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(PostUpdateView, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         return self.get_post()
@@ -697,7 +693,7 @@ class PostDeleteView(PermissionRequiredMixin, DeleteView):
     model = Post
 
     def get_context_data(self, **kwargs):
-        context = super(PostDeleteView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         # Append the topic and the forum associated with the post being deleted
         # to the context

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 from django.db import models
 
 from machina.core.loading import get_class
@@ -24,7 +20,7 @@ class ForumReadTrackManager(models.Manager):
         visibility_contents = ForumVisibilityContentTree.from_forums(forums)
         forum_ids_to_visibility_nodes = visibility_contents.as_dict
 
-        tracks = super(ForumReadTrackManager, self).get_queryset().select_related('forum').filter(
+        tracks = super().get_queryset().select_related('forum').filter(
             user=user,
             forum__in=forums)
         tracked_forums = []

@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
-
 def get_client_ip(request):
     """
     Given an HTTP request, returns the related IP address.
