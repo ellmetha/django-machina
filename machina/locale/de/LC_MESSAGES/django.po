@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Marcel Lambert <marcel.lambert@wesualize.com>, 2017
 # Robert Gutschale <r.gutschale@blueshoe.de>, 2018
@@ -648,7 +648,7 @@ msgstr "Forum Profile"
 
 #: apps/forum_member/app.py:25
 msgid "^profile/(?P<pk>\\d+)/$"
-msgstr "^profil/(?P1\\d+)/$"
+msgstr "^profil/(?P<pk>\\d+)/$"
 
 #: apps/forum_member/app.py:27
 msgid "^profile/(?P<pk>\\d+)/posts/$"
@@ -664,11 +664,11 @@ msgstr "^abonnements/$"
 
 #: apps/forum_member/app.py:35
 msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-msgstr "^thema/(?P1\\d+)/abonnieren/$"
+msgstr "^thema/(?P<pk>\\d+)/abonnieren/$"
 
 #: apps/forum_member/app.py:37
 msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-msgstr "^thema/(?P1\\d+)/abbestellen/$"
+msgstr "^thema/(?P<pk>\\d+)/abbestellen/$"
 
 #: apps/forum_member/registry_config.py:12
 msgid "Machina: Forum members"
@@ -688,19 +688,19 @@ msgstr "Du hast das Thema erfolgreich abbestellt."
 
 #: apps/forum_moderation/app.py:31
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgstr "^thema/(?P1[\\w-]+)-(?P2\\d+)/sperren/$"
+msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/sperren/$"
 
 #: apps/forum_moderation/app.py:33
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgstr "^thema/(?P1[\\w-]+)-(?P2\\d+)/entsperren/$"
+msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/entsperren/$"
 
 #: apps/forum_moderation/app.py:35
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgstr "^thema/(?P1[\\w-]+)-(?P2\\d+)/löschen/$"
+msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
 
 #: apps/forum_moderation/app.py:37
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgstr "^thema/(?P1[\\w-]+)-(?P2\\d+)/verschieben/$"
+msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/verschieben/$"
 
 #: apps/forum_moderation/app.py:39
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
@@ -720,15 +720,15 @@ msgstr "^schlange/$"
 
 #: apps/forum_moderation/app.py:46
 msgid "^queue/(?P<pk>\\d+)/$"
-msgstr "^schlange/(?P1\\d+)/$"
+msgstr "^schlange/(?P<pk>\\d+)/$"
 
 #: apps/forum_moderation/app.py:48
 msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgstr "^schlange/(?P1\\d+)/akzeptieren$"
+msgstr "^schlange/(?P<pk>\\d+)/akzeptieren$"
 
 #: apps/forum_moderation/app.py:50
 msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgstr "^schlange/(?P1\\d+)/ablehnen$"
+msgstr "^schlange/(?P<pk>\\d+)/ablehnen$"
 
 #: apps/forum_moderation/forms.py:20
 msgid "Select a destination forum"
