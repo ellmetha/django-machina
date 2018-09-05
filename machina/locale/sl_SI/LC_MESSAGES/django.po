@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Miha Frangež <miha.frangez@gmail.com>, 2016-2017
 # Miha Frangež <miha.frangez@gmail.com>, 2016
@@ -10,15 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-12 11:54-0400\n"
+"POT-Creation-Date: 2018-09-04 18:01-1000\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-team/django-machina/language/sl_SI/)\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-"
+"team/django-machina/language/sl_SI/)\n"
+"Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sl_SI\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: app.py:39
@@ -118,12 +120,10 @@ msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:82
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
-#: apps/forum/abstract_models.py:89
-#: apps/forum_permission/abstract_models.py:73
+#: apps/forum/abstract_models.py:89 apps/forum_permission/abstract_models.py:73
 #: apps/forum_tracking/abstract_models.py:25
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
@@ -387,12 +387,17 @@ msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/objava/ustvari/$"
 
 #: apps/forum_conversation/app.py:38
-msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
-msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/uredi/$"
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgstr ""
+"^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/uredi/$"
 
 #: apps/forum_conversation/app.py:40
-msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
-msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/izbriši/$"
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgstr ""
+"^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/izbriši/"
+"$"
 
 #: apps/forum_conversation/app.py:45
 msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
@@ -1036,13 +1041,17 @@ msgstr "Datoteke večje od {} niso dovoljene. Vaša datoteka je velika {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše slike je {}px"
+msgstr ""
+"Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše "
+"slike je {}px"
 
 #: models/fields.py:238
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše slike je {}px"
+msgstr ""
+"Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše "
+"slike je {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -1538,10 +1547,18 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Posts</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objava</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objavi</small></p>"
-msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objave</small></p>"
-msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Objav</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Objava</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Objavi</small></p>"
+msgstr[2] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Objave</small></p>"
+msgstr[3] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Objav</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:44
 #, python-format
@@ -1551,10 +1568,18 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Topics</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Tema</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Temi</small></p>"
-msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Teme</small></p>"
-msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Tem</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Tema</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Temi</small></p>"
+msgstr[2] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Teme</small></p>"
+msgstr[3] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Tem</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "Recent posts"
