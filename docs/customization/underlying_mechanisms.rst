@@ -41,8 +41,6 @@ order to customize the way it behaves. For example you could extend the
 
 ::
 
-  from __future__ import unicode_literals
-
   from machina.apps.forum_conversation.views import TopicView as BaseTopicView
 
   class TopicView(BaseTopicView):

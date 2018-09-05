@@ -20,8 +20,6 @@ new application should be defined in your ``INSTALLED_APPS`` setting.
 Most importantly, you should've created a ``models.py`` file inside your package in order to
 reference the models of the overriden application::
 
-  from __future__ import unicode_literals
-
   # Custom models should be declared before importing
   # django-machina models
 
@@ -39,8 +37,6 @@ must have the exact same name as the model you are trying to override.
 
 For example, in order to define a custom version of the ``Topic`` model it is necessary to subclass
 the ``machina.apps.forum_conversation.abstract_models.AbstractTopic`` abstract model::
-
-  from __future__ import unicode_literals
 
   from django.db import models
   from machina.apps.forum_conversation.abstract_models import AbstractTopic

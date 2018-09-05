@@ -62,8 +62,6 @@ All django-machina's applications do not necessarily contain models. So this ste
 depending on the application you want to override. In the other case, it is necessary to reference
 the models of the overridden application by creating a ``models.py`` file in your package::
 
-  from __future__ import unicode_literals
-
   # Custom models should be declared before importing
   # django-machina models
 
@@ -101,7 +99,6 @@ As previously stated, this step can be skipped if the application you want to ov
 contain models. In the other case you will want to create an ``admin.py`` file in your package in
 order to reference the admin classes of the overridden application::
 
-  from __future__ import unicode_literals
   from machina.apps.forum_conversation.admin import *  # noqa
 
 Define the application AppConfig
