@@ -41,14 +41,12 @@ Project configuration
 Django settings
 ~~~~~~~~~~~~~~~
 
-First update your ``INSTALLED_APPS`` in your project's settings module. Modify it to be a list and
-append the django-machina's  apps to this list:
+First update your ``INSTALLED_APPS`` in your project's settings module. Modify it so that it
+includes the machina's dependencies and the machina's own applications as follows:
 
 .. code-block:: python
 
-    from machina import get_apps as get_machina_apps
-
-    INSTALLED_APS = [
+    INSTALLED_APS = (
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
@@ -57,11 +55,24 @@ append the django-machina's  apps to this list:
         'django.contrib.staticfiles',
         'django.contrib.admin',
 
-        # Machina related apps:
+        # Machina dependencies:
         'mptt',
         'haystack',
         'widget_tweaks',
-    ] + get_machina_apps()
+
+        # Machina apps:
+        'machina',
+        'machina.apps.forum',
+        'machina.apps.forum_conversation',
+        'machina.apps.forum_conversation.forum_attachments',
+        'machina.apps.forum_conversation.forum_polls',
+        'machina.apps.forum_feeds',
+        'machina.apps.forum_moderation',
+        'machina.apps.forum_search',
+        'machina.apps.forum_tracking',
+        'machina.apps.forum_member',
+        'machina.apps.forum_permission',
+    )
 
 .. note::
 

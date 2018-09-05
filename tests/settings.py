@@ -4,7 +4,6 @@ from django import VERSION as DJANGO_VERSION
 
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
-from machina import get_apps as get_machina_apps
 
 
 class DisableMigrations(object):
@@ -78,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -89,7 +88,20 @@ INSTALLED_APPS = [
     'haystack',
     'widget_tweaks',
     'tests',
-] + get_machina_apps(['tests._testsite.apps.forum_conversation', ])
+
+    # Machina apps.
+    'machina',
+    'machina.apps.forum',
+    'machina.apps.forum_conversation.forum_attachments',
+    'machina.apps.forum_conversation.forum_polls',
+    'machina.apps.forum_feeds',
+    'machina.apps.forum_moderation',
+    'machina.apps.forum_search',
+    'machina.apps.forum_tracking',
+    'machina.apps.forum_member',
+    'machina.apps.forum_permission',
+    'tests._testsite.apps.forum_conversation',
+)
 
 SITE_ID = 1
 

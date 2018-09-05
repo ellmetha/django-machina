@@ -127,13 +127,35 @@ Add the local application to your INSTALLED_APPS
 ------------------------------------------------
 
 Finally you have to tell Django to use your overridden application instead of the django-machina's
-original application. You can do this by adding your application as a second argument to the
-``get_apps`` function in your Django settings::
+original application. You can do this by replacing the machina's original application in the
+``INSTALLED_APS`` setting by the application you just created::
 
-  from machina import get_apps as get_machina_apps
+  INSTALLED_APS = (
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.sites',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+      'django.contrib.admin',
 
-  INSTALLED_APS = [
-    # ...
-  ] + get_machina_apps(['apps.forum_conversation', ])
+      # Machina dependencies:
+      'mptt',
+      'haystack',
+      'widget_tweaks',
 
-The list you pass to the ``get_apps`` function must contain overridden applications.
+      # Machina apps:
+      'machina',
+      'machina.apps.forum',
+      'machina.apps.forum_conversation.forum_attachments',
+      'machina.apps.forum_conversation.forum_polls',
+      'machina.apps.forum_feeds',
+      'machina.apps.forum_moderation',
+      'machina.apps.forum_search',
+      'machina.apps.forum_tracking',
+      'machina.apps.forum_member',
+      'machina.apps.forum_permission',
+
+      # Overridden machina apps:
+      'apps.forum_conversation',
+  )

@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from unipath import Path
 
-from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 
@@ -12,7 +11,7 @@ PROJECT_PATH = Path(__file__).ancestor(3)
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
     # Django apps
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,7 +26,20 @@ INSTALLED_APPS = [
     'mptt',
     'haystack',
     'widget_tweaks',
-] + get_machina_apps()
+
+    # Machina apps
+    'machina',
+    'machina.apps.forum',
+    'machina.apps.forum_conversation',
+    'machina.apps.forum_conversation.forum_attachments',
+    'machina.apps.forum_conversation.forum_polls',
+    'machina.apps.forum_feeds',
+    'machina.apps.forum_moderation',
+    'machina.apps.forum_search',
+    'machina.apps.forum_tracking',
+    'machina.apps.forum_member',
+    'machina.apps.forum_permission',
+)
 
 
 # MIGRATION CONFIGURATION

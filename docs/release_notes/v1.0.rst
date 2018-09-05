@@ -10,4 +10,7 @@ Python 3.4, 3.5, 3.6 and 3.7. Django 1.11, 2.0 and 2.1.
 Backwards incompatible changes
 ------------------------------
 
-* Support for Python 2.7 was dropped
+* Support for Python 2.7 is dropped
+* The ``get_apps`` helper is removed. This function was used to append the machina's applications
+  (and overridden applications) to the ``INSTALLED_APPS`` setting. Now machina's applications and
+  overridden applications must be explicitly defined in the Django settings

@@ -23,9 +23,7 @@ editor.
 
 The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting::
 
-  from machina import get_apps as get_machina_apps
-
-  INSTALLED_APS = [
+  INSTALLED_APS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -39,7 +37,20 @@ The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting::
     'haystack',
     'widget_tweaks',
     'ckeditor',
-  ] + get_machina_apps()
+
+    # Machina apps:
+    'machina',
+    'machina.apps.forum',
+    'machina.apps.forum_conversation',
+    'machina.apps.forum_conversation.forum_attachments',
+    'machina.apps.forum_conversation.forum_polls',
+    'machina.apps.forum_feeds',
+    'machina.apps.forum_moderation',
+    'machina.apps.forum_search',
+    'machina.apps.forum_tracking',
+    'machina.apps.forum_member',
+    'machina.apps.forum_permission',
+  )
 
 Then we must set the ``MACHINA_MARKUP_LANGUAGE`` and ``MACHINA_MARKUP_WIDGET`` settings in order to
 tell django-machina the widget to use when displaying forms::
