@@ -287,19 +287,21 @@ permissions to all the users and for all the forums you created. In that case, t
 used in order to define which permissions should be granted to all authenticated users. Note that
 the permissions specified in this list are granted only if the considered forum does not have any
 permission for the considered authenticated user. For example, the setting could be specified as
-follows::
+follows:
 
-	MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
-	    'can_see_forum',
-	    'can_read_forum',
-	    'can_start_new_topics',
-	    'can_reply_to_topics',
-	    'can_edit_own_posts',
-	    'can_post_without_approval',
-	    'can_create_polls',
-	    'can_vote_in_polls',
-	    'can_download_file',
-	]
+.. code-block:: python
+
+    MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
+        'can_see_forum',
+        'can_read_forum',
+        'can_start_new_topics',
+        'can_reply_to_topics',
+        'can_edit_own_posts',
+        'can_post_without_approval',
+        'can_create_polls',
+        'can_vote_in_polls',
+        'can_download_file',
+    ]
 
 For a full list of the available forum permissions, please refer to :doc:`forum_permissions`.
 

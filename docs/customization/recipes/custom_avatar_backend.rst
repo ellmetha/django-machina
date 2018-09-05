@@ -5,7 +5,9 @@ Using a custom avatar backend
 Django-machina has a built-in avatar system to get you started, but if your site uses a different
 avatar provider, you can modify django-machina to use that.
 
-The first thing we must do is tell django-machina to ignore the built-in avatar system::
+The first thing we must do is tell django-machina to ignore the built-in avatar system:
+
+.. code-block:: python
 
   MACHINA_PROFILE_AVATARS_ENABLED = False
 
@@ -24,7 +26,9 @@ Example: using django-avatar
 ----------------------------
 
 Here is an example template for
-`django-avatar <https://github.com/grantmcconnaughey/django-avatar>`_::
+`django-avatar <https://github.com/grantmcconnaughey/django-avatar>`_:
+
+.. code-block:: html
 
     {% load avatar_tags %}
     {% if profile.user|has_avatar %}

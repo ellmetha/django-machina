@@ -22,7 +22,9 @@ template loading system. Thus you can easily override forum layouts and styles i
 configured to look in your project first for templates before using the django-machina's templates.
 
 For example, you can easily override django-machina's templates by configuring your template
-directories as follows in your ``TEMPLATES`` setting::
+directories as follows in your ``TEMPLATES`` setting:
+
+.. code-block:: python
 
   import os
 

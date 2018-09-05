@@ -18,7 +18,9 @@ have created a Python package with the same application label as the app you wan
 new application should be defined in your ``INSTALLED_APPS`` setting.
 
 Most importantly, you should've created a ``models.py`` file inside your package in order to
-reference the models of the overriden application::
+reference the models of the overriden application:
+
+.. code-block:: python
 
   # Custom models should be declared before importing
   # django-machina models
@@ -36,7 +38,9 @@ that subclasses the abstract model class of the model you want to override. The 
 must have the exact same name as the model you are trying to override.
 
 For example, in order to define a custom version of the ``Topic`` model it is necessary to subclass
-the ``machina.apps.forum_conversation.abstract_models.AbstractTopic`` abstract model::
+the ``machina.apps.forum_conversation.abstract_models.AbstractTopic`` abstract model:
+
+.. code-block:: python
 
   from django.db import models
   from machina.apps.forum_conversation.abstract_models import AbstractTopic

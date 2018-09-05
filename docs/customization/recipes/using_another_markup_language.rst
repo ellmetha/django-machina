@@ -21,7 +21,9 @@ Example: using django-ckeditor
 Let's use django-ckeditor_ instead of the default widget in order to benefit from a powerful wysiwyg
 editor.
 
-The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting::
+The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting:
+
+.. code-block:: python
 
   INSTALLED_APS = (
     'django.contrib.auth',
@@ -53,7 +55,9 @@ The first thing to do is to add ``ckeditor`` in our ``INSTALLED_APPS`` setting::
   )
 
 Then we must set the ``MACHINA_MARKUP_LANGUAGE`` and ``MACHINA_MARKUP_WIDGET`` settings in order to
-tell django-machina the widget to use when displaying forms::
+tell django-machina the widget to use when displaying forms:
+
+.. code-block:: python
 
   MACHINA_MARKUP_LANGUAGE = None
   MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'
@@ -65,7 +69,9 @@ widget.
 
 The last thing to do is to ensure that you use the required assets in your templates. Basically, you
 have to ensure that the media property is used in your form templates (this is the case if you have
-not modified the default topic/post templates)::
+not modified the default topic/post templates):
+
+.. code-block:: html
 
   {% block css %}
     {{ block.super }}

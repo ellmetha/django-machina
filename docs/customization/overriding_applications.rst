@@ -60,7 +60,9 @@ Import the application models if needed
 
 All django-machina's applications do not necessarily contain models. So this step may be skipped
 depending on the application you want to override. In the other case, it is necessary to reference
-the models of the overridden application by creating a ``models.py`` file in your package::
+the models of the overridden application by creating a ``models.py`` file in your package:
+
+.. code-block:: python
 
   # Custom models should be declared before importing
   # django-machina models
@@ -81,7 +83,7 @@ be used by your Django project. You have two possibilities to do so:
   * you can configure the ``MIGRATION_MODULES`` setting to reference the original migrations of the
     application you want to override
 
-::
+.. code-block:: python
 
     MIGRATION_MODULES = {
       'forum_conversation': 'machina.apps.forum_conversation.migrations',
@@ -97,7 +99,9 @@ Import the application admin classes if needed
 
 As previously stated, this step can be skipped if the application you want to override does not
 contain models. In the other case you will want to create an ``admin.py`` file in your package in
-order to reference the admin classes of the overridden application::
+order to reference the admin classes of the overridden application:
+
+.. code-block:: python
 
   from machina.apps.forum_conversation.admin import *  # noqa
 
@@ -108,11 +112,15 @@ Most of django-machina's applications define sublclasses of Django's ``AppConfig
 initialization operations. Django-machina ``AppConfig`` instances are defined inside sub-modules
 called ``registry_config``. You need to define an ``AppConfig`` subclass for your custom application
 by subclassing the overridden application ``AppConfig``. So your application's ``__init__.py``
-should report the custom application ``AppConfig``::
+should report the custom application ``AppConfig``:
+
+.. code-block:: python
 
     default_app_config = 'apps.forum_conversation.registry_config.ConversationRegistryConfig'
 
-And in ``registry_config.py`` in you application you have something like::
+And in ``registry_config.py`` in you application you have something like:
+
+.. code-block:: python
 
     from machina.apps.forum_conversation.registry_config import ConversationRegistryConfig as BaseConversationRegistryConfig
 
@@ -125,7 +133,9 @@ Add the local application to your INSTALLED_APPS
 
 Finally you have to tell Django to use your overridden application instead of the django-machina's
 original application. You can do this by replacing the machina's original application in the
-``INSTALLED_APS`` setting by the application you just created::
+``INSTALLED_APS`` setting by the application you just created:
+
+.. code-block:: python
 
   INSTALLED_APS = (
       'django.contrib.auth',

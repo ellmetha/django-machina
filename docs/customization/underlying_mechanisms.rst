@@ -9,7 +9,9 @@ system provided by the django-oscar_ e-commerce framework.
 .. _django-oscar: https://github.com/django-oscar/django-oscar
 
 If you look through django-machina's codebase, you'll find that most of the classes or functions are
-imported using this kind of statement::
+imported using this kind of statement:
+
+.. code-block:: python
 
   from machina.core.loading import get_class
   PostForm = get_class('forum_conversation.forms', 'PostForm')
