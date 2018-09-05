@@ -1,104 +1,105 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Peter Torok <peter@bluefridge.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-12 11:54-0400\n"
+"POT-Creation-Date: 2018-09-04 18:03-1000\n"
 "PO-Revision-Date: 2018-08-07 18:40+0000\n"
 "Last-Translator: Peter Torok <peter@bluefridge.com>\n"
-"Language-Team: Hungarian (http://www.transifex.com/django-machina-team/django-machina/language/hu/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/django-machina-team/"
+"django-machina/language/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: app.py:39
+#: app.py:37
 msgid "^feeds/"
 msgstr "^feeds/"
 
-#: app.py:40
+#: app.py:38
 msgid "^member/"
 msgstr "^member/"
 
-#: app.py:41
+#: app.py:39
 msgid "^moderation/"
 msgstr "^moderation/"
 
-#: app.py:42
+#: app.py:40
 msgid "^search/"
 msgstr "^search/"
 
-#: app.py:43
+#: app.py:41
 msgid "^tracking/"
 msgstr "^tracking/"
 
-#: apps/forum/abstract_models.py:33
+#: apps/forum/abstract_models.py:27
 msgid "Parent"
 msgstr "Szülő"
 
-#: apps/forum/abstract_models.py:35
+#: apps/forum/abstract_models.py:29
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
 msgstr "Név"
 
-#: apps/forum/abstract_models.py:36
-#: apps/forum_conversation/abstract_models.py:38
+#: apps/forum/abstract_models.py:30
+#: apps/forum_conversation/abstract_models.py:32
 msgid "Slug"
 msgstr "URL-tő"
 
-#: apps/forum/abstract_models.py:38
+#: apps/forum/abstract_models.py:32
 msgid "Description"
 msgstr "Leírás"
 
-#: apps/forum/abstract_models.py:42
+#: apps/forum/abstract_models.py:36
 msgid "Forum image"
 msgstr "Fórum kép"
 
-#: apps/forum/abstract_models.py:47
+#: apps/forum/abstract_models.py:41
 msgid "Forum link"
 msgstr "Fórum hivatkozás"
 
-#: apps/forum/abstract_models.py:49 apps/forum/abstract_models.py:68
+#: apps/forum/abstract_models.py:43 apps/forum/abstract_models.py:62
 msgid "Track link redirects count"
 msgstr "Nyomonkövető hivatkozás átirányításainak száma"
 
-#: apps/forum/abstract_models.py:50
+#: apps/forum/abstract_models.py:44
 msgid "Records the number of times a forum link was clicked"
 msgstr "Számontartja, hányszor használtak egy fórum hivatkozást"
 
-#: apps/forum/abstract_models.py:55
+#: apps/forum/abstract_models.py:49
 msgid "Default forum"
 msgstr "Alap-fórum"
 
-#: apps/forum/abstract_models.py:56
+#: apps/forum/abstract_models.py:50
 msgid "Category forum"
 msgstr "Kategória-fórum"
 
-#: apps/forum/abstract_models.py:57
+#: apps/forum/abstract_models.py:51
 msgid "Link forum"
 msgstr "Hivatkozás-fórum"
 
-#: apps/forum/abstract_models.py:60
+#: apps/forum/abstract_models.py:54
 msgid "Forum type"
 msgstr "Fórumtípus"
 
-#: apps/forum/abstract_models.py:64
+#: apps/forum/abstract_models.py:58
 msgid "Direct number of posts"
 msgstr "Közvetlen hozzászólások száma"
 
-#: apps/forum/abstract_models.py:66
+#: apps/forum/abstract_models.py:60
 msgid "Direct number of topics"
 msgstr "Közvetlen témák száma"
 
-#: apps/forum/abstract_models.py:75
-#: apps/forum_conversation/abstract_models.py:82
+#: apps/forum/abstract_models.py:69
+#: apps/forum_conversation/abstract_models.py:76
 #: templates/machina/forum/forum_list.html:21
 #: templates/machina/forum/forum_list.html:39
 #: templates/machina/forum/forum_list.html:207
@@ -106,199 +107,203 @@ msgstr "Közvetlen témák száma"
 msgid "Last post"
 msgstr "Legfrissebb hozzászólás"
 
-#: apps/forum/abstract_models.py:76
-#: apps/forum_conversation/abstract_models.py:73
+#: apps/forum/abstract_models.py:70
+#: apps/forum_conversation/abstract_models.py:67
 msgid "Last post added on"
 msgstr "Legfrissebb hozzászólás időpontja:"
 
-#: apps/forum/abstract_models.py:81
+#: apps/forum/abstract_models.py:75
 msgid "Display in parent-forums legend"
 msgstr "Megjelenítés a szülő-fórum leírásában"
 
-#: apps/forum/abstract_models.py:82
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+#: apps/forum/abstract_models.py:76
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Megjeleníti ezt a fórumot a szülő-fórumon (az al-fórum listán)"
 
-#: apps/forum/abstract_models.py:89
-#: apps/forum_permission/abstract_models.py:73
-#: apps/forum_tracking/abstract_models.py:25
+#: apps/forum/abstract_models.py:83 apps/forum_permission/abstract_models.py:67
+#: apps/forum_tracking/abstract_models.py:19
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Forum"
 msgstr "Fórum"
 
-#: apps/forum/abstract_models.py:90 templates/machina/forum/forum_list.html:35
+#: apps/forum/abstract_models.py:84 templates/machina/forum/forum_list.html:35
 #: templates/machina/forum/forum_list.html:203
 msgid "Forums"
 msgstr "Fórumok"
 
-#: apps/forum/abstract_models.py:128
+#: apps/forum/abstract_models.py:122
 msgid "A forum can not have a link forum as parent"
 msgstr "Fórumnak nem lehet szülője egy hivatkozás-fórum"
 
-#: apps/forum/abstract_models.py:131
+#: apps/forum/abstract_models.py:125
 msgid "A category can not have another category as parent"
 msgstr "Kategóriának nem lehet szülője egy másik kategória"
 
-#: apps/forum/abstract_models.py:134
+#: apps/forum/abstract_models.py:128
 msgid "A link forum must have a link associated with it"
 msgstr "Egy hivatkozás-fórumhoz tartoznia kell egy hivatkozásnak"
 
-#: apps/forum/admin.py:54
+#: apps/forum/admin.py:50
 msgid "Forum settings"
 msgstr "Fórum beállításai"
 
-#: apps/forum/admin.py:58
+#: apps/forum/admin.py:54
 msgid "Link forum settings"
 msgstr "Hivatkozás-fórum beállításai"
 
-#: apps/forum/admin.py:146
+#: apps/forum/admin.py:142
 msgid "'{}' forum successfully moved"
 msgstr "'{}' fórum áthelyezése sikeres"
 
-#: apps/forum/admin.py:160 apps/forum/admin.py:234 apps/forum/admin.py:252
-#: apps/forum/admin.py:271 apps/forum_permission/abstract_models.py:46
+#: apps/forum/admin.py:156 apps/forum/admin.py:230 apps/forum/admin.py:248
+#: apps/forum/admin.py:267 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
 msgid "Forum permissions"
 msgstr "Fórum jogosultságok"
 
-#: apps/forum/admin.py:161 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:157 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "Teljeskörű fórum jogosultságok"
 
-#: apps/forum/admin.py:169
+#: apps/forum/admin.py:165
 msgid "Permissions successfully copied"
 msgstr "Jogosultságok másolása sikeres"
 
-#: apps/forum/admin.py:190
+#: apps/forum/admin.py:186
 msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "Válasszon ki egy felhasználó- ill. csoportazonosítót, vagy jelölje ki a névtelen felhasználót"
+msgstr ""
+"Válasszon ki egy felhasználó- ill. csoportazonosítót, vagy jelölje ki a "
+"névtelen felhasználót"
 
-#: apps/forum/admin.py:252
+#: apps/forum/admin.py:248
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:119
 msgid "Anonymous user"
 msgstr "Névtelen felhasználó"
 
-#: apps/forum/admin.py:321
+#: apps/forum/admin.py:317
 msgid "Permissions successfully applied"
 msgstr "Jogosultságok alkalmazása sikeres"
 
-#: apps/forum/admin.py:361
+#: apps/forum/admin.py:357
 msgid "Anonymous"
 msgstr "Névtelen"
 
-#: apps/forum/admin.py:364
+#: apps/forum/admin.py:360
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr "Válassza ezt a lehetőséget, ha a névtelen felhasználó jogosultságait szeretné szerkeszteni"
+msgstr ""
+"Válassza ezt a lehetőséget, ha a névtelen felhasználó jogosultságait "
+"szeretné szerkeszteni"
 
-#: apps/forum/admin.py:382
+#: apps/forum/admin.py:378
 msgid "Choose either a user ID or select the anonymous user"
-msgstr "Válasszon ki egy felhasználóazonosítót vagy jelölje ki a névtelen felhasználót"
+msgstr ""
+"Válasszon ki egy felhasználóazonosítót vagy jelölje ki a névtelen "
+"felhasználót"
 
-#: apps/forum/admin.py:410
+#: apps/forum/admin.py:406
 #: templates/admin/forum/forum/editpermissions_form.html:35
 msgid "Not set"
 msgstr "Nincs beállítva"
 
-#: apps/forum/admin.py:411
+#: apps/forum/admin.py:407
 #: templates/admin/forum/forum/editpermissions_form.html:36
 msgid "Granted"
 msgstr "Engedélyezett"
 
-#: apps/forum/admin.py:412
+#: apps/forum/admin.py:408
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "Nem engedélyezett"
 
-#: apps/forum/app.py:21
+#: apps/forum/app.py:17
 msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 
-#: apps/forum/registry_config.py:12
+#: apps/forum/registry_config.py:8
 msgid "Machina: Forum"
 msgstr "Machina: Fórum"
 
-#: apps/forum_conversation/abstract_models.py:31
+#: apps/forum_conversation/abstract_models.py:25
 msgid "Topic forum"
 msgstr "Téma-fórum"
 
-#: apps/forum_conversation/abstract_models.py:34
-#: apps/forum_conversation/abstract_models.py:208
+#: apps/forum_conversation/abstract_models.py:28
+#: apps/forum_conversation/abstract_models.py:201
 msgid "Poster"
 msgstr "Hozzászóló"
 
-#: apps/forum_conversation/abstract_models.py:37
-#: apps/forum_conversation/abstract_models.py:216
+#: apps/forum_conversation/abstract_models.py:31
+#: apps/forum_conversation/abstract_models.py:209
 msgid "Subject"
 msgstr "Tárgy"
 
-#: apps/forum_conversation/abstract_models.py:43
+#: apps/forum_conversation/abstract_models.py:37
 msgid "Default topic"
 msgstr "Alap-téma"
 
-#: apps/forum_conversation/abstract_models.py:44
+#: apps/forum_conversation/abstract_models.py:38
 msgid "Sticky"
 msgstr "Kiemelt"
 
-#: apps/forum_conversation/abstract_models.py:45
+#: apps/forum_conversation/abstract_models.py:39
 msgid "Announce"
 msgstr "Közlemény"
 
-#: apps/forum_conversation/abstract_models.py:48
+#: apps/forum_conversation/abstract_models.py:42
 msgid "Topic type"
 msgstr "Tématípus"
 
-#: apps/forum_conversation/abstract_models.py:53
+#: apps/forum_conversation/abstract_models.py:47
 msgid "Topic unlocked"
 msgstr "Téma feloldva"
 
-#: apps/forum_conversation/abstract_models.py:54
+#: apps/forum_conversation/abstract_models.py:48
 msgid "Topic locked"
 msgstr "Téma zárolva"
 
-#: apps/forum_conversation/abstract_models.py:55
+#: apps/forum_conversation/abstract_models.py:49
 msgid "Topic moved"
 msgstr "Téma áthelyezve"
 
-#: apps/forum_conversation/abstract_models.py:58
+#: apps/forum_conversation/abstract_models.py:52
 msgid "Topic status"
 msgstr "Téma státusz"
 
-#: apps/forum_conversation/abstract_models.py:62
-#: apps/forum_conversation/abstract_models.py:227
+#: apps/forum_conversation/abstract_models.py:56
+#: apps/forum_conversation/abstract_models.py:220
 msgid "Approved"
 msgstr "Jóváhagyott"
 
-#: apps/forum_conversation/abstract_models.py:66
+#: apps/forum_conversation/abstract_models.py:60
 msgid "Posts count"
 msgstr "Hozzászólások száma"
 
-#: apps/forum_conversation/abstract_models.py:70
+#: apps/forum_conversation/abstract_models.py:64
 msgid "Views count"
 msgstr "Megtekintések száma"
 
-#: apps/forum_conversation/abstract_models.py:79
+#: apps/forum_conversation/abstract_models.py:73
 msgid "First post"
 msgstr "Első hozzászólás"
 
-#: apps/forum_conversation/abstract_models.py:87
+#: apps/forum_conversation/abstract_models.py:81
 msgid "Subscribers"
 msgstr "Feliratkozók"
 
-#: apps/forum_conversation/abstract_models.py:97
-#: apps/forum_conversation/abstract_models.py:205
-#: apps/forum_conversation/forum_polls/abstract_models.py:24
-#: apps/forum_tracking/abstract_models.py:51
+#: apps/forum_conversation/abstract_models.py:91
+#: apps/forum_conversation/abstract_models.py:198
+#: apps/forum_conversation/forum_polls/abstract_models.py:17
+#: apps/forum_tracking/abstract_models.py:44
 #: templates/machina/forum_moderation/moderation_queue/list.html:34
 msgid "Topic"
 msgstr "Téma"
 
-#: apps/forum_conversation/abstract_models.py:98
+#: apps/forum_conversation/abstract_models.py:92
 #: templates/machina/forum/forum_detail.html:50
 #: templates/machina/forum/forum_list.html:19
 #: templates/machina/forum/forum_list.html:37
@@ -306,173 +311,186 @@ msgstr "Téma"
 msgid "Topics"
 msgstr "Témák"
 
-#: apps/forum_conversation/abstract_models.py:143
+#: apps/forum_conversation/abstract_models.py:137
 msgid "A topic can not be associated with a category or a link forum"
 msgstr "Kategória- vagy hivatkozás-fórumokhoz nem tartozhat téma"
 
-#: apps/forum_conversation/abstract_models.py:210
+#: apps/forum_conversation/abstract_models.py:203
 msgid "Poster IP address"
 msgstr "Hozzászóló IP címe"
 
-#: apps/forum_conversation/abstract_models.py:212
-#: apps/forum_conversation/forum_polls/abstract_models.py:96
+#: apps/forum_conversation/abstract_models.py:205
+#: apps/forum_conversation/forum_polls/abstract_models.py:87
 msgid "Anonymous user forum key"
 msgstr "Névtelen felhasználó fórum-kulcsa"
 
-#: apps/forum_conversation/abstract_models.py:220
+#: apps/forum_conversation/abstract_models.py:213
 msgid "Content"
 msgstr "Tartalom"
 
-#: apps/forum_conversation/abstract_models.py:224
+#: apps/forum_conversation/abstract_models.py:217
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: apps/forum_conversation/abstract_models.py:231
+#: apps/forum_conversation/abstract_models.py:224
 msgid "Attach a signature"
 msgstr "Aláírás hozzáfűzése"
 
-#: apps/forum_conversation/abstract_models.py:236
+#: apps/forum_conversation/abstract_models.py:229
 msgid "Update reason"
 msgstr "Módosítás indoka"
 
-#: apps/forum_conversation/abstract_models.py:241
+#: apps/forum_conversation/abstract_models.py:234
 msgid "Lastly updated by"
 msgstr "Utoljára módosította:"
 
-#: apps/forum_conversation/abstract_models.py:243
+#: apps/forum_conversation/abstract_models.py:236
 msgid "Updates count"
 msgstr "Módosítások száma"
 
-#: apps/forum_conversation/abstract_models.py:253
-#: apps/forum_conversation/forum_attachments/abstract_models.py:21
+#: apps/forum_conversation/abstract_models.py:246
+#: apps/forum_conversation/forum_attachments/abstract_models.py:15
 msgid "Post"
 msgstr "Hozzászólás"
 
-#: apps/forum_conversation/abstract_models.py:254
+#: apps/forum_conversation/abstract_models.py:247
 #: templates/machina/forum/forum_list.html:20
 #: templates/machina/forum/forum_list.html:38
 #: templates/machina/forum/forum_list.html:206
 msgid "Posts"
 msgstr "Hozzászólások"
 
-#: apps/forum_conversation/abstract_models.py:295
+#: apps/forum_conversation/abstract_models.py:288
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen kulcsot."
+msgstr ""
+"A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen "
+"kulcsot."
 
-#: apps/forum_conversation/abstract_models.py:297
+#: apps/forum_conversation/abstract_models.py:290
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen kulcsot, de nem mindkettőt."
+msgstr ""
+"A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen "
+"kulcsot, de nem mindkettőt."
 
-#: apps/forum_conversation/abstract_models.py:301
+#: apps/forum_conversation/abstract_models.py:294
 msgid "A username must be specified if the poster is anonymous"
 msgstr "Felhasználónevet kötelező megadni, ha a hozzászóló névtelen"
 
-#: apps/forum_conversation/app.py:29
+#: apps/forum_conversation/app.py:25
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 
-#: apps/forum_conversation/app.py:32
+#: apps/forum_conversation/app.py:28
 msgid "^topic/create/$"
 msgstr "^topic/create/$"
 
-#: apps/forum_conversation/app.py:33
+#: apps/forum_conversation/app.py:29
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
 
-#: apps/forum_conversation/app.py:36
+#: apps/forum_conversation/app.py:32
 msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 msgstr "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 
-#: apps/forum_conversation/app.py:38
-msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
-msgstr "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+#: apps/forum_conversation/app.py:34
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
+msgstr ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 
-#: apps/forum_conversation/app.py:40
-msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
-msgstr "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+#: apps/forum_conversation/app.py:36
+msgid ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
+msgstr ""
+"^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 
-#: apps/forum_conversation/app.py:45
+#: apps/forum_conversation/app.py:41
 msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
-#: apps/forum_conversation/forms.py:41
+#: apps/forum_conversation/forms.py:37
 msgid "Enter your subject"
 msgstr "Írja ide a tárgyat"
 
-#: apps/forum_conversation/forms.py:42
+#: apps/forum_conversation/forms.py:38
 msgid "Message"
 msgstr "Üzenet"
 
-#: apps/forum_conversation/forms.py:43
+#: apps/forum_conversation/forms.py:39
 msgid "Enter your message"
 msgstr "Írja ide az üzenetet"
 
-#: apps/forum_conversation/forms.py:70 apps/forum_moderation/forms.py:23
+#: apps/forum_conversation/forms.py:66 apps/forum_moderation/forms.py:19
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: templates/machina/forum_moderation/topic_lock.html:5
 #: templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
 msgstr "Téma zárolása"
 
-#: apps/forum_conversation/forms.py:116
+#: apps/forum_conversation/forms.py:112
 msgid "Post topic as"
 msgstr "Téma indítása mint"
 
-#: apps/forum_conversation/forms.py:140
-#: apps/forum_conversation/forum_polls/abstract_models.py:27
+#: apps/forum_conversation/forms.py:136
+#: apps/forum_conversation/forum_polls/abstract_models.py:20
 msgid "Poll question"
 msgstr "Szavazásra bocsátott kérdés"
 
-#: apps/forum_conversation/forms.py:141
+#: apps/forum_conversation/forms.py:137
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr "Adjon meg egy kérdést, hogy a témához szavazást rendeljen, vagy hagyja üresen, ha nem akar szavazást."
+msgstr ""
+"Adjon meg egy kérdést, hogy a témához szavazást rendeljen, vagy hagyja "
+"üresen, ha nem akar szavazást."
 
-#: apps/forum_conversation/forms.py:145
-#: apps/forum_conversation/forum_polls/abstract_models.py:35
+#: apps/forum_conversation/forms.py:141
+#: apps/forum_conversation/forum_polls/abstract_models.py:28
 msgid "Maximum number of poll options per user"
 msgstr "Felhasználónként megadható válaszlehetőségek maximális száma"
 
-#: apps/forum_conversation/forms.py:146
+#: apps/forum_conversation/forms.py:142
 msgid "This is the number of options each user may select when voting."
 msgstr "Hány válaszlehetőséget adhat meg egy felhasználó, amikor szavaz."
 
-#: apps/forum_conversation/forms.py:150
+#: apps/forum_conversation/forms.py:146
 msgid "For how many days the poll should be run?"
 msgstr "Hány napig tartson a szavazás?"
 
-#: apps/forum_conversation/forms.py:151
+#: apps/forum_conversation/forms.py:147
 msgid "Enter 0 or leave blank for a never ending poll."
 msgstr "Végtelen szavazáshoz írjon be 0-t, vagy hagyja üresen."
 
-#: apps/forum_conversation/forms.py:154
+#: apps/forum_conversation/forms.py:150
 msgid "Allow re-voting?"
 msgstr "Újraszavazás engedélyezése?"
 
-#: apps/forum_conversation/forms.py:155
+#: apps/forum_conversation/forms.py:151
 msgid "If enabled users are able to change their vote."
-msgstr "Ha engedélyezett, akkor a felhasználók megváltoztathatják a szavazatukat."
+msgstr ""
+"Ha engedélyezett, akkor a felhasználók megváltoztathatják a szavazatukat."
 
-#: apps/forum_conversation/forms.py:176
+#: apps/forum_conversation/forms.py:172
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr "Szavazás létrehozásakor kötelező megadni a válaszlehetőségek felhasználónként megadható számát."
+msgstr ""
+"Szavazás létrehozásakor kötelező megadni a válaszlehetőségek "
+"felhasználónként megadható számát."
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:23
+#: apps/forum_conversation/forum_attachments/abstract_models.py:17
 msgid "File"
 msgstr "File"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:24
+#: apps/forum_conversation/forum_attachments/abstract_models.py:18
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:29
+#: apps/forum_conversation/forum_attachments/abstract_models.py:23
 msgid "Attachment"
 msgstr "Csatolmány"
 
-#: apps/forum_conversation/forum_attachments/abstract_models.py:30
+#: apps/forum_conversation/forum_attachments/abstract_models.py:24
 #: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
 #: templates/machina/forum_conversation/forum_attachments/attachments_preview.html:7
 #: templates/machina/forum_conversation/partials/post_form.html:22
@@ -481,566 +499,574 @@ msgstr "Csatolmány"
 msgid "Attachments"
 msgstr "Csatolmányok"
 
-#: apps/forum_conversation/forum_attachments/registry_config.py:12
+#: apps/forum_conversation/forum_attachments/registry_config.py:8
 msgid "Machina: Forum attachments"
 msgstr "Machina: Fórum csatolmányok"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:31
+#: apps/forum_conversation/forum_polls/abstract_models.py:24
 msgid "Poll duration, in days"
 msgstr "Szavazás időtartama napokban"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:39
+#: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Allow vote changes"
 msgstr "Szavazatmódosítás engedélyezése"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:46
+#: apps/forum_conversation/forum_polls/abstract_models.py:39
 msgid "Topic poll"
 msgstr "Téma-szavazás"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:47
+#: apps/forum_conversation/forum_polls/abstract_models.py:40
 msgid "Topic polls"
 msgstr "Téma-szavazások"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:70
+#: apps/forum_conversation/forum_polls/abstract_models.py:62
 #: templates/machina/forum_conversation/partials/topic_form.html:23
 msgid "Poll"
 msgstr "Szavazás"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:71
+#: apps/forum_conversation/forum_polls/abstract_models.py:63
 msgid "Poll option text"
 msgstr "Válaszlehetőség szövege"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:76
+#: apps/forum_conversation/forum_polls/abstract_models.py:68
 msgid "Topic poll option"
 msgstr "Téma-szavazás válaszlehetőség"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:77
+#: apps/forum_conversation/forum_polls/abstract_models.py:69
 msgid "Topic poll options"
 msgstr "Téma-szavazás válaszlehetőségek"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:94
+#: apps/forum_conversation/forum_polls/abstract_models.py:85
 msgid "Voter"
 msgstr "Szavazó"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:100
+#: apps/forum_conversation/forum_polls/abstract_models.py:91
 msgid "Poll option"
 msgstr "Szavazás válaszlehetőség"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:101
+#: apps/forum_conversation/forum_polls/abstract_models.py:92
 msgid "Vote's date"
 msgstr "Szavazat dátuma"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:106
+#: apps/forum_conversation/forum_polls/abstract_models.py:97
 msgid "Topic poll vote"
 msgstr "Téma-szavazat"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:107
+#: apps/forum_conversation/forum_polls/abstract_models.py:98
 msgid "Topic poll votes"
 msgstr "Téma-szavazatok"
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:118
+#: apps/forum_conversation/forum_polls/abstract_models.py:109
 msgid "A user id or an anonymous key must be used."
 msgstr "Felhasználóazonosító vagy névtelen kulcs kötelező."
 
-#: apps/forum_conversation/forum_polls/abstract_models.py:120
+#: apps/forum_conversation/forum_polls/abstract_models.py:111
 msgid "A user id or an anonymous key must be used, but not both."
 msgstr "Felhasználóazonosító vagy névtelen kulcs kötelező, de nem mindkettő."
 
-#: apps/forum_conversation/forum_polls/forms.py:30
+#: apps/forum_conversation/forum_polls/forms.py:26
 msgid "Enter a poll option"
 msgstr "Adjon meg egy válaszlehetőséget"
 
-#: apps/forum_conversation/forum_polls/forms.py:123
+#: apps/forum_conversation/forum_polls/forms.py:119
 msgid "You must specify an option when voting."
 msgstr "Szavazáshoz meg kell jelölni egy válaszlehetőséget."
 
-#: apps/forum_conversation/forum_polls/forms.py:128
+#: apps/forum_conversation/forum_polls/forms.py:124
 msgid "You have tried to vote for too many options."
 msgstr "Túl sok válaszlehetőségre próbált szavazni."
 
-#: apps/forum_conversation/forum_polls/registry_config.py:12
+#: apps/forum_conversation/forum_polls/registry_config.py:8
 msgid "Machina: Forum polls"
 msgstr "Machina: Fórum szavazások"
 
-#: apps/forum_conversation/forum_polls/views.py:67
+#: apps/forum_conversation/forum_polls/views.py:63
 msgid "Your vote has been cast."
 msgstr "Leadta szavazatát."
 
-#: apps/forum_conversation/registry_config.py:12
+#: apps/forum_conversation/registry_config.py:8
 msgid "Machina: Forum conversations"
 msgstr "Machina: Fórum beszélgetések"
 
-#: apps/forum_conversation/views.py:128
+#: apps/forum_conversation/views.py:124
 msgid "This message has been posted successfully."
 msgstr "Az üzenetet sikeresen közzétettük."
 
-#: apps/forum_conversation/views.py:129
+#: apps/forum_conversation/views.py:125
 msgid "This message will be validated before appearing on the forum."
 msgstr "Az üzenetet ellenőrizni fogjuk, mielőtt a fórumon közzé tesszük."
 
-#: apps/forum_conversation/views.py:131
+#: apps/forum_conversation/views.py:127
 msgid "There are some errors in the attachments you submitted."
 msgstr "A feltöltött csatolmányok hibásak."
 
-#: apps/forum_conversation/views.py:388
+#: apps/forum_conversation/views.py:384
 msgid "There are some errors in the poll options you submitted."
 msgstr "A megadott válaszlehetőségek hibásak."
 
-#: apps/forum_conversation/views.py:574 apps/forum_conversation/views.py:659
+#: apps/forum_conversation/views.py:570 apps/forum_conversation/views.py:655
 msgid "This message has been edited successfully."
 msgstr "Az üzenet szerkesztése sikeres."
 
-#: apps/forum_conversation/views.py:696
+#: apps/forum_conversation/views.py:692
 msgid "This message has been deleted successfully."
 msgstr "Az üzenet törlése sikeres."
 
-#: apps/forum_feeds/app.py:19
+#: apps/forum_feeds/app.py:15
 msgid "^topics/$"
 msgstr "^topics/$"
 
-#: apps/forum_feeds/app.py:20
+#: apps/forum_feeds/app.py:16
 msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
 
-#: apps/forum_feeds/app.py:22
+#: apps/forum_feeds/app.py:18
 msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
 
-#: apps/forum_feeds/feeds.py:22
+#: apps/forum_feeds/feeds.py:18
 msgid "Latest topics"
 msgstr "Legújabb témák"
 
-#: apps/forum_feeds/feeds.py:23
+#: apps/forum_feeds/feeds.py:19
 msgid "Latest topics updated on the forums"
 msgstr "Legújabban frissült témák a fórumokban"
 
-#: apps/forum_feeds/registry_config.py:12
+#: apps/forum_feeds/registry_config.py:8
 msgid "Machina: Forum feeds"
 msgstr "Machina: Fórum hírcsatornák"
 
-#: apps/forum_member/abstract_models.py:23
-#: apps/forum_permission/abstract_models.py:92
-#: apps/forum_tracking/abstract_models.py:23
-#: apps/forum_tracking/abstract_models.py:48
+#: apps/forum_member/abstract_models.py:17
+#: apps/forum_permission/abstract_models.py:85
+#: apps/forum_tracking/abstract_models.py:17
+#: apps/forum_tracking/abstract_models.py:41
 msgid "User"
 msgstr "Felhasználó"
 
-#: apps/forum_member/abstract_models.py:27
+#: apps/forum_member/abstract_models.py:21
 msgid "Avatar"
 msgstr "Avatar"
 
-#: apps/forum_member/abstract_models.py:33
+#: apps/forum_member/abstract_models.py:27
 msgid "Signature"
 msgstr "Aláírás"
 
-#: apps/forum_member/abstract_models.py:38
+#: apps/forum_member/abstract_models.py:32
 msgid "Total posts"
 msgstr "Összes hozzászólás"
 
-#: apps/forum_member/abstract_models.py:43
+#: apps/forum_member/abstract_models.py:37
 msgid "Forum profile"
 msgstr "Fórum profil"
 
-#: apps/forum_member/abstract_models.py:44
+#: apps/forum_member/abstract_models.py:38
 msgid "Forum profiles"
 msgstr "Fórum profilok"
 
-#: apps/forum_member/app.py:25
+#: apps/forum_member/app.py:21
 msgid "^profile/(?P<pk>\\d+)/$"
 msgstr "^profile/(?P<pk>\\d+)/$"
 
-#: apps/forum_member/app.py:27
+#: apps/forum_member/app.py:23
 msgid "^profile/(?P<pk>\\d+)/posts/$"
 msgstr "^profile/(?P<pk>\\d+)/posts/$"
 
-#: apps/forum_member/app.py:29
+#: apps/forum_member/app.py:25
 msgid "^profile/edit/$"
 msgstr "^profile/edit/$"
 
-#: apps/forum_member/app.py:32
+#: apps/forum_member/app.py:28
 msgid "^subscriptions/$"
 msgstr "^subscriptions/$"
 
-#: apps/forum_member/app.py:35
+#: apps/forum_member/app.py:31
 msgid "^topic/(?P<pk>\\d+)/subscribe/$"
 msgstr "^topic/(?P<pk>\\d+)/subscribe/$"
 
-#: apps/forum_member/app.py:37
+#: apps/forum_member/app.py:33
 msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
 msgstr "^topic/(?P<pk>\\d+)/unsubscribe/$"
 
-#: apps/forum_member/registry_config.py:12
+#: apps/forum_member/registry_config.py:8
 msgid "Machina: Forum members"
 msgstr "Machina: Fórum tagok"
 
-#: apps/forum_member/views.py:106
+#: apps/forum_member/views.py:102
 msgid "The profile has been edited successfully."
 msgstr "A profil szerkesztése sikeres."
 
-#: apps/forum_member/views.py:131
+#: apps/forum_member/views.py:127
 msgid "You subscribed to this topic successfully."
 msgstr "Sikeresen feliratkozott a témára."
 
-#: apps/forum_member/views.py:170
+#: apps/forum_member/views.py:166
 msgid "You unsubscribed from this topic successfully."
 msgstr "Sikeresen leiratkozott a témáról."
 
-#: apps/forum_moderation/app.py:31
+#: apps/forum_moderation/app.py:27
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
 
-#: apps/forum_moderation/app.py:33
+#: apps/forum_moderation/app.py:29
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
 
-#: apps/forum_moderation/app.py:35
+#: apps/forum_moderation/app.py:31
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
 
-#: apps/forum_moderation/app.py:37
+#: apps/forum_moderation/app.py:33
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
 
-#: apps/forum_moderation/app.py:39
+#: apps/forum_moderation/app.py:35
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
 
-#: apps/forum_moderation/app.py:41
+#: apps/forum_moderation/app.py:37
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
 
-#: apps/forum_moderation/app.py:43
+#: apps/forum_moderation/app.py:39
 msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
 
-#: apps/forum_moderation/app.py:45
+#: apps/forum_moderation/app.py:41
 msgid "^queue/$"
 msgstr "^queue/$"
 
-#: apps/forum_moderation/app.py:46
+#: apps/forum_moderation/app.py:42
 msgid "^queue/(?P<pk>\\d+)/$"
 msgstr "^queue/(?P<pk>\\d+)/$"
 
-#: apps/forum_moderation/app.py:48
+#: apps/forum_moderation/app.py:44
 msgid "^queue/(?P<pk>\\d+)/approve/$"
 msgstr "^queue/(?P<pk>\\d+)/approve/$"
 
-#: apps/forum_moderation/app.py:50
+#: apps/forum_moderation/app.py:46
 msgid "^queue/(?P<pk>\\d+)/disapprove/$"
 msgstr "^queue/(?P<pk>\\d+)/disapprove/$"
 
-#: apps/forum_moderation/forms.py:20
+#: apps/forum_moderation/forms.py:16
 msgid "Select a destination forum"
 msgstr "Válassza ki a cél-fórumot"
 
-#: apps/forum_moderation/registry_config.py:12
+#: apps/forum_moderation/registry_config.py:8
 msgid "Machina: Forum moderation"
 msgstr "Machina: Fórum moderálás"
 
-#: apps/forum_moderation/views.py:39
+#: apps/forum_moderation/views.py:35
 msgid "This topic has been locked successfully."
 msgstr "A téma zárolása sikeres."
 
-#: apps/forum_moderation/views.py:89
+#: apps/forum_moderation/views.py:85
 msgid "This topic has been unlocked successfully."
 msgstr "A téma feloldása sikeres."
 
-#: apps/forum_moderation/views.py:139
+#: apps/forum_moderation/views.py:135
 msgid "This topic has been deleted successfully."
 msgstr "A téma törlése sikeres."
 
-#: apps/forum_moderation/views.py:190
+#: apps/forum_moderation/views.py:186
 msgid "This topic has been moved successfully."
 msgstr "A téma áthelyezése sikeres."
 
-#: apps/forum_moderation/views.py:263
+#: apps/forum_moderation/views.py:259
 msgid "This topic type has been changed successfully."
 msgstr "A tématípus módosítása sikeres."
 
-#: apps/forum_moderation/views.py:310
+#: apps/forum_moderation/views.py:306
 msgid "Would you want to change this topic to a default topic?"
 msgstr "Szeretné ezt a témát alap-témára változtatni?"
 
-#: apps/forum_moderation/views.py:320
+#: apps/forum_moderation/views.py:316
 msgid "Would you want to change this topic to a sticky topic?"
 msgstr "Szeretné ezt a témát kiemelt témára változtatni?"
 
-#: apps/forum_moderation/views.py:330
+#: apps/forum_moderation/views.py:326
 msgid "Would you want to change this topic to an announce?"
 msgstr "Szeretné ezt a témát közleményre változtatni?"
 
-#: apps/forum_moderation/views.py:403
+#: apps/forum_moderation/views.py:399
 msgid "This post has been approved successfully."
 msgstr "Az üzenet jóváhagyása sikeres."
 
-#: apps/forum_moderation/views.py:444
+#: apps/forum_moderation/views.py:440
 msgid "This post has been disapproved successfully."
 msgstr "Az üzenet visszautasítása sikeres."
 
-#: apps/forum_permission/abstract_models.py:31
+#: apps/forum_permission/abstract_models.py:25
 msgid "Permission codename"
 msgstr "Jogosultság kódnév"
 
-#: apps/forum_permission/abstract_models.py:34
+#: apps/forum_permission/abstract_models.py:28
 msgid "Global permission"
 msgstr "Teljeskörű jogosultság"
 
-#: apps/forum_permission/abstract_models.py:35
+#: apps/forum_permission/abstract_models.py:29
 msgid "This permission can be granted globally to all the forums"
 msgstr "Ezt a jogosultságot meg lehet adni teljeskörűen, minden fórumra"
 
-#: apps/forum_permission/abstract_models.py:38
+#: apps/forum_permission/abstract_models.py:32
 msgid "Local permission"
 msgstr "Helyi jogosultság"
 
-#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:33
 msgid "This permission can be granted individually for each forum"
 msgstr "Ezt a jogosultságot meg lehet adni külön, fórumonként"
 
-#: apps/forum_permission/abstract_models.py:45
-#: apps/forum_permission/abstract_models.py:67
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:61
 msgid "Forum permission"
 msgstr "Fórum jogosultság"
 
-#: apps/forum_permission/abstract_models.py:54
+#: apps/forum_permission/abstract_models.py:48
 msgid "A forum permission should be at least either global or local"
 msgstr "Egy fórum-jogosultságnak vagy teljeskörűnek, vagy helyinek kell lennie"
 
-#: apps/forum_permission/abstract_models.py:68
+#: apps/forum_permission/abstract_models.py:62
 msgid "Has perm"
 msgstr "Van joga"
 
-#: apps/forum_permission/abstract_models.py:82
+#: apps/forum_permission/abstract_models.py:76
 msgid "The following permission cannot be granted globally: {}"
 msgstr "A következő jogosultságot nem lehet teljeskörűen megadni: {}"
 
-#: apps/forum_permission/abstract_models.py:94
+#: apps/forum_permission/abstract_models.py:87
 msgid "Target anonymous user"
 msgstr "A névtelen felhasználóra vonatkoztatás"
 
-#: apps/forum_permission/abstract_models.py:100
+#: apps/forum_permission/abstract_models.py:93
 msgid "User forum permission"
 msgstr "Felhasználó fórum jogosultság"
 
-#: apps/forum_permission/abstract_models.py:101
+#: apps/forum_permission/abstract_models.py:94
 msgid "User forum permissions"
 msgstr "Felhasználó fórum jogosultságok"
 
-#: apps/forum_permission/abstract_models.py:113
+#: apps/forum_permission/abstract_models.py:106
 msgid "A permission should target either a user or an anonymous user"
-msgstr "A jogosultságnak vagy egy felhasználóra, vagy a névtelen felhasználóra kell vonatkoznia"
+msgstr ""
+"A jogosultságnak vagy egy felhasználóra, vagy a névtelen felhasználóra kell "
+"vonatkoznia"
 
-#: apps/forum_permission/abstract_models.py:120
+#: apps/forum_permission/abstract_models.py:112
 msgid "Group"
 msgstr "Csoport"
 
-#: apps/forum_permission/abstract_models.py:126
+#: apps/forum_permission/abstract_models.py:118
 msgid "Group forum permission"
 msgstr "Csoport fórum jogosultság"
 
-#: apps/forum_permission/abstract_models.py:127
+#: apps/forum_permission/abstract_models.py:119
 msgid "Group forum permissions"
 msgstr "Csoport fórum jogosultságok"
 
-#: apps/forum_permission/defaults.py:23
+#: apps/forum_permission/defaults.py:19
 msgid "Can see forum"
 msgstr "Láthatja a fórumot"
 
-#: apps/forum_permission/defaults.py:28
+#: apps/forum_permission/defaults.py:24
 msgid "Can read forum"
 msgstr "Olvashatja a fórumot"
 
-#: apps/forum_permission/defaults.py:35
+#: apps/forum_permission/defaults.py:31
 msgid "Can start new topics"
 msgstr "Nyithat új témát"
 
-#: apps/forum_permission/defaults.py:40
+#: apps/forum_permission/defaults.py:36
 msgid "Can reply to topics"
 msgstr "Hozzászólhat témákhoz"
 
-#: apps/forum_permission/defaults.py:45
+#: apps/forum_permission/defaults.py:41
 msgid "Can post announcements"
 msgstr "Kiadhat közleményt"
 
-#: apps/forum_permission/defaults.py:50
+#: apps/forum_permission/defaults.py:46
 msgid "Can post stickies"
 msgstr "Létrehozhat kiemelt hozzászólást"
 
-#: apps/forum_permission/defaults.py:55
+#: apps/forum_permission/defaults.py:51
 msgid "Can delete own posts"
 msgstr "Törölheti saját hozzászólásait"
 
-#: apps/forum_permission/defaults.py:60
+#: apps/forum_permission/defaults.py:56
 msgid "Can edit own posts"
 msgstr "Szerkesztheti saját hozzászólásait"
 
-#: apps/forum_permission/defaults.py:66
+#: apps/forum_permission/defaults.py:62
 msgid "Can post without approval"
 msgstr "Hozzászólhat jóváhagyás nélkül"
 
-#: apps/forum_permission/defaults.py:73
+#: apps/forum_permission/defaults.py:69
 msgid "Can create polls"
 msgstr "Létrehozhat szavazást"
 
-#: apps/forum_permission/defaults.py:78
+#: apps/forum_permission/defaults.py:74
 msgid "Can vote in polls"
 msgstr "Résztvehet szavazásban"
 
-#: apps/forum_permission/defaults.py:85
+#: apps/forum_permission/defaults.py:81
 msgid "Can attach file"
 msgstr "Csatolhat file-t"
 
-#: apps/forum_permission/defaults.py:90
+#: apps/forum_permission/defaults.py:86
 msgid "Can download file"
 msgstr "Letölthet file-t"
 
-#: apps/forum_permission/defaults.py:97
+#: apps/forum_permission/defaults.py:93
 msgid "Can lock topics"
 msgstr "Zárolhat témákat"
 
-#: apps/forum_permission/defaults.py:102
+#: apps/forum_permission/defaults.py:98
 msgid "Can move topics"
 msgstr "Áthelyezhet témákat"
 
-#: apps/forum_permission/defaults.py:107
+#: apps/forum_permission/defaults.py:103
 msgid "Can edit posts"
 msgstr "Szerkeszthet hozzászólásokat"
 
-#: apps/forum_permission/defaults.py:112
+#: apps/forum_permission/defaults.py:108
 msgid "Can delete posts"
 msgstr "Törölhet hozzászólásokat"
 
-#: apps/forum_permission/defaults.py:117
+#: apps/forum_permission/defaults.py:113
 msgid "Can approve posts"
 msgstr "Jóváhagyhat hozzászólásokat"
 
-#: apps/forum_permission/defaults.py:123
+#: apps/forum_permission/defaults.py:119
 msgid "Can add posts in locked topics"
 msgstr "Hozzászólhat zárolt témákhoz"
 
-#: apps/forum_permission/registry_config.py:12
+#: apps/forum_permission/registry_config.py:8
 msgid "Machina: Forum permissions"
 msgstr "Machina: Fórum jogosultságok"
 
-#: apps/forum_search/forms.py:21
+#: apps/forum_search/forms.py:17
 msgid "Search only in topic subjects"
 msgstr "Csak a téma tárgyakban keresés"
 
-#: apps/forum_search/forms.py:24
+#: apps/forum_search/forms.py:20
 msgid "Search for poster"
 msgstr "Hozzászóló keresése"
 
-#: apps/forum_search/forms.py:25
+#: apps/forum_search/forms.py:21
 msgid "Enter a user name to limit the search to a specific user."
-msgstr "Adjon meg egy felhasználónevet, hogy a keresést arra a felhasználóra szűkítse."
+msgstr ""
+"Adjon meg egy felhasználónevet, hogy a keresést arra a felhasználóra "
+"szűkítse."
 
-#: apps/forum_search/forms.py:29
+#: apps/forum_search/forms.py:25
 msgid "Search in specific forums"
 msgstr "Keresés bizonyos fórumokban"
 
-#: apps/forum_search/forms.py:30
+#: apps/forum_search/forms.py:26
 msgid "Select the forums you wish to search in."
 msgstr "Válassza ki a fórumokat, amelyekben keresni szeretne."
 
-#: apps/forum_search/forms.py:39
+#: apps/forum_search/forms.py:35
 msgid "Search for keywords"
 msgstr "Kulcsszó keresése"
 
-#: apps/forum_search/forms.py:40
+#: apps/forum_search/forms.py:36
 msgid "Keywords or phrase"
 msgstr "Kulcsszavak vagy kifejezés"
 
-#: apps/forum_search/forms.py:41
+#: apps/forum_search/forms.py:37
 msgid "Poster name"
 msgstr "Hozzászóló neve"
 
-#: apps/forum_search/registry_config.py:12
+#: apps/forum_search/registry_config.py:8
 msgid "Machina: Forum searches"
 msgstr "Machina: Fórum keresések"
 
-#: apps/forum_tracking/abstract_models.py:34
+#: apps/forum_tracking/abstract_models.py:28
 msgid "Forum track"
 msgstr "Fórum nyomonkövetés"
 
-#: apps/forum_tracking/abstract_models.py:35
+#: apps/forum_tracking/abstract_models.py:29
 msgid "Forum tracks"
 msgstr "Fórum nyomonkövetések"
 
-#: apps/forum_tracking/abstract_models.py:58
+#: apps/forum_tracking/abstract_models.py:51
 msgid "Topic track"
 msgstr "Téma nyomonkövetés"
 
-#: apps/forum_tracking/abstract_models.py:59
+#: apps/forum_tracking/abstract_models.py:52
 msgid "Topic tracks"
 msgstr "Téma nyomonkövetések"
 
-#: apps/forum_tracking/app.py:21
+#: apps/forum_tracking/app.py:17
 msgid "^mark/forums/$"
 msgstr "^mark/forums/$"
 
-#: apps/forum_tracking/app.py:23
+#: apps/forum_tracking/app.py:19
 msgid "^mark/forums/(?P<pk>\\d+)/$"
 msgstr "^mark/forums/(?P<pk>\\d+)/$"
 
-#: apps/forum_tracking/app.py:25
+#: apps/forum_tracking/app.py:21
 msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
 msgstr "^mark/forum/(?P<pk>\\d+)/topics/$"
 
-#: apps/forum_tracking/app.py:27
+#: apps/forum_tracking/app.py:23
 msgid "^unread-topics/$"
 msgstr "^unread-topics/$"
 
-#: apps/forum_tracking/registry_config.py:12
+#: apps/forum_tracking/registry_config.py:8
 msgid "Machina: Forum tracking"
 msgstr "Machina: Fórum nyomonkövetés"
 
-#: apps/forum_tracking/views.py:37
+#: apps/forum_tracking/views.py:33
 msgid "Forums have been marked read."
 msgstr "Fórumok olvasottnak jelölve."
 
-#: apps/forum_tracking/views.py:87
+#: apps/forum_tracking/views.py:83
 msgid "Topics have been marked read."
 msgstr "Témák olvasottnak jelölve."
 
-#: core/compat.py:20
+#: core/compat.py:16
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Sem a Pillow, sem a PIL beimportálása nem sikerült: {}"
 
-#: models/abstract_models.py:14
+#: models/abstract_models.py:13
 msgid "Creation date"
 msgstr "Létrehozás dátuma"
 
-#: models/abstract_models.py:15
+#: models/abstract_models.py:14
 msgid "Update date"
 msgstr "Módosítás dátuma"
 
-#: models/fields.py:37
+#: models/fields.py:32
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "Nem lehetett beimportálni: MACHINA_MARKUP_WIDGET {}: {}"
 
-#: models/fields.py:59
+#: models/fields.py:54
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
 msgstr "Nem lehetett beimportálni: MACHINA_MARKUP_LANGUAGE {}: {}"
 
-#: models/fields.py:63
+#: models/fields.py:58
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
 msgstr "MACHINA_MARKUP_LANGUAGE beállítás szükséges"
 
-#: models/fields.py:221
+#: models/fields.py:215
 msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr "{} méretnél nagyobb file nem engedélyezett. Az Öné {}"
 
-#: models/fields.py:232
+#: models/fields.py:226
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "{} pixelnél keskenyebb vagy {} pixelnél szélesebb kép nem engedélyezett. Az Öné {} pixel széles"
+msgstr ""
+"{} pixelnél keskenyebb vagy {} pixelnél szélesebb kép nem engedélyezett. Az "
+"Öné {} pixel széles"
 
-#: models/fields.py:238
+#: models/fields.py:232
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "{} pixelnél alacsonyabb vagy {} pixelnél magasabb kép nem engedélyezett. Az Öné {} pixel magas"
+msgstr ""
+"{} pixelnél alacsonyabb vagy {} pixelnél magasabb kép nem engedélyezett. Az "
+"Öné {} pixel magas"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -1143,7 +1169,9 @@ msgstr "Jogosultságok másolása másik fórumról"
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr "Válasszon ki egy fórumot, hogy annak jogosultság-beállításait a jelenlegi fórumra másolja"
+msgstr ""
+"Válasszon ki egy fórumot, hogy annak jogosultság-beállításait a jelenlegi "
+"fórumra másolja"
 
 #: templates/admin/forum/forum/editpermissions_index.html:106
 msgid "Copy"
@@ -1304,7 +1332,9 @@ msgstr "Válaszlehetőség hozzáadása"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr "<b>Figyelem:</b>&nbsp;Ha meglévő szavazás válaszlehetőségeit törli, akkor a hozzátartozó szavazatok is törlődnek."
+msgstr ""
+"<b>Figyelem:</b>&nbsp;Ha meglévő szavazás válaszlehetőségeit törli, akkor a "
+"hozzátartozó szavazatok is törlődnek."
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1403,7 +1433,8 @@ msgstr "Téma ellenőrzése"
 #: templates/machina/forum_search/search.html:85
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr "Szerző: <a href=\"%(poster_url)s\">%(username)s</a>, ekkor: %(creation_date)s"
+msgstr ""
+"Szerző: <a href=\"%(poster_url)s\">%(username)s</a>, ekkor: %(creation_date)s"
 
 #: templates/machina/forum_conversation/post_create.html:54
 #: templates/machina/forum_conversation/topic_detail.html:56
@@ -1534,8 +1565,12 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Posts</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Hozzászólás</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Hozzászólás</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Hozzászólás</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Hozzászólás</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:44
 #, python-format
@@ -1545,8 +1580,12 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                    <p><small>Topics</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Téma</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                    <p><small>Téma</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Téma</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                    <p><small>Téma</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:58
 msgid "Recent posts"
@@ -1669,7 +1708,8 @@ msgstr "Hozzászólás visszautasítása"
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr "Biztosan visszautasítja ezt a hozzászólást? A hozzászólás törölve lesz."
+msgstr ""
+"Biztosan visszautasítja ezt a hozzászólást? A hozzászólás törölve lesz."
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
