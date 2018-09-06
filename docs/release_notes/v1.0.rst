@@ -19,3 +19,6 @@ Backwards incompatible changes
   this helper. Thus all the ``app`` modules in the machina applications have been removed and
   replaced by an ``urls`` module. The way to include machina URLs has been updated so that it is now
   possible to benefit from a standard ``machina.urls`` module containing an ``urlpatterns`` list
+* In order to better follow Django conventions, all django-machina's ``AppConfig`` instances are
+  renamed to ``<AppName>AppConfig`` (eg. ``ForumConversationAppConfig``) and are moved to ``apps``
+  modules inside each application

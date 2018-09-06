@@ -110,21 +110,21 @@ Define the application AppConfig
 
 Most of django-machina's applications define sublclasses of Django's ``AppConfig`` which can perform
 initialization operations. Django-machina ``AppConfig`` instances are defined inside sub-modules
-called ``registry_config``. You need to define an ``AppConfig`` subclass for your custom application
-by subclassing the overridden application ``AppConfig``. So your application's ``__init__.py``
+called ``apps``. You need to define an ``AppConfig`` subclass for your custom application by
+subclassing the overridden application ``AppConfig``. So your application's ``__init__.py``
 should report the custom application ``AppConfig``:
 
 .. code-block:: python
 
-    default_app_config = 'apps.forum_conversation.registry_config.ConversationRegistryConfig'
+    default_app_config = 'apps.forum_conversation.apps.ForumConversationAppConfig'
 
-And in ``registry_config.py`` in you application you have something like:
+And in ``apps.py`` in you application you have something like:
 
 .. code-block:: python
 
-    from machina.apps.forum_conversation.registry_config import ConversationRegistryConfig as BaseConversationRegistryConfig
+    from machina.apps.forum_conversation.apps import ForumConversationAppConfig as BaseForumConversationAppConfig
 
-    class ConversationRegistryConfig(BaseConversationRegistryConfig):
+    class ForumConversationAppConfig(BaseForumConversationAppConfig):
         name = 'apps.forum_conversation'
 
 

@@ -1,6 +1,6 @@
 """
-    Forum members URLs
-    ==================
+    Forum member URLs
+    =================
 
     This module defines URL patterns associated with the django-machina's ``forum_member``
     application.

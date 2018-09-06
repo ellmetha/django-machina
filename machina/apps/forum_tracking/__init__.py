@@ -1,1 +1,1 @@
-default_app_config = 'machina.apps.forum_tracking.registry_config.TrackingRegistryConfig'
+default_app_config = 'machina.apps.forum_tracking.apps.ForumTrackingAppConfig'
