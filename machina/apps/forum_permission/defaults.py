@@ -3,7 +3,7 @@ from collections import OrderedDict
 from django.utils.translation import ugettext_lazy as _
 
 
-class PermissionConfig(object):
+class PermissionConfig:
     """ Defines the supported forum permissions.
 
     This class defines the default configuration of forum permissions. It is used to create the

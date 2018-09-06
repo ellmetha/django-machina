@@ -4,7 +4,7 @@ from django.test.client import Client
 
 
 @pytest.mark.django_db
-class BaseClientTestCase(object):
+class BaseClientTestCase:
     """
     Shortcut class for using Django's test client and avoid boilerplate code
     such as user login or user creation.

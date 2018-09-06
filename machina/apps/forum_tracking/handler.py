@@ -12,7 +12,7 @@ TopicReadTrack = get_model('forum_tracking', 'TopicReadTrack')
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
-class TrackingHandler(object):
+class TrackingHandler:
     """ Provides utility methods to compute unread forums and topics.
 
     The TrackingHandler allows to filter list of forums and list of topics in order to get only the

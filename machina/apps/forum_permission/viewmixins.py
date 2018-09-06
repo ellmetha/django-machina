@@ -10,7 +10,7 @@ from django.utils.http import urlquote
 from django.utils.six import string_types
 
 
-class PermissionRequiredMixin(object):
+class PermissionRequiredMixin:
     """
     This view mixin verifies if the current user has the permissions specified by the
     'permission_required' attribute. This 'permissions check' behavior can be updated

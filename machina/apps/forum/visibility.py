@@ -11,7 +11,7 @@ from django.db.models.query import QuerySet
 from django.utils.functional import cached_property
 
 
-class ForumVisibilityContentTree(object):
+class ForumVisibilityContentTree:
     """ Represents a tree of ``ForumVisibilityContentNode`` instances.
 
     Such a tree can be used to easily compute sums or "global" values associated with a given set of
@@ -133,7 +133,7 @@ class ForumVisibilityContentTree(object):
         return list(filter(lambda n: n.visible, self.nodes))
 
 
-class ForumVisibilityContentNode(object):
+class ForumVisibilityContentNode:
     """ Represents a forum object and its "visibility content".
 
     This class provides common properties that should help computing values such as posts counts or

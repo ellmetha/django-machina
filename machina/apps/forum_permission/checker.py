@@ -10,7 +10,7 @@ GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 
-class ForumPermissionChecker(object):
+class ForumPermissionChecker:
     """
     The ForumPermissionChecker allows to check forum permissions
     on Forum instances.

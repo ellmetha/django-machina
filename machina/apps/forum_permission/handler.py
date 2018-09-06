@@ -24,7 +24,7 @@ get_anonymous_user_forum_key = get_class(
     'forum_permission.shortcuts', 'get_anonymous_user_forum_key')
 
 
-class PermissionHandler(object):
+class PermissionHandler:
     """ Defines filter / access logic related to forums.
 
     The ``PermissionHandler`` class allows to filter lists of forums and to perform permission

@@ -90,7 +90,7 @@ class MarkupText(SafeData):
         return len(self.raw)
 
 
-class MarkupTextDescriptor(object):
+class MarkupTextDescriptor:
     """
     Acts as the Django's default attribute descriptor class, enabled via the SubfieldBase metaclass.
     The main difference is that it does not call to_python() on the MarkupTextField class. Instead,

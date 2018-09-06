@@ -10,7 +10,7 @@ from django.utils.six import BytesIO
 from machina.conf import settings as machina_settings
 
 
-class AttachmentCache(object):
+class AttachmentCache:
     """
     The attachments cache. This one should be used with a FileBasedCache backend.
     But this can be overriden. The attachments cache acts as a wrapper and ensure
