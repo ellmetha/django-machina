@@ -194,12 +194,12 @@ Finally you have to update your main ``urls.py`` module in order to include the 
 
 .. code-block:: python
 
-    from machina.app import board
+    from machina import urls as machina_urls
 
     urlpatterns = patterns(
         # [...]
         # Apps
-        url(r'^forum/', include(board.urls)),
+        url(r'^forum/', include(machina_urls)),
     )
 
 Creating your first forums

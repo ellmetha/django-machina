@@ -14,3 +14,8 @@ Backwards incompatible changes
 * The ``get_apps`` helper is removed. This function was used to append the machina's applications
   (and overridden applications) to the ``INSTALLED_APPS`` setting. Now machina's applications and
   overridden applications must be explicitly defined in the Django settings
+* The ``machina.core.app.Application`` class is improved and moved to
+  ``machina.core.urls.URLPatternsFactory`` in order to better suit the initial responsibility of
+  this helper. Thus all the ``app`` modules in the machina applications have been removed and
+  replaced by an ``urls`` module. The way to include machina URLs has been updated so that it is now
+  possible to benefit from a standard ``machina.urls`` module containing an ``urlpatterns`` list
