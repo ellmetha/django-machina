@@ -206,7 +206,8 @@ Creating your first forums
 --------------------------
 
 You can now navigate to http://127.0.0.1:8000/forum/ in order to visualize the index of your forum
-board. As you should see no forums have been created yet. Django-machina does not ship with
+board (and you can use the ``forum:index`` URL name to add a link toward the forum in your Django
+templates). As you should see no forums have been created yet. Django-machina does not ship with
 pre-created forums, so you should navigate to your administration panel and create some forum
 instances.
 
