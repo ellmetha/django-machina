@@ -81,7 +81,7 @@ class ForumAttachmentsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return super().get_urlpatterns() + [
-            url(r'^', include(self.attachments_urlpatterns_factory.urls)),
+            url(r'^', include(self.attachments_urlpatterns_factory.urlpatterns)),
         ]
 
 
@@ -93,7 +93,7 @@ class ForumPollsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return super().get_urlpatterns() + [
-            url(r'^', include(self.polls_urlpatterns_factory.urls)),
+            url(r'^', include(self.polls_urlpatterns_factory.urlpatterns)),
         ]
 
 

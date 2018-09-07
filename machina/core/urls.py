@@ -31,6 +31,6 @@ class URLPatternsFactory:
         return []
 
     @property
-    def urls(self):
+    def urlpatterns(self):
         """ Returns a tuple containing the list of URL patterns and an app namespace. """
         return self.get_urlpatterns(), self.app_namespace
