@@ -26,6 +26,9 @@ class ForumVisibilityContentTree:
         # position in the tree of forum).
         self.nodes = nodes or []
 
+    def __bool__(self):
+        return len(self.forums) > 0
+
     @classmethod
     def from_forums(cls, forums):
         """ Initializes a ``ForumVisibilityContentTree`` instance from a list of forums. """

@@ -193,3 +193,11 @@ class TestForumVisibilityContentNode(object):
         visibility_tree = ForumVisibilityContentTree.from_forums(Forum.objects.all())
         # Run & check
         assert visibility_tree.as_dict[self.top_level_cat.id].topics_count == 3
+
+    def test_can_return_an_appropriate_boolean_value(self):
+        visibility_tree_1 = ForumVisibilityContentTree.from_forums(Forum.objects.all())
+        visibility_tree_2 = ForumVisibilityContentTree.from_forums(
+            self.last_forum.get_descendants()
+        )
+        assert visibility_tree_1
+        assert not visibility_tree_2
