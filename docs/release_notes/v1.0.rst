@@ -7,6 +7,11 @@ Requirements and compatibility
 
 Python 3.4, 3.5, 3.6 and 3.7. Django 1.11, 2.0 and 2.1.
 
+Major changes
+-------------
+
+* Default templates are upgraded to Bootstrap 4
+
 Backwards incompatible changes
 ------------------------------
 
