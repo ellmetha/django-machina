@@ -4,9 +4,9 @@
 {% block content %}
 <div class="row">
   <div class="col-md-12">
-    <ul class="nav nav-pills">
-      <li{% if menu_parameters == "account" %} class="active"{% endif %}><a href="{% url 'account-parameters' %}">{% trans "Account" %}</a></li>
-      <li{% if menu_parameters == "password" %} class="active"{% endif %}><a href="{% url 'account-password' %}">{% trans "Password" %}</a></li>
+    <ul class="mb-3 nav nav-pills">
+      <li class="nav-item"><a href="{% url 'account-parameters' %}" class="nav-link{% if menu_parameters == "account" %} active{% endif %}">{% trans "Account" %}</a></li>
+      <li class="nav-item"><a href="{% url 'account-password' %}" class="nav-link{% if menu_parameters == "password" %} active{% endif %}">{% trans "Password" %}</a></li>
     </ul>
     <div class="row">
       <div class="col-md-12">
