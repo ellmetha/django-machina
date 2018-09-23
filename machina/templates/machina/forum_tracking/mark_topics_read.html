@@ -6,15 +6,15 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default topic-delete">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Mark topics read" %}</h3></div>
-      <div class="panel-body">
-        <div class="warning-message">{% trans "Are you sure you want to mark topics read?" %}</div>
+  <div class="col-12">
+    <div class="card topic-delete">
+      <div class="card-header"><h3 class="m-0 card-title h5">{% trans "Mark topics read" %}</h3></div>
+      <div class="card-body">
+        <div class="mb-3 warning-message">{% trans "Are you sure you want to mark topics read?" %}</div>
         <form action="" method="post">{% csrf_token %}
           <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
-          <a href="{{ forum_url }}" class="btn">{% trans "No" %}</a>
+          <button role="submit" class="btn btn-warning">{% trans "Yes, I'm sure" %}</button>
+          <a href="{{ forum_url }}" class="btn btn-secondary">{% trans "No, take me back" %}</a>
         </form>
       </div>
     </div>

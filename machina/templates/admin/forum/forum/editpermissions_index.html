@@ -6,120 +6,120 @@
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
 
 {% if not is_popup %}
-	{% block breadcrumbs %}
-		<div class="breadcrumbs">
-			<a href="{% if forum %}../../../../{% else %}../../../{% endif %}">{% trans 'Home' %}</a>
-			&rsaquo; <a href="{% if forum %}../../../{% else %}../../{% endif %}">{{ opts.app_config.verbose_name }}</a>
-			&rsaquo; {% if has_change_permission %}<a href="{% if forum %}../../{% else %}../{% endif %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
-			{% if forum and has_change_permission %}&rsaquo; <a href="../">{{ forum.name }}</a>{% endif %}
-			&rsaquo; {% if has_change_permission %}{% trans "Forum permissions" %}{% endif %}
-		</div>
-	{% endblock %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% if forum %}../../../../{% else %}../../../{% endif %}">{% trans 'Home' %}</a>
+  &rsaquo; <a href="{% if forum %}../../../{% else %}../../{% endif %}">{{ opts.app_config.verbose_name }}</a>
+  &rsaquo; {% if has_change_permission %}<a href="{% if forum %}../../{% else %}../{% endif %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+  {% if forum and has_change_permission %}&rsaquo; <a href="../">{{ forum.name }}</a>{% endif %}
+  &rsaquo; {% if has_change_permission %}{% trans "Forum permissions" %}{% endif %}
+</div>
+{% endblock %}
 {% endif %}
 
 {% block content %}
-	<form action="." method="post" id="{{ opts.model_name }}_pick_user_form" novalidate>{% csrf_token %}
-		<div>
-			{% if user_errors %}
-			    <p class="errornote">
-			    	{% if user_errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-			    </p>
-			    {{ user_form.non_field_errors }}
-			{% endif %}
-			<fieldset class="module aligned {{ fieldset.classes }}">
-			    <h2>{% trans "Edit user permissions" %}</h2>
-			    <div class="description">{% trans "Please select a user in order to update its permissions" %}</div>
-	            {% for field in user_form %}
-	            	<div class="form-row">
-		                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-		                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-		                    {% if field.is_checkbox %}
-		                        {{ field.field }}{{ field.label_tag }}
-		                    {% else %}
-		                        {{ field.label_tag }}
-		                        {{ field }}
-		                    {% endif %}
-		                    {% if field.field.help_text %}
-		                        <p class="help">{{ field.field.help_text|safe }}</p>
-		                    {% endif %}
-		                </div>
-	                </div>
-	            {% endfor %}
-			</fieldset>
-		</div>
-		<div class="submit-row">
-			<input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
-		</div>
-	</form>
-	<form action="." method="post" id="{{ opts.model_name }}_pick_group_form" novalidate>{% csrf_token %}
-		<div>
-			<fieldset class="module aligned {{ fieldset.classes }}">
-			    <h2>{% trans "Edit group permissions" %}</h2>
-			    <div class="description">{% trans "Please select a group in order to update its permissions" %}</div>
-	            {% for field in group_form %}
-	            	<div class="form-row">
-		                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-		                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-		                    {% if field.is_checkbox %}
-		                        {{ field.field }}{{ field.label_tag }}
-		                    {% else %}
-		                        {{ field.label_tag }}
-		                        {{ field }}
-		                    {% endif %}
-		                    {% if field.field.help_text %}
-		                        <p class="help">{{ field.field.help_text|safe }}</p>
-		                    {% endif %}
-		                </div>
-	                </div>
-	            {% endfor %}
-			</fieldset>
-		</div>
-		<div class="submit-row">
-			<input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />
-		</div>
-	</form>
-	{% if forum %}
-		<form action="." method="post" id="{{ opts.model_name }}_pick_forum_form" novalidate>{% csrf_token %}
-			<div>
-				<fieldset class="module aligned {{ fieldset.classes }}">
-				    <h2>{% trans "Copy permissions from another forum" %}</h2>
-				    <div class="description">{% trans "Please select a forum in order to copy its permissions configuration to the current forum" %}</div>
-		            {% for field in forum_form %}
-		            	<div class="form-row">
-			                <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-			                    {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-			                    {% if field.is_checkbox %}
-			                        {{ field.field }}{{ field.label_tag }}
-			                    {% else %}
-			                        {{ field.label_tag }}
-			                        {{ field }}
-			                    {% endif %}
-			                    {% if field.field.help_text %}
-			                        <p class="help">{{ field.field.help_text|safe }}</p>
-			                    {% endif %}
-			                </div>
-		                </div>
-		            {% endfor %}
-				</fieldset>
-			</div>
-			<div class="submit-row">
-				<input type="submit" value="{% trans 'Copy' %}" class="default" name="_select_forum" />
-			</div>
-		</form>
-	{% endif %}
+<form action="." method="post" id="{{ opts.model_name }}_pick_user_form" novalidate>{% csrf_token %}
+  <div>
+    {% if user_errors %}
+    <p class="errornote">
+    {% if user_errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+    </p>
+    {{ user_form.non_field_errors }}
+    {% endif %}
+    <fieldset class="module aligned {{ fieldset.classes }}">
+      <h2>{% trans "Edit user permissions" %}</h2>
+      <div class="description">{% trans "Please select a user in order to update its permissions" %}</div>
+      {% for field in user_form %}
+      <div class="form-row">
+        <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+          {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+          {% if field.is_checkbox %}
+          {{ field.field }}{{ field.label_tag }}
+          {% else %}
+          {{ field.label_tag }}
+          {{ field }}
+          {% endif %}
+          {% if field.field.help_text %}
+          <p class="help">{{ field.field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </fieldset>
+  </div>
+  <div class="submit-row">
+    <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
+  </div>
+</form>
+<form action="." method="post" id="{{ opts.model_name }}_pick_group_form" novalidate>{% csrf_token %}
+  <div>
+    <fieldset class="module aligned {{ fieldset.classes }}">
+      <h2>{% trans "Edit group permissions" %}</h2>
+      <div class="description">{% trans "Please select a group in order to update its permissions" %}</div>
+      {% for field in group_form %}
+      <div class="form-row">
+        <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+          {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+          {% if field.is_checkbox %}
+          {{ field.field }}{{ field.label_tag }}
+          {% else %}
+          {{ field.label_tag }}
+          {{ field }}
+          {% endif %}
+          {% if field.field.help_text %}
+          <p class="help">{{ field.field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </fieldset>
+  </div>
+  <div class="submit-row">
+    <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />
+  </div>
+</form>
+{% if forum %}
+<form action="." method="post" id="{{ opts.model_name }}_pick_forum_form" novalidate>{% csrf_token %}
+  <div>
+    <fieldset class="module aligned {{ fieldset.classes }}">
+      <h2>{% trans "Copy permissions from another forum" %}</h2>
+      <div class="description">{% trans "Please select a forum in order to copy its permissions configuration to the current forum" %}</div>
+      {% for field in forum_form %}
+      <div class="form-row">
+        <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+          {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+          {% if field.is_checkbox %}
+          {{ field.field }}{{ field.label_tag }}
+          {% else %}
+          {{ field.label_tag }}
+          {{ field }}
+          {% endif %}
+          {% if field.field.help_text %}
+          <p class="help">{{ field.field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </fieldset>
+  </div>
+  <div class="submit-row">
+    <input type="submit" value="{% trans 'Copy' %}" class="default" name="_select_forum" />
+  </div>
+</form>
+{% endif %}
 
-    <script type="text/javascript">
-        (function($) {
-            $(document).ready(function() {
-                $('.related-lookup').click(function(e) {
-                    e.preventDefault();
-                    var event = $.Event('django:lookup-related');
-                    $(this).trigger(event);
-                    if (!event.isDefaultPrevented()) {
-                        showRelatedObjectLookupPopup(this);
-                    }
-                });
-            });
-        })(django.jQuery);
-    </script>
+<script type="text/javascript">
+  (function($) {
+    $(document).ready(function() {
+      $('.related-lookup').click(function(e) {
+        e.preventDefault();
+        var event = $.Event('django:lookup-related');
+        $(this).trigger(event);
+        if (!event.isDefaultPrevented()) {
+          showRelatedObjectLookupPopup(this);
+        }
+      });
+    });
+  })(django.jQuery);
+</script>
 {% endblock content %}

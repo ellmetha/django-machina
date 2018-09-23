@@ -25,8 +25,8 @@
 {% endfor %}
 <a href="#" id="add_more_poll_option" class="btn btn-sm btn-info"><i class="icon-white icon-plus-sign"></i>&nbsp;{% trans "Add a poll option" %}</a>
 {% if poll_option_formset.initial_form_count %}
-  <br /><br />
-  <div class="alert alert-warning">
-    {% blocktrans %}<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes.{% endblocktrans %}
-  </div>
+<br /><br />
+<div class="alert alert-warning">
+  {% blocktrans %}<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes.{% endblocktrans %}
+</div>
 {% endif %}

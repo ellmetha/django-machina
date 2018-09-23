@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-12">
     <h1>{{ topic.subject }}</h1>
   </div>
 </div>
@@ -14,12 +14,12 @@
   {% include "forum_conversation/post_preview.html" %}
 {% endif %}
 <div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default post-edit">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Edit post" %}</h3>
+  <div class="col-12">
+    <div class="card post-edit">
+      <div class="card-header">
+        <h3 class="m-0 h5 card-title">{% trans "Edit post" %}</h3>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <form method="post" action="." class="form" enctype="multipart/form-data" novalidate>{% csrf_token %}
           {% include "forum_conversation/partials/post_form.html" %}
           <div class="form-actions">

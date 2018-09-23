@@ -5,26 +5,26 @@
 {% block sub_title %}{% trans "Move topic" %}{% endblock sub_title %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="panel panel-default topic-move">
-	            <div class="panel-heading">
-	                <h3 class="panel-title">{% trans "Move topic" %}</h3>
-	            </div>
-	            <div class="panel-body">
-				    <form action="" method="post">{% csrf_token %}
-				    	{% include "partials/form_field.html" with field=form.forum %}
-                        <div class="checkbox">
-                            <label for="{{ form.lock_topic.auto_id }}">
-                                {{ form.lock_topic }}
-                                {{ form.lock_topic.label }}
-                            </label>
-                        </div>
-				        <input type="submit" value="{% trans "Move" %}" class="btn btn-warning" />
-				        <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn">{% trans "Cancel" %}</a>
-				    </form>
-	            </div>
-			</div>
-		</div>
-	</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card topic-move">
+      <div class="card-header">
+        <h3 class="m-0 card-title h5">{% trans "Move topic" %}</h3>
+      </div>
+      <div class="card-body">
+        <form action="" method="post">{% csrf_token %}
+          {% include "partials/form_field.html" with field=form.forum %}
+          <div class="checkbox">
+            <label for="{{ form.lock_topic.auto_id }}">
+              {{ form.lock_topic }}
+              {{ form.lock_topic.label }}
+            </label>
+          </div>
+          <button role="submit" class="btn btn-warning">{% trans "Yes, I'm sure" %}</button>
+          <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="btn btn-secondary">{% trans "No, take me back" %}</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

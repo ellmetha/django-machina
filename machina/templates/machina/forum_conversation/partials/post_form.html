@@ -1,11 +1,11 @@
 {% load i18n %}
 
 {% if post_form.non_field_errors %}
-    {% for error in post_form.non_field_errors %}
-        <div class="alert alert-danger">
-            <i class="icon-exclamation-sign"></i> {{ error }}
-        </div>
-    {% endfor %}
+{% for error in post_form.non_field_errors %}
+<div class="alert alert-danger">
+  <i class="icon-exclamation-sign"></i> {{ error }}
+</div>
+{% endfor %}
 {% endif %}
 {% include "partials/form_field.html" with field=post_form.subject %}
 {% include "partials/form_field.html" with field=post_form.content %}
@@ -17,9 +17,9 @@
 {% endif %}
 <!-- Sub "forms" tabs -->
 <ul class="nav nav-tabs nav-justified">
-  <li class="active"><a href="#options" data-toggle="tab">{% trans "Options" %}</a></li>
+  <li class="nav-item"><a href="#options" class="nav-link active" data-toggle="tab">{% trans "Options" %}</a></li>
   {% if attachment_formset %}
-    <li><a href="#attachments" data-toggle="tab">{% trans "Attachments" %}</a></li>
+    <li class="nav-item"><a href="#attachments" class="nav-link" data-toggle="tab">{% trans "Attachments" %}</a></li>
   {% endif %}
 </ul>
 <!-- Sub "forms" panes -->

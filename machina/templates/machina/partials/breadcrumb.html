@@ -1,14 +1,16 @@
 {% load i18n %}
 
-<ul class="breadcrumb">
-    <li><a href="{% url 'forum:index' %}"><i class="fa fa-home">&nbsp;</i>{% trans "Forum index" %}</a></li>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}"><i class="fas fa-home">&nbsp;</i>{% trans "Forum index" %}</a></li>
     {% if forum %}
-        {% for ancestor in forum.get_ancestors %}
-            <li><a href="{% url 'forum:forum' ancestor.slug ancestor.id %}">{{ ancestor.name }}</a></li>
-        {% endfor %}
-        <li><a href="{% url 'forum:forum' forum.slug forum.id %}">{{ forum.name }}</a></li>
+    {% for ancestor in forum.get_ancestors %}
+    <li class="breadcrumb-item"><a href="{% url 'forum:forum' ancestor.slug ancestor.id %}">{{ ancestor.name }}</a></li>
+    {% endfor %}
+    <li class="breadcrumb-item"><a href="{% url 'forum:forum' forum.slug forum.id %}">{{ forum.name }}</a></li>
     {% endif %}
     {% if topic %}
-        <li><a href="{% url 'forum_conversation:topic' forum.slug forum.id topic.slug topic.id %}">{{ topic.subject }}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'forum_conversation:topic' forum.slug forum.id topic.slug topic.id %}">{{ topic.subject }}</a></li>
     {% endif %}
-</ul>
+  </ol>
+</nav>

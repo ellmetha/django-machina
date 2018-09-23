@@ -1,0 +1,48 @@
+//
+// MACHINA BOARD: FORUM LISTS
+// --------------------------------------------------
+
+
+.card.forumlist {
+  .card-header {
+    .forum-count-col, .forum-last-post-col {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: $gray;
+    }
+  }
+
+  .card-body {
+    .forum-icon {
+      width: 50px;
+      height: 45px;
+      line-height: 49px;
+      text-align: center;
+      color: lighten($blueDark, 20%);
+
+      &.unread {
+        color: lighten($red, 20%);
+      }
+
+      &.link {
+        color: $grayLight;
+      }
+    }
+
+    .forum-name {
+      .forum-description {
+        font-size: 0.9rem;
+        line-height: 1rem;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    .forum-syndication, .forum-count, .forum-last-post {
+      font-size: 0.9rem;
+      line-height: 1rem;
+    }
+  }
+}

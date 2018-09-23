@@ -4,166 +4,166 @@
 {% block sub_title %}{% trans "Moderation queue" %}{% endblock sub_title %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{% trans "Moderation queue" %}</h1>
-        </div>
-    </div>
-	<div class="alert alert-warning" role="alert">
-		<div class="pull-right">
-			<a href="{% url 'forum_moderation:disapprove_queued_post' post.pk %}" class="btn btn-warning">{% trans "Disapprove" %}</a>
-			<a href="{% url 'forum_moderation:approve_queued_post' post.pk %}" class="btn btn-success"><b>{% trans "Approve" %}</b></a>
-		</div>
-		<h4>{{ post.subject }}</h4>
-		<p class="text-muted">{% if post.is_topic_head %}{% trans "New topic" %}{% else %}{% trans "New post" %}{% endif %}</p>
-	</div>
-    <div class="row">
-        <div class="col-xs-12">
-            {% if post.is_topic_head and poll %}
-                <div class="panel panel-default poll">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12 poll-content-wrapper">
-                                <h4 class="question">{{ poll.question }}</h4>
-                                <hr />
-                                <div class="max-options-indication">
-                                    {% if poll.max_options == 1 %}
-                                        {% blocktrans trimmed %}
-                                            <b>1</b> option may be selected
-                                        {% endblocktrans %}
-                                    {% else %}
-                                        {% blocktrans trimmed with max_options=poll.max_options %}
-                                            Up to <b>{{ max_options }}</b> options may be selected
-                                        {% endblocktrans %}
-                                    {% endif %}
-                                </div>
-                                <div class="poll-options">
-                                    {% for option in poll_options %}
-                                        {% if forloop.first or not forloop.counter|divisibleby:2 %}
-                                            <div class="row">
-                                        {% endif %}
-                                        <div class="col-md-6">
-                                            <div class="well well-sm">
-                                                {% if poll.max_options == 1 %}
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="options" value="{{ option.id }}">
-                                                            {{ option.text }}
-                                                        </label>
-                                                    </div>
-                                                {% else %}
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="options" value="{{ option.id }}">
-                                                            {{ option.text }}
-                                                        </label>
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        {% if forloop.last or forloop.counter|divisibleby:2 %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            <div id="{{ post.id }}" class="panel panel-default post">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-10 post-content-wrapper">
-                            <h4 class="subject">{{ post.subject }}</h4>
-                            <p>
-                                <small class="text-muted">
-                                  {% spaceless %}
-                                    <i class="fa fa-clock-o"></i>&nbsp;
-                                    {% if post.poster %}
-                                      {% url 'forum_member:profile' post.poster_id as poster_url %}
-                                      {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
-                                        By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
-                                      {% endblocktrans %}
-                                    {% else %}
-                                      {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
-                                        By: {{ poster_username }} on {{ creation_date }}
-                                      {% endblocktrans %}
-                                    {% endif %}
-                                  {% endspaceless %}
-                                </small>
-                            </p>
-                            <div class="post-content">
-                                {{ post.content.rendered }}
-                            </div>
-                            {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
-                            {% if post.enable_signature and post.poster.forum_profile.signature %}
-                                <div class="post-signature">
-                                    {{ post.poster.forum_profile.signature.rendered }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-2 post-sidebar">
-                            {% if post.poster %}
-                                {% if post.poster.forum_profile.avatar %}
-                                    <div class="avatar">
-                                        <a href="{% url 'forum_member:profile' post.poster_id %}">
-                                            {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
-                                        </a>
-                                    </div>
-                                {% endif %}
-                                <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
-                                <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
-                            {% else %}
-                                <div class="username"><b>{{ post.username }}</b></div>
-                                <div class="username text-muted">{% trans "Anonymous user" %}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+<div class="row">
+  <div class="col-12">
+    <h1>{% trans "Moderation queue" %}</h1>
+  </div>
+</div>
+<div class="alert alert-warning" role="alert">
+  <div class="float-right">
+    <a href="{% url 'forum_moderation:disapprove_queued_post' post.pk %}" class="btn btn-warning">{% trans "Disapprove" %}</a>
+    <a href="{% url 'forum_moderation:approve_queued_post' post.pk %}" class="btn btn-success"><b>{% trans "Approve" %}</b></a>
+  </div>
+  <h4>{{ post.subject }}</h4>
+  <p class="text-muted">{% if post.is_topic_head %}{% trans "New topic" %}{% else %}{% trans "New post" %}{% endif %}</p>
+</div>
+<div class="my-3 row">
+  <div class="col-12">
+    {% if post.is_topic_head and poll %}
+    <div class="mb-3 card poll">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 poll-content-wrapper">
+            <h4 class="question">{{ poll.question }}</h4>
+            <hr />
+            <div class="max-options-indication">
+              {% if poll.max_options == 1 %}
+              {% blocktrans trimmed %}
+              <b>1</b> option may be selected
+              {% endblocktrans %}
+              {% else %}
+              {% blocktrans trimmed with max_options=poll.max_options %}
+              Up to <b>{{ max_options }}</b> options may be selected
+              {% endblocktrans %}
+              {% endif %}
             </div>
+            <div class="poll-options">
+            {% for option in poll_options %}
+            {% if forloop.first or not forloop.counter|divisibleby:2 %}
+            <div class="row">
+            {% endif %}
+            <div class="col-md-6">
+              <div class="well well-sm">
+                {% if poll.max_options == 1 %}
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="options" value="{{ option.id }}">
+                    {{ option.text }}
+                  </label>
+                </div>
+                {% else %}
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="options" value="{{ option.id }}">
+                    {{ option.text }}
+                  </label>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% if forloop.last or forloop.counter|divisibleby:2 %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    {% if previous_posts %}
-	    <div class="row">
-	        <div class="col-xs-12">
-	            <div class="panel panel-default topic-review">
-	                <div class="panel-heading">
-	                    <h3 class="panel-title">{% trans "Topic review" %}&nbsp;&ndash;&nbsp;{{ post.topic.subject }}</h3>
-	                </div>
-	                <div class="panel-body">
-	                    {% for post in previous_posts %}
-	                        <div class="row post-review">
-	                            <div class="col-md-10 post-content-wrapper">
-	                                <h4 class="subject">{{ post.subject }}</h4>
-	                                <p><small class="text-muted">
-                                    {% spaceless %}
-                                      <i class="fa fa-clock-o"></i>&nbsp;
-                                      {% if post.poster %}
-                                        {% url 'forum_member:profile' post.poster_id as poster_url %}
-                                        {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
-                                          By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
-                                        {% endblocktrans %}
-                                      {% else %}
-                                        {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
-                                          By: {{ poster_username }} on {{ creation_date }}
-                                        {% endblocktrans %}
-                                      {% endif %}
-                                    {% endspaceless %}
-	                                </small></p>
-	                                <div class="post-content">
-	                                    {{ post.content.rendered }}
-	                                </div>
-	                                {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
-	                            </div>
-	                            <div class="col-md-2 post-sidebar">
-	                                <div class="username">{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a>{% else %}<b>{{ post.username }}</b>{% endif %}</div>
-	                            </div>
-	                        </div>
-	                    {% endfor %}
-	                </div>
-	            </div>
-	        </div>
-	    </div>
     {% endif %}
+    <div id="{{ post.id }}" class="card post">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10 post-content-wrapper">
+            <h4 class="subject">{{ post.subject }}</h4>
+            <p>
+              <small class="text-muted">
+                {% spaceless %}
+                <i class="fas fa-clock"></i>&nbsp;
+                {% if post.poster %}
+                {% url 'forum_member:profile' post.poster_id as poster_url %}
+                {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+                {% endblocktrans %}
+                {% else %}
+                {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
+                By: {{ poster_username }} on {{ creation_date }}
+                {% endblocktrans %}
+                {% endif %}
+                {% endspaceless %}
+              </small>
+            </p>
+            <div class="post-content">
+              {{ post.content.rendered }}
+            </div>
+            {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
+            {% if post.enable_signature and post.poster.forum_profile.signature %}
+            <div class="post-signature">
+              {{ post.poster.forum_profile.signature.rendered }}
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-md-2 post-sidebar">
+            {% if post.poster %}
+            {% if post.poster.forum_profile.avatar %}
+            <div class="avatar">
+              <a href="{% url 'forum_member:profile' post.poster_id %}">
+                {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
+              </a>
+            </div>
+            {% endif %}
+            <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
+            <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
+            {% else %}
+            <div class="username"><b>{{ post.username }}</b></div>
+            <div class="username text-muted">{% trans "Anonymous user" %}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if previous_posts %}
+<div class="row">
+  <div class="col-12">
+    <div class="card topic-review">
+      <div class="card-header">
+        <h3 class="m-0 h5 card-title">{% trans "Topic review" %}&nbsp;&ndash;&nbsp;{{ post.topic.subject }}</h3>
+      </div>
+      <div class="card-body">
+        {% for post in previous_posts %}
+        <div class="row post-review">
+          <div class="col-md-10 post-content-wrapper">
+            <h4 class="subject">{{ post.subject }}</h4>
+            <p><small class="text-muted">
+            {% spaceless %}
+            <i class="fas fa-clock"></i>&nbsp;
+            {% if post.poster %}
+            {% url 'forum_member:profile' post.poster_id as poster_url %}
+            {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+            By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+            {% endblocktrans %}
+            {% else %}
+            {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
+            By: {{ poster_username }} on {{ creation_date }}
+            {% endblocktrans %}
+            {% endif %}
+            {% endspaceless %}
+            </small></p>
+            <div class="post-content">
+              {{ post.content.rendered }}
+            </div>
+            {% include "forum_conversation/forum_attachments/attachments_detail.html" %}
+          </div>
+          <div class="col-md-2 post-sidebar">
+            <div class="username">{% if post.poster %}<a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a>{% else %}<b>{{ post.username }}</b>{% endif %}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock content %}

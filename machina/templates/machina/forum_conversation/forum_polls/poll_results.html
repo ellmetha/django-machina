@@ -1,19 +1,19 @@
 {% load i18n %}
 
 {% for option in poll.options.all %}
-	{% if forloop.first or not forloop.counter|divisibleby:2 %}
-		<div class="row">
-	{% endif %}
-	<div class="col-md-6">
-		<b>{{ option.text }}</b>
-		<div class="progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="{{ option.percentage|floatformat }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ option.percentage|stringformat:"f" }}%;">
-				{{ option.percentage|floatformat }}%
-			</div>
-		</div>
-	</div>
-	{% if forloop.last or forloop.counter|divisibleby:2 %}
-		</div>
-	{% endif %}
+{% if forloop.first or not forloop.counter|divisibleby:2 %}
+<div class="mb-3 row">
+{% endif %}
+<div class="col-md-6">
+  <b>{{ option.text }}</b>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{ option.percentage|floatformat }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ option.percentage|stringformat:"f" }}%;">
+      {{ option.percentage|floatformat }}%
+    </div>
+  </div>
+</div>
+{% if forloop.last or forloop.counter|divisibleby:2 %}
+</div>
+{% endif %}
 {% endfor %}
 {% trans "Total votes:" %}&nbsp;{{ poll.votes|length }}

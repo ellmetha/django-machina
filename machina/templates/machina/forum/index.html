@@ -6,20 +6,19 @@
 {% block sub_title %}{% trans "Index" %}{% endblock sub_title %}
 
 {% block content %}
-<br />
-<div class="row">
-  <div class="forumlist-top-controls col-xs-12">
+<div class="mt-3 row">
+  <div class="forumlist-top-controls col-12">
     {% if request.user.is_authenticated %}
-    <div class="pull-right">
-      <a href="{% url 'forum_tracking:mark_all_forums_read' %}" class="btn btn-link"><i class="fa fa-check-circle-o">&nbsp;</i>{% trans "Mark forums read" %}</a>
+    <div class="float-right">
+      <a href="{% url 'forum_tracking:mark_all_forums_read' %}" class="d-inline-block"><i class="fas fa-check-circle">&nbsp;</i>{% trans "Mark forums read" %}</a>
     </div>
-    <a href="{% url 'forum_tracking:unread_topics' %}" class="btn btn-link">{% trans "View unread topics" %}</a>
+    <a href="{% url 'forum_tracking:unread_topics' %}" class="d-inline-block">{% trans "View unread topics" %}</a>
     {% endif %}
   </div>
 </div>
 {% forum_list forums %}
-<div class="row">
-  <div class="forum-page-statistics col-xs-12">
+<div class="my-4 row">
+  <div class="forum-page-statistics col-12">
     <h4 class="page-header">{% trans "Statistics" %}</h4>
     <p class="statistics">{% trans "Total posts:" %}&nbsp;<b>{{ total_posts_count }}</b>&nbsp;&#8226;&nbsp;{% trans "Total topics:" %}&nbsp;<b>{{ total_topics_count }}</b>&nbsp;</p>
   </div>

@@ -1,19 +1,19 @@
 {% load i18n %}
 
 {% if attachment_preview %}
-    <div class="row attachments">
-        {% if attachment_file_previews %}
-            <div class="col-md-12">
-                <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
-            </div>
-        {% endif %}
-        {% for attachment_form, filename in attachment_file_previews %}
-            <div class="col-md-12 attachment">
-                <a href="#"><i class="fa fa-file"></i>&nbsp;{{ filename }}</a>
-                {% if attachment_form.comment.value %}
-                    <p class="text-muted"><em>{{ attachment_form.comment.value }}</em></p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+<div class="row attachments">
+  {% if attachment_file_previews %}
+  <div class="col-md-12">
+    <span class="text-muted attachments-title"><i class="fa fa-files-o"></i>&nbsp;{% trans "Attachments" %}</span>
+  </div>
+  {% endif %}
+  {% for attachment_form, filename in attachment_file_previews %}
+  <div class="col-md-12 attachment">
+    <a href="#"><i class="fa fa-file"></i>&nbsp;{{ filename }}</a>
+    {% if attachment_form.comment.value %}
+    <p class="text-muted"><em>{{ attachment_form.comment.value }}</em></p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
 {% endif %}

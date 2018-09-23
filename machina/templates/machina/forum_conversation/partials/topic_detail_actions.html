@@ -12,31 +12,31 @@
 {% get_permission 'can_update_topics_to_announces' topic.forum request.user as user_can_change_to_announces %}
 
 {% if user_can_add_post %}
-  <a href="{% url 'forum_conversation:post_create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
+<a href="{% url 'forum_conversation:post_create' forum.slug forum.pk topic.slug topic.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-lg"></i>&nbsp;{% trans "Post reply" %}</a>
 {% endif %}
 {% if user_can_subscribe_to_topic %}
-  <a href="{% url 'forum_member:topic_subscribe' topic.pk %}" class="btn btn-info btn-sm btn-subscription"><i class="fa fa-check">&nbsp;</i>{% trans "Subscribe" %}</a>
+<a href="{% url 'forum_member:topic_subscribe' topic.pk %}" class="btn btn-info btn-sm btn-subscription"><i class="fas fa-check">&nbsp;</i>{% trans "Subscribe" %}</a>
 {% elif user_can_unsubscribe_from_topic %}
-  <a href="{% url 'forum_member:topic_unsubscribe' topic.pk %}" class="btn btn-info btn-sm btn-subscription"><i class="fa fa-times">&nbsp;</i>{% trans "Unsubscribe" %}</a>
+<a href="{% url 'forum_member:topic_unsubscribe' topic.pk %}" class="btn btn-info btn-sm btn-subscription"><i class="fas fa-times">&nbsp;</i>{% trans "Unsubscribe" %}</a>
 {% endif %}
 {% if user_can_lock_topics and not topic.is_locked or user_can_move_topics or user_can_delete_topics %}
-  <div class="dropdown moderation-dropdown">
-    <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      {% if user_can_lock_topics and not topic.is_locked %}<li><a href="{% url 'forum_moderation:topic_lock' slug=topic.slug pk=topic.pk %}">{% trans "Lock topic" %}</a></li>{% endif %}
-      {% if user_can_lock_topics and topic.is_locked %}<li><a href="{% url 'forum_moderation:topic_unlock' slug=topic.slug pk=topic.pk %}">{% trans "Unlock topic" %}</a></li>{% endif %}
-      {% if user_can_delete_topics %}<li><a href="{% url 'forum_moderation:topic_delete' slug=topic.slug pk=topic.pk %}">{% trans "Delete topic" %}</a></li>{% endif %}
-      {% if user_can_move_topics %}<li><a href="{% url 'forum_moderation:topic_move' slug=topic.slug pk=topic.pk %}">{% trans "Move topic" %}</a></li>{% endif %}
-      {% if topic.is_topic %}
-        {% if user_can_change_to_sticky_topics %}<li><a href="{% url 'forum_moderation:topic_update_to_sticky' slug=topic.slug pk=topic.pk %}">{% trans "Change to sticky topic" %}</a></li>{% endif %}
-        {% if user_can_change_to_announces %}<li><a href="{% url 'forum_moderation:topic_update_to_announce' slug=topic.slug pk=topic.pk %}">{% trans "Change to announce" %}</a></li> {% endif %}
-      {% elif topic.is_sticky %}
-        {% if user_can_change_to_normal_topics %}<li><a href="{% url 'forum_moderation:topic_update_to_post' slug=topic.slug pk=topic.pk %}">{% trans "Change to standard topic" %}</a></li>{% endif %}
-        {% if user_can_change_to_announces %}<li><a href="{% url 'forum_moderation:topic_update_to_announce' slug=topic.slug pk=topic.pk %}">{% trans "Change to announce" %}</a></li> {% endif %}
-      {% elif topic.is_announce %}
-        {% if user_can_change_to_normal_topics %}<li><a href="{% url 'forum_moderation:topic_update_to_post' slug=topic.slug pk=topic.pk %}">{% trans "Change to standard topic" %}</a></li>{% endif %}
-        {% if user_can_change_to_sticky_topics %}<li><a href="{% url 'forum_moderation:topic_update_to_sticky' slug=topic.slug pk=topic.pk %}">{% trans "Change to sticky topic" %}</a></li>{% endif %}
-      {% endif %}
-    </ul>
+<div class="d-inline-block dropdown moderation-dropdown">
+  <button id="id_dropdown_moderation_menu_button" class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-gavel">&nbsp;&nbsp;</i><span class="caret"></span></button>
+  <div class="dropdown-menu" aria-labelledby="id_dropdown_moderation_menu_button">
+    {% if user_can_lock_topics and not topic.is_locked %}<a href="{% url 'forum_moderation:topic_lock' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Lock topic" %}</a>{% endif %}
+    {% if user_can_lock_topics and topic.is_locked %}<a href="{% url 'forum_moderation:topic_unlock' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Unlock topic" %}</a>{% endif %}
+    {% if user_can_delete_topics %}<a href="{% url 'forum_moderation:topic_delete' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Delete topic" %}</a>{% endif %}
+    {% if user_can_move_topics %}<a href="{% url 'forum_moderation:topic_move' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Move topic" %}</a>{% endif %}
+    {% if topic.is_topic %}
+      {% if user_can_change_to_sticky_topics %}<a href="{% url 'forum_moderation:topic_update_to_sticky' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to sticky topic" %}</a>{% endif %}
+      {% if user_can_change_to_announces %}<a href="{% url 'forum_moderation:topic_update_to_announce' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to announce" %}</a>{% endif %}
+    {% elif topic.is_sticky %}
+      {% if user_can_change_to_normal_topics %}<a href="{% url 'forum_moderation:topic_update_to_post' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to standard topic" %}</a>{% endif %}
+      {% if user_can_change_to_announces %}<a href="{% url 'forum_moderation:topic_update_to_announce' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to announce" %}</a>{% endif %}
+    {% elif topic.is_announce %}
+      {% if user_can_change_to_normal_topics %}<a href="{% url 'forum_moderation:topic_update_to_post' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to standard topic" %}</a>{% endif %}
+      {% if user_can_change_to_sticky_topics %}<a href="{% url 'forum_moderation:topic_update_to_sticky' slug=topic.slug pk=topic.pk %}" class="dropdown-item">{% trans "Change to sticky topic" %}</a>{% endif %}
+    {% endif %}
   </div>
+</div>
 {% endif %}

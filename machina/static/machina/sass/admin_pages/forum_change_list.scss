@@ -1,0 +1,35 @@
+//
+// MACHINA ADMIN: FORUM CHANGE LIST STYLES
+// --------------------------------------------------
+
+
+.danger{
+  color: $redLight;
+}
+a.danger{
+  color: $redLight;
+  &:hover{
+    color: $red;
+  }
+}
+
+.success{
+  color: $greenLight;
+}
+a.success{
+  color: $greenLight;
+  &:hover{
+    color: $green;
+  }
+}
+
+#forum-table-dnd{
+  .quick-actions-cell{
+    width: 5%;
+    text-align: center;
+
+    .disabled{
+      color: $grayLighter;
+    }
+  }
+}

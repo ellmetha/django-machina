@@ -1,7 +1,7 @@
 {% if profile.avatar %}
 <img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.user.username }}" />
-{% elif placeholder %}
+{% elif show_placeholder %}
 <span class="avatar empty">
-  <i class="fa fa-user fa-4x" ></i>
+  <i class="far fa-user fa-4x" ></i>
 </span>
 {% endif %}

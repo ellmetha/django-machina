@@ -1,13 +1,13 @@
 {% load i18n %}
 
 {% if first_pages %}
-    &#91;&nbsp;
-    {% trans "Go to the page:" %}&nbsp;
-    {% for page in first_pages %}
-        <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.id topic.slug topic.pk %}?page={{ page }}">{{ page }}</a>{% if not forloop.last %}&#44;&nbsp;{% elif forloop.last and last_page %}&#44;&nbsp;{% endif %}
-    {% endfor %}
-    {% if last_page %}
-        &#133;&#44;&nbsp;<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.id topic.slug topic.pk %}?page={{ last_page }}">{{ last_page }}</a>
-    {% endif %}
-    &nbsp;&#93;
+&#91;&nbsp;
+{% trans "Go to the page:" %}&nbsp;
+{% for page in first_pages %}
+<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.id topic.slug topic.pk %}?page={{ page }}">{{ page }}</a>{% if not forloop.last %}&#44;&nbsp;{% elif forloop.last and last_page %}&#44;&nbsp;{% endif %}
+{% endfor %}
+{% if last_page %}
+&#133;&#44;&nbsp;<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.id topic.slug topic.pk %}?page={{ last_page }}">{{ last_page }}</a>
+{% endif %}
+&nbsp;&#93;
 {% endif %}

@@ -1,0 +1,58 @@
+//
+// MACHINA BOARD: TOPIC PAGES
+// --------------------------------------------------
+
+
+.card.post{
+  .card-body{
+    .post-content-wrapper{
+      h4.subject{
+        &:hover{
+          a{
+            display: inline-block;
+          }
+        }
+
+        a{
+          display: none;
+
+          &:hover, &:focus{
+            text-decoration: none;
+          }
+        }
+      }
+
+      .attachments{
+        .attachments-title{
+          margin-top: 10px;
+          display: inline-block;
+          border-bottom: 1px solid $grayLight;
+        }
+
+        .attachment{
+          margin-top: 4px;
+
+          p{
+            margin: 0;
+          }
+        }
+      }
+
+      .post-signature{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-top: 5px;
+        border-top: 1px dashed $grayLighter;
+      }
+    }
+
+    .post-sidebar{
+      border-left: 1px solid $grayLighter;
+
+      .avatar{
+        margin-bottom: 6px;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,33 +1,33 @@
 {% load i18n %}
 
 {% if is_paginated %}
-    <ul class="pagination {{ pagination_size|default:"" }}">
-        <li class="prev {% if not page_obj.has_previous %}disabled{% endif %}">
-            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&laquo;</a>
-        </li>
-        {% for number in paginator.page_range %}
-            {% if forloop.first %}
-                <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-                {% if page_obj.number > 4 and paginator.num_pages > 6 %}
-                    <li><span>...</span></li>
-                {% endif %}
-            {% elif forloop.last %}
-                {% if page_obj.number < paginator.num_pages|add:"-3" and paginator.num_pages > 6 %}
-                    <li><span>...</span></li>
-                {% endif %}
-                <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-            {% else %}
-                {% if page_obj.number < 3 and number <= 5 %}
-                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-                {% elif page_obj.number > paginator.num_pages|add:"-2" and number >= paginator.num_pages|add:"-4" %}
-                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-                {% elif number >= page_obj.previous_page_number|add:"-1" and number <= page_obj.next_page_number|add:"1" %}
-                    <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-        <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
-            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" >&raquo;</a>
-        </li>
-    </ul>
+<ul class="m-0 pagination {{ pagination_size|default:"" }}">
+  <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+    <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}" class="page-link">&laquo;</a>
+  </li>
+  {% for number in paginator.page_range %}
+  {% if forloop.first %}
+  <li class="page-item{% if page_obj.number == number %} active{% endif %}"><a href="?page={{ number }}" class="page-link">{{ number }}</a></li>
+  {% if page_obj.number > 4 and paginator.num_pages > 6 %}
+  <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+  {% endif %}
+  {% elif forloop.last %}
+  {% if page_obj.number < paginator.num_pages|add:"-3" and paginator.num_pages > 6 %}
+  <li class="page-item disabled"><a href="" class="page-link">...</a></li>
+  {% endif %}
+  <li class="page-item{% if page_obj.number == number %} active{% endif %}"><a href="?page={{ number }}" class="page-link">{{ number }}</a></li>
+  {% else %}
+  {% if page_obj.number < 3 and number <= 5 %}
+  <li class="page-item{% if page_obj.number == number %} active{% endif %}"><a href="?page={{ number }}" class="page-link">{{ number }}</a></li>
+  {% elif page_obj.number > paginator.num_pages|add:"-2" and number >= paginator.num_pages|add:"-4" %}
+  <li class="page-item{% if page_obj.number == number %} active{% endif %}"><a href="?page={{ number }}" class="page-link">{{ number }}</a></li>
+  {% elif number >= page_obj.previous_page_number|add:"-1" and number <= page_obj.next_page_number|add:"1" %}
+  <li class="page-item{% if page_obj.number == number %} active{% endif %}"><a href="?page={{ number }}" class="page-link">{{ number }}</a></li>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+    <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" class="page-link">&raquo;</a>
+  </li>
+</ul>
 {% endif %}

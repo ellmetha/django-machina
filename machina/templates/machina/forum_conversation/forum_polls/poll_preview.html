@@ -1,56 +1,56 @@
 {% load i18n %}
 
-<div class="row preview">
-	<div class="col-xs-12">
-		<div class="panel panel-default poll poll-preview">
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12 poll-content-wrapper">
-						<h4 class="question">{% trans "Preview:" %}&nbsp;{{ post_form.poll_question.value }}</h4>
-						<hr />
-						<div class="max-options-indication">
-							{% if post_form.poll_max_options.value == '1' %}
-								{% blocktrans trimmed %}
-									You may select <b>1</b> option
-								{% endblocktrans %}
-							{% else %}
-								{% blocktrans trimmed with max_options=post_form.poll_max_options.value %}
-									You may select up to <b>{{ max_options }}</b> options
-								{% endblocktrans %}
-							{% endif %}
-						</div>
-						<div class="poll-options">
-							{% for inline_form in poll_options_previews %}
-								{% if forloop.first or not forloop.counter|divisibleby:2 %}
-									<div class="row">
-								{% endif %}
-								<div class="col-md-6">
-	                            	<div class="well well-sm">
-										{% if post_form.poll_max_options.value == '1' %}
-		                                	<div class="radio">
-		                                    	<label>
-													<input type="radio" value="">
-													{{ inline_form.text.value }}
-												</label>
-											</div>
-										{% else %}
-											<div class="checkbox">
-												<label>
-													<input type="checkbox" value="">
-													{{ inline_form.text.value }}
-												</label>
-											</div>
-										{% endif %}
-	                            	</div>
-								</div>
-								{% if forloop.last or forloop.counter|divisibleby:2 %}
-									</div>
-								{% endif %}
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="mb-3 row preview">
+  <div class="col-12">
+    <div class="card poll poll-preview">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 poll-content-wrapper">
+            <h4 class="question">{% trans "Preview:" %}&nbsp;{{ post_form.poll_question.value }}</h4>
+            <hr />
+            <div class="mb-3 max-options-indication">
+              {% if post_form.poll_max_options.value == '1' %}
+              {% blocktrans trimmed %}
+              You may select <b>1</b> option
+              {% endblocktrans %}
+              {% else %}
+              {% blocktrans trimmed with max_options=post_form.poll_max_options.value %}
+              You may select up to <b>{{ max_options }}</b> options
+              {% endblocktrans %}
+              {% endif %}
+            </div>
+            <div class="poll-options">
+              {% for inline_form in poll_options_previews %}
+              {% if forloop.first or not forloop.counter|divisibleby:2 %}
+              <div class="row">
+              {% endif %}
+                <div class="col-md-6">
+                  <div class="well well-sm">
+                    {% if post_form.poll_max_options.value == '1' %}
+                    <div class="radio">
+                      <label>
+                        <input type="radio" value="">
+                        {{ inline_form.text.value }}
+                      </label>
+                    </div>
+                    {% else %}
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="">
+                        {{ inline_form.text.value }}
+                      </label>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% if forloop.last or forloop.counter|divisibleby:2 %}
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

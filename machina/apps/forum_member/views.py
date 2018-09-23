@@ -197,11 +197,11 @@ class TopicUnsubscribeView(
 
 
 class TopicSubscriptionListView(ListView):
-    """
-    Provides a list of all topics to which the current user has subscribed.
-    """
-    model = Topic
+    """ Provides a list of all topics to which the current user has subscribed. """
+
     context_object_name = 'topics'
+    model = Topic
+    paginate_by = machina_settings.FORUM_TOPICS_NUMBER_PER_PAGE
     template_name = 'forum_member/subscription_topic_list.html'
 
     def get_queryset(self):

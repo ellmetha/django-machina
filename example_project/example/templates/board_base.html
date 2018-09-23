@@ -9,21 +9,20 @@
 
 {% block header_collapse %}
 {{ block.super }}
-<ul class="nav navbar-nav navbar-right">
+<ul class="navbar-nav ml-auto">
   {% if request.user.is_authenticated %}
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <span class="glyphicon glyphicon-user"></span>
+  <li class="nav-item dropdown">
+    <a href="#" id="id_navbar_dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="fas fa-user"></span>
       <strong>{{ request.user.username }}</strong>
-      <span class="glyphicon glyphicon-chevron-down"></span>
     </a>
-    <ul class="dropdown-menu">
-      <li>
+    <ul class="dropdown-menu" aria-labelledby="id_navbar_dropdown">
+      <li class="dropdown-item">
         <div class="navbar-login">
           <div class="row">
             <div class="col-lg-4">
               <p class="text-center">
-                <span class="glyphicon glyphicon-user icon-size"></span>
+                <span class="fa fa-user icon-size"></span>
               </p>
             </div>
             <div class="col-lg-8">
@@ -37,8 +36,8 @@
           </div>
         </div>
       </li>
-      <li class="divider"></li>
-      <li>
+      <li class="dropdown-divider"></li>
+      <li class="dropdown-item">
         <div class="navbar-login navbar-login-session">
           <div class="row">
             <div class="col-lg-12">
@@ -52,8 +51,8 @@
     </ul>
   </li>
   {% else %}
-  <li><a href="{% url 'register' %}">{% trans "Sign up" %}</a></li>
-  <li><a href="{% url 'login' %}">{% trans "Sign in" %}</a></li>
+  <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">{% trans "Sign up" %}</a></li>
+  <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">{% trans "Sign in" %}</a></li>
   {% endif %}
 </ul>
 {% endblock header_collapse %}
@@ -63,13 +62,14 @@
   {{ block.super }}
   <div id="push"></div>
 </div>
-<footer id="footer">
+<footer id="footer" class="py-2 bg-light">
   <div class="container">
-    <div class="pull-right">
-      <p class="text-muted">
-        {% trans "Powered by: "%}&nbsp;
-        <a href="https://www.djangoproject.com/">Django</a>,&nbsp;<a href="https://github.com/ellmetha/django-machina">django-machina</a>
-      </p>
+    <div class="row">
+      <div class="col-12">
+        <p class="text-right text-muted">
+          {% trans "Powered by" %} <a href="https://www.djangoproject.com/">Django</a> &amp; <a href="https://github.com/ellmetha/django-machina">django-machina</a>
+        </p>
+      </div>
     </div>
   </div>
 </footer>

@@ -5,76 +5,75 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-12">
     <h1>{% if poster == request.user %}{% trans "My messages" %}{% else %}{% blocktrans with username=poster.username %}{{ username }}'s posts{% endblocktrans %}{% endif %}</h1>
-    <br />
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-6 col-md-4 forum-actions-block">
+  <div class="col-6 col-md-4 forum-actions-block">
     {% if paginator.count > 0 %}
-      <p class="text-muted">
-        {% blocktrans trimmed count counter=paginator.count %}
-          {{ counter }} post found
-        {% plural %}
-          {{ counter }} posts found
-        {% endblocktrans %}
-      </p>
+    <p class="mt-1 mb-0 text-muted">
+      {% blocktrans trimmed count counter=paginator.count %}
+      {{ counter }} post found
+      {% plural %}
+      {{ counter }} posts found
+      {% endblocktrans %}
+    </p>
     {% else %}
-      <p class="text-muted">{% trans "No posts found" %}</p>
+    <p class="mt-1 mb-0 text-muted">{% trans "No posts found" %}</p>
     {% endif %}
   </div>
-  <div class="col-xs-12 col-md-8 pagination-block">
-    {% with "pagination-sm" as pagination_size %}
-      {% include "partials/pagination.html" %}
+  <div class="col-12 col-md-8 pagination-block">
+    {% with "pagination-sm justify-content-end" as pagination_size %}
+    {% include "partials/pagination.html" %}
     {% endwith %}
   </div>
 </div>
 <div class="row member-posts">
-  <div class="col-xs-12">
+  <div class="col-12">
     {% for post in posts %}
-      <div id="{{ post.id }}" class="panel panel-default post">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-10 post-content-wrapper">
+    <div id="{{ post.id }}" class="my-3 card post">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10 post-content-wrapper">
+              {% spaceless %}
+              <h4 class="subject">
+                <a href="{% url 'forum_conversation:topic' post.topic.forum.slug post.topic.forum.pk post.topic.slug post.topic.pk %}?post={{ post.pk }}#{{ post.pk }}">{{ post.subject }}</a>
+              </h4>
+              {% endspaceless %}
+              <p>
+                <small class="text-muted">
                 {% spaceless %}
-                <h4 class="subject">
-                  <a href="{% url 'forum_conversation:topic' post.topic.forum.slug post.topic.forum.pk post.topic.slug post.topic.pk %}?post={{ post.pk }}#{{ post.pk }}">{{ post.subject }}</a>
-                </h4>
+                <i class="fas fa-clock"></i>&nbsp;
+                {% url 'forum_member:profile' post.poster_id as poster_url %}
+                {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
+                By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+                {% endblocktrans %}
                 {% endspaceless %}
-                <p>
-                  <small class="text-muted">
-                  {% spaceless %}
-                    <i class="fa fa-clock-o"></i>&nbsp;
-                    {% url 'forum_member:profile' post.poster_id as poster_url %}
-                    {% blocktrans trimmed with poster_url=poster_url username=post.poster.username creation_date=post.created %}
-                      By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
-                    {% endblocktrans %}
-                  {% endspaceless %}
-                  </small>
-                </p>
-                <div class="post-content">
-                  {{ post.content.rendered|truncatechars_html:250 }}
-                </div>
+                </small>
+              </p>
+              <div class="post-content">
+                {{ post.content.rendered|truncatechars_html:250 }}
+              </div>
+          </div>
+          <div class="col-md-2 post-sidebar">
+            <div class="avatar">
+              <a href="{% url 'forum_member:profile' post.poster_id %}">
+                {% include "partials/avatar.html" with profile=post.poster placeholder=False %}
+              </a>
             </div>
-            <div class="col-md-2 post-sidebar">
-                <div class="avatar">
-                  <a href="{% url 'forum_member:profile' post.poster_id %}">
-                    {% include "partials/avatar.html" with profile=post.poster placeholder=False %}
-                  </a>
-                </div>
-              <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
-              <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
-            </div>
+            <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster.username }}</b></a></div>
+            <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
           </div>
         </div>
       </div>
+    </div>
     {% endfor %}
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12 col-md-12 pagination-block">
-    {% with "pagination-sm" as pagination_size %}
+  <div class="col-12 pagination-block">
+    {% with "pagination-sm justify-content-end" as pagination_size %}
       {% include "partials/pagination.html" %}
     {% endwith %}
   </div>

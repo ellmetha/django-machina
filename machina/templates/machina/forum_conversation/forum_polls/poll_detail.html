@@ -2,50 +2,51 @@
 {% load forum_permission_tags %}
 {% load forum_polls_tags %}
 
-<div class="panel panel-default poll">
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-md-12 poll-content-wrapper">
-				{% get_permission 'can_vote_in_poll' poll request.user as user_can_vote_in_poll %}
-				{% with can_be_completed=user_can_vote_in_poll has_been_completed=poll|has_been_completed_by:request.user poll=poll %}
-					<h4 class="question">{{ poll.question }}</h4>
-					<hr />
-					<div class="max-options-indication">
-						{% if can_be_completed and not view_results_action %}
-							{% if not has_been_completed or change_vote_action %}
-								{% if poll.max_options == 1 %}
-									{% blocktrans trimmed %}
-										You may select <b>1</b> option
-									{% endblocktrans %}
-								{% else %}
-									{% blocktrans trimmed with max_options=poll.max_options %}
-										You may select up to <b>{{ max_options }}</b> options
-									{% endblocktrans %}
-								{% endif %}
-							{% endif %}
-						{% endif %}
-					</div>
-					<div class="poll-options">
-						{% if can_be_completed and not has_been_completed and not view_results_action %}
-							{% include "forum_conversation/forum_polls/poll_vote_form.html" %}
-						{% elif can_be_completed and has_been_completed and change_vote_action %}
-							{% include "forum_conversation/forum_polls/poll_vote_form.html" %}
-						{% else %}
-							{% include "forum_conversation/forum_polls/poll_results.html" %}
-						{% endif %}
-					</div>
-					{% if view_results_action %}
-						<div class="form-actions">
-							<br />
-							<a href="."><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Vote" %}</a></div>
-					{% elif can_be_completed and has_been_completed and not change_vote_action %}
-						<div class="form-actions">
-							<br />
-							<a href="?change_vote=true"><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Change your vote" %}</a>
-						</div>
-					{% endif %}
-				{% endwith %}
-			</div>
-		</div>
-	</div>
+<div class="my-3 card poll">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 poll-content-wrapper">
+        {% get_permission 'can_vote_in_poll' poll request.user as user_can_vote_in_poll %}
+        {% with can_be_completed=user_can_vote_in_poll has_been_completed=poll|has_been_completed_by:request.user poll=poll %}
+        <h4 class="question">{{ poll.question }}</h4>
+        <hr />
+        <div class="max-options-indication">
+          {% if can_be_completed and not view_results_action %}
+          {% if not has_been_completed or change_vote_action %}
+          {% if poll.max_options == 1 %}
+          {% blocktrans trimmed %}
+          You may select <b>1</b> option
+          {% endblocktrans %}
+          {% else %}
+          {% blocktrans trimmed with max_options=poll.max_options %}
+          You may select up to <b>{{ max_options }}</b> options
+          {% endblocktrans %}
+          {% endif %}
+          {% endif %}
+          {% endif %}
+        </div>
+        <div class="poll-options">
+          {% if can_be_completed and not has_been_completed and not view_results_action %}
+          {% include "forum_conversation/forum_polls/poll_vote_form.html" %}
+          {% elif can_be_completed and has_been_completed and change_vote_action %}
+          {% include "forum_conversation/forum_polls/poll_vote_form.html" %}
+          {% else %}
+          {% include "forum_conversation/forum_polls/poll_results.html" %}
+          {% endif %}
+        </div>
+        {% if view_results_action %}
+        <div class="form-actions">
+          <br />
+          <a href="."><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Vote" %}</a>
+        </div>
+        {% elif can_be_completed and has_been_completed and not change_vote_action %}
+        <div class="form-actions">
+          <br />
+          <a href="?change_vote=true"><i class="fa fa-chevron-circle-right"></i>&nbsp;{% trans "Change your vote" %}</a>
+        </div>
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
 </div>

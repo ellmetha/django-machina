@@ -4,21 +4,20 @@
 {% block sub_title %}{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}{% endblock sub_title %}
 
 {% block content %}
-<div class="row">
-  <div class="col-xs-12">
+<div class="mb-3 row">
+  <div class="col-12">
     <h1>{% blocktrans with username=profile.user.username %}{{ username }} profile{% endblocktrans %}</h1>
-    <br />
   </div>
 </div>
 <div class="row profile">
   <div class="col-md-3">
-    <div class="profile-sidebar">
-      <div class="panel panel-default">
+    <div class="mb-3 profile-sidebar">
+      <div class="card">
         <div class="profile-avatar">
-          {% include "partials/avatar.html" with profile=profile placeholder=True %}
+          {% include "partials/avatar.html" with profile=profile show_placeholder=True %}
         </div>
         <div class="profile-username">
-          <h3 class="text-center text-muted">{{ profile.user.username }}</h3>
+          <h3 class="my-3 text-center text-muted">{{ profile.user.username }}</h3>
         </div>
       </div>
     </div>
@@ -27,23 +26,25 @@
     {% endif %}
   </div>
   <div class="col-md-9">
-    <div class="row">
+    <div class="mb-3 row">
       <div class="col-md-12">
         <div class="profile-content">
-          <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Statistics" %}</div>
-            <div class="panel-body">
+          <div class="card">
+            <div class="card-header">{% trans "Statistics" %}</div>
+            <div class="card-body">
               <div class="row">
                 <div class="col-md-12 divider text-center">
-                  <div class="col-xs-12 col-sm-6 emphasis">
-                    {% blocktrans count counter=profile.posts_count %}<h2><strong>{{ counter }}</strong></h2>
-                    <p><small>Post</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
-                    <p><small>Posts</small></p>{% endblocktrans %}
-                  </div>
-                  <div class="col-xs-12 col-sm-6 emphasis">
-                    {% blocktrans count counter=topics_count %}<h2><strong>{{ counter }}</strong></h2>
-                    <p><small>Topic</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
-                    <p><small>Topics</small></p>{% endblocktrans %}
+                  <div class="row">
+                    <div class="col-12 col-sm-6 emphasis">
+                      {% blocktrans count counter=profile.posts_count %}<h2><strong>{{ counter }}</strong></h2>
+                      <p><small>Post</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
+                      <p class="mb-1"><small>Posts</small></p>{% endblocktrans %}
+                    </div>
+                    <div class="col-12 col-sm-6 emphasis">
+                      {% blocktrans count counter=topics_count %}<h2><strong>{{ counter }}</strong></h2>
+                      <p><small>Topic</small></p>{% plural %}<h2><strong>{{ counter }}</strong></h2>
+                      <p class="mb-1"><small>Topics</small></p>{% endblocktrans %}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -54,9 +55,9 @@
     </div>
     <div class="row recent-posts">
       <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">{% trans "Recent posts" %}{% if recent_posts %}&nbsp;(<a href="{% url 'forum_member:user_posts' profile.user_id %}">{% trans "View all" %}</a>){% endif %}</div>
-          <div class="panel-body">
+        <div class="card">
+          <div class="card-header">{% trans "Recent posts" %}{% if recent_posts %}&nbsp;(<a href="{% url 'forum_member:user_posts' profile.user_id %}">{% trans "View all" %}</a>){% endif %}</div>
+          <div class="card-body">
             {% for post in recent_posts %}
             <div class="row post">
               <div class="col-md-12 post-content-wrapper">

@@ -1,38 +1,38 @@
 {% load i18n %}
 
 <form method="post" action="{% url 'forum_conversation:topic_poll_vote' poll.pk %}" class="form" novalidate>
-	{% csrf_token %}
+  {% csrf_token %}
 
-	{% for option in poll_form.options.field.queryset %}
-		{% if forloop.first or not forloop.counter|divisibleby:2 %}
-			<div class="row">
-		{% endif %}
-		<div class="col-md-6">
-			<div class="well well-sm">
-				{% if poll.max_options == 1 %}
-					<div class="radio">
-						<label>
-							<input type="radio" name="options" value="{{ option.id }}">
-							{{ option.text }}
-						</label>
-					</div>
-				{% else %}
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="options" value="{{ option.id }}">
-							{{ option.text }}
-						</label>
-					</div>
-				{% endif %}
-			</div>
-		</div>
-		{% if forloop.last or forloop.counter|divisibleby:2 %}
-			</div>
-		{% endif %}
-	{% endfor %}
+  {% for option in poll_form.options.field.queryset %}
+  {% if forloop.first or not forloop.counter|divisibleby:2 %}
+  <div class="row">
+  {% endif %}
+  <div class="col-md-6">
+    <div class="well well-sm">
+      {% if poll.max_options == 1 %}
+      <div class="radio">
+        <label>
+          <input type="radio" name="options" value="{{ option.id }}">
+          {{ option.text }}
+        </label>
+      </div>
+      {% else %}
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="options" value="{{ option.id }}">
+          {{ option.text }}
+        </label>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if forloop.last or forloop.counter|divisibleby:2 %}
+  </div>
+  {% endif %}
+  {% endfor %}
 
-	<div class="form-actions">
-		<input type="submit" class="btn btn-sm btn-info" value="{% trans "Submit" %}" />
-		<a href="{% if change_vote_action %}.{% else %}?view_results=true{% endif %}" class="btn btn-link">{% trans "View results" %}</a>
-	</div>
+  <div class="form-actions">
+    <input type="submit" class="btn btn-sm btn-info" value="{% trans "Submit" %}" />
+    <a href="{% if change_vote_action %}.{% else %}?view_results=true{% endif %}" class="btn btn-link">{% trans "View results" %}</a>
+  </div>
 </form>

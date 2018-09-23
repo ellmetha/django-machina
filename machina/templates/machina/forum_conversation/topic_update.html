@@ -5,40 +5,40 @@
 {% block sub_title %}{% trans "Edit post" %}{% endblock sub_title %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{ forum.name }}</h1>
-        </div>
+<div class="row">
+  <div class="col-12">
+    <h1>{{ forum.name }}</h1>
+  </div>
+</div>
+{% if poll_preview %}
+{% include "forum_conversation/forum_polls/poll_preview.html" %}
+{% endif %}
+{% if preview %}
+{% include "forum_conversation/post_preview.html" %}
+{% endif %}
+<div class="row">
+  <div class="col-12">
+    <div class="card post-edit">
+      <div class="card-header">
+        <h3 class="m-0 h5 card-title">{% trans "Edit post" %}</h3>
+      </div>
+      <div class="card-body">
+        {% include "forum_conversation/partials/topic_form.html" %}
+      </div>
     </div>
-    {% if poll_preview %}
-        {% include "forum_conversation/forum_polls/poll_preview.html" %}
-    {% endif %}
-    {% if preview %}
-        {% include "forum_conversation/post_preview.html" %}
-    {% endif %}
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default post-edit">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Edit post" %}</h3>
-                </div>
-                <div class="panel-body">
-                    {% include "forum_conversation/partials/topic_form.html" %}
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block onbodyload %}
-    machina.poll.init();
-    machina.attachment.init();
+machina.poll.init();
+machina.attachment.init();
 {% endblock onbodyload %}
 
 {% block extra_css %}
-    {{ post_form.media.css }}
+{{ post_form.media.css }}
 {% endblock extra_css %}
 
 {% block extra_js %}
-    {{ post_form.media.js }}
+{{ post_form.media.js }}
 {% endblock extra_js %}
