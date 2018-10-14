@@ -205,7 +205,11 @@ class TopicSubscriptionListView(ListView):
     template_name = 'forum_member/subscription_topic_list.html'
 
     def get_queryset(self):
-        return self.request.user.topic_subscriptions.all()
+        return (
+            self.request.user.topic_subscriptions
+            .select_related('forum', 'poster', 'last_post', 'last_post__poster')
+            .all()
+        )
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
