@@ -17,37 +17,9 @@
       <strong>{{ request.user.username }}</strong>
     </a>
     <ul class="dropdown-menu" aria-labelledby="id_navbar_dropdown">
-      <li class="dropdown-item">
-        <div class="navbar-login">
-          <div class="row">
-            <div class="col-lg-4">
-              <p class="text-center">
-                <span class="fa fa-user icon-size"></span>
-              </p>
-            </div>
-            <div class="col-lg-8">
-              <p class="text-left"><strong>{{ request.user.username }}</strong></p>
-              <p class="text-left small">{{ request.user.email }}</p>
-              <p class="text-left">
-                <a href="{% url 'forum_member:profile_update' %}" class="btn btn-primary btn-block btn-sm">{% trans "Profile" %}</a>
-                <a href="{% url 'account-parameters' %}" class="btn btn-info btn-block btn-sm">{% trans "Account" %}</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="dropdown-divider"></li>
-      <li class="dropdown-item">
-        <div class="navbar-login navbar-login-session">
-          <div class="row">
-            <div class="col-lg-12">
-              <p>
-                <a href="{% url 'logout' %}?next=/" class="btn btn-danger btn-block">{% trans "Sign out" %}</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </li>
+      <a href="{% url 'forum_member:profile_update' %}" class="dropdown-item">{% trans "Profile" %}</a>
+      <a href="{% url 'account-parameters' %}" class="dropdown-item">{% trans "Settings" %}</a>
+      <a href="{% url 'logout' %}?next=/" class="dropdown-item">{% trans "Sign out" %}</a>
     </ul>
   </li>
   {% else %}
