@@ -1,3 +1,11 @@
+"""
+    Forum permission abstract models
+    ================================
+
+    This module defines abstract models provided by the ``forum_permission`` application.
+
+"""
+
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
@@ -22,16 +30,19 @@ class AbstractForumPermission(models.Model):
     """
 
     codename = models.CharField(
-        max_length=150, verbose_name=_('Permission codename'), unique=True, db_index=True)
+        max_length=150, verbose_name=_('Permission codename'), unique=True, db_index=True,
+    )
 
     is_global = models.BooleanField(
         verbose_name=_('Global permission'),
         help_text=_('This permission can be granted globally to all the forums'),
-        default=False, db_index=True)
+        default=False, db_index=True,
+    )
     is_local = models.BooleanField(
         verbose_name=_('Local permission'),
         help_text=_('This permission can be granted individually for each forum'),
-        default=True, db_index=True)
+        default=True, db_index=True,
+    )
 
     class Meta:
         abstract = True
@@ -43,12 +54,14 @@ class AbstractForumPermission(models.Model):
         return '{} - {}'.format(self.codename, self.name)
 
     def clean(self):
+        """ Validates the current instance. """
         super().clean()
         if not self.is_global and not self.is_local:
             raise ValidationError(_('A forum permission should be at least either global or local'))
 
     @cached_property
     def name(self):
+        """ Returns the name of the considered permission. """
         perm_config = PermissionConfig().get(self.codename)
         return perm_config['label'] if perm_config else None
 
@@ -58,23 +71,30 @@ class BaseAuthForumPermission(models.Model):
 
     permission = models.ForeignKey(
         'forum_permission.ForumPermission', on_delete=models.CASCADE,
-        verbose_name=_('Forum permission'))
+        verbose_name=_('Forum permission'),
+    )
     has_perm = models.BooleanField(verbose_name=_('Has perm'), default=True, db_index=True)
 
-    # The forum related to a UserForumPermission instance can be null if the
-    # considered permission should be granted globally.
+    # The forum related to a UserForumPermission instance can be null if the considered permission
+    # should be granted globally.
     forum = models.ForeignKey(
-        'forum.Forum', blank=True, null=True, on_delete=models.CASCADE, verbose_name=_('Forum'))
+        'forum.Forum', blank=True, null=True, on_delete=models.CASCADE, verbose_name=_('Forum'),
+    )
 
     class Meta:
         abstract = True
 
     def clean(self):
+        """ Validates the current instance. """
         super().clean()
         if self.forum is None and not self.permission.is_global:
             raise ValidationError(
-                _('The following permission cannot be granted globally: {}'.format(
-                    self.permission)))
+                _(
+                    'The following permission cannot be granted globally: {}'.format(
+                        self.permission,
+                    ),
+                ),
+            )
 
 
 class AbstractUserForumPermission(BaseAuthForumPermission):
@@ -82,9 +102,11 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,
-        verbose_name=_('User'))
+        verbose_name=_('User'),
+    )
     anonymous_user = models.BooleanField(
-        verbose_name=_('Target anonymous user'), default=False, db_index=True)
+        verbose_name=_('Target anonymous user'), default=False, db_index=True,
+    )
 
     class Meta:
         abstract = True
@@ -99,11 +121,15 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
         return '{} - {}'.format(self.permission, self.user)
 
     def clean(self):
+        """ Validates the current instance. """
         super().clean()
-        if (self.user is None and not self.anonymous_user) \
-                or (self.user and self.anonymous_user):
+        if (
+            (self.user is None and not self.anonymous_user) or
+            (self.user and self.anonymous_user)
+        ):
             raise ValidationError(
-                _('A permission should target either a user or an anonymous user'))
+                _('A permission should target either a user or an anonymous user'),
+            )
 
 
 class AbstractGroupForumPermission(BaseAuthForumPermission):

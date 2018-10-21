@@ -1,3 +1,11 @@
+"""
+    Forum abstract models
+    =====================
+
+    This module defines abstract models provided by the ``forum`` application.
+
+"""
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
@@ -24,7 +32,8 @@ class AbstractForum(MPTTModel, DatedModel):
 
     parent = TreeForeignKey(
         'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE,
-        verbose_name=_('Parent'))
+        verbose_name=_('Parent'),
+    )
 
     name = models.CharField(max_length=100, verbose_name=_('Name'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
@@ -33,15 +42,17 @@ class AbstractForum(MPTTModel, DatedModel):
 
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(
-        verbose_name=_('Forum image'), null=True, blank=True,
-        upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
-        **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS)
+        null=True, blank=True, upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
+        verbose_name=_('Forum image'),
+        **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS,
+    )
 
     # Forums can be simple links (eg. wiki, documentation, etc)
     link = models.URLField(verbose_name=_('Forum link'), null=True, blank=True)
     link_redirects = models.BooleanField(
-        verbose_name=_('Track link redirects count'),
-        help_text=_('Records the number of times a forum link was clicked'), default=False)
+        default=False, verbose_name=_('Track link redirects count'),
+        help_text=_('Records the number of times a forum link was clicked'),
+    )
 
     # Category, Default forum or Link ; that's what a forum can be
     FORUM_POST, FORUM_CAT, FORUM_LINK = 0, 1, 2
@@ -51,30 +62,34 @@ class AbstractForum(MPTTModel, DatedModel):
         (FORUM_LINK, _('Link forum')),
     )
     type = models.PositiveSmallIntegerField(
-        choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True)
+        choices=TYPE_CHOICES, verbose_name=_('Forum type'), db_index=True,
+    )
 
     # Tracking data (only approved topics and posts are recorded)
     direct_posts_count = models.PositiveIntegerField(
-        verbose_name=_('Direct number of posts'), editable=False, blank=True, default=0)
+        editable=False, blank=True, default=0, verbose_name=_('Direct number of posts'),
+    )
     direct_topics_count = models.PositiveIntegerField(
-        verbose_name=_('Direct number of topics'), editable=False, blank=True, default=0)
+        editable=False, blank=True, default=0, verbose_name=_('Direct number of topics'),)
     link_redirects_count = models.PositiveIntegerField(
-        verbose_name=_('Track link redirects count'), editable=False, blank=True, default=0)
+        editable=False, blank=True, default=0, verbose_name=_('Track link redirects count'),
+    )
 
     # The 'last_post' and 'last_post_on' fields contain values related to the direct topics/posts
     # only (that is the topics/posts that are directly associated with the considered forum and not
     # one of its sub-forums).
     last_post = models.ForeignKey(
         'forum_conversation.Post', editable=False, related_name='+', blank=True, null=True,
-        on_delete=models.SET_NULL, verbose_name=_('Last post'))
+        on_delete=models.SET_NULL, verbose_name=_('Last post'),
+    )
     last_post_on = models.DateTimeField(verbose_name=_('Last post added on'), blank=True, null=True)
 
     # Display options ; these fields can be used to alter the display of the forums in the list of
     # forums.
     display_sub_forum_list = models.BooleanField(
-        verbose_name=_('Display in parent-forums legend'),
+        default=True, verbose_name=_('Display in parent-forums legend'),
         help_text=_('Displays this forum on the legend of its parent-forum (sub forums list)'),
-        default=True)
+    )
 
     class Meta:
         abstract = True
@@ -88,34 +103,31 @@ class AbstractForum(MPTTModel, DatedModel):
 
     @property
     def margin_level(self):
-        """
-        Used in templates or menus to create an easy-to-see left margin to contrast
-        a forum from their parents.
+        """ Returns a margin value computed from the forum node's level.
+
+        Used in templates or menus to create an easy-to-see left margin to contrast a forum from
+        their parents.
+
         """
         return self.level * 2
 
     @property
     def is_category(self):
-        """
-        Returns True if the forum is a category.
-        """
+        """ Returns ``True`` if the forum is a category. """
         return self.type == self.FORUM_CAT
 
     @property
     def is_forum(self):
-        """
-        Returns True if the forum is a a default forum.
-        """
+        """ Returns ``True`` if the forum is a a default forum. """
         return self.type == self.FORUM_POST
 
     @property
     def is_link(self):
-        """
-        Returns True if the forum is a link.
-        """
+        """ Returns ``True`` if the forum is a link. """
         return self.type == self.FORUM_LINK
 
     def clean(self):
+        """ Validates the forum instance. """
         super().clean()
 
         if self.parent and self.parent.is_link:
@@ -128,6 +140,7 @@ class AbstractForum(MPTTModel, DatedModel):
             raise ValidationError(_('A link forum must have a link associated with it'))
 
     def save(self, *args, **kwargs):
+        """ Saves the forum instance. """
         # It is vital to track the changes of the parent associated with a forum in order to
         # maintain counters up-to-date and to trigger other operations such as permissions updates.
         old_instance = None
@@ -147,17 +160,20 @@ class AbstractForum(MPTTModel, DatedModel):
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
 
     def _simple_save(self, *args, **kwargs):
-        """
-        Calls the parent save method in order to avoid the checks for forum parent changes
-        which can result in triggering a new update of the counters associated with the
-        current forum.
+        """ Simple wrapper around the standard save method.
+
+        Calls the parent save method in order to avoid the checks for forum parent changes which can
+        result in triggering a new update of the counters associated with the current forum.
+
         This allow the database to not be hit by such checks during very common and regular
         operations such as those provided by the update_trackers function; indeed these operations
         will never result in an update of a forum parent.
+
         """
         super().save(*args, **kwargs)
 
     def update_trackers(self):
+        """ Updates the denormalized trackers associated with the forum instance. """
         direct_approved_topics = self.topics.filter(approved=True).order_by('-last_post_on')
 
         # Compute the direct topics count and the direct posts count.

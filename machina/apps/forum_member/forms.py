@@ -1,3 +1,11 @@
+"""
+    Forum member forms
+    ==================
+
+    This module defines forum provided by the ``forum_member`` application.
+
+"""
+
 from django import forms
 
 from machina.conf import settings as machina_settings

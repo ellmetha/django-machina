@@ -1,3 +1,12 @@
+"""
+    Forum permission view mixins
+    ============================
+
+    This module defines permission-related view mixins that can ease the process of verifying forum
+    permissions during a view lifetime.
+
+"""
+
 from collections import Iterable
 
 from django.conf import settings
@@ -11,7 +20,8 @@ from django.utils.six import string_types
 
 
 class PermissionRequiredMixin:
-    """
+    """ Implements the permissions verification and checks at the view level.
+
     This view mixin verifies if the current user has the permissions specified by the
     'permission_required' attribute. This 'permissions check' behavior can be updated
     in the 'perform_permissions_check()' method.
@@ -32,15 +42,15 @@ class PermissionRequiredMixin:
     should be checked against an instance that is not the one associated with a specific
     DetailView, it is possible to write a `get_controlled_object` method to which it will
     be given priority over the methods and attributes mentioned previously.
+
     """
+
     login_url = settings.LOGIN_URL
     permission_required = None
     redirect_field_name = REDIRECT_FIELD_NAME
 
     def get_required_permissions(self, request):
-        """
-        Returns the required permissions to access the considered object.
-        """
+        """ Returns the required permissions to access the considered object. """
         perms = []
 
         if not self.permission_required:
@@ -59,12 +69,13 @@ class PermissionRequiredMixin:
         return perms
 
     def perform_permissions_check(self, user, obj, perms):
-        """
-        Performs a permissions check in order to tell if the passed user
-        can access the current view for the given object.
-        By default, this method checks whether the given user has all the
-        considered permissions in order to grant access. This behavior can
-        be overridden in any subclass.
+        """ Performs the permissions check.
+
+        Performs a permissions check in order to tell if the passed user can access the current view
+        for the given object. By default, this method checks whether the given user has all the
+        considered permissions in order to grant access. This behavior can be overridden in any
+        subclass.
+
         """
         # Initializes a permission checker
         checker = self.request.forum_permission_handler._get_checker(user)
@@ -72,11 +83,11 @@ class PermissionRequiredMixin:
         return all(checker.has_perm(perm, obj) for perm in perms)
 
     def check_permissions(self, request):
-        """
-        Retrieve the controlled object and perform the permissions check.
-        """
-        obj = (hasattr(self, 'get_controlled_object') and self.get_controlled_object() or
-               hasattr(self, 'get_object') and self.get_object() or getattr(self, 'object', None))
+        """ Retrieves the controlled object and perform the permissions check. """
+        obj = (
+            hasattr(self, 'get_controlled_object') and self.get_controlled_object() or
+            hasattr(self, 'get_object') and self.get_object() or getattr(self, 'object', None)
+        )
         user = request.user
 
         # Get the permissions to check
@@ -95,6 +106,7 @@ class PermissionRequiredMixin:
             raise PermissionDenied
 
     def dispatch(self, request, *args, **kwargs):
+        """ Dispatches an incoming request. """
         self.request = request
         self.args = args
         self.kwargs = kwargs

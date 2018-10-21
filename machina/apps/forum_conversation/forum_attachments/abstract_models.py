@@ -1,3 +1,11 @@
+"""
+    Forum attachments abstract models
+    =================================
+
+    This module defines abstract models provided by the ``forum_attachments`` application.
+
+"""
+
 import os
 
 from django.db import models
@@ -7,14 +15,15 @@ from machina.conf import settings as machina_settings
 
 
 class AbstractAttachment(models.Model):
-    """
-    Represents a post attachment. An attachment is always linked to a post.
-    """
+    """ Represents a post attachment. An attachment is always linked to a post. """
+
     post = models.ForeignKey(
         'forum_conversation.Post', related_name='attachments', on_delete=models.CASCADE,
-        verbose_name=_('Post'))
+        verbose_name=_('Post'),
+    )
     file = models.FileField(
-        verbose_name=_('File'), upload_to=machina_settings.ATTACHMENT_FILE_UPLOAD_TO)
+        verbose_name=_('File'), upload_to=machina_settings.ATTACHMENT_FILE_UPLOAD_TO,
+    )
     comment = models.CharField(max_length=255, verbose_name=_('Comment'), blank=True, null=True)
 
     class Meta:
@@ -28,4 +37,5 @@ class AbstractAttachment(models.Model):
 
     @property
     def filename(self):
+        """ Returns the filename of the considered attachment. """
         return os.path.basename(self.file.name)

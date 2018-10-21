@@ -1,3 +1,11 @@
+"""
+    Forum attachments views
+    =======================
+
+    This module defines views provided by the ``forum_attachments`` application.
+
+"""
+
 import mimetypes
 import os
 
@@ -14,12 +22,12 @@ PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRe
 
 
 class AttachmentView(PermissionRequiredMixin, DetailView):
-    """
-    Allows to retrieve a forum attachment.
-    """
+    """ Allows to retrieve a forum attachment. """
+
     model = Attachment
 
     def render_to_response(self, context, **response_kwargs):
+        """ Generates the appropriate response. """
         filename = os.path.basename(self.object.file.name)
 
         # Try to guess the content type of the given file
@@ -32,10 +40,10 @@ class AttachmentView(PermissionRequiredMixin, DetailView):
 
         return response
 
-    # Permissions checks
-
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().post.topic.forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permission check. """
         return self.request.forum_permission_handler.can_download_files(obj, user)

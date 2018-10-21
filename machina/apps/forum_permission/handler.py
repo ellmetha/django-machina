@@ -1,3 +1,12 @@
+"""
+    Forum permission handler
+    ========================
+
+    This module defines a ``PermissionHandler`` abstraction that allows to implement filter or
+    access logic related to forums.
+
+"""
+
 import collections
 import datetime as dt
 from functools import reduce
@@ -50,9 +59,8 @@ class PermissionHandler:
     # --
 
     def forum_list_filter(self, qs, user):
-        """
-        Filters the given queryset in order to return a list of forums that can be seen and read
-        by the specified user (at least).
+        """ Filters the given queryset in order to return a list of forums that can be seen and read
+            by the specified user (at least).
         """
         # Any superuser should see all the forums
         if user.is_superuser:
@@ -82,52 +90,40 @@ class PermissionHandler:
     # Forums
 
     def can_read_forum(self, forum, user):
-        """
-        Given a forum, checks whether the user can read its content.
-        """
+        """ Given a forum, checks whether the user can read its content. """
         return self._perform_basic_permission_check(forum, user, 'can_read_forum')
 
     # Posts and topics
 
     def can_add_topic(self, forum, user):
-        """
-        Given a forum, checks whether the user can append topics to it.
-        """
+        """ Given a forum, checks whether the user can append topics to it. """
         return self._perform_basic_permission_check(forum, user, 'can_start_new_topics')
 
     def can_add_stickies(self, forum, user):
-        """
-        Given a forum, checks whether the user can append stickies to it.
-        """
+        """ Given a forum, checks whether the user can append stickies to it. """
         return self._perform_basic_permission_check(forum, user, 'can_post_stickies')
 
     def can_add_announcements(self, forum, user):
-        """
-        Given a forum, checks whether the user can append announcements to it.
-        """
+        """ Given a forum, checks whether the user can append announcements to it. """
         return self._perform_basic_permission_check(forum, user, 'can_post_announcements')
 
     def can_post_without_approval(self, forum, user):
-        """
-        Given a forum, checks whether the user can add a posts and topics without approval.
-        """
+        """ Given a forum, checks whether the user can add a posts and topics without approval. """
         return self._perform_basic_permission_check(forum, user, 'can_post_without_approval')
 
     def can_add_post(self, topic, user):
-        """
-        Given a topic, checks whether the user can append posts to it.
-        """
+        """ Given a topic, checks whether the user can append posts to it. """
         can_add_post = self._perform_basic_permission_check(
-            topic.forum, user, 'can_reply_to_topics') and (
-                not topic.is_locked or
-                self._perform_basic_permission_check(
-                    topic.forum, user, 'can_reply_to_locked_topics'))
+            topic.forum, user, 'can_reply_to_topics',
+        )
+        can_add_post &= (
+            not topic.is_locked or
+            self._perform_basic_permission_check(topic.forum, user, 'can_reply_to_locked_topics')
+        )
         return can_add_post
 
     def can_edit_post(self, post, user):
-        """
-        Given a forum post, checks whether the user can edit the latter.
-        """
+        """ Given a forum post, checks whether the user can edit the latter. """
         checker = self._get_checker(user)
 
         # A user can edit a post if...
@@ -135,12 +131,14 @@ class PermissionHandler:
         #     they are the original poster of the forum post
         #     they belong to the forum moderators
         is_author = self._is_post_author(post, user)
-        can_edit = (user.is_superuser or
-                    (
-                        is_author and checker.has_perm('can_edit_own_posts', post.topic.forum) and
-                        not post.topic.is_locked
-                    ) or
-                    checker.has_perm('can_edit_posts', post.topic.forum))
+        can_edit = (
+            user.is_superuser or
+            (
+                is_author and checker.has_perm('can_edit_own_posts', post.topic.forum) and
+                not post.topic.is_locked
+            ) or
+            checker.has_perm('can_edit_posts', post.topic.forum)
+        )
         return can_edit
 
     def can_delete_post(self, post, user):
@@ -154,43 +152,42 @@ class PermissionHandler:
         #     they are the original poster of the forum post
         #     they belong to the forum moderators
         is_author = self._is_post_author(post, user)
-        can_delete = (user.is_superuser or
-                      (is_author and checker.has_perm('can_delete_own_posts', post.topic.forum)) or
-                      checker.has_perm('can_delete_posts', post.topic.forum))
+        can_delete = (
+            user.is_superuser or
+            (is_author and checker.has_perm('can_delete_own_posts', post.topic.forum)) or
+            checker.has_perm('can_delete_posts', post.topic.forum)
+        )
         return can_delete
 
     # Polls
 
     def can_create_polls(self, forum, user):
-        """
-        Given a forum, checks whether the user can add a topic with an embedded poll.
-        """
+        """ Given a forum, checks whether the user can add a topic with an embedded poll. """
         return self._perform_basic_permission_check(forum, user, 'can_create_polls')
 
     def can_vote_in_poll(self, poll, user):
-        """
-        Given a poll, checks whether the user can answer to it.
-        """
+        """ Given a poll, checks whether the user can answer to it. """
         # First we have to check if the poll is curently open
         if poll.duration:
             poll_dtend = poll.created + dt.timedelta(days=poll.duration)
             if poll_dtend < now():
                 return False
 
-        # Is this user allowed to vote in polls in the current forum ?
-        can_vote = self._perform_basic_permission_check(
-            poll.topic.forum, user, 'can_vote_in_polls') and not poll.topic.is_locked
+        # Is this user allowed to vote in polls in the current forum?
+        can_vote = (
+            self._perform_basic_permission_check(poll.topic.forum, user, 'can_vote_in_polls') and
+            not poll.topic.is_locked
+        )
 
         # Retrieve the user votes for the considered poll
-        user_votes = TopicPollVote.objects.filter(
-            poll_option__poll=poll)
+        user_votes = TopicPollVote.objects.filter(poll_option__poll=poll)
         if user.is_anonymous:
             forum_key = get_anonymous_user_forum_key(user)
             if forum_key:
                 user_votes = user_votes.filter(anonymous_key=forum_key)
             else:
-                # If the forum key of the anonymous user cannot be retrieved, the user
-                # should not be allowed to vote in the considered poll.
+                # If the forum key of the anonymous user cannot be retrieved, the user should not be
+                # allowed to vote in the considered poll.
                 user_votes = user_votes.none()
                 can_vote = False
         else:
@@ -205,126 +202,111 @@ class PermissionHandler:
     # Attachments
 
     def can_attach_files(self, forum, user):
-        """
-        Given a forum, checks whether the user can add attachments to posts.
-        """
+        """ Given a forum, checks whether the user can add attachments to posts. """
         return self._perform_basic_permission_check(forum, user, 'can_attach_file')
 
     def can_download_files(self, forum, user):
-        """
-        Given a forum, checks whether the user can download files attached to posts.
-        """
+        """ Given a forum, checks whether the user can download files attached to posts. """
         return self._perform_basic_permission_check(forum, user, 'can_download_file')
 
     # Topic subscription
 
     def can_subscribe_to_topic(self, topic, user):
-        """
-        Given a topic, checks whether the user can add it to their subscription list.
-        """
+        """ Given a topic, checks whether the user can add it to their subscription list. """
         # A user can subscribe to topics if they are authenticated and if they have the permission
         # to read the related forum. Of course a user can subscribe only if they have not already
         # subscribed to the considered topic.
-        return user.is_authenticated and not topic.has_subscriber(user) \
-            and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+        return (
+            user.is_authenticated and
+            not topic.has_subscriber(user) and
+            self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+        )
 
     def can_unsubscribe_from_topic(self, topic, user):
-        """
-        Given a topic, checks whether the user can remove it from their subscription list.
-        """
+        """ Given a topic, checks whether the user can remove it from their subscription list. """
         # A user can unsubscribe from topics if they are authenticated and if they have the
         # permission to read the related forum. Of course a user can unsubscribe only if they are
         #  already a subscriber of the considered topic.
-        return user.is_authenticated and topic.has_subscriber(user) \
-            and self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+        return (
+            user.is_authenticated and
+            topic.has_subscriber(user) and
+            self._perform_basic_permission_check(topic.forum, user, 'can_read_forum')
+        )
 
     # Moderation
 
     def get_moderation_queue_forums(self, user):
-        """
-        Returns the list of forums whose posts can be approved by the considered
-        user.
-        """
+        """ Returns the list of forums whose posts can be approved by the considered user. """
         return self._get_forums_for_user(user, ['can_approve_posts', ])
 
     def can_access_moderation_queue(self, user):
-        """
-        Returns True if the passed user can access the moderation queue.  The latest
-        allows the moderator to approve posts.
-        """
+        """ Returns True if the passed user can access the moderation queue. """
         return len(self.get_moderation_queue_forums(user)) > 0
 
     def can_lock_topics(self, forum, user):
-        """
-        Given a forum, checks whether the user can lock its topics.
-        """
+        """ Given a forum, checks whether the user can lock its topics. """
         return self._perform_basic_permission_check(forum, user, 'can_lock_topics')
 
     def can_move_topics(self, forum, user):
-        """
-        Given a forum, checks whether the user can move its topics to another forum.
-        """
+        """ Given a forum, checks whether the user can move its topics to another forum. """
         return self._perform_basic_permission_check(forum, user, 'can_move_topics')
 
     def get_target_forums_for_moved_topics(self, user):
-        """
-        Returns a list of forums in which the considered user can add topics
-        that have been moved from another forum.
+        """ Returns a list of forums in which the considered user can add topics that have been
+            moved from another forum.
         """
         return [f for f in self._get_forums_for_user(user, ['can_move_topics', ]) if f.is_forum]
 
     def can_delete_topics(self, forum, user):
-        """
-        Given a forum, checks whether the user can delete its topics.
-        Note: the ``can_delete_posts`` permission is used here because
-        a user who can delete all the posts of a topic is also able to
-        delete the topic itself.
+        """ Given a forum, checks whether the user can delete its topics.
+
+        Note: the ``can_delete_posts`` permission is used here because a user who can delete all the
+        posts of a topic is also able to delete the topic itself.
+
         """
         return self._perform_basic_permission_check(forum, user, 'can_delete_posts')
 
     def can_update_topics_to_normal_topics(self, forum, user):
-        """
-        Given a forum, checks whether the user can change its topic types to normal
-        topics.
-        """
+        """ Given a forum, checks whether the user can change its topic types to normal topics. """
         return self._perform_basic_permission_check(forum, user, 'can_edit_posts')
 
     def can_update_topics_to_sticky_topics(self, forum, user):
-        """
-        Given a forum, checks whether the user can change its topic types to sticky
-        topics.
-        """
-        return self._perform_basic_permission_check(forum, user, 'can_edit_posts') \
-            and self._perform_basic_permission_check(forum, user, 'can_post_stickies')
+        """ Given a forum, checks whether the user can change its topic types to sticky topics. """
+        return (
+            self._perform_basic_permission_check(forum, user, 'can_edit_posts') and
+            self._perform_basic_permission_check(forum, user, 'can_post_stickies')
+        )
 
     def can_update_topics_to_announces(self, forum, user):
-        """
-        Given a forum, checks whether the user can change its topic types to announces.
-        """
-        return self._perform_basic_permission_check(forum, user, 'can_edit_posts') \
-            and self._perform_basic_permission_check(forum, user, 'can_post_announcements')
+        """ Given a forum, checks whether the user can change its topic types to announces. """
+        return (
+            self._perform_basic_permission_check(forum, user, 'can_edit_posts') and
+            self._perform_basic_permission_check(forum, user, 'can_post_announcements')
+        )
 
     def can_approve_posts(self, forum, user):
-        """
-        Given a forum, checks whether the user can approve its posts.
-        """
+        """ Given a forum, checks whether the user can approve its posts. """
         return self._perform_basic_permission_check(forum, user, 'can_approve_posts')
 
     # Common
     # --
 
     def _is_post_author(self, post, user):
-        return (post.poster == user) if user.is_authenticated \
-            else (post.anonymous_key is not None and
-                  post.anonymous_key == get_anonymous_user_forum_key(user))
+        return (
+            (post.poster == user) if user.is_authenticated else
+            (
+                post.anonymous_key is not None and
+                post.anonymous_key == get_anonymous_user_forum_key(user)
+            )
+        )
 
     def _get_hidden_forum_ids(self, forums, user):
-        """
-        Given a set of forums and a user, returns the list of forums that are not visible
-        by this user.
+        """ Given a set of forums and a user, returns the list of forums that are not visible by
+            this user.
         """
         visible_forums = self._get_forums_for_user(
-            user, ['can_see_forum', 'can_read_forum', ], use_tree_hierarchy=True)
+            user, ['can_see_forum', 'can_read_forum', ], use_tree_hierarchy=True,
+        )
         return forums.exclude(id__in=[f.id for f in visible_forums])
 
     def _get_forums_for_user(self, user, perm_codenames, use_tree_hierarchy=False):
@@ -337,7 +319,8 @@ class PermissionHandler:
         returned.
         """
         granted_forums_cache_key = '{}__{}'.format(
-            ':'.join(perm_codenames), user.id if not user.is_anonymous else 'anonymous')
+            ':'.join(perm_codenames), user.id if not user.is_anonymous else 'anonymous',
+        )
 
         if granted_forums_cache_key in self._granted_forums_cache:
             return self._granted_forums_cache[granted_forums_cache_key]
@@ -354,28 +337,35 @@ class PermissionHandler:
             user_kwargs_filter = {'anonymous_user': True} if user.is_anonymous else {'user': user}
 
             # Get all the user permissions for the considered user.
-            user_perms = UserForumPermission.objects \
-                .filter(**user_kwargs_filter) \
+            user_perms = (
+                UserForumPermission.objects
+                .filter(**user_kwargs_filter)
                 .filter(permission__codename__in=perm_codenames)
+            )
 
             # The first thing to do is to compute three lists of permissions: one containing only
             # globally granted permissions, one containing granted permissions (these permissions
             # are associated with specific forums) and one containing non granted permissions (the
             # latest are also associated with specific forums).
             globally_granted_user_perms = list(
-                filter(lambda p: p.has_perm and p.forum_id is None, user_perms))
+                filter(lambda p: p.has_perm and p.forum_id is None, user_perms)
+            )
             per_forum_granted_user_perms = list(
-                filter(lambda p: p.has_perm and p.forum_id is not None, user_perms))
+                filter(lambda p: p.has_perm and p.forum_id is not None, user_perms)
+            )
             per_forum_nongranted_user_perms = list(
-                filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms))
+                filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms)
+            )
 
             # Using the previous lists we are able to compute a list of forums ids for which
             # permissions are explicitly not granted. It should be noted that any permission that is
             # explicitely set for a user will not be considered as non granted if a "non granted"
             # permission also exists. The explicitly granted permissions always win precedence.
             granted_user_forum_ids = [p.forum_id for p in per_forum_granted_user_perms]
-            nongranted_forum_ids = [p.forum_id for p in per_forum_nongranted_user_perms
-                                    if p.forum_id not in granted_user_forum_ids]
+            nongranted_forum_ids = [
+                p.forum_id for p in per_forum_nongranted_user_perms
+                if p.forum_id not in granted_user_forum_ids
+            ]
 
             required_perm_codenames_count = len(perm_codenames)
             initial_forum_ids = [f.id for f in forums]
@@ -387,33 +377,44 @@ class PermissionHandler:
                 granted_permissions_per_forum[perm.forum_id].add(perm.permission_id)
             for forum_id in initial_forum_ids:
                 granted_permissions_per_forum[forum_id].update(
-                    [perm.permission_id for perm in globally_granted_user_perms])
+                    [perm.permission_id for perm in globally_granted_user_perms]
+                )
 
             if not user.is_anonymous:
                 user_model = get_user_model()
 
                 # Get all the group permissions for the considered user.
-                group_perms = GroupForumPermission.objects \
-                    .filter(**{
-                        'group__{0}'.format(user_model.groups.field.related_query_name()): user}) \
+                group_perms = (
+                    GroupForumPermission.objects
+                    .filter(
+                        **{
+                            'group__{0}'.format(user_model.groups.field.related_query_name()): user
+                        }
+                    )
                     .filter(permission__codename__in=perm_codenames)
+                )
 
                 # Again, we compute three lists of permissions. But this time we are considering
                 # group permissions. The first list contains only globally granted permissions. The
                 # second one contains only granted permissions that are associated with specific
                 # forums. The third list contains non granted permissions.
                 globally_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum_id is None, group_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is None, group_perms)
+                )
                 per_forum_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum_id is not None, group_perms))
+                    filter(lambda p: p.has_perm and p.forum_id is not None, group_perms)
+                )
                 per_forum_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and p.forum_id is not None, group_perms))
+                    filter(lambda p: not p.has_perm and p.forum_id is not None, group_perms)
+                )
 
                 # Now we can update the list of forums ids for which permissions are explicitly not
                 # granted.
                 granted_group_forum_ids = [p.forum_id for p in per_forum_granted_group_perms]
-                nongranted_forum_ids += [p.forum_id for p in per_forum_nongranted_group_perms
-                                         if p.forum_id not in granted_group_forum_ids]
+                nongranted_forum_ids += [
+                    p.forum_id for p in per_forum_nongranted_group_perms
+                    if p.forum_id not in granted_group_forum_ids
+                ]
 
                 # Now we will update our previous dictionary that associated each forum ID with a
                 # set of granted permissions (at the user level). We will update it with the new
@@ -422,7 +423,8 @@ class PermissionHandler:
                     granted_permissions_per_forum[perm.forum_id].add(perm.permission_id)
                 for forum_id in initial_forum_ids:
                     granted_permissions_per_forum[forum_id].update(
-                        [perm.permission_id for perm in globally_granted_group_perms])
+                        [perm.permission_id for perm in globally_granted_group_perms]
+                    )
 
             # We keep only the forum IDs for which the length of the set containing the granted
             # permissions is equal to the number of initial permission codenames. The other forums
@@ -436,11 +438,15 @@ class PermissionHandler:
             # explicitly not granted.
             forum_objects = [
                 f for f in forums
-                if f.id in granted_permissions_per_forum and f.id not in nongranted_forum_ids]
+                if f.id in granted_permissions_per_forum and f.id not in nongranted_forum_ids
+            ]
 
-            if not user.is_anonymous and not forum_objects \
-                    and set(perm_codenames).issubset(set(
-                        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)):
+            if (
+                not user.is_anonymous and not forum_objects and
+                set(perm_codenames).issubset(
+                    set(machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)
+                )
+            ):
                 forum_objects = [f for f in forums if f.id not in nongranted_forum_ids]
 
             if use_tree_hierarchy:
@@ -452,14 +458,16 @@ class PermissionHandler:
     def _filter_granted_forums_using_tree(self, granted_forums):
         top_nodes = self._get_top_nodes()
         d = reduce(
-            lambda a, b: a + self._filter_granted_node_using_tree(b, granted_forums), top_nodes, [])
+            lambda a, b: a + self._filter_granted_node_using_tree(b, granted_forums), top_nodes, []
+        )
         return Forum.objects.filter(id__in=d)
 
     def _filter_granted_node_using_tree(self, f, granted_forums):
         if f in granted_forums:
             return [f.id, ] + reduce(
                 lambda a, b: a + self._filter_granted_node_using_tree(b, granted_forums),
-                f.get_children(), [])
+                f.get_children(), []
+            )
         return []
 
     def _get_top_nodes(self):
@@ -468,13 +476,13 @@ class PermissionHandler:
         return self._top_nodes
 
     def _perform_basic_permission_check(self, forum, user, permission):
-        """
-        Given a forum and a user, checks whether the latter has the passed
-        permission.
+        """ Given a forum and a user, checks whether the latter has the passed permission.
+
         The workflow is:
 
             1. The permission is granted if the user is a superuser
             2. If not, a check is performed with the given permission
+
         """
         checker = self._get_checker(user)
 
@@ -485,9 +493,7 @@ class PermissionHandler:
         return check
 
     def _get_checker(self, user):
-        """
-        Return a ForumPermissionChecker instance for the given user.
-        """
+        """ Return a ForumPermissionChecker instance for the given user. """
         user_perm_checkers_cache_key = user.id if not user.is_anonymous else 'anonymous'
 
         if user_perm_checkers_cache_key in self._user_perm_checkers_cache:

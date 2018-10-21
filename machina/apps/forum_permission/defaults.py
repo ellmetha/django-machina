@@ -1,3 +1,11 @@
+"""
+    Forum defailt permissions
+    =========================
+
+    This module defines the default permissions that can be configured for a forum applications.
+
+"""
+
 from collections import OrderedDict
 
 from django.utils.translation import ugettext_lazy as _

@@ -1,3 +1,11 @@
+"""
+    Forum moderation views
+    ======================
+
+    This module defines views provided by the ``forum_moderation`` application.
+
+"""
+
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -27,184 +35,165 @@ PermissionRequiredMixin = get_class('forum_permission.viewmixins', 'PermissionRe
 
 
 class TopicLockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
-    """
-    A view providing the ability to lock forum topics.
-    """
-    template_name = 'forum_moderation/topic_lock.html'
+    """ Provides the ability to lock forum topics. """
+
     context_object_name = 'topic'
-    success_message = _('This topic has been locked successfully.')
     model = Topic
+    success_message = _('This topic has been locked successfully.')
+    template_name = 'forum_moderation/topic_lock.html'
 
     def lock(self, request, *args, **kwargs):
-        """
-        Locks the considered topic and retirects the user to the success URL.
-        """
+        """ Locks the considered topic and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.status = Topic.TOPIC_LOCKED
         self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         return self.lock(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
-
-        # Append the forum associated with the topic being locked
-        # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
-
         return context
 
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
-
-        return reverse('forum_conversation:topic', kwargs={
-            'forum_slug': self.object.forum.slug,
-            'forum_pk': self.object.forum.pk,
-            'slug': self.object.slug,
-            'pk': self.object.pk})
-
-    # Permissions checks
+        """ Returns the success URL to redirect the user to. """
+        return reverse(
+            'forum_conversation:topic',
+            kwargs={
+                'forum_slug': self.object.forum.slug,
+                'forum_pk': self.object.forum.pk,
+                'slug': self.object.slug,
+                'pk': self.object.pk,
+            },
+        )
 
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permission check. """
         return self.request.forum_permission_handler.can_lock_topics(obj, user)
 
 
 class TopicUnlockView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
-    """
-    A view providing the ability to unlock forum topics.
-    """
-    template_name = 'forum_moderation/topic_unlock.html'
+    """ Provides the ability to unlock forum topics. """
+
     context_object_name = 'topic'
-    success_message = _('This topic has been unlocked successfully.')
     model = Topic
+    template_name = 'forum_moderation/topic_unlock.html'
+    success_message = _('This topic has been unlocked successfully.')
 
     def unlock(self, request, *args, **kwargs):
-        """
-        Unlocks the considered topic and retirects the user to the success URL.
-        """
+        """ Unlocks the considered topic and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.status = Topic.TOPIC_UNLOCKED
         self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         return self.unlock(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
-
-        # Append the forum associated with the topic being locked
-        # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
-
         return context
 
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
-
-        return reverse('forum_conversation:topic', kwargs={
-            'forum_slug': self.object.forum.slug,
-            'forum_pk': self.object.forum.pk,
-            'slug': self.object.slug,
-            'pk': self.object.pk})
-
-    # Permissions checks
+        """ Returns the success URL to redirect the user to. """
+        return reverse(
+            'forum_conversation:topic',
+            kwargs={
+                'forum_slug': self.object.forum.slug,
+                'forum_pk': self.object.forum.pk,
+                'slug': self.object.slug,
+                'pk': self.object.pk,
+            },
+        )
 
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_lock_topics(obj, user)
 
 
 class TopicDeleteView(PermissionRequiredMixin, DeleteView):
-    """
-    A view providing the ability to delete forum topics.
-    """
-    template_name = 'forum_moderation/topic_delete.html'
+    """ Provides the ability to delete forum topics. """
+
     context_object_name = 'topic'
-    success_message = _('This topic has been deleted successfully.')
     model = Topic
+    success_message = _('This topic has been deleted successfully.')
+    template_name = 'forum_moderation/topic_delete.html'
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
-
-        # Append the forum associated with the topic being deleted
-        # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
-
         return context
 
-    def delete(self, request, *args, **kwargs):
-        """
-        Deletes the considered topic and retirects the user to the success URL.
-        Calls the delete() method on the fetched object and then
-        redirects to the success URL.
-        This is a workaround for versions of Django prior 1.6
-        where the get_success_url() method was called after
-        the delete() method.
-        """
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.delete()
-        return HttpResponseRedirect(success_url)
-
     def get_success_url(self):
+        """ Returns the success URL to redirect the user to. """
         messages.success(self.request, self.success_message)
-
-        return reverse('forum:forum', kwargs={
-            'slug': self.object.forum.slug,
-            'pk': self.object.forum.pk})
-
-    # Permissions checks
+        return reverse(
+            'forum:forum', kwargs={'slug': self.object.forum.slug, 'pk': self.object.forum.pk},
+        )
 
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_delete_topics(obj, user)
 
 
-class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
-                    FormMixin, SingleObjectMixin, ProcessFormView):
-    """
-    A view providing the ability to move forum topics.
-    """
-    template_name = 'forum_moderation/topic_move.html'
-    form_class = TopicMoveForm
+class TopicMoveView(
+    PermissionRequiredMixin, SingleObjectTemplateResponseMixin, FormMixin, SingleObjectMixin,
+    ProcessFormView,
+):
+    """ Provides the ability to move forum topics. """
+
     context_object_name = 'topic'
-    success_message = _('This topic has been moved successfully.')
+    form_class = TopicMoveForm
     model = Topic
+    success_message = _('This topic has been moved successfully.')
+    template_name = 'forum_moderation/topic_move.html'
 
     def get(self, request, *args, **kwargs):
+        """ Handles GET requests. """
         self.object = self.get_object()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
-
-        # Append the forum associated with the topic being deleted
-        # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
-
         return context
 
     def get_form_kwargs(self):
+        """ Returns the keyword arguments used to initialize the associated form. """
         kwargs = super().get_form_kwargs()
         kwargs.update({
             'topic': self.object,
@@ -213,6 +202,7 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return kwargs
 
     def form_valid(self, form):
+        """ Handles a valid form. """
         # Move the topic
         topic = self.object
         old_forum = topic.forum
@@ -232,136 +222,149 @@ class TopicMoveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin,
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('forum_conversation:topic', kwargs={
-            'forum_slug': self.object.forum.slug,
-            'forum_pk': self.object.forum.pk,
-            'slug': self.object.slug,
-            'pk': self.object.pk})
-
-    # Permissions checks
+        """ Returns the success URL to redirect the user to. """
+        return reverse(
+            'forum_conversation:topic',
+            kwargs={
+                'forum_slug': self.object.forum.slug,
+                'forum_pk': self.object.forum.pk,
+                'slug': self.object.slug,
+                'pk': self.object.pk,
+            },
+        )
 
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_move_topics(obj, user)
 
 
 class TopicUpdateTypeBaseView(
-        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
+    PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView,
+):
+    """ Provides the ability to change the type of forum topics: normal, sticky topic or announce.
     """
-    A view providing the ability to change the type of forum topics: normal, sticky topic or
-    announce.
-    """
-    template_name = 'forum_moderation/topic_update_type.html'
+
     context_object_name = 'topic'
     model = Topic
     success_message = _('This topic type has been changed successfully.')
+    template_name = 'forum_moderation/topic_update_type.html'
 
-    # The following attributes should be defined in subclasses
-    target_type = None
+    # The following attributes should be defined in subclasses.
     question = ''
+    target_type = None
 
     def update_type(self, request, *args, **kwargs):
-        """
-        Updates the type of the considered topic and retirects the user to the success URL.
+        """ Updates the type of the considered topic and retirects the user to the success URL.
         """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.type = self.target_type
         self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         return self.update_type(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
         context['question'] = self.question
-
-        # Append the forum associated with the topic being locked
-        # to the context
         topic = self.get_object()
         context['forum'] = topic.forum
-
         return context
 
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
-
-        return reverse('forum_conversation:topic', kwargs={
-            'forum_slug': self.object.forum.slug,
-            'forum_pk': self.object.forum.pk,
-            'slug': self.object.slug,
-            'pk': self.object.pk})
-
-    # Permissions checks
+        """ Returns the success URL to redirect the user to. """
+        return reverse(
+            'forum_conversation:topic', kwargs={
+                'forum_slug': self.object.forum.slug,
+                'forum_pk': self.object.forum.pk,
+                'slug': self.object.slug,
+                'pk': self.object.pk,
+            },
+        )
 
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().forum
 
 
 class TopicUpdateToNormalTopicView(TopicUpdateTypeBaseView):
-    target_type = Topic.TOPIC_POST
-    question = _('Would you want to change this topic to a default topic?')
+    """ Provides the ability to switch a topic to a normal topic. """
 
-    # Permissions checks
+    question = _('Would you want to change this topic to a default topic?')
+    target_type = Topic.TOPIC_POST
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_update_topics_to_normal_topics(obj, user)
 
 
 class TopicUpdateToStickyTopicView(TopicUpdateTypeBaseView):
-    target_type = Topic.TOPIC_STICKY
-    question = _('Would you want to change this topic to a sticky topic?')
+    """ Provides the ability to switch a topic to a sticky topic. """
 
-    # Permissions checks
+    question = _('Would you want to change this topic to a sticky topic?')
+    target_type = Topic.TOPIC_STICKY
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_update_topics_to_sticky_topics(obj, user)
 
 
 class TopicUpdateToAnnounceView(TopicUpdateTypeBaseView):
-    target_type = Topic.TOPIC_ANNOUNCE
-    question = _('Would you want to change this topic to an announce?')
+    """ Provides the ability to switch a topic to an announce. """
 
-    # Permissions checks
+    question = _('Would you want to change this topic to an announce?')
+    target_type = Topic.TOPIC_ANNOUNCE
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_update_topics_to_announces(obj, user)
 
 
 class ModerationQueueListView(PermissionRequiredMixin, ListView):
-    template_name = 'forum_moderation/moderation_queue/list.html'
+    """ Displays the moderation queue. """
+
     context_object_name = 'posts'
-    paginate_by = machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE
     model = Post
+    paginate_by = machina_settings.TOPIC_POSTS_NUMBER_PER_PAGE
+    template_name = 'forum_moderation/moderation_queue/list.html'
 
     def get_queryset(self):
+        """ Returns the list of items for this view. """
         forums = self.request.forum_permission_handler.get_moderation_queue_forums(
-            self.request.user)
+            self.request.user,
+        )
         qs = super().get_queryset()
         qs = qs.filter(topic__forum__in=forums, approved=False)
         return qs.order_by('-created')
 
-    # Permissions checks
-
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_access_moderation_queue(user)
 
 
 class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
-    template_name = 'forum_moderation/moderation_queue/detail.html'
+    """ Displays the details of an item in the moderation queue. """
+
     context_object_name = 'post'
     model = Post
+    template_name = 'forum_moderation/moderation_queue/detail.html'
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
 
         post = self.object
         topic = post.topic
 
-        # Handles the case when a poll is associated to the topic
+        # Handles the case when a poll is associated to the topic.
         try:
             if hasattr(topic, 'poll') and topic.poll.options.exists():
                 poll = topic.poll
@@ -372,99 +375,103 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
 
         if not post.is_topic_head:
             # Add the topic review
-            previous_posts = topic.posts.filter(approved=True, created__lte=post.created) \
-                .select_related('poster', 'updated_by') \
-                .prefetch_related('attachments', 'poster__forum_profile') \
+            previous_posts = (
+                topic.posts
+                .filter(approved=True, created__lte=post.created)
+                .select_related('poster', 'updated_by')
+                .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')
+            )
             previous_posts = previous_posts[:machina_settings.TOPIC_REVIEW_POSTS_NUMBER]
             context['previous_posts'] = previous_posts
 
         return context
 
-    # Permissions checks
-
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().topic.forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_approve_posts(obj, user)
 
 
 class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
-    """
-    A view providing the ability to approve queued forum posts.
-    """
-    template_name = 'forum_moderation/moderation_queue/post_approve.html'
+    """ Provides the ability to approve queued forum posts. """
+
     context_object_name = 'post'
-    success_message = _('This post has been approved successfully.')
     model = Post
+    success_message = _('This post has been approved successfully.')
+    template_name = 'forum_moderation/moderation_queue/post_approve.html'
 
     def approve(self, request, *args, **kwargs):
-        """
-        Approves the considered post and retirects the user to the success URL.
-        """
+        """ Approves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.approved = True
         self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         return self.approve(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
         context['forum'] = self.get_object().topic.forum
         return context
 
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
+        """ Returns the success URL to redirect the user to. """
         return reverse('forum_moderation:queue')
 
-    # Permissions checks
-
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().topic.forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_approve_posts(obj, user)
 
 
 class PostDisapproveView(
-        PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
-    """
-    A view providing the ability to disapprove queued forum posts.
-    """
-    template_name = 'forum_moderation/moderation_queue/post_disapprove.html'
+    PermissionRequiredMixin, SingleObjectTemplateResponseMixin, BaseDetailView,
+):
+    """ Provides the ability to disapprove queued forum posts. """
+
     context_object_name = 'post'
-    success_message = _('This post has been disapproved successfully.')
     model = Post
+    success_message = _('This post has been disapproved successfully.')
+    template_name = 'forum_moderation/moderation_queue/post_disapprove.html'
 
     def disapprove(self, request, *args, **kwargs):
-        """
-        Disapproves the considered post and retirects the user to the success URL.
-        """
+        """ Disapproves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
         self.object.delete()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
     def post(self, request, *args, **kwargs):
+        """ Handles POST requests. """
         return self.disapprove(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """ Returns the context data to provide to the template. """
         context = super().get_context_data(**kwargs)
         context['forum'] = self.get_object().topic.forum
         return context
 
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
+        """ Returns the success URL to redirect the user to. """
         return reverse('forum_moderation:queue')
 
-    # Permissions checks
-
     def get_controlled_object(self):
+        """ Returns the controlled object. """
         return self.get_object().topic.forum
 
     def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permissions check. """
         return self.request.forum_permission_handler.can_approve_posts(obj, user)

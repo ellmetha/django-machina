@@ -1,3 +1,11 @@
+"""
+    Forum member abstract models
+    ============================
+
+    This module defines abstract models provided by the ``forum_member`` application.
+
+"""
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -9,24 +17,27 @@ from machina.models.fields import MarkupTextField
 
 
 class AbstractForumProfile(models.Model):
-    """
-    Represents the profile associated with each forum user.
-    """
+    """ Represents the profile associated with each forum user. """
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='forum_profile',
-        verbose_name=_('User'))
+        verbose_name=_('User'),
+    )
 
     # The user's avatar.
     avatar = ExtendedImageField(
         verbose_name=_('Avatar'), null=True, blank=True,
         upload_to=machina_settings.PROFILE_AVATAR_UPLOAD_TO,
-        **machina_settings.DEFAULT_AVATAR_SETTINGS)
+        **machina_settings.DEFAULT_AVATAR_SETTINGS,
+    )
 
     # The user's signature.
     signature = MarkupTextField(
         verbose_name=_('Signature'), blank=True, null=True,
-        validators=[validators.NullableMaxLengthValidator(
-            machina_settings.PROFILE_SIGNATURE_MAX_LENGTH)])
+        validators=[
+            validators.NullableMaxLengthValidator(machina_settings.PROFILE_SIGNATURE_MAX_LENGTH),
+        ],
+    )
 
     # The amount of posts the user has posted (only approved posts are considered here).
     posts_count = models.PositiveIntegerField(verbose_name=_('Total posts'), blank=True, default=0)

@@ -38,8 +38,10 @@ class ForumVisibilityContentTree:
 
         # Ensures forums last posts and related poster relations are "followed" for better
         # performance (only if we're considering a queryset).
-        forums = forums.select_related('last_post', 'last_post__poster') \
+        forums = (
+            forums.select_related('last_post', 'last_post__poster')
             if isinstance(forums, QuerySet) else forums
+        )
 
         for forum in forums:
             level = forum.level
@@ -185,9 +187,10 @@ class ForumVisibilityContentNode:
         else:
             nodes = self.tree.nodes
             index = nodes.index(self)
-            sibling = next(
-                (n for n in nodes[index + 1:] if n.level == self.level), None) \
+            sibling = (
+                next((n for n in nodes[index + 1:] if n.level == self.level), None)
                 if index < len(nodes) - 1 else None
+            )
         return sibling
 
     @cached_property
@@ -210,9 +213,10 @@ class ForumVisibilityContentNode:
         else:
             nodes = self.tree.nodes
             index = nodes.index(self)
-            sibling = next(
-                (n for n in reversed(nodes[:index]) if n.level == self.level), None) \
+            sibling = (
+                next((n for n in reversed(nodes[:index]) if n.level == self.level), None)
                 if index > 0 else None
+            )
         return sibling
 
     @cached_property

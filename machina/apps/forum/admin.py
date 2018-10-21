@@ -1,3 +1,11 @@
+"""
+    Forum model admin definitions
+    =============================
+
+    This module defines admin classes used to populate the Django administration dashboard.
+
+"""
+
 from collections import OrderedDict
 
 from django import forms
@@ -36,73 +44,84 @@ PERM_NOT_SET = 'not-set'
 
 
 class ForumAdmin(admin.ModelAdmin):
-    """
-    The ForumAdmin class provides a specific view for moving up or down any forums.
-    """
+    """ The Forum model admin. """
+
     formfield_overrides = {
         MarkupTextField: {'widget': MarkupTextFieldWidget},
     }
 
     fieldsets = (
-        [None, {
-            'fields': ('type', 'parent', 'name', 'description', 'image',)
-        }],
-        [_('Forum settings'), {
-            'fields': ('display_sub_forum_list',),
-            'classes': ('collapse',)
-        }],
-        [_('Link forum settings'), {
-            'fields': ('link', 'link_redirects',),
-            'classes': ('collapse',)
-        }],
+        [None, {'fields': ('type', 'parent', 'name', 'description', 'image')}],
+        [_('Forum settings'), {'fields': ('display_sub_forum_list', ), 'classes': ('collapse', )}],
+        [
+            _('Link forum settings'),
+            {'fields': ('link', 'link_redirects', ), 'classes': ('collapse', )},
+        ],
     )
-    list_display = ('name', 'type', 'direct_topics_count', 'direct_posts_count',)
-    search_fields = ('name',)
+    list_display = ('name', 'type', 'direct_topics_count', 'direct_posts_count', )
+    search_fields = ('name', )
 
     editpermissions_index_view_template_name = 'admin/forum/forum/editpermissions_index.html'
     editpermissions_user_view_template_name = 'admin/forum/forum/editpermissions_user.html'
-    editpermissions_anonymous_user_view_template_name = \
+    editpermissions_anonymous_user_view_template_name = (
         'admin/forum/forum/editpermissions_anonymous_user.html'
+    )
     editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
 
     def get_urls(self):
+        """ Returns the URLs associated with the admin abstraction. """
         urls = super().get_urls()
         forum_admin_urls = [
-            url(r'^(?P<forum_id>[0-9]+)/move-forum/(?P<direction>up|down)/$',
+            url(
+                r'^(?P<forum_id>[0-9]+)/move-forum/(?P<direction>up|down)/$',
                 self.admin_site.admin_view(self.moveforum_view),
-                name='forum_forum_move'),
-            url(r'^edit-global-permissions/$',
+                name='forum_forum_move',
+            ),
+            url(
+                r'^edit-global-permissions/$',
                 self.admin_site.admin_view(self.editpermissions_index_view),
-                name='forum_forum_editpermission_index'),
-            url(r'^edit-global-permissions/user/(?P<user_id>[0-9]+)/$',
+                name='forum_forum_editpermission_index',
+            ),
+            url(
+                r'^edit-global-permissions/user/(?P<user_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_user_view),
-                name='forum_forum_editpermission_user'),
-            url(r'^edit-global-permissions/user/anonymous/$',
+                name='forum_forum_editpermission_user',
+            ),
+            url(
+                r'^edit-global-permissions/user/anonymous/$',
                 self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
-                name='forum_forum_editpermission_anonymous_user'),
-            url(r'^edit-global-permissions/group/(?P<group_id>[0-9]+)/$',
+                name='forum_forum_editpermission_anonymous_user',
+            ),
+            url(
+                r'^edit-global-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
-                name='forum_forum_editpermission_group'),
-            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/$',
+                name='forum_forum_editpermission_group',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/edit-permissions/$',
                 self.admin_site.admin_view(self.editpermissions_index_view),
-                name='forum_forum_editpermission_index'),
-            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/user/(?P<user_id>[0-9]+)/$',
+                name='forum_forum_editpermission_index',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/edit-permissions/user/(?P<user_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_user_view),
-                name='forum_forum_editpermission_user'),
-            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/user/anonymous/$',
+                name='forum_forum_editpermission_user',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/edit-permissions/user/anonymous/$',
                 self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
-                name='forum_forum_editpermission_anonymous_user'),
-            url(r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
+                name='forum_forum_editpermission_anonymous_user',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
-                name='forum_forum_editpermission_group'),
+                name='forum_forum_editpermission_group',
+            ),
         ]
         return forum_admin_urls + urls
 
     def get_forum_perms_base_context(self, request, obj=None):
-        """
-        Returns context dictionary with common admin and object permissions
-        related content.
-        """
+        """ Returns the context to provide to the template for permissions contents. """
         context = {
             'adminform': {'model_admin': self},
             'media': self.media,
@@ -121,9 +140,7 @@ class ForumAdmin(admin.ModelAdmin):
         return context
 
     def moveforum_view(self, request, forum_id, direction):
-        """
-        Moves the given forum toward the requested direction.
-        """
+        """ Moves the given forum toward the requested direction. """
         forum = get_object_or_404(Forum, pk=forum_id)
 
         # Fetch the target
@@ -143,9 +160,11 @@ class ForumAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(reverse('admin:forum_forum_changelist'))
 
     def editpermissions_index_view(self, request, forum_id=None):
-        """
-        Display a form to select a user or a group in order to edit its
-        permissions for the considered forum.
+        """ Allows to select how to edit forum permissions.
+
+        The view displays a form to select a user or a group in order to edit its permissions for
+        the considered forum.
+
         """
         forum = get_object_or_404(Forum, pk=forum_id) if forum_id \
             else None
@@ -153,8 +172,7 @@ class ForumAdmin(admin.ModelAdmin):
         # Set up the context
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
-        context['title'] = _('Forum permissions') if forum \
-            else _('Global forum permissions')
+        context['title'] = _('Forum permissions') if forum else _('Global forum permissions')
 
         # Handles "copy permission from" form
         permissions_copied = False
@@ -174,33 +192,46 @@ class ForumAdmin(admin.ModelAdmin):
             group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
             if user_form.is_valid() and group_form.is_valid():
-                user = user_form.cleaned_data.get('user', None) \
+                user = user_form.cleaned_data.get('user', None) if user_form.cleaned_data else None
+                anonymous_user = (
+                    user_form.cleaned_data.get('anonymous_user', None)
                     if user_form.cleaned_data else None
-                anonymous_user = user_form.cleaned_data.get('anonymous_user', None) \
-                    if user_form.cleaned_data else None
-                group = group_form.cleaned_data.get('group', None) \
+                )
+                group = (
+                    group_form.cleaned_data.get('group', None)
                     if group_form.cleaned_data else None
+                )
 
                 if not user and not anonymous_user and not group:
                     user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
                         [_('Choose either a user ID, a group ID or the anonymous user'), ])
                 elif user:
                     # Redirect to user
-                    url_kwargs = {'forum_id': forum.id, 'user_id': user.id} if forum \
-                        else {'user_id': user.id}
-                    return redirect(reverse(
-                        'admin:forum_forum_editpermission_user', kwargs=url_kwargs))
+                    url_kwargs = (
+                        {'forum_id': forum.id, 'user_id': user.id}
+                        if forum else {'user_id': user.id}
+                    )
+                    return redirect(
+                        reverse('admin:forum_forum_editpermission_user', kwargs=url_kwargs),
+                    )
                 elif anonymous_user:
                     # Redirect to anonymous user
                     url_kwargs = {'forum_id': forum.id} if forum else {}
-                    return redirect(reverse(
-                        'admin:forum_forum_editpermission_anonymous_user', kwargs=url_kwargs))
+                    return redirect(
+                        reverse(
+                            'admin:forum_forum_editpermission_anonymous_user',
+                            kwargs=url_kwargs,
+                        ),
+                    )
                 elif group:
                     # Redirect to group
-                    url_kwargs = {'forum_id': forum.id, 'group_id': group.id} if forum \
-                        else {'group_id': group.id}
-                    return redirect(reverse(
-                        'admin:forum_forum_editpermission_group', kwargs=url_kwargs))
+                    url_kwargs = (
+                        {'forum_id': forum.id, 'group_id': group.id}
+                        if forum else {'group_id': group.id}
+                    )
+                    return redirect(
+                        reverse('admin:forum_forum_editpermission_group', kwargs=url_kwargs),
+                    )
 
             context['user_errors'] = helpers.AdminErrorList(user_form, [])
             context['group_errors'] = helpers.AdminErrorList(group_form, [])
@@ -211,78 +242,87 @@ class ForumAdmin(admin.ModelAdmin):
         context['user_form'] = user_form
         context['group_form'] = group_form
 
-        return render(
-            request, self.editpermissions_index_view_template_name, context)
+        return render(request, self.editpermissions_index_view_template_name, context)
 
     def editpermissions_user_view(self, request, user_id, forum_id=None):
-        """
-        Display a form to define which permissions are granted for the given user
-        for the considered forum.
+        """ Allows to edit user permissions for the considered forum.
+
+        The view displays a form to define which permissions are granted for the given user for the
+        considered forum.
+
         """
         user_model = get_user_model()
         user = get_object_or_404(user_model, pk=user_id)
-        forum = get_object_or_404(Forum, pk=forum_id) if forum_id \
-            else None
+        forum = get_object_or_404(Forum, pk=forum_id) if forum_id else None
 
         # Set up the context
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), user)
         context['form'] = self._get_permissions_form(
-            request, UserForumPermission, {'forum': forum, 'user': user})
+            request, UserForumPermission, {'forum': forum, 'user': user},
+        )
 
-        return render(
-            request, self.editpermissions_user_view_template_name, context)
+        return render(request, self.editpermissions_user_view_template_name, context)
 
     def editpermissions_anonymous_user_view(self, request, forum_id=None):
+        """ Allows to edit anonymous user permissions for the considered forum.
+
+        The view displays a form to define which permissions are granted for the anonymous user for
+        the considered forum.
+
         """
-        Display a form to define which permissions are granted for the anonymous user
-        for the considered forum.
-        """
-        forum = get_object_or_404(Forum, pk=forum_id) if forum_id \
-            else None
+        forum = get_object_or_404(Forum, pk=forum_id) if forum_id else None
 
         # Set up the context
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), _('Anonymous user'))
         context['form'] = self._get_permissions_form(
-            request, UserForumPermission, {'forum': forum, 'anonymous_user': True})
+            request, UserForumPermission, {'forum': forum, 'anonymous_user': True},
+        )
 
-        return render(
-            request, self.editpermissions_anonymous_user_view_template_name, context)
+        return render(request, self.editpermissions_anonymous_user_view_template_name, context)
 
     def editpermissions_group_view(self, request, group_id, forum_id=None):
-        """
-        Display a form to define which permissions are granted for the given group
-        for the considered forum.
+        """ Allows to edit group permissions for the considered forum.
+
+        The view displays a form to define which permissions are granted for the given group for the
+        considered forum.
+
         """
         group = get_object_or_404(Group, pk=group_id)
-        forum = get_object_or_404(Forum, pk=forum_id) if forum_id \
-            else None
+        forum = get_object_or_404(Forum, pk=forum_id) if forum_id else None
 
         # Set up the context
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
         context['title'] = '{} - {}'.format(_('Forum permissions'), group)
         context['form'] = self._get_permissions_form(
-            request, GroupForumPermission, {'forum': forum, 'group': group})
+            request, GroupForumPermission, {'forum': forum, 'group': group},
+        )
 
-        return render(
-            request, self.editpermissions_group_view_template_name, context)
+        return render(request, self.editpermissions_group_view_template_name, context)
 
     def _get_permissions_form(self, request, permission_model, filter_kwargs):
         # Fetch the permissions
         forum = filter_kwargs.get('forum', None)
         perm_type_filter = {'is_local': True} if forum else {'is_global': True}
         editable_permissions = sorted(
-            ForumPermission.objects.filter(**perm_type_filter), key=lambda p: p.name)
-        granted_permissions = permission_model.objects.filter(
-            permission__in=editable_permissions, has_perm=True, **filter_kwargs) \
+            ForumPermission.objects.filter(**perm_type_filter), key=lambda p: p.name,
+        )
+        granted_permissions = (
+            permission_model.objects.filter(
+                permission__in=editable_permissions, has_perm=True, **filter_kwargs,
+            )
             .values_list('permission__codename', flat=True)
-        non_granted_permissions = permission_model.objects.filter(
-            permission__in=editable_permissions, has_perm=False, **filter_kwargs) \
+        )
+        non_granted_permissions = (
+            permission_model.objects.filter(
+                permission__in=editable_permissions, has_perm=False, **filter_kwargs,
+            )
             .values_list('permission__codename', flat=True)
+        )
 
         permissions_dict = OrderedDict()
         for p in editable_permissions:
@@ -300,12 +340,14 @@ class ForumAdmin(admin.ModelAdmin):
                 for codename, value in form.cleaned_data.items():
                     try:
                         perm = permission_model.objects.get(
-                            permission=permissions_dict[codename][0], **filter_kwargs)
+                            permission=permissions_dict[codename][0], **filter_kwargs,
+                        )
                     except permission_model.DoesNotExist:
                         if value == PERM_NOT_SET:
                             continue
                         perm = permission_model.objects.create(
-                            permission=permissions_dict[codename][0], **filter_kwargs)
+                            permission=permissions_dict[codename][0], **filter_kwargs,
+                        )
 
                     if value == PERM_NOT_SET:
                         perm.delete()
@@ -321,20 +363,20 @@ class ForumAdmin(admin.ModelAdmin):
         return form
 
     def _copy_forum_permissions(self, forum_from, forum_to):
-        user_perms = UserForumPermission.objects.filter(
-            forum=forum_from)
-        group_perms = GroupForumPermission.objects.filter(
-            forum=forum_from)
+        user_perms = UserForumPermission.objects.filter(forum=forum_from)
+        group_perms = GroupForumPermission.objects.filter(forum=forum_from)
 
         for perm in user_perms:
             try:
                 new_perm = UserForumPermission.objects.get(
                     permission=perm.permission, forum=forum_to,
-                    user=perm.user, anonymous_user=perm.anonymous_user)
+                    user=perm.user, anonymous_user=perm.anonymous_user,
+                )
             except UserForumPermission.DoesNotExist:
                 new_perm = UserForumPermission(
                     permission=perm.permission, forum=forum_to,
-                    user=perm.user, anonymous_user=perm.anonymous_user)
+                    user=perm.user, anonymous_user=perm.anonymous_user,
+                )
             new_perm.has_perm = perm.has_perm
             new_perm.save()
 
@@ -342,22 +384,28 @@ class ForumAdmin(admin.ModelAdmin):
             try:
                 new_perm = GroupForumPermission.objects.get(
                     permission=perm.permission, forum=forum_to,
-                    group=perm.group)
+                    group=perm.group,
+                )
             except GroupForumPermission.DoesNotExist:
                 new_perm = GroupForumPermission(
                     permission=perm.permission, forum=forum_to,
-                    group=perm.group)
+                    group=perm.group,
+                )
             new_perm.has_perm = perm.has_perm
             new_perm.save()
 
 
 class PickUserForm(forms.Form):
+    """ Form allowing to pick a user to edit their permissions. """
+
     user = UserForumPermission._meta.get_field('user').formfield()
     anonymous_user = forms.BooleanField(
         label=_('Anonymous'),
         initial=False,
         help_text=_(
-            'Please select this option if you want to edit the permissions of the anonymous user'))
+            'Please select this option if you want to edit the permissions of the anonymous user'
+        ),
+    )
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')
@@ -365,7 +413,8 @@ class PickUserForm(forms.Form):
 
         self.fields['user'].required = False
         self.fields['user'].widget = ForeignKeyRawIdWidget(
-            UserForumPermission._meta.get_field('user').remote_field, admin_site)
+            UserForumPermission._meta.get_field('user').remote_field, admin_site,
+        )
 
         self.fields['anonymous_user'].required = False
 
@@ -375,11 +424,14 @@ class PickUserForm(forms.Form):
         anonymous_user = cleaned_data.get('anonymous_user', None)
         if user and anonymous_user:
             self._errors[NON_FIELD_ERRORS] = self.error_class(
-                [_('Choose either a user ID or select the anonymous user'), ])
+                [_('Choose either a user ID or select the anonymous user'), ],
+            )
         return cleaned_data
 
 
 class PickGroupForm(forms.Form):
+    """ Form allowing to pick a group to edit its permissions. """
+
     group = GroupForumPermission._meta.get_field('group').formfield()
 
     def __init__(self, *args, **kwargs):
@@ -388,15 +440,19 @@ class PickGroupForm(forms.Form):
 
         self.fields['group'].required = False
         self.fields['group'].widget = ForeignKeyRawIdWidget(
-            GroupForumPermission._meta.get_field('group').remote_field, admin_site)
+            GroupForumPermission._meta.get_field('group').remote_field, admin_site,
+        )
 
 
 class PickForumForm(forms.Form):
-    forum = TreeNodeChoiceField(
-        queryset=Forum.objects.all(), required=False)
+    """ Form allowing to pick a specific forum. """
+
+    forum = TreeNodeChoiceField(queryset=Forum.objects.all(), required=False)
 
 
 class PermissionsForm(forms.Form):
+    """ Form allowing to edit permissions. """
+
     def __init__(self, *args, **kwargs):
         self.permissions_dict = kwargs.pop('permissions_dict', {})
         super().__init__(*args, **kwargs)
@@ -408,15 +464,14 @@ class PermissionsForm(forms.Form):
             (PERM_NOT_GRANTED, _('Not granted')),
         )
         for scope in PermissionConfig.scopes:
-            codenames = [x['fields']['codename'] for x in PermissionConfig.permissions
-                         if x['scope'] == scope]
+            codenames = [
+                x['fields']['codename'] for x in PermissionConfig.permissions if x['scope'] == scope
+            ]
             permissions = filter(lambda v: v[0] in codenames, self.permissions_dict.items())
             for codename, p in permissions:
                 self.fields[codename] = forms.ChoiceField(
-                    label=p[0].name,
-                    choices=f_choices,
-                    required=False,
-                    widget=forms.RadioSelect)
+                    label=p[0].name, choices=f_choices, required=False, widget=forms.RadioSelect,
+                )
                 self.fields[codename].initial = p[1]
                 self.fields[codename].scope = scope
 

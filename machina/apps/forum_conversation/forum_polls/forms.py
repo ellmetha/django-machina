@@ -59,8 +59,12 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         # At least two options must be defined
         number_of_options = 0
         for form in self.forms:
-            if not ((self.can_delete and self._should_delete_form(form)) or
-                    len(form.cleaned_data) == 0):
+            if (
+                not (
+                    (self.can_delete and self._should_delete_form(form)) or
+                    len(form.cleaned_data) == 0
+                )
+            ):
                 number_of_options += 1
         if number_of_options < 2:
             raise forms.ValidationError('At least two poll options must be defined.')
@@ -89,7 +93,8 @@ TopicPollOptionFormset = modelformset_factory(
     TopicPollOption, TopicPollOptionForm,
     formset=BaseTopicPollOptionFormset,
     can_delete=True, extra=2, max_num=machina_settings.POLL_MAX_OPTIONS_PER_POLL,
-    validate_max=True)
+    validate_max=True,
+)
 
 
 class TopicPollVoteForm(forms.Form):
@@ -100,11 +105,13 @@ class TopicPollVoteForm(forms.Form):
         if poll.max_options == 1:
             self.fields['options'] = forms.ModelChoiceField(
                 label='', queryset=poll.options.all(), empty_label=None,
-                widget=forms.RadioSelect())
+                widget=forms.RadioSelect(),
+            )
         else:
             self.fields['options'] = forms.ModelMultipleChoiceField(
                 label='', queryset=poll.options.all(),
-                widget=forms.CheckboxSelectMultiple())
+                widget=forms.CheckboxSelectMultiple(),
+            )
 
     def clean_options(self):
         options = self.cleaned_data['options']

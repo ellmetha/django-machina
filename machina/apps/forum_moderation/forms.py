@@ -1,3 +1,11 @@
+"""
+    Forum moderation forms
+    ======================
+
+    This module defines forum provided by the ``forum_moderation`` application.
+
+"""
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,11 +20,10 @@ PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 
 
 class TopicMoveForm(forms.Form):
-    forum = forms.ChoiceField(
-        label=_('Select a destination forum'),
-        widget=SelectWithDisabled)
-    lock_topic = forms.BooleanField(
-        label=_('Lock topic'), required=False)
+    """ Allows to move a topic. """
+
+    forum = forms.ChoiceField(label=_('Select a destination forum'), widget=SelectWithDisabled)
+    lock_topic = forms.BooleanField(label=_('Lock topic'), required=False)
 
     def __init__(self, *args, **kwargs):
         self.topic = kwargs.pop('topic', None)
@@ -35,7 +42,8 @@ class TopicMoveForm(forms.Form):
                     {
                         'label': '{} {}'.format('-' * f.margin_level, f.name),
                         'disabled': True,
-                    }))
+                    }
+                ))
             else:
                 forum_choices.append((f.id, '{} {}'.format('-' * f.margin_level, f.name)))
 

@@ -1,3 +1,11 @@
+"""
+    Forum conversation models
+    =========================
+
+    This module defines models provided by the ``forum_conversation`` application.
+
+"""
+
 from machina.apps.forum_conversation.abstract_models import AbstractPost
 from machina.apps.forum_conversation.abstract_models import AbstractTopic
 from machina.core.db.models import model_factory

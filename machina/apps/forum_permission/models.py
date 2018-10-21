@@ -1,3 +1,11 @@
+"""
+    Forum permission models
+    =======================
+
+    This module defines models provided by the ``forum_permission`` application.
+
+"""
+
 from machina.apps.forum_permission.abstract_models import AbstractForumPermission
 from machina.apps.forum_permission.abstract_models import AbstractGroupForumPermission
 from machina.apps.forum_permission.abstract_models import AbstractUserForumPermission

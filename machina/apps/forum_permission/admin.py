@@ -1,3 +1,11 @@
+"""
+    Forum permission model admin definitions
+    ========================================
+
+    This module defines admin classes used to populate the Django administration dashboard.
+
+"""
+
 from django.contrib import admin
 
 from machina.core.db.models import get_model
@@ -9,12 +17,16 @@ UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
 
 class ForumPermissionAdmin(admin.ModelAdmin):
+    """ The Forum Permission model admin. """
+
     search_fields = ('codename', )
     list_display = ('name', 'codename', 'is_global', 'is_local', )
     list_editables = ('is_global', 'is_local', )
 
 
 class GroupForumPermissionAdmin(admin.ModelAdmin):
+    """ The Group Forum Permission model admin. """
+
     search_fields = ('permission__codename', 'group__name', )
     list_display = ('group', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )
@@ -23,6 +35,8 @@ class GroupForumPermissionAdmin(admin.ModelAdmin):
 
 
 class UserForumPermissionAdmin(admin.ModelAdmin):
+    """ The User Forum Permission model admin. """
+
     search_fields = ('permission__codename', 'user__username', )
     list_display = ('user', 'anonymous_user', 'forum', 'permission', 'has_perm', )
     list_editables = ('has_perm', )

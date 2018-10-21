@@ -1,3 +1,11 @@
+"""
+    Forum member signal receivers
+    =============================
+
+    This module defines signal receivers.
+
+"""
+
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
@@ -21,6 +29,7 @@ def increase_posts_count(sender, instance, **kwargs):
     This receiver handles the update of the profile related to the user who is the poster of the
     forum post being created or updated.
     """
+
     if instance.poster is None:
         # An anonymous post is considered. No profile can be updated in
         # that case.
