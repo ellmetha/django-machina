@@ -338,7 +338,7 @@ class BasePostFormView(FormView):
             return self.render_to_response(
                 self.get_context_data(
                     preview=True, post_form=post_form, attachment_formset=attachment_formset,
-                    **kwargs,
+                    **kwargs
                 ),
             )
 
@@ -371,7 +371,7 @@ class BasePostFormView(FormView):
 
         return self.render_to_response(
             self.get_context_data(
-                post_form=post_form, attachment_formset=attachment_formset, **kwargs,
+                post_form=post_form, attachment_formset=attachment_formset, **kwargs
             ),
         )
 

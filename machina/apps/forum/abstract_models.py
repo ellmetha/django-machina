@@ -43,8 +43,7 @@ class AbstractForum(MPTTModel, DatedModel):
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(
         null=True, blank=True, upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
-        verbose_name=_('Forum image'),
-        **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS,
+        verbose_name=_('Forum image'), **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS
     )
 
     # Forums can be simple links (eg. wiki, documentation, etc)

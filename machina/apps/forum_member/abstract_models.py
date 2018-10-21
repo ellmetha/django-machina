@@ -28,7 +28,7 @@ class AbstractForumProfile(models.Model):
     avatar = ExtendedImageField(
         verbose_name=_('Avatar'), null=True, blank=True,
         upload_to=machina_settings.PROFILE_AVATAR_UPLOAD_TO,
-        **machina_settings.DEFAULT_AVATAR_SETTINGS,
+        **machina_settings.DEFAULT_AVATAR_SETTINGS
     )
 
     # The user's signature.

@@ -313,13 +313,13 @@ class ForumAdmin(admin.ModelAdmin):
         )
         granted_permissions = (
             permission_model.objects.filter(
-                permission__in=editable_permissions, has_perm=True, **filter_kwargs,
+                permission__in=editable_permissions, has_perm=True, **filter_kwargs
             )
             .values_list('permission__codename', flat=True)
         )
         non_granted_permissions = (
             permission_model.objects.filter(
-                permission__in=editable_permissions, has_perm=False, **filter_kwargs,
+                permission__in=editable_permissions, has_perm=False, **filter_kwargs
             )
             .values_list('permission__codename', flat=True)
         )
@@ -340,13 +340,13 @@ class ForumAdmin(admin.ModelAdmin):
                 for codename, value in form.cleaned_data.items():
                     try:
                         perm = permission_model.objects.get(
-                            permission=permissions_dict[codename][0], **filter_kwargs,
+                            permission=permissions_dict[codename][0], **filter_kwargs
                         )
                     except permission_model.DoesNotExist:
                         if value == PERM_NOT_SET:
                             continue
                         perm = permission_model.objects.create(
-                            permission=permissions_dict[codename][0], **filter_kwargs,
+                            permission=permissions_dict[codename][0], **filter_kwargs
                         )
 
                     if value == PERM_NOT_SET:
