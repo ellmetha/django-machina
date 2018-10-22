@@ -12,13 +12,13 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_permission(context, method, *args, **kwargs):
-    """
-    This will return a boolean indicating if the considered permission is
-    granted for the passed user.
+    """ This will return a boolean indicating if the considered permission is granted for the passed
+        user.
 
     Usage::
 
         {% get_permission 'can_access_moderation_panel' request.user as var %}
+
     """
     request = context.get('request', None)
     perm_handler = request.forum_permission_handler if request else PermissionHandler()

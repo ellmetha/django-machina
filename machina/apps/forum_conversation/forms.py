@@ -2,7 +2,7 @@
     Forum conversation forms
     ========================
 
-    This module defines forum provided by the ``forum_conversation`` application.
+    This module defines forms provided by the ``forum_conversation`` application.
 
 """
 

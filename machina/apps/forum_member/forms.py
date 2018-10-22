@@ -2,7 +2,7 @@
     Forum member forms
     ==================
 
-    This module defines forum provided by the ``forum_member`` application.
+    This module defines forms provided by the ``forum_member`` application.
 
 """
 

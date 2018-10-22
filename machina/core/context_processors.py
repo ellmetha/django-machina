@@ -2,9 +2,7 @@ from machina.conf import settings as machina_settings
 
 
 def metadata(request):
-    """
-    Append some Machina-specific data to the template context.
-    """
+    """ Appends some Machina-specific data to the template context. """
     return {
         'MACHINA_FORUM_NAME': machina_settings.MACHINA_FORUM_NAME,
         'MACHINA_BASE_TEMPLATE_NAME': machina_settings.MACHINA_BASE_TEMPLATE_NAME,

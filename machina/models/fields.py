@@ -29,9 +29,11 @@ def _get_markup_widget():
         widget = getattr(__import__(module, {}, {}, [widget]), widget)
         return widget
     except ImportError as e:
-        raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
-            machina_settings.MACHINA_MARKUP_WIDGET,
-            e))
+        raise ImproperlyConfigured(
+            _('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
+                machina_settings.MACHINA_MARKUP_WIDGET, e
+            )
+        )
     except AssertionError:
         return Textarea
 
@@ -48,13 +50,17 @@ def _get_render_function(dotted_path, kwargs):
 
 try:
     markup_lang = machina_settings.MACHINA_MARKUP_LANGUAGE
-    render_func = _get_render_function(markup_lang[0], markup_lang[1]) if markup_lang \
+    render_func = (
+        _get_render_function(markup_lang[0], markup_lang[1]) if markup_lang
         else lambda text: text
+    )
 except ImportError as e:
-    raise ImproperlyConfigured(_('Could not import MACHINA_MARKUP_LANGUAGE {}: {}').format(
-        machina_settings.MACHINA_MARKUP_LANGUAGE,
-        e))
-except AttributeError as e:
+    raise ImproperlyConfigured(
+        _('Could not import MACHINA_MARKUP_LANGUAGE {}: {}').format(
+            machina_settings.MACHINA_MARKUP_LANGUAGE, e,
+        )
+    )
+except AttributeError:
     raise ImproperlyConfigured(_('MACHINA_MARKUP_LANGUAGE setting is required'))
 
 
@@ -125,6 +131,7 @@ class MarkupTextField(models.TextField):
     The initial column store any content written by using a given markup language and the other one
     keeps the rendered content returned by a specific render function.
     """
+
     def __init__(self, *args, **kwargs):
         # For Django 1.7 migration serializer compatibility: the frozen version of a
         # MarkupTextField can't try to add a '*_rendered' field, because the '*_rendered' field
@@ -191,6 +198,7 @@ class ExtendedImageField(models.ImageField):
     An ExtendedImageField is an ImageField whose image can be resized before being saved.
     This field also add the capability of checking the image size, width and height a user may send.
     """
+
     def __init__(self, *args, **kwargs):
         self.width = kwargs.pop('width', None)
         self.height = kwargs.pop('height', None)
@@ -225,13 +233,17 @@ class ExtendedImageField(models.ImageField):
             raise ValidationError(
                 _('Images of width lesser than {}px or greater than {}px or are not allowed. '
                   'The width of your image is {}px').format(
-                    self.min_width, self.max_width, image_width))
+                    self.min_width, self.max_width, image_width
+                )
+            )
         if self.min_height and self.max_height \
                 and not self.min_height <= image_height <= self.max_height:
             raise ValidationError(
                 _('Images of height lesser than {}px or greater than {}px or are not allowed. '
                   'The height of your image is {}px').format(
-                    self.min_height, self.max_height, image_height))
+                    self.min_height, self.max_height, image_height
+                )
+            )
 
         return data
 
@@ -248,9 +260,7 @@ class ExtendedImageField(models.ImageField):
         super().save_form_data(instance, data)
 
     def resize_image(self, data, size):
-        """
-        Resizes the given image to fit inside a box of the given size
-        """
+        """ Resizes the given image to fit inside a box of the given size. """
         from machina.core.compat import PILImage as Image
         image = Image.open(BytesIO(data))
 

@@ -1,3 +1,11 @@
+"""
+    Forum tracking managers
+    =======================
+
+    This module defines managers provided by the ``forum_tracking`` application.
+
+"""
+
 from django.db import models
 
 from machina.core.loading import get_class

@@ -10,9 +10,7 @@ from django.core.exceptions import AppRegistryNotReady
 
 
 def get_model(app_label, model_name):
-    """
-    Given an app label and a model name, returns the corresponding model class.
-    """
+    """ Given an app label and a model name, returns the corresponding model class. """
     try:
         return apps.get_model(app_label, model_name)
     except AppRegistryNotReady:
@@ -34,9 +32,11 @@ def get_model(app_label, model_name):
 
 
 def is_model_registered(app_label, model_name):
-    """
-    Checks whether the given model is registered or not. It is usefull to prevent
-    Machina models for being registered if they are overridden by local apps.
+    """ Checks whether the given model is registered or not.
+
+    It is usefull to prevent Machina models for being registered if they are overridden by local
+    apps.
+
     """
     try:
         apps.get_registered_model(app_label, model_name)
@@ -47,9 +47,8 @@ def is_model_registered(app_label, model_name):
 
 
 def model_factory(abstract_class):
-    """
-    Given an abstract class, constructs the model that inherits  from this class only
-    if a model with the same (app label, model name) was not already in the app registry.
+    """ Given an abstract class, constructs the model that inherits from this class only if a model
+        with the same (app label, model name) was not already in the app registry.
     """
     app_label = abstract_class.Meta.app_label
     model_name = abstract_class.__name__.replace('Abstract', '')

@@ -2,7 +2,7 @@
     Forum attachments forms
     =======================
 
-    This module defines forum provided by the ``forum_attachments`` application.
+    This module defines forms provided by the ``forum_attachments`` application.
 
 """
 

@@ -1,3 +1,11 @@
+"""
+    Forum search indexes
+    ====================
+
+    This module defines search indexes allowing to perform searches among forum topics and posts.
+
+"""
+
 from haystack import indexes
 
 from machina.core.db.models import get_model
@@ -7,11 +15,11 @@ Post = get_model('forum_conversation', 'Post')
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
-    """
-    Defines the data stored in the Post indexes.
-    """
+    """ Defines the data stored in the Post indexes. """
+
     text = indexes.CharField(
-        document=True, use_template=True, template_name='forum_search/post_text.txt')
+        document=True, use_template=True, template_name='forum_search/post_text.txt',
+    )
 
     poster = indexes.IntegerField(model_attr='poster_id', null=True)
     poster_name = indexes.CharField()

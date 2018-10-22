@@ -1,3 +1,12 @@
+"""
+    Forum tracking handler
+    ======================
+
+    This module defines a ``TrackingHandler`` abstraction that allows to identify unread forums and
+    topics.
+
+"""
+
 from django.db.models import F
 from django.db.models import Q
 
@@ -61,8 +70,10 @@ class TrackingHandler:
         if tracked_topics:
             for topic in topics:
                 topic_last_modification_date = topic.last_post_on or topic.created
-                if topic.id in tracked_topics.keys() \
-                        and topic_last_modification_date > tracked_topics[topic.id]:
+                if (
+                    topic.id in tracked_topics.keys() and
+                    topic_last_modification_date > tracked_topics[topic.id]
+                ):
                     unread_topics.append(topic)
 
         # A topic can be unread if a track for its associated forum exists with
@@ -74,8 +85,10 @@ class TrackingHandler:
         if tracked_forums:
             for topic in topics:
                 topic_last_modification_date = topic.last_post_on or topic.created
-                if ((topic.forum_id in tracked_forums.keys() and topic.id not in tracked_topics) and
-                        topic_last_modification_date > tracked_forums[topic.forum_id]):
+                if (
+                    (topic.forum_id in tracked_forums.keys() and topic.id not in tracked_topics) and
+                    topic_last_modification_date > tracked_forums[topic.forum_id]
+                ):
                     unread_topics.append(topic)
 
         # A topic can be unread if no tracks exists for it
@@ -112,23 +125,36 @@ class TrackingHandler:
         except ForumReadTrack.DoesNotExist:
             forum_track = None
 
-        if forum_track is None \
-                or (topic.last_post_on and forum_track.mark_time < topic.last_post_on):
+        if (
+            forum_track is None or
+            (topic.last_post_on and forum_track.mark_time < topic.last_post_on)
+        ):
             topic_track, created = TopicReadTrack.objects.get_or_create(topic=topic, user=user)
             if not created:
                 topic_track.save()  # mark_time filled
 
             # If no other topic is unread inside the considered forum, the latter should also be
             # marked as read.
-            unread_topics = forum.topics.filter(
-                Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
-                Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'),
-                  tracks__isnull=True)).exclude(id=topic.id)
+            unread_topics = (
+                forum.topics
+                .filter(
+                    Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
+                    Q(
+                        forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'),
+                        tracks__isnull=True,
+                    )
+                )
+                .exclude(id=topic.id)
+            )
 
             forum_topic_tracks = TopicReadTrack.objects.filter(topic__forum=forum, user=user)
-            if not unread_topics.exists() and (
+            if (
+                not unread_topics.exists() and
+                (
                     forum_track is not None or
-                    forum_topic_tracks.count() == forum.topics.filter(approved=True).count()):
+                    forum_topic_tracks.count() == forum.topics.filter(approved=True).count()
+                )
+            ):
                 # The topics that are marked as read inside the forum for the given user will be
                 # deleted while the forum track associated with the user must be created or updated.
                 # This is done only if there are as many topic tracks as approved topics in case
@@ -144,10 +170,16 @@ class TrackingHandler:
         for forum in forum.get_ancestors(ascending=True):
             # If no other topics are unread inside the considered forum, the latter should also
             # be marked as read.
-            unread_topics = forum.topics.filter(
-                Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
-                Q(forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'),
-                  tracks__isnull=True))
+            unread_topics = (
+                forum.topics
+                .filter(
+                    Q(tracks__user=user, tracks__mark_time__lt=F('last_post_on')) |
+                    Q(
+                        forum__tracks__user=user, forum__tracks__mark_time__lt=F('last_post_on'),
+                        tracks__isnull=True,
+                    ),
+                )
+            )
             if unread_topics.exists():
                 break
 

@@ -15,9 +15,11 @@ from django.conf import settings
 MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(
     settings, 'MACHINA_MARKUP_LANGUAGE',
-    ('machina.core.markdown.markdown', {'safe_mode': True, 'extras': {'break-on-newline': True}}))
+    ('machina.core.markdown.markdown', {'safe_mode': True, 'extras': {'break-on-newline': True}})
+)
 MACHINA_MARKUP_WIDGET = getattr(
-    settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget')
+    settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget'
+)
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
 MACHINA_BASE_TEMPLATE_NAME = getattr(settings, 'MACHINA_BASE_TEMPLATE_NAME', '_base.html')
 
@@ -50,13 +52,15 @@ POLL_MAX_OPTIONS_PER_USER = getattr(settings, 'MACHINA_POLL_MAX_OPTIONS_PER_USER
 
 # Attachments
 ATTACHMENT_FILE_UPLOAD_TO = getattr(
-    settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments')
+    settings, 'MACHINA_ATTACHMENT_FILE_UPLOAD_TO', 'machina/attachments'
+)
 ATTACHMENT_CACHE_NAME = getattr(settings, 'MACHINA_ATTACHMENT_CACHE_NAME', 'machina_attachments')
 ATTACHMENT_MAX_FILES_PER_POST = getattr(settings, 'MACHINA_ATTACHMENT_MAX_FILES_PER_POST', 15)
 
 # Member
 PROFILE_AVATAR_UPLOAD_TO = getattr(
-    settings, 'MACHINA_PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images')
+    settings, 'MACHINA_PROFILE_AVATAR_UPLOAD_TO', 'machina/avatar_images'
+)
 
 PROFILE_AVATARS_ENABLED = getattr(settings, 'MACHINA_PROFILE_AVATARS_ENABLED', True)
 PROFILE_AVATAR_WIDTH = getattr(settings, 'MACHINA_PROFILE_AVATAR_WIDTH', 150)
@@ -85,4 +89,5 @@ PROFILE_POSTS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_PROFILE_POSTS_NUMBER_
 
 # Permission
 DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(
-    settings, 'MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS', [])
+    settings, 'MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS', []
+)

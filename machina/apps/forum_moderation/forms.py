@@ -2,7 +2,7 @@
     Forum moderation forms
     ======================
 
-    This module defines forum provided by the ``forum_moderation`` application.
+    This module defines forms provided by the ``forum_moderation`` application.
 
 """
 

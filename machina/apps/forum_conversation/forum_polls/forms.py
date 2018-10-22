@@ -1,3 +1,11 @@
+"""
+    Forum polls forms
+    =================
+
+    This module defines forms provided by the ``forum_polls`` application.
+
+"""
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.models import BaseModelFormSet

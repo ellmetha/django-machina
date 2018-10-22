@@ -14,11 +14,12 @@ register = template.Library()
 
 @register.filter
 def has_been_completed_by(poll, user):
-    """
-    This will return a boolean indicating if the passed user has already
-    voted in the given poll.
+    """ This will return a boolean indicating if the passed user has already voted in the given
+        poll.
+
     Usage::
         {% if poll|has_been_completed_by:user %}...{% endif %}
+
     """
     user_votes = TopicPollVote.objects.filter(
         poll_option__poll=poll)

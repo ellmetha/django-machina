@@ -17,7 +17,8 @@ class SelectWithDisabled(Select):
         if isinstance(label, dict):
             label, disabled = label['label'], label['disabled']
         option_dict = super().create_option(
-            name, value, label, selected, index, subindex=subindex, attrs=attrs)
+            name, value, label, selected, index, subindex=subindex, attrs=attrs
+        )
         if disabled:
             option_dict['attrs']['disabled'] = 'disabled'
         return option_dict
