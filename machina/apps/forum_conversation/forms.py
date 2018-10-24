@@ -36,7 +36,6 @@ class PostForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        self.user_ip = kwargs.pop('user_ip', None)
         self.forum = kwargs.pop('forum', None)
         self.topic = kwargs.pop('topic', None)
 
@@ -97,7 +96,6 @@ class PostForm(forms.ModelForm):
         else:
             post = Post(
                 topic=self.topic,
-                poster_ip=self.user_ip,
                 subject=self.cleaned_data['subject'],
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'],

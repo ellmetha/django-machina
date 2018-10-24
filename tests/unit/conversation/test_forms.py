@@ -57,7 +57,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         valid = form.is_valid()
@@ -73,7 +72,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         # Check
@@ -93,7 +91,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -113,7 +110,6 @@ class TestPostForm(object):
         form_kwargs = {
             'data': form_data,
             'user': self.user,
-            'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
             'topic': self.topic,
         }
@@ -141,7 +137,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic)
         # Check
@@ -161,7 +156,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -183,7 +177,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -205,7 +198,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -229,7 +221,6 @@ class TestPostForm(object):
         form = PostForm(
             data=form_data,
             user=user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -271,7 +262,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -289,7 +279,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -307,7 +296,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -323,7 +311,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum)
         valid = form.is_valid()
         # Check
@@ -341,7 +328,6 @@ class TestTopicForm(object):
         form_kwargs = {
             'data': form_data,
             'user': self.user,
-            'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
         # Run & check
@@ -365,7 +351,6 @@ class TestTopicForm(object):
         form_kwargs = {
             'data': form_data,
             'user': self.user,
-            'user_ip': faker.ipv4(),
             'forum': self.top_level_forum,
         }
         # Run & check
@@ -391,7 +376,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -413,7 +397,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -438,7 +421,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -461,7 +443,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)
@@ -488,7 +469,6 @@ class TestTopicForm(object):
         form = TopicForm(
             data=form_data,
             user=self.user,
-            user_ip=faker.ipv4(),
             forum=self.top_level_forum,
             topic=self.topic,
             instance=self.post)

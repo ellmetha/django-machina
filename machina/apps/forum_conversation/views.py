@@ -18,7 +18,6 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 
 from machina.apps.forum_conversation.signals import topic_viewed
-from machina.apps.forum_conversation.utils import get_client_ip
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
@@ -213,7 +212,6 @@ class BasePostFormView(FormView):
         """ Returns the keyword arguments for instantiating the post form. """
         kwargs = {
             'user': self.request.user,
-            'user_ip': get_client_ip(self.request),
             'forum': self.get_forum(),
             'topic': self.get_topic(),
         }

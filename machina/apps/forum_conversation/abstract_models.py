@@ -209,9 +209,6 @@ class AbstractPost(DatedModel):
         settings.AUTH_USER_MODEL, related_name='posts',
         blank=True, null=True, on_delete=models.CASCADE, verbose_name=_('Poster'),
     )
-    poster_ip = models.GenericIPAddressField(
-        verbose_name=_('Poster IP address'), blank=True, null=True, default='2002::0',
-    )
     anonymous_key = models.CharField(
         max_length=100, blank=True, null=True, verbose_name=_('Anonymous user forum key'),
     )
