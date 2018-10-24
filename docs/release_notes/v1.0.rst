@@ -27,3 +27,5 @@ Backwards incompatible changes
 * In order to better follow Django conventions, all django-machina's ``AppConfig`` instances are
   renamed to ``<AppName>AppConfig`` (eg. ``ForumConversationAppConfig``) and are moved to ``apps``
   modules inside each application
+* The ``poster_ip`` field (that used to contain the IP address of post authors) is removed from the
+  ``Post`` model as it wasn't really used in the context of the forum application
