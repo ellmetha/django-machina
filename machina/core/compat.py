@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 try:
     # Try from the Pillow (or one variant of PIL) install location first.
     from PIL import Image as PILImage
-except ImportError as err:  # pragma: no cover
+except ImportError:  # pragma: no cover
     try:
         # If that failed, try the alternate import syntax for PIL.
         import Image as PILImage  # noqa
