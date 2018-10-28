@@ -17,7 +17,7 @@
       <strong>{{ request.user.username }}</strong>
     </a>
     <ul class="dropdown-menu" aria-labelledby="id_navbar_dropdown">
-      <a href="{% url 'forum_member:profile_update' %}" class="dropdown-item">{% trans "Profile" %}</a>
+      <a href="{% url 'forum_member:profile' request.user.id %}" class="dropdown-item">{% trans "Profile" %}</a>
       <a href="{% url 'account-parameters' %}" class="dropdown-item">{% trans "Settings" %}</a>
       <a href="{% url 'logout' %}?next=/" class="dropdown-item">{% trans "Sign out" %}</a>
     </ul>
