@@ -12,6 +12,13 @@ Major changes
 
 * Default templates are upgraded to Bootstrap 4
 
+Minor changes
+-------------
+
+* The forms used by the admin classes of the ``forum`` application are now imported using the
+  django-machina's class loading system. This is to allow to easily override the related form fields
+  and widgets in order to customize the corresponding admin pages
+
 Backwards incompatible changes
 ------------------------------
 
