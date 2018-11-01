@@ -1,17 +1,14 @@
 import pytest
-from django.contrib.auth.models import AnonymousUser
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.core.exceptions import ImproperlyConfigured
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.test import RequestFactory
 from django.views.generic import DetailView
 
 from machina.apps.forum_permission.middleware import ForumPermissionMiddleware
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import UserFactory
-from machina.test.factories import create_forum
+from machina.test.factories import UserFactory, create_forum
 
 
 Forum = get_model('forum', 'Forum')

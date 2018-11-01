@@ -12,8 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
 from machina.core import validators
-from machina.models.fields import ExtendedImageField
-from machina.models.fields import MarkupTextField
+from machina.models.fields import ExtendedImageField, MarkupTextField
 
 
 class AbstractForumProfile(models.Model):

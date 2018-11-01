@@ -7,8 +7,7 @@
 """
 
 from django import forms
-from django.forms.models import BaseModelFormSet
-from django.forms.models import modelformset_factory
+from django.forms.models import BaseModelFormSet, modelformset_factory
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model

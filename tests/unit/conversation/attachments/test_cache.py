@@ -1,8 +1,8 @@
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.files.uploadedfile import TemporaryUploadedFile
+from django.core.files.uploadedfile import (
+    InMemoryUploadedFile, SimpleUploadedFile, TemporaryUploadedFile
+)
 from django.utils.encoding import force_bytes
 
 from machina.apps.forum_conversation.forum_attachments.cache import cache

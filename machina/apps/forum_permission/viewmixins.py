@@ -11,8 +11,7 @@ from collections import Iterable
 
 from django.conf import settings
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
-from django.core.exceptions import ImproperlyConfigured
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import resolve_url
 from django.utils.http import urlquote

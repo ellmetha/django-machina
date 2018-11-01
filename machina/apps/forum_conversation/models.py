@@ -6,8 +6,7 @@
 
 """
 
-from machina.apps.forum_conversation.abstract_models import AbstractPost
-from machina.apps.forum_conversation.abstract_models import AbstractTopic
+from machina.apps.forum_conversation.abstract_models import AbstractPost, AbstractTopic
 from machina.core.db.models import model_factory
 
 

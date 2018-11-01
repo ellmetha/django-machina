@@ -7,8 +7,7 @@
 
 """
 
-from django.db.models import F
-from django.db.models import Q
+from django.db.models import F, Q
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

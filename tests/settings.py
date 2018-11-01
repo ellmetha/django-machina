@@ -2,8 +2,7 @@ import os
 
 from django import VERSION as DJANGO_VERSION
 
-from machina import MACHINA_MAIN_STATIC_DIR
-from machina import MACHINA_MAIN_TEMPLATE_DIR
+from machina import MACHINA_MAIN_STATIC_DIR, MACHINA_MAIN_TEMPLATE_DIR
 
 
 class DisableMigrations(object):

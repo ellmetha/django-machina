@@ -4,13 +4,11 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
 from django.db.models import signals
-from django.forms import Textarea
-from django.forms import ValidationError
+from django.forms import Textarea, ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.encoding import smart_str
 from django.utils.functional import curry
-from django.utils.safestring import SafeData
-from django.utils.safestring import mark_safe
+from django.utils.safestring import SafeData, mark_safe
 from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
 

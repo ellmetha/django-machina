@@ -2,9 +2,7 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from machina.core.db.models import get_model
-from machina.test.factories import ForumPermissionFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import UserForumPermissionFactory
+from machina.test.factories import ForumPermissionFactory, UserFactory, UserForumPermissionFactory
 
 
 Forum = get_model('forum', 'Forum')

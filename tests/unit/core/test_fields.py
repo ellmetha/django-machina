@@ -1,14 +1,11 @@
 import pytest
 from django import forms
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.core.files import File
 from django.utils.encoding import force_text
 from django.utils.six import BytesIO
-from tests.models import RESIZED_IMAGE_HEIGHT
-from tests.models import RESIZED_IMAGE_WIDTH
-from tests.models import DummyModel
+from tests.models import RESIZED_IMAGE_HEIGHT, RESIZED_IMAGE_WIDTH, DummyModel
 
 from machina.conf import settings as machina_settings
 from machina.core.compat import PILImage as Image

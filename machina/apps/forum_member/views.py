@@ -14,11 +14,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView
-from django.views.generic import ListView
-from django.views.generic import UpdateView
-from django.views.generic.detail import BaseDetailView
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.views.generic import DetailView, ListView, UpdateView
+from django.views.generic.detail import BaseDetailView, SingleObjectTemplateResponseMixin
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model

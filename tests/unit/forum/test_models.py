@@ -4,14 +4,10 @@ from django.core.exceptions import ValidationError
 from machina.apps.forum.signals import forum_moved
 from machina.core.db.models import get_model
 from machina.test.context_managers import mock_signal_receiver
-from machina.test.factories import PostFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import build_category_forum
-from machina.test.factories import build_link_forum
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
-from machina.test.factories import create_link_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    PostFactory, UserFactory, build_category_forum, build_link_forum, create_category_forum,
+    create_forum, create_link_forum, create_topic
+)
 
 
 Forum = get_model('forum', 'Forum')

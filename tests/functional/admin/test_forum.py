@@ -3,14 +3,13 @@ from django.contrib.sites.models import Site
 from django.urls import reverse
 
 from machina.apps.forum.admin import PickUserForm
-from machina.apps.forum_permission.models import ForumPermission
-from machina.apps.forum_permission.models import GroupForumPermission
-from machina.apps.forum_permission.models import UserForumPermission
+from machina.apps.forum_permission.models import (
+    ForumPermission, GroupForumPermission, UserForumPermission
+)
 from machina.core.db.models import get_model
-from machina.test.factories import GroupFactory
-from machina.test.factories import GroupForumPermissionFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import UserForumPermissionFactory
+from machina.test.factories import (
+    GroupFactory, GroupForumPermissionFactory, UserFactory, UserForumPermissionFactory
+)
 from machina.test.mixins import AdminBaseViewTestMixin
 from machina.test.testcases import AdminClientTestCase
 

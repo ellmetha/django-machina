@@ -4,13 +4,10 @@ from faker import Faker
 from machina.apps.forum_moderation.forms import TopicMoveForm
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import ForumReadTrackFactory
-from machina.test.factories import PostFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
-from machina.test.factories import create_link_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    ForumReadTrackFactory, PostFactory, UserFactory, create_category_forum, create_forum,
+    create_link_forum, create_topic
+)
 
 
 faker = Faker()

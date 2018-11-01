@@ -8,9 +8,7 @@ from django.test.client import RequestFactory
 from machina.apps.forum_permission.middleware import ForumPermissionMiddleware
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import UserFactory
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
+from machina.test.factories import UserFactory, create_category_forum, create_forum
 
 
 Forum = get_model('forum', 'Forum')

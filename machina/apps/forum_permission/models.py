@@ -6,9 +6,9 @@
 
 """
 
-from machina.apps.forum_permission.abstract_models import AbstractForumPermission
-from machina.apps.forum_permission.abstract_models import AbstractGroupForumPermission
-from machina.apps.forum_permission.abstract_models import AbstractUserForumPermission
+from machina.apps.forum_permission.abstract_models import (
+    AbstractForumPermission, AbstractGroupForumPermission, AbstractUserForumPermission
+)
 from machina.core.db.models import model_factory
 
 

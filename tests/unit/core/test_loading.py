@@ -3,10 +3,7 @@ from django.conf import settings
 from django.test.utils import override_settings
 
 from machina.core.db.models import get_model
-from machina.core.loading import AppNotFoundError
-from machina.core.loading import ClassNotFoundError
-from machina.core.loading import get_class
-from machina.core.loading import get_classes
+from machina.core.loading import AppNotFoundError, ClassNotFoundError, get_class, get_classes
 
 
 class TestClassLoadingFunctions(object):

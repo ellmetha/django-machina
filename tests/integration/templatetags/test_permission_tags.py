@@ -1,20 +1,16 @@
 import pytest
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.template import Context
-from django.template import TemplateSyntaxError
+from django.template import Context, TemplateSyntaxError
 from django.template.base import Template
 from django.test.client import RequestFactory
 
 from machina.apps.forum_permission.middleware import ForumPermissionMiddleware
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import GroupFactory
-from machina.test.factories import PostFactory
-from machina.test.factories import TopicPollFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import create_category_forum
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    GroupFactory, PostFactory, TopicPollFactory, UserFactory, create_category_forum, create_forum,
+    create_topic
+)
 
 
 Forum = get_model('forum', 'Forum')

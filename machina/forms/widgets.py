@@ -1,5 +1,4 @@
-from django.forms.widgets import Select
-from django.forms.widgets import Textarea
+from django.forms.widgets import Select, Textarea
 
 
 # Originaly comes from https://djangosnippets.org/snippets/2453/

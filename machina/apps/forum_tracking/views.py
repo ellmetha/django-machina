@@ -12,15 +12,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView
-from django.views.generic import TemplateView
-from django.views.generic.detail import BaseDetailView
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.views.generic import ListView, TemplateView
+from django.views.generic.detail import BaseDetailView, SingleObjectTemplateResponseMixin
 
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
-from machina.core.loading import get_class
-from machina.core.loading import get_classes
+from machina.core.loading import get_class, get_classes
 
 
 Forum = get_model('forum', 'Forum')

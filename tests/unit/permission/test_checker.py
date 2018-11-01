@@ -4,9 +4,7 @@ from machina.apps.forum_permission.checker import ForumPermissionChecker
 from machina.apps.forum_permission.models import ForumPermission
 from machina.apps.forum_permission.shortcuts import assign_perm
 from machina.conf import settings as machina_settings
-from machina.test.factories import GroupFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import create_forum
+from machina.test.factories import GroupFactory, UserFactory, create_forum
 
 
 @pytest.mark.django_db

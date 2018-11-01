@@ -5,8 +5,7 @@ from machina.apps.forum.signals import forum_viewed
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.context_managers import mock_signal_receiver
-from machina.test.factories import create_forum
-from machina.test.factories import create_link_forum
+from machina.test.factories import create_forum, create_link_forum
 from machina.test.testcases import BaseClientTestCase
 
 

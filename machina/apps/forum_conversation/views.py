@@ -12,9 +12,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DeleteView
-from django.views.generic import FormView
-from django.views.generic import ListView
+from django.views.generic import DeleteView, FormView, ListView
 from django.views.generic.detail import SingleObjectMixin
 
 from machina.apps.forum_conversation.signals import topic_viewed

@@ -6,8 +6,9 @@
 
 """
 
-from machina.apps.forum_tracking.abstract_models import AbstractForumReadTrack
-from machina.apps.forum_tracking.abstract_models import AbstractTopicReadTrack
+from machina.apps.forum_tracking.abstract_models import (
+    AbstractForumReadTrack, AbstractTopicReadTrack
+)
 from machina.core.db.models import model_factory
 
 

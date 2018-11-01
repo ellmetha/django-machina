@@ -8,11 +8,9 @@
 """
 
 from django.conf import settings
-from django.core.cache import InvalidCacheBackendError
-from django.core.cache import caches
+from django.core.cache import InvalidCacheBackendError, caches
 from django.core.exceptions import ImproperlyConfigured
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.core.files.uploadedfile import TemporaryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.utils.datastructures import MultiValueDict
 from django.utils.six import BytesIO
 

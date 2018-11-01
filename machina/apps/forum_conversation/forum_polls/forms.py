@@ -8,8 +8,7 @@
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms.models import BaseModelFormSet
-from django.forms.models import modelformset_factory
+from django.forms.models import BaseModelFormSet, modelformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings

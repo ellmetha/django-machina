@@ -8,11 +8,9 @@ from faker import Faker
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import AttachmentFactory
-from machina.test.factories import ForumReadTrackFactory
-from machina.test.factories import PostFactory
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    AttachmentFactory, ForumReadTrackFactory, PostFactory, create_forum, create_topic
+)
 from machina.test.testcases import BaseClientTestCase
 
 

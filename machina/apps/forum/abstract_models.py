@@ -12,14 +12,12 @@ from django.db.models import Sum
 from django.utils.encoding import force_text
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from mptt.models import MPTTModel
-from mptt.models import TreeForeignKey
+from mptt.models import MPTTModel, TreeForeignKey
 
 from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.models import DatedModel
-from machina.models.fields import ExtendedImageField
-from machina.models.fields import MarkupTextField
+from machina.models.fields import ExtendedImageField, MarkupTextField
 
 
 class AbstractForum(MPTTModel, DatedModel):

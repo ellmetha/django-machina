@@ -3,16 +3,13 @@ from django import forms
 from django.contrib.auth.models import AnonymousUser
 from faker import Faker
 
-from machina.apps.forum_conversation.forms import PostForm
-from machina.apps.forum_conversation.forms import TopicForm
+from machina.apps.forum_conversation.forms import PostForm, TopicForm
 from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test.factories import PostFactory
-from machina.test.factories import TopicPollFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    PostFactory, TopicPollFactory, UserFactory, create_forum, create_topic
+)
 
 
 faker = Faker()

@@ -15,17 +15,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from mptt.exceptions import InvalidMove
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.models.fields import MarkupTextField
-from machina.models.fields import MarkupTextFieldWidget
+from machina.models.fields import MarkupTextField, MarkupTextFieldWidget
 
 
 Forum = get_model('forum', 'Forum')

@@ -1,13 +1,10 @@
 import pytest
 from django.core.exceptions import ValidationError
 
-from machina.test.factories import PostFactory
-from machina.test.factories import TopicPollFactory
-from machina.test.factories import TopicPollOptionFactory
-from machina.test.factories import TopicPollVoteFactory
-from machina.test.factories import UserFactory
-from machina.test.factories import create_forum
-from machina.test.factories import create_topic
+from machina.test.factories import (
+    PostFactory, TopicPollFactory, TopicPollOptionFactory, TopicPollVoteFactory, UserFactory,
+    create_forum, create_topic
+)
 
 
 @pytest.mark.django_db
