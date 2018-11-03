@@ -6,6 +6,9 @@
 
 """
 
+import os
+import uuid
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -13,6 +16,11 @@ from django.utils.translation import ugettext_lazy as _
 from machina.conf import settings as machina_settings
 from machina.core import validators
 from machina.models.fields import ExtendedImageField, MarkupTextField
+
+
+def get_profile_avatar_upload_to(instance, filename):
+    """ Returns a valid upload path for the avatar associated with a forum profile. """
+    return instance.get_avatar_upload_to(filename)
 
 
 class AbstractForumProfile(models.Model):
@@ -25,8 +33,7 @@ class AbstractForumProfile(models.Model):
 
     # The user's avatar.
     avatar = ExtendedImageField(
-        verbose_name=_('Avatar'), null=True, blank=True,
-        upload_to=machina_settings.PROFILE_AVATAR_UPLOAD_TO,
+        null=True, blank=True, upload_to=get_profile_avatar_upload_to, verbose_name=_('Avatar'),
         **machina_settings.DEFAULT_AVATAR_SETTINGS
     )
 
@@ -49,3 +56,11 @@ class AbstractForumProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_avatar_upload_to(self, filename):
+        """ Returns the path to upload the associated avatar to. """
+        dummy, ext = os.path.splitext(filename)
+        return os.path.join(
+            machina_settings.PROFILE_AVATAR_UPLOAD_TO,
+            '{id}{ext}'.format(id=str(uuid.uuid4()).replace('-', ''), ext=ext),
+        )

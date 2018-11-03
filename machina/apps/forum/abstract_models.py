@@ -6,6 +6,9 @@
 
 """
 
+import os
+import uuid
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
@@ -18,6 +21,11 @@ from machina.apps.forum import signals
 from machina.conf import settings as machina_settings
 from machina.models import DatedModel
 from machina.models.fields import ExtendedImageField, MarkupTextField
+
+
+def get_forum_image_upload_to(instance, filename):
+    """ Returns a valid upload path for an image file associated with a forum instance. """
+    return instance.get_image_upload_to(filename)
 
 
 class AbstractForum(MPTTModel, DatedModel):
@@ -40,7 +48,7 @@ class AbstractForum(MPTTModel, DatedModel):
 
     # A forum can come with an image (eg. a small logo)
     image = ExtendedImageField(
-        null=True, blank=True, upload_to=machina_settings.FORUM_IMAGE_UPLOAD_TO,
+        null=True, blank=True, upload_to=get_forum_image_upload_to,
         verbose_name=_('Forum image'), **machina_settings.DEFAULT_FORUM_IMAGE_SETTINGS
     )
 
@@ -136,6 +144,14 @@ class AbstractForum(MPTTModel, DatedModel):
         if self.is_link and not self.link:
             raise ValidationError(_('A link forum must have a link associated with it'))
 
+    def get_image_upload_to(self, filename):
+        """ Returns the path to upload a new associated image to. """
+        dummy, ext = os.path.splitext(filename)
+        return os.path.join(
+            machina_settings.FORUM_IMAGE_UPLOAD_TO,
+            '{id}{ext}'.format(id=str(uuid.uuid4()).replace('-', ''), ext=ext),
+        )
+
     def save(self, *args, **kwargs):
         """ Saves the forum instance. """
         # It is vital to track the changes of the parent associated with a forum in order to
@@ -155,19 +171,6 @@ class AbstractForum(MPTTModel, DatedModel):
             self.update_trackers()
             # Trigger the 'forum_moved' signal
             signals.forum_moved.send(sender=self, previous_parent=old_instance.parent)
-
-    def _simple_save(self, *args, **kwargs):
-        """ Simple wrapper around the standard save method.
-
-        Calls the parent save method in order to avoid the checks for forum parent changes which can
-        result in triggering a new update of the counters associated with the current forum.
-
-        This allow the database to not be hit by such checks during very common and regular
-        operations such as those provided by the update_trackers function; indeed these operations
-        will never result in an update of a forum parent.
-
-        """
-        super().save(*args, **kwargs)
 
     def update_trackers(self):
         """ Updates the denormalized trackers associated with the forum instance. """
@@ -190,3 +193,16 @@ class AbstractForum(MPTTModel, DatedModel):
         # Any save of a forum triggered from the update_tracker process will not result in checking
         # for a change of the forum's parent.
         self._simple_save()
+
+    def _simple_save(self, *args, **kwargs):
+        """ Simple wrapper around the standard save method.
+
+        Calls the parent save method in order to avoid the checks for forum parent changes which can
+        result in triggering a new update of the counters associated with the current forum.
+
+        This allow the database to not be hit by such checks during very common and regular
+        operations such as those provided by the update_trackers function; indeed these operations
+        will never result in an update of a forum parent.
+
+        """
+        super().save(*args, **kwargs)
