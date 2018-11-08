@@ -6,7 +6,7 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
@@ -24,9 +24,9 @@ class ForumURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(r'^$', self.index_view.as_view(), name='index'),
-            url(
-                _(r'^forum/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'),
+            path('', self.index_view.as_view(), name='index'),
+            path(
+                _('forum/<slug>-<pk>/'),
                 self.forum_view.as_view(),
                 name='forum',
             ),

@@ -7,7 +7,7 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
 from haystack.views import search_view_factory
 
 from machina.core.loading import get_class
@@ -25,9 +25,10 @@ class ForumSearchURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(
-                r'^$',
-                search_view_factory(view_class=self.search_view, form_class=self.search_form),
+            path(
+                '',
+                search_view_factory(
+                    view_class=self.search_view, form_class=self.search_form),
                 name='search',
             ),
         ]
