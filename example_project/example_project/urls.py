@@ -23,7 +23,7 @@ if settings.DEBUG:
     # Add the Debug Toolbar’s URLs to the project’s URLconf
     import debug_toolbar
 
-    urlpatterns += [path('^__debug__/', include(debug_toolbar.urls)), ]
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls)), ]
 
     # In DEBUG mode, serve media files through Django.
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -33,6 +33,6 @@ if settings.DEBUG:
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
     urlpatterns += [
-        path('^%s/<path>' % media_url, static.serve,
+        path('%s/<path>' % media_url, static.serve,
              {'document_root': settings.MEDIA_ROOT}),
     ]
