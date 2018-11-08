@@ -7,7 +7,7 @@
 
 """
 
-from django.urls import path, include
+from django.urls import include, path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.apps.forum_conversation.forum_attachments.urls import \
