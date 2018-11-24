@@ -25,8 +25,8 @@ const js_dir = static_dir + '/js';
  */
 
 /* Task to build the javascript packages. */
-gulp.task('build-js-packages', function () {
-  gulp.src([
+gulp.task('build-js-packages', gulp.series(function () {
+  return gulp.src([
       'node_modules/jquery/dist/jquery.js',
       'node_modules/popper.js/dist/umd/popper.js',
       'node_modules/bootstrap/dist/js/bootstrap.js',
@@ -35,20 +35,20 @@ gulp.task('build-js-packages', function () {
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest(build_dir + '/js'));
-});
+}));
 
 /* Task to build the main javascript application. */
-gulp.task('build-js-application', function () {
-  gulp.src(js_dir + '/ui.js')
+gulp.task('build-js-application', gulp.series(function () {
+  return gulp.src(js_dir + '/ui.js')
     .pipe(concat(application_name + '.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest(build_dir + '/js'));
-});
+}));
 
 /* Task to build the application style. */
-gulp.task('build-css', function () {
-  gulp.src([
+gulp.task('build-css', gulp.series(function () {
+  return gulp.src([
       sass_dir + '/admin_theme.scss',
       sass_dir + '/board_theme.scss',
       sass_dir + '/board_theme.vendor.scss',
@@ -57,17 +57,17 @@ gulp.task('build-css', function () {
       .pipe(rename({prefix: application_name + '.', suffix: '.min'}))
       .pipe(minifyCSS())
     .pipe(gulp.dest(build_dir + '/css'));
-});
+}));
 
 /* Task to copy the application fonts. */
-gulp.task('build-font', function () {
-  gulp.src([
+gulp.task('build-font', gulp.series(function () {
+  return gulp.src([
     'node_modules/@fortawesome/fontawesome-free-webfonts/webfonts/*',
   ]).pipe(gulp.dest(build_dir + '/fonts'));
-});
+}));
 
 /* Task to build our application. */
-gulp.task('build-machina-application', ['build-js-packages', 'build-js-application', 'build-css', 'build-font']);
+gulp.task('build-machina-application', gulp.series('build-js-packages', 'build-js-application', 'build-css', 'build-font'));
 
 
 /*
@@ -76,26 +76,26 @@ gulp.task('build-machina-application', ['build-js-packages', 'build-js-applicati
  */
 
 /* Task to copy the simplemde CSS. */
-gulp.task('build-simplemde-css', function () {
-  gulp.src('node_modules/simplemde/dist/simplemde.min.css').pipe(gulp.dest(build_dir + '/css/vendor'));
-});
+gulp.task('build-simplemde-css', gulp.series(function () {
+  return gulp.src('node_modules/simplemde/dist/simplemde.min.css').pipe(gulp.dest(build_dir + '/css/vendor'));
+}));
 
 /* Task to copy the simplemde JS. */
-gulp.task('build-simplemde-js', function () {
-  gulp.src('node_modules/simplemde/dist/simplemde.min.js').pipe(gulp.dest(build_dir + '/js/vendor'));
-});
+gulp.task('build-simplemde-js', gulp.series(function () {
+  return gulp.src('node_modules/simplemde/dist/simplemde.min.js').pipe(gulp.dest(build_dir + '/js/vendor'));
+}));
 
 /* Task to build the Mardkown editor JS application. */
-gulp.task('build-markdown-editor-js-application', function () {
-  gulp.src(js_dir + '/editor.js')
+gulp.task('build-markdown-editor-js-application', gulp.series(function () {
+  return gulp.src(js_dir + '/editor.js')
     .pipe(concat(application_name + '.editor.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest(build_dir + '/js'));
-});
+}));
 
 /* Task to build the Mardkown editor application. */
-gulp.task('build-machina-editor', ['build-simplemde-css', 'build-simplemde-js', 'build-markdown-editor-js-application']);
+gulp.task('build-machina-editor', gulp.series('build-simplemde-css', 'build-simplemde-js', 'build-markdown-editor-js-application'));
 
 
 /*
@@ -104,4 +104,4 @@ gulp.task('build-machina-editor', ['build-simplemde-css', 'build-simplemde-js', 
  */
 
 /* Default task. */
-gulp.task('default', ['build-machina-application', 'build-machina-editor', ]);
+gulp.task('default', gulp.series('build-machina-application', 'build-machina-editor', ));
