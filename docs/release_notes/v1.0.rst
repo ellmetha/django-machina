@@ -18,6 +18,8 @@ Minor changes
 * The forms used by the admin classes of the ``forum`` application are now imported using the
   django-machina's class loading system. This is to allow to easily override the related form fields
   and widgets in order to customize the corresponding admin pages
+* It is now possible to easily override the way forum member display names are retrieved for each
+  user. See :doc:`../customization/recipes/custom_forum_member_display_names` for more details
 
 Backwards incompatible changes
 ------------------------------

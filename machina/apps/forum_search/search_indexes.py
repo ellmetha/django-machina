@@ -9,9 +9,12 @@
 from haystack import indexes
 
 from machina.core.db.models import get_model
+from machina.core.loading import get_class
 
 
 Post = get_model('forum_conversation', 'Post')
+
+get_forum_member_display_name = get_class('forum_member.shortcuts', 'get_forum_member_display_name')
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
@@ -39,7 +42,7 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def prepare_poster_name(self, obj):
-        return obj.poster.username if obj.poster else obj.username
+        return get_forum_member_display_name(obj.poster) if obj.poster else obj.username
 
     def prepare_forum_slug(self, obj):
         return obj.topic.forum.slug
