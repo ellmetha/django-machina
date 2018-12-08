@@ -30,19 +30,19 @@ class ForumMemberURLPatternsFactory(URLPatternsFactory):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
             url(
-                _(r'^profile/(?P<pk>\d+)/$'),
+                _(r'^profile/edit/$'),
+                self.forum_profile_update_view.as_view(),
+                name='profile_update',
+            ),
+            url(
+                _(r'^profile/(?P<pk>[\w-]+)/$'),
                 self.forum_profile_detail_view.as_view(),
                 name='profile',
             ),
             url(
-                _(r'^profile/(?P<pk>\d+)/posts/$'),
+                _(r'^profile/(?P<pk>[\w-]+)/posts/$'),
                 self.user_posts_list.as_view(),
                 name='user_posts',
-            ),
-            url(
-                _(r'^profile/edit/$'),
-                self.forum_profile_update_view.as_view(),
-                name='profile_update',
             ),
             url(
                 _(r'^subscriptions/$'),
