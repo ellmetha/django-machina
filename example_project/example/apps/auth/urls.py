@@ -1,15 +1,28 @@
-from django.conf.urls import include
-from django.conf.urls import url
+from django.urls import include, path
 
 from . import views
 
 
 urlpatterns = [
-    url(r'^account/', include('django.contrib.auth.urls')),
-    url(r'^account/parameters/edit/',
-        views.UserAccountParametersUpdateView.as_view(), name='account-parameters'),
-    url(r'^account/password/edit/',
-        views.UserPasswordUpdateView.as_view(), name='account-password'),
-    url(r'^register/', views.UserCreateView.as_view(), name='register'),
-    url(r'^unregister/', views.UserDeleteView.as_view(), name='unregister'),
+    path('account/', include('django.contrib.auth.urls')),
+    path(
+        'account/parameters/edit/',
+        views.UserAccountParametersUpdateView.as_view(),
+        name='account-parameters',
+    ),
+    path(
+        'account/password/edit/',
+        views.UserPasswordUpdateView.as_view(),
+        name='account-password',
+    ),
+    path(
+        'register/',
+        views.UserCreateView.as_view(),
+        name='register',
+    ),
+    path(
+        'unregister/',
+        views.UserDeleteView.as_view(),
+        name='unregister',
+    ),
 ]

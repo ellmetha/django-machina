@@ -30,7 +30,7 @@ setup(
     keywords='django forum board messages',
     zip_safe=False,
     install_requires=[
-        'django>=1.11',
+        'django>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
         'django-mptt>=0.8',

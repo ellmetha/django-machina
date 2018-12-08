@@ -7,7 +7,7 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
@@ -38,54 +38,54 @@ class ForumModerationURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/lock/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/lock/'),
                 self.topic_lock_view.as_view(),
                 name='topic_lock',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/unlock/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/unlock/'),
                 self.topic_unlock_view.as_view(),
                 name='topic_unlock',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/delete/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/delete/'),
                 self.topic_delete_view.as_view(),
                 name='topic_delete',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/move/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/move/'),
                 self.topic_move_view.as_view(),
                 name='topic_move',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/topic/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/change/topic/'),
                 self.topic_update_to_normal_topic_view.as_view(),
                 name='topic_update_to_post',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/sticky/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/change/sticky/'),
                 self.topic_update_to_sticky_topic_view.as_view(),
                 name='topic_update_to_sticky',
             ),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/change/announce/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/change/announce/'),
                 self.topic_update_to_announce_view.as_view(),
                 name='topic_update_to_announce',
             ),
-            url(_(r'^queue/$'), self.moderation_queue_list_view.as_view(), name='queue'),
-            url(
-                _(r'^queue/(?P<pk>\d+)/$'),
+            path(_('queue/'), self.moderation_queue_list_view.as_view(), name='queue'),
+            path(
+                _('queue/<int:pk>/'),
                 self.moderation_queue_detail_view.as_view(),
                 name='queued_post',
             ),
-            url(
-                _(r'^queue/(?P<pk>\d+)/approve/$'),
+            path(
+                _('queue/<int:pk>/approve/'),
                 self.post_approve_view.as_view(),
                 name='approve_queued_post',
             ),
-            url(
-                _(r'^queue/(?P<pk>\d+)/disapprove/$'),
+            path(
+                _('queue/<int:pk>/disapprove/'),
                 self.post_disapprove_view.as_view(),
                 name='disapprove_queued_post',
             ),

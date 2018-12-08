@@ -7,7 +7,7 @@
 
 """
 
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.apps.forum_conversation.forum_attachments.urls import \
@@ -35,36 +35,37 @@ class BaseForumConversationURLPatternsFactory(URLPatternsFactory):
         urlpatterns = super().get_urlpatterns()
 
         conversation_urlpatterns = [
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/$'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/'),
                 self.topic_view.as_view(),
                 name='topic',
             ),
-
-            url(_(r'^topic/create/$'), self.topic_create_view.as_view(), name='topic_create'),
-            url(
-                _(r'^topic/(?P<slug>[\w-]+)-(?P<pk>\d+)/update/$'),
+            path(_('topic/create/'), self.topic_create_view.as_view(), name='topic_create'),
+            path(
+                _('topic/<slug:slug>-<int:pk>/update/'),
                 self.topic_update_view.as_view(),
                 name='topic_update',
             ),
-
-            url(
-                _(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/post/create/$'),
+            path(
+                _('topic/<slug:topic_slug>-<int:topic_pk>/post/create/'),
                 self.post_create_view.as_view(),
                 name='post_create',
             ),
-            url(
-                _(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/update/$'),
+            path(
+                _('topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/'),
                 self.post_update_view.as_view(),
                 name='post_update',
             ),
-            url(_(r'^topic/(?P<topic_slug>[\w-]+)-(?P<topic_pk>\d+)/(?P<pk>\d+)/post/delete/$'),
-                self.post_delete_view.as_view(), name='post_delete'),
+            path(
+                _('topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/'),
+                self.post_delete_view.as_view(),
+                name='post_delete',
+            ),
         ]
 
         urlpatterns += [
-            url(
-                _(r'forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/'),
+            path(
+                _('forum/<slug:forum_slug>-<int:forum_pk>/'),
                 include(conversation_urlpatterns),
             ),
         ]
@@ -80,7 +81,7 @@ class ForumAttachmentsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return super().get_urlpatterns() + [
-            url(r'^', include(self.attachments_urlpatterns_factory.urlpatterns)),
+            path('', include(self.attachments_urlpatterns_factory.urlpatterns)),
         ]
 
 
@@ -92,7 +93,7 @@ class ForumPollsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return super().get_urlpatterns() + [
-            url(r'^', include(self.polls_urlpatterns_factory.urlpatterns)),
+            path('', include(self.polls_urlpatterns_factory.urlpatterns)),
         ]
 
 

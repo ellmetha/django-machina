@@ -11,9 +11,6 @@ python:
   - "3.8-dev"
 
 env:
-  - DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
-  - DJANGO_ENV="django>=1.11,<2.0" DB=postgres
-  - DJANGO_ENV="django>=1.11,<2.0" DB=mysql
   - DJANGO_ENV="django>=2.0,<2.1" DB=sqlite
   - DJANGO_ENV="django>=2.0,<2.1" DB=postgres
   - DJANGO_ENV="django>=2.0,<2.1" DB=mysql
@@ -25,18 +22,13 @@ matrix:
   allow_failures:
     - python: "3.8-dev"
   exclude:
-  - python: "3.4"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=sqlite
-  - python: "3.4"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=postgres
-  - python: "3.4"
-    env: DJANGO_ENV="django>=2.1,<2.2" DB=mysql
-  - python: "3.7-dev"
-    env: DJANGO_ENV="django>=1.11,<2.0" DB=sqlite
-  - python: "3.7-dev"
-    env: DJANGO_ENV="django>=1.11,<2.0" DB=postgres
-  - python: "3.7-dev"
-    env: DJANGO_ENV="django>=1.11,<2.0" DB=mysql
+    - python: "3.4"
+      env: DJANGO_ENV="django>=2.1,<2.2" DB=sqlite
+    - python: "3.4"
+      env: DJANGO_ENV="django>=2.1,<2.2" DB=postgres
+    - python: "3.4"
+      env: DJANGO_ENV="django>=2.1,<2.2" DB=mysql
+
 
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
