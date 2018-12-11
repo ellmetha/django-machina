@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import gulp from 'gulp';
 import concat from 'gulp-concat';
