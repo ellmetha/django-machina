@@ -20,7 +20,7 @@ setup(
     name='django-machina',
     version=machina.__version__,
     author='Morgan Aubert',
-    author_email='morgan.aubert@zoho.com',
+    author_email='me@morganaubert.name',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/ellmetha/django-machina',
