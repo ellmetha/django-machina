@@ -8,6 +8,7 @@ __pycache__
 *.egg/
 .cache/
 .pytest_cache/
+.vscode/
 /dist/
 /build/
 docs/_build/
