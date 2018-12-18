@@ -22,3 +22,6 @@ migrations:
 
 shell:
 	pipenv run python manage.py shell --settings=$(DJANGO_SETTINGS_MODULE)
+
+superuser:
+	pipenv run python manage.py createsuperuser --settings=$(DJANGO_SETTINGS_MODULE)
