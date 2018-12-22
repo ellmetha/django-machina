@@ -38,7 +38,7 @@ class ForumPermissionChecker:
 
     def get_perms(self, forum):
         """ Returns the list of permission codenames of all permissions for the given forum. """
-        # An inactive user has no permissions
+        # An inactive user has no permissions.
         if not self.user.is_anonymous and not self.user.is_active:
             return []
 
@@ -47,7 +47,7 @@ class ForumPermissionChecker:
 
         if forum.id not in self._forum_perms_cache:
             if self.user and self.user.is_superuser:
-                # The superuser has all the permissions
+                # The superuser has all the permissions.
                 perms = list(ForumPermission.objects.values_list('codename', flat=True))
             elif self.user:
                 default_auth_forum_perms = (
@@ -59,14 +59,14 @@ class ForumPermissionChecker:
                     else {'user': self.user}
                 )
 
-                # Fetches the permissions of the considered user for the given forum
+                # Fetches the permissions of the considered user for the given forum.
                 user_perms = (
                     UserForumPermission.objects.select_related()
                     .filter(**user_kwargs_filter)
                     .filter(Q(forum__isnull=True) | Q(forum=forum))
                 )
 
-                # Computes the list of permissions that are granted for all the forums
+                # Computes the list of permissions that are granted for all the forums.
                 globally_granted_user_perms = list(
                     filter(lambda p: p.has_perm and p.forum_id is None, user_perms)
                 )
@@ -74,7 +74,7 @@ class ForumPermissionChecker:
                     p.permission.codename for p in globally_granted_user_perms
                 ]
 
-                # Computes the list of permissions that are granted on a per-forum basis
+                # Computes the list of permissions that are granted on a per-forum basis.
                 per_forum_granted_user_perms = list(
                     filter(lambda p: p.has_perm and p.forum_id is not None, user_perms)
                 )
@@ -82,7 +82,7 @@ class ForumPermissionChecker:
                     p.permission.codename for p in per_forum_granted_user_perms
                 ]
 
-                # Computes the list of permissions that are not granted on a per-forum basis
+                # Computes the list of permissions that are not granted on a per-forum basis.
                 per_forum_nongranted_user_perms = list(
                     filter(lambda p: not p.has_perm and p.forum_id is not None, user_perms)
                 )
@@ -91,12 +91,12 @@ class ForumPermissionChecker:
                 ]
 
                 # If the considered user have no global permissions, the permissions defined by the
-                # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS settings are used instead
+                # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS settings are used instead.
                 if self.user.is_authenticated and not globally_granted_user_perms:
                     globally_granted_user_perms = default_auth_forum_perms
 
                 # Finally computes the list of permission codenames that are granted to the user for
-                # the considered forum
+                # the considered forum.
                 granted_user_perms = [
                     c for c in globally_granted_user_perms if
                     c not in per_forum_nongranted_user_perms
@@ -107,7 +107,7 @@ class ForumPermissionChecker:
                 perms = granted_user_perms
 
                 # If the user is a registered user, we have to check the permissions of its groups
-                # in order to determine the additional permissions they could have
+                # in order to determine the additional permissions they could have.
                 if not self.user.is_anonymous:
                     group_perms = (
                         GroupForumPermission.objects.select_related()
@@ -147,7 +147,7 @@ class ForumPermissionChecker:
                     granted_group_perms = set(granted_group_perms)
 
                     # Includes the permissions granted for the user' groups in the initial set of
-                    # permission codenames
+                    # permission codenames.
                     perms |= granted_group_perms
 
             self._forum_perms_cache[forum.id] = perms

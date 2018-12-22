@@ -635,6 +635,20 @@ class TestPermissionHandler(object):
             == set(Forum.objects.exclude(pk=self.forum_2.pk))
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
 
+    def test_filter_method_can_take_into_account_default_permissions_for_a_forum_without_permission_and_other_granted_permissions_for_other_forums_at_the_same_time(self):  # noqa
+        # Setup
+        codenames = [
+            'can_vote_in_polls',
+        ]
+        assign_perm('can_vote_in_polls', self.u1, forum=self.forum_2, has_perm=True)
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = codenames
+        # Run & check
+        assert (
+            set(self.perm_handler._get_forums_for_user(self.u1, codenames)) ==
+            {self.top_level_cat, self.top_level_link, self.forum_1, self.forum_2, self.forum_3, }
+        )
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
+
     def test_filter_methods_ensure_that_granted_permissions_take_precedence_over_the_same_non_granted_permissions(self):  # noqa: E501
         # Setup
         user = UserFactory.create()
