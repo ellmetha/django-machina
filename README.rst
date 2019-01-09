@@ -75,7 +75,7 @@ list of dependencies.
 Demo site
 =========
 
-A demo sites can be tested at https://vanilla.machina-forum.io. It contains a standard installation
+A demo site can be tested at https://vanilla.machina-forum.io. It contains a standard installation
 of django-machina without any customizations.
 
 Authors
