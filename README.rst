@@ -1,29 +1,25 @@
-.. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
-    :target: https://django-machina.readthedocs.org/
+.. raw:: html
 
-.. image:: https://readthedocs.org/projects/django-machina/badge/?version=stable
-    :target: https://django-machina.readthedocs.org/en/stable/
-    :alt: Documentation Status
+    <p align="center">
+        <img
+        src="docs/_images/logo.svg"
+        width="125px;">
+    </p>
+    <h1 align="center">django-machina</h1>
+    <p align="center">
+        A Django forum engine for building powerful community driven websites.
+    </p>
+    <p align="center">
+        <a href="https://django-machina.readthedocs.org/en/stable/" rel="nofollow"><img alt="Documentation Status" src="https://readthedocs.org/projects/django-machina/badge/?version=stable" style="max-width:100%;"></a>
+        <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="License" src="https://img.shields.io/pypi/l/django-machina.svg" style="max-width:100%;">
+        </a>
+        <a href="https://pypi.python.org/pypi/django-machina" rel="nofollow"><img src="https://img.shields.io/pypi/pyversions/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="Latest Version" src="https://img.shields.io/pypi/v/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://travis-ci.org/ellmetha/django-machina" rel="nofollow"><img alt="Build status" src="https://img.shields.io/travis/ellmetha/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://codecov.io/github/ellmetha/django-machina" rel="nofollow"><img alt="Codecov status" src="https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg" style="max-width:100%;"></a>
+    </p>
 
-.. image:: https://img.shields.io/pypi/l/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina/
-    :alt: License
-
-.. image:: https://img.shields.io/pypi/pyversions/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina
-
-.. image:: https://img.shields.io/pypi/v/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina/
-    :alt: Latest Version
-
-.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg
-    :target: https://travis-ci.org/ellmetha/django-machina
-    :alt: Build status
-
-.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg
-    :target: https://codecov.io/github/ellmetha/django-machina
-    :alt: Codecov status
-
+|
 |
 
 Django-machina is a forum framework for Django providing a way to build community-driven websites.
