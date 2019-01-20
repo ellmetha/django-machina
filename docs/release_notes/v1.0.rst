@@ -20,6 +20,8 @@ Minor changes
   and widgets in order to customize the corresponding admin pages
 * It is now possible to easily override the way forum member display names are retrieved for each
   user. See :doc:`../customization/recipes/custom_forum_member_display_names` for more details
+* The SimpleMDE Markdown editor was replaced by the
+  `EasyMDE Markdown editor <https://github.com/Ionaru/easy-markdown-editor>`_
 
 Backwards incompatible changes
 ------------------------------
