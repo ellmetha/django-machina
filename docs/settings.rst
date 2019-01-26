@@ -53,6 +53,16 @@ Default: ``'_base.html'``
 This setting defines the name of the base template that is extended by the django-machina's main
 ``board_base.html`` template.
 
+``MACHINA_USER_DISPLAY_NAME_METHOD``
+------------------------------------
+
+Default: ``'get_username'``
+
+The setting defines the name of a method on the project's ``User`` model to be used to retrieve
+user display names of users. For example you can use it to ensure that the full name of users is
+displayed in the forum application instead of their usernames. The method name you put in this
+setting have to correspond to a real method available on your project's ``User`` model.
+
 
 Forum
 *****

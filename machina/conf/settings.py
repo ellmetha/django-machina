@@ -22,7 +22,11 @@ MACHINA_MARKUP_WIDGET = getattr(
 )
 MACHINA_MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
 MACHINA_BASE_TEMPLATE_NAME = getattr(settings, 'MACHINA_BASE_TEMPLATE_NAME', '_base.html')
-
+MACHINA_USER_DISPLAY_NAME_METHOD = getattr(
+    settings,
+    'MACHINA_USER_DISPLAY_NAME_METHOD',
+    'get_username',
+)
 
 # Forum
 FORUM_IMAGE_UPLOAD_TO = getattr(settings, 'MACHINA_FORUM_IMAGE_UPLOAD_TO', 'machina/forum_images')
