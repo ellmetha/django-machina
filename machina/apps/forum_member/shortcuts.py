@@ -11,4 +11,4 @@ from machina.conf import settings as machina_settings
 
 def get_forum_member_display_name(user):
     """ Given a specific user, returns their related display name. """
-    return getattr(user, machina_settings.MACHINA_USER_DISPLAY_NAME_METHOD)()
+    return getattr(user, machina_settings.USER_DISPLAY_NAME_METHOD)()
