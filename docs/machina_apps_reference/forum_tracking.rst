@@ -6,6 +6,13 @@ The ``forum_tracking`` application allows to determine which forums or topics ha
 given user. It provides mechanisms allowing users to mark forums or topics as read and to browse
 unread forums or topics.
 
+Abstract models
+---------------
+
+.. automodule:: machina.apps.forum_tracking.abstract_models
+    :members:
+    :show-inheritance:
+
 Handler
 -------
 
