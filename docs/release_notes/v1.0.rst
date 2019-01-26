@@ -11,6 +11,8 @@ Major changes
 -------------
 
 * Default templates are upgraded to Bootstrap 4
+* A new ``MACHINA_USER_DISPLAY_NAME_METHOD`` setting is introduced. The setting defines the name of
+  a method on the project's ``User`` model to be used to retrieve user display names
 
 Minor changes
 -------------
