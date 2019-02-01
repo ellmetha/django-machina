@@ -26,7 +26,7 @@ class ForumURLPatternsFactory(URLPatternsFactory):
         return [
             path('', self.index_view.as_view(), name='index'),
             path(
-                _('forum/<slug:slug>-<int:pk>/'),
+                _('forum/<str:slug>-<int:pk>/'),
                 self.forum_view.as_view(),
                 name='forum',
             ),

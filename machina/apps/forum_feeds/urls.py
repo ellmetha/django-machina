@@ -26,12 +26,12 @@ class ForumFeedsURLPatternsFactory(URLPatternsFactory):
         return [
             path(_('topics/'), self.latest_topics_feed(), name='latest_topics'),
             path(
-                _('forum/<slug:forum_slug>-<int:forum_pk>/topics/'),
+                _('forum/<str:forum_slug>-<int:forum_pk>/topics/'),
                 self.latest_topics_feed(),
                 name='forum_latest_topics',
             ),
             path(
-                _('forum/<slug:forum_slug>-<int:forum_pk>/topics/all/'),
+                _('forum/<str:forum_slug>-<int:forum_pk>/topics/all/'),
                 self.latest_topics_feed(),
                 {'descendants': True},
                 name='forum_latest_topics_with_descendants',

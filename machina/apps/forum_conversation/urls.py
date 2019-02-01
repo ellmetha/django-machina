@@ -36,28 +36,28 @@ class BaseForumConversationURLPatternsFactory(URLPatternsFactory):
 
         conversation_urlpatterns = [
             path(
-                _('topic/<slug:slug>-<int:pk>/'),
+                _('topic/<str:slug>-<int:pk>/'),
                 self.topic_view.as_view(),
                 name='topic',
             ),
             path(_('topic/create/'), self.topic_create_view.as_view(), name='topic_create'),
             path(
-                _('topic/<slug:slug>-<int:pk>/update/'),
+                _('topic/<str:slug>-<int:pk>/update/'),
                 self.topic_update_view.as_view(),
                 name='topic_update',
             ),
             path(
-                _('topic/<slug:topic_slug>-<int:topic_pk>/post/create/'),
+                _('topic/<str:topic_slug>-<int:topic_pk>/post/create/'),
                 self.post_create_view.as_view(),
                 name='post_create',
             ),
             path(
-                _('topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/'),
+                _('topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/'),
                 self.post_update_view.as_view(),
                 name='post_update',
             ),
             path(
-                _('topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/'),
+                _('topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/'),
                 self.post_delete_view.as_view(),
                 name='post_delete',
             ),
@@ -65,7 +65,7 @@ class BaseForumConversationURLPatternsFactory(URLPatternsFactory):
 
         urlpatterns += [
             path(
-                _('forum/<slug:forum_slug>-<int:forum_pk>/'),
+                _('forum/<str:forum_slug>-<int:forum_pk>/'),
                 include(conversation_urlpatterns),
             ),
         ]
