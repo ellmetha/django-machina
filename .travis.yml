@@ -58,7 +58,7 @@ install:
   - pipenv install "$DJANGO_ENV" --skip-lock
   - pipenv install --dev --skip-lock
 before_script:
-  - mysql -u root -e 'create database machina_test;'
+  - mysql -u root -e 'create database machina_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
   - psql -c 'create database machina_test;' -U postgres
 script:
   - make qa
