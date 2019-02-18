@@ -2,6 +2,11 @@ language: python
 
 addons:
   postgresql: "9.4"
+  apt:
+    sources:
+      - travis-ci/sqlite3
+    packages:
+      - sqlite3
 
 python:
   - "3.4"
