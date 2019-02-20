@@ -46,7 +46,9 @@ elif DB_CONFIG == 'mysql':
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'machina_test',
             'USER': 'root',
-            'OPTIONS': {'charset': 'utf8mb4'},
+            'TEST': {
+                'charset': 'utf8mb4',
+            },
         }
     }
 
