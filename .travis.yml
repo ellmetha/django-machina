@@ -3,16 +3,13 @@ dist: xenial
 language: python
 
 addons:
+  mariadb: "10.3.12"
   postgresql: "9.4"
   apt:
     sources:
       - travis-ci/sqlite3
     packages:
       - sqlite3
-
-services:
-  - mysql
-
 
 python:
   - "3.4"
