@@ -34,11 +34,6 @@ It offers a full-featured yet very extensible forum solution:
 * Forum conversations search
 * ...
 
-.. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
-    :target: https://django-machina.readthedocs.org/
-
-|
-
 Django-machina was built with integration in mind: the application is designed to be used inside
 existing Django applications. It is not a standalone forum solution.
 
