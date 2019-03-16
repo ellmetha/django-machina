@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-08 17:58-0500\n"
-"PO-Revision-Date: 2019-03-09 02:03+0000\n"
+"PO-Revision-Date: 2019-03-11 00:25+0000\n"
 "Last-Translator: I K <ki.foobar@gmail.com>\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-team/django-machina/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
@@ -557,11 +557,11 @@ msgstr ""
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
-msgstr ""
+msgstr "このメッセージが表示されるのは承認後です"
 
 #: apps/forum_conversation/views.py:131
 msgid "There are some errors in the attachments you submitted."
-msgstr ""
+msgstr "添付ファイルを送信中にエラーが発生しました"
 
 #: apps/forum_conversation/views.py:136
 msgid "This message has been posted successfully."
@@ -569,7 +569,7 @@ msgstr "メッセージを投稿しました"
 
 #: apps/forum_conversation/views.py:380
 msgid "There are some errors in the poll options you submitted."
-msgstr ""
+msgstr "投票内容を送信中にエラーが発生しました"
 
 #: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
 msgid "This message has been edited successfully."
@@ -581,15 +581,15 @@ msgstr "メッセージを削除しました"
 
 #: apps/forum_feeds/apps.py:17
 msgid "Machina: Forum feeds"
-msgstr ""
+msgstr "Machina: フォーラムフィード"
 
 #: apps/forum_feeds/feeds.py:26
 msgid "Latest topics"
-msgstr ""
+msgstr "最新のトピック"
 
 #: apps/forum_feeds/feeds.py:27
 msgid "Latest topics updated on the forums"
-msgstr ""
+msgstr "フォーラムで最後に更新されたトピック"
 
 #: apps/forum_feeds/urls.py:27
 msgid "topics/"
@@ -608,7 +608,7 @@ msgstr ""
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
-msgstr ""
+msgstr "ユーザー"
 
 #: apps/forum_member/abstract_models.py:36
 msgid "Avatar"
@@ -620,19 +620,19 @@ msgstr "プロフィール"
 
 #: apps/forum_member/abstract_models.py:49
 msgid "Total posts"
-msgstr ""
+msgstr "合計投稿数"
 
 #: apps/forum_member/abstract_models.py:54
 msgid "Forum profile"
-msgstr ""
+msgstr "フォーラムプロフィール"
 
 #: apps/forum_member/abstract_models.py:55
 msgid "Forum profiles"
-msgstr ""
+msgstr "フォーラムプロフィール"
 
 #: apps/forum_member/apps.py:17
 msgid "Machina: Forum members"
-msgstr ""
+msgstr "Machina: フォーラムメンバー"
 
 #: apps/forum_member/urls.py:33
 msgid "profile/edit/"
@@ -676,7 +676,7 @@ msgstr "Machina: フォーラム管理"
 
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
-msgstr ""
+msgstr "移動先のフォーラムを選択してください"
 
 #: apps/forum_moderation/urls.py:42
 msgid "topic/<slug:slug>-<int:pk>/lock/"
@@ -756,160 +756,160 @@ msgstr "このトピックをアナウンスに変更しますか？"
 
 #: apps/forum_moderation/views.py:401
 msgid "This post has been approved successfully."
-msgstr ""
+msgstr "投稿を承認しました"
 
 #: apps/forum_moderation/views.py:443
 msgid "This post has been disapproved successfully."
-msgstr ""
+msgstr "投稿を却下しました"
 
 #: apps/forum_permission/abstract_models.py:33
 msgid "Permission codename"
-msgstr ""
+msgstr "権限コードネーム"
 
 #: apps/forum_permission/abstract_models.py:37
 msgid "Global permission"
-msgstr ""
+msgstr "グローバル権限"
 
 #: apps/forum_permission/abstract_models.py:38
 msgid "This permission can be granted globally to all the forums"
-msgstr ""
+msgstr "この権限はすべてのフォーラムに適用されます"
 
 #: apps/forum_permission/abstract_models.py:42
 msgid "Local permission"
-msgstr ""
+msgstr "ローカル権限"
 
 #: apps/forum_permission/abstract_models.py:43
 msgid "This permission can be granted individually for each forum"
-msgstr ""
+msgstr "この権限はそれぞれのフォーラムごとに適用されます"
 
 #: apps/forum_permission/abstract_models.py:50
 #: apps/forum_permission/abstract_models.py:74
 msgid "Forum permission"
-msgstr ""
+msgstr "フォーラムの権限"
 
 #: apps/forum_permission/abstract_models.py:60
 msgid "A forum permission should be at least either global or local"
-msgstr ""
+msgstr "フォーラム権限は最低でもグローバルかローカルのどちらかである必要があります"
 
 #: apps/forum_permission/abstract_models.py:76
 msgid "Has perm"
-msgstr ""
+msgstr "権限を持つかどうか"
 
 #: apps/forum_permission/abstract_models.py:93
 msgid "The following permission cannot be granted globally: {}"
-msgstr ""
+msgstr "以下の権限はグローバルに適用することはできません: {}"
 
 #: apps/forum_permission/abstract_models.py:108
 msgid "Target anonymous user"
-msgstr ""
+msgstr "匿名ユーザーを対象とする"
 
 #: apps/forum_permission/abstract_models.py:115
 msgid "User forum permission"
-msgstr ""
+msgstr "ユーザーフォーラム権限"
 
 #: apps/forum_permission/abstract_models.py:116
 msgid "User forum permissions"
-msgstr ""
+msgstr "ユーザーフォーラム権限"
 
 #: apps/forum_permission/abstract_models.py:131
 msgid "A permission should target either a user or an anonymous user"
-msgstr ""
+msgstr "権限は特定のユーザーか匿名ユーザーを対象とする必要があります"
 
 #: apps/forum_permission/abstract_models.py:138
 msgid "Group"
-msgstr ""
+msgstr "グループ"
 
 #: apps/forum_permission/abstract_models.py:144
 msgid "Group forum permission"
-msgstr ""
+msgstr "グループフォーラム権限"
 
 #: apps/forum_permission/abstract_models.py:145
 msgid "Group forum permissions"
-msgstr ""
+msgstr "グループフォーラム権限"
 
 #: apps/forum_permission/apps.py:17
 msgid "Machina: Forum permissions"
-msgstr ""
+msgstr "Machina: フォーラム権限"
 
 #: apps/forum_permission/defaults.py:27
 msgid "Can see forum"
-msgstr ""
+msgstr "フォーラムの閲覧(存在の有無)"
 
 #: apps/forum_permission/defaults.py:32
 msgid "Can read forum"
-msgstr ""
+msgstr "フォーラムの閲覧(内容)"
 
 #: apps/forum_permission/defaults.py:39
 msgid "Can start new topics"
-msgstr ""
+msgstr "新しいトピックの開始"
 
 #: apps/forum_permission/defaults.py:44
 msgid "Can reply to topics"
-msgstr ""
+msgstr "トピックへの返信"
 
 #: apps/forum_permission/defaults.py:49
 msgid "Can post announcements"
-msgstr ""
+msgstr "アナウンスの投稿"
 
 #: apps/forum_permission/defaults.py:54
 msgid "Can post stickies"
-msgstr ""
+msgstr "固定トピックの投稿"
 
 #: apps/forum_permission/defaults.py:59
 msgid "Can delete own posts"
-msgstr ""
+msgstr "自分の投稿の削除"
 
 #: apps/forum_permission/defaults.py:64
 msgid "Can edit own posts"
-msgstr ""
+msgstr "自分の投稿の編集"
 
 #: apps/forum_permission/defaults.py:70
 msgid "Can post without approval"
-msgstr ""
+msgstr "承認なしに投稿"
 
 #: apps/forum_permission/defaults.py:77
 msgid "Can create polls"
-msgstr ""
+msgstr "投票の設置"
 
 #: apps/forum_permission/defaults.py:82
 msgid "Can vote in polls"
-msgstr ""
+msgstr "投票"
 
 #: apps/forum_permission/defaults.py:89
 msgid "Can attach file"
-msgstr ""
+msgstr "ファイルの添付"
 
 #: apps/forum_permission/defaults.py:94
 msgid "Can download file"
-msgstr ""
+msgstr "ファイルのダウンロード"
 
 #: apps/forum_permission/defaults.py:101
 msgid "Can lock topics"
-msgstr ""
+msgstr "トピックの凍結"
 
 #: apps/forum_permission/defaults.py:106
 msgid "Can move topics"
-msgstr ""
+msgstr "トピックの移動"
 
 #: apps/forum_permission/defaults.py:111
 msgid "Can edit posts"
-msgstr ""
+msgstr "投稿の編集"
 
 #: apps/forum_permission/defaults.py:116
 msgid "Can delete posts"
-msgstr ""
+msgstr "投稿の削除"
 
 #: apps/forum_permission/defaults.py:121
 msgid "Can approve posts"
-msgstr ""
+msgstr "投稿の承認"
 
 #: apps/forum_permission/defaults.py:127
 msgid "Can add posts in locked topics"
-msgstr ""
+msgstr "凍結されたトピックへの投稿"
 
 #: apps/forum_search/apps.py:17
 msgid "Machina: Forum searches"
-msgstr ""
+msgstr "Machina: フォーラム検索"
 
 #: apps/forum_search/forms.py:26
 msgid "Search only in topic subjects"
@@ -941,27 +941,27 @@ msgstr "キーワード"
 
 #: apps/forum_search/forms.py:48
 msgid "Poster name"
-msgstr ""
+msgstr "投稿者の名前"
 
 #: apps/forum_tracking/abstract_models.py:37
 msgid "Forum track"
-msgstr ""
+msgstr "フォーラムトラック"
 
 #: apps/forum_tracking/abstract_models.py:38
 msgid "Forum tracks"
-msgstr ""
+msgstr "フォーラムトラック"
 
 #: apps/forum_tracking/abstract_models.py:61
 msgid "Topic track"
-msgstr ""
+msgstr "トピックトラック"
 
 #: apps/forum_tracking/abstract_models.py:62
 msgid "Topic tracks"
-msgstr ""
+msgstr "トピックトラック"
 
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
-msgstr ""
+msgstr "Machina: フォーラムトラッキング"
 
 #: apps/forum_tracking/urls.py:30
 msgid "mark/forums/"
@@ -989,43 +989,43 @@ msgstr "トピックを既読にしました"
 
 #: core/compat.py:16
 msgid "Neither Pillow nor PIL could be imported: {}"
-msgstr ""
+msgstr "Pillow、PILのどちらもimportできませんでした: {}"
 
 #: models/abstract_models.py:13
 msgid "Creation date"
-msgstr ""
+msgstr "作成日"
 
 #: models/abstract_models.py:14
 msgid "Update date"
-msgstr ""
+msgstr "更新日"
 
 #: models/fields.py:31
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
-msgstr ""
+msgstr "MACHINA_MARKUP_WIDGET {} をimportできません: {}"
 
 #: models/fields.py:57
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
-msgstr ""
+msgstr "MACHINA_MARKUP_LANGUAGE {} をimportできません: {}"
 
 #: models/fields.py:62
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
-msgstr ""
+msgstr "MACHINA_MARKUP_LANGUAGEの設定は必須です"
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr ""
+msgstr "{} を超えるサイズのファイルは認められていません。このファイルは {} です"
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
+msgstr "横幅が {}px より小さい画像、{}px より大きい画像は認められていません。この画像の横幅は {}px です"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
+msgstr "縦の高さが {}px より小さい画像、{}px より大きい画像は認められていません。この画像の縦の高さは {}px です"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -1033,7 +1033,7 @@ msgstr "フォーラム一覧"
 
 #: templates/admin/forum/forum/change_list_table.html:10
 msgid "Quick actions"
-msgstr ""
+msgstr "クイックアクション"
 
 #: templates/admin/forum/forum/change_list_table.html:11
 msgid "Type"
@@ -1084,7 +1084,7 @@ msgstr "ユーザーの権限を編集"
 #: templates/admin/forum/forum/editpermissions_form.html:16
 #: templates/admin/forum/forum/editpermissions_index.html:11
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: templates/admin/forum/forum/editpermissions_form.html:34
 msgid "Permission"
@@ -1293,7 +1293,7 @@ msgstr "選択肢を追加"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
+msgstr "<b>注意:</b>&nbsp;選択肢を削除するとそれに投票した票も失われます"
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1375,12 +1375,12 @@ msgstr "プレビュー"
 #: templates/machina/forum_conversation/post_create.html:6
 #: templates/machina/forum_conversation/post_create.html:21
 msgid "Post a reply"
-msgstr ""
+msgstr "返信を投稿"
 
 #: templates/machina/forum_conversation/post_create.html:39
 #: templates/machina/forum_moderation/moderation_queue/detail.html:133
 msgid "Topic review"
-msgstr ""
+msgstr "プレビュー"
 
 #: templates/machina/forum_conversation/post_create.html:51
 #: templates/machina/forum_conversation/topic_detail.html:53
@@ -1686,7 +1686,7 @@ msgstr "別の条件で検索"
 #, python-format
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] ""
+msgstr[0] "<b>%(number_of_results)s</b> 件の検索結果が見つかりました"
 
 #: templates/machina/forum_search/search.html:70
 msgid "Results"
