@@ -12,7 +12,6 @@ Requirements
 * `Markdown2`_ 2.3. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
 
-
 .. note::
 
     Django-machina uses Markdown by default as a syntax for forum messages, but you can change this
