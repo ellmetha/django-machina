@@ -632,7 +632,6 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
     """ Allows users to create forum posts. """
 
     model = Post
-    permission_required = ['can_reply_to_topics', ]
     template_name = 'forum_conversation/post_create.html'
 
     def get(self, request, *args, **kwargs):
@@ -664,7 +663,7 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
 
     def get_controlled_object(self):
         """ Returns the controlled object. """
-        return self.get_forum()
+        return self.get_topic()
 
     def get_success_url(self):
         """ Returns the URL to redirect the user to upon valid form processing. """
@@ -680,6 +679,10 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
             ),
             self.forum_post.pk,
         )
+
+    def perform_permissions_check(self, user, obj, perms):
+        """ Performs the permission check. """
+        return self.request.forum_permission_handler.can_add_post(obj, user)
 
 
 class PostUpdateView(PermissionRequiredMixin, PostFormView):
