@@ -50,3 +50,5 @@ Fixes
 * Fix incorrect logic related to the use of the
   ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting that resulted in forums or
   categories not being displayed in the list of forums
+* Fix missing check that allowed users to reply to locked topics
+  (`#155 <https://github.com/ellmetha/django-machina/issues/155>`_)
