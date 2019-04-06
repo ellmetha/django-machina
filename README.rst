@@ -40,8 +40,6 @@ existing Django applications. It is not a standalone forum solution.
 Django-machina was built with customization and extensibility in mind: each single functionality
 of the application can be customized or overriden to accommodate with your needs.
 
-.. _django-oscar: https://github.com/django-oscar/django-oscar
-
 .. contents:: Table of Contents
     :local:
 
@@ -59,7 +57,7 @@ Requirements
 Python 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for a full
 list of dependencies.
 
-.. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
+.. _requirements: https://django-machina.readthedocs.org/en/stable/getting_started.html#requirements
 
 Demo site
 =========
