@@ -54,7 +54,7 @@ it to suit your needs.
 Requirements
 ============
 
-Python 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for a full
+Python 3.4+, Django 2.0+. Please refer to the requirements_ section of the documentation for a full
 list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/stable/getting_started.html#requirements
