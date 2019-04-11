@@ -1,32 +1,25 @@
-.. image:: https://github.com/ellmetha/django-machina/raw/master/docs/_images/banner.png
-    :target: https://django-machina.readthedocs.org/
+.. raw:: html
 
-.. image:: https://readthedocs.org/projects/django-machina/badge/?version=stable
-    :target: https://django-machina.readthedocs.org/en/stable/
-    :alt: Documentation Status
+    <p align="center">
+        <img
+        src="docs/_images/logo.svg"
+        width="125px;">
+    </p>
+    <h1 align="center">django-machina</h1>
+    <p align="center">
+        A Django forum engine for building powerful community driven websites.
+    </p>
+    <p align="center">
+        <a href="https://django-machina.readthedocs.org/en/stable/" rel="nofollow"><img alt="Documentation Status" src="https://readthedocs.org/projects/django-machina/badge/?version=stable" style="max-width:100%;"></a>
+        <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="License" src="https://img.shields.io/pypi/l/django-machina.svg" style="max-width:100%;">
+        </a>
+        <a href="https://pypi.python.org/pypi/django-machina" rel="nofollow"><img src="https://img.shields.io/pypi/pyversions/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="Latest Version" src="https://img.shields.io/pypi/v/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://travis-ci.org/ellmetha/django-machina" rel="nofollow"><img alt="Build status" src="https://img.shields.io/travis/ellmetha/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://codecov.io/github/ellmetha/django-machina" rel="nofollow"><img alt="Codecov status" src="https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg" style="max-width:100%;"></a>
+    </p>
 
-.. image:: https://img.shields.io/pypi/l/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina/
-    :alt: License
-
-.. image:: https://img.shields.io/pypi/pyversions/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina
-
-.. image:: https://img.shields.io/pypi/v/django-machina.svg
-    :target: https://pypi.python.org/pypi/django-machina/
-    :alt: Latest Version
-
-.. image:: https://img.shields.io/travis/ellmetha/django-machina.svg
-    :target: https://travis-ci.org/ellmetha/django-machina
-    :alt: Build status
-
-.. image:: https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg
-    :target: https://codecov.io/github/ellmetha/django-machina
-    :alt: Codecov status
-
-.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
-   :target: https://saythanks.io/to/ellmetha
-
+|
 |
 
 Django-machina is a forum framework for Django providing a way to build community-driven websites.
@@ -41,20 +34,11 @@ It offers a full-featured yet very extensible forum solution:
 * Forum conversations search
 * ...
 
-.. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
-    :target: https://django-machina.readthedocs.org/
-
-|
-
 Django-machina was built with integration in mind: the application is designed to be used inside
 existing Django applications. It is not a standalone forum solution.
 
 Django-machina was built with customization and extensibility in mind: each single functionality
-of the application can be customized or overriden to accommodate with your needs. In fact,
-django-machina uses the same techniques as those introduced by the famous django-oscar_ e-commerce
-framework to allow powerfull customizations.
-
-.. _django-oscar: https://github.com/django-oscar/django-oscar
+of the application can be customized or overriden to accommodate with your needs.
 
 .. contents:: Table of Contents
     :local:
@@ -70,15 +54,15 @@ it to suit your needs.
 Requirements
 ============
 
-Python 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for a full
+Python 3.4+, Django 2.0+. Please refer to the requirements_ section of the documentation for a full
 list of dependencies.
 
-.. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
+.. _requirements: https://django-machina.readthedocs.org/en/stable/getting_started.html#requirements
 
 Demo site
 =========
 
-A demo sites can be tested at https://vanilla.machina-forum.io. It contains a standard installation
+A demo site can be tested at https://demo.machina-forum.io. It contains a standard installation
 of django-machina without any customizations.
 
 Authors

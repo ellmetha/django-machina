@@ -202,7 +202,7 @@ class AbstractTopic(DatedModel):
         """ Returns the URL for this topic """
         reverse('forum_conversation:topic', kwargs={
                 'forum_slug': self.forum.slug, 'forum_pk': self.forum.pk,
-                'slug': self.slug', 'pk': self.pk})
+                'slug': self.slug, 'pk': self.pk})
 
 
 class AbstractPost(DatedModel):

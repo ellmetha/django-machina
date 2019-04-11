@@ -5,13 +5,12 @@ Requirements
 ------------
 
 * `Python`_ 3.4, 3.5, 3.6 and 3.7
-* `Django`_ 1.11.x, 2.0.x and 2.1.x
+* `Django`_ 2.0.x, 2.1.x and 2.2x
 * `Pillow`_ 2.2. or higher
 * `Django-mptt`_ 0.8. or higher
 * `Django-haystack`_ 2.1. or higher
 * `Markdown2`_ 2.3. or higher
 * `Django-widget-tweaks`_ 1.4. or higher
-
 
 .. note::
 
@@ -194,13 +193,13 @@ Finally you have to update your main ``urls.py`` module in order to include the 
 
 .. code-block:: python
 
+    from django.urls import include, path
     from machina import urls as machina_urls
 
-    urlpatterns = patterns(
+    urlpatterns = [
         # [...]
-        # Apps
-        url(r'^forum/', include(machina_urls)),
-    )
+        path('forum/', include(machina_urls)),
+    ]
 
 Creating your first forums
 --------------------------

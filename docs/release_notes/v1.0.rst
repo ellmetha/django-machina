@@ -1,16 +1,18 @@
-####################################################
-Django-machina 1.0 release notes (UNDER DEVELOPMENT)
-####################################################
+#############################################
+Django-machina 1.0 release notes (2019-04-06)
+#############################################
 
 Requirements and compatibility
 ------------------------------
 
-Python 3.4, 3.5, 3.6 and 3.7. Django 1.11, 2.0 and 2.1.
+Python 3.4, 3.5, 3.6 and 3.7. Django 2.0, 2.1 and 2.2.
 
 Major changes
 -------------
 
 * Default templates are upgraded to Bootstrap 4
+* A new ``MACHINA_USER_DISPLAY_NAME_METHOD`` setting is introduced. The setting defines the name of
+  a method on the project's ``User`` model to be used to retrieve user display names
 
 Minor changes
 -------------
@@ -18,11 +20,16 @@ Minor changes
 * The forms used by the admin classes of the ``forum`` application are now imported using the
   django-machina's class loading system. This is to allow to easily override the related form fields
   and widgets in order to customize the corresponding admin pages
+* It is now possible to easily override the way forum member display names are retrieved for each
+  user. See :doc:`../customization/recipes/custom_forum_member_display_names` for more details
+* The SimpleMDE Markdown editor was replaced by the
+  `EasyMDE Markdown editor <https://github.com/Ionaru/easy-markdown-editor>`_
 
 Backwards incompatible changes
 ------------------------------
 
 * Support for Python 2.7 is dropped
+* Support for Django 1.11 is dropped
 * The ``get_apps`` helper is removed. This function was used to append the machina's applications
   (and overridden applications) to the ``INSTALLED_APPS`` setting. Now machina's applications and
   overridden applications must be explicitly defined in the Django settings
@@ -36,3 +43,12 @@ Backwards incompatible changes
   modules inside each application
 * The ``poster_ip`` field (that used to contain the IP address of post authors) is removed from the
   ``Post`` model as it wasn't really used in the context of the forum application
+
+Fixes
+-----
+
+* Fix incorrect logic related to the use of the
+  ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting that resulted in forums or
+  categories not being displayed in the list of forums
+* Fix missing check that allowed users to reply to locked topics
+  (`#155 <https://github.com/ellmetha/django-machina/issues/155>`_)

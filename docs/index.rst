@@ -3,7 +3,7 @@ Welcome to django-machina's documentation!
 ##########################################
 
 
-.. image:: ./_images/machina_forum_header.png
+.. image:: ./_images/logo.svg
 
 .. toctree::
    :maxdepth: 2

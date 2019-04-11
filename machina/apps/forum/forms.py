@@ -97,7 +97,7 @@ class PermissionsForm(forms.Form):
         )
         for scope in PermissionConfig.scopes:
             codenames = [
-                x['fields']['codename'] for x in PermissionConfig.permissions if x['scope'] == scope
+                x['codename'] for x in PermissionConfig.permissions if x['scope'] == scope
             ]
             permissions = filter(lambda v: v[0] in codenames, self.permissions_dict.items())
             for codename, p in permissions:

@@ -1,0 +1,1743 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# I K <ki.foobar@gmail.com>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: django-machina\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"PO-Revision-Date: 2019-03-11 00:25+0000\n"
+"Last-Translator: I K <ki.foobar@gmail.com>\n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-team/django-machina/language/ja_JP/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: apps/forum/abstract_models.py:41
+msgid "Parent"
+msgstr "親フォーラム"
+
+#: apps/forum/abstract_models.py:44
+#: templates/admin/forum/forum/change_list_table.html:9
+msgid "Name"
+msgstr "名前"
+
+#: apps/forum/abstract_models.py:45
+#: apps/forum_conversation/abstract_models.py:41
+msgid "Slug"
+msgstr "スラッグ"
+
+#: apps/forum/abstract_models.py:47
+msgid "Description"
+msgstr "説明"
+
+#: apps/forum/abstract_models.py:52
+msgid "Forum image"
+msgstr "フォーラムの画像"
+
+#: apps/forum/abstract_models.py:56
+msgid "Forum link"
+msgstr "フォーラムのリンク"
+
+#: apps/forum/abstract_models.py:58 apps/forum/abstract_models.py:80
+msgid "Track link redirects count"
+msgstr "リンクのリダイレクトを追跡する"
+
+#: apps/forum/abstract_models.py:59
+msgid "Records the number of times a forum link was clicked"
+msgstr "フォーラムのリンクがクリックされた数を記録します"
+
+#: apps/forum/abstract_models.py:65
+msgid "Default forum"
+msgstr "デフォルトフォーラム"
+
+#: apps/forum/abstract_models.py:66
+msgid "Category forum"
+msgstr "カテゴリーフォーラム"
+
+#: apps/forum/abstract_models.py:67
+msgid "Link forum"
+msgstr "リンクフォーラム"
+
+#: apps/forum/abstract_models.py:70
+msgid "Forum type"
+msgstr "フォーラムの種類"
+
+#: apps/forum/abstract_models.py:75
+msgid "Direct number of posts"
+msgstr "投稿数"
+
+#: apps/forum/abstract_models.py:78
+msgid "Direct number of topics"
+msgstr "トピック数"
+
+#: apps/forum/abstract_models.py:88
+#: apps/forum_conversation/abstract_models.py:90
+#: templates/machina/forum/forum_list.html:22
+#: templates/machina/forum/forum_list.html:40
+#: templates/machina/forum/forum_list.html:208
+#: templates/machina/forum_conversation/topic_list.html:15
+msgid "Last post"
+msgstr "最後の投稿"
+
+#: apps/forum/abstract_models.py:90
+#: apps/forum_conversation/abstract_models.py:80
+msgid "Last post added on"
+msgstr "最後に投稿された日時"
+
+#: apps/forum/abstract_models.py:95
+msgid "Display in parent-forums legend"
+msgstr "親フォーラムに表示する"
+
+#: apps/forum/abstract_models.py:96
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "親フォーラムにこのフォーラムを表示します（サブフォーラムリスト）"
+
+#: apps/forum/abstract_models.py:103
+#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_tracking/abstract_models.py:27
+#: templates/machina/forum_moderation/moderation_queue/list.html:36
+msgid "Forum"
+msgstr "フォーラム"
+
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
+#: templates/machina/forum/forum_list.html:204
+msgid "Forums"
+msgstr "フォーラム"
+
+#: apps/forum/abstract_models.py:139
+msgid "A forum can not have a link forum as parent"
+msgstr "リンクフォーラムを親として持つことはできません"
+
+#: apps/forum/abstract_models.py:142
+msgid "A category can not have another category as parent"
+msgstr "カテゴリーフォーラムは別のカテゴリーフォーラムを親として持つことはできません"
+
+#: apps/forum/abstract_models.py:145
+msgid "A link forum must have a link associated with it"
+msgstr "リンクフォーラムは関連するリンクを持つ必要があります"
+
+#: apps/forum/admin.py:50
+msgid "Forum settings"
+msgstr "フォーラムの設定"
+
+#: apps/forum/admin.py:52
+msgid "Link forum settings"
+msgstr "リンクフォーラムの設定"
+
+#: apps/forum/admin.py:154
+msgid "'{}' forum successfully moved"
+msgstr "フォーラム '{}' を移動しました"
+
+#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: templates/admin/forum/forum/change_form.html:5
+#: templates/admin/forum/forum/editpermissions_form.html:20
+#: templates/admin/forum/forum/editpermissions_index.html:15
+msgid "Forum permissions"
+msgstr "フォーラム権限"
+
+#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+msgid "Global forum permissions"
+msgstr "グローバルフォーラム権限"
+
+#: apps/forum/admin.py:178
+msgid "Permissions successfully copied"
+msgstr "権限をコピーしました"
+
+#: apps/forum/admin.py:202
+msgid "Choose either a user ID, a group ID or the anonymous user"
+msgstr "ユーザーID、グループID、匿名ユーザーのいずれかを選択してください"
+
+#: apps/forum/admin.py:275
+#: templates/machina/forum_conversation/topic_detail.html:98
+#: templates/machina/forum_moderation/moderation_queue/detail.html:120
+msgid "Anonymous user"
+msgstr "匿名ユーザー"
+
+#: apps/forum/admin.py:354
+msgid "Permissions successfully applied"
+msgstr "権限を適用しました"
+
+#: apps/forum/apps.py:17
+msgid "Machina: Forum"
+msgstr "Machina: フォーラム"
+
+#: apps/forum/forms.py:31
+msgid "Anonymous"
+msgstr "匿名"
+
+#: apps/forum/forms.py:34
+msgid ""
+"Please select this option if you want to edit the permissions of the "
+"anonymous user"
+msgstr "匿名ユーザーの権限を編集する場合はこのオプションを選んでください"
+
+#: apps/forum/forms.py:55
+msgid "Choose either a user ID or select the anonymous user"
+msgstr "ユーザーIDか匿名ユーザーを選択してください"
+
+#: apps/forum/forms.py:94
+#: templates/admin/forum/forum/editpermissions_form.html:35
+msgid "Not set"
+msgstr "未指定"
+
+#: apps/forum/forms.py:95
+#: templates/admin/forum/forum/editpermissions_form.html:36
+msgid "Granted"
+msgstr "可"
+
+#: apps/forum/forms.py:96
+#: templates/admin/forum/forum/editpermissions_form.html:37
+msgid "Not granted"
+msgstr "不可"
+
+#: apps/forum/urls.py:29
+msgid "forum/<slug:slug>-<int:pk>/"
+msgstr ""
+
+#: apps/forum_conversation/abstract_models.py:32
+msgid "Topic forum"
+msgstr "トピックフォーラム"
+
+#: apps/forum_conversation/abstract_models.py:36
+#: apps/forum_conversation/abstract_models.py:210
+msgid "Poster"
+msgstr "投稿者"
+
+#: apps/forum_conversation/abstract_models.py:40
+#: apps/forum_conversation/abstract_models.py:218
+msgid "Subject"
+msgstr "題名"
+
+#: apps/forum_conversation/abstract_models.py:46
+msgid "Default topic"
+msgstr "デフォルトトピック"
+
+#: apps/forum_conversation/abstract_models.py:47
+msgid "Sticky"
+msgstr "固定"
+
+#: apps/forum_conversation/abstract_models.py:48
+msgid "Announce"
+msgstr "アナウンス"
+
+#: apps/forum_conversation/abstract_models.py:51
+msgid "Topic type"
+msgstr "トピックの種類"
+
+#: apps/forum_conversation/abstract_models.py:57
+msgid "Topic unlocked"
+msgstr "未凍結"
+
+#: apps/forum_conversation/abstract_models.py:58
+msgid "Topic locked"
+msgstr "凍結済"
+
+#: apps/forum_conversation/abstract_models.py:59
+msgid "Topic moved"
+msgstr "移動済"
+
+#: apps/forum_conversation/abstract_models.py:62
+msgid "Topic status"
+msgstr "トピックの状態"
+
+#: apps/forum_conversation/abstract_models.py:67
+#: apps/forum_conversation/abstract_models.py:232
+msgid "Approved"
+msgstr "承認済"
+
+#: apps/forum_conversation/abstract_models.py:71
+msgid "Posts count"
+msgstr "投稿数"
+
+#: apps/forum_conversation/abstract_models.py:76
+msgid "Views count"
+msgstr "閲覧数"
+
+#: apps/forum_conversation/abstract_models.py:86
+msgid "First post"
+msgstr "最初の投稿"
+
+#: apps/forum_conversation/abstract_models.py:96
+msgid "Subscribers"
+msgstr "購読者"
+
+#: apps/forum_conversation/abstract_models.py:107
+#: apps/forum_conversation/abstract_models.py:206
+#: apps/forum_conversation/forum_polls/abstract_models.py:24
+#: apps/forum_tracking/abstract_models.py:53
+#: templates/machina/forum_moderation/moderation_queue/list.html:35
+msgid "Topic"
+msgstr "トピック"
+
+#: apps/forum_conversation/abstract_models.py:108
+#: templates/machina/forum/forum_detail.html:52
+#: templates/machina/forum/forum_list.html:20
+#: templates/machina/forum/forum_list.html:38
+#: templates/machina/forum/forum_list.html:206
+msgid "Topics"
+msgstr "トピック"
+
+#: apps/forum_conversation/abstract_models.py:144
+msgid "A topic can not be associated with a category or a link forum"
+msgstr "トピックはカテゴリーフォーラムやリンクフォーラムと関連づけることはできません"
+
+#: apps/forum_conversation/abstract_models.py:213
+#: apps/forum_conversation/forum_polls/abstract_models.py:96
+msgid "Anonymous user forum key"
+msgstr "匿名ユーザーフォーラムキー"
+
+#: apps/forum_conversation/abstract_models.py:225
+msgid "Content"
+msgstr "内容"
+
+#: apps/forum_conversation/abstract_models.py:229
+msgid "Username"
+msgstr "ユーザー名"
+
+#: apps/forum_conversation/abstract_models.py:236
+msgid "Attach a signature"
+msgstr "プロフィールを表示"
+
+#: apps/forum_conversation/abstract_models.py:242
+msgid "Update reason"
+msgstr "更新理由"
+
+#: apps/forum_conversation/abstract_models.py:248
+msgid "Lastly updated by"
+msgstr "最後に編集したユーザー"
+
+#: apps/forum_conversation/abstract_models.py:251
+msgid "Updates count"
+msgstr "更新回数"
+
+#: apps/forum_conversation/abstract_models.py:262
+#: apps/forum_conversation/forum_attachments/abstract_models.py:27
+msgid "Post"
+msgstr "投稿"
+
+#: apps/forum_conversation/abstract_models.py:263
+#: templates/machina/forum/forum_list.html:21
+#: templates/machina/forum/forum_list.html:39
+#: templates/machina/forum/forum_list.html:207
+msgid "Posts"
+msgstr "投稿"
+
+#: apps/forum_conversation/abstract_models.py:297
+msgid "A user id or an anonymous key must be associated with a post."
+msgstr "投稿にはユーザーIDまたは匿名キーを指定する必要があります"
+
+#: apps/forum_conversation/abstract_models.py:301
+msgid ""
+"A user id or an anonymous key must be associated with a post, but not both."
+msgstr "投稿にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定することはできません"
+
+#: apps/forum_conversation/abstract_models.py:305
+msgid "A username must be specified if the poster is anonymous"
+msgstr "投稿者が匿名の場合はユーザー名を指定する必要があります"
+
+#: apps/forum_conversation/apps.py:17
+msgid "Machina: Forum conversations"
+msgstr "Machina: フォーラム会話"
+
+#: apps/forum_conversation/forms.py:47
+msgid "Enter your subject"
+msgstr "タイトルを入力"
+
+#: apps/forum_conversation/forms.py:48
+msgid "Message"
+msgstr "メッセージ"
+
+#: apps/forum_conversation/forms.py:49
+msgid "Enter your message"
+msgstr "メッセージを入力"
+
+#: apps/forum_conversation/forms.py:75 apps/forum_moderation/forms.py:26
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
+#: templates/machina/forum_moderation/topic_lock.html:5
+#: templates/machina/forum_moderation/topic_lock.html:12
+msgid "Lock topic"
+msgstr "トピックを凍結"
+
+#: apps/forum_conversation/forms.py:125
+msgid "Post topic as"
+msgstr "トピックの種類"
+
+#: apps/forum_conversation/forms.py:149
+#: apps/forum_conversation/forum_polls/abstract_models.py:28
+msgid "Poll question"
+msgstr "投票の質問"
+
+#: apps/forum_conversation/forms.py:151
+msgid ""
+"Enter a question to associate a poll with the topic or leave blank to not "
+"create a poll."
+msgstr "投票を設置する場合は質問を入力してください。何も入力しなければ投票は作られません"
+
+#: apps/forum_conversation/forms.py:157
+#: apps/forum_conversation/forum_polls/abstract_models.py:37
+msgid "Maximum number of poll options per user"
+msgstr "一人あたりの最大投票数"
+
+#: apps/forum_conversation/forms.py:158
+msgid "This is the number of options each user may select when voting."
+msgstr "投票の際、それぞれの投票者が一度に選べる選択肢の数です"
+
+#: apps/forum_conversation/forms.py:163
+msgid "For how many days the poll should be run?"
+msgstr "投票を何日で締め切るか"
+
+#: apps/forum_conversation/forms.py:164
+msgid "Enter 0 or leave blank for a never ending poll."
+msgstr "何も入力しないか0を指定した場合は締め切りなしとなります"
+
+#: apps/forum_conversation/forms.py:168
+msgid "Allow re-voting?"
+msgstr "再投票を認めるか"
+
+#: apps/forum_conversation/forms.py:169
+msgid "If enabled users are able to change their vote."
+msgstr "有効にした場合は、票を後から変更することができます"
+
+#: apps/forum_conversation/forms.py:192
+msgid ""
+"You must set the maximum number of poll options per user when creating polls"
+msgstr "投票を設置するときは、一人当たりの最大投票数を設定する必要があります"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:29
+msgid "File"
+msgstr "ファイル"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:30
+msgid "Comment"
+msgstr "コメント"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:35
+msgid "Attachment"
+msgstr "添付ファイル"
+
+#: apps/forum_conversation/forum_attachments/abstract_models.py:36
+#: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
+#: templates/machina/forum_conversation/forum_attachments/attachments_preview.html:7
+#: templates/machina/forum_conversation/partials/post_form.html:22
+#: templates/machina/forum_conversation/partials/post_form.html:60
+#: templates/machina/forum_conversation/partials/topic_form.html:24
+msgid "Attachments"
+msgstr "添付ファイル"
+
+#: apps/forum_conversation/forum_attachments/apps.py:17
+msgid "Machina: Forum attachments"
+msgstr "Machina: フォーラム添付ファイル"
+
+#: apps/forum_conversation/forum_attachments/urls.py:25
+msgid "attachment/<int:pk>/"
+msgstr ""
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:32
+msgid "Poll duration, in days"
+msgstr "投票受付時間 (単位: 日)"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:42
+msgid "Allow vote changes"
+msgstr "票の変更を認める"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:49
+msgid "Topic poll"
+msgstr "トピックの投票"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:50
+msgid "Topic polls"
+msgstr "トピックの投票"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:69
+#: templates/machina/forum_conversation/partials/topic_form.html:23
+msgid "Poll"
+msgstr "投票"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:71
+msgid "Poll option text"
+msgstr "投票の選択肢"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:76
+msgid "Topic poll option"
+msgstr "トピックの投票の選択肢"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:77
+msgid "Topic poll options"
+msgstr "トピックの投票の選択肢"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:93
+msgid "Voter"
+msgstr "投票者"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:101
+msgid "Poll option"
+msgstr "投票の選択肢"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:103
+msgid "Vote's date"
+msgstr "投票日時"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:108
+msgid "Topic poll vote"
+msgstr "トピックの投票の投票"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:109
+msgid "Topic poll votes"
+msgstr "トピックの投票の投票"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:121
+msgid "A user id or an anonymous key must be used."
+msgstr "投票にはユーザーIDまたは匿名キーを指定する必要があります"
+
+#: apps/forum_conversation/forum_polls/abstract_models.py:123
+msgid "A user id or an anonymous key must be used, but not both."
+msgstr "投票にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定することはできません"
+
+#: apps/forum_conversation/forum_polls/apps.py:17
+msgid "Machina: Forum polls"
+msgstr "Machina: フォーラム投票"
+
+#: apps/forum_conversation/forum_polls/forms.py:33
+msgid "Enter a poll option"
+msgstr "投票の選択肢を入力"
+
+#: apps/forum_conversation/forum_polls/forms.py:133
+msgid "You must specify an option when voting."
+msgstr "投票する際は選択肢を指定する必要があります"
+
+#: apps/forum_conversation/forum_polls/forms.py:138
+msgid "You have tried to vote for too many options."
+msgstr "票を入れようとしている選択肢の数が多すぎます"
+
+#: apps/forum_conversation/forum_polls/urls.py:25
+msgid "poll/<int:pk>/vote/"
+msgstr ""
+
+#: apps/forum_conversation/forum_polls/views.py:79
+msgid "Your vote has been cast."
+msgstr "投票しました"
+
+#: apps/forum_conversation/urls.py:39
+msgid "topic/<slug:slug>-<int:pk>/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:43
+msgid "topic/create/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:45
+msgid "topic/<slug:slug>-<int:pk>/update/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:50
+msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:55
+msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:60
+msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgstr ""
+
+#: apps/forum_conversation/urls.py:68
+msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgstr ""
+
+#: apps/forum_conversation/views.py:128
+msgid "This message will be validated before appearing on the forum."
+msgstr "このメッセージが表示されるのは承認後です"
+
+#: apps/forum_conversation/views.py:131
+msgid "There are some errors in the attachments you submitted."
+msgstr "添付ファイルを送信中にエラーが発生しました"
+
+#: apps/forum_conversation/views.py:136
+msgid "This message has been posted successfully."
+msgstr "メッセージを投稿しました"
+
+#: apps/forum_conversation/views.py:380
+msgid "There are some errors in the poll options you submitted."
+msgstr "投票内容を送信中にエラーが発生しました"
+
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+msgid "This message has been edited successfully."
+msgstr "メッセージを編集しました"
+
+#: apps/forum_conversation/views.py:734
+msgid "This message has been deleted successfully."
+msgstr "メッセージを削除しました"
+
+#: apps/forum_feeds/apps.py:17
+msgid "Machina: Forum feeds"
+msgstr "Machina: フォーラムフィード"
+
+#: apps/forum_feeds/feeds.py:26
+msgid "Latest topics"
+msgstr "最新のトピック"
+
+#: apps/forum_feeds/feeds.py:27
+msgid "Latest topics updated on the forums"
+msgstr "フォーラムで最後に更新されたトピック"
+
+#: apps/forum_feeds/urls.py:27
+msgid "topics/"
+msgstr ""
+
+#: apps/forum_feeds/urls.py:29
+msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgstr ""
+
+#: apps/forum_feeds/urls.py:34
+msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgstr ""
+
+#: apps/forum_member/abstract_models.py:31
+#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_tracking/abstract_models.py:24
+#: apps/forum_tracking/abstract_models.py:49
+msgid "User"
+msgstr "ユーザー"
+
+#: apps/forum_member/abstract_models.py:36
+msgid "Avatar"
+msgstr "アバター"
+
+#: apps/forum_member/abstract_models.py:42
+msgid "Signature"
+msgstr "プロフィール"
+
+#: apps/forum_member/abstract_models.py:49
+msgid "Total posts"
+msgstr "合計投稿数"
+
+#: apps/forum_member/abstract_models.py:54
+msgid "Forum profile"
+msgstr "フォーラムプロフィール"
+
+#: apps/forum_member/abstract_models.py:55
+msgid "Forum profiles"
+msgstr "フォーラムプロフィール"
+
+#: apps/forum_member/apps.py:17
+msgid "Machina: Forum members"
+msgstr "Machina: フォーラムメンバー"
+
+#: apps/forum_member/urls.py:33
+msgid "profile/edit/"
+msgstr ""
+
+#: apps/forum_member/urls.py:38
+msgid "profile/<str:pk>/"
+msgstr ""
+
+#: apps/forum_member/urls.py:43
+msgid "profile/<str:pk>/posts/"
+msgstr ""
+
+#: apps/forum_member/urls.py:48
+msgid "subscriptions/"
+msgstr ""
+
+#: apps/forum_member/urls.py:53
+msgid "topic/<int:pk>/subscribe/"
+msgstr ""
+
+#: apps/forum_member/urls.py:58
+msgid "topic/<int:pk>/unsubscribe/"
+msgstr ""
+
+#: apps/forum_member/views.py:118
+msgid "The profile has been edited successfully."
+msgstr "プロフィールを編集しました"
+
+#: apps/forum_member/views.py:142
+msgid "You subscribed to this topic successfully."
+msgstr "トピックを購読しました"
+
+#: apps/forum_member/views.py:188
+msgid "You unsubscribed from this topic successfully."
+msgstr "トピックの購読を解除しました"
+
+#: apps/forum_moderation/apps.py:17
+msgid "Machina: Forum moderation"
+msgstr "Machina: フォーラム管理"
+
+#: apps/forum_moderation/forms.py:25
+msgid "Select a destination forum"
+msgstr "移動先のフォーラムを選択してください"
+
+#: apps/forum_moderation/urls.py:42
+msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:47
+msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:52
+msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:57
+msgid "topic/<slug:slug>-<int:pk>/move/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:62
+msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:67
+msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:72
+msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:76
+msgid "queue/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:78
+msgid "queue/<int:pk>/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:83
+msgid "queue/<int:pk>/approve/"
+msgstr ""
+
+#: apps/forum_moderation/urls.py:88
+msgid "queue/<int:pk>/disapprove/"
+msgstr ""
+
+#: apps/forum_moderation/views.py:39
+msgid "This topic has been locked successfully."
+msgstr "トピックを凍結しました"
+
+#: apps/forum_moderation/views.py:89
+msgid "This topic has been unlocked successfully."
+msgstr "トピックの凍結を解除しました"
+
+#: apps/forum_moderation/views.py:137
+msgid "This topic has been deleted successfully."
+msgstr "トピックを削除しました"
+
+#: apps/forum_moderation/views.py:172
+msgid "This topic has been moved successfully."
+msgstr "トピックを移動しました"
+
+#: apps/forum_moderation/views.py:250
+msgid "This topic type has been changed successfully."
+msgstr "トピックの種類を変更しました"
+
+#: apps/forum_moderation/views.py:298
+msgid "Would you want to change this topic to a default topic?"
+msgstr "このトピックをデフォルトトピックに変更しますか？"
+
+#: apps/forum_moderation/views.py:309
+msgid "Would you want to change this topic to a sticky topic?"
+msgstr "このトピックを固定トピックに変更しますか？"
+
+#: apps/forum_moderation/views.py:320
+msgid "Would you want to change this topic to an announce?"
+msgstr "このトピックをアナウンスに変更しますか？"
+
+#: apps/forum_moderation/views.py:401
+msgid "This post has been approved successfully."
+msgstr "投稿を承認しました"
+
+#: apps/forum_moderation/views.py:443
+msgid "This post has been disapproved successfully."
+msgstr "投稿を却下しました"
+
+#: apps/forum_permission/abstract_models.py:33
+msgid "Permission codename"
+msgstr "権限コードネーム"
+
+#: apps/forum_permission/abstract_models.py:37
+msgid "Global permission"
+msgstr "グローバル権限"
+
+#: apps/forum_permission/abstract_models.py:38
+msgid "This permission can be granted globally to all the forums"
+msgstr "この権限はすべてのフォーラムに適用されます"
+
+#: apps/forum_permission/abstract_models.py:42
+msgid "Local permission"
+msgstr "ローカル権限"
+
+#: apps/forum_permission/abstract_models.py:43
+msgid "This permission can be granted individually for each forum"
+msgstr "この権限はそれぞれのフォーラムごとに適用されます"
+
+#: apps/forum_permission/abstract_models.py:50
+#: apps/forum_permission/abstract_models.py:74
+msgid "Forum permission"
+msgstr "フォーラムの権限"
+
+#: apps/forum_permission/abstract_models.py:60
+msgid "A forum permission should be at least either global or local"
+msgstr "フォーラム権限は最低でもグローバルかローカルのどちらかである必要があります"
+
+#: apps/forum_permission/abstract_models.py:76
+msgid "Has perm"
+msgstr "権限を持つかどうか"
+
+#: apps/forum_permission/abstract_models.py:93
+msgid "The following permission cannot be granted globally: {}"
+msgstr "以下の権限はグローバルに適用することはできません: {}"
+
+#: apps/forum_permission/abstract_models.py:108
+msgid "Target anonymous user"
+msgstr "匿名ユーザーを対象とする"
+
+#: apps/forum_permission/abstract_models.py:115
+msgid "User forum permission"
+msgstr "ユーザーフォーラム権限"
+
+#: apps/forum_permission/abstract_models.py:116
+msgid "User forum permissions"
+msgstr "ユーザーフォーラム権限"
+
+#: apps/forum_permission/abstract_models.py:131
+msgid "A permission should target either a user or an anonymous user"
+msgstr "権限は特定のユーザーか匿名ユーザーを対象とする必要があります"
+
+#: apps/forum_permission/abstract_models.py:138
+msgid "Group"
+msgstr "グループ"
+
+#: apps/forum_permission/abstract_models.py:144
+msgid "Group forum permission"
+msgstr "グループフォーラム権限"
+
+#: apps/forum_permission/abstract_models.py:145
+msgid "Group forum permissions"
+msgstr "グループフォーラム権限"
+
+#: apps/forum_permission/apps.py:17
+msgid "Machina: Forum permissions"
+msgstr "Machina: フォーラム権限"
+
+#: apps/forum_permission/defaults.py:27
+msgid "Can see forum"
+msgstr "フォーラムの閲覧(存在の有無)"
+
+#: apps/forum_permission/defaults.py:32
+msgid "Can read forum"
+msgstr "フォーラムの閲覧(内容)"
+
+#: apps/forum_permission/defaults.py:39
+msgid "Can start new topics"
+msgstr "新しいトピックの開始"
+
+#: apps/forum_permission/defaults.py:44
+msgid "Can reply to topics"
+msgstr "トピックへの返信"
+
+#: apps/forum_permission/defaults.py:49
+msgid "Can post announcements"
+msgstr "アナウンスの投稿"
+
+#: apps/forum_permission/defaults.py:54
+msgid "Can post stickies"
+msgstr "固定トピックの投稿"
+
+#: apps/forum_permission/defaults.py:59
+msgid "Can delete own posts"
+msgstr "自分の投稿の削除"
+
+#: apps/forum_permission/defaults.py:64
+msgid "Can edit own posts"
+msgstr "自分の投稿の編集"
+
+#: apps/forum_permission/defaults.py:70
+msgid "Can post without approval"
+msgstr "承認なしに投稿"
+
+#: apps/forum_permission/defaults.py:77
+msgid "Can create polls"
+msgstr "投票の設置"
+
+#: apps/forum_permission/defaults.py:82
+msgid "Can vote in polls"
+msgstr "投票"
+
+#: apps/forum_permission/defaults.py:89
+msgid "Can attach file"
+msgstr "ファイルの添付"
+
+#: apps/forum_permission/defaults.py:94
+msgid "Can download file"
+msgstr "ファイルのダウンロード"
+
+#: apps/forum_permission/defaults.py:101
+msgid "Can lock topics"
+msgstr "トピックの凍結"
+
+#: apps/forum_permission/defaults.py:106
+msgid "Can move topics"
+msgstr "トピックの移動"
+
+#: apps/forum_permission/defaults.py:111
+msgid "Can edit posts"
+msgstr "投稿の編集"
+
+#: apps/forum_permission/defaults.py:116
+msgid "Can delete posts"
+msgstr "投稿の削除"
+
+#: apps/forum_permission/defaults.py:121
+msgid "Can approve posts"
+msgstr "投稿の承認"
+
+#: apps/forum_permission/defaults.py:127
+msgid "Can add posts in locked topics"
+msgstr "凍結されたトピックへの投稿"
+
+#: apps/forum_search/apps.py:17
+msgid "Machina: Forum searches"
+msgstr "Machina: フォーラム検索"
+
+#: apps/forum_search/forms.py:26
+msgid "Search only in topic subjects"
+msgstr "検索範囲をトピックのタイトルに限定"
+
+#: apps/forum_search/forms.py:29
+msgid "Search for poster"
+msgstr "投稿者で検索"
+
+#: apps/forum_search/forms.py:30
+msgid "Enter a user name to limit the search to a specific user."
+msgstr "ユーザー名を入力することで検索範囲を特定のユーザーだけに限定できます"
+
+#: apps/forum_search/forms.py:35
+msgid "Search in specific forums"
+msgstr "特定のフォーラムから検索"
+
+#: apps/forum_search/forms.py:36
+msgid "Select the forums you wish to search in."
+msgstr "検索したいフォーラムを選択してください"
+
+#: apps/forum_search/forms.py:46
+msgid "Search for keywords"
+msgstr "キーワードで検索"
+
+#: apps/forum_search/forms.py:47
+msgid "Keywords or phrase"
+msgstr "キーワード"
+
+#: apps/forum_search/forms.py:48
+msgid "Poster name"
+msgstr "投稿者の名前"
+
+#: apps/forum_tracking/abstract_models.py:37
+msgid "Forum track"
+msgstr "フォーラムトラック"
+
+#: apps/forum_tracking/abstract_models.py:38
+msgid "Forum tracks"
+msgstr "フォーラムトラック"
+
+#: apps/forum_tracking/abstract_models.py:61
+msgid "Topic track"
+msgstr "トピックトラック"
+
+#: apps/forum_tracking/abstract_models.py:62
+msgid "Topic tracks"
+msgstr "トピックトラック"
+
+#: apps/forum_tracking/apps.py:17
+msgid "Machina: Forum tracking"
+msgstr "Machina: フォーラムトラッキング"
+
+#: apps/forum_tracking/urls.py:30
+msgid "mark/forums/"
+msgstr ""
+
+#: apps/forum_tracking/urls.py:35
+msgid "mark/forums/<int:pk>/"
+msgstr ""
+
+#: apps/forum_tracking/urls.py:40
+msgid "mark/forum/<int:pk>/topics/"
+msgstr ""
+
+#: apps/forum_tracking/urls.py:45
+msgid "unread-topics/"
+msgstr ""
+
+#: apps/forum_tracking/views.py:38
+msgid "Forums have been marked read."
+msgstr "フォーラムを既読にしました"
+
+#: apps/forum_tracking/views.py:95
+msgid "Topics have been marked read."
+msgstr "トピックを既読にしました"
+
+#: core/compat.py:16
+msgid "Neither Pillow nor PIL could be imported: {}"
+msgstr "Pillow、PILのどちらもimportできませんでした: {}"
+
+#: models/abstract_models.py:13
+msgid "Creation date"
+msgstr "作成日"
+
+#: models/abstract_models.py:14
+msgid "Update date"
+msgstr "更新日"
+
+#: models/fields.py:31
+msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
+msgstr "MACHINA_MARKUP_WIDGET {} をimportできません: {}"
+
+#: models/fields.py:57
+msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgstr "MACHINA_MARKUP_LANGUAGE {} をimportできません: {}"
+
+#: models/fields.py:62
+msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgstr "MACHINA_MARKUP_LANGUAGEの設定は必須です"
+
+#: models/fields.py:221
+msgid "Files of size greater than {} are not allowed. Your file is {}"
+msgstr "{} を超えるサイズのファイルは認められていません。このファイルは {} です"
+
+#: models/fields.py:232
+msgid ""
+"Images of width lesser than {}px or greater than {}px or are not allowed. "
+"The width of your image is {}px"
+msgstr "横幅が {}px より小さい画像、{}px より大きい画像は認められていません。この画像の横幅は {}px です"
+
+#: models/fields.py:240
+msgid ""
+"Images of height lesser than {}px or greater than {}px or are not allowed. "
+"The height of your image is {}px"
+msgstr "縦の高さが {}px より小さい画像、{}px より大きい画像は認められていません。この画像の縦の高さは {}px です"
+
+#: templates/admin/forum/forum/change_list.html:7
+msgid "List of forums"
+msgstr "フォーラム一覧"
+
+#: templates/admin/forum/forum/change_list_table.html:10
+msgid "Quick actions"
+msgstr "クイックアクション"
+
+#: templates/admin/forum/forum/change_list_table.html:11
+msgid "Type"
+msgstr "種類"
+
+#: templates/admin/forum/forum/change_list_table.html:12
+msgid "Details"
+msgstr "詳細"
+
+#: templates/admin/forum/forum/change_list_table.html:28
+msgid "Move up"
+msgstr "上に移動"
+
+#: templates/admin/forum/forum/change_list_table.html:33
+msgid "Move down"
+msgstr "下に移動"
+
+#: templates/admin/forum/forum/change_list_table.html:38
+msgid "Add a sub-forum"
+msgstr "サブフォーラムを追加"
+
+#: templates/admin/forum/forum/change_list_table.html:42
+#: templates/machina/forum_conversation/topic_detail.html:38
+msgid "Delete"
+msgstr "削除"
+
+#: templates/admin/forum/forum/change_list_table.html:51
+msgid "Topics:"
+msgstr "トピック:"
+
+#: templates/admin/forum/forum/change_list_table.html:51
+#: templates/machina/forum_conversation/topic_detail.html:95
+#: templates/machina/forum_member/user_posts_list.html:67
+#: templates/machina/forum_moderation/moderation_queue/detail.html:117
+msgid "Posts:"
+msgstr "投稿:"
+
+#: templates/admin/forum/forum/change_list_table.html:53
+msgid "Link:"
+msgstr "リンク:"
+
+#: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
+#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_user.html:4
+msgid "Edit user permissions"
+msgstr "ユーザーの権限を編集"
+
+#: templates/admin/forum/forum/editpermissions_form.html:16
+#: templates/admin/forum/forum/editpermissions_index.html:11
+msgid "Home"
+msgstr "ホーム"
+
+#: templates/admin/forum/forum/editpermissions_form.html:34
+msgid "Permission"
+msgstr "権限"
+
+#: templates/admin/forum/forum/editpermissions_form.html:63
+msgid "Save"
+msgstr "保存"
+
+#: templates/admin/forum/forum/editpermissions_group.html:4
+#: templates/admin/forum/forum/editpermissions_index.html:57
+msgid "Edit group permissions"
+msgstr "グループの権限を編集"
+
+#: templates/admin/forum/forum/editpermissions_index.html:25
+msgid "Please correct the error below."
+msgstr "以下のエラーを修正してください"
+
+#: templates/admin/forum/forum/editpermissions_index.html:25
+msgid "Please correct the errors below."
+msgstr "以下のエラーを修正してください"
+
+#: templates/admin/forum/forum/editpermissions_index.html:31
+msgid "Please select a user in order to update its permissions"
+msgstr "権限を更新するにはユーザーを選んでください"
+
+#: templates/admin/forum/forum/editpermissions_index.html:51
+#: templates/admin/forum/forum/editpermissions_index.html:78
+msgid "Select"
+msgstr "選択"
+
+#: templates/admin/forum/forum/editpermissions_index.html:58
+msgid "Please select a group in order to update its permissions"
+msgstr "権限を更新するにはグループを選んでください"
+
+#: templates/admin/forum/forum/editpermissions_index.html:85
+msgid "Copy permissions from another forum"
+msgstr "権限を別のフォーラムからコピー"
+
+#: templates/admin/forum/forum/editpermissions_index.html:86
+msgid ""
+"Please select a forum in order to copy its permissions configuration to the "
+"current forum"
+msgstr "権限の設定を現在のフォーラムにコピーするにはフォーラムを選んでください"
+
+#: templates/admin/forum/forum/editpermissions_index.html:106
+msgid "Copy"
+msgstr "コピー"
+
+#: templates/machina/board_base.html:25
+#: templates/machina/forum_search/search.html:5
+#: templates/machina/forum_search/search.html:11
+#: templates/machina/forum_search/search.html:32
+#: templates/machina/forum_search/search.html:42
+msgid "Search"
+msgstr "検索"
+
+#: templates/machina/board_base.html:28
+msgid "Advanced search"
+msgstr "詳細な検索"
+
+#: templates/machina/board_base.html:41
+msgid "Subscriptions"
+msgstr "購読"
+
+#: templates/machina/board_base.html:42
+msgid "View my posts"
+msgstr "自分の投稿"
+
+#: templates/machina/board_base.html:46
+#: templates/machina/forum_moderation/moderation_queue/detail.html:5
+#: templates/machina/forum_moderation/moderation_queue/detail.html:10
+#: templates/machina/forum_moderation/moderation_queue/list.html:5
+#: templates/machina/forum_moderation/moderation_queue/list.html:10
+#: templates/machina/forum_moderation/moderation_queue/list.html:33
+msgid "Moderation queue"
+msgstr "管理"
+
+#: templates/machina/forum/forum_detail.html:22
+msgid "Mark subforums read"
+msgstr "サブフォーラムを既読にする"
+
+#: templates/machina/forum/forum_detail.html:34
+#: templates/machina/forum/forum_detail.html:59
+#: templates/machina/forum_moderation/moderation_queue/detail.html:19
+#: templates/machina/forum_moderation/moderation_queue/list.html:67
+msgid "New topic"
+msgstr "新しいトピック"
+
+#: templates/machina/forum/forum_detail.html:40
+#: templates/machina/forum/forum_detail.html:65
+#: templates/machina/forum_tracking/mark_topics_read.html:5
+#: templates/machina/forum_tracking/mark_topics_read.html:11
+msgid "Mark topics read"
+msgstr "トピックを既読にする"
+
+#: templates/machina/forum/forum_detail.html:48
+msgid "Announcements"
+msgstr "アナウンス"
+
+#: templates/machina/forum/forum_list.html:70
+#: templates/machina/forum/forum_list.html:143
+msgid "RSS feed"
+msgstr "RSSフィード"
+
+#: templates/machina/forum/forum_list.html:77
+#: templates/machina/forum/forum_list.html:150
+#: templates/machina/forum_conversation/topic_list.html:54
+#, python-format
+msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
+msgstr ""
+
+#: templates/machina/forum/forum_list.html:81
+#: templates/machina/forum/forum_list.html:154
+#: templates/machina/forum_conversation/topic_list.html:58
+#, python-format
+msgid "By: %(poster_username)s"
+msgstr ""
+
+#: templates/machina/forum/forum_list.html:89
+#: templates/machina/forum/forum_list.html:162
+msgid "No posts"
+msgstr "投稿なし"
+
+#: templates/machina/forum/forum_list.html:108
+#: templates/machina/forum/forum_list.html:181
+msgid "Total redirects:"
+msgstr "合計リンク数:"
+
+#: templates/machina/forum/forum_list.html:188
+#: templates/machina/forum/forum_list.html:194
+msgid "Subforums:"
+msgstr "サブフォーラム"
+
+#: templates/machina/forum/forum_list.html:213
+msgid "No forums."
+msgstr "現在フォーラムはありません"
+
+#: templates/machina/forum/index.html:6
+msgid "Index"
+msgstr "トップページ"
+
+#: templates/machina/forum/index.html:13
+#: templates/machina/forum_tracking/mark_forums_read.html:5
+#: templates/machina/forum_tracking/mark_forums_read.html:11
+msgid "Mark forums read"
+msgstr "フォーラムを既読にする"
+
+#: templates/machina/forum/index.html:15
+#: templates/machina/forum_tracking/unread_topic_list.html:4
+#: templates/machina/forum_tracking/unread_topic_list.html:8
+msgid "View unread topics"
+msgstr "未読のトピックを見る"
+
+#: templates/machina/forum/index.html:22
+#: templates/machina/forum_member/forum_profile_detail.html:34
+msgid "Statistics"
+msgstr "統計"
+
+#: templates/machina/forum/index.html:23
+msgid "Total posts:"
+msgstr "合計投稿数:"
+
+#: templates/machina/forum/index.html:23
+msgid "Total topics:"
+msgstr "合計トピック数:"
+
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:28
+#: templates/machina/forum_member/forum_profile_update.html:19
+#: templates/machina/partials/form_field.html:6
+msgid "(optional)"
+msgstr "任意"
+
+#: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:41
+msgid "Add another file"
+msgstr "別のファイルを追加"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:17
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:13
+msgid "You may select <b>1</b> option"
+msgstr "選択肢を<b>1</b>つ選ぶことができます"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:21
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:17
+#, python-format
+msgid "You may select up to <b>%(max_options)s</b> options"
+msgstr "選択肢を最大<b>%(max_options)s</b>つまで選ぶことができます"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:40
+msgid "Vote"
+msgstr "投票"
+
+#: templates/machina/forum_conversation/forum_polls/poll_detail.html:45
+msgid "Change your vote"
+msgstr "投票先を変更"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:3
+msgid "Poll options"
+msgstr "投票の選択肢"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:26
+msgid "Add a poll option"
+msgstr "選択肢を追加"
+
+#: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:30
+msgid ""
+"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
+"associated votes."
+msgstr "<b>注意:</b>&nbsp;選択肢を削除するとそれに投票した票も失われます"
+
+#: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
+#: templates/machina/forum_conversation/post_preview.html:10
+msgid "Preview:"
+msgstr "プレビュー:"
+
+#: templates/machina/forum_conversation/forum_polls/poll_results.html:19
+msgid "Total votes:"
+msgstr "合計投票数:"
+
+#: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
+#: templates/machina/forum_conversation/partials/topic_form.html:100
+#: templates/machina/forum_conversation/post_create.html:28
+#: templates/machina/forum_conversation/post_update.html:27
+#: templates/machina/forum_member/forum_profile_update.html:35
+msgid "Submit"
+msgstr "送信"
+
+#: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:36
+msgid "View results"
+msgstr "結果を見る"
+
+#: templates/machina/forum_conversation/partials/post_form.html:21
+#: templates/machina/forum_conversation/partials/topic_form.html:22
+msgid "Options"
+msgstr "オプション"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:15
+msgid "Post reply"
+msgstr "返信"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:18
+msgid "Subscribe"
+msgstr "購読"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:20
+msgid "Unsubscribe"
+msgstr "購読解除"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
+#: templates/machina/forum_moderation/topic_unlock.html:5
+#: templates/machina/forum_moderation/topic_unlock.html:12
+msgid "Unlock topic"
+msgstr "トピックの凍結を解除"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:28
+#: templates/machina/forum_moderation/topic_delete.html:5
+#: templates/machina/forum_moderation/topic_delete.html:12
+msgid "Delete topic"
+msgstr "トピックを削除"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:29
+#: templates/machina/forum_moderation/topic_move.html:5
+#: templates/machina/forum_moderation/topic_move.html:12
+msgid "Move topic"
+msgstr "トピックを移動"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:31
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:38
+msgid "Change to sticky topic"
+msgstr "固定トピックに変更"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:32
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:35
+msgid "Change to announce"
+msgstr "アナウンスに変更"
+
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:34
+#: templates/machina/forum_conversation/partials/topic_detail_actions.html:37
+msgid "Change to standard topic"
+msgstr "通常のトピックに変更"
+
+#: templates/machina/forum_conversation/partials/topic_form.html:99
+#: templates/machina/forum_conversation/post_create.html:27
+#: templates/machina/forum_conversation/post_update.html:26
+msgid "Preview"
+msgstr "プレビュー"
+
+#: templates/machina/forum_conversation/post_create.html:6
+#: templates/machina/forum_conversation/post_create.html:21
+msgid "Post a reply"
+msgstr "返信を投稿"
+
+#: templates/machina/forum_conversation/post_create.html:39
+#: templates/machina/forum_moderation/moderation_queue/detail.html:133
+msgid "Topic review"
+msgstr "プレビュー"
+
+#: templates/machina/forum_conversation/post_create.html:51
+#: templates/machina/forum_conversation/topic_detail.html:53
+#: templates/machina/forum_conversation/topic_list.html:34
+#: templates/machina/forum_member/user_posts_list.html:50
+#: templates/machina/forum_moderation/moderation_queue/detail.html:86
+#: templates/machina/forum_moderation/moderation_queue/detail.html:145
+#: templates/machina/forum_moderation/moderation_queue/list.html:51
+#: templates/machina/forum_search/search.html:83
+#, python-format
+msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
+msgstr ""
+
+#: templates/machina/forum_conversation/post_create.html:55
+#: templates/machina/forum_conversation/topic_detail.html:57
+#: templates/machina/forum_conversation/topic_list.html:38
+#: templates/machina/forum_moderation/moderation_queue/detail.html:90
+#: templates/machina/forum_moderation/moderation_queue/detail.html:149
+#: templates/machina/forum_moderation/moderation_queue/list.html:55
+#: templates/machina/forum_search/search.html:87
+#, python-format
+msgid "By: %(poster_username)s on %(creation_date)s"
+msgstr ""
+
+#: templates/machina/forum_conversation/post_delete.html:5
+#: templates/machina/forum_conversation/post_delete.html:12
+msgid "Delete post"
+msgstr "投稿を削除"
+
+#: templates/machina/forum_conversation/post_delete.html:15
+msgid "Are you sure you want to delete this post?"
+msgstr "本当にこの投稿を削除しますか？"
+
+#: templates/machina/forum_conversation/post_delete.html:18
+#: templates/machina/forum_member/topic_subscribe.html:18
+#: templates/machina/forum_member/topic_unsubscribe.html:18
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:18
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:18
+#: templates/machina/forum_moderation/topic_delete.html:18
+#: templates/machina/forum_moderation/topic_lock.html:18
+#: templates/machina/forum_moderation/topic_move.html:23
+#: templates/machina/forum_moderation/topic_unlock.html:18
+#: templates/machina/forum_moderation/topic_update_type.html:18
+#: templates/machina/forum_tracking/mark_forums_read.html:16
+#: templates/machina/forum_tracking/mark_topics_read.html:16
+msgid "Yes, I'm sure"
+msgstr "はい"
+
+#: templates/machina/forum_conversation/post_delete.html:19
+#: templates/machina/forum_member/topic_subscribe.html:19
+#: templates/machina/forum_member/topic_unsubscribe.html:19
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:19
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:19
+#: templates/machina/forum_moderation/topic_delete.html:19
+#: templates/machina/forum_moderation/topic_lock.html:19
+#: templates/machina/forum_moderation/topic_move.html:24
+#: templates/machina/forum_moderation/topic_unlock.html:19
+#: templates/machina/forum_moderation/topic_update_type.html:19
+#: templates/machina/forum_tracking/mark_forums_read.html:17
+#: templates/machina/forum_tracking/mark_topics_read.html:17
+msgid "No, take me back"
+msgstr "いいえ"
+
+#: templates/machina/forum_conversation/post_update.html:5
+#: templates/machina/forum_conversation/post_update.html:20
+#: templates/machina/forum_conversation/topic_update.html:5
+#: templates/machina/forum_conversation/topic_update.html:23
+msgid "Edit post"
+msgstr "投稿を編集"
+
+#: templates/machina/forum_conversation/topic_create.html:5
+#: templates/machina/forum_conversation/topic_create.html:23
+msgid "Post a new topic"
+msgstr "新しいトピックを投稿"
+
+#: templates/machina/forum_conversation/topic_detail.html:34
+msgid "Edit"
+msgstr "編集"
+
+#: templates/machina/forum_conversation/topic_detail.html:76
+msgid "Last edited by:"
+msgstr "最後の編集者:"
+
+#: templates/machina/forum_conversation/topic_detail.html:76
+msgid "Updated"
+msgstr ""
+
+#: templates/machina/forum_conversation/topic_detail.html:76
+msgid "on"
+msgstr ""
+
+#: templates/machina/forum_conversation/topic_detail.html:76
+#, python-format
+msgid "edited %(counter)s time in total."
+msgid_plural "edited %(counter)s times in total."
+msgstr[0] "計%(counter)s回編集"
+
+#: templates/machina/forum_conversation/topic_detail.html:81
+msgid "Reason:"
+msgstr ""
+
+#: templates/machina/forum_conversation/topic_list.html:13
+msgid "Replies"
+msgstr "返信数"
+
+#: templates/machina/forum_conversation/topic_list.html:14
+msgid "Views"
+msgstr "閲覧数"
+
+#: templates/machina/forum_conversation/topic_list.html:29
+msgid "This topic is locked"
+msgstr "このトピックは凍結されています"
+
+#: templates/machina/forum_conversation/topic_list.html:74
+msgid "There are no topics in this forum."
+msgstr "このフォーラムにはトピックがありません"
+
+#: templates/machina/forum_conversation/topic_pages_inline_list.html:5
+msgid "Go to the page:"
+msgstr ""
+
+#: templates/machina/forum_feeds/topics_description.html:6
+msgid "Posted by"
+msgstr ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:5
+#: templates/machina/forum_member/forum_profile_detail.html:10
+#, python-format
+msgid "%(username)s profile"
+msgstr ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:26
+msgid "Edit profile"
+msgstr "プロフィールを編集"
+
+#: templates/machina/forum_member/forum_profile_detail.html:40
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p><small>Post</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p class=\"mb-1\"><small>Posts</small></p>"
+msgstr[0] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:45
+#, python-format
+msgid ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p><small>Topic</small></p>"
+msgid_plural ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p class=\"mb-1\"><small>Topics</small></p>"
+msgstr[0] ""
+
+#: templates/machina/forum_member/forum_profile_detail.html:60
+msgid "Recent posts"
+msgstr "最近の投稿"
+
+#: templates/machina/forum_member/forum_profile_detail.html:60
+msgid "View all"
+msgstr "すべて見る"
+
+#: templates/machina/forum_member/forum_profile_detail.html:70
+#, python-format
+msgid "On %(creation_date)s"
+msgstr ""
+
+#: templates/machina/forum_member/forum_profile_update.html:4
+#: templates/machina/forum_member/forum_profile_update.html:11
+msgid "Edit forum profile"
+msgstr "プロフィールを編集"
+
+#: templates/machina/forum_member/subscription_topic_list.html:4
+#: templates/machina/forum_member/subscription_topic_list.html:10
+msgid "Topics that you are subscribed to"
+msgstr "購読中のトピック"
+
+#: templates/machina/forum_member/subscription_topic_list.html:17
+#, python-format
+msgid "%(counter)s topic found"
+msgid_plural "%(counter)s topics found"
+msgstr[0] "%(counter)s件のトピックが見つかりました"
+
+#: templates/machina/forum_member/subscription_topic_list.html:31
+msgid "Not topics found."
+msgstr "トピックなし"
+
+#: templates/machina/forum_member/topic_subscribe.html:5
+#: templates/machina/forum_member/topic_subscribe.html:12
+msgid "Subscribe to topic"
+msgstr "トピックを編集"
+
+#: templates/machina/forum_member/topic_subscribe.html:15
+msgid "Would you like to subscribe to this topic?"
+msgstr "トピックを購読しますか？"
+
+#: templates/machina/forum_member/topic_unsubscribe.html:5
+#: templates/machina/forum_member/topic_unsubscribe.html:12
+msgid "Unsubscribe from topic"
+msgstr "トピックの購読を解除"
+
+#: templates/machina/forum_member/topic_unsubscribe.html:15
+msgid "Would you like to unsubscribe from this topic?"
+msgstr "トピックの購読を解除しますか？"
+
+#: templates/machina/forum_member/user_posts_list.html:5
+#: templates/machina/forum_member/user_posts_list.html:10
+msgid "My messages"
+msgstr "自分のメッセージ"
+
+#: templates/machina/forum_member/user_posts_list.html:5
+#: templates/machina/forum_member/user_posts_list.html:10
+#, python-format
+msgid "%(username)s's posts"
+msgstr "%(username)sの投稿"
+
+#: templates/machina/forum_member/user_posts_list.html:17
+#, python-format
+msgid "%(counter)s post found"
+msgid_plural "%(counter)s posts found"
+msgstr[0] "%(counter)s件の投稿が見つかりました"
+
+#: templates/machina/forum_member/user_posts_list.html:24
+msgid "No posts found"
+msgstr "投稿はありません"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:15
+msgid "Disapprove"
+msgstr "却下"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:16
+msgid "Approve"
+msgstr "承認"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:19
+msgid "New post"
+msgstr "新規投稿"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:32
+msgid "<b>1</b> option may be selected"
+msgstr "選択肢を<b>1</b>つ選ぶことができます"
+
+#: templates/machina/forum_moderation/moderation_queue/detail.html:36
+#, python-format
+msgid "Up to <b>%(max_options)s</b> options may be selected"
+msgstr "選択肢を最大<b>%(max_options)s</b>つまで選ぶことができます"
+
+#: templates/machina/forum_moderation/moderation_queue/list.html:17
+#, python-format
+msgid "%(topic_length)s posts found"
+msgstr "%(topic_length)s件の投稿が見つかりました"
+
+#: templates/machina/forum_moderation/moderation_queue/list.html:79
+msgid "No posts awaiting approval."
+msgstr "承認待ちの投稿はありません"
+
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:5
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:12
+msgid "Approve post"
+msgstr "投稿を承認"
+
+#: templates/machina/forum_moderation/moderation_queue/post_approve.html:15
+msgid "Are you sure you want to approve this post?"
+msgstr "本当にこの投稿を承認しますか？"
+
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:5
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:12
+msgid "Disapprove post"
+msgstr "投稿を却下"
+
+#: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
+msgid ""
+"Are you sure you want to disapprove this post? This post will be deleted."
+msgstr "本当にこの投稿を却下しますか？　却下した場合投稿は削除されます"
+
+#: templates/machina/forum_moderation/topic_delete.html:15
+msgid "Are you sure you want to delete this topic?"
+msgstr "本当にこのトピックを削除しますか？"
+
+#: templates/machina/forum_moderation/topic_lock.html:15
+msgid "Are you sure you want to lock this topic?"
+msgstr "本当にこのトピックを凍結しますか？"
+
+#: templates/machina/forum_moderation/topic_unlock.html:15
+msgid "Are you sure you want to unlock this topic?"
+msgstr "本当にこのトピックの凍結を解除しますか？"
+
+#: templates/machina/forum_moderation/topic_update_type.html:5
+#: templates/machina/forum_moderation/topic_update_type.html:12
+msgid "Change topic type"
+msgstr "トピックの種類を変更"
+
+#: templates/machina/forum_search/search.html:18
+msgid "Search forums"
+msgstr "フォーラム内を検索"
+
+#: templates/machina/forum_search/search.html:44
+msgid "New search"
+msgstr "別の条件で検索"
+
+#: templates/machina/forum_search/search.html:50
+#, python-format
+msgid "Your search has returned <b>%(number_of_results)s</b> result"
+msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
+msgstr[0] "<b>%(number_of_results)s</b> 件の検索結果が見つかりました"
+
+#: templates/machina/forum_search/search.html:70
+msgid "Results"
+msgstr "検索結果"
+
+#: templates/machina/forum_search/search.html:101
+msgid "No results."
+msgstr "該当なし"
+
+#: templates/machina/forum_tracking/mark_forums_read.html:13
+msgid "Are you sure you want to mark forums read?"
+msgstr "本当にフォーラムを既読にしますか？"
+
+#: templates/machina/forum_tracking/mark_topics_read.html:13
+msgid "Are you sure you want to mark topics read?"
+msgstr "本当にトピックを既読にしますか？"
+
+#: templates/machina/forum_tracking/unread_topic_list.html:13
+#, python-format
+msgid ""
+""
+"      %(topic_length)s unread topic found"
+msgid_plural ""
+"%(topic_length)s unread topics found\n"
+"      "
+msgstr[0] "%(topic_length)s件の未読のトピック\n      "
+
+#: templates/machina/forum_tracking/unread_topic_list.html:25
+msgid "There are no unread topics."
+msgstr "未読のトピックはありません"
+
+#: templates/machina/partials/breadcrumb.html:5
+msgid "Forum index"
+msgstr "フォーラムトップ"
+
+#: urls.py:32
+msgid "^feeds/"
+msgstr ""
+
+#: urls.py:33
+msgid "^member/"
+msgstr ""
+
+#: urls.py:34
+msgid "^moderation/"
+msgstr ""
+
+#: urls.py:35
+msgid "^search/"
+msgstr ""
+
+#: urls.py:36
+msgid "^tracking/"
+msgstr ""

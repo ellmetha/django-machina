@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import gulp from 'gulp';
 import concat from 'gulp-concat';
@@ -75,14 +75,14 @@ gulp.task('build-machina-application', gulp.series('build-js-packages', 'build-j
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-/* Task to copy the simplemde CSS. */
-gulp.task('build-simplemde-css', gulp.series(function () {
-  return gulp.src('node_modules/simplemde/dist/simplemde.min.css').pipe(gulp.dest(build_dir + '/css/vendor'));
+/* Task to copy the easymde CSS. */
+gulp.task('build-easymde-css', gulp.series(function () {
+  return gulp.src('node_modules/easymde/dist/easymde.min.css').pipe(gulp.dest(build_dir + '/css/vendor'));
 }));
 
-/* Task to copy the simplemde JS. */
-gulp.task('build-simplemde-js', gulp.series(function () {
-  return gulp.src('node_modules/simplemde/dist/simplemde.min.js').pipe(gulp.dest(build_dir + '/js/vendor'));
+/* Task to copy the easymde JS. */
+gulp.task('build-easymde-js', gulp.series(function () {
+  return gulp.src('node_modules/easymde/dist/easymde.min.js').pipe(gulp.dest(build_dir + '/js/vendor'));
 }));
 
 /* Task to build the Mardkown editor JS application. */
@@ -95,7 +95,7 @@ gulp.task('build-markdown-editor-js-application', gulp.series(function () {
 }));
 
 /* Task to build the Mardkown editor application. */
-gulp.task('build-machina-editor', gulp.series('build-simplemde-css', 'build-simplemde-js', 'build-markdown-editor-js-application'));
+gulp.task('build-machina-editor', gulp.series('build-easymde-css', 'build-easymde-js', 'build-markdown-editor-js-application'));
 
 
 /*

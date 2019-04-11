@@ -7,7 +7,7 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
@@ -24,14 +24,14 @@ class ForumFeedsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(_(r'^topics/$'), self.latest_topics_feed(), name='latest_topics'),
-            url(
-                _(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/$'),
+            path(_('topics/'), self.latest_topics_feed(), name='latest_topics'),
+            path(
+                _('forum/<str:forum_slug>-<int:forum_pk>/topics/'),
                 self.latest_topics_feed(),
                 name='forum_latest_topics',
             ),
-            url(
-                _(r'^forum/(?P<forum_slug>[\w-]+)-(?P<forum_pk>\d+)/topics/all/$'),
+            path(
+                _('forum/<str:forum_slug>-<int:forum_pk>/topics/all/'),
                 self.latest_topics_feed(),
                 {'descendants': True},
                 name='forum_latest_topics_with_descendants',
