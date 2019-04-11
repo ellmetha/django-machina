@@ -16,12 +16,12 @@
     {% include "partials/form_field.html" with field=post_form.update_reason %}
 {% endif %}
 <!-- Sub "forms" tabs -->
+{% if attachment_formset %}
 <ul class="nav nav-tabs nav-justified">
   <li class="nav-item"><a href="#options" class="nav-link active" data-toggle="tab">{% trans "Options" %}</a></li>
-  {% if attachment_formset %}
-    <li class="nav-item"><a href="#attachments" class="nav-link" data-toggle="tab">{% trans "Attachments" %}</a></li>
-  {% endif %}
+  <li class="nav-item"><a href="#attachments" class="nav-link" data-toggle="tab">{% trans "Attachments" %}</a></li>
 </ul>
+{% endif %}
 <!-- Sub "forms" panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="options">

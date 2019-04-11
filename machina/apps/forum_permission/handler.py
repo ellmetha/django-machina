@@ -442,12 +442,14 @@ class PermissionHandler:
             ]
 
             if (
-                not user.is_anonymous and not forum_objects and
+                not user.is_anonymous and
                 set(perm_codenames).issubset(
                     set(machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS)
                 )
             ):
-                forum_objects = [f for f in forums if f.id not in nongranted_forum_ids]
+                forum_objects += [
+                    f for f in forums if f.id not in nongranted_forum_ids and f not in forum_objects
+                ]
 
             if use_tree_hierarchy:
                 forum_objects = self._filter_granted_forums_using_tree(forum_objects)

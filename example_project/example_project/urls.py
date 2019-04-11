@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.conf.urls import include
-from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include, path, re_path
 from django.views.i18n import JavaScriptCatalog
 from machina import urls as machina_urls
 
@@ -11,20 +10,20 @@ js_info_dict = {
 }
 
 urlpatterns = [
-    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript_catalog'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript_catalog'),
 
     # Admin
-    url(r'^' + settings.ADMIN_URL, admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
 
     # Apps
-    url(r'', include('example.apps.auth.urls')),
-    url(r'', include(machina_urls)),
+    path('', include('example.apps.auth.urls')),
+    path('', include(machina_urls)),
 ]
 
 if settings.DEBUG:
     # Add the Debug Toolbar’s URLs to the project’s URLconf
     import debug_toolbar
-    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls)), ]
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls)), ]
 
     # In DEBUG mode, serve media files through Django.
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -33,6 +32,6 @@ if settings.DEBUG:
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
     urlpatterns += [
-        url(r'^%s/(?P<path>.*)$' % media_url, static.serve,
-            {'document_root': settings.MEDIA_ROOT}),
+        re_path(r'^%s/(?P<path>.*)$' % media_url, static.serve,
+                {'document_root': settings.MEDIA_ROOT}),
     ]

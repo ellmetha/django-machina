@@ -18,3 +18,10 @@ Views
 .. automodule:: machina.apps.forum.views
     :members:
     :show-inheritance:
+
+Visibility
+----------
+
+.. automodule:: machina.apps.forum.visibility
+    :members:
+    :show-inheritance:

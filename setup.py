@@ -20,7 +20,7 @@ setup(
     name='django-machina',
     version=machina.__version__,
     author='Morgan Aubert',
-    author_email='morgan.aubert@zoho.com',
+    author_email='me@morganaubert.name',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/ellmetha/django-machina',
@@ -30,7 +30,7 @@ setup(
     keywords='django forum board messages',
     zip_safe=False,
     install_requires=[
-        'django>=1.11',
+        'django>=2.0',
 
         # Django-mptt is required to handle the tree hierarchy of nested forums
         'django-mptt>=0.8',

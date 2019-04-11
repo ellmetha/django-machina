@@ -7,7 +7,8 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
+from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -21,7 +22,7 @@ class ForumAttachmentsURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(r'^attachment/(?P<pk>\d+)/$', self.attachment_view.as_view(), name='attachment'),
+            path(_('attachment/<int:pk>/'), self.attachment_view.as_view(), name='attachment'),
         ]
 
 

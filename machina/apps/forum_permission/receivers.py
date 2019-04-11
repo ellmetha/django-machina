@@ -20,11 +20,7 @@ PermissionConfig = get_class('forum_permission.defaults', 'PermissionConfig')
 def create_permissions():
     """ Creates all the permissions from the permission configuration. """
     for config in PermissionConfig.permissions:
-        try:
-            gp = ForumPermission.objects.get(codename=config['fields']['codename'])
-        except ForumPermission.DoesNotExist:
-            gp = ForumPermission(**config['fields'])
-        gp.save()
+        ForumPermission.objects.get_or_create(codename=config['codename'])
 
 
 @receiver(post_migrate)

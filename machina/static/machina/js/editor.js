@@ -6,7 +6,7 @@ MachinaMarkdownEditor = (function() {
   };
 
   var createEditor = function(el) {
-    new SimpleMDE({
+    new EasyMDE({
       element: el,
       hideIcons: ['preview', 'guide', 'side-by-side', 'fullscreen', ],
       renderingConfig: {

@@ -301,10 +301,8 @@ class ForumAdmin(admin.ModelAdmin):
 
     def _get_permissions_form(self, request, permission_model, filter_kwargs):
         # Fetch the permissions
-        forum = filter_kwargs.get('forum', None)
-        perm_type_filter = {'is_local': True} if forum else {'is_global': True}
         editable_permissions = sorted(
-            ForumPermission.objects.filter(**perm_type_filter), key=lambda p: p.name,
+            ForumPermission.objects.all(), key=lambda p: p.name,
         )
         granted_permissions = (
             permission_model.objects.filter(

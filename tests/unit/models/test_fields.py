@@ -74,17 +74,17 @@ class TestMarkupTextField(object):
 
     def test_should_not_allow_non_accessible_markup_languages(self):
         # Run & check
-        machina_settings.MACHINA_MARKUP_LANGUAGE = (('it.will.fail'), {})
+        machina_settings.MARKUP_LANGUAGE = (('it.will.fail'), {})
         with pytest.raises(ImproperlyConfigured):
             reload(fields)
-        del machina_settings.MACHINA_MARKUP_LANGUAGE
+        del machina_settings.MARKUP_LANGUAGE
         with pytest.raises(ImproperlyConfigured):
             reload(fields)
 
     def test_should_use_a_default_text_input_widget_with_formfields(self):
         # Setup
-        machina_settings.MACHINA_MARKUP_WIDGET = None
-        machina_settings.MACHINA_MARKUP_WIDGET_KWARGS = {}
+        machina_settings.MARKUP_WIDGET = None
+        machina_settings.MARKUP_WIDGET_KWARGS = {}
 
         class TestableForm(forms.ModelForm):
             class Meta:
@@ -99,7 +99,7 @@ class TestMarkupTextField(object):
 
     def test_sets_the_markup_widget_to_a_textarea_if_it_is_none(self):
         # Setup
-        machina_settings.MACHINA_MARKUP_WIDGET = None
+        machina_settings.MARKUP_WIDGET = None
         # Run
         widget_class = fields._get_markup_widget()
         # Check
@@ -107,8 +107,8 @@ class TestMarkupTextField(object):
 
     def test_can_use_a_custom_form_widget(self):
         # Setup
-        machina_settings.MACHINA_MARKUP_WIDGET = 'django.forms.HiddenInput'
-        machina_settings.MACHINA_MARKUP_WIDGET_KWARGS = {}
+        machina_settings.MARKUP_WIDGET = 'django.forms.HiddenInput'
+        machina_settings.MARKUP_WIDGET_KWARGS = {}
 
         class TestableForm(forms.ModelForm):
             class Meta:
@@ -118,18 +118,18 @@ class TestMarkupTextField(object):
         form = TestableForm()
         # Check
         assert isinstance(form.fields['content'].widget, forms.HiddenInput)
-        machina_settings.MACHINA_MARKUP_WIDGET = None
+        machina_settings.MARKUP_WIDGET = None
 
     def test_should_not_allow_non_accessible_custom_form_widgets(self):
         # Setup
-        machina_settings.MACHINA_MARKUP_WIDGET = 'it.will.fail'
+        machina_settings.MARKUP_WIDGET = 'it.will.fail'
         # Run & check
         with pytest.raises(ImproperlyConfigured):
             class TestableForm(forms.ModelForm):
                 class Meta:
                     model = DummyModel
                     exclude = []
-        machina_settings.MACHINA_MARKUP_WIDGET = None
+        machina_settings.MARKUP_WIDGET = None
 
 
 @pytest.mark.django_db

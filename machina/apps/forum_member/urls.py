@@ -7,7 +7,7 @@
 
 """
 
-from django.conf.urls import url
+from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
@@ -29,33 +29,33 @@ class ForumMemberURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(
-                _(r'^profile/(?P<pk>\d+)/$'),
-                self.forum_profile_detail_view.as_view(),
-                name='profile',
-            ),
-            url(
-                _(r'^profile/(?P<pk>\d+)/posts/$'),
-                self.user_posts_list.as_view(),
-                name='user_posts',
-            ),
-            url(
-                _(r'^profile/edit/$'),
+            path(
+                _('profile/edit/'),
                 self.forum_profile_update_view.as_view(),
                 name='profile_update',
             ),
-            url(
-                _(r'^subscriptions/$'),
+            path(
+                _('profile/<str:pk>/'),
+                self.forum_profile_detail_view.as_view(),
+                name='profile',
+            ),
+            path(
+                _('profile/<str:pk>/posts/'),
+                self.user_posts_list.as_view(),
+                name='user_posts',
+            ),
+            path(
+                _('subscriptions/'),
                 self.topic_subscription_list_view.as_view(),
                 name='user_subscriptions',
             ),
-            url(
-                _(r'^topic/(?P<pk>\d+)/subscribe/$'),
+            path(
+                _('topic/<int:pk>/subscribe/'),
                 self.topic_subscribe_view.as_view(),
                 name='topic_subscribe',
             ),
-            url(
-                _(r'^topic/(?P<pk>\d+)/unsubscribe/$'),
+            path(
+                _('topic/<int:pk>/unsubscribe/'),
                 self.topic_unsubscribe_view.as_view(),
                 name='topic_unsubscribe',
             ),
