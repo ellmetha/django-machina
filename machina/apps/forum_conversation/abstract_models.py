@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
+from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -196,6 +197,12 @@ class AbstractTopic(DatedModel):
         self._simple_save()
         # Trigger the forum-level trackers update
         self.forum.update_trackers()
+
+    def get_absolute_url(self):
+        """ Returns the URL for this topic """
+        reverse('forum_conversation:topic', kwargs={
+                'forum_slug': self.forum.slug, 'forum_pk': self.forum.pk,
+                'slug': self.slug', 'pk': self.pk})
 
 
 class AbstractPost(DatedModel):
