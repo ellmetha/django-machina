@@ -71,3 +71,4 @@ django-machina:
     recipes/overriding_models
     recipes/using_another_markup_language
     recipes/custom_avatar_backend
+    recipes/custom_forum_member_display_names

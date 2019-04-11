@@ -951,6 +951,24 @@ class TestPostCreateView(BaseClientTestCase):
         # Check
         assert response.status_code == 403
 
+    def test_cannot_be_browsed_by_users_when_the_topic_is_locked(self):
+        # Setup
+        self.topic.status = Topic.TOPIC_LOCKED
+        self.topic.save()
+        correct_url = reverse(
+            'forum_conversation:post_create',
+            kwargs={
+                'forum_slug': self.top_level_forum.slug,
+                'forum_pk': self.top_level_forum.pk,
+                'topic_slug': self.topic.slug,
+                'topic_pk': self.topic.pk,
+            }
+        )
+        # Run
+        response = self.client.get(correct_url, follow=True)
+        # Check
+        assert response.status_code == 403
+
     def test_embed_the_current_topic_into_the_context(self):
         # Setup
         correct_url = reverse(

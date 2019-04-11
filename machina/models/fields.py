@@ -19,7 +19,7 @@ _rendered_field_name = lambda name: '_{}_rendered'.format(name)
 
 
 def _get_markup_widget():
-    dotted_path = machina_settings.MACHINA_MARKUP_WIDGET
+    dotted_path = machina_settings.MARKUP_WIDGET
     try:
         assert dotted_path is not None
         module, widget = dotted_path.rsplit('.', 1)
@@ -29,7 +29,7 @@ def _get_markup_widget():
     except ImportError as e:
         raise ImproperlyConfigured(
             _('Could not import MACHINA_MARKUP_WIDGET {}: {}').format(
-                machina_settings.MACHINA_MARKUP_WIDGET, e
+                machina_settings.MARKUP_WIDGET, e
             )
         )
     except AssertionError:
@@ -47,7 +47,7 @@ def _get_render_function(dotted_path, kwargs):
 
 
 try:
-    markup_lang = machina_settings.MACHINA_MARKUP_LANGUAGE
+    markup_lang = machina_settings.MARKUP_LANGUAGE
     render_func = (
         _get_render_function(markup_lang[0], markup_lang[1]) if markup_lang
         else lambda text: text
@@ -55,7 +55,7 @@ try:
 except ImportError as e:
     raise ImproperlyConfigured(
         _('Could not import MACHINA_MARKUP_LANGUAGE {}: {}').format(
-            machina_settings.MACHINA_MARKUP_LANGUAGE, e,
+            machina_settings.MARKUP_LANGUAGE, e,
         )
     )
 except AttributeError:
@@ -185,7 +185,7 @@ class MarkupTextField(models.TextField):
 
     def formfield(self, **kwargs):
         widget = _get_markup_widget()
-        defaults = {'widget': widget(**machina_settings.MACHINA_MARKUP_WIDGET_KWARGS)}
+        defaults = {'widget': widget(**machina_settings.MARKUP_WIDGET_KWARGS)}
         defaults.update(kwargs)
         field = super().formfield(**defaults)
         return field

@@ -33,17 +33,6 @@ class AbstractForumPermission(models.Model):
         max_length=150, verbose_name=_('Permission codename'), unique=True, db_index=True,
     )
 
-    is_global = models.BooleanField(
-        verbose_name=_('Global permission'),
-        help_text=_('This permission can be granted globally to all the forums'),
-        default=False, db_index=True,
-    )
-    is_local = models.BooleanField(
-        verbose_name=_('Local permission'),
-        help_text=_('This permission can be granted individually for each forum'),
-        default=True, db_index=True,
-    )
-
     class Meta:
         abstract = True
         app_label = 'forum_permission'
@@ -52,12 +41,6 @@ class AbstractForumPermission(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.codename, self.name)
-
-    def clean(self):
-        """ Validates the current instance. """
-        super().clean()
-        if not self.is_global and not self.is_local:
-            raise ValidationError(_('A forum permission should be at least either global or local'))
 
     @cached_property
     def name(self):
@@ -83,18 +66,6 @@ class BaseAuthForumPermission(models.Model):
 
     class Meta:
         abstract = True
-
-    def clean(self):
-        """ Validates the current instance. """
-        super().clean()
-        if self.forum is None and not self.permission.is_global:
-            raise ValidationError(
-                _(
-                    'The following permission cannot be granted globally: {}'.format(
-                        self.permission,
-                    ),
-                ),
-            )
 
 
 class AbstractUserForumPermission(BaseAuthForumPermission):

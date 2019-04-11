@@ -1,5 +1,6 @@
+{% load forum_member_tags %}
 {% if profile.avatar %}
-<img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.user.username }}" />
+<img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.user|forum_member_display_name }}" />
 {% elif show_placeholder %}
 <span class="avatar empty">
   <i class="far fa-user fa-4x" ></i>

@@ -24,14 +24,14 @@ class SelectWithDisabled(Select):
 
 
 class MarkdownTextareaWidget(Textarea):
-    """ A simple Textarea widget using the simplemde JS library to provide Markdown editor. """
+    """ A simple Textarea widget using the easymde JS library to provide Markdown editor. """
 
     class Media:
         css = {
-            'all': ('machina/build/css/vendor/simplemde.min.css', ),
+            'all': ('machina/build/css/vendor/easymde.min.css', ),
         }
         js = (
-            'machina/build/js/vendor/simplemde.min.js',
+            'machina/build/js/vendor/easymde.min.js',
             'machina/build/js/machina.editor.min.js',
         )
 

@@ -12,6 +12,13 @@ Abstract models
     :members:
     :show-inheritance:
 
+Shortcuts
+---------
+
+.. automodule:: machina.apps.forum_member.shortcuts
+    :members:
+    :show-inheritance:
+
 Views
 -----
 

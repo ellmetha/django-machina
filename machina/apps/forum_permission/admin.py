@@ -20,8 +20,7 @@ class ForumPermissionAdmin(admin.ModelAdmin):
     """ The Forum Permission model admin. """
 
     search_fields = ('codename', )
-    list_display = ('name', 'codename', 'is_global', 'is_local', )
-    list_editables = ('is_global', 'is_local', )
+    list_display = ('name', 'codename', )
 
 
 class GroupForumPermissionAdmin(admin.ModelAdmin):
