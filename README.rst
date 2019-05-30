@@ -15,8 +15,8 @@
         </a>
         <a href="https://pypi.python.org/pypi/django-machina" rel="nofollow"><img src="https://img.shields.io/pypi/pyversions/django-machina.svg" style="max-width:100%;"></a>
         <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="Latest Version" src="https://img.shields.io/pypi/v/django-machina.svg" style="max-width:100%;"></a>
-        <a href="https://travis-ci.org/ellmetha/django-machina" rel="nofollow"><img alt="Build status" src="https://img.shields.io/travis/ellmetha/django-machina.svg" style="max-width:100%;"></a>
-        <a href="https://codecov.io/github/ellmetha/django-machina" rel="nofollow"><img alt="Codecov status" src="https://img.shields.io/codecov/c/github/ellmetha/django-machina.svg" style="max-width:100%;"></a>
+        <a href="https://travis-ci.org/ellmetha/django-machina" rel="nofollow"><img alt="Build status" src="https://travis-ci.org/ellmetha/django-machina.svg?branch=master" style="max-width:100%;"></a>
+        <a href="https://codecov.io/github/ellmetha/django-machina" rel="nofollow"><img alt="Codecov status" src="https://codecov.io/gh/ellmetha/django-machina/branch/master/graph/badge.svg" style="max-width:100%;"></a>
     </p>
 
 |
