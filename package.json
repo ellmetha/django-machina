@@ -17,6 +17,7 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
+    "fstream": ">=1.0.12",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.0",
     "gulp-minify-css": "^1.2.4",
