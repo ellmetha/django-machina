@@ -1,7 +1,0 @@
-.cache
-.tox
-.tx
-__pycache__
-*.db
-*.pyc
-node_modules/
