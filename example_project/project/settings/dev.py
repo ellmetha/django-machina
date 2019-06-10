@@ -45,7 +45,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (  # noqa: F405
 
 STATICFILES_DIRS = (
     MACHINA_MAIN_STATIC_DIR,  # noqa: F405
-    PROJECT_PATH.child('example', 'static'),  # noqa: F405
+    str(PROJECT_PATH / 'main' / 'static'),  # noqa: F405
 )
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'

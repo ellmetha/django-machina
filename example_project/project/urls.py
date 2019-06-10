@@ -16,7 +16,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     # Apps
-    path('', include('example.apps.auth.urls')),
+    path('', include('main.apps.auth.urls')),
     path('', include(machina_urls)),
 ]
 

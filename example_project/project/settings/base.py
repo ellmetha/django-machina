@@ -1,11 +1,12 @@
+import pathlib
+
 from django.urls import reverse_lazy
-from unipath import Path
 
 from machina import MACHINA_MAIN_STATIC_DIR
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 
-PROJECT_PATH = Path(__file__).ancestor(3)
+PROJECT_PATH = pathlib.Path(__file__).parents[2]
 
 
 # APP CONFIGURATION
@@ -81,7 +82,7 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_PATH.child('test.db'),
+        'NAME': str(PROJECT_PATH / 'test.db'),
     }
 }
 
@@ -120,7 +121,7 @@ LANGUAGES = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = (
-    PROJECT_PATH.child('example_project', 'locale'),
+    str(PROJECT_PATH / 'project' / 'locale'),
 )
 
 
@@ -139,7 +140,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': (
-            PROJECT_PATH.child('example', 'templates'),
+            str(PROJECT_PATH / 'main' / 'templates'),
             MACHINA_MAIN_TEMPLATE_DIR,
         ),
         'OPTIONS': {
@@ -169,7 +170,7 @@ TEMPLATES = [
 # ------------------------------------------------------------------------------
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = PROJECT_PATH.child('public', 'static')
+STATIC_ROOT = str(PROJECT_PATH / 'public' / 'static')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -193,7 +194,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # ------------------------------------------------------------------------------
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = PROJECT_PATH.child('public', 'media')
+MEDIA_ROOT = str(PROJECT_PATH / 'public' / 'media')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
@@ -202,7 +203,7 @@ MEDIA_URL = '/media/'
 # URL CONFIGURATION
 # ------------------------------------------------------------------------------
 
-ROOT_URLCONF = 'example_project.urls'
+ROOT_URLCONF = 'project.urls'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
@@ -263,7 +264,7 @@ CKEDITOR_CONFIGS = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': PROJECT_PATH.child('whoosh_index'),
+        'PATH': str(PROJECT_PATH / 'whoosh_index'),
     },
 }
 

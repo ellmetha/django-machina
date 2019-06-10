@@ -21,4 +21,4 @@ tests/_testdata/media/machina
 tests/settings_local.py
 
 # Don't commit env-specific settings and files
-example_project/example_project/settings/env.py
+example_project/project/settings/env.py

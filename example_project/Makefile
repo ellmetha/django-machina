@@ -1,5 +1,5 @@
-PROJECT_PACKAGE := example
-PROJECT_CONFIGURATION_PACKAGE := $(PROJECT_PACKAGE)_project
+PROJECT_PACKAGE := main
+PROJECT_CONFIGURATION_PACKAGE := project
 DJANGO_SETTINGS_MODULE := $(PROJECT_CONFIGURATION_PACKAGE).settings.dev
 
 .PHONY: c console migrate migrations s server superuser

@@ -14,7 +14,7 @@ from django.views.generic import CreateView
 from django.views.generic import FormView
 from django.views.generic import UpdateView
 
-from example.common.mixins import MenuItemMixin
+from main.common.mixins import MenuItemMixin
 
 from .forms import UserCreationForm
 from .forms import UserDeletionForm
