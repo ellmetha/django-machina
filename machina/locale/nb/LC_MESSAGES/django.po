@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
@@ -104,7 +104,7 @@ msgstr ""
 "listes opp)"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -140,7 +140,7 @@ msgid "'{}' forum successfully moved"
 msgstr "Flyttingen av forumet {} var vellykket"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -165,7 +165,7 @@ msgstr "Velg enten en bruker-ID, en gruppe-ID, eller den anonyme brukeren"
 msgid "Anonymous user"
 msgstr "Anonym bruker"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "Rettighetene blir nå tatt i bruk"
 
@@ -205,8 +205,10 @@ msgid "Not granted"
 msgstr "Ikke innvilget"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+msgid "forum/<str:slug>-<int:pk>/"
+msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -540,8 +542,10 @@ msgid "Your vote has been cast."
 msgstr "Din stemme er avgitt."
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+msgid "topic/<str:slug>-<int:pk>/"
+msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
 
 #: apps/forum_conversation/urls.py:43
 #, fuzzy
@@ -552,13 +556,13 @@ msgstr "^tråd/opprett/$"
 #: apps/forum_conversation/urls.py:45
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/oppdater/$"
 
 #: apps/forum_conversation/urls.py:50
 #, fuzzy
 #| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
 msgstr "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/innlegg/opprett/$"
 
 #: apps/forum_conversation/urls.py:55
@@ -566,7 +570,7 @@ msgstr "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/innlegg/opprett/$"
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "update/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr ""
 "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
 "oppdater/$"
@@ -576,14 +580,14 @@ msgstr ""
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "delete/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
 "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/slett/$"
 
 #: apps/forum_conversation/urls.py:68
 #, fuzzy
 #| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/views.py:128
@@ -602,11 +606,11 @@ msgstr "Denne meldingen har blitt lagt til."
 msgid "There are some errors in the poll options you submitted."
 msgstr "Det er noen feil i avstemningsvalgene du sendte inn."
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "Redigeringen av denne meldingen var vellykket."
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "Slettingen av denne meldingen var vellykket."
 
@@ -631,17 +635,17 @@ msgstr "^tråd/$"
 #: apps/forum_feeds/urls.py:29
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/$"
 
 #: apps/forum_feeds/urls.py:34
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/alle/$"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -730,43 +734,43 @@ msgstr "Velg et destinasjonsforum"
 #: apps/forum_moderation/urls.py:42
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
 
 #: apps/forum_moderation/urls.py:47
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås-opp/$"
 
 #: apps/forum_moderation/urls.py:52
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/slett/$"
 
 #: apps/forum_moderation/urls.py:57
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/flytt/$"
 
 #: apps/forum_moderation/urls.py:62
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/tråd/$"
 
 #: apps/forum_moderation/urls.py:67
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/klistret/$"
 
 #: apps/forum_moderation/urls.py:72
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/kunngjøring/$"
 
 #: apps/forum_moderation/urls.py:76
@@ -837,64 +841,40 @@ msgstr "Avvisningen av innlegget var vellykket."
 msgid "Permission codename"
 msgstr "Rettighetskodenavn"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Global rettighet"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "Denne rettigheten kan innvilges globalt til alle forumene"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Lokal rettighet"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "Denne rettigheten kan innvilges individuelt for hvert forum"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Forumrettighet"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr "En forumrettighet må i det minste være enten global eller lokal"
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "Har rettighet"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "Følgende rettighet kan ikke innvilges globalt: {}"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr "Angi for den anonyme brukeren"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr "Brukerforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr "Brukerforumrettigheter"
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr "En rettighet bør gjelde for enten en bruker eller en anonym bruker"
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "Gruppe"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr "Gruppeforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr "Gruppeforumrettigheter"
 
@@ -934,47 +914,47 @@ msgstr "Kan slette egne innlegg"
 msgid "Can edit own posts"
 msgstr "Kan redigere egne innlegg"
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr "Kan poste uten godkjenning"
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr "Kan lage avstemninger"
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr "Kan stemme i avstemninger"
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr "Kan legge ved filer"
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr "Kan laste ned filer"
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr "Kan låse tråder"
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr "Kan flytte tråder"
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr "Kan redigere innlegg"
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr "Kan slette innlegg"
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr "Kan godkjenne innlegg"
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr "Kan skrive innlegg i låste tråder"
 
@@ -1857,6 +1837,24 @@ msgstr "^søk/"
 #: urls.py:36
 msgid "^tracking/"
 msgstr "^sporing/"
+
+#~ msgid "Global permission"
+#~ msgstr "Global rettighet"
+
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "Denne rettigheten kan innvilges globalt til alle forumene"
+
+#~ msgid "Local permission"
+#~ msgstr "Lokal rettighet"
+
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr "Denne rettigheten kan innvilges individuelt for hvert forum"
+
+#~ msgid "A forum permission should be at least either global or local"
+#~ msgstr "En forumrettighet må i det minste være enten global eller lokal"
+
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "Følgende rettighet kan ikke innvilges globalt: {}"
 
 #~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 #~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"

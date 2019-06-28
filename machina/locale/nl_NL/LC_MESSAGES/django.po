@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Brenda H <brendahellenthal@gmail.com>, 2018
-# S. Jansen <samuel.anton.j@gmail.com>, 2016-2017
+# Brenda H <brendahellenthal@gmail.com>, 2018-2019
+# S. Jansen <samuel.anton.j@gmail.com>, 2016-2018
 # S. Jansen <samuel.anton.j@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
-"PO-Revision-Date: 2018-08-13 12:15+0000\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"PO-Revision-Date: 2019-06-26 13:51+0000\n"
 "Last-Translator: Brenda H <brendahellenthal@gmail.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/django-machina-"
 "team/django-machina/language/nl_NL/)\n"
@@ -105,7 +105,7 @@ msgstr ""
 "lijst)"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -141,7 +141,7 @@ msgid "'{}' forum successfully moved"
 msgstr "'{}' forum succesvol verplaatst"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -166,7 +166,7 @@ msgstr "Kies een gebruikers-ID, groeps-ID of een anonieme gebruiker"
 msgid "Anonymous user"
 msgstr "Anonieme gebruiker"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "Rechten succesvol toegepast"
 
@@ -205,8 +205,10 @@ msgid "Not granted"
 msgstr "Niet toegestaan"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "forum/<slug:slug>-<int:pk>/"
+msgid "forum/<str:slug>-<int:pk>/"
+msgstr "forum/<slug:slug>-<int:pk>/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -447,10 +449,8 @@ msgid "Machina: Forum attachments"
 msgstr "Machina: Forum bestanden"
 
 #: apps/forum_conversation/forum_attachments/urls.py:25
-#, fuzzy
-#| msgid "Attachment"
 msgid "attachment/<int:pk>/"
-msgstr "Bijlage"
+msgstr "bijlage/<int:pk>/"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
@@ -533,60 +533,52 @@ msgstr "Je hebt geprobeerd om voor teveel opties te stemmen."
 
 #: apps/forum_conversation/forum_polls/urls.py:25
 msgid "poll/<int:pk>/vote/"
-msgstr ""
+msgstr "poll/<int:pk>/stemmen/"
 
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "Je stem is uitgebracht."
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/"
+msgid "topic/<str:slug>-<int:pk>/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/"
 
 #: apps/forum_conversation/urls.py:43
-#, fuzzy
-#| msgid "^topic/create/$"
 msgid "topic/create/"
-msgstr "^onderwerp/aanmaken/$"
+msgstr "onderwerp/aanmaken/"
 
 #: apps/forum_conversation/urls.py:45
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<slug:slug>-<int:pk>/update/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/bijwerken/$"
+#| msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/bijwerken/"
 
 #: apps/forum_conversation/urls.py:50
 #, fuzzy
-#| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
-msgstr ""
-"^onderwerp/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/reactie/aanmaken/$"
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+msgstr "onderwerp/<slug:topic_slug>-<int:topic_pk>/bericht/aanmaken/"
 
 #: apps/forum_conversation/urls.py:55
 #, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "update/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-"^onderwerp/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/reactie/"
-"bijwerken/$"
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgstr "onderwerp/<slug:topic_slug>-<int:topic_pk>/<int:pk>/bericht/bijwerken/"
 
 #: apps/forum_conversation/urls.py:60
 #, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "delete/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
-"^onderwerp/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/reactie/"
-"verwijderen/$"
+"onderwerp/<slug:topic_slug>-<int:topic_pk>/<int:pk>/bericht/verwijderen/"
 
 #: apps/forum_conversation/urls.py:68
 #, fuzzy
-#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
-msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
+msgstr "onderwerp/<slug:forum_slug>-<int:forum_pk>/"
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -606,11 +598,11 @@ msgstr "Dit bericht is geplaatst."
 msgid "There are some errors in the poll options you submitted."
 msgstr "Er zijn fouten in de poll opties."
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "Dit bericht is bewerkt."
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "Dit bericht is verwijderd."
 
@@ -627,25 +619,23 @@ msgid "Latest topics updated on the forums"
 msgstr "Laatst bijgewerkte onderwerpen van de fora"
 
 #: apps/forum_feeds/urls.py:27
-#, fuzzy
-#| msgid "^topics/$"
 msgid "topics/"
-msgstr "^onderwerpen/$"
+msgstr "onderwerpen/"
 
 #: apps/forum_feeds/urls.py:29
 #, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/onderwerpen/$"
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+msgstr "forum/<slug:forum_slug>-<int:forum_pk>/onderwerpen/"
 
 #: apps/forum_feeds/urls.py:34
 #, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/onderwerpen/alles/$"
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+msgstr "forum/<slug:forum_slug>-<int:forum_pk>/onderwerpen/alles/"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -676,40 +666,28 @@ msgid "Machina: Forum members"
 msgstr "Machina: Forum gebruikers"
 
 #: apps/forum_member/urls.py:33
-#, fuzzy
-#| msgid "^profile/edit/$"
 msgid "profile/edit/"
-msgstr "^profiel/bewerken/$"
+msgstr "profiel/bewerken/"
 
 #: apps/forum_member/urls.py:38
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/$"
 msgid "profile/<str:pk>/"
-msgstr "^profiel/(?P<pk>\\d+)/$"
+msgstr "profiel/<str:pk>/"
 
 #: apps/forum_member/urls.py:43
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/posts/$"
 msgid "profile/<str:pk>/posts/"
-msgstr "^profiel/(?P<pk>\\d+)/onderwerpen/$"
+msgstr "profiel/<str:pk>/berichten/"
 
 #: apps/forum_member/urls.py:48
-#, fuzzy
-#| msgid "^subscriptions/$"
 msgid "subscriptions/"
-msgstr "^abonnementen/$"
+msgstr "abonnementen/"
 
 #: apps/forum_member/urls.py:53
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
 msgid "topic/<int:pk>/subscribe/"
-msgstr "^onderwerp/(?P<pk>\\d+)/abonneren/$"
+msgstr "onderwerp/<int:pk>/abonneer/"
 
 #: apps/forum_member/urls.py:58
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
 msgid "topic/<int:pk>/unsubscribe/"
-msgstr "^onderwerp/(?P<pk>\\d+)/afmelden/$"
+msgstr "onderwerp/<int:pk>/afmelden/"
 
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
@@ -733,69 +711,61 @@ msgstr "Kies een forum"
 
 #: apps/forum_moderation/urls.py:42
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<slug:slug>-<int:pk>/lock/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/vergrendelen/$"
+#| msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/vergrendelen/"
 
 #: apps/forum_moderation/urls.py:47
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/ontgrendelen/$"
+#| msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/ontgrendelen/"
 
 #: apps/forum_moderation/urls.py:52
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<slug:slug>-<int:pk>/delete/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/verwijderen/$"
+#| msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/verwijderen/"
 
 #: apps/forum_moderation/urls.py:57
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<slug:slug>-<int:pk>/move/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/verplaatsen/$"
+#| msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/verplaatsen/"
 
 #: apps/forum_moderation/urls.py:62
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/wijzigen/onderwerp/$"
+#| msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/aanpassen/onderwerp/"
 
 #: apps/forum_moderation/urls.py:67
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/wijzigen/sticky/$"
+#| msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/aanpassen/plakkerig/"
 
 #: apps/forum_moderation/urls.py:72
 #, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
-msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/wijzigen/mededeling/$"
+#| msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
+msgstr "onderwerp/<slug:slug>-<int:pk>/aanpassen/aankondigen/"
 
 #: apps/forum_moderation/urls.py:76
-#, fuzzy
-#| msgid "^queue/$"
 msgid "queue/"
-msgstr "^wachtlijst/$"
+msgstr "wachtrij/"
 
 #: apps/forum_moderation/urls.py:78
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/$"
 msgid "queue/<int:pk>/"
-msgstr "^wachtlijst/(?P<pk>\\d+)/$"
+msgstr "wachtrij/<int:pk>/"
 
 #: apps/forum_moderation/urls.py:83
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/approve/$"
 msgid "queue/<int:pk>/approve/"
-msgstr "^wachtlijst/(?P<pk>\\d+)/goedkeuren/$"
+msgstr "wachtrij/<int:pk>/goedkeuren/"
 
 #: apps/forum_moderation/urls.py:88
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
 msgid "queue/<int:pk>/disapprove/"
-msgstr "^wachtlijst/(?P<pk>\\d+)/afkeuren/$"
+msgstr "wachtrij/<int:pk>/afkeuren/"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -841,65 +811,41 @@ msgstr "Dit onderwerp is afgekeurd."
 msgid "Permission codename"
 msgstr "Permissie sleutelwoord"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Globale rechten"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "De rechten kunnen globaal op alle fora toegepast worden"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Lokale rechten"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "De rechten kunnen individueel op elk fora toegepast worden"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Forum rechten"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr "Forumrechten moeten tenminste globaal of lokaal zijn"
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "Heeft toestemming"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "De volgende rechten kunnen niet globaal worden toegepast: {}"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr "Richt op anonieme gebruiker"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr "Forum rechten gebruiker"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr "Forum rechten gebruiker"
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr ""
 "Een permissie moet gericht zijn op een gebruiker of een anonieme gebruiker"
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "Groep"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr "Forum rechten groep"
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr "Forum rechten groep"
 
@@ -939,47 +885,47 @@ msgstr "Mag eigen berichten verwijderen"
 msgid "Can edit own posts"
 msgstr "Mag eigen berichten aanpassen"
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr "Mag reageren zonder goedkeuring"
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr "Mag polls aanmaken"
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr "Mag stemmen in polls"
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr "Mag bijlage toevoegen"
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr "Mag bijlage downloaden"
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr "Mag onderwerpen vergrendelen"
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr "Mag onderwerpen verplaatsen"
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr "Mag berichten aanpassen"
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr "Mag berichten verwijderen"
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr "Mag berichten goedkeuren"
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr "Mag reageren in vergrendelde onderwerpen"
 
@@ -1040,28 +986,20 @@ msgid "Machina: Forum tracking"
 msgstr "Machina: Forum volgen"
 
 #: apps/forum_tracking/urls.py:30
-#, fuzzy
-#| msgid "^mark/forums/$"
 msgid "mark/forums/"
-msgstr "^mark/forums/$"
+msgstr "mark/forums/"
 
 #: apps/forum_tracking/urls.py:35
-#, fuzzy
-#| msgid "^mark/forums/(?P<pk>\\d+)/$"
 msgid "mark/forums/<int:pk>/"
-msgstr "^mark/forums/(?P<pk>\\d+)/$"
+msgstr "mark/forums/<int:pk>/"
 
 #: apps/forum_tracking/urls.py:40
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
 msgid "mark/forum/<int:pk>/topics/"
-msgstr "^mark/forum/(?P<pk>\\d+)/onderwerpen/$"
+msgstr "mark/forums/<int:pk>/onderwerpen/"
 
 #: apps/forum_tracking/urls.py:45
-#, fuzzy
-#| msgid "^unread-topics/$"
 msgid "unread-topics/"
-msgstr "^ongelezen-onderwerpen/$"
+msgstr "ongelezen-onderwerpen/"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1517,7 +1455,7 @@ msgstr "Weet je zeker dat je dit bericht wilt verwijderen?"
 #: templates/machina/forum_tracking/mark_forums_read.html:16
 #: templates/machina/forum_tracking/mark_topics_read.html:16
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Ja, ik weet het zeker"
 
 #: templates/machina/forum_conversation/post_delete.html:19
 #: templates/machina/forum_member/topic_subscribe.html:19
@@ -1532,7 +1470,7 @@ msgstr ""
 #: templates/machina/forum_tracking/mark_forums_read.html:17
 #: templates/machina/forum_tracking/mark_topics_read.html:17
 msgid "No, take me back"
-msgstr ""
+msgstr "Nee, ga terug"
 
 #: templates/machina/forum_conversation/post_update.html:5
 #: templates/machina/forum_conversation/post_update.html:20
@@ -1608,13 +1546,7 @@ msgid "Edit profile"
 msgstr "Bewerk profiel"
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Post</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Posts</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Post</small></p>"
@@ -1623,19 +1555,13 @@ msgid_plural ""
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
 msgstr[0] ""
 "<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Bericht</small></p>"
+"                      <p><small>Bericht</small></p>"
 msgstr[1] ""
 "<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Berichten</small></p>"
+"                      <p class=\"mb-1\"><small>Berichten</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topic</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topics</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Topic</small></p>"
@@ -1644,10 +1570,10 @@ msgid_plural ""
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
 msgstr[0] ""
 "<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Onderwerp</small></p>"
+"                      <p><small>Onderwerp</small></p>"
 msgstr[1] ""
 "<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Onderwerpen</small></p>"
+"                      <p class=\"mb-1\"><small>Onderwerpen</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1823,16 +1749,19 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Weet je zeker dat je alle onderwerpen als gelezen wilt markeren?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "%(topic_length)s ongelezen onderwerpen gevonden"
-msgstr[1] "%(topic_length)s ongelezen onderwerpen gevonden"
+msgstr[0] ""
+"\n"
+"      %(topic_length)s ongelezen onderwerp gevonden"
+msgstr[1] ""
+"%(topic_length)s ongelezen onderwerpen gevonden\n"
+"      "
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1862,26 +1791,20 @@ msgstr "^zoeken/"
 msgid "^tracking/"
 msgstr "^volgen/"
 
-#~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+#~ msgid "Global permission"
+#~ msgstr "Globale rechten"
 
-#~ msgid "Poster IP address"
-#~ msgstr "Gebruikers IP adres"
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "De rechten kunnen globaal op alle fora toegepast worden"
 
-#~ msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^onderwerp/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
+#~ msgid "Local permission"
+#~ msgstr "Lokale rechten"
 
-#~ msgid "Search..."
-#~ msgstr "Zoeken..."
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr "De rechten kunnen individueel op elk fora toegepast worden"
 
-#~ msgid "Yes"
-#~ msgstr "Ja"
+#~ msgid "A forum permission should be at least either global or local"
+#~ msgstr "Forumrechten moeten tenminste globaal of lokaal zijn"
 
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "Move"
-#~ msgstr "Verplaatsen"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuleren"
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "De volgende rechten kunnen niet globaal worden toegepast: {}"

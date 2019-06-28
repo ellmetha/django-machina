@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-"
@@ -104,7 +104,7 @@ msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -140,7 +140,7 @@ msgid "'{}' forum successfully moved"
 msgstr "Forum '{}' premaknjen"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Anonymous user"
 msgstr "Anonimen uporabnik"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr ""
 
@@ -203,8 +203,10 @@ msgid "Not granted"
 msgstr ""
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+msgid "forum/<str:slug>-<int:pk>/"
+msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -532,8 +534,10 @@ msgid "Your vote has been cast."
 msgstr "Glas zabeležen"
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+msgid "topic/<str:slug>-<int:pk>/"
+msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zakleni/$"
 
 #: apps/forum_conversation/urls.py:43
 #, fuzzy
@@ -544,13 +548,13 @@ msgstr "^tema/ustvari/$"
 #: apps/forum_conversation/urls.py:45
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/uredi/$"
 
 #: apps/forum_conversation/urls.py:50
 #, fuzzy
 #| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
 msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/objava/ustvari/$"
 
 #: apps/forum_conversation/urls.py:55
@@ -558,7 +562,7 @@ msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/objava/ustvari/$"
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "update/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr ""
 "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/uredi/$"
 
@@ -567,7 +571,7 @@ msgstr ""
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "delete/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
 "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/izbriši/"
 "$"
@@ -575,7 +579,7 @@ msgstr ""
 #: apps/forum_conversation/urls.py:68
 #, fuzzy
 #| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/views.py:128
@@ -594,11 +598,11 @@ msgstr "Sporočilo poslano"
 msgid "There are some errors in the poll options you submitted."
 msgstr ""
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "Sporočilo spremenjeno"
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "Sporočilo izbrisano"
 
@@ -623,17 +627,17 @@ msgstr "^teme/$"
 #: apps/forum_feeds/urls.py:29
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/$"
 
 #: apps/forum_feeds/urls.py:34
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/vse/$"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -722,43 +726,43 @@ msgstr "Izberi končni forum"
 #: apps/forum_moderation/urls.py:42
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zakleni/$"
 
 #: apps/forum_moderation/urls.py:47
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/odkleni/$"
 
 #: apps/forum_moderation/urls.py:52
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/izbriši/$"
 
 #: apps/forum_moderation/urls.py:57
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/premakni/$"
 
 #: apps/forum_moderation/urls.py:62
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/tema/$"
 
 #: apps/forum_moderation/urls.py:67
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/pripeto/$"
 
 #: apps/forum_moderation/urls.py:72
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/razglas/$"
 
 #: apps/forum_moderation/urls.py:76
@@ -829,64 +833,40 @@ msgstr ""
 msgid "Permission codename"
 msgstr "Koda dovoljenja"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Globalno dovoljenje"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Lokalno dovoljenje"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Dovoljenje foruma"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "Ima dovoljenje"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "Dovoljenje '{}' ne more biti globalno"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "Skupina"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr ""
 
@@ -926,47 +906,47 @@ msgstr "Lahko briše lastne objave"
 msgid "Can edit own posts"
 msgstr "Lahko ureja lastne objave"
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr "Lahko objavlja brez potrditve"
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr "Lahko ustvarja ankete"
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr "Lahko glasuje v anketah"
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr "Lahko pripenja datoteke"
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr "Lahko prenaša datoteke"
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr "Lahko zaklene teme"
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr "Lahko premika teme"
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr "Lahko ureja objave"
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr "Lahko izbriše objave"
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr "Lahko potrdi objave"
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr ""
 
@@ -1862,6 +1842,15 @@ msgstr "^iskanje/"
 #: urls.py:36
 msgid "^tracking/"
 msgstr ""
+
+#~ msgid "Global permission"
+#~ msgstr "Globalno dovoljenje"
+
+#~ msgid "Local permission"
+#~ msgstr "Lokalno dovoljenje"
+
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "Dovoljenje '{}' ne more biti globalno"
 
 #~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 #~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"

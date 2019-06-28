@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/django-machina-team/"
@@ -104,7 +104,7 @@ msgstr ""
 "forums)"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -140,7 +140,7 @@ msgid "'{}' forum successfully moved"
 msgstr "Le forum '{}' a été déplacé avec succès"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -165,7 +165,7 @@ msgstr "Choisir un ID d'utilisateur, un ID de groupe ou l'utilisateur anonyme"
 msgid "Anonymous user"
 msgstr "Utilisateur anonyme"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "Permissions appliquées avec succès"
 
@@ -205,8 +205,10 @@ msgid "Not granted"
 msgstr "Refusée"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+msgid "forum/<str:slug>-<int:pk>/"
+msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -548,8 +550,10 @@ msgid "Your vote has been cast."
 msgstr "Votre vote a été enregistré."
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+msgid "topic/<str:slug>-<int:pk>/"
+msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
 
 #: apps/forum_conversation/urls.py:43
 #, fuzzy
@@ -560,13 +564,13 @@ msgstr "^topic/create/$"
 #: apps/forum_conversation/urls.py:45
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
 
 #: apps/forum_conversation/urls.py:50
 #, fuzzy
 #| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
 msgstr "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 
 #: apps/forum_conversation/urls.py:55
@@ -574,7 +578,7 @@ msgstr "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "update/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr ""
 "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/update/$"
 
@@ -583,14 +587,14 @@ msgstr ""
 #| msgid ""
 #| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
 #| "delete/$"
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
 "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/delete/$"
 
 #: apps/forum_conversation/urls.py:68
 #, fuzzy
 #| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/views.py:128
@@ -609,11 +613,11 @@ msgstr "Ce message a été publié avec succès."
 msgid "There are some errors in the poll options you submitted."
 msgstr "Il y a des erreurs dans les choix du sondage."
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "Ce message a été édité avec succès."
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "Ce message a été supprimé avec succès."
 
@@ -638,17 +642,17 @@ msgstr "^topics/$"
 #: apps/forum_feeds/urls.py:29
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
 
 #: apps/forum_feeds/urls.py:34
 #, fuzzy
 #| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
 msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -737,43 +741,43 @@ msgstr "Sélectionner le forum de destination"
 #: apps/forum_moderation/urls.py:42
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
 
 #: apps/forum_moderation/urls.py:47
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
 
 #: apps/forum_moderation/urls.py:52
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
 
 #: apps/forum_moderation/urls.py:57
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
 
 #: apps/forum_moderation/urls.py:62
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
 
 #: apps/forum_moderation/urls.py:67
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
 
 #: apps/forum_moderation/urls.py:72
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
 
 #: apps/forum_moderation/urls.py:76
@@ -844,64 +848,40 @@ msgstr "Ce message a été marqué comme non approuvé."
 msgid "Permission codename"
 msgstr "Code de la permission"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Permission globale"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "Cette permission peut être accordée globalement sur tous les forums"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Permission locale"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "Cette permission peut être accordée individuellement pour chaque forum"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Permission de forum"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr "Une autorisation de forum doit être au moins globale ou locale"
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "Permission accordée"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "La permission suivante ne peut pas être accordée: {}"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr "Cible les utilisateurs anonymes"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr "Permission d'utilisateur"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr "Permissions d'utilisateurs"
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr "Une permission doit cibler un utilisateur ou un utilisateur anonyme"
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "Groupe"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr "Permission de groupe"
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr "Permissions de groupes"
 
@@ -941,47 +921,47 @@ msgstr ""
 msgid "Can edit own posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr ""
 
@@ -1869,6 +1849,25 @@ msgstr "^search/"
 #: urls.py:36
 msgid "^tracking/"
 msgstr "^tracking/"
+
+#~ msgid "Global permission"
+#~ msgstr "Permission globale"
+
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "Cette permission peut être accordée globalement sur tous les forums"
+
+#~ msgid "Local permission"
+#~ msgstr "Permission locale"
+
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr ""
+#~ "Cette permission peut être accordée individuellement pour chaque forum"
+
+#~ msgid "A forum permission should be at least either global or local"
+#~ msgstr "Une autorisation de forum doit être au moins globale ou locale"
+
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "La permission suivante ne peut pas être accordée: {}"
 
 #~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
 #~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"

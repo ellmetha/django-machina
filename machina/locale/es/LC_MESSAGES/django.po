@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2019-03-18 12:10+0000\n"
 "Last-Translator: Davinia MC\n"
-"Language-Team: Spanish (http://www.transifex.com/django-machina-team/django-machina/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/django-machina-team/django-"
+"machina/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -96,19 +97,17 @@ msgid "Display in parent-forums legend"
 msgstr "Mostrar en la leyenda de los foros padre"
 
 #: apps/forum/abstract_models.py:96
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Mostrar este foro en la leyenda de los foros padre (lista de subforos)"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
 msgstr "Foro"
 
-#: apps/forum/abstract_models.py:104
-#: templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Foros"
@@ -138,7 +137,7 @@ msgid "'{}' forum successfully moved"
 msgstr "El foro '{}' ha sido movido con éxito"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -155,7 +154,9 @@ msgstr "Los permisos se han copiado satisfactoriamente"
 
 #: apps/forum/admin.py:202
 msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "Escoger un identificador de usuario, un identificador de grupo o el usuario anónimo"
+msgstr ""
+"Escoger un identificador de usuario, un identificador de grupo o el usuario "
+"anónimo"
 
 #: apps/forum/admin.py:275
 #: templates/machina/forum_conversation/topic_detail.html:98
@@ -163,7 +164,7 @@ msgstr "Escoger un identificador de usuario, un identificador de grupo o el usua
 msgid "Anonymous user"
 msgstr "Usuario anónimo"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "Los permisos se han aplicado correctamente"
 
@@ -179,7 +180,9 @@ msgstr "Anónimo"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr "Por favor, selecciona esta opción si quieres editar los permisos del usuario anónimo"
+msgstr ""
+"Por favor, selecciona esta opción si quieres editar los permisos del usuario "
+"anónimo"
 
 #: apps/forum/forms.py:55
 msgid "Choose either a user ID or select the anonymous user"
@@ -201,7 +204,9 @@ msgid "Not granted"
 msgstr "Sin conceder"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
+#, fuzzy
+#| msgid "forum/<slug:slug>-<int:pk>/"
+msgid "forum/<str:slug>-<int:pk>/"
 msgstr "forum/<slug:slug>-<int:pk>/"
 
 #: apps/forum_conversation/abstract_models.py:32
@@ -334,12 +339,15 @@ msgstr "Mensajes"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "Se debe asociar un identificador de usuario o una clave anónima a un mensaje."
+msgstr ""
+"Se debe asociar un identificador de usuario o una clave anónima a un mensaje."
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "Se debe asociar un identificador de usuario o una clave anónima a un mensaje, pero no ambos."
+msgstr ""
+"Se debe asociar un identificador de usuario o una clave anónima a un "
+"mensaje, pero no ambos."
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
@@ -381,7 +389,9 @@ msgstr "Pregunta de la encuesta"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr "Escribe una pregunta para asociar una encuesta al hilo o déjala en blanco para no crear una encuesta."
+msgstr ""
+"Escribe una pregunta para asociar una encuesta al hilo o déjala en blanco "
+"para no crear una encuesta."
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -390,7 +400,8 @@ msgstr "Número máximo de opciones de la encuesta por usuario"
 
 #: apps/forum_conversation/forms.py:158
 msgid "This is the number of options each user may select when voting."
-msgstr "Este es el número de opciones que cada usuario puede seleccionar al votar."
+msgstr ""
+"Este es el número de opciones que cada usuario puede seleccionar al votar."
 
 #: apps/forum_conversation/forms.py:163
 msgid "For how many days the poll should be run?"
@@ -411,7 +422,9 @@ msgstr "Si está activo, los usuarios pueden cambiar su voto."
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr "Debes seleccionar el número máximo de opciones por usuario cuando creas una encuesta"
+msgstr ""
+"Debes seleccionar el número máximo de opciones por usuario cuando creas una "
+"encuesta"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
@@ -497,11 +510,14 @@ msgstr "Votos de la encuesta del hilo"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:121
 msgid "A user id or an anonymous key must be used."
-msgstr "Se debe usar un identificador de usuario o una clave de usuario anónimo."
+msgstr ""
+"Se debe usar un identificador de usuario o una clave de usuario anónimo."
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:123
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr "Se debe usar un identificador de usuario o una clave de usuario anónimo, pero no ambos."
+msgstr ""
+"Se debe usar un identificador de usuario o una clave de usuario anónimo, "
+"pero no ambos."
 
 #: apps/forum_conversation/forum_polls/apps.py:17
 msgid "Machina: Forum polls"
@@ -528,7 +544,9 @@ msgid "Your vote has been cast."
 msgstr "Tu voto ha sido grabado."
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/"
+msgid "topic/<str:slug>-<int:pk>/"
 msgstr "topic/<slug:slug>-<int:pk>/"
 
 #: apps/forum_conversation/urls.py:43
@@ -536,23 +554,33 @@ msgid "topic/create/"
 msgstr "topic/create/"
 
 #: apps/forum_conversation/urls.py:45
-msgid "topic/<slug:slug>-<int:pk>/update/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
 msgstr "topic/<slug:slug>-<int:pk>/update/"
 
 #: apps/forum_conversation/urls.py:50
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+#, fuzzy
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
 msgstr "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
 
 #: apps/forum_conversation/urls.py:55
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+#, fuzzy
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 
 #: apps/forum_conversation/urls.py:60
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#, fuzzy
+#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 
 #: apps/forum_conversation/urls.py:68
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+#, fuzzy
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr "forum/<slug:forum_slug>-<int:forum_pk>/"
 
 #: apps/forum_conversation/views.py:128
@@ -571,11 +599,11 @@ msgstr "El mensaje se ha enviado correctamente."
 msgid "There are some errors in the poll options you submitted."
 msgstr "Hay errores en las opciones de la encuesta enviadas."
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "El mensaje se ha editado correctamente."
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "El mensaje ha sido borrado correctamente."
 
@@ -596,15 +624,19 @@ msgid "topics/"
 msgstr "topics/"
 
 #: apps/forum_feeds/urls.py:29
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+#, fuzzy
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
 msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
 
 #: apps/forum_feeds/urls.py:34
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+#, fuzzy
+#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
 msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -679,31 +711,45 @@ msgid "Select a destination forum"
 msgstr "Selecciona un foro de destino"
 
 #: apps/forum_moderation/urls.py:42
-msgid "topic/<slug:slug>-<int:pk>/lock/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
 msgstr "topic/<slug:slug>-<int:pk>/lock/"
 
 #: apps/forum_moderation/urls.py:47
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
 msgstr "topic/<slug:slug>-<int:pk>/unlock/"
 
 #: apps/forum_moderation/urls.py:52
-msgid "topic/<slug:slug>-<int:pk>/delete/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
 msgstr "topic/<slug:slug>-<int:pk>/delete/"
 
 #: apps/forum_moderation/urls.py:57
-msgid "topic/<slug:slug>-<int:pk>/move/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr "topic/<slug:slug>-<int:pk>/move/"
 
 #: apps/forum_moderation/urls.py:62
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr "topic/<slug:slug>-<int:pk>/change/topic/"
 
 #: apps/forum_moderation/urls.py:67
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr "topic/<slug:slug>-<int:pk>/change/sticky/"
 
 #: apps/forum_moderation/urls.py:72
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+#, fuzzy
+#| msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr "topic/<slug:slug>-<int:pk>/change/announce/"
 
 #: apps/forum_moderation/urls.py:76
@@ -766,64 +812,40 @@ msgstr "Se ha rechazado este mensaje correctamente."
 msgid "Permission codename"
 msgstr "Clave del permiso"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Permiso global"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "Se puede conceder este permiso de forma global a todos los foros"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Permiso local"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "Se puede conceder este permiso de forma individual en cada foro"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Permiso de foro"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr "Un permiso de foro debe ser al menos global o local"
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "Tiene permiso"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "Los permisos siguientes no pueden ser asignados de forma global: {}"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr "Usuario anónimo como objetivo"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr "Permiso para el foro de usuarios"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr "Permisos para el foro de usuarios"
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr "Un permiso debe tener como objetivo un usuario o el usuario anónimo"
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "Grupo"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr "Permiso del foro de grupos"
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr "Permisos del foro de grupos"
 
@@ -863,47 +885,47 @@ msgstr "Puede borrar sus propios mensajes"
 msgid "Can edit own posts"
 msgstr "Puede editar sus propios mensajes"
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr "Puede publicar sin necesidad de aprobación"
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr "Puede crear encuestas"
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr "Puede votar en encuestas"
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr "Puede adjuntar ficheros"
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr "Puede bajarse ficheros"
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr "Puede bloquear hilos"
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr "Puede mover hilos"
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr "Puede editar mensajes"
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr "Puede borrar mensajes"
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr "Puede aprobar mensajes"
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr "Puede añadir mensajes a hilos bloqueados"
 
@@ -921,7 +943,9 @@ msgstr "Búsqueda de participante"
 
 #: apps/forum_search/forms.py:30
 msgid "Enter a user name to limit the search to a specific user."
-msgstr "Introduce un nombre de usuario para limitar la búsqueda a un usuario concreto."
+msgstr ""
+"Introduce un nombre de usuario para limitar la búsqueda a un usuario "
+"concreto."
 
 #: apps/forum_search/forms.py:35
 msgid "Search in specific forums"
@@ -1019,13 +1043,17 @@ msgstr "No se permiten ficheros mayores de {}. Tu fichero tiene {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "No se permiten imágenes menores de {}px o mayores de {}px de ahcho. El ancho de tu imagen es {}px"
+msgstr ""
+"No se permiten imágenes menores de {}px o mayores de {}px de ahcho. El ancho "
+"de tu imagen es {}px"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "No se permiten imágenes menores de {}px o mayores de {}px de alto. Tu imagen tiene {}px de alto"
+msgstr ""
+"No se permiten imágenes menores de {}px o mayores de {}px de alto. Tu imagen "
+"tiene {}px de alto"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -1128,7 +1156,9 @@ msgstr "Copiar los permisos de otro foro"
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr "Por favor, selecciona un foro para copiar la configuración de sus permisos a este foro"
+msgstr ""
+"Por favor, selecciona un foro para copiar la configuración de sus permisos a "
+"este foro"
 
 #: templates/admin/forum/forum/editpermissions_index.html:106
 msgid "Copy"
@@ -1293,7 +1323,9 @@ msgstr "Añadir opción a la encuesta"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr "Nota:</b>&nbsp;Borrar las opciones de una encuestra existente borrará los votos asociados."
+msgstr ""
+"Nota:</b>&nbsp;Borrar las opciones de una encuestra existente borrará los "
+"votos asociados."
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1525,8 +1557,12 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                      <p><small>Mensaje</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                      <p class=\"mb-1\"><small>Mensajes</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p><small>Mensaje</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p class=\"mb-1\"><small>Mensajes</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
 #, python-format
@@ -1536,8 +1572,12 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                      <p><small>Hilo</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                      <p class=\"mb-1\"><small>Hilos</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p><small>Hilo</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"                      <p class=\"mb-1\"><small>Hilos</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1711,15 +1751,21 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "¿Seguro que quieres marcar los hilos como leídos?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, python-format
+#, fuzzy, python-format
+#| msgid "      %(topic_length)s unread topic found"
+#| msgid_plural ""
+#| "%(topic_length)s unread topics found\n"
+#| "      "
 msgid ""
-""
+"\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
 msgstr[0] "     encontrado %(topic_length)s hilo sin leer"
-msgstr[1] "Encontrados %(topic_length)s hilos sin leer\n      "
+msgstr[1] ""
+"Encontrados %(topic_length)s hilos sin leer\n"
+"      "
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1748,3 +1794,21 @@ msgstr "^search/"
 #: urls.py:36
 msgid "^tracking/"
 msgstr "^tracking/"
+
+#~ msgid "Global permission"
+#~ msgstr "Permiso global"
+
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "Se puede conceder este permiso de forma global a todos los foros"
+
+#~ msgid "Local permission"
+#~ msgstr "Permiso local"
+
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr "Se puede conceder este permiso de forma individual en cada foro"
+
+#~ msgid "A forum permission should be at least either global or local"
+#~ msgstr "Un permiso de foro debe ser al menos global o local"
+
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "Los permisos siguientes no pueden ser asignados de forma global: {}"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/"
@@ -103,7 +103,7 @@ msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -139,7 +139,7 @@ msgid "'{}' forum successfully moved"
 msgstr "成功移动 '{}' 论坛"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -164,7 +164,7 @@ msgstr "选择一个用户ID或群组ID或匿名用户"
 msgid "Anonymous user"
 msgstr "匿名用户"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "许可文件应用成功"
 
@@ -202,8 +202,10 @@ msgid "Not granted"
 msgstr "未被准许"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "forum/<str:slug>-<int:pk>/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -531,31 +533,37 @@ msgid "Your vote has been cast."
 msgstr "已投票"
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:slug>-<int:pk>/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_conversation/urls.py:43
 msgid "topic/create/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:45
-msgid "topic/<slug:slug>-<int:pk>/update/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:slug>-<int:pk>/update/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_conversation/urls.py:50
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_conversation/urls.py:55
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:60
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:68
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr ""
 
 #: apps/forum_conversation/views.py:128
@@ -574,11 +582,11 @@ msgstr "消息发布成功"
 msgid "There are some errors in the poll options you submitted."
 msgstr "你提交的投票选项存在问题"
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "消息编辑成功"
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "消息删除成功"
 
@@ -601,15 +609,19 @@ msgid "topics/"
 msgstr "主题"
 
 #: apps/forum_feeds/urls.py:29
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
-msgstr ""
+#, fuzzy
+#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+msgstr "标记论坛话题"
 
 #: apps/forum_feeds/urls.py:34
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr ""
+#, fuzzy
+#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+msgstr "标记论坛话题"
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -686,39 +698,45 @@ msgid "Select a destination forum"
 msgstr "选择目的论坛"
 
 #: apps/forum_moderation/urls.py:42
-msgid "topic/<slug:slug>-<int:pk>/lock/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:slug>-<int:pk>/lock/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_moderation/urls.py:47
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_moderation/urls.py:52
-msgid "topic/<slug:slug>-<int:pk>/delete/"
-msgstr ""
+#, fuzzy
+#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+msgid "topic/<str:slug>-<int:pk>/delete/"
+msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_moderation/urls.py:57
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_moderation/urls.py:62
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/话题/$"
 
 #: apps/forum_moderation/urls.py:67
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/置顶/$"
 
 #: apps/forum_moderation/urls.py:72
 #, fuzzy
 #| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/通告/$"
 
 #: apps/forum_moderation/urls.py:76
@@ -789,64 +807,40 @@ msgstr "成功阻止帖子发布"
 msgid "Permission codename"
 msgstr "许可文件代码名"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "全局许可文件"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "这个许可文件能被所有论坛全局准许"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "局部许可文件"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "这个许可文件能被各论坛分别准许"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr "一个论坛许可文件应当至少是全局的或局部的"
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr "组合"
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr "以下许可文件不能被全局准许"
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr "针对匿名用户"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr "用户论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr "用户论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr "许可文件应当针对用户及匿名用户"
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr "群组"
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr "群组论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr "群组论坛许可文件"
 
@@ -886,47 +880,47 @@ msgstr "允许删除自己的帖子"
 msgid "Can edit own posts"
 msgstr "允许编辑自己的帖子"
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr "允许不经审核发帖"
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr "允许创建投票"
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr "允许投票"
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr "允许添加附件"
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr "允许下载文件"
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr "允许锁定帖子"
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr "允许移动帖子"
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr "允许编辑帖子"
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr "允许删除帖子"
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr "允许批准帖子"
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr "允许在锁定的话题中发布帖子"
 
@@ -1789,6 +1783,24 @@ msgstr "搜索"
 #: urls.py:36
 msgid "^tracking/"
 msgstr "追踪"
+
+#~ msgid "Global permission"
+#~ msgstr "全局许可文件"
+
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "这个许可文件能被所有论坛全局准许"
+
+#~ msgid "Local permission"
+#~ msgstr "局部许可文件"
+
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr "这个许可文件能被各论坛分别准许"
+
+#~ msgid "A forum permission should be at least either global or local"
+#~ msgstr "一个论坛许可文件应当至少是全局的或局部的"
+
+#~ msgid "The following permission cannot be granted globally: {}"
+#~ msgstr "以下许可文件不能被全局准许"
 
 #~ msgid "Poster IP address"
 #~ msgstr "发布者IP地址"

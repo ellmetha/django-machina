@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 17:58-0500\n"
+"POT-Creation-Date: 2019-06-27 22:36-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Russian (http://www.transifex.com/django-machina-team/django-"
@@ -105,7 +105,7 @@ msgstr ""
 "Показывать этот форуум в легенде родительского форума (списке подфорумов)"
 
 #: apps/forum/abstract_models.py:103
-#: apps/forum_permission/abstract_models.py:81
+#: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
@@ -141,7 +141,7 @@ msgid "'{}' forum successfully moved"
 msgstr "Форум '{}' успешно перемещён"
 
 #: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:51
+#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
 #: templates/admin/forum/forum/editpermissions_form.html:20
 #: templates/admin/forum/forum/editpermissions_index.html:15
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Anonymous user"
 msgstr "Анонимный пользователь"
 
-#: apps/forum/admin.py:354
+#: apps/forum/admin.py:352
 msgid "Permissions successfully applied"
 msgstr "Разрешения успешно применены"
 
@@ -207,7 +207,7 @@ msgid "Not granted"
 msgstr "Не предоставлено"
 
 #: apps/forum/urls.py:29
-msgid "forum/<slug:slug>-<int:pk>/"
+msgid "forum/<str:slug>-<int:pk>/"
 msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:32
@@ -551,7 +551,7 @@ msgid "Your vote has been cast."
 msgstr "Ваш голос был учтен"
 
 #: apps/forum_conversation/urls.py:39
-msgid "topic/<slug:slug>-<int:pk>/"
+msgid "topic/<str:slug>-<int:pk>/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:43
@@ -559,23 +559,23 @@ msgid "topic/create/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:45
-msgid "topic/<slug:slug>-<int:pk>/update/"
+msgid "topic/<str:slug>-<int:pk>/update/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:50
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:55
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:60
-msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
 msgstr ""
 
 #: apps/forum_conversation/urls.py:68
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr ""
 
 #: apps/forum_conversation/views.py:128
@@ -594,11 +594,11 @@ msgstr "Сообщение было успешно опубликовано."
 msgid "There are some errors in the poll options you submitted."
 msgstr "В вариантах опроса есть ошибки."
 
-#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:689
+#: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
 msgstr "Сообщение было успешно изменено."
 
-#: apps/forum_conversation/views.py:734
+#: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
 msgstr "Сообщение было успешно удалено."
 
@@ -621,15 +621,15 @@ msgid "topics/"
 msgstr "Темы"
 
 #: apps/forum_feeds/urls.py:29
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
 msgstr ""
 
 #: apps/forum_feeds/urls.py:34
-msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
 msgstr ""
 
 #: apps/forum_member/abstract_models.py:31
-#: apps/forum_permission/abstract_models.py:105
+#: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
@@ -706,31 +706,31 @@ msgid "Select a destination forum"
 msgstr "Выберете форум назначения"
 
 #: apps/forum_moderation/urls.py:42
-msgid "topic/<slug:slug>-<int:pk>/lock/"
+msgid "topic/<str:slug>-<int:pk>/lock/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:47
-msgid "topic/<slug:slug>-<int:pk>/unlock/"
+msgid "topic/<str:slug>-<int:pk>/unlock/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:52
-msgid "topic/<slug:slug>-<int:pk>/delete/"
+msgid "topic/<str:slug>-<int:pk>/delete/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:57
-msgid "topic/<slug:slug>-<int:pk>/move/"
+msgid "topic/<str:slug>-<int:pk>/move/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:62
-msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+msgid "topic/<str:slug>-<int:pk>/change/topic/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:67
-msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+msgid "topic/<str:slug>-<int:pk>/change/sticky/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:72
-msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+msgid "topic/<str:slug>-<int:pk>/change/announce/"
 msgstr ""
 
 #: apps/forum_moderation/urls.py:76
@@ -793,64 +793,40 @@ msgstr "Сообщение не было одобрено."
 msgid "Permission codename"
 msgstr "Кодовое название разрешения"
 
-#: apps/forum_permission/abstract_models.py:37
-msgid "Global permission"
-msgstr "Глабальное разрешение"
-
-#: apps/forum_permission/abstract_models.py:38
-msgid "This permission can be granted globally to all the forums"
-msgstr "Это разрешение может быть установлено глобально на все форумы"
-
-#: apps/forum_permission/abstract_models.py:42
-msgid "Local permission"
-msgstr "Местное разрешение"
-
-#: apps/forum_permission/abstract_models.py:43
-msgid "This permission can be granted individually for each forum"
-msgstr "Это разрешение может быть установлено для каждого форума индивидуально"
-
-#: apps/forum_permission/abstract_models.py:50
-#: apps/forum_permission/abstract_models.py:74
+#: apps/forum_permission/abstract_models.py:39
+#: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
 msgstr "Разрешение форума"
 
-#: apps/forum_permission/abstract_models.py:60
-msgid "A forum permission should be at least either global or local"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:76
+#: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:93
-msgid "The following permission cannot be granted globally: {}"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:108
+#: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:86
 msgid "User forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:87
 msgid "User forum permissions"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:131
+#: apps/forum_permission/abstract_models.py:102
 msgid "A permission should target either a user or an anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:138
+#: apps/forum_permission/abstract_models.py:109
 msgid "Group"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:144
+#: apps/forum_permission/abstract_models.py:115
 msgid "Group forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:145
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group forum permissions"
 msgstr ""
 
@@ -890,47 +866,47 @@ msgstr ""
 msgid "Can edit own posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:70
+#: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:77
+#: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:82
+#: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:89
+#: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:94
+#: apps/forum_permission/defaults.py:93
 msgid "Can download file"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:101
+#: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:106
+#: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:111
+#: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:116
+#: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:121
+#: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
 msgstr ""
 
-#: apps/forum_permission/defaults.py:127
+#: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
 msgstr ""
 
@@ -1796,6 +1772,19 @@ msgstr ""
 #: urls.py:36
 msgid "^tracking/"
 msgstr ""
+
+#~ msgid "Global permission"
+#~ msgstr "Глабальное разрешение"
+
+#~ msgid "This permission can be granted globally to all the forums"
+#~ msgstr "Это разрешение может быть установлено глобально на все форумы"
+
+#~ msgid "Local permission"
+#~ msgstr "Местное разрешение"
+
+#~ msgid "This permission can be granted individually for each forum"
+#~ msgstr ""
+#~ "Это разрешение может быть установлено для каждого форума индивидуально"
 
 #~ msgid "Poster IP address"
 #~ msgstr "IP адресс автора"
