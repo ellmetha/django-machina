@@ -1,0 +1,13 @@
+###############################################
+Django-machina 1.0.2 release notes (2018-06-29)
+###############################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.4, 3.5, 3.6 and 3.7. Django 2.0, 2.1 and 2.2.
+
+Minor changes
+-------------
+
+* Add missing migration
