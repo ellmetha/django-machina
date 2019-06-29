@@ -1,5 +1,5 @@
 ###############################################
-Django-machina 1.0.2 release notes (2018-06-29)
+Django-machina 1.0.2 release notes (2019-06-29)
 ###############################################
 
 Requirements and compatibility
