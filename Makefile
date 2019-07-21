@@ -31,6 +31,7 @@ messages:
 compiledmessages:
 	cd machina && pipenv run python -m django compilemessages
 
+.PHONY: docs
 ## Builds the documentation.
 docs:
 	cd docs && rm -rf _build && pipenv run make html
