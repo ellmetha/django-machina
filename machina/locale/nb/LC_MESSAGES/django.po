@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
@@ -203,12 +203,6 @@ msgstr "Innvilget"
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "Ikke innvilget"
-
-#: apps/forum/urls.py:29
-#, fuzzy
-#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<str:slug>-<int:pk>/"
-msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -450,12 +444,6 @@ msgstr "Vedlegg"
 msgid "Machina: Forum attachments"
 msgstr "Machina: Forumvedlegg"
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-#, fuzzy
-#| msgid "Attachment"
-msgid "attachment/<int:pk>/"
-msgstr "Vedlegg"
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr "Varighet på avstemningen, i dager"
@@ -533,62 +521,9 @@ msgstr "Du må oppgi et valg for å stemme."
 msgid "You have tried to vote for too many options."
 msgstr "Du har prøvd å stemme på for mange valg."
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "Din stemme er avgitt."
-
-#: apps/forum_conversation/urls.py:39
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
-
-#: apps/forum_conversation/urls.py:43
-#, fuzzy
-#| msgid "^topic/create/$"
-msgid "topic/create/"
-msgstr "^tråd/opprett/$"
-
-#: apps/forum_conversation/urls.py:45
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/oppdater/$"
-
-#: apps/forum_conversation/urls.py:50
-#, fuzzy
-#| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/innlegg/opprett/$"
-
-#: apps/forum_conversation/urls.py:55
-#, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "update/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-"^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
-"oppdater/$"
-
-#: apps/forum_conversation/urls.py:60
-#, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "delete/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr ""
-"^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/slett/$"
-
-#: apps/forum_conversation/urls.py:68
-#, fuzzy
-#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -626,24 +561,6 @@ msgstr "Siste tråder"
 msgid "Latest topics updated on the forums"
 msgstr "Sist oppdaterte tråder i forumene"
 
-#: apps/forum_feeds/urls.py:27
-#, fuzzy
-#| msgid "^topics/$"
-msgid "topics/"
-msgstr "^tråd/$"
-
-#: apps/forum_feeds/urls.py:29
-#, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/$"
-
-#: apps/forum_feeds/urls.py:34
-#, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/alle/$"
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -675,42 +592,6 @@ msgstr "Forumprofiler"
 msgid "Machina: Forum members"
 msgstr "Machina: Forummedlemmer"
 
-#: apps/forum_member/urls.py:33
-#, fuzzy
-#| msgid "^profile/edit/$"
-msgid "profile/edit/"
-msgstr "^profile/rediger/$"
-
-#: apps/forum_member/urls.py:38
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/$"
-msgid "profile/<str:pk>/"
-msgstr "^profil/(?P<pk>\\d+)/$"
-
-#: apps/forum_member/urls.py:43
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/posts/$"
-msgid "profile/<str:pk>/posts/"
-msgstr "^profil/(?P<pk>\\d+)/innlegg/$"
-
-#: apps/forum_member/urls.py:48
-#, fuzzy
-#| msgid "^subscriptions/$"
-msgid "subscriptions/"
-msgstr "^abonnementer/$"
-
-#: apps/forum_member/urls.py:53
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-msgid "topic/<int:pk>/subscribe/"
-msgstr "^tråd/(?P<pk>\\d+)/abonner/$"
-
-#: apps/forum_member/urls.py:58
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr "^tråd/(?P<pk>\\d+)/stopp-abonnement/$"
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr "Redigeringen av profilen var vellykket."
@@ -730,72 +611,6 @@ msgstr "Machina: Forummoderasjon"
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
 msgstr "Velg et destinasjonsforum"
-
-#: apps/forum_moderation/urls.py:42
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
-
-#: apps/forum_moderation/urls.py:47
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås-opp/$"
-
-#: apps/forum_moderation/urls.py:52
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/slett/$"
-
-#: apps/forum_moderation/urls.py:57
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/flytt/$"
-
-#: apps/forum_moderation/urls.py:62
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/tråd/$"
-
-#: apps/forum_moderation/urls.py:67
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/klistret/$"
-
-#: apps/forum_moderation/urls.py:72
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/kunngjøring/$"
-
-#: apps/forum_moderation/urls.py:76
-#, fuzzy
-#| msgid "^queue/$"
-msgid "queue/"
-msgstr "^kø/$"
-
-#: apps/forum_moderation/urls.py:78
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/$"
-msgid "queue/<int:pk>/"
-msgstr "^kø/(?P<pk>\\d+)/$"
-
-#: apps/forum_moderation/urls.py:83
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgid "queue/<int:pk>/approve/"
-msgstr "^kø/(?P<pk>\\d+)/godkjenn/$"
-
-#: apps/forum_moderation/urls.py:88
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgid "queue/<int:pk>/disapprove/"
-msgstr "^kø/(?P<pk>\\d+)/avvis/$"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -1013,30 +828,6 @@ msgstr "Trådsporinger"
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
 msgstr "Machina: Forumsporing"
-
-#: apps/forum_tracking/urls.py:30
-#, fuzzy
-#| msgid "^mark/forums/$"
-msgid "mark/forums/"
-msgstr "^markering/forumer/$"
-
-#: apps/forum_tracking/urls.py:35
-#, fuzzy
-#| msgid "^mark/forums/(?P<pk>\\d+)/$"
-msgid "mark/forums/<int:pk>/"
-msgstr "^markering/forumer/(?P<pk>\\d+)/$"
-
-#: apps/forum_tracking/urls.py:40
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgid "mark/forum/<int:pk>/topics/"
-msgstr "^markering/forumer/(?P<pk>\\d+)/tråder/$"
-
-#: apps/forum_tracking/urls.py:45
-#, fuzzy
-#| msgid "^unread-topics/$"
-msgid "unread-topics/"
-msgstr "^uleste-tråder/$"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1818,25 +1609,193 @@ msgstr "Det er ingen uleste tråder."
 msgid "Forum index"
 msgstr "Forumindeks"
 
-#: urls.py:32
-msgid "^feeds/"
-msgstr "^kilder/"
+#, fuzzy
+#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+#~ msgid "forum/<str:slug>-<int:pk>/"
+#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
-#: urls.py:33
-msgid "^member/"
-msgstr "^medlem/"
+#, fuzzy
+#~| msgid "Attachment"
+#~ msgid "attachment/<int:pk>/"
+#~ msgstr "Vedlegg"
 
-#: urls.py:34
-msgid "^moderation/"
-msgstr "^moderasjon/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
 
-#: urls.py:35
-msgid "^search/"
-msgstr "^søk/"
+#, fuzzy
+#~| msgid "^topic/create/$"
+#~ msgid "topic/create/"
+#~ msgstr "^tråd/opprett/$"
 
-#: urls.py:36
-msgid "^tracking/"
-msgstr "^sporing/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
+#~ msgid "topic/<str:slug>-<int:pk>/update/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/oppdater/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+#~ msgstr "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/innlegg/opprett/$"
+
+#, fuzzy
+#~| msgid ""
+#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
+#~| "update/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+#~ msgstr ""
+#~ "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
+#~ "oppdater/$"
+
+#, fuzzy
+#~| msgid ""
+#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
+#~| "delete/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#~ msgstr ""
+#~ "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
+#~ "slett/$"
+
+#, fuzzy
+#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/"
+#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+
+#, fuzzy
+#~| msgid "^topics/$"
+#~ msgid "topics/"
+#~ msgstr "^tråd/$"
+
+#, fuzzy
+#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/$"
+
+#, fuzzy
+#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/alle/$"
+
+#, fuzzy
+#~| msgid "^profile/edit/$"
+#~ msgid "profile/edit/"
+#~ msgstr "^profile/rediger/$"
+
+#, fuzzy
+#~| msgid "^profile/(?P<pk>\\d+)/$"
+#~ msgid "profile/<str:pk>/"
+#~ msgstr "^profil/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^profile/(?P<pk>\\d+)/posts/$"
+#~ msgid "profile/<str:pk>/posts/"
+#~ msgstr "^profil/(?P<pk>\\d+)/innlegg/$"
+
+#, fuzzy
+#~| msgid "^subscriptions/$"
+#~ msgid "subscriptions/"
+#~ msgstr "^abonnementer/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
+#~ msgid "topic/<int:pk>/subscribe/"
+#~ msgstr "^tråd/(?P<pk>\\d+)/abonner/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
+#~ msgid "topic/<int:pk>/unsubscribe/"
+#~ msgstr "^tråd/(?P<pk>\\d+)/stopp-abonnement/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/lock/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås-opp/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
+#~ msgid "topic/<str:slug>-<int:pk>/delete/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/slett/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/move/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/flytt/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/tråd/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/klistret/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
+#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/kunngjøring/$"
+
+#, fuzzy
+#~| msgid "^queue/$"
+#~ msgid "queue/"
+#~ msgstr "^kø/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/$"
+#~ msgid "queue/<int:pk>/"
+#~ msgstr "^kø/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
+#~ msgid "queue/<int:pk>/approve/"
+#~ msgstr "^kø/(?P<pk>\\d+)/godkjenn/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
+#~ msgid "queue/<int:pk>/disapprove/"
+#~ msgstr "^kø/(?P<pk>\\d+)/avvis/$"
+
+#, fuzzy
+#~| msgid "^mark/forums/$"
+#~ msgid "mark/forums/"
+#~ msgstr "^markering/forumer/$"
+
+#, fuzzy
+#~| msgid "^mark/forums/(?P<pk>\\d+)/$"
+#~ msgid "mark/forums/<int:pk>/"
+#~ msgstr "^markering/forumer/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+#~ msgid "mark/forum/<int:pk>/topics/"
+#~ msgstr "^markering/forumer/(?P<pk>\\d+)/tråder/$"
+
+#, fuzzy
+#~| msgid "^unread-topics/$"
+#~ msgid "unread-topics/"
+#~ msgstr "^uleste-tråder/$"
+
+#~ msgid "^feeds/"
+#~ msgstr "^kilder/"
+
+#~ msgid "^member/"
+#~ msgstr "^medlem/"
+
+#~ msgid "^moderation/"
+#~ msgstr "^moderasjon/"
+
+#~ msgid "^search/"
+#~ msgstr "^søk/"
+
+#~ msgid "^tracking/"
+#~ msgstr "^sporing/"
 
 #~ msgid "Global permission"
 #~ msgstr "Global rettighet"

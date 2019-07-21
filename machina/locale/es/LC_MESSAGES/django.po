@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2019-03-18 12:10+0000\n"
 "Last-Translator: Davinia MC\n"
 "Language-Team: Spanish (http://www.transifex.com/django-machina-team/django-"
@@ -202,12 +202,6 @@ msgstr "Concedido"
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "Sin conceder"
-
-#: apps/forum/urls.py:29
-#, fuzzy
-#| msgid "forum/<slug:slug>-<int:pk>/"
-msgid "forum/<str:slug>-<int:pk>/"
-msgstr "forum/<slug:slug>-<int:pk>/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -451,10 +445,6 @@ msgstr "Adjuntos"
 msgid "Machina: Forum attachments"
 msgstr "Machina: Adjuntos del foro"
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-msgid "attachment/<int:pk>/"
-msgstr "attachment/<int:pk>/"
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr "Duración de la encuesta, en días"
@@ -535,53 +525,9 @@ msgstr "Debes especificar una opción al votar."
 msgid "You have tried to vote for too many options."
 msgstr "Has intentado votar demasiadas opciones."
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr "poll/<int:pk>/vote/"
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "Tu voto ha sido grabado."
-
-#: apps/forum_conversation/urls.py:39
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/"
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr "topic/<slug:slug>-<int:pk>/"
-
-#: apps/forum_conversation/urls.py:43
-msgid "topic/create/"
-msgstr "topic/create/"
-
-#: apps/forum_conversation/urls.py:45
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/update/"
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr "topic/<slug:slug>-<int:pk>/update/"
-
-#: apps/forum_conversation/urls.py:50
-#, fuzzy
-#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
-
-#: apps/forum_conversation/urls.py:55
-#, fuzzy
-#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-
-#: apps/forum_conversation/urls.py:60
-#, fuzzy
-#| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-
-#: apps/forum_conversation/urls.py:68
-#, fuzzy
-#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-msgstr "forum/<slug:forum_slug>-<int:forum_pk>/"
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -619,22 +565,6 @@ msgstr "Últimos hilos"
 msgid "Latest topics updated on the forums"
 msgstr "Últimos hilos modificados del foro"
 
-#: apps/forum_feeds/urls.py:27
-msgid "topics/"
-msgstr "topics/"
-
-#: apps/forum_feeds/urls.py:29
-#, fuzzy
-#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
-
-#: apps/forum_feeds/urls.py:34
-#, fuzzy
-#| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -666,30 +596,6 @@ msgstr "Perfiles del foro"
 msgid "Machina: Forum members"
 msgstr "Machina: Miembros del foro"
 
-#: apps/forum_member/urls.py:33
-msgid "profile/edit/"
-msgstr "profile/edit/"
-
-#: apps/forum_member/urls.py:38
-msgid "profile/<str:pk>/"
-msgstr "profile/<str:pk>/"
-
-#: apps/forum_member/urls.py:43
-msgid "profile/<str:pk>/posts/"
-msgstr "profile/<str:pk>/posts/"
-
-#: apps/forum_member/urls.py:48
-msgid "subscriptions/"
-msgstr "subscriptions/"
-
-#: apps/forum_member/urls.py:53
-msgid "topic/<int:pk>/subscribe/"
-msgstr "topic/<int:pk>/subscribe/"
-
-#: apps/forum_member/urls.py:58
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr "topic/<int:pk>/unsubscribe/"
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr "El perfil se ha editado correctamente."
@@ -709,64 +615,6 @@ msgstr "Machina: Moderación del foro"
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
 msgstr "Selecciona un foro de destino"
-
-#: apps/forum_moderation/urls.py:42
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/lock/"
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr "topic/<slug:slug>-<int:pk>/lock/"
-
-#: apps/forum_moderation/urls.py:47
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/unlock/"
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr "topic/<slug:slug>-<int:pk>/unlock/"
-
-#: apps/forum_moderation/urls.py:52
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/delete/"
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr "topic/<slug:slug>-<int:pk>/delete/"
-
-#: apps/forum_moderation/urls.py:57
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/move/"
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr "topic/<slug:slug>-<int:pk>/move/"
-
-#: apps/forum_moderation/urls.py:62
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/change/topic/"
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr "topic/<slug:slug>-<int:pk>/change/topic/"
-
-#: apps/forum_moderation/urls.py:67
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr "topic/<slug:slug>-<int:pk>/change/sticky/"
-
-#: apps/forum_moderation/urls.py:72
-#, fuzzy
-#| msgid "topic/<slug:slug>-<int:pk>/change/announce/"
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr "topic/<slug:slug>-<int:pk>/change/announce/"
-
-#: apps/forum_moderation/urls.py:76
-msgid "queue/"
-msgstr "queue/"
-
-#: apps/forum_moderation/urls.py:78
-msgid "queue/<int:pk>/"
-msgstr "queue/<int:pk>/"
-
-#: apps/forum_moderation/urls.py:83
-msgid "queue/<int:pk>/approve/"
-msgstr "queue/<int:pk>/approve/"
-
-#: apps/forum_moderation/urls.py:88
-msgid "queue/<int:pk>/disapprove/"
-msgstr "queue/<int:pk>/disapprove/"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -986,22 +834,6 @@ msgstr "Registro de los hilos"
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
 msgstr "Machina: Registros del foro"
-
-#: apps/forum_tracking/urls.py:30
-msgid "mark/forums/"
-msgstr "mark/forums/"
-
-#: apps/forum_tracking/urls.py:35
-msgid "mark/forums/<int:pk>/"
-msgstr "mark/forums/<int:pk>/"
-
-#: apps/forum_tracking/urls.py:40
-msgid "mark/forum/<int:pk>/topics/"
-msgstr "mark/forum/<int:pk>/topics/"
-
-#: apps/forum_tracking/urls.py:45
-msgid "unread-topics/"
-msgstr "unread-topics/"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1775,25 +1607,154 @@ msgstr "No hay hilos sin leer."
 msgid "Forum index"
 msgstr "Índice del foro"
 
-#: urls.py:32
-msgid "^feeds/"
-msgstr "^feeds/"
+#, fuzzy
+#~| msgid "forum/<slug:slug>-<int:pk>/"
+#~ msgid "forum/<str:slug>-<int:pk>/"
+#~ msgstr "forum/<slug:slug>-<int:pk>/"
 
-#: urls.py:33
-msgid "^member/"
-msgstr "^member/"
+#~ msgid "attachment/<int:pk>/"
+#~ msgstr "attachment/<int:pk>/"
 
-#: urls.py:34
-msgid "^moderation/"
-msgstr "^moderation/"
+#~ msgid "poll/<int:pk>/vote/"
+#~ msgstr "poll/<int:pk>/vote/"
 
-#: urls.py:35
-msgid "^search/"
-msgstr "^search/"
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/"
+#~ msgid "topic/<str:slug>-<int:pk>/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/"
 
-#: urls.py:36
-msgid "^tracking/"
-msgstr "^tracking/"
+#~ msgid "topic/create/"
+#~ msgstr "topic/create/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/update/"
+#~ msgid "topic/<str:slug>-<int:pk>/update/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/update/"
+
+#, fuzzy
+#~| msgid "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+#~ msgstr "topic/<slug:topic_slug>-<int:topic_pk>/post/create/"
+
+#, fuzzy
+#~| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+#~ msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+
+#, fuzzy
+#~| msgid "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#~ msgstr "topic/<slug:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+
+#, fuzzy
+#~| msgid "forum/<slug:forum_slug>-<int:forum_pk>/"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/"
+#~ msgstr "forum/<slug:forum_slug>-<int:forum_pk>/"
+
+#~ msgid "topics/"
+#~ msgstr "topics/"
+
+#, fuzzy
+#~| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+#~ msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/"
+
+#, fuzzy
+#~| msgid "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+#~ msgstr "forum/<slug:forum_slug>-<int:forum_pk>/topics/all/"
+
+#~ msgid "profile/edit/"
+#~ msgstr "profile/edit/"
+
+#~ msgid "profile/<str:pk>/"
+#~ msgstr "profile/<str:pk>/"
+
+#~ msgid "profile/<str:pk>/posts/"
+#~ msgstr "profile/<str:pk>/posts/"
+
+#~ msgid "subscriptions/"
+#~ msgstr "subscriptions/"
+
+#~ msgid "topic/<int:pk>/subscribe/"
+#~ msgstr "topic/<int:pk>/subscribe/"
+
+#~ msgid "topic/<int:pk>/unsubscribe/"
+#~ msgstr "topic/<int:pk>/unsubscribe/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/lock/"
+#~ msgid "topic/<str:slug>-<int:pk>/lock/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/lock/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/unlock/"
+#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/unlock/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/delete/"
+#~ msgid "topic/<str:slug>-<int:pk>/delete/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/delete/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/move/"
+#~ msgid "topic/<str:slug>-<int:pk>/move/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/move/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/change/topic/"
+#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/change/topic/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/change/sticky/"
+#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/change/sticky/"
+
+#, fuzzy
+#~| msgid "topic/<slug:slug>-<int:pk>/change/announce/"
+#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
+#~ msgstr "topic/<slug:slug>-<int:pk>/change/announce/"
+
+#~ msgid "queue/"
+#~ msgstr "queue/"
+
+#~ msgid "queue/<int:pk>/"
+#~ msgstr "queue/<int:pk>/"
+
+#~ msgid "queue/<int:pk>/approve/"
+#~ msgstr "queue/<int:pk>/approve/"
+
+#~ msgid "queue/<int:pk>/disapprove/"
+#~ msgstr "queue/<int:pk>/disapprove/"
+
+#~ msgid "mark/forums/"
+#~ msgstr "mark/forums/"
+
+#~ msgid "mark/forums/<int:pk>/"
+#~ msgstr "mark/forums/<int:pk>/"
+
+#~ msgid "mark/forum/<int:pk>/topics/"
+#~ msgstr "mark/forum/<int:pk>/topics/"
+
+#~ msgid "unread-topics/"
+#~ msgstr "unread-topics/"
+
+#~ msgid "^feeds/"
+#~ msgstr "^feeds/"
+
+#~ msgid "^member/"
+#~ msgstr "^member/"
+
+#~ msgid "^moderation/"
+#~ msgstr "^moderation/"
+
+#~ msgid "^search/"
+#~ msgstr "^search/"
+
+#~ msgid "^tracking/"
+#~ msgstr "^tracking/"
 
 #~ msgid "Global permission"
 #~ msgstr "Permiso global"

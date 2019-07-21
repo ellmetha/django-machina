@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Romanian (http://www.transifex.com/django-machina-team/django-"
@@ -197,10 +197,6 @@ msgstr ""
 #: apps/forum/forms.py:96
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
-msgstr ""
-
-#: apps/forum/urls.py:29
-msgid "forum/<str:slug>-<int:pk>/"
 msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:32
@@ -437,10 +433,6 @@ msgstr ""
 msgid "Machina: Forum attachments"
 msgstr ""
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-msgid "attachment/<int:pk>/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr ""
@@ -518,40 +510,8 @@ msgstr ""
 msgid "You have tried to vote for too many options."
 msgstr ""
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
-msgstr ""
-
-#: apps/forum_conversation/urls.py:39
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:43
-msgid "topic/create/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:45
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:50
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:55
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:60
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:68
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
 msgstr ""
 
 #: apps/forum_conversation/views.py:128
@@ -590,18 +550,6 @@ msgstr ""
 msgid "Latest topics updated on the forums"
 msgstr ""
 
-#: apps/forum_feeds/urls.py:27
-msgid "topics/"
-msgstr ""
-
-#: apps/forum_feeds/urls.py:29
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr ""
-
-#: apps/forum_feeds/urls.py:34
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr ""
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -633,30 +581,6 @@ msgstr ""
 msgid "Machina: Forum members"
 msgstr ""
 
-#: apps/forum_member/urls.py:33
-msgid "profile/edit/"
-msgstr ""
-
-#: apps/forum_member/urls.py:38
-msgid "profile/<str:pk>/"
-msgstr ""
-
-#: apps/forum_member/urls.py:43
-msgid "profile/<str:pk>/posts/"
-msgstr ""
-
-#: apps/forum_member/urls.py:48
-msgid "subscriptions/"
-msgstr ""
-
-#: apps/forum_member/urls.py:53
-msgid "topic/<int:pk>/subscribe/"
-msgstr ""
-
-#: apps/forum_member/urls.py:58
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr ""
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr ""
@@ -675,50 +599,6 @@ msgstr ""
 
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:42
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:47
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:52
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:57
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:62
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:67
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:72
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:76
-msgid "queue/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:78
-msgid "queue/<int:pk>/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:83
-msgid "queue/<int:pk>/approve/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:88
-msgid "queue/<int:pk>/disapprove/"
 msgstr ""
 
 #: apps/forum_moderation/views.py:39
@@ -936,22 +816,6 @@ msgstr ""
 
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:30
-msgid "mark/forums/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:35
-msgid "mark/forums/<int:pk>/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:40
-msgid "mark/forum/<int:pk>/topics/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:45
-msgid "unread-topics/"
 msgstr ""
 
 #: apps/forum_tracking/views.py:38
@@ -1709,24 +1573,4 @@ msgstr ""
 
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
-msgstr ""
-
-#: urls.py:32
-msgid "^feeds/"
-msgstr ""
-
-#: urls.py:33
-msgid "^member/"
-msgstr ""
-
-#: urls.py:34
-msgid "^moderation/"
-msgstr ""
-
-#: urls.py:35
-msgid "^search/"
-msgstr ""
-
-#: urls.py:36
-msgid "^tracking/"
 msgstr ""

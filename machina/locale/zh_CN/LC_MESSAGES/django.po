@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2018-07-02 20:29+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/"
@@ -200,12 +200,6 @@ msgstr "已准许"
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "未被准许"
-
-#: apps/forum/urls.py:29
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "forum/<str:slug>-<int:pk>/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -441,12 +435,6 @@ msgstr "附件"
 msgid "Machina: Forum attachments"
 msgstr "Machina:论坛附件"
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-#, fuzzy
-#| msgid "Attachment"
-msgid "attachment/<int:pk>/"
-msgstr "附件"
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr "投票持续时间"
@@ -524,47 +512,9 @@ msgstr "你需要在投票时对选项进行描述"
 msgid "You have tried to vote for too many options."
 msgstr "投票选项过多"
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "已投票"
-
-#: apps/forum_conversation/urls.py:39
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_conversation/urls.py:43
-msgid "topic/create/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:45
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_conversation/urls.py:50
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_conversation/urls.py:55
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:60
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:68
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-msgstr ""
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -602,24 +552,6 @@ msgstr "最新话题"
 msgid "Latest topics updated on the forums"
 msgstr "论坛最新更新话题"
 
-#: apps/forum_feeds/urls.py:27
-#, fuzzy
-#| msgid "^topics/$"
-msgid "topics/"
-msgstr "主题"
-
-#: apps/forum_feeds/urls.py:29
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr "标记论坛话题"
-
-#: apps/forum_feeds/urls.py:34
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr "标记论坛话题"
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -651,32 +583,6 @@ msgstr "论坛资料"
 msgid "Machina: Forum members"
 msgstr "Machina:论坛成员"
 
-#: apps/forum_member/urls.py:33
-msgid "profile/edit/"
-msgstr ""
-
-#: apps/forum_member/urls.py:38
-msgid "profile/<str:pk>/"
-msgstr ""
-
-#: apps/forum_member/urls.py:43
-msgid "profile/<str:pk>/posts/"
-msgstr ""
-
-#: apps/forum_member/urls.py:48
-#, fuzzy
-#| msgid "Subscriptions"
-msgid "subscriptions/"
-msgstr "订阅"
-
-#: apps/forum_member/urls.py:53
-msgid "topic/<int:pk>/subscribe/"
-msgstr ""
-
-#: apps/forum_member/urls.py:58
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr ""
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr "资料编辑成功"
@@ -696,72 +602,6 @@ msgstr "Machina:论坛限制"
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
 msgstr "选择目的论坛"
-
-#: apps/forum_moderation/urls.py:42
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_moderation/urls.py:47
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_moderation/urls.py:52
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_moderation/urls.py:57
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#: apps/forum_moderation/urls.py:62
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/话题/$"
-
-#: apps/forum_moderation/urls.py:67
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/置顶/$"
-
-#: apps/forum_moderation/urls.py:72
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/通告/$"
-
-#: apps/forum_moderation/urls.py:76
-#, fuzzy
-#| msgid "^queue/$"
-msgid "queue/"
-msgstr "^队列/$"
-
-#: apps/forum_moderation/urls.py:78
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/$"
-msgid "queue/<int:pk>/"
-msgstr "^队列/(?P<pk>\\d+)/$"
-
-#: apps/forum_moderation/urls.py:83
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgid "queue/<int:pk>/approve/"
-msgstr "^队列/(?P<pk>\\d+)/已通过/$"
-
-#: apps/forum_moderation/urls.py:88
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgid "queue/<int:pk>/disapprove/"
-msgstr "^队列/(?P<pk>\\d+)/未通过/$"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -979,30 +819,6 @@ msgstr "话题追踪"
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
 msgstr "Machina:论坛追踪"
-
-#: apps/forum_tracking/urls.py:30
-#, fuzzy
-#| msgid "^mark/forums/$"
-msgid "mark/forums/"
-msgstr "标记论坛"
-
-#: apps/forum_tracking/urls.py:35
-#, fuzzy
-#| msgid "^mark/forums/(?P<pk>\\d+)/$"
-msgid "mark/forums/<int:pk>/"
-msgstr "标记论坛"
-
-#: apps/forum_tracking/urls.py:40
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgid "mark/forum/<int:pk>/topics/"
-msgstr "标记论坛话题"
-
-#: apps/forum_tracking/urls.py:45
-#, fuzzy
-#| msgid "^unread-topics/$"
-msgid "unread-topics/"
-msgstr "未读话题"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1764,25 +1580,140 @@ msgstr "没有未读话题了"
 msgid "Forum index"
 msgstr "论坛主页"
 
-#: urls.py:32
-msgid "^feeds/"
-msgstr "^订阅列表/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "forum/<str:slug>-<int:pk>/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
-#: urls.py:33
-msgid "^member/"
-msgstr "成员"
+#, fuzzy
+#~| msgid "Attachment"
+#~ msgid "attachment/<int:pk>/"
+#~ msgstr "附件"
 
-#: urls.py:34
-msgid "^moderation/"
-msgstr "^审核/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
-#: urls.py:35
-msgid "^search/"
-msgstr "搜索"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/update/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
 
-#: urls.py:36
-msgid "^tracking/"
-msgstr "追踪"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
+
+#, fuzzy
+#~| msgid "^topics/$"
+#~ msgid "topics/"
+#~ msgstr "主题"
+
+#, fuzzy
+#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+#~ msgstr "标记论坛话题"
+
+#, fuzzy
+#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+#~ msgstr "标记论坛话题"
+
+#, fuzzy
+#~| msgid "Subscriptions"
+#~ msgid "subscriptions/"
+#~ msgstr "订阅"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/lock/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/delete/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/move/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/话题/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/置顶/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
+#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/通告/$"
+
+#, fuzzy
+#~| msgid "^queue/$"
+#~ msgid "queue/"
+#~ msgstr "^队列/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/$"
+#~ msgid "queue/<int:pk>/"
+#~ msgstr "^队列/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
+#~ msgid "queue/<int:pk>/approve/"
+#~ msgstr "^队列/(?P<pk>\\d+)/已通过/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
+#~ msgid "queue/<int:pk>/disapprove/"
+#~ msgstr "^队列/(?P<pk>\\d+)/未通过/$"
+
+#, fuzzy
+#~| msgid "^mark/forums/$"
+#~ msgid "mark/forums/"
+#~ msgstr "标记论坛"
+
+#, fuzzy
+#~| msgid "^mark/forums/(?P<pk>\\d+)/$"
+#~ msgid "mark/forums/<int:pk>/"
+#~ msgstr "标记论坛"
+
+#, fuzzy
+#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+#~ msgid "mark/forum/<int:pk>/topics/"
+#~ msgstr "标记论坛话题"
+
+#, fuzzy
+#~| msgid "^unread-topics/$"
+#~ msgid "unread-topics/"
+#~ msgstr "未读话题"
+
+#~ msgid "^feeds/"
+#~ msgstr "^订阅列表/"
+
+#~ msgid "^member/"
+#~ msgstr "成员"
+
+#~ msgid "^moderation/"
+#~ msgstr "^审核/"
+
+#~ msgid "^search/"
+#~ msgstr "搜索"
+
+#~ msgid "^tracking/"
+#~ msgstr "追踪"
 
 #~ msgid "Global permission"
 #~ msgstr "全局许可文件"

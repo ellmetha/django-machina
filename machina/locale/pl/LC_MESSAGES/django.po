@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2018-08-22 19:56+0000\n"
 "Last-Translator: P G <grabowskiptr@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/django-machina-team/django-"
@@ -200,12 +200,6 @@ msgstr "Przyznane"
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "Nie przyznane"
-
-#: apps/forum/urls.py:29
-#, fuzzy
-#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<str:slug>-<int:pk>/"
-msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -447,12 +441,6 @@ msgstr "Załączniki"
 msgid "Machina: Forum attachments"
 msgstr "Machina: Załączniki forum"
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-#, fuzzy
-#| msgid "Attachment"
-msgid "attachment/<int:pk>/"
-msgstr "Załącznik"
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr "Czas trwania ankiety w dniach"
@@ -532,61 +520,9 @@ msgstr "Musisz wybrać odpowiedź."
 msgid "You have tried to vote for too many options."
 msgstr "Wybrano zbyt wiele odpowiedzi."
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "Twój głos został zliczony."
-
-#: apps/forum_conversation/urls.py:39
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zamknij/$"
-
-#: apps/forum_conversation/urls.py:43
-#, fuzzy
-#| msgid "^topic/create/$"
-msgid "topic/create/"
-msgstr "^temat/utworz/$"
-
-#: apps/forum_conversation/urls.py:45
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/edytuj/$"
-
-#: apps/forum_conversation/urls.py:50
-#, fuzzy
-#| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr "^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/utworz/$"
-
-#: apps/forum_conversation/urls.py:55
-#, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "update/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-"^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/edytuj/$"
-
-#: apps/forum_conversation/urls.py:60
-#, fuzzy
-#| msgid ""
-#| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#| "delete/$"
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr ""
-"^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/usun/$"
-
-#: apps/forum_conversation/urls.py:68
-#, fuzzy
-#| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -624,24 +560,6 @@ msgstr "Ostatnie tematy"
 msgid "Latest topics updated on the forums"
 msgstr "Ostatnio zaktualizowane tematy."
 
-#: apps/forum_feeds/urls.py:27
-#, fuzzy
-#| msgid "^topics/$"
-msgid "topics/"
-msgstr "^tematy/$"
-
-#: apps/forum_feeds/urls.py:29
-#, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tematy/$"
-
-#: apps/forum_feeds/urls.py:34
-#, fuzzy
-#| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tematy/wszystkie/$"
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -673,42 +591,6 @@ msgstr "Profile"
 msgid "Machina: Forum members"
 msgstr "Machina: Użytkownicy forum"
 
-#: apps/forum_member/urls.py:33
-#, fuzzy
-#| msgid "^profile/edit/$"
-msgid "profile/edit/"
-msgstr "^profil/edytuj/$"
-
-#: apps/forum_member/urls.py:38
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/$"
-msgid "profile/<str:pk>/"
-msgstr "^profil/(?P<pk>\\d+)/$"
-
-#: apps/forum_member/urls.py:43
-#, fuzzy
-#| msgid "^profile/(?P<pk>\\d+)/posts/$"
-msgid "profile/<str:pk>/posts/"
-msgstr "^profil/(?P<pk>\\d+)/poosty/$"
-
-#: apps/forum_member/urls.py:48
-#, fuzzy
-#| msgid "^subscriptions/$"
-msgid "subscriptions/"
-msgstr "^subskrybcje/$"
-
-#: apps/forum_member/urls.py:53
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-msgid "topic/<int:pk>/subscribe/"
-msgstr "^temat/(?P<pk>\\d+)/subskrybuj/$"
-
-#: apps/forum_member/urls.py:58
-#, fuzzy
-#| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr "^topic/(?P<pk>\\d+)/anuluj-subskrybcje/$"
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr "Profil został edytowany."
@@ -728,72 +610,6 @@ msgstr "Machina: Moderacja forum"
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
 msgstr "Wybierz docelowe forum"
-
-#: apps/forum_moderation/urls.py:42
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zamknij/$"
-
-#: apps/forum_moderation/urls.py:47
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/otworz/$"
-
-#: apps/forum_moderation/urls.py:52
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/usun/$"
-
-#: apps/forum_moderation/urls.py:57
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/przenies/$"
-
-#: apps/forum_moderation/urls.py:62
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/temat/$"
-
-#: apps/forum_moderation/urls.py:67
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/przyklejony/$"
-
-#: apps/forum_moderation/urls.py:72
-#, fuzzy
-#| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/ogloszenie/$"
-
-#: apps/forum_moderation/urls.py:76
-#, fuzzy
-#| msgid "^queue/$"
-msgid "queue/"
-msgstr "^kolejka/$"
-
-#: apps/forum_moderation/urls.py:78
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/$"
-msgid "queue/<int:pk>/"
-msgstr "^kolejka/(?P<pk>\\d+)/$"
-
-#: apps/forum_moderation/urls.py:83
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/approve/$"
-msgid "queue/<int:pk>/approve/"
-msgstr "^kolejka/(?P<pk>\\d+)/zatwierdz/$"
-
-#: apps/forum_moderation/urls.py:88
-#, fuzzy
-#| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-msgid "queue/<int:pk>/disapprove/"
-msgstr "^kolejka/(?P<pk>\\d+)/odrzuc/$"
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -1011,30 +827,6 @@ msgstr "Przeczytane tematy"
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
 msgstr "Machina: Przeczytane"
-
-#: apps/forum_tracking/urls.py:30
-#, fuzzy
-#| msgid "^mark/forums/$"
-msgid "mark/forums/"
-msgstr "^oznacz/fora/$"
-
-#: apps/forum_tracking/urls.py:35
-#, fuzzy
-#| msgid "^mark/forums/(?P<pk>\\d+)/$"
-msgid "mark/forums/<int:pk>/"
-msgstr "^oznacz/fora/(?P<pk>\\d+)/$"
-
-#: apps/forum_tracking/urls.py:40
-#, fuzzy
-#| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-msgid "mark/forum/<int:pk>/topics/"
-msgstr "^oznacz/fora/(?P<pk>\\d+)/tematy/$"
-
-#: apps/forum_tracking/urls.py:45
-#, fuzzy
-#| msgid "^unread-topics/$"
-msgid "unread-topics/"
-msgstr "^nieprzeczytane-tematy/$"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1835,25 +1627,193 @@ msgstr "Brak nieprzeczytanych tematów"
 msgid "Forum index"
 msgstr "Indeks"
 
-#: urls.py:32
-msgid "^feeds/"
-msgstr "^kanaly/"
+#, fuzzy
+#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+#~ msgid "forum/<str:slug>-<int:pk>/"
+#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
 
-#: urls.py:33
-msgid "^member/"
-msgstr "^uczestnik/"
+#, fuzzy
+#~| msgid "Attachment"
+#~ msgid "attachment/<int:pk>/"
+#~ msgstr "Załącznik"
 
-#: urls.py:34
-msgid "^moderation/"
-msgstr "^moderacja/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zamknij/$"
 
-#: urls.py:35
-msgid "^search/"
-msgstr "^szukaj/"
+#, fuzzy
+#~| msgid "^topic/create/$"
+#~ msgid "topic/create/"
+#~ msgstr "^temat/utworz/$"
 
-#: urls.py:36
-msgid "^tracking/"
-msgstr "^sledzenie/"
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
+#~ msgid "topic/<str:slug>-<int:pk>/update/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/edytuj/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
+#~ msgstr "^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/utworz/$"
+
+#, fuzzy
+#~| msgid ""
+#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
+#~| "update/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
+#~ msgstr ""
+#~ "^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
+#~ "edytuj/$"
+
+#, fuzzy
+#~| msgid ""
+#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
+#~| "delete/$"
+#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
+#~ msgstr ""
+#~ "^temat/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/usun/$"
+
+#, fuzzy
+#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/"
+#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
+
+#, fuzzy
+#~| msgid "^topics/$"
+#~ msgid "topics/"
+#~ msgstr "^tematy/$"
+
+#, fuzzy
+#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
+#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tematy/$"
+
+#, fuzzy
+#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
+#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
+#~ msgstr ""
+#~ "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tematy/wszystkie/$"
+
+#, fuzzy
+#~| msgid "^profile/edit/$"
+#~ msgid "profile/edit/"
+#~ msgstr "^profil/edytuj/$"
+
+#, fuzzy
+#~| msgid "^profile/(?P<pk>\\d+)/$"
+#~ msgid "profile/<str:pk>/"
+#~ msgstr "^profil/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^profile/(?P<pk>\\d+)/posts/$"
+#~ msgid "profile/<str:pk>/posts/"
+#~ msgstr "^profil/(?P<pk>\\d+)/poosty/$"
+
+#, fuzzy
+#~| msgid "^subscriptions/$"
+#~ msgid "subscriptions/"
+#~ msgstr "^subskrybcje/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
+#~ msgid "topic/<int:pk>/subscribe/"
+#~ msgstr "^temat/(?P<pk>\\d+)/subskrybuj/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
+#~ msgid "topic/<int:pk>/unsubscribe/"
+#~ msgstr "^topic/(?P<pk>\\d+)/anuluj-subskrybcje/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/lock/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zamknij/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
+#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/otworz/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
+#~ msgid "topic/<str:slug>-<int:pk>/delete/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/usun/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
+#~ msgid "topic/<str:slug>-<int:pk>/move/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/przenies/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/temat/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/przyklejony/$"
+
+#, fuzzy
+#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
+#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
+#~ msgstr "^temat/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zmien/ogloszenie/$"
+
+#, fuzzy
+#~| msgid "^queue/$"
+#~ msgid "queue/"
+#~ msgstr "^kolejka/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/$"
+#~ msgid "queue/<int:pk>/"
+#~ msgstr "^kolejka/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
+#~ msgid "queue/<int:pk>/approve/"
+#~ msgstr "^kolejka/(?P<pk>\\d+)/zatwierdz/$"
+
+#, fuzzy
+#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
+#~ msgid "queue/<int:pk>/disapprove/"
+#~ msgstr "^kolejka/(?P<pk>\\d+)/odrzuc/$"
+
+#, fuzzy
+#~| msgid "^mark/forums/$"
+#~ msgid "mark/forums/"
+#~ msgstr "^oznacz/fora/$"
+
+#, fuzzy
+#~| msgid "^mark/forums/(?P<pk>\\d+)/$"
+#~ msgid "mark/forums/<int:pk>/"
+#~ msgstr "^oznacz/fora/(?P<pk>\\d+)/$"
+
+#, fuzzy
+#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
+#~ msgid "mark/forum/<int:pk>/topics/"
+#~ msgstr "^oznacz/fora/(?P<pk>\\d+)/tematy/$"
+
+#, fuzzy
+#~| msgid "^unread-topics/$"
+#~ msgid "unread-topics/"
+#~ msgstr "^nieprzeczytane-tematy/$"
+
+#~ msgid "^feeds/"
+#~ msgstr "^kanaly/"
+
+#~ msgid "^member/"
+#~ msgstr "^uczestnik/"
+
+#~ msgid "^moderation/"
+#~ msgstr "^moderacja/"
+
+#~ msgid "^search/"
+#~ msgstr "^szukaj/"
+
+#~ msgid "^tracking/"
+#~ msgstr "^sledzenie/"
 
 #~ msgid "Global permission"
 #~ msgstr "Globalne uprawnienie"

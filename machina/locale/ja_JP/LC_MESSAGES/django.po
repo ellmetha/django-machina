@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 22:36-0400\n"
+"POT-Creation-Date: 2019-07-20 22:34-0400\n"
 "PO-Revision-Date: 2019-03-11 00:25+0000\n"
 "Last-Translator: I K <ki.foobar@gmail.com>\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-"
@@ -199,10 +199,6 @@ msgstr "可"
 #: templates/admin/forum/forum/editpermissions_form.html:37
 msgid "Not granted"
 msgstr "不可"
-
-#: apps/forum/urls.py:29
-msgid "forum/<str:slug>-<int:pk>/"
-msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
@@ -443,10 +439,6 @@ msgstr "添付ファイル"
 msgid "Machina: Forum attachments"
 msgstr "Machina: フォーラム添付ファイル"
 
-#: apps/forum_conversation/forum_attachments/urls.py:25
-msgid "attachment/<int:pk>/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
 msgstr "投票受付時間 (単位: 日)"
@@ -526,41 +518,9 @@ msgstr "投票する際は選択肢を指定する必要があります"
 msgid "You have tried to vote for too many options."
 msgstr "票を入れようとしている選択肢の数が多すぎます"
 
-#: apps/forum_conversation/forum_polls/urls.py:25
-msgid "poll/<int:pk>/vote/"
-msgstr ""
-
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
 msgstr "投票しました"
-
-#: apps/forum_conversation/urls.py:39
-msgid "topic/<str:slug>-<int:pk>/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:43
-msgid "topic/create/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:45
-msgid "topic/<str:slug>-<int:pk>/update/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:50
-msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:55
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:60
-msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-msgstr ""
-
-#: apps/forum_conversation/urls.py:68
-msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-msgstr ""
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
@@ -598,18 +558,6 @@ msgstr "最新のトピック"
 msgid "Latest topics updated on the forums"
 msgstr "フォーラムで最後に更新されたトピック"
 
-#: apps/forum_feeds/urls.py:27
-msgid "topics/"
-msgstr ""
-
-#: apps/forum_feeds/urls.py:29
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-msgstr ""
-
-#: apps/forum_feeds/urls.py:34
-msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-msgstr ""
-
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
@@ -641,30 +589,6 @@ msgstr "フォーラムプロフィール"
 msgid "Machina: Forum members"
 msgstr "Machina: フォーラムメンバー"
 
-#: apps/forum_member/urls.py:33
-msgid "profile/edit/"
-msgstr ""
-
-#: apps/forum_member/urls.py:38
-msgid "profile/<str:pk>/"
-msgstr ""
-
-#: apps/forum_member/urls.py:43
-msgid "profile/<str:pk>/posts/"
-msgstr ""
-
-#: apps/forum_member/urls.py:48
-msgid "subscriptions/"
-msgstr ""
-
-#: apps/forum_member/urls.py:53
-msgid "topic/<int:pk>/subscribe/"
-msgstr ""
-
-#: apps/forum_member/urls.py:58
-msgid "topic/<int:pk>/unsubscribe/"
-msgstr ""
-
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
 msgstr "プロフィールを編集しました"
@@ -684,50 +608,6 @@ msgstr "Machina: フォーラム管理"
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
 msgstr "移動先のフォーラムを選択してください"
-
-#: apps/forum_moderation/urls.py:42
-msgid "topic/<str:slug>-<int:pk>/lock/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:47
-msgid "topic/<str:slug>-<int:pk>/unlock/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:52
-msgid "topic/<str:slug>-<int:pk>/delete/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:57
-msgid "topic/<str:slug>-<int:pk>/move/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:62
-msgid "topic/<str:slug>-<int:pk>/change/topic/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:67
-msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:72
-msgid "topic/<str:slug>-<int:pk>/change/announce/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:76
-msgid "queue/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:78
-msgid "queue/<int:pk>/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:83
-msgid "queue/<int:pk>/approve/"
-msgstr ""
-
-#: apps/forum_moderation/urls.py:88
-msgid "queue/<int:pk>/disapprove/"
-msgstr ""
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
@@ -945,22 +825,6 @@ msgstr "トピックトラック"
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
 msgstr "Machina: フォーラムトラッキング"
-
-#: apps/forum_tracking/urls.py:30
-msgid "mark/forums/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:35
-msgid "mark/forums/<int:pk>/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:40
-msgid "mark/forum/<int:pk>/topics/"
-msgstr ""
-
-#: apps/forum_tracking/urls.py:45
-msgid "unread-topics/"
-msgstr ""
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -1715,26 +1579,6 @@ msgstr "未読のトピックはありません"
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "フォーラムトップ"
-
-#: urls.py:32
-msgid "^feeds/"
-msgstr ""
-
-#: urls.py:33
-msgid "^member/"
-msgstr ""
-
-#: urls.py:34
-msgid "^moderation/"
-msgstr ""
-
-#: urls.py:35
-msgid "^search/"
-msgstr ""
-
-#: urls.py:36
-msgid "^tracking/"
-msgstr ""
 
 #~ msgid "Global permission"
 #~ msgstr "グローバル権限"
