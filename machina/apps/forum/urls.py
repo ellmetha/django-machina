@@ -7,7 +7,6 @@
 """
 
 from django.urls import path
-from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -26,7 +25,7 @@ class ForumURLPatternsFactory(URLPatternsFactory):
         return [
             path('', self.index_view.as_view(), name='index'),
             path(
-                _('forum/<str:slug>-<int:pk>/'),
+                'forum/<str:slug>-<int:pk>/',
                 self.forum_view.as_view(),
                 name='forum',
             ),

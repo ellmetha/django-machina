@@ -8,7 +8,6 @@
 """
 
 from django.urls import path
-from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -30,32 +29,32 @@ class ForumMemberURLPatternsFactory(URLPatternsFactory):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
             path(
-                _('profile/edit/'),
+                'profile/edit/',
                 self.forum_profile_update_view.as_view(),
                 name='profile_update',
             ),
             path(
-                _('profile/<str:pk>/'),
+                'profile/<str:pk>/',
                 self.forum_profile_detail_view.as_view(),
                 name='profile',
             ),
             path(
-                _('profile/<str:pk>/posts/'),
+                'profile/<str:pk>/posts/',
                 self.user_posts_list.as_view(),
                 name='user_posts',
             ),
             path(
-                _('subscriptions/'),
+                'subscriptions/',
                 self.topic_subscription_list_view.as_view(),
                 name='user_subscriptions',
             ),
             path(
-                _('topic/<int:pk>/subscribe/'),
+                'topic/<int:pk>/subscribe/',
                 self.topic_subscribe_view.as_view(),
                 name='topic_subscribe',
             ),
             path(
-                _('topic/<int:pk>/unsubscribe/'),
+                'topic/<int:pk>/unsubscribe/',
                 self.topic_unsubscribe_view.as_view(),
                 name='topic_unsubscribe',
             ),

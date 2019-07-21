@@ -8,7 +8,6 @@
 """
 
 from django.urls import include, path
-from django.utils.translation import ugettext_lazy as _
 
 from machina.apps.forum_conversation.forum_attachments.urls import \
     urlpatterns_factory as attachments_urlpatterns_factory
@@ -36,28 +35,28 @@ class BaseForumConversationURLPatternsFactory(URLPatternsFactory):
 
         conversation_urlpatterns = [
             path(
-                _('topic/<str:slug>-<int:pk>/'),
+                'topic/<str:slug>-<int:pk>/',
                 self.topic_view.as_view(),
                 name='topic',
             ),
-            path(_('topic/create/'), self.topic_create_view.as_view(), name='topic_create'),
+            path('topic/create/', self.topic_create_view.as_view(), name='topic_create'),
             path(
-                _('topic/<str:slug>-<int:pk>/update/'),
+                'topic/<str:slug>-<int:pk>/update/',
                 self.topic_update_view.as_view(),
                 name='topic_update',
             ),
             path(
-                _('topic/<str:topic_slug>-<int:topic_pk>/post/create/'),
+                'topic/<str:topic_slug>-<int:topic_pk>/post/create/',
                 self.post_create_view.as_view(),
                 name='post_create',
             ),
             path(
-                _('topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/'),
+                'topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/',
                 self.post_update_view.as_view(),
                 name='post_update',
             ),
             path(
-                _('topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/'),
+                'topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/',
                 self.post_delete_view.as_view(),
                 name='post_delete',
             ),
@@ -65,7 +64,7 @@ class BaseForumConversationURLPatternsFactory(URLPatternsFactory):
 
         urlpatterns += [
             path(
-                _('forum/<str:forum_slug>-<int:forum_pk>/'),
+                'forum/<str:forum_slug>-<int:forum_pk>/',
                 include(conversation_urlpatterns),
             ),
         ]

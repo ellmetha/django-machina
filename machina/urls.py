@@ -7,7 +7,6 @@
 """
 
 from django.conf.urls import include, url
-from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -29,11 +28,11 @@ class BoardURLPatternsFactory(URLPatternsFactory):
         return [
             url(r'', include(self.forum_urlpatterns_factory.urlpatterns)),
             url(r'', include(self.conversation_urlpatterns_factory.urlpatterns)),
-            url(_(r'^feeds/'), include(self.feeds_urlpatterns_factory.urlpatterns)),
-            url(_(r'^member/'), include(self.member_urlpatterns_factory.urlpatterns)),
-            url(_(r'^moderation/'), include(self.moderation_urlpatterns_factory.urlpatterns)),
-            url(_(r'^search/'), include(self.search_urlpatterns_factory.urlpatterns)),
-            url(_(r'^tracking/'), include(self.tracking_urlpatterns_factory.urlpatterns)),
+            url(r'^feeds/', include(self.feeds_urlpatterns_factory.urlpatterns)),
+            url(r'^member/', include(self.member_urlpatterns_factory.urlpatterns)),
+            url(r'^moderation/', include(self.moderation_urlpatterns_factory.urlpatterns)),
+            url(r'^search/', include(self.search_urlpatterns_factory.urlpatterns)),
+            url(r'^tracking/', include(self.tracking_urlpatterns_factory.urlpatterns)),
         ]
 
 

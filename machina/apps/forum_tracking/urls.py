@@ -8,7 +8,6 @@
 """
 
 from django.urls import path
-from django.utils.translation import ugettext_lazy as _
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -27,22 +26,22 @@ class ForumTrackingURLPatternsFactory(URLPatternsFactory):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
             path(
-                _('mark/forums/'),
+                'mark/forums/',
                 self.mark_forums_read_view.as_view(),
                 name='mark_all_forums_read',
             ),
             path(
-                _('mark/forums/<int:pk>/'),
+                'mark/forums/<int:pk>/',
                 self.mark_forums_read_view.as_view(),
                 name='mark_subforums_read',
             ),
             path(
-                _('mark/forum/<int:pk>/topics/'),
+                'mark/forum/<int:pk>/topics/',
                 self.mark_topics_read_view.as_view(),
                 name='mark_topics_read',
             ),
             path(
-                _('unread-topics/'),
+                'unread-topics/',
                 self.unread_topics_view.as_view(),
                 name='unread_topics',
             ),
