@@ -17,8 +17,10 @@ of your forum: markup language, pagination, images, default permissions, etc.
 Templates and static files
 --------------------------
 
-If you wish to personalize the look and feel of your forum you can take advantage of the Django's
-template loading system. Thus you can easily override forum layouts and styles if Django is
+Django-machina uses `Bootstrap <https://getbootstrap.com/>`_ for its templates and dynamic features.
+
+If you wish to personalize the look and feel of your forum you can obviously take advantage of the
+Django's template loading system. Thus you can easily override forum layouts and styles if Django is
 configured to look in your project first for templates before using the django-machina's templates.
 
 For example, you can easily override django-machina's templates by configuring your template
@@ -42,6 +44,10 @@ directories as follows in your ``TEMPLATES`` setting:
       },
     },
   ]
+
+One thing to keep in mind is that django-machina's base template already includes Bootstrap-related
+and other "vendor" assets as part of ``css/machina.board_theme.vendor.min.css`` and
+``js/machina.packages.min.js``.
 
 Advanced customization mechanisms
 ---------------------------------
