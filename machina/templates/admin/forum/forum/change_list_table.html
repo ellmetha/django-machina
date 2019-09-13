@@ -25,14 +25,14 @@
                 </th>
                 <td class="quick-actions-cell">
                     {% if forum.get_previous_sibling %}
-                        <a href="{% url 'admin:forum_forum_move' forum.id 'up' %}" title="{% trans "Move up" %}"><i class="fas fa-arrow-circle-o-up fa-lg"></i></a>
+                        <a href="{% url 'admin:forum_forum_move' forum.id 'up' %}" title="{% trans "Move up" %}"><i class="fas fa-arrow-circle-up fa-lg"></i></a>
                     {% else %}
-                        <i class="fas fa-arrow-circle-o-up fa-lg disabled"></i>
+                        <i class="fas fa-arrow-circle-up fa-lg disabled"></i>
                     {% endif %}
                     {% if forum.get_next_sibling %}
-                        <a href="{% url 'admin:forum_forum_move' forum.id 'down' %}" title="{% trans "Move down" %}"><i class="fas fa-arrow-circle-o-down fa-lg"></i></a>
+                        <a href="{% url 'admin:forum_forum_move' forum.id 'down' %}" title="{% trans "Move down" %}"><i class="fas fa-arrow-circle-down fa-lg"></i></a>
                     {% else %}
-                        <i class="fas fa-arrow-circle-o-down fa-lg disabled"></i>
+                        <i class="fas fa-arrow-circle-down fa-lg disabled"></i>
                     {% endif %}
                     {% if not forum.is_link %}
                         <a href="{% url 'admin:forum_forum_add' %}?parent={{ forum.id }}" class="success" title="{% trans "Add a sub-forum" %}"><i class="fas fa-plus-circle fa-lg"></i></a>
