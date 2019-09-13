@@ -12,6 +12,8 @@ Minor changes
 
 * Fix incorrect icon class names used for the up and down buttons (allowing to move forums) in the
   admin
+  (`#166 <https://github.com/ellmetha/django-machina/issues/166>`_)
+
 
 Backwards incompatible changes
 ------------------------------
