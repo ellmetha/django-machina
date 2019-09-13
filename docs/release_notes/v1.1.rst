@@ -7,6 +7,12 @@ Requirements and compatibility
 
 Python 3.5, 3.6, 3.7 and 3.8. Django 2.1, 2.2 and 3.0.
 
+Minor changes
+-------------
+
+* Fix incorrect icon class names used for the up and down buttons (allowing to move forums) in the
+  admin
+
 Backwards incompatible changes
 ------------------------------
 
