@@ -13,7 +13,9 @@ Minor changes
 * Fix incorrect icon class names used for the up and down buttons (allowing to move forums) in the
   admin
   (`#166 <https://github.com/ellmetha/django-machina/issues/166>`_)
-
+* Fix user / group precedence issue related to forum permissions: now user permissions always have
+  precedence over group permissions
+  (`#163 <https://github.com/ellmetha/django-machina/issues/163>`_)
 
 Backwards incompatible changes
 ------------------------------
