@@ -343,12 +343,16 @@ class PermissionHandler:
                 .filter(permission__codename__in=perm_codenames)
             )
 
-            # The first thing to do is to compute three lists of permissions: one containing only
-            # globally granted permissions, one containing granted permissions (these permissions
-            # are associated with specific forums) and one containing non granted permissions (the
-            # latest are also associated with specific forums).
+            # The first thing to do is to compute four lists of permissions: one containing only
+            # globally granted permissions, one containing globally explicitely non-granted
+            # permission, one containing granted permissions (these permissions are associated
+            # with specific forums) and one containing non granted permissions (the latest are
+            # also associated with specific forums).
             globally_granted_user_perms = list(
                 filter(lambda p: p.has_perm and p.forum_id is None, user_perms)
+            )
+            globally_nongranted_user_perms = list(
+                filter(lambda p: not p.has_perm and p.forum_id is None, user_perms)
             )
             per_forum_granted_user_perms = list(
                 filter(lambda p: p.has_perm and p.forum_id is not None, user_perms)
@@ -394,18 +398,25 @@ class PermissionHandler:
                     .filter(permission__codename__in=perm_codenames)
                 )
 
-                # Again, we compute three lists of permissions. But this time we are considering
-                # group permissions. The first list contains only globally granted permissions. The
-                # second one contains only granted permissions that are associated with specific
-                # forums. The third list contains non granted permissions.
+                # Again, we compute (now three) lists of permissions. But this time we are
+                # considering group permissions. The first list contains only globally granted
+                # permissions. The second one contains only granted permissions that are associated
+                # with specific forums. The third list contains non granted permissions per forum.
+
+                # We remove the permissions that were on user level explicitely NON-granted
                 globally_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum_id is None, group_perms)
+                    filter(lambda p: p.has_perm and p.forum_id is None and
+                           p.permission_id not in
+                           [q.permission_id for q in globally_nongranted_user_perms], group_perms)
                 )
                 per_forum_granted_group_perms = list(
                     filter(lambda p: p.has_perm and p.forum_id is not None, group_perms)
                 )
+                # A permission can be granted on user-forum level, and that takes precedence over
+                # nongranted group permissions so we do not add those to the list.
                 per_forum_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and p.forum_id is not None, group_perms)
+                    filter(lambda p: not p.has_perm and p.forum_id is not None and
+                           p.forum_id not in granted_user_forum_ids, group_perms)
                 )
 
                 # Now we can update the list of forums ids for which permissions are explicitly not

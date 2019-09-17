@@ -73,14 +73,28 @@ class TestForumPermissionChecker(object):
 
     def test_knows_that_user_permissions_take_precedence_over_group_permissions(self):
         # Setup
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
         user = UserFactory.create()
         group = GroupFactory.create()
         user.groups.add(group)
-        assign_perm('can_read_forum', user, self.forum, has_perm=False)
+        # Check on forum level if user permission takes precedence over group permission
         assign_perm('can_read_forum', group, self.forum, has_perm=True)
+        assign_perm('can_read_forum', user, self.forum, has_perm=False)
+        assign_perm('can_see_forum', group, self.forum, has_perm=False)
+        assign_perm('can_see_forum', user, self.forum, has_perm=True)
+
+        # Check on global level if user permission takes precedence over group permission
+        assign_perm('can_edit_own_posts', group, None, has_perm=True)
+        assign_perm('can_edit_own_posts', user, None, has_perm=False)
+        assign_perm('can_delete_own_posts', group, None, has_perm=False)
+        assign_perm('can_delete_own_posts', user, None, has_perm=True)
+
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
+        assert checker.has_perm('can_see_forum', self.forum)
+        assert not checker.has_perm('can_edit_own_posts', self.forum)
+        assert checker.has_perm('can_delete_own_posts', self.forum)
 
     def test_knows_that_granted_permissions_should_take_precedence_over_the_same_non_granted_permissions(self):  # noqa: E501
         # Setup

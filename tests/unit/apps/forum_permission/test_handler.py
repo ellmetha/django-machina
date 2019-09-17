@@ -128,6 +128,78 @@ class TestPermissionHandler(object):
         assert set(readable_forums_1) == set([self.top_level_cat, self.forum_1, self.forum_3, ])
         assert set(readable_forums_2) == set(Forum.objects.all())
 
+    def test_can_return_a_list_of_readable_forums_taking_into_account_user_over_group_precedence(self):  # noqa: E501
+
+        u2 = UserFactory.create()
+        g2 = GroupFactory.create()
+        u2.groups.add(g2)
+        # Restrict permission for group but allow for user
+        assign_perm('can_see_forum', g2, self.top_level_cat, False)
+        assign_perm('can_see_forum', g2, self.forum_1, False)
+        assign_perm('can_read_forum', g2, self.top_level_cat, False)
+        assign_perm('can_read_forum', g2, self.forum_1, False)
+        assign_perm('can_see_forum', u2, self.top_level_cat, True)
+        assign_perm('can_see_forum', u2, self.forum_1, True)
+        assign_perm('can_read_forum', u2, self.top_level_cat, True)
+        assign_perm('can_read_forum', u2, self.forum_1, True)
+        readable_forums_u2 = self.perm_handler._get_forums_for_user(
+            u2,
+            ['can_see_forum', 'can_read_forum'],
+            False
+        )
+
+        u3 = UserFactory.create()
+        g3 = GroupFactory.create()
+        u3.groups.add(g3)
+        # Now allow for group but restrict for user
+        assign_perm('can_see_forum', g3, self.top_level_cat, True)
+        assign_perm('can_see_forum', g3, self.forum_1, True)
+        assign_perm('can_read_forum', g3, self.top_level_cat, True)
+        assign_perm('can_read_forum', g3, self.forum_1, True)
+        assign_perm('can_see_forum', u3, self.top_level_cat, False)
+        assign_perm('can_see_forum', u3, self.forum_1, False)
+        assign_perm('can_read_forum', u3, self.top_level_cat, False)
+        assign_perm('can_read_forum', u3, self.forum_1, False)
+        readable_forums_u3 = self.perm_handler._get_forums_for_user(
+            u3,
+            ['can_see_forum', 'can_read_forum'],
+            False
+        )
+
+        # Now we'll test for global permissions that are set
+        u4 = UserFactory.create()
+        g4 = GroupFactory.create()
+        u4.groups.add(g4)
+        # Allow for group but restrict for user
+        assign_perm('can_see_forum', g4, None, True)
+        assign_perm('can_read_forum', g4, None, True)
+        assign_perm('can_see_forum', u4, None, False)
+        assign_perm('can_read_forum', u4, None, False)
+        readable_forums_u4 = self.perm_handler._get_forums_for_user(
+            u4,
+            ['can_see_forum', 'can_read_forum'],
+            False
+        )
+
+        u5 = UserFactory.create()
+        g5 = GroupFactory.create()
+        u5.groups.add(g5)
+        # Restrict for group but allow for user
+        assign_perm('can_see_forum', g5, None, False)
+        assign_perm('can_read_forum', g5, None, False)
+        assign_perm('can_see_forum', u5, None, True)
+        assign_perm('can_read_forum', u5, None, True)
+        readable_forums_u5 = self.perm_handler._get_forums_for_user(
+            u5,
+            ['can_see_forum', 'can_read_forum'],
+            False
+        )
+
+        assert set(readable_forums_u2) == set([self.top_level_cat, self.forum_1])
+        assert set(readable_forums_u3) == set([])
+        assert set(readable_forums_u4) == set([])
+        assert set(readable_forums_u5) == set(Forum.objects.all())
+
     def test_shows_all_forums_to_a_superuser(self):
         # Setup
         u2 = UserFactory.create(is_superuser=True)
