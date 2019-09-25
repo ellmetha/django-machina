@@ -78,6 +78,9 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
     anonymous_user = models.BooleanField(
         verbose_name=_('Target anonymous user'), default=False, db_index=True,
     )
+    authenticated_user = models.BooleanField(
+        verbose_name=_('Target any logged in user'), default=False, db_index=True,
+    )
 
     class Meta:
         abstract = True
@@ -95,11 +98,13 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
         """ Validates the current instance. """
         super().clean()
         if (
-            (self.user is None and not self.anonymous_user) or
-            (self.user and self.anonymous_user)
+            (self.user is None and not self.anonymous_user and not self.authenticated_user) or
+            ((self.user and self.anonymous_user) or (self.user and self.authenticated_user) or
+             (self.anonymous_user and self.authenticated_user))
         ):
             raise ValidationError(
-                _('A permission should target either a user or an anonymous user'),
+                _("A permission should target either a specific user, an anonymous user " +
+                  "or any authenticated user"),
             )
 
 
