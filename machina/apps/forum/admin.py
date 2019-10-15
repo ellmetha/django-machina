@@ -215,9 +215,12 @@ class ForumAdmin(admin.ModelAdmin):
                 )
 
                 if not user and not anonymous_user and not authenticated_user and not group:
-                    user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
-                        [_("Choose either a user ID, a group ID, the anonymous user " +
-                           "or the authenticated user"), ])
+                    user_form._errors[NON_FIELD_ERRORS] = user_form.error_class([
+                        _(
+                            "Choose either a user ID, a group ID, the anonymous user " +
+                            "or the authenticated user"
+                        ),
+                    ])
                 elif user:
                     # Redirect to user
                     url_kwargs = (
@@ -237,7 +240,7 @@ class ForumAdmin(admin.ModelAdmin):
                         ),
                     )
                 elif authenticated_user:
-                    # Redirect to anonymous user
+                    # Redirect to authenticated user
                     url_kwargs = {'forum_id': forum.id} if forum else {}
                     return redirect(
                         reverse(

@@ -103,8 +103,10 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
              (self.anonymous_user and self.authenticated_user))
         ):
             raise ValidationError(
-                _("A permission should target either a specific user, an anonymous user " +
-                  "or any authenticated user"),
+                _(
+                    "A permission should target either a specific user, an anonymous user " +
+                    "or any authenticated user"
+                ),
             )
 
 

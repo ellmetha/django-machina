@@ -61,10 +61,12 @@ class PickUserForm(forms.Form):
         anonymous_user = cleaned_data.get('anonymous_user', None)
         authed_user = cleaned_data.get('authenticated_user', None)
         if (user and anonymous_user) or (user and authed_user) or (anonymous_user and authed_user):
-            self._errors[NON_FIELD_ERRORS] = self.error_class(
-                [_('Choose either a user ID or check either the anonymous or ' +
-                   'authenticated user checkbox'), ],
-            )
+            self._errors[NON_FIELD_ERRORS] = self.error_class([
+                _(
+                    'Choose either a user ID or check either the anonymous or ' +
+                    'authenticated user checkbox'
+                ),
+            ],)
         return cleaned_data
 
 
