@@ -139,13 +139,13 @@ class ForumPermissionChecker:
 
             # ########## BLOCK FOR PERMS SPECIFIC TO ONE LOGGED IN USER ###########
             per_forum_granted_user_perms = list(
-                filter(lambda p: p.has_perm and f and p.forum_id is f.id, user_perms)
+                filter(lambda p: p.has_perm and f and p.forum_id == f.id, user_perms)
             )
             per_forum_granted_user_permcodes = [
                 p.permission.codename for p in per_forum_granted_user_perms
             ]
             per_forum_nongranted_user_perms = list(
-                filter(lambda p: not p.has_perm and f and p.forum_id is f.id, user_perms)
+                filter(lambda p: not p.has_perm and f and p.forum_id == f.id, user_perms)
             )
             per_forum_nongranted_user_permcodes = [
                 p.permission.codename for p in per_forum_nongranted_user_perms
@@ -171,7 +171,7 @@ class ForumPermissionChecker:
                 # A permission can be non-granted on user-forum level, and that takes
                 # precedence over granted group permissions so we do not add those to the list.
                 per_forum_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and f and p.forum_id is f.id and
+                    filter(lambda p: p.has_perm and f and p.forum_id == f.id and
                            p.permission_id not in
                            [q.permission_id for q in per_forum_nongranted_user_perms],
                            group_perms)
@@ -182,7 +182,7 @@ class ForumPermissionChecker:
                 # A permission can be granted on user-forum level, and that takes precedence
                 # over nongranted group permissions so we do not add those to the list.
                 per_forum_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and f and p.forum_id is f.id and
+                    filter(lambda p: not p.has_perm and f and p.forum_id == f.id and
                            p.permission_id not in
                            [q.permission_id for q in per_forum_granted_user_perms],
                            group_perms)
@@ -228,7 +228,7 @@ class ForumPermissionChecker:
                 # that takes precedence over granted all_users permissions so we do not add
                 # those to the list.
                 per_forum_granted_all_users_perms = list(
-                    filter(lambda p: p.has_perm and f and p.forum_id is f.id and
+                    filter(lambda p: p.has_perm and f and p.forum_id == f.id and
                            p.permission_id not in
                            [q.permission_id for q in per_forum_nongranted_user_perms] and
                            p.permission_id not in
@@ -243,7 +243,7 @@ class ForumPermissionChecker:
                 # precedence over nongranted all_user permissions so we do not add those to
                 # the list
                 per_forum_nongranted_all_users_perms = list(
-                    filter(lambda p: not p.has_perm and f and p.forum_id is f.id and
+                    filter(lambda p: not p.has_perm and f and p.forum_id == f.id and
                            p.permission_id not in
                            [q.permission_id for q in per_forum_granted_user_perms] and
                            p.permission_id not in
