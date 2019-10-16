@@ -326,14 +326,15 @@ class PermissionHandler:
 
         # First check if the user is a superuser and if so, returns the forum queryset immediately.
         if user.is_superuser:  # pragma: no cover
+            self._granted_forums_cache[granted_forums_cache_key] = forums
             return forums
         else:
             checker = self._get_checker(user)
+            perms = checker.get_perms_for_forumlist(forums, perm_codenames)
             allowed_forums = []
+            # Check if the requested permissions are in the set of permissions for the forum
             for f in forums:
-                perm_codes = checker.get_perms(f)
-                # Check if the requested permissions are in the set of permissions for the forum
-                if set(perm_codenames).issubset(perm_codes):
+                if set(perm_codenames).issubset(perms[f]):
                     allowed_forums.append(f)
 
             if use_tree_hierarchy:
