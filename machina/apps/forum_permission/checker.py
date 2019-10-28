@@ -87,8 +87,9 @@ class ForumPermissionChecker:
             all_users_perms = None
             group_perms = None
         else:
-            all_users_perms = user_perms.filter(authenticated_user=True)
-            user_perms = user_perms.filter(user=self.user)
+            two_types_user_perms = user_perms.filter(Q(authenticated_user=True) | Q(user=self.user))
+            all_users_perms = [p for p in two_types_user_perms if p.authenticated_user]
+            user_perms = [p for p in two_types_user_perms if p.user]
             # Now get group permissions
             user_model = get_user_model()
             user_groups_related_name = user_model.groups.field.related_query_name()
