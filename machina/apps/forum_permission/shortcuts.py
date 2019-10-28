@@ -17,7 +17,7 @@ ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
 
-ALL_AUTH = object()  # object to check against if all authenticated users are meant
+ALL_AUTHENTICATED_USERS = object()  # object to check against if all authenticated users are meant
 
 
 class NotUserNorGroup(Exception):
@@ -28,11 +28,11 @@ def assign_perm(perm, object, forum=None, has_perm=True):
     """ Assigns a permission to a user (anonymous, specific or all authenticated) or a group.
     object can be either: a user object (specific or anonymous)
                           a group object
-                          the ALL_AUTH object for all authenticated users
+                          the ALL_AUTHENTICATED_USERS object for all authenticated users
     """
     perm = ForumPermission.objects.get(codename=perm)
 
-    if object is ALL_AUTH:
+    if object is ALL_AUTHENTICATED_USERS:
         return UserForumPermission.objects.create(
             forum=forum,
             permission=perm,
@@ -63,11 +63,11 @@ def remove_perm(perm, object, forum=None):
     """ Remove a permission to a user (anonymous, specific or all authenticated) or a group.
     object can be either: a user object (specific or anonymous)
                           a group object
-                          the ALL_AUTH object for all authenticated users
+                          the ALL_AUTHENTICATED_USERS object for all authenticated users
     """
     perm = ForumPermission.objects.get(codename=perm)
 
-    if object is ALL_AUTH:
+    if object is ALL_AUTHENTICATED_USERS:
         return UserForumPermission.objects.filter(
             forum=forum,
             permission=perm,

@@ -2,7 +2,9 @@ import pytest
 
 from machina.apps.forum_permission.checker import ForumPermissionChecker
 from machina.apps.forum_permission.models import ForumPermission
-from machina.apps.forum_permission.shortcuts import ALL_AUTH, assign_perm, remove_perm
+from machina.apps.forum_permission.shortcuts import (
+    ALL_AUTHENTICATED_USERS, assign_perm, remove_perm
+)
 from machina.conf import settings as machina_settings
 from machina.test.factories import GroupFactory, UserFactory, create_forum
 
@@ -55,11 +57,11 @@ class TestForumPermissionChecker(object):
         # Setup
         user = UserFactory.create()
         # Test globally True but forum level False
-        assign_perm('can_read_forum', ALL_AUTH, None, has_perm=True)  # global permission
-        assign_perm('can_read_forum', ALL_AUTH, self.forum, has_perm=False)
+        assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, None, has_perm=True)
+        assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
         # Test globally False but forum level True
-        assign_perm('can_see_forum', ALL_AUTH, None, has_perm=False)  # global permission
-        assign_perm('can_see_forum', ALL_AUTH, self.forum, has_perm=True)
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, None, has_perm=False)
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
@@ -161,7 +163,12 @@ class TestForumPermissionChecker(object):
                 forum_val = None
             else:
                 forum_val = self.forum
-            assign_perm('can_read_forum', ALL_AUTH, forum_val, has_perm=dct['all_auth'])
+            assign_perm(
+                'can_read_forum',
+                ALL_AUTHENTICATED_USERS,
+                forum_val,
+                has_perm=dct['all_auth']
+            )
             assign_perm('can_read_forum', group, forum_val, has_perm=dct['group'])
             if dct['user'] != 'unset':
                 assign_perm('can_read_forum', user, forum_val, has_perm=dct['user'])
@@ -171,7 +178,7 @@ class TestForumPermissionChecker(object):
             assert checker.has_perm('can_read_forum', forum_val) == dct['res']
 
             # unset the set permissions so the next iteration goes in blankly
-            remove_perm('can_read_forum', ALL_AUTH, forum_val)
+            remove_perm('can_read_forum', ALL_AUTHENTICATED_USERS, forum_val)
             remove_perm('can_read_forum', group, forum_val)
             if dct['user'] != 'unset':
                 remove_perm('can_read_forum', user, forum_val)
