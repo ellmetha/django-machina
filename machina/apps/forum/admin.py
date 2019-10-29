@@ -61,6 +61,9 @@ class ForumAdmin(admin.ModelAdmin):
     editpermissions_anonymous_user_view_template_name = (
         'admin/forum/forum/editpermissions_anonymous_user.html'
     )
+    editpermissions_authenticated_user_view_template_name = (
+        'admin/forum/forum/editpermissions_authenticated_user.html'
+    )
     editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
 
     def get_urls(self):
@@ -88,6 +91,11 @@ class ForumAdmin(admin.ModelAdmin):
                 name='forum_forum_editpermission_anonymous_user',
             ),
             url(
+                r'^edit-global-permissions/user/authenticated/$',
+                self.admin_site.admin_view(self.editpermissions_authenticated_user_view),
+                name='forum_forum_editpermission_authenticated_user',
+            ),
+            url(
                 r'^edit-global-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
                 name='forum_forum_editpermission_group',
@@ -106,6 +114,11 @@ class ForumAdmin(admin.ModelAdmin):
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/user/anonymous/$',
                 self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
                 name='forum_forum_editpermission_anonymous_user',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/edit-permissions/user/authenticated/$',
+                self.admin_site.admin_view(self.editpermissions_authenticated_user_view),
+                name='forum_forum_editpermission_authenticated_user',
             ),
             url(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
@@ -192,14 +205,22 @@ class ForumAdmin(admin.ModelAdmin):
                     user_form.cleaned_data.get('anonymous_user', None)
                     if user_form.cleaned_data else None
                 )
+                authenticated_user = (
+                    user_form.cleaned_data.get('authenticated_user', None)
+                    if user_form.cleaned_data else None
+                )
                 group = (
                     group_form.cleaned_data.get('group', None)
                     if group_form.cleaned_data else None
                 )
 
-                if not user and not anonymous_user and not group:
-                    user_form._errors[NON_FIELD_ERRORS] = user_form.error_class(
-                        [_('Choose either a user ID, a group ID or the anonymous user'), ])
+                if not user and not anonymous_user and not authenticated_user and not group:
+                    user_form._errors[NON_FIELD_ERRORS] = user_form.error_class([
+                        _(
+                            "Choose either a user ID, a group ID, the anonymous user " +
+                            "or the authenticated user"
+                        ),
+                    ])
                 elif user:
                     # Redirect to user
                     url_kwargs = (
@@ -215,6 +236,15 @@ class ForumAdmin(admin.ModelAdmin):
                     return redirect(
                         reverse(
                             'admin:forum_forum_editpermission_anonymous_user',
+                            kwargs=url_kwargs,
+                        ),
+                    )
+                elif authenticated_user:
+                    # Redirect to authenticated user
+                    url_kwargs = {'forum_id': forum.id} if forum else {}
+                    return redirect(
+                        reverse(
+                            'admin:forum_forum_editpermission_authenticated_user',
                             kwargs=url_kwargs,
                         ),
                     )
@@ -278,6 +308,25 @@ class ForumAdmin(admin.ModelAdmin):
         )
 
         return render(request, self.editpermissions_anonymous_user_view_template_name, context)
+
+    def editpermissions_authenticated_user_view(self, request, forum_id=None):
+        """ Allows to edit authenticated user permissions for the considered forum.
+
+        The view displays a form to define which permissions are granted for the authenticated,
+        non-specific, user for the considered forum.
+
+        """
+        forum = get_object_or_404(Forum, pk=forum_id) if forum_id else None
+
+        # Set up the context
+        context = self.get_forum_perms_base_context(request, forum)
+        context['forum'] = forum
+        context['title'] = '{} - {}'.format(_('Forum permissions'), _('Authenticated user'))
+        context['form'] = self._get_permissions_form(
+            request, UserForumPermission, {'forum': forum, 'authenticated_user': True},
+        )
+
+        return render(request, self.editpermissions_authenticated_user_view_template_name, context)
 
     def editpermissions_group_view(self, request, group_id, forum_id=None):
         """ Allows to edit group permissions for the considered forum.
@@ -369,6 +418,7 @@ class ForumAdmin(admin.ModelAdmin):
                 new_perm = UserForumPermission(
                     permission=perm.permission, forum=forum_to,
                     user=perm.user, anonymous_user=perm.anonymous_user,
+                    authenticated_user=perm.authenticated_user
                 )
             new_perm.has_perm = perm.has_perm
             new_perm.save()

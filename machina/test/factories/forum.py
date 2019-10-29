@@ -8,10 +8,11 @@ from machina.core.db.models import get_model
 faker = Faker()
 
 Forum = get_model('forum', 'Forum')
+NAMES = [faker.name() for i in range(10)]
 
 
 class ForumFactory(factory.DjangoModelFactory):
-    name = faker.text(max_nb_chars=100)
+    name = factory.LazyAttribute(lambda obj: factory.fuzzy.FuzzyChoice(NAMES).fuzz())
     slug = factory.LazyAttribute(lambda t: slugify(t.name))
 
     # Link forum specific

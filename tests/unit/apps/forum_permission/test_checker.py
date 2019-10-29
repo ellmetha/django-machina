@@ -2,7 +2,9 @@ import pytest
 
 from machina.apps.forum_permission.checker import ForumPermissionChecker
 from machina.apps.forum_permission.models import ForumPermission
-from machina.apps.forum_permission.shortcuts import assign_perm
+from machina.apps.forum_permission.shortcuts import (
+    ALL_AUTHENTICATED_USERS, assign_perm, remove_perm
+)
 from machina.conf import settings as machina_settings
 from machina.test.factories import GroupFactory, UserFactory, create_forum
 
@@ -51,6 +53,20 @@ class TestForumPermissionChecker(object):
         # Run & check
         assert checker.has_perm('can_read_forum', self.forum)
 
+    def test_knows_that_alluser_permissions_take_precedence_over_alluser_global_permissions(self):
+        # Setup
+        user = UserFactory.create()
+        # Test globally True but forum level False
+        assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, None, has_perm=True)
+        assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
+        # Test globally False but forum level True
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, None, has_perm=False)
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
+        checker = ForumPermissionChecker(user)
+        # Run & check
+        assert not checker.has_perm('can_read_forum', self.forum)
+        assert checker.has_perm('can_see_forum', self.forum)
+
     def test_knows_that_user_permissions_take_precedence_over_user_global_permissions(self):
         # Setup
         user = UserFactory.create()
@@ -95,6 +111,77 @@ class TestForumPermissionChecker(object):
         assert checker.has_perm('can_see_forum', self.forum)
         assert not checker.has_perm('can_edit_own_posts', self.forum)
         assert checker.has_perm('can_delete_own_posts', self.forum)
+
+    def test_knows_precedence_of_permissions_is_user_group_allusers(self):
+        # Setup
+        machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []
+        user = UserFactory.create()
+        group = GroupFactory.create()
+        user.groups.add(group)
+
+        # 'res' in the following dict means 'expected result'
+        test_list = [
+            # Differing user settings, all_auth and group to True
+            {'level': 'global', 'all_auth': True, 'group': True, 'user': True, 'res': True},
+            {'level': 'global', 'all_auth': True, 'group': True, 'user': 'unset', 'res': True},
+            {'level': 'global', 'all_auth': True, 'group': True, 'user': False, 'res': False},
+            # Differing user settings, all_auto True, group permission False
+            {'level': 'global', 'all_auth': True, 'group': False, 'user': True, 'res': True},
+            {'level': 'global', 'all_auth': True, 'group': False, 'user': 'unset', 'res': False},
+            {'level': 'global', 'all_auth': True, 'group': False, 'user': False, 'res': False},
+            # Differing user settings, all_auth and group on False
+            {'level': 'global', 'all_auth': False, 'group': False, 'user': True, 'res': True},
+            {'level': 'global', 'all_auth': False, 'group': False, 'user': 'unset', 'res': False},
+            {'level': 'global', 'all_auth': False, 'group': False, 'user': False, 'res': False},
+            # Differing user settings, all_auth False, group permission True
+            {'level': 'global', 'all_auth': False, 'group': True, 'user': True, 'res': True},
+            {'level': 'global', 'all_auth': False, 'group': True, 'user': 'unset', 'res': True},
+            {'level': 'global', 'all_auth': False, 'group': True, 'user': False, 'res': False},
+            # Now on forum level instead of global
+            # Differing user settings, all_auth and group to True
+            {'level': 'forum', 'all_auth': True, 'group': True, 'user': True, 'res': True},
+            {'level': 'forum', 'all_auth': True, 'group': True, 'user': 'unset', 'res': True},
+            {'level': 'forum', 'all_auth': True, 'group': True, 'user': False, 'res': False},
+            # Differing user settings, all_auto True, group permission False
+            {'level': 'forum', 'all_auth': True, 'group': False, 'user': True, 'res': True},
+            {'level': 'forum', 'all_auth': True, 'group': False, 'user': 'unset', 'res': False},
+            {'level': 'forum', 'all_auth': True, 'group': False, 'user': False, 'res': False},
+            # Differing user settings, all_auth and group on False
+            {'level': 'forum', 'all_auth': False, 'group': False, 'user': True, 'res': True},
+            {'level': 'forum', 'all_auth': False, 'group': False, 'user': 'unset', 'res': False},
+            {'level': 'forum', 'all_auth': False, 'group': False, 'user': False, 'res': False},
+            # Differing user settings, all_auth False, group permission True
+            {'level': 'forum', 'all_auth': False, 'group': True, 'user': True, 'res': True},
+            {'level': 'forum', 'all_auth': False, 'group': True, 'user': 'unset', 'res': True},
+            {'level': 'forum', 'all_auth': False, 'group': True, 'user': False, 'res': False},
+        ]
+
+        # loop over test dict:
+        for dct in test_list:
+            # set each permission as instructed in the dict
+            if dct['level'] == 'global':
+                forum_val = None
+            else:
+                forum_val = self.forum
+            assign_perm(
+                'can_read_forum',
+                ALL_AUTHENTICATED_USERS,
+                forum_val,
+                has_perm=dct['all_auth']
+            )
+            assign_perm('can_read_forum', group, forum_val, has_perm=dct['group'])
+            if dct['user'] != 'unset':
+                assign_perm('can_read_forum', user, forum_val, has_perm=dct['user'])
+
+            checker = ForumPermissionChecker(user)
+            # test if value is as the expected value
+            assert checker.has_perm('can_read_forum', forum_val) == dct['res']
+
+            # unset the set permissions so the next iteration goes in blankly
+            remove_perm('can_read_forum', ALL_AUTHENTICATED_USERS, forum_val)
+            remove_perm('can_read_forum', group, forum_val)
+            if dct['user'] != 'unset':
+                remove_perm('can_read_forum', user, forum_val)
 
     def test_knows_that_granted_permissions_should_take_precedence_over_the_same_non_granted_permissions(self):  # noqa: E501
         # Setup

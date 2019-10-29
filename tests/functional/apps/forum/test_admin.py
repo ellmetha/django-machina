@@ -136,6 +136,24 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         last_url, status_code = response.redirect_chain[-1]
         assert editpermissions_anonymous_user_url in last_url
 
+    def test_editpermission_index_view_can_redirect_to_authenticated_user_permissions_form(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'authenticated_user': 1}, follow=True)
+        # Check
+        editpermissions_auth_user_raw_url = ('admin:{}_{}_editpermission_authenticated_user'
+                                             .format(model._meta.app_label,
+                                                     self._get_module_name(model._meta)))
+        editpermissions_auth_user_url = reverse(
+            editpermissions_auth_user_raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        assert len(response.redirect_chain)
+        last_url, status_code = response.redirect_chain[-1]
+        assert editpermissions_auth_user_url in last_url
+
     def test_editpermission_index_view_can_redirect_to_group_permissions_form(self):
         # Setup
         group = GroupFactory.create()
@@ -286,6 +304,45 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
             anonymous_user=True, forum=self.top_level_cat)
         assert not_granted_perm.exists()
 
+    def test_editpermission_form_can_update_authenticated_user_permissions(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_authenticated_user'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        post_data = {
+            'can_see_forum': 'granted',
+            'can_read_forum': 'not-granted',
+            'can_start_new_topics': 'not-set',
+            'can_reply_to_topics': 'not-set',
+            'can_post_announcements': 'not-set',
+            'can_post_stickies': 'not-set',
+            'can_delete_own_posts': 'not-set',
+            'can_edit_own_posts': 'not-set',
+            'can_post_without_approval': 'not-set',
+            'can_create_polls': 'not-set',
+            'can_vote_in_polls': 'not-set',
+            'can_attach_file': 'not-set',
+            'can_download_file': 'not-set',
+            'can_lock_topics': 'not-set',
+            'can_edit_posts': 'not-set',
+            'can_delete_posts': 'not-set',
+            'can_approve_posts': 'not-set',
+        }
+        # Run
+        url = reverse(raw_url, kwargs={
+            'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, post_data)
+        # Check
+        assert response.status_code == 200
+        granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_see_forum', has_perm=True,
+            authenticated_user=True, forum=self.top_level_cat)
+        assert granted_perm.exists()
+        not_granted_perm = UserForumPermission.objects.filter(
+            permission__codename='can_read_forum', has_perm=False,
+            authenticated_user=True, forum=self.top_level_cat)
+        assert not_granted_perm.exists()
+
     def test_editpermission_form_can_update_group_permissions(self):
         # Setup
         group = GroupFactory.create()
@@ -340,12 +397,23 @@ class TestPickUserForm(object):
         # Setup
         user = UserFactory.create()
         site = Site.objects.get_current()
-        form_data = {
+        form_data1 = {
             'user': user.id,
             'anonymous_user': True,
         }
+        form_data2 = {
+            'user': user.id,
+            'authenticated_user': True,
+        }
+        form_data3 = {
+            'anonymous_user': True,
+            'authenticated_user': True,
+        }
         # Run
-        form = PickUserForm(form_data, admin_site=site)
+        form1 = PickUserForm(form_data1, admin_site=site)
+        form2 = PickUserForm(form_data2, admin_site=site)
+        form3 = PickUserForm(form_data3, admin_site=site)
         # Check
-        is_valid = form.is_valid()
-        assert not is_valid
+        assert not form1.is_valid()
+        assert not form2.is_valid()
+        assert not form3.is_valid()

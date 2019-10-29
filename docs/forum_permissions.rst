@@ -5,8 +5,9 @@ Forum permissions
 Django-machina comes with its own permission system, allowing you to define exactly what users or
 groups can or can not do with the forums you created.
 
-Permissions can be granted to users (anonymous user or registered users) and to groups. Some
-permissions can be granted globally: in this case, the permissions apply to all forums.
+Permissions can be granted to users (anonymous user, a specific user or all registered users)
+and to groups. Some permissions can be granted globally: in this case, the permissions apply to
+all forums.
 
 Built-in permissions
 --------------------
@@ -96,6 +97,11 @@ forum instances and their related permissions.
     ``MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS`` setting to define which permissions
     should be granted to all authenticated users for all forums (please refer to :doc:`settings`).
 
+    If, however, you foresee the need for more fine grained control it might be wiser and more
+    convenient to target all authenticated users on the first forum and copy these permissions to
+    later forums, giving a bit more control about exactly which forums (and subforums) these
+    'general rules' apply to and making it easier to later adjust them per forum.
+
 As previously stated, the forum permissions can be applied either to a specific forum or globally to
 all forums:
 
@@ -106,12 +112,13 @@ all forums:
 
 Note that global permissions have a lower priority than permissions that are associated with a
 specific forum. For example, a forum will be hidden if it is tied with a permission defining that it
-should not be accessible for a group of user, even if this forum can be accessed according to the
+should not be accessible for a group of users, even if this forum can be accessed according to the
 global permissions applying to all forums for this group of users.
 
 The admin pages mentioned above ("Global forum permissions" or "Forum permissions" for specific
 forums) allow you to select the user or group for which you want to set permissions. You have to
-select a specific user, the anonymous user or a specific group in order to set its permissions.
+select a specific user, the anonymous user, all authenticated users or a specific group in order
+to set its permissions.
 
 .. image:: ./_images/permissions_edit_page_1.png
 

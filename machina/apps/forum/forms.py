@@ -34,6 +34,14 @@ class PickUserForm(forms.Form):
             'Please select this option if you want to edit the permissions of the anonymous user'
         ),
     )
+    authenticated_user = forms.BooleanField(
+        label=_('Authenticated'),
+        initial=False,
+        help_text=_(
+            'Please select this option if you want to edit the permissions of every ' +
+            '(non-specific) logged in user'
+        ),
+    )
 
     def __init__(self, *args, **kwargs):
         admin_site = kwargs.pop('admin_site')
@@ -45,15 +53,20 @@ class PickUserForm(forms.Form):
         )
 
         self.fields['anonymous_user'].required = False
+        self.fields['authenticated_user'].required = False
 
     def clean(self):
         cleaned_data = super().clean()
         user = cleaned_data.get('user', None)
         anonymous_user = cleaned_data.get('anonymous_user', None)
-        if user and anonymous_user:
-            self._errors[NON_FIELD_ERRORS] = self.error_class(
-                [_('Choose either a user ID or select the anonymous user'), ],
-            )
+        authed_user = cleaned_data.get('authenticated_user', None)
+        if (user and anonymous_user) or (user and authed_user) or (anonymous_user and authed_user):
+            self._errors[NON_FIELD_ERRORS] = self.error_class([
+                _(
+                    'Choose either a user ID or check either the anonymous or ' +
+                    'authenticated user checkbox'
+                ),
+            ],)
         return cleaned_data
 
 
