@@ -10,7 +10,7 @@
   <div class="col-12 col-md-4 topic-actions-block">
     {% if paginator.count > 0 %}
     <p class="text-muted">
-      {% blocktrans count topic_length=paginator.count %}
+      {% blocktrans trimmed count topic_length=paginator.count %}
       {{ topic_length }} unread topic found{% plural %}{{ topic_length }} unread topics found
       {% endblocktrans %}
     </p>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"POT-Creation-Date: 2019-10-28 22:00-0400\n"
 "PO-Revision-Date: 2016-02-22 22:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1578,12 +1578,8 @@ msgstr ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
 #, python-format
-msgid ""
-"\n"
-"      %(topic_length)s unread topic found"
-msgid_plural ""
-"%(topic_length)s unread topics found\n"
-"      "
+msgid "%(topic_length)s unread topic found"
+msgid_plural "%(topic_length)s unread topics found"
 msgstr[0] ""
 msgstr[1] ""
 

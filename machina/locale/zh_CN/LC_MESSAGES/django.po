@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # yanceyy <20135224@stu.neu.edu.cn>, 2016
 # Neo Chang <me@neoto.xin>, 2017
@@ -10,14 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"POT-Creation-Date: 2019-10-28 22:00-0400\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/django-machina/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/"
+"django-machina/language/zh_CN/)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -98,8 +99,7 @@ msgid "Display in parent-forums legend"
 msgstr "在父论坛图例中显示"
 
 #: apps/forum/abstract_models.py:96
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 
 #: apps/forum/abstract_models.py:103
@@ -109,8 +109,7 @@ msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 msgid "Forum"
 msgstr "论坛"
 
-#: apps/forum/abstract_models.py:104
-#: templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "论坛"
@@ -158,8 +157,8 @@ msgstr "许可文件复制成功"
 
 #: apps/forum/admin.py:220
 msgid ""
-"Choose either a user ID, a group ID, the anonymous user or the authenticated"
-" user"
+"Choose either a user ID, a group ID, the anonymous user or the authenticated "
+"user"
 msgstr ""
 
 #: apps/forum/admin.py:305
@@ -1576,14 +1575,11 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "你确定你要标记这些话题为已读取？"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, python-format
-msgid ""
-"\n"
-"      %(topic_length)s unread topic found"
-msgid_plural ""
-"%(topic_length)s unread topics found\n"
-"      "
-msgstr[0] ""
+#, fuzzy, python-format
+#| msgid "%(topic_length)s posts found"
+msgid "%(topic_length)s unread topic found"
+msgid_plural "%(topic_length)s unread topics found"
+msgstr[0] "找到了%(topic_length)s帖子"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."

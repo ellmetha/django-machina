@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Miha Frangež <miha.frangez@gmail.com>, 2016-2017
 # Miha Frangež <miha.frangez@gmail.com>, 2016
@@ -10,15 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"POT-Creation-Date: 2019-10-28 22:00-0400\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-team/django-machina/language/sl_SI/)\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-"
+"team/django-machina/language/sl_SI/)\n"
+"Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sl_SI\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: apps/forum/abstract_models.py:41
@@ -98,8 +100,7 @@ msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:96
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
 #: apps/forum/abstract_models.py:103
@@ -109,8 +110,7 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:104
-#: templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Forumi"
@@ -158,8 +158,8 @@ msgstr "Dovoljenja kopirana"
 
 #: apps/forum/admin.py:220
 msgid ""
-"Choose either a user ID, a group ID, the anonymous user or the authenticated"
-" user"
+"Choose either a user ID, a group ID, the anonymous user or the authenticated "
+"user"
 msgstr ""
 
 #: apps/forum/admin.py:305
@@ -886,13 +886,17 @@ msgstr "Datoteke večje od {} niso dovoljene. Vaša datoteka je velika {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše slike je {}px"
+msgstr ""
+"Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše "
+"slike je {}px"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše slike je {}px"
+msgstr ""
+"Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše "
+"slike je {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -1594,17 +1598,14 @@ msgid "Are you sure you want to mark topics read?"
 msgstr ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, python-format
-msgid ""
-"\n"
-"      %(topic_length)s unread topic found"
-msgid_plural ""
-"%(topic_length)s unread topics found\n"
-"      "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+#, fuzzy, python-format
+#| msgid "%(topic_length)s posts found"
+msgid "%(topic_length)s unread topic found"
+msgid_plural "%(topic_length)s unread topics found"
+msgstr[0] "%(topic_length)s objav najdenih"
+msgstr[1] "%(topic_length)s objav najdenih"
+msgstr[2] "%(topic_length)s objav najdenih"
+msgstr[3] "%(topic_length)s objav najdenih"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."

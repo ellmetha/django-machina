@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # alexander fedorov <elf607@gmail.com>, 2017
 # georgekpg <konstantinpopov@inbox.ru>, 2018
@@ -10,15 +10,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"POT-Creation-Date: 2019-10-28 22:00-0400\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-machina/language/ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-"
+"machina/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: apps/forum/abstract_models.py:41
@@ -98,9 +101,9 @@ msgid "Display in parent-forums legend"
 msgstr "Отображать в легенде родительских форумов"
 
 #: apps/forum/abstract_models.py:96
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr "Показывать этот форуум в легенде родительского форума (списке подфорумов)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr ""
+"Показывать этот форуум в легенде родительского форума (списке подфорумов)"
 
 #: apps/forum/abstract_models.py:103
 #: apps/forum_permission/abstract_models.py:64
@@ -109,8 +112,7 @@ msgstr "Показывать этот форуум в легенде родит�
 msgid "Forum"
 msgstr "Форум"
 
-#: apps/forum/abstract_models.py:104
-#: templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Форумы"
@@ -158,8 +160,8 @@ msgstr "Разрешения успешно скопированы"
 
 #: apps/forum/admin.py:220
 msgid ""
-"Choose either a user ID, a group ID, the anonymous user or the authenticated"
-" user"
+"Choose either a user ID, a group ID, the anonymous user or the authenticated "
+"user"
 msgstr ""
 
 #: apps/forum/admin.py:305
@@ -188,7 +190,9 @@ msgstr "Аноним"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr "Выберите этот вариант, если вы хотите отредактировать разрешения анонимного пользоватея"
+msgstr ""
+"Выберите этот вариант, если вы хотите отредактировать разрешения анонимного "
+"пользоватея"
 
 #: apps/forum/forms.py:38
 msgid "Authenticated"
@@ -351,16 +355,21 @@ msgstr "Сообщения"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением"
+msgstr ""
+"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
+"сообщением"
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением, но не оба одновременно"
+msgstr ""
+"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
+"сообщением, но не оба одновременно"
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
-msgstr "Имя пользователя должно быть указано, если автор - анонимный пользователь"
+msgstr ""
+"Имя пользователя должно быть указано, если автор - анонимный пользователь"
 
 #: apps/forum_conversation/apps.py:17
 msgid "Machina: Forum conversations"
@@ -398,7 +407,9 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr "Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не создавать опрос"
+msgstr ""
+"Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не "
+"создавать опрос"
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -407,7 +418,9 @@ msgstr "Максимальное количество вариантов для 
 
 #: apps/forum_conversation/forms.py:158
 msgid "This is the number of options each user may select when voting."
-msgstr "Это количество вариантов, которые пользователь сможет выбрать при голосовании."
+msgstr ""
+"Это количество вариантов, которые пользователь сможет выбрать при "
+"голосовании."
 
 #: apps/forum_conversation/forms.py:163
 msgid "For how many days the poll should be run?"
@@ -423,12 +436,15 @@ msgstr "Позволить голосовать заново?"
 
 #: apps/forum_conversation/forms.py:169
 msgid "If enabled users are able to change their vote."
-msgstr "Если отмечено, пользователи будут иметь возможность изменить своё выбор."
+msgstr ""
+"Если отмечено, пользователи будут иметь возможность изменить своё выбор."
 
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr "Вы должны установить максимальное количество вариантов, которые может выбрать пользователь, когда создаёте опрос"
+msgstr ""
+"Вы должны установить максимальное количество вариантов, которые может "
+"выбрать пользователь, когда создаёте опрос"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
@@ -510,11 +526,14 @@ msgstr "Голосования опроса темы"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:121
 msgid "A user id or an anonymous key must be used."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован"
+msgstr ""
+"Пользовательский ID или ключ анонимного пользователя должен быть использован"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:123
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован, но не оба одновременно"
+msgstr ""
+"Пользовательский ID или ключ анонимного пользователя должен быть "
+"использован, но не оба одновременно"
 
 #: apps/forum_conversation/forum_polls/apps.py:17
 msgid "Machina: Forum polls"
@@ -886,13 +905,17 @@ msgstr "Файлы размера больше чем {} не доступны �
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "Изображения имеют ширину меньше {}px, больше {}px или не разрешены. Ширина вашего изображения: {}px"
+msgstr ""
+"Изображения имеют ширину меньше {}px, больше {}px или не разрешены. Ширина "
+"вашего изображения: {}px"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "Изображения имеют высоту меньше {}px, больше {}px или не разрешены. Высота вашего изображения: {}px"
+msgstr ""
+"Изображения имеют высоту меньше {}px, больше {}px или не разрешены. Высота "
+"вашего изображения: {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -999,7 +1022,8 @@ msgstr "Скопировать разрешения из другого фору
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr "Выберите форум, чтобы скопировать его параметры разрешений в текущий форум "
+msgstr ""
+"Выберите форум, чтобы скопировать его параметры разрешений в текущий форум "
 
 #: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
@@ -1164,7 +1188,9 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr "<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и связанные с ним голоса. "
+msgstr ""
+"<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и "
+"связанные с ним голоса. "
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1573,9 +1599,12 @@ msgstr "Новый поиск"
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
 msgstr[0] "По вашему запросу было найден <b>%(number_of_results)s</b>результат"
-msgstr[1] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
-msgstr[2] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
-msgstr[3] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
+msgstr[1] ""
+"По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
+msgstr[2] ""
+"По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
+msgstr[3] ""
+"По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
 
 #: templates/machina/forum_search/search.html:70
 msgid "Results"
@@ -1594,17 +1623,14 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Вы уверены, что хотите отметить темы прочитанными?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, python-format
-msgid ""
-"\n"
-"      %(topic_length)s unread topic found"
-msgid_plural ""
-"%(topic_length)s unread topics found\n"
-"      "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+#, fuzzy, python-format
+#| msgid "%(topic_length)s posts found"
+msgid "%(topic_length)s unread topic found"
+msgid_plural "%(topic_length)s unread topics found"
+msgstr[0] "%(topic_length)s сообщений найдено"
+msgstr[1] "%(topic_length)s сообщений найдено"
+msgstr[2] "%(topic_length)s сообщений найдено"
+msgstr[3] "%(topic_length)s сообщений найдено"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."

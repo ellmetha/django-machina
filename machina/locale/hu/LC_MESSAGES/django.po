@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Peter Torok <peter@bluefridge.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"POT-Creation-Date: 2019-10-28 22:00-0400\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Hungarian (http://www.transifex.com/django-machina-team/django-machina/language/hu/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/django-machina-team/"
+"django-machina/language/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -96,8 +97,7 @@ msgid "Display in parent-forums legend"
 msgstr "Megjelenítés a szülő-fórum leírásában"
 
 #: apps/forum/abstract_models.py:96
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Megjeleníti ezt a fórumot a szülő-fórumon (az al-fórum listán)"
 
 #: apps/forum/abstract_models.py:103
@@ -107,8 +107,7 @@ msgstr "Megjeleníti ezt a fórumot a szülő-fórumon (az al-fórum listán)"
 msgid "Forum"
 msgstr "Fórum"
 
-#: apps/forum/abstract_models.py:104
-#: templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Fórumok"
@@ -156,8 +155,8 @@ msgstr "Jogosultságok másolása sikeres"
 
 #: apps/forum/admin.py:220
 msgid ""
-"Choose either a user ID, a group ID, the anonymous user or the authenticated"
-" user"
+"Choose either a user ID, a group ID, the anonymous user or the authenticated "
+"user"
 msgstr ""
 
 #: apps/forum/admin.py:305
@@ -186,7 +185,9 @@ msgstr "Névtelen"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr "Válassza ezt a lehetőséget, ha a névtelen felhasználó jogosultságait szeretné szerkeszteni"
+msgstr ""
+"Válassza ezt a lehetőséget, ha a névtelen felhasználó jogosultságait "
+"szeretné szerkeszteni"
 
 #: apps/forum/forms.py:38
 msgid "Authenticated"
@@ -349,12 +350,16 @@ msgstr "Hozzászólások"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen kulcsot."
+msgstr ""
+"A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen "
+"kulcsot."
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen kulcsot, de nem mindkettőt."
+msgstr ""
+"A hozzászóláshoz kötelező megadni felhasználóazonosítót vagy névtelen "
+"kulcsot, de nem mindkettőt."
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
@@ -396,7 +401,9 @@ msgstr "Szavazásra bocsátott kérdés"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr "Adjon meg egy kérdést, hogy a témához szavazást rendeljen, vagy hagyja üresen, ha nem akar szavazást."
+msgstr ""
+"Adjon meg egy kérdést, hogy a témához szavazást rendeljen, vagy hagyja "
+"üresen, ha nem akar szavazást."
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -421,12 +428,15 @@ msgstr "Újraszavazás engedélyezése?"
 
 #: apps/forum_conversation/forms.py:169
 msgid "If enabled users are able to change their vote."
-msgstr "Ha engedélyezett, akkor a felhasználók megváltoztathatják a szavazatukat."
+msgstr ""
+"Ha engedélyezett, akkor a felhasználók megváltoztathatják a szavazatukat."
 
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr "Szavazás létrehozásakor kötelező megadni a válaszlehetőségek felhasználónként megadható számát."
+msgstr ""
+"Szavazás létrehozásakor kötelező megadni a válaszlehetőségek "
+"felhasználónként megadható számát."
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
@@ -802,7 +812,9 @@ msgstr "Hozzászóló keresése"
 
 #: apps/forum_search/forms.py:30
 msgid "Enter a user name to limit the search to a specific user."
-msgstr "Adjon meg egy felhasználónevet, hogy a keresést arra a felhasználóra szűkítse."
+msgstr ""
+"Adjon meg egy felhasználónevet, hogy a keresést arra a felhasználóra "
+"szűkítse."
 
 #: apps/forum_search/forms.py:35
 msgid "Search in specific forums"
@@ -884,13 +896,17 @@ msgstr "{} méretnél nagyobb file nem engedélyezett. Az Öné {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "{} pixelnél keskenyebb vagy {} pixelnél szélesebb kép nem engedélyezett. Az Öné {} pixel széles"
+msgstr ""
+"{} pixelnél keskenyebb vagy {} pixelnél szélesebb kép nem engedélyezett. Az "
+"Öné {} pixel széles"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "{} pixelnél alacsonyabb vagy {} pixelnél magasabb kép nem engedélyezett. Az Öné {} pixel magas"
+msgstr ""
+"{} pixelnél alacsonyabb vagy {} pixelnél magasabb kép nem engedélyezett. Az "
+"Öné {} pixel magas"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -997,7 +1013,9 @@ msgstr "Jogosultságok másolása másik fórumról"
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr "Válasszon ki egy fórumot, hogy annak jogosultság-beállításait a jelenlegi fórumra másolja"
+msgstr ""
+"Válasszon ki egy fórumot, hogy annak jogosultság-beállításait a jelenlegi "
+"fórumra másolja"
 
 #: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
@@ -1162,7 +1180,9 @@ msgstr "Válaszlehetőség hozzáadása"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr "<b>Figyelem:</b>&nbsp;Ha meglévő szavazás válaszlehetőségeit törli, akkor a hozzátartozó szavazatok is törlődnek."
+msgstr ""
+"<b>Figyelem:</b>&nbsp;Ha meglévő szavazás válaszlehetőségeit törli, akkor a "
+"hozzátartozó szavazatok is törlődnek."
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1261,7 +1281,8 @@ msgstr "Téma ellenőrzése"
 #: templates/machina/forum_search/search.html:83
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr "Szerző: <a href=\"%(poster_url)s\">%(username)s</a>, ekkor: %(creation_date)s"
+msgstr ""
+"Szerző: <a href=\"%(poster_url)s\">%(username)s</a>, ekkor: %(creation_date)s"
 
 #: templates/machina/forum_conversation/post_create.html:55
 #: templates/machina/forum_conversation/topic_detail.html:57
@@ -1529,7 +1550,8 @@ msgstr "Hozzászólás visszautasítása"
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr "Biztosan visszautasítja ezt a hozzászólást? A hozzászólás törölve lesz."
+msgstr ""
+"Biztosan visszautasítja ezt a hozzászólást? A hozzászólás törölve lesz."
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
@@ -1580,15 +1602,12 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Biztosan olvasottnak jelöli a témákat?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, python-format
-msgid ""
-"\n"
-"      %(topic_length)s unread topic found"
-msgid_plural ""
-"%(topic_length)s unread topics found\n"
-"      "
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy, python-format
+#| msgid "%(topic_length)s posts found"
+msgid "%(topic_length)s unread topic found"
+msgid_plural "%(topic_length)s unread topics found"
+msgstr[0] "%(topic_length)s hozzászólást találtunk"
+msgstr[1] "%(topic_length)s hozzászólást találtunk"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
