@@ -21,66 +21,76 @@
 {% endif %}
 
 {% block content %}
-<form action="." method="post" id="{{ opts.model_name }}_pick_user_form" novalidate>{% csrf_token %}
-  <div>
-    {% if user_errors %}
-    <p class="errornote">
-    {% if user_errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-    </p>
-    {{ user_form.non_field_errors }}
-    {% endif %}
-    <fieldset class="module aligned {{ fieldset.classes }}">
-      <h2>{% trans "Edit user permissions" %}</h2>
-      <div class="description">{% trans "Please select a user in order to update its permissions" %}</div>
-      {% for field in user_form %}
-      <div class="form-row">
-        <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-          {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-          {% if field.is_checkbox %}
-          {{ field.field }}{{ field.label_tag }}
-          {% else %}
-          {{ field.label_tag }}
-          {{ field }}
-          {% endif %}
-          {% if field.field.help_text %}
-          <p class="help">{{ field.field.help_text|safe }}</p>
-          {% endif %}
-        </div>
+  {% if user_form %}
+    <form action="." method="post" id="{{ opts.model_name }}_pick_user_form" novalidate>{% csrf_token %}
+      <div>
+        {% if user_errors %}
+        <p class="errornote">
+        {% if user_errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+        </p>
+        {{ user_form.non_field_errors }}
+        {% endif %}
+        <fieldset class="module aligned {{ fieldset.classes }}">
+          <h2>{% trans "Edit user permissions" %}</h2>
+          <div class="description">{% trans "Please select a user in order to update its permissions" %}</div>
+          {% for field in user_form %}
+          <div class="form-row">
+            <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+              {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+              {% if field.is_checkbox %}
+              {{ field.field }}{{ field.label_tag }}
+              {% else %}
+              {{ field.label_tag }}
+              {{ field }}
+              {% endif %}
+              {% if field.field.help_text %}
+              <p class="help">{{ field.field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </fieldset>
       </div>
-      {% endfor %}
-    </fieldset>
-  </div>
-  <div class="submit-row">
-    <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
-  </div>
-</form>
-<form action="." method="post" id="{{ opts.model_name }}_pick_group_form" novalidate>{% csrf_token %}
-  <div>
-    <fieldset class="module aligned {{ fieldset.classes }}">
-      <h2>{% trans "Edit group permissions" %}</h2>
-      <div class="description">{% trans "Please select a group in order to update its permissions" %}</div>
-      {% for field in group_form %}
-      <div class="form-row">
-        <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
-          {% if not field.is_readonly %}{{ field.errors }}{% endif %}
-          {% if field.is_checkbox %}
-          {{ field.field }}{{ field.label_tag }}
-          {% else %}
-          {{ field.label_tag }}
-          {{ field }}
-          {% endif %}
-          {% if field.field.help_text %}
-          <p class="help">{{ field.field.help_text|safe }}</p>
-          {% endif %}
-        </div>
+      <div class="submit-row">
+        <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
       </div>
-      {% endfor %}
-    </fieldset>
-  </div>
-  <div class="submit-row">
-    <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />
-  </div>
-</form>
+    </form>
+  {% endif %}
+  {% if group_form %}
+    <form action="." method="post" id="{{ opts.model_name }}_pick_group_form" novalidate>{% csrf_token %}
+      <div>
+        {% if group_errors %}
+          <p class="errornote">
+            {% if group_errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+          </p>
+          {{ group_form.non_field_errors }}
+        {% endif %}
+        <fieldset class="module aligned {{ fieldset.classes }}">
+          <h2>{% trans "Edit group permissions" %}</h2>
+          <div class="description">{% trans "Please select a group in order to update its permissions" %}</div>
+          {% for field in group_form %}
+          <div class="form-row">
+            <div {% if field.is_checkbox %} class="checkbox-row"{% else %} class="field-box field-{{ field.name }}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.is_hidden %} hidden{% endif %}"{% endif %}>
+              {% if not field.is_readonly %}{{ field.errors }}{% endif %}
+              {% if field.is_checkbox %}
+              {{ field.field }}{{ field.label_tag }}
+              {% else %}
+              {{ field.label_tag }}
+              {{ field }}
+              {% endif %}
+              {% if field.field.help_text %}
+              <p class="help">{{ field.field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </fieldset>
+      </div>
+      <div class="submit-row">
+        <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />
+      </div>
+    </form>
+  {% endif %}
 {% if forum %}
 <form action="." method="post" id="{{ opts.model_name }}_pick_forum_form" novalidate>{% csrf_token %}
   <div>

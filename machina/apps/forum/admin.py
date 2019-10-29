@@ -194,12 +194,22 @@ class ForumAdmin(admin.ModelAdmin):
         elif forum:
             context['forum_form'] = PickForumForm()
 
+        show_user_perm_form = (request.user.has_perm('forum_permission.add_userforumpermission') or
+                               request.user.has_perm('forum_permission.change_userforumpermission'))
+        show_grp_perm_form = (request.user.has_perm('forum_permission.add_groupforumpermission') or
+                              request.user.has_perm('forum_permission.change_groupforumpermission'))
+        user_form, user = None, None
+        group_form, group = None, None
+
         # Handles user or group selection
         if request.method == 'POST' and not permissions_copied:
-            user_form = PickUserForm(request.POST, admin_site=self.admin_site)
-            group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
+            if show_user_perm_form:
+                user_form = PickUserForm(request.POST, admin_site=self.admin_site)
+            if show_grp_perm_form:
+                group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
-            if user_form.is_valid() and group_form.is_valid():
+            # Check if the form was drawn, was valid and was submitted (presence of submitbutton)
+            if user_form and user_form.is_valid() and '_select_user' in request.POST:
                 user = user_form.cleaned_data.get('user', None) if user_form.cleaned_data else None
                 anonymous_user = (
                     user_form.cleaned_data.get('anonymous_user', None)
@@ -209,16 +219,11 @@ class ForumAdmin(admin.ModelAdmin):
                     user_form.cleaned_data.get('authenticated_user', None)
                     if user_form.cleaned_data else None
                 )
-                group = (
-                    group_form.cleaned_data.get('group', None)
-                    if group_form.cleaned_data else None
-                )
 
-                if not user and not anonymous_user and not authenticated_user and not group:
+                if not user and not anonymous_user and not authenticated_user:
                     user_form._errors[NON_FIELD_ERRORS] = user_form.error_class([
                         _(
-                            "Choose either a user ID, a group ID, the anonymous user " +
-                            "or the authenticated user"
+                            "Choose either a user ID, the anonymous user or the authenticated user"
                         ),
                     ])
                 elif user:
@@ -248,7 +253,18 @@ class ForumAdmin(admin.ModelAdmin):
                             kwargs=url_kwargs,
                         ),
                     )
-                elif group:
+
+                context['user_errors'] = helpers.AdminErrorList(user_form, [])
+
+            # Check if the form was drawn, was valid and was submitted (presence of submitbutton)
+            if group_form and group_form.is_valid() and '_select_group' in request.POST:
+                group = group_form.cleaned_data.get('group', None) \
+                    if group_form.cleaned_data else None
+
+                if not group:
+                    group_form._errors[NON_FIELD_ERRORS] = group_form.error_class(
+                        [_('Choose a group ID'), ])
+                else:
                     # Redirect to group
                     url_kwargs = (
                         {'forum_id': forum.id, 'group_id': group.id}
@@ -258,11 +274,12 @@ class ForumAdmin(admin.ModelAdmin):
                         reverse('admin:forum_forum_editpermission_group', kwargs=url_kwargs),
                     )
 
-            context['user_errors'] = helpers.AdminErrorList(user_form, [])
             context['group_errors'] = helpers.AdminErrorList(group_form, [])
         else:
-            user_form = PickUserForm(admin_site=self.admin_site)
-            group_form = PickGroupForm(admin_site=self.admin_site)
+            if show_user_perm_form:
+                user_form = PickUserForm(admin_site=self.admin_site)
+            if show_grp_perm_form:
+                group_form = PickGroupForm(admin_site=self.admin_site)
 
         context['user_form'] = user_form
         context['group_form'] = group_form

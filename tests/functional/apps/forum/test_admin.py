@@ -102,6 +102,19 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         assert response.status_code == 200
         assert response.context['user_form'].errors is not None
 
+    def test_editpermission_index_view_gives_error_without_user(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        # Run, ommitting user id
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'_select_user': True}, follow=True)
+
+        # We should get a response to the same page (we're not redirected further)
+        # But an error should have been set because of a missing user id
+        assert len(response.context['user_errors']) > 0
+
     def test_editpermission_index_view_can_redirect_to_user_permissions_form(self):
         # Setup
         model = self.model
@@ -171,6 +184,19 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         assert len(response.redirect_chain)
         last_url, status_code = response.redirect_chain[-1]
         assert editpermissions_group_url in last_url
+
+    def test_editpermission_index_view_gives_error_without_group(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_editpermission_index'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+        # Run, ommitting group import ipdb; ipdb.set_trace()
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.post(url, {'_select_group': True}, follow=True)
+
+        # We should get a response to the same page (we're not redirected further)
+        # But an error should have been set because of the missing group id
+        assert len(response.context['group_errors']) > 0
 
     def test_editpermission_index_view_can_copy_permissions_from_another_forum(self):
         # Setup
