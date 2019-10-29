@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Simen Heggestøyl <simenheg@gmail.com>, 2016
 # Stein Strindhaug <stein.strindhaug@gmail.com>, 2016-2017
@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-"
-"team/django-machina/language/nb/)\n"
-"Language: nb\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-team/django-machina/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -98,10 +97,9 @@ msgid "Display in parent-forums legend"
 msgstr "Vis i foreldreforumets forklaring"
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr ""
-"Viser dette forumet i forklaringen til dets foreldreforum (underforumer "
-"listes opp)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "Viser dette forumet i forklaringen til dets foreldreforum (underforumer listes opp)"
 
 #: apps/forum/abstract_models.py:103
 #: apps/forum_permission/abstract_models.py:64
@@ -110,7 +108,8 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Forumer"
@@ -135,37 +134,44 @@ msgstr "Foruminnstillinger"
 msgid "Link forum settings"
 msgstr "Innstillinger for lenkeforum"
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "Flyttingen av forumet {} var vellykket"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "Forumrettigheter"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "Globale forumrettigheter"
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "Kopieringen av rettigheter var vellykket"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "Velg enten en bruker-ID, en gruppe-ID, eller den anonyme brukeren"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
+msgstr ""
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "Anonym bruker"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr "Rettighetene blir nå tatt i bruk"
 
@@ -181,26 +187,36 @@ msgstr "Anonym"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
+msgstr "Vennligst velg dette alternativet dersom du ønsker å redigere rettighetene til den anonyme brukeren"
+
+#: apps/forum/forms.py:38
+msgid "Authenticated"
 msgstr ""
-"Vennligst velg dette alternativet dersom du ønsker å redigere rettighetene "
-"til den anonyme brukeren"
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
-msgstr "Velg enten en bruker-ID eller den anonyme brukeren"
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "Ikke satt"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr "Innvilget"
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr "Ikke innvilget"
 
@@ -339,9 +355,7 @@ msgstr "En bruker-ID eller en anonym nøkkel må tilknyttes et innlegg."
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr ""
-"Enten en bruker-ID eller en anonym nøkkel må tilknyttes et innlegg, men ikke "
-"begge."
+msgstr "Enten en bruker-ID eller en anonym nøkkel må tilknyttes et innlegg, men ikke begge."
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
@@ -383,9 +397,7 @@ msgstr "Avstemningsspørsmål"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr ""
-"Skriv inn et spørsmål for å koble en avstemning til tråden, eller la det stå "
-"blankt for å ikke lage en avstemning."
+msgstr "Skriv inn et spørsmål for å koble en avstemning til tråden, eller la det stå blankt for å ikke lage en avstemning."
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -415,9 +427,7 @@ msgstr "Hvis på, så vil brukere kunne endre sine stemmer."
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr ""
-"Du må angi et maksimalt antall avstemningsvalg per bruker når du lager "
-"avstemninger"
+msgstr "Du må angi et maksimalt antall avstemningsvalg per bruker når du lager avstemninger"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
@@ -669,27 +679,33 @@ msgstr "Har rettighet"
 msgid "Target anonymous user"
 msgstr "Angi for den anonyme brukeren"
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
 msgstr "Brukerforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
 msgstr "Brukerforumrettigheter"
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
-msgstr "En rettighet bør gjelde for enten en bruker eller en anonym bruker"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
+msgstr ""
 
-#: apps/forum_permission/abstract_models.py:109
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group"
 msgstr "Gruppe"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:122
 msgid "Group forum permission"
 msgstr "Gruppeforumrettighet"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
 msgstr "Gruppeforumrettigheter"
 
@@ -869,17 +885,13 @@ msgstr "Filer som er større enn {} er ikke tillatt. Din fil er {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
-"Bilder som er smalere enn {} piksler eller bredere enn {} piksler er ikke "
-"tillatt. Ditt bilde er {} piksler bredt"
+msgstr "Bilder som er smalere enn {} piksler eller bredere enn {} piksler er ikke tillatt. Ditt bilde er {} piksler bredt"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
-"Bilder som er lavere enn {} piksler eller høyere enn {} piksler er ikke "
-"tillatt. Ditt bilde er {} piksler høyt"
+msgstr "Bilder som er lavere enn {} piksler eller høyere enn {} piksler er ikke tillatt. Ditt bilde er {} piksler høyt"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -930,63 +942,65 @@ msgid "Link:"
 msgstr "Lenke:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
 msgstr "Rediger brukerrettigheter"
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr "Hjem"
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr "Rettighet"
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "Lagre"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr "Rediger grupperettigheter"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
 msgstr "Vennligst rett opp i feilen under."
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
 msgstr "Vennligst rett opp i feilene under."
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
 msgstr "Vennligst velg en bruker for å oppdatere rettighetene dens"
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "Velg"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
 msgstr "Vennligst velg en gruppe for å oppdatere rettighetene dens"
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
 msgstr "Kopier rettigheter fra et annet forum"
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr ""
-"Vennligst velg et forum for å kopiere dets rettighetskonfigurasjon til det "
-"gjeldende forumet"
+msgstr "Vennligst velg et forum for å kopiere dets rettighetskonfigurasjon til det gjeldende forumet"
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "Kopier"
 
@@ -1149,9 +1163,7 @@ msgstr "Legg til et avstemingsvalg"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
-"<b>Merk:</b>&nbsp;Sletting av et avstemningsvalg på en eksisterende "
-"avstemning vil også slette de tilhørende stemmene."
+msgstr "<b>Merk:</b>&nbsp;Sletting av et avstemningsvalg på en eksisterende avstemning vil også slette de tilhørende stemmene."
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1376,13 +1388,7 @@ msgid "Edit profile"
 msgstr "Rediger profil"
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Post</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Posts</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Post</small></p>"
@@ -1390,20 +1396,10 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Innlegg</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Innlegg</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topic</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topics</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Topic</small></p>"
@@ -1411,11 +1407,7 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Tråd</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Tråder</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1538,8 +1530,7 @@ msgstr "Avvis innlegg"
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr ""
-"Er du sikker på at du vil avvise dette innlegget? Innlegget vil slettes."
+msgstr "Er du sikker på at du vil avvise dette innlegget? Innlegget vil slettes."
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
@@ -1590,16 +1581,15 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Er du sikker på at du vil markere tråder som lest?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "%(topic_length)s uleste tråder funnet"
-msgstr[1] "%(topic_length)s uleste tråder funnet"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1608,233 +1598,3 @@ msgstr "Det er ingen uleste tråder."
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "Forumindeks"
-
-#, fuzzy
-#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-#~ msgid "forum/<str:slug>-<int:pk>/"
-#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-
-#, fuzzy
-#~| msgid "Attachment"
-#~ msgid "attachment/<int:pk>/"
-#~ msgstr "Vedlegg"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
-
-#, fuzzy
-#~| msgid "^topic/create/$"
-#~ msgid "topic/create/"
-#~ msgstr "^tråd/opprett/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-#~ msgid "topic/<str:slug>-<int:pk>/update/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/oppdater/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-#~ msgstr "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/innlegg/opprett/$"
-
-#, fuzzy
-#~| msgid ""
-#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#~| "update/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-#~ msgstr ""
-#~ "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
-#~ "oppdater/$"
-
-#, fuzzy
-#~| msgid ""
-#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#~| "delete/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-#~ msgstr ""
-#~ "^tråd/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/innlegg/"
-#~ "slett/$"
-
-#, fuzzy
-#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-
-#, fuzzy
-#~| msgid "^topics/$"
-#~ msgid "topics/"
-#~ msgstr "^tråd/$"
-
-#, fuzzy
-#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/$"
-
-#, fuzzy
-#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/tråder/alle/$"
-
-#, fuzzy
-#~| msgid "^profile/edit/$"
-#~ msgid "profile/edit/"
-#~ msgstr "^profile/rediger/$"
-
-#, fuzzy
-#~| msgid "^profile/(?P<pk>\\d+)/$"
-#~ msgid "profile/<str:pk>/"
-#~ msgstr "^profil/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^profile/(?P<pk>\\d+)/posts/$"
-#~ msgid "profile/<str:pk>/posts/"
-#~ msgstr "^profil/(?P<pk>\\d+)/innlegg/$"
-
-#, fuzzy
-#~| msgid "^subscriptions/$"
-#~ msgid "subscriptions/"
-#~ msgstr "^abonnementer/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-#~ msgid "topic/<int:pk>/subscribe/"
-#~ msgstr "^tråd/(?P<pk>\\d+)/abonner/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-#~ msgid "topic/<int:pk>/unsubscribe/"
-#~ msgstr "^tråd/(?P<pk>\\d+)/stopp-abonnement/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/lock/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lås-opp/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:slug>-<int:pk>/delete/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/slett/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/move/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/flytt/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/tråd/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/klistret/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/endre/kunngjøring/$"
-
-#, fuzzy
-#~| msgid "^queue/$"
-#~ msgid "queue/"
-#~ msgstr "^kø/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/$"
-#~ msgid "queue/<int:pk>/"
-#~ msgstr "^kø/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
-#~ msgid "queue/<int:pk>/approve/"
-#~ msgstr "^kø/(?P<pk>\\d+)/godkjenn/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-#~ msgid "queue/<int:pk>/disapprove/"
-#~ msgstr "^kø/(?P<pk>\\d+)/avvis/$"
-
-#, fuzzy
-#~| msgid "^mark/forums/$"
-#~ msgid "mark/forums/"
-#~ msgstr "^markering/forumer/$"
-
-#, fuzzy
-#~| msgid "^mark/forums/(?P<pk>\\d+)/$"
-#~ msgid "mark/forums/<int:pk>/"
-#~ msgstr "^markering/forumer/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-#~ msgid "mark/forum/<int:pk>/topics/"
-#~ msgstr "^markering/forumer/(?P<pk>\\d+)/tråder/$"
-
-#, fuzzy
-#~| msgid "^unread-topics/$"
-#~ msgid "unread-topics/"
-#~ msgstr "^uleste-tråder/$"
-
-#~ msgid "^feeds/"
-#~ msgstr "^kilder/"
-
-#~ msgid "^member/"
-#~ msgstr "^medlem/"
-
-#~ msgid "^moderation/"
-#~ msgstr "^moderasjon/"
-
-#~ msgid "^search/"
-#~ msgstr "^søk/"
-
-#~ msgid "^tracking/"
-#~ msgstr "^sporing/"
-
-#~ msgid "Global permission"
-#~ msgstr "Global rettighet"
-
-#~ msgid "This permission can be granted globally to all the forums"
-#~ msgstr "Denne rettigheten kan innvilges globalt til alle forumene"
-
-#~ msgid "Local permission"
-#~ msgstr "Lokal rettighet"
-
-#~ msgid "This permission can be granted individually for each forum"
-#~ msgstr "Denne rettigheten kan innvilges individuelt for hvert forum"
-
-#~ msgid "A forum permission should be at least either global or local"
-#~ msgstr "En forumrettighet må i det minste være enten global eller lokal"
-
-#~ msgid "The following permission cannot be granted globally: {}"
-#~ msgstr "Følgende rettighet kan ikke innvilges globalt: {}"
-
-#~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-
-#~ msgid "Poster IP address"
-#~ msgstr "Forfatterens IP-adresse"
-
-#~ msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^tråd/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-
-#~ msgid "Search..."
-#~ msgstr "Søk …"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "No"
-#~ msgstr "Nei"
-
-#~ msgid "Move"
-#~ msgstr "Flytt"
-
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"

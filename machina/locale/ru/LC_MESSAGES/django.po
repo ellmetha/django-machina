@@ -1,26 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # alexander fedorov <elf607@gmail.com>, 2017
 # georgekpg <konstantinpopov@inbox.ru>, 2018
+# Za Ars <zaars.progger@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-"
-"machina/language/ru/)\n"
-"Language: ru\n"
+"Language-Team: Russian (http://www.transifex.com/django-machina-team/django-machina/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: apps/forum/abstract_models.py:41
@@ -47,7 +45,7 @@ msgstr "Изображение форума"
 
 #: apps/forum/abstract_models.py:56
 msgid "Forum link"
-msgstr "Форумная ссылка"
+msgstr "Ссылка форума"
 
 #: apps/forum/abstract_models.py:58 apps/forum/abstract_models.py:80
 msgid "Track link redirects count"
@@ -75,11 +73,11 @@ msgstr "Тип форума"
 
 #: apps/forum/abstract_models.py:75
 msgid "Direct number of posts"
-msgstr ""
+msgstr "Кол-во постов"
 
 #: apps/forum/abstract_models.py:78
 msgid "Direct number of topics"
-msgstr ""
+msgstr "Кол-во тем"
 
 #: apps/forum/abstract_models.py:88
 #: apps/forum_conversation/abstract_models.py:90
@@ -100,9 +98,9 @@ msgid "Display in parent-forums legend"
 msgstr "Отображать в легенде родительских форумов"
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr ""
-"Показывать этот форуум в легенде родительского форума (списке подфорумов)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "Показывать этот форуум в легенде родительского форума (списке подфорумов)"
 
 #: apps/forum/abstract_models.py:103
 #: apps/forum_permission/abstract_models.py:64
@@ -111,7 +109,8 @@ msgstr ""
 msgid "Forum"
 msgstr "Форум"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Форумы"
@@ -136,38 +135,44 @@ msgstr "Настройки форума"
 msgid "Link forum settings"
 msgstr "Настройки форума ссылок"
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "Форум '{}' успешно перемещён"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "Разрешения форума"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "Глобальные разрешения форума"
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "Разрешения успешно скопированы"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
 msgstr ""
-"Выберите или пользовательский ID или ID группы, или анонимного пользователя"
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "Анонимный пользователь"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr "Разрешения успешно применены"
 
@@ -183,26 +188,36 @@ msgstr "Аноним"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
+msgstr "Выберите этот вариант, если вы хотите отредактировать разрешения анонимного пользоватея"
+
+#: apps/forum/forms.py:38
+msgid "Authenticated"
 msgstr ""
-"Выберите этот вариант, если вы хотите отредактировать разрешения анонимного "
-"пользоватея"
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
-msgstr "Выберите или пользовательский ID или анонимного пользователя"
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "Не установлено"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr "Предоставлено"
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr "Не предоставлено"
 
@@ -336,25 +351,20 @@ msgstr "Сообщения"
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
-"сообщением"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением"
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть связан с "
-"сообщением, но не оба одновременно"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением, но не оба одновременно"
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
-msgstr ""
-"Имя пользователя должно быть указано, если автор - анонимный пользователь"
+msgstr "Имя пользователя должно быть указано, если автор - анонимный пользователь"
 
 #: apps/forum_conversation/apps.py:17
 msgid "Machina: Forum conversations"
-msgstr "Machina: форумные беседы"
+msgstr "Machina: Беседы форума"
 
 #: apps/forum_conversation/forms.py:47
 msgid "Enter your subject"
@@ -388,9 +398,7 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr ""
-"Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не "
-"создавать опрос"
+msgstr "Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не создавать опрос"
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -399,9 +407,7 @@ msgstr "Максимальное количество вариантов для 
 
 #: apps/forum_conversation/forms.py:158
 msgid "This is the number of options each user may select when voting."
-msgstr ""
-"Это количество вариантов, которые пользователь сможет выбрать при "
-"голосовании."
+msgstr "Это количество вариантов, которые пользователь сможет выбрать при голосовании."
 
 #: apps/forum_conversation/forms.py:163
 msgid "For how many days the poll should be run?"
@@ -417,15 +423,12 @@ msgstr "Позволить голосовать заново?"
 
 #: apps/forum_conversation/forms.py:169
 msgid "If enabled users are able to change their vote."
-msgstr ""
-"Если отмечено, пользователи будут иметь возможность изменить своё выбор."
+msgstr "Если отмечено, пользователи будут иметь возможность изменить своё выбор."
 
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr ""
-"Вы должны установить максимальное количество вариантов, которые может "
-"выбрать пользователь, когда создаёте опрос"
+msgstr "Вы должны установить максимальное количество вариантов, которые может выбрать пользователь, когда создаёте опрос"
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
@@ -450,7 +453,7 @@ msgstr "Вложения"
 
 #: apps/forum_conversation/forum_attachments/apps.py:17
 msgid "Machina: Forum attachments"
-msgstr "Machina: Форумные вложения"
+msgstr "Machina: Вложения форума"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
@@ -507,18 +510,15 @@ msgstr "Голосования опроса темы"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:121
 msgid "A user id or an anonymous key must be used."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть использован"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован"
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:123
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr ""
-"Пользовательский ID или ключ анонимного пользователя должен быть "
-"использован, но не оба одновременно"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть использован, но не оба одновременно"
 
 #: apps/forum_conversation/forum_polls/apps.py:17
 msgid "Machina: Forum polls"
-msgstr "Machina: Форумные опросы"
+msgstr "Machina: Опросы форума"
 
 #: apps/forum_conversation/forum_polls/forms.py:33
 msgid "Enter a poll option"
@@ -562,7 +562,7 @@ msgstr "Сообщение было успешно удалено."
 
 #: apps/forum_feeds/apps.py:17
 msgid "Machina: Forum feeds"
-msgstr "Machina: форумные каналы"
+msgstr "Machina: Каналы форума"
 
 #: apps/forum_feeds/feeds.py:26
 msgid "Latest topics"
@@ -601,7 +601,7 @@ msgstr "Форумные профили"
 
 #: apps/forum_member/apps.py:17
 msgid "Machina: Forum members"
-msgstr "Machina: участники форума"
+msgstr "Machina: Участники форума"
 
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
@@ -617,7 +617,7 @@ msgstr "вы успешно отписались от этой темы."
 
 #: apps/forum_moderation/apps.py:17
 msgid "Machina: Forum moderation"
-msgstr "Machina: модерация форума"
+msgstr "Machina: Модерация форума"
 
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
@@ -674,147 +674,153 @@ msgstr "Разрешение форума"
 
 #: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
-msgstr ""
+msgstr "Есть разрешение"
 
 #: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
+msgstr "Цель анонимный пользователь"
+
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
-msgstr ""
+msgstr "Разрешение пользователя форума"
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
-msgstr ""
+msgstr "Разрешения пользователя форума"
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:109
-msgid "Group"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:115
-msgid "Group forum permission"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
 msgstr ""
 
 #: apps/forum_permission/abstract_models.py:116
+msgid "Group"
+msgstr "Группа"
+
+#: apps/forum_permission/abstract_models.py:122
+msgid "Group forum permission"
+msgstr "Разрешение группы форума"
+
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
-msgstr ""
+msgstr "Разрешения группы форума"
 
 #: apps/forum_permission/apps.py:17
 msgid "Machina: Forum permissions"
-msgstr ""
+msgstr "Machina: Разрешения форума"
 
 #: apps/forum_permission/defaults.py:27
 msgid "Can see forum"
-msgstr ""
+msgstr "Может видеть форума"
 
 #: apps/forum_permission/defaults.py:32
 msgid "Can read forum"
-msgstr ""
+msgstr "Может читать форум"
 
 #: apps/forum_permission/defaults.py:39
 msgid "Can start new topics"
-msgstr ""
+msgstr "Может начать новую тему"
 
 #: apps/forum_permission/defaults.py:44
 msgid "Can reply to topics"
-msgstr ""
+msgstr "Может отвечать на темы"
 
 #: apps/forum_permission/defaults.py:49
 msgid "Can post announcements"
-msgstr ""
+msgstr "Может писать объявления"
 
 #: apps/forum_permission/defaults.py:54
 msgid "Can post stickies"
-msgstr ""
+msgstr "Может отправлять закрепленные сообщения"
 
 #: apps/forum_permission/defaults.py:59
 msgid "Can delete own posts"
-msgstr ""
+msgstr "Может удалять свои ответы"
 
 #: apps/forum_permission/defaults.py:64
 msgid "Can edit own posts"
-msgstr ""
+msgstr "Может редактировать свои ответы"
 
 #: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
-msgstr ""
+msgstr "Может отвечать без проверки"
 
 #: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
-msgstr ""
+msgstr "Может создавать опросы"
 
 #: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
-msgstr ""
+msgstr "Может голосовать в опросах"
 
 #: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
-msgstr ""
+msgstr "Может прикреплять файл"
 
 #: apps/forum_permission/defaults.py:93
 msgid "Can download file"
-msgstr ""
+msgstr "Может загружать файл"
 
 #: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
-msgstr ""
+msgstr "Может закреплять темы"
 
 #: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
-msgstr ""
+msgstr "Может перемещать темы"
 
 #: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
-msgstr ""
+msgstr "Может редактировать ответы"
 
 #: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
-msgstr ""
+msgstr "Может удалять ответы"
 
 #: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
-msgstr ""
+msgstr "Может проверять ответы"
 
 #: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
-msgstr ""
+msgstr "Может отвечать в закрытые темы"
 
 #: apps/forum_search/apps.py:17
 msgid "Machina: Forum searches"
-msgstr "Machina: поиск по форуму"
+msgstr "Machina: Поиск по форуму"
 
 #: apps/forum_search/forms.py:26
 msgid "Search only in topic subjects"
-msgstr ""
+msgstr "Искать только в названиях тем"
 
 #: apps/forum_search/forms.py:29
 msgid "Search for poster"
-msgstr ""
+msgstr "Искать по автору"
 
 #: apps/forum_search/forms.py:30
 msgid "Enter a user name to limit the search to a specific user."
-msgstr ""
+msgstr "Введите имя пользователя для ограничения поиска по определенному лицу"
 
 #: apps/forum_search/forms.py:35
 msgid "Search in specific forums"
-msgstr ""
+msgstr "Искать в определенных форумах"
 
 #: apps/forum_search/forms.py:36
 msgid "Select the forums you wish to search in."
-msgstr ""
+msgstr "Выберите форумы, по которым хотите произвести поиск"
 
 #: apps/forum_search/forms.py:46
 msgid "Search for keywords"
-msgstr ""
+msgstr "Искать по ключевым словать"
 
 #: apps/forum_search/forms.py:47
 msgid "Keywords or phrase"
-msgstr ""
+msgstr "Ключевые слова или фраза"
 
 #: apps/forum_search/forms.py:48
 msgid "Poster name"
@@ -838,7 +844,7 @@ msgstr "Отслеживания темы"
 
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
-msgstr ""
+msgstr "Machina: Отслеживание форума"
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
@@ -850,7 +856,7 @@ msgstr "Темы были отмечены как прочитанные."
 
 #: core/compat.py:16
 msgid "Neither Pillow nor PIL could be imported: {}"
-msgstr ""
+msgstr "Ни Pillow, ни PIL не могут быть импортированы: {}"
 
 #: models/abstract_models.py:13
 msgid "Creation date"
@@ -862,31 +868,31 @@ msgstr "Дата обновления"
 
 #: models/fields.py:31
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
-msgstr ""
+msgstr "Невозможно импортировать MACHINA_MARKUP_WIDGET {}: {}"
 
 #: models/fields.py:57
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
-msgstr ""
+msgstr "Невозможно импортировать MACHINA_MARKUP_LANGUAGE {}: {}"
 
 #: models/fields.py:62
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
-msgstr ""
+msgstr "Настройка MACHINA_MARKUP_LANGUAGE обязательна "
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr ""
+msgstr "Файлы размера больше чем {} не доступны для загрузки. Ваш файл {}"
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
+msgstr "Изображения имеют ширину меньше {}px, больше {}px или не разрешены. Ширина вашего изображения: {}px"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
+msgstr "Изображения имеют высоту меньше {}px, больше {}px или не разрешены. Высота вашего изображения: {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -937,61 +943,65 @@ msgid "Link:"
 msgstr "Ссылки:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
+msgstr "Редактировать разрешения пользователя"
+
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr "Домой"
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr "Разрешения"
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "Сохранить"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr "Настроить разрешения группы"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
-msgstr ""
+msgstr "Пожалуйста, исправьте ошибку"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "Пожалуйста, исправьте ошибки"
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
-msgstr ""
+msgstr "Выберите пользователя, чтобы обновить его разрешения"
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "Выбрать"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
-msgstr ""
+msgstr "Выберите группу, чтобы обновить ее разрешения"
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
-msgstr ""
+msgstr "Скопировать разрешения из другого форума"
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr ""
+msgstr "Выберите форум, чтобы скопировать его параметры разрешений в текущий форум "
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "Скопировать"
 
@@ -1013,7 +1023,7 @@ msgstr "Подписки"
 
 #: templates/machina/board_base.html:42
 msgid "View my posts"
-msgstr ""
+msgstr "Посмотреть мои ответы"
 
 #: templates/machina/board_base.html:46
 #: templates/machina/forum_moderation/moderation_queue/detail.html:5
@@ -1086,7 +1096,7 @@ msgstr "Форумов нет."
 
 #: templates/machina/forum/index.html:6
 msgid "Index"
-msgstr "Индекс"
+msgstr "Главная"
 
 #: templates/machina/forum/index.html:13
 #: templates/machina/forum_tracking/mark_forums_read.html:5
@@ -1154,9 +1164,7 @@ msgstr "Добавить вариант опроса"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
-"<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и "
-"связанные с ним голоса. "
+msgstr "<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и связанные с ним голоса. "
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1333,16 +1341,16 @@ msgstr "Обновлено"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "on"
-msgstr ""
+msgstr "на"
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 #, python-format
 msgid "edited %(counter)s time in total."
 msgid_plural "edited %(counter)s times in total."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "всего отредактировано %(counter)s раз"
+msgstr[1] "всего отредактировано %(counter)s раза"
+msgstr[2] "всего отредактировано %(counter)s раз"
+msgstr[3] "всего отредактировано %(counter)s раз"
 
 #: templates/machina/forum_conversation/topic_detail.html:81
 msgid "Reason:"
@@ -1376,7 +1384,7 @@ msgstr "Добавлено "
 #: templates/machina/forum_member/forum_profile_detail.html:10
 #, python-format
 msgid "%(username)s profile"
-msgstr ""
+msgstr "Профиль пользователя %(username)s"
 
 #: templates/machina/forum_member/forum_profile_detail.html:26
 msgid "Edit profile"
@@ -1419,7 +1427,7 @@ msgstr "Просмотреть все"
 #: templates/machina/forum_member/forum_profile_detail.html:70
 #, python-format
 msgid "On %(creation_date)s"
-msgstr ""
+msgstr " %(creation_date)s"
 
 #: templates/machina/forum_member/forum_profile_update.html:4
 #: templates/machina/forum_member/forum_profile_update.html:11
@@ -1435,10 +1443,10 @@ msgstr "Темы на которые вы подписаны"
 #, python-format
 msgid "%(counter)s topic found"
 msgid_plural "%(counter)s topics found"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s тема найдена"
+msgstr[1] "%(counter)s тем найдено"
+msgstr[2] "%(counter)s тем найдено"
+msgstr[3] "%(counter)s тем найдено"
 
 #: templates/machina/forum_member/subscription_topic_list.html:31
 msgid "Not topics found."
@@ -1471,16 +1479,16 @@ msgstr "Мои сообщения"
 #: templates/machina/forum_member/user_posts_list.html:10
 #, python-format
 msgid "%(username)s's posts"
-msgstr ""
+msgstr "Сообщения пользователя %(username)s"
 
 #: templates/machina/forum_member/user_posts_list.html:17
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s сообщение найдено"
+msgstr[1] "%(counter)s сообщений найдено"
+msgstr[2] "%(counter)s сообщений найдено"
+msgstr[3] "%(counter)s сообщений найдено"
 
 #: templates/machina/forum_member/user_posts_list.html:24
 msgid "No posts found"
@@ -1500,17 +1508,17 @@ msgstr "Новое сообщение"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:32
 msgid "<b>1</b> option may be selected"
-msgstr ""
+msgstr "<b>1</b> вариант может быть выбран"
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:36
 #, python-format
 msgid "Up to <b>%(max_options)s</b> options may be selected"
-msgstr ""
+msgstr " Может быть выбрано до <b>%(max_options)s</b> опций"
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:17
 #, python-format
 msgid "%(topic_length)s posts found"
-msgstr ""
+msgstr "%(topic_length)s сообщений найдено"
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:79
 msgid "No posts awaiting approval."
@@ -1564,10 +1572,10 @@ msgstr "Новый поиск"
 #, python-format
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "По вашему запросу было найден <b>%(number_of_results)s</b>результат"
+msgstr[1] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
+msgstr[2] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
+msgstr[3] "По вашему запросу было найдено <b>%(number_of_results)s</b> результатов"
 
 #: templates/machina/forum_search/search.html:70
 msgid "Results"
@@ -1586,18 +1594,17 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Вы уверены, что хотите отметить темы прочитанными?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "%(topic_length)s непрочитанных тем найдено"
-msgstr[1] "%(topic_length)s непрочитанных тем найдено"
-msgstr[2] "%(topic_length)s непрочитанных тем найдено"
-msgstr[3] "%(topic_length)s непрочитанных тем найдено"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1605,60 +1612,4 @@ msgstr "Непрочитанных тем не найдено."
 
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
-msgstr ""
-
-#, fuzzy
-#~| msgid "Attachment"
-#~ msgid "attachment/<int:pk>/"
-#~ msgstr "Вложение"
-
-#, fuzzy
-#~| msgid "Topics"
-#~ msgid "topics/"
-#~ msgstr "Темы"
-
-#, fuzzy
-#~| msgid "Subscriptions"
-#~ msgid "subscriptions/"
-#~ msgstr "Подписки"
-
-#, fuzzy
-#~| msgid "Mark forums read"
-#~ msgid "mark/forums/"
-#~ msgstr "Отметить форумы прочитанными"
-
-#, fuzzy
-#~| msgid "View unread topics"
-#~ msgid "unread-topics/"
-#~ msgstr "Показать непрочитанные темы"
-
-#~ msgid "Global permission"
-#~ msgstr "Глабальное разрешение"
-
-#~ msgid "This permission can be granted globally to all the forums"
-#~ msgstr "Это разрешение может быть установлено глобально на все форумы"
-
-#~ msgid "Local permission"
-#~ msgstr "Местное разрешение"
-
-#~ msgid "This permission can be granted individually for each forum"
-#~ msgstr ""
-#~ "Это разрешение может быть установлено для каждого форума индивидуально"
-
-#~ msgid "Poster IP address"
-#~ msgstr "IP адресс автора"
-
-#~ msgid "Search..."
-#~ msgstr "Найти..."
-
-#~ msgid "Yes"
-#~ msgstr "Да"
-
-#~ msgid "No"
-#~ msgstr "Нет"
-
-#~ msgid "Move"
-#~ msgstr "Переместить"
-
-#~ msgid "Cancel"
-#~ msgstr "Отменить"
+msgstr "Главная страница форума"

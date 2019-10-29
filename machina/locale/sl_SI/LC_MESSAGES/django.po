@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Miha Frangež <miha.frangez@gmail.com>, 2016-2017
 # Miha Frangež <miha.frangez@gmail.com>, 2016
@@ -10,17 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-"
-"team/django-machina/language/sl_SI/)\n"
-"Language: sl_SI\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-team/django-machina/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: apps/forum/abstract_models.py:41
@@ -100,7 +98,8 @@ msgid "Display in parent-forums legend"
 msgstr ""
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr ""
 
 #: apps/forum/abstract_models.py:103
@@ -110,7 +109,8 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Forumi"
@@ -135,37 +135,44 @@ msgstr "Nastavitve foruma"
 msgid "Link forum settings"
 msgstr ""
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "Forum '{}' premaknjen"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "Dovoljenja foruma"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr ""
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "Dovoljenja kopirana"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
 msgstr ""
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "Anonimen uporabnik"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr ""
 
@@ -183,22 +190,34 @@ msgid ""
 "anonymous user"
 msgstr ""
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
+#: apps/forum/forms.py:38
+msgid "Authenticated"
 msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
+
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "Ni nastavljeno"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr ""
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr ""
 
@@ -661,27 +680,33 @@ msgstr "Ima dovoljenje"
 msgid "Target anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
-msgstr ""
-
-#: apps/forum_permission/abstract_models.py:109
-msgid "Group"
-msgstr "Skupina"
-
-#: apps/forum_permission/abstract_models.py:115
-msgid "Group forum permission"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
 msgstr ""
 
 #: apps/forum_permission/abstract_models.py:116
+msgid "Group"
+msgstr "Skupina"
+
+#: apps/forum_permission/abstract_models.py:122
+msgid "Group forum permission"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
 msgstr ""
 
@@ -861,17 +886,13 @@ msgstr "Datoteke večje od {} niso dovoljene. Vaša datoteka je velika {}"
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
-"Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše "
-"slike je {}px"
+msgstr "Slike s širino manjšo od {}px ali večjo od {}px niso dovoljene. Širina vaše slike je {}px"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
-"Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše "
-"slike je {}px"
+msgstr "Slike z višino manjšo od {}px ali večjo od {}px niso dovoljene. Višina vaše slike je {}px"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -922,61 +943,65 @@ msgid "Link:"
 msgstr "Povezave:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
 msgstr "Uredi dovoljenja uporabnika"
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr "Domov"
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr "Dovoljenje"
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "Shrani"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr "Uredi dovoljenja skupine"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "Izberi"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "Kopiraj"
 
@@ -1366,13 +1391,7 @@ msgid "Edit profile"
 msgstr "Uredi profil"
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Post</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Posts</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Post</small></p>"
@@ -1380,26 +1399,12 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Objava</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Objavi</small></p>"
 msgstr[2] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Objave</small></p>"
 msgstr[3] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Objav</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topic</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topics</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Topic</small></p>"
@@ -1407,17 +1412,9 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Tema</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Temi</small></p>"
 msgstr[2] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Teme</small></p>"
 msgstr[3] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Tem</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1597,18 +1594,17 @@ msgid "Are you sure you want to mark topics read?"
 msgstr ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "%(topic_length)s neprebranih tem najdenih"
-msgstr[1] "%(topic_length)s neprebranih tem najdenih"
-msgstr[2] "%(topic_length)s neprebranih tem najdenih"
-msgstr[3] "%(topic_length)s neprebranih tem najdenih"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1617,208 +1613,3 @@ msgstr "Ni novih tem"
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "Imenik foruma"
-
-#, fuzzy
-#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-#~ msgid "forum/<str:slug>-<int:pk>/"
-#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-
-#, fuzzy
-#~| msgid "Attachment"
-#~ msgid "attachment/<int:pk>/"
-#~ msgstr "Priloga"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zakleni/$"
-
-#, fuzzy
-#~| msgid "^topic/create/$"
-#~ msgid "topic/create/"
-#~ msgstr "^tema/ustvari/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/update/$"
-#~ msgid "topic/<str:slug>-<int:pk>/update/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/uredi/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/post/create/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-#~ msgstr "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/objava/ustvari/$"
-
-#, fuzzy
-#~| msgid ""
-#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#~| "update/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-#~ msgstr ""
-#~ "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/"
-#~ "uredi/$"
-
-#, fuzzy
-#~| msgid ""
-#~| "^topic/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/post/"
-#~| "delete/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-#~ msgstr ""
-#~ "^tema/(?P<topic_slug>[\\w-]+)-(?P<topic_pk>\\d+)/(?P<pk>\\d+)/objava/"
-#~ "izbriši/$"
-
-#, fuzzy
-#~| msgid "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/"
-#~ msgstr "forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/"
-
-#, fuzzy
-#~| msgid "^topics/$"
-#~ msgid "topics/"
-#~ msgstr "^teme/$"
-
-#, fuzzy
-#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/$"
-
-#, fuzzy
-#~| msgid "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/topics/all/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-#~ msgstr "^forum/(?P<forum_slug>[\\w-]+)-(?P<forum_pk>\\d+)/teme/vse/$"
-
-#, fuzzy
-#~| msgid "^profile/edit/$"
-#~ msgid "profile/edit/"
-#~ msgstr "^profil/uredi/$"
-
-#, fuzzy
-#~| msgid "^profile/(?P<pk>\\d+)/$"
-#~ msgid "profile/<str:pk>/"
-#~ msgstr "^profil/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^profile/(?P<pk>\\d+)/posts/$"
-#~ msgid "profile/<str:pk>/posts/"
-#~ msgstr "^profil/(?P<pk>\\d+)/objave/$"
-
-#, fuzzy
-#~| msgid "^subscriptions/$"
-#~ msgid "subscriptions/"
-#~ msgstr "^naročnine/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-#~ msgid "topic/<int:pk>/subscribe/"
-#~ msgstr "^tema/(?P<pk>\\d+)/naroči/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-#~ msgid "topic/<int:pk>/unsubscribe/"
-#~ msgstr "^tema/(?P<pk>\\d+)/odjavi/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/lock/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/zakleni/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/odkleni/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:slug>-<int:pk>/delete/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/izbriši/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/move/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/premakni/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/tema/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/pripeto/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/spremeni/razglas/$"
-
-#, fuzzy
-#~| msgid "^queue/$"
-#~ msgid "queue/"
-#~ msgstr "^čakalna-vrsta/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/$"
-#~ msgid "queue/<int:pk>/"
-#~ msgstr "^čakalna-vrsta/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
-#~ msgid "queue/<int:pk>/approve/"
-#~ msgstr "^čakalna-vrsta/(?P<pk>\\d+)/potrdi/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-#~ msgid "queue/<int:pk>/disapprove/"
-#~ msgstr "^čakalna-vrsta/(?P<pk>\\d+)/zavrni/$"
-
-#, fuzzy
-#~| msgid "Mark forums read"
-#~ msgid "mark/forums/"
-#~ msgstr "Označi forume kot prebrane"
-
-#, fuzzy
-#~| msgid "^unread-topics/$"
-#~ msgid "unread-topics/"
-#~ msgstr "^neprebrane-teme/$"
-
-#~ msgid "^member/"
-#~ msgstr "^član/"
-
-#~ msgid "^moderation/"
-#~ msgstr "^moderacija/"
-
-#~ msgid "^search/"
-#~ msgstr "^iskanje/"
-
-#~ msgid "Global permission"
-#~ msgstr "Globalno dovoljenje"
-
-#~ msgid "Local permission"
-#~ msgstr "Lokalno dovoljenje"
-
-#~ msgid "The following permission cannot be granted globally: {}"
-#~ msgstr "Dovoljenje '{}' ne more biti globalno"
-
-#~ msgid "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^forum/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-
-#~ msgid "Poster IP address"
-#~ msgstr "IP naslov avtorja"
-
-#~ msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-#~ msgstr "^tema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/$"
-
-#~ msgid "Search..."
-#~ msgstr "Iskanje"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid "Move"
-#~ msgstr "Premakni"
-
-#~ msgid "Cancel"
-#~ msgstr "Prekliči"

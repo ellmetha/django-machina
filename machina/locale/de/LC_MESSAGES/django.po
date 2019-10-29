@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Marcel Lambert <marcel.lambert@wesualize.com>, 2017
 # Robert Gutschale <r.gutschale@blueshoe.de>, 2018
@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2018-08-29 11:57+0000\n"
-"Last-Translator: Robert Gutschale <r.gutschale@blueshoe.de>\n"
-"Language-Team: German (http://www.transifex.com/django-machina-team/django-"
-"machina/language/de/)\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
+"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"Language-Team: German (http://www.transifex.com/django-machina-team/django-machina/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -98,10 +97,9 @@ msgid "Display in parent-forums legend"
 msgstr "In Legende des übergeordneten Forum anzeigen"
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr ""
-"Zeigt dieses Forum in der Legende seines übergeordneten Forums an (Subforen-"
-"Liste)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgstr "Zeigt dieses Forum in der Legende seines übergeordneten Forums an (Subforen-Liste)"
 
 #: apps/forum/abstract_models.py:103
 #: apps/forum_permission/abstract_models.py:64
@@ -110,7 +108,8 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "Foren"
@@ -135,37 +134,44 @@ msgstr "Forumeinstellungen"
 msgid "Link forum settings"
 msgstr "Linkforum-Einstellungen"
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "'{}' Forum erfolgreich verschoben"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "Forum Berechtigungen"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "Globale Forum Berechtigungen"
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "Berechtigungen erfolgreich kopiert"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "Wähle entweder eine Nutzer ID oder anonyme Nutzer"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
+msgstr ""
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "Anonymer Benutzer"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr "Berechtigungen erfolgreich angewendet"
 
@@ -181,25 +187,36 @@ msgstr "Anonym"
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
+msgstr "Bitte wähle diese Option, um die Berechtigungen anonymer Nutzer zu bearbeiten"
+
+#: apps/forum/forms.py:38
+msgid "Authenticated"
 msgstr ""
-"Bitte wähle diese Option, um die Berechtigungen anonymer Nutzer zu bearbeiten"
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
-msgstr "Wähle entweder eine Nutzer ID oder anonyme Nutzer"
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "Nicht festgelegt"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr "Gestattet"
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr "Nicht gestattet"
 
@@ -389,9 +406,7 @@ msgstr "Maximale Stimmenzahl pro Nutzer"
 
 #: apps/forum_conversation/forms.py:158
 msgid "This is the number of options each user may select when voting."
-msgstr ""
-"Dies ist die Anzahl der Optionen, die ein Nutzer bei der Abstimmung "
-"auswählen kann."
+msgstr "Dies ist die Anzahl der Optionen, die ein Nutzer bei der Abstimmung auswählen kann."
 
 #: apps/forum_conversation/forms.py:163
 msgid "For how many days the poll should be run?"
@@ -407,9 +422,7 @@ msgstr "Ändern der Abstimmung erlauben?"
 
 #: apps/forum_conversation/forms.py:169
 msgid "If enabled users are able to change their vote."
-msgstr ""
-"Ist diese Option ausgewählt, können Nutzer ihre Abstimmung nachträglich "
-"ändern"
+msgstr "Ist diese Option ausgewählt, können Nutzer ihre Abstimmung nachträglich ändern"
 
 #: apps/forum_conversation/forms.py:192
 msgid ""
@@ -666,27 +679,33 @@ msgstr "ist berechtigt"
 msgid "Target anonymous user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
 msgstr ""
 
-#: apps/forum_permission/abstract_models.py:109
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group"
 msgstr "Gruppe"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:122
 msgid "Group forum permission"
 msgstr "Gruppenbefugniss"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
 msgstr "Gruppenbefugnisse"
 
@@ -866,17 +885,13 @@ msgstr "Dateien mit mehr als {} sind nicht zulässig. Datei ist {} groß."
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
-"Bilder mit einer Breite von weniger als {}px oder mehr als {}px sind nicht "
-"zulässig. Dein Bild hat eine Breite von {}px."
+msgstr "Bilder mit einer Breite von weniger als {}px oder mehr als {}px sind nicht zulässig. Dein Bild hat eine Breite von {}px."
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
-"Bilder mit einer Höhe von weniger als {}px oder mehr als {}px sind nicht "
-"zulässig. Dein Bild hat eine Höhe von {}px."
+msgstr "Bilder mit einer Höhe von weniger als {}px oder mehr als {}px sind nicht zulässig. Dein Bild hat eine Höhe von {}px."
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -927,61 +942,65 @@ msgid "Link:"
 msgstr "Link:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "Speichern"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
 msgstr "Bitte den untenstehenden Fehler korrigieren."
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
 msgstr "Bitte die untenstehenden Fehler korrigieren."
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "Auswählen"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
 msgstr ""
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -1144,9 +1163,7 @@ msgstr "Abstimmungsoption hinzufügen"
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr ""
-"<b>Hinweis:</b>&nbsp;Beim Löschen von Abstimmungsoptionen in bestehenden "
-"Umfragen werden die zugehörigen Stimmen gelöscht."
+msgstr "<b>Hinweis:</b>&nbsp;Beim Löschen von Abstimmungsoptionen in bestehenden Umfragen werden die zugehörigen Stimmen gelöscht."
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
@@ -1371,13 +1388,7 @@ msgid "Edit profile"
 msgstr "Profil bearbeiten"
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Post</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Posts</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Post</small></p>"
@@ -1385,20 +1396,10 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Beitrag</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Beiträge</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topic</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topics</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Topic</small></p>"
@@ -1406,11 +1407,7 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Thema</small></p>"
 msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Themen</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1533,9 +1530,7 @@ msgstr "Beitrag ablehnen"
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr ""
-"Bist du sicher, dass du diesen Beitrag ablehnen möchtest? Der Beitrag wird "
-"damit gelöscht."
+msgstr "Bist du sicher, dass du diesen Beitrag ablehnen möchtest? Der Beitrag wird damit gelöscht."
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
@@ -1586,16 +1581,15 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "Bist du sicher, dass du alle Themen als gelesen markieren möchtest?"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "%(topic_length)s ungelesene Themen gefunden"
-msgstr[1] "%(topic_length)s ungelesene Themen gefunden"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1604,154 +1598,3 @@ msgstr "Es gibt keine ungelesenen Themen."
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "Forenübersicht"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "forum/<str:slug>-<int:pk>/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/sperren/$"
-
-#, fuzzy
-#~| msgid "Attachment"
-#~ msgid "attachment/<int:pk>/"
-#~ msgstr "Anhang"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/sperren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:slug>-<int:pk>/update/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/update/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/<int:pk>/post/delete/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
-
-#, fuzzy
-#~| msgid "Topics"
-#~ msgid "topics/"
-#~ msgstr "Themen"
-
-#, fuzzy
-#~| msgid "^profile/edit/$"
-#~ msgid "profile/edit/"
-#~ msgstr "^profil/bearbeiten/$"
-
-#, fuzzy
-#~| msgid "^profile/(?P<pk>\\d+)/$"
-#~ msgid "profile/<str:pk>/"
-#~ msgstr "^profil/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^subscriptions/$"
-#~ msgid "subscriptions/"
-#~ msgstr "^abonnements/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/subscribe/$"
-#~ msgid "topic/<int:pk>/subscribe/"
-#~ msgstr "^thema/(?P<pk>\\d+)/abonnieren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<pk>\\d+)/unsubscribe/$"
-#~ msgid "topic/<int:pk>/unsubscribe/"
-#~ msgstr "^thema/(?P<pk>\\d+)/abbestellen/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/lock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/lock/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/sperren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/entsperren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/delete/$"
-#~ msgid "topic/<str:slug>-<int:pk>/delete/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/löschen/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/move/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/verschieben/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/entsperren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/entsperren/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/unlock/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
-#~ msgstr "^thema/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/entsperren/$"
-
-#, fuzzy
-#~| msgid "^queue/$"
-#~ msgid "queue/"
-#~ msgstr "^schlange/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/$"
-#~ msgid "queue/<int:pk>/"
-#~ msgstr "^schlange/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
-#~ msgid "queue/<int:pk>/approve/"
-#~ msgstr "^schlange/(?P<pk>\\d+)/akzeptieren$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-#~ msgid "queue/<int:pk>/disapprove/"
-#~ msgstr "^schlange/(?P<pk>\\d+)/ablehnen$"
-
-#, fuzzy
-#~| msgid "Mark forums read"
-#~ msgid "mark/forums/"
-#~ msgstr "Foren als gelesen markieren"
-
-#, fuzzy
-#~| msgid "^unread-topics/$"
-#~ msgid "unread-topics/"
-#~ msgstr "^ungelesene-themen/$"
-
-#~ msgid "The following permission cannot be granted globally: {}"
-#~ msgstr "Die folgende Erlaubnis kann nicht global gewährt werden: {}"
-
-#~ msgid "Poster IP address"
-#~ msgstr "IP Adresse des Verfassers"
-
-#~ msgid "Search..."
-#~ msgstr "Suchen..."
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "No"
-#~ msgstr "Nein"
-
-#~ msgid "Move"
-#~ msgstr "Verschieben"
-
-#~ msgid "Cancel"
-#~ msgstr "Abbrechen"

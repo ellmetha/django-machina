@@ -1,81 +1,80 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Davinia MC, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-28 21:35-0400\n"
-"PO-Revision-Date: 2019-10-29 01:36+0000\n"
-"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Spanish (http://www.transifex.com/django-machina-team/django-machina/language/es/)\n"
+"PO-Revision-Date: 2016-02-23 03:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: Catalan (http://www.transifex.com/django-machina-team/django-machina/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #: apps/forum/abstract_models.py:41
 msgid "Parent"
-msgstr "Padre"
+msgstr ""
 
 #: apps/forum/abstract_models.py:44
 #: templates/admin/forum/forum/change_list_table.html:9
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #: apps/forum/abstract_models.py:45
 #: apps/forum_conversation/abstract_models.py:41
 msgid "Slug"
-msgstr "Slug"
+msgstr ""
 
 #: apps/forum/abstract_models.py:47
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #: apps/forum/abstract_models.py:52
 msgid "Forum image"
-msgstr "Imagen del foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:56
 msgid "Forum link"
-msgstr "Link del foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:58 apps/forum/abstract_models.py:80
 msgid "Track link redirects count"
-msgstr "Registrar el número de redirecciones de links"
+msgstr ""
 
 #: apps/forum/abstract_models.py:59
 msgid "Records the number of times a forum link was clicked"
-msgstr "Grabar las veces que se pulsa un link de foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:65
 msgid "Default forum"
-msgstr "Foro por defecto"
+msgstr ""
 
 #: apps/forum/abstract_models.py:66
 msgid "Category forum"
-msgstr "Categoría de foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:67
 msgid "Link forum"
-msgstr "Link de foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:70
 msgid "Forum type"
-msgstr "Tipo de foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:75
 msgid "Direct number of posts"
-msgstr "Número de mensajes directos"
+msgstr ""
 
 #: apps/forum/abstract_models.py:78
 msgid "Direct number of topics"
-msgstr "Número de hilos directos"
+msgstr ""
 
 #: apps/forum/abstract_models.py:88
 #: apps/forum_conversation/abstract_models.py:90
@@ -84,58 +83,58 @@ msgstr "Número de hilos directos"
 #: templates/machina/forum/forum_list.html:208
 #: templates/machina/forum_conversation/topic_list.html:15
 msgid "Last post"
-msgstr "Último mensaje"
+msgstr ""
 
 #: apps/forum/abstract_models.py:90
 #: apps/forum_conversation/abstract_models.py:80
 msgid "Last post added on"
-msgstr "Último mensaje añadido el"
+msgstr ""
 
 #: apps/forum/abstract_models.py:95
 msgid "Display in parent-forums legend"
-msgstr "Mostrar en la leyenda de los foros padre"
+msgstr ""
 
 #: apps/forum/abstract_models.py:96
 msgid ""
 "Displays this forum on the legend of its parent-forum (sub forums list)"
-msgstr "Mostrar este foro en la leyenda de los foros padre (lista de subforos)"
+msgstr ""
 
 #: apps/forum/abstract_models.py:103
 #: apps/forum_permission/abstract_models.py:64
 #: apps/forum_tracking/abstract_models.py:27
 #: templates/machina/forum_moderation/moderation_queue/list.html:36
 msgid "Forum"
-msgstr "Foro"
+msgstr ""
 
 #: apps/forum/abstract_models.py:104
 #: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
-msgstr "Foros"
+msgstr ""
 
 #: apps/forum/abstract_models.py:139
 msgid "A forum can not have a link forum as parent"
-msgstr "Un foro no puede tener un foro de tipo link como padre"
+msgstr ""
 
 #: apps/forum/abstract_models.py:142
 msgid "A category can not have another category as parent"
-msgstr "Una categoría no puede tener otra categoría como padre"
+msgstr ""
 
 #: apps/forum/abstract_models.py:145
 msgid "A link forum must have a link associated with it"
-msgstr "Un foro de tipo link debe tener un link asociado a él"
+msgstr ""
 
 #: apps/forum/admin.py:50
 msgid "Forum settings"
-msgstr "Configuración del foro"
+msgstr ""
 
 #: apps/forum/admin.py:52
 msgid "Link forum settings"
-msgstr "Configuración de foro de tipo link"
+msgstr ""
 
 #: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
-msgstr "El foro '{}' ha sido movido con éxito"
+msgstr ""
 
 #: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
 #: apps/forum/admin.py:324 apps/forum/admin.py:344
@@ -144,15 +143,15 @@ msgstr "El foro '{}' ha sido movido con éxito"
 #: templates/admin/forum/forum/editpermissions_form.html:25
 #: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
-msgstr "Permisos del foro"
+msgstr ""
 
 #: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
-msgstr "Permisos globales del foro"
+msgstr ""
 
 #: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
-msgstr "Los permisos se han copiado satisfactoriamente"
+msgstr ""
 
 #: apps/forum/admin.py:220
 msgid ""
@@ -164,7 +163,7 @@ msgstr ""
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
-msgstr "Usuario anónimo"
+msgstr ""
 
 #: apps/forum/admin.py:324
 msgid "Authenticated user"
@@ -172,21 +171,21 @@ msgstr ""
 
 #: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
-msgstr "Los permisos se han aplicado correctamente"
+msgstr ""
 
 #: apps/forum/apps.py:17
 msgid "Machina: Forum"
-msgstr "Machina: Foro"
+msgstr ""
 
 #: apps/forum/forms.py:31
 msgid "Anonymous"
-msgstr "Anónimo"
+msgstr ""
 
 #: apps/forum/forms.py:34
 msgid ""
 "Please select this option if you want to edit the permissions of the "
 "anonymous user"
-msgstr "Por favor, selecciona esta opción si quieres editar los permisos del usuario anónimo"
+msgstr ""
 
 #: apps/forum/forms.py:38
 msgid "Authenticated"
@@ -207,84 +206,84 @@ msgstr ""
 #: apps/forum/forms.py:107
 #: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
-msgstr "Sin asignar"
+msgstr ""
 
 #: apps/forum/forms.py:108
 #: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
-msgstr "Concedido"
+msgstr ""
 
 #: apps/forum/forms.py:109
 #: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
-msgstr "Sin conceder"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:32
 msgid "Topic forum"
-msgstr "Hilo de foro"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:36
 #: apps/forum_conversation/abstract_models.py:210
 msgid "Poster"
-msgstr "Participante"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:40
 #: apps/forum_conversation/abstract_models.py:218
 msgid "Subject"
-msgstr "Asunto"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:46
 msgid "Default topic"
-msgstr "Hilo por defecto"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:47
 msgid "Sticky"
-msgstr "Fijado"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:48
 msgid "Announce"
-msgstr "Anuncio"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:51
 msgid "Topic type"
-msgstr "Tipo de hilo"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:57
 msgid "Topic unlocked"
-msgstr "Hilo desbloqueado"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:58
 msgid "Topic locked"
-msgstr "Hilo bloqueado"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:59
 msgid "Topic moved"
-msgstr "Hilo movido"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:62
 msgid "Topic status"
-msgstr "Estado del hilo"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:67
 #: apps/forum_conversation/abstract_models.py:232
 msgid "Approved"
-msgstr "Aprobado"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:71
 msgid "Posts count"
-msgstr "Contador de mensajes"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:76
 msgid "Views count"
-msgstr "Contador de visitas"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:86
 msgid "First post"
-msgstr "Primer mensaje"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:96
 msgid "Subscribers"
-msgstr "Suscriptores"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:107
 #: apps/forum_conversation/abstract_models.py:206
@@ -292,7 +291,7 @@ msgstr "Suscriptores"
 #: apps/forum_tracking/abstract_models.py:53
 #: templates/machina/forum_moderation/moderation_queue/list.html:35
 msgid "Topic"
-msgstr "Hilo"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:108
 #: templates/machina/forum/forum_detail.html:52
@@ -300,145 +299,145 @@ msgstr "Hilo"
 #: templates/machina/forum/forum_list.html:38
 #: templates/machina/forum/forum_list.html:206
 msgid "Topics"
-msgstr "Hilos"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:144
 msgid "A topic can not be associated with a category or a link forum"
-msgstr "No se puede asociar un hilo con un foro de tipo categoría o link"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:213
 #: apps/forum_conversation/forum_polls/abstract_models.py:96
 msgid "Anonymous user forum key"
-msgstr "Clave del foro para usuario anónimo"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:225
 msgid "Content"
-msgstr "Contenido"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:229
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:236
 msgid "Attach a signature"
-msgstr "Adjuntar firma"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:242
 msgid "Update reason"
-msgstr "Actualizar motivo"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:248
 msgid "Lastly updated by"
-msgstr "Última actualización por"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:251
 msgid "Updates count"
-msgstr "Número de actualizaciones"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:262
 #: apps/forum_conversation/forum_attachments/abstract_models.py:27
 msgid "Post"
-msgstr "Mensaje"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:263
 #: templates/machina/forum/forum_list.html:21
 #: templates/machina/forum/forum_list.html:39
 #: templates/machina/forum/forum_list.html:207
 msgid "Posts"
-msgstr "Mensajes"
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:297
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "Se debe asociar un identificador de usuario o una clave anónima a un mensaje."
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "Se debe asociar un identificador de usuario o una clave anónima a un mensaje, pero no ambos."
+msgstr ""
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
-msgstr "Se debe especificar un nombre de usuario si el participante es anónimo"
+msgstr ""
 
 #: apps/forum_conversation/apps.py:17
 msgid "Machina: Forum conversations"
-msgstr "Machina: conversaciones de los foros"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:47
 msgid "Enter your subject"
-msgstr "Escribe el asunto"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:48
 msgid "Message"
-msgstr "Mensaje"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:49
 msgid "Enter your message"
-msgstr "Escribe el mensaje"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:75 apps/forum_moderation/forms.py:26
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:26
 #: templates/machina/forum_moderation/topic_lock.html:5
 #: templates/machina/forum_moderation/topic_lock.html:12
 msgid "Lock topic"
-msgstr "Bloquear un hilo"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:125
 msgid "Post topic as"
-msgstr "Publicar hilo como"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:149
 #: apps/forum_conversation/forum_polls/abstract_models.py:28
 msgid "Poll question"
-msgstr "Pregunta de la encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:151
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr "Escribe una pregunta para asociar una encuesta al hilo o déjala en blanco para no crear una encuesta."
+msgstr ""
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
 msgid "Maximum number of poll options per user"
-msgstr "Número máximo de opciones de la encuesta por usuario"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:158
 msgid "This is the number of options each user may select when voting."
-msgstr "Este es el número de opciones que cada usuario puede seleccionar al votar."
+msgstr ""
 
 #: apps/forum_conversation/forms.py:163
 msgid "For how many days the poll should be run?"
-msgstr "¿Cuántos días debe estar activa la encuesta?"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:164
 msgid "Enter 0 or leave blank for a never ending poll."
-msgstr "Escribe 0 o deja en blanco para una encuesta sin fin."
+msgstr ""
 
 #: apps/forum_conversation/forms.py:168
 msgid "Allow re-voting?"
-msgstr "¿Permitir volver a votar?"
+msgstr ""
 
 #: apps/forum_conversation/forms.py:169
 msgid "If enabled users are able to change their vote."
-msgstr "Si está activo, los usuarios pueden cambiar su voto."
+msgstr ""
 
 #: apps/forum_conversation/forms.py:192
 msgid ""
 "You must set the maximum number of poll options per user when creating polls"
-msgstr "Debes seleccionar el número máximo de opciones por usuario cuando creas una encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:29
 msgid "File"
-msgstr "Fichero"
+msgstr ""
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:30
 msgid "Comment"
-msgstr "Comentario"
+msgstr ""
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:35
 msgid "Attachment"
-msgstr "Adjunto"
+msgstr ""
 
 #: apps/forum_conversation/forum_attachments/abstract_models.py:36
 #: templates/machina/forum_conversation/forum_attachments/attachments_detail.html:8
@@ -447,236 +446,236 @@ msgstr "Adjunto"
 #: templates/machina/forum_conversation/partials/post_form.html:60
 #: templates/machina/forum_conversation/partials/topic_form.html:24
 msgid "Attachments"
-msgstr "Adjuntos"
+msgstr ""
 
 #: apps/forum_conversation/forum_attachments/apps.py:17
 msgid "Machina: Forum attachments"
-msgstr "Machina: Adjuntos del foro"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:32
 msgid "Poll duration, in days"
-msgstr "Duración de la encuesta, en días"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:42
 msgid "Allow vote changes"
-msgstr "Permitir cambiar el voto"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:49
 msgid "Topic poll"
-msgstr "Encuesta sobre el hilo"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:50
 msgid "Topic polls"
-msgstr "Encuesta sobre los hilos"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:69
 #: templates/machina/forum_conversation/partials/topic_form.html:23
 msgid "Poll"
-msgstr "Encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:71
 msgid "Poll option text"
-msgstr "Texto de la opción de la encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:76
 msgid "Topic poll option"
-msgstr "Opción de la encuesta del hilo"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:77
 msgid "Topic poll options"
-msgstr "Opciones de la encuesta del hilo"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:93
 msgid "Voter"
-msgstr "Votante"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:101
 msgid "Poll option"
-msgstr "Opción de la encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:103
 msgid "Vote's date"
-msgstr "Fecha del voto"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:108
 msgid "Topic poll vote"
-msgstr "Voto de la encuesta del hilo"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:109
 msgid "Topic poll votes"
-msgstr "Votos de la encuesta del hilo"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:121
 msgid "A user id or an anonymous key must be used."
-msgstr "Se debe usar un identificador de usuario o una clave de usuario anónimo."
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:123
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr "Se debe usar un identificador de usuario o una clave de usuario anónimo, pero no ambos."
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/apps.py:17
 msgid "Machina: Forum polls"
-msgstr "Machina: encuestas del foro"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/forms.py:33
 msgid "Enter a poll option"
-msgstr "Escribe una opción de la encuesta"
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/forms.py:133
 msgid "You must specify an option when voting."
-msgstr "Debes especificar una opción al votar."
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/forms.py:138
 msgid "You have tried to vote for too many options."
-msgstr "Has intentado votar demasiadas opciones."
+msgstr ""
 
 #: apps/forum_conversation/forum_polls/views.py:79
 msgid "Your vote has been cast."
-msgstr "Tu voto ha sido grabado."
+msgstr ""
 
 #: apps/forum_conversation/views.py:128
 msgid "This message will be validated before appearing on the forum."
-msgstr "Este mensaje tiene que validarse antes de aparecer en el foro."
+msgstr ""
 
 #: apps/forum_conversation/views.py:131
 msgid "There are some errors in the attachments you submitted."
-msgstr "Existen algunos errores en los adjuntos enviados."
+msgstr ""
 
 #: apps/forum_conversation/views.py:136
 msgid "This message has been posted successfully."
-msgstr "El mensaje se ha enviado correctamente."
+msgstr ""
 
 #: apps/forum_conversation/views.py:380
 msgid "There are some errors in the poll options you submitted."
-msgstr "Hay errores en las opciones de la encuesta enviadas."
+msgstr ""
 
 #: apps/forum_conversation/views.py:590 apps/forum_conversation/views.py:692
 msgid "This message has been edited successfully."
-msgstr "El mensaje se ha editado correctamente."
+msgstr ""
 
 #: apps/forum_conversation/views.py:737
 msgid "This message has been deleted successfully."
-msgstr "El mensaje ha sido borrado correctamente."
+msgstr ""
 
 #: apps/forum_feeds/apps.py:17
 msgid "Machina: Forum feeds"
-msgstr "Machina: Feeds del foro"
+msgstr ""
 
 #: apps/forum_feeds/feeds.py:26
 msgid "Latest topics"
-msgstr "Últimos hilos"
+msgstr ""
 
 #: apps/forum_feeds/feeds.py:27
 msgid "Latest topics updated on the forums"
-msgstr "Últimos hilos modificados del foro"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:31
 #: apps/forum_permission/abstract_models.py:76
 #: apps/forum_tracking/abstract_models.py:24
 #: apps/forum_tracking/abstract_models.py:49
 msgid "User"
-msgstr "Usuario"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:36
 msgid "Avatar"
-msgstr "Avatar"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:42
 msgid "Signature"
-msgstr "Firma"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:49
 msgid "Total posts"
-msgstr "Mensajes totales"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:54
 msgid "Forum profile"
-msgstr "Perfil del foro"
+msgstr ""
 
 #: apps/forum_member/abstract_models.py:55
 msgid "Forum profiles"
-msgstr "Perfiles del foro"
+msgstr ""
 
 #: apps/forum_member/apps.py:17
 msgid "Machina: Forum members"
-msgstr "Machina: Miembros del foro"
+msgstr ""
 
 #: apps/forum_member/views.py:118
 msgid "The profile has been edited successfully."
-msgstr "El perfil se ha editado correctamente."
+msgstr ""
 
 #: apps/forum_member/views.py:142
 msgid "You subscribed to this topic successfully."
-msgstr "Te has suscrito correctamente a este hilo."
+msgstr ""
 
 #: apps/forum_member/views.py:188
 msgid "You unsubscribed from this topic successfully."
-msgstr "Te has dado de baja de este hilo correctamente."
+msgstr ""
 
 #: apps/forum_moderation/apps.py:17
 msgid "Machina: Forum moderation"
-msgstr "Machina: Moderación del foro"
+msgstr ""
 
 #: apps/forum_moderation/forms.py:25
 msgid "Select a destination forum"
-msgstr "Selecciona un foro de destino"
+msgstr ""
 
 #: apps/forum_moderation/views.py:39
 msgid "This topic has been locked successfully."
-msgstr "Se ha bloqueado el hilo correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:89
 msgid "This topic has been unlocked successfully."
-msgstr "Se ha desbloqueado el hilo correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:137
 msgid "This topic has been deleted successfully."
-msgstr "El hilo se ha borrado correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:172
 msgid "This topic has been moved successfully."
-msgstr "Se ha movido el hilo correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:250
 msgid "This topic type has been changed successfully."
-msgstr "Este hilo se ha modificado correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:298
 msgid "Would you want to change this topic to a default topic?"
-msgstr "¿Quieres convertir este hilo en hilo por defecto?"
+msgstr ""
 
 #: apps/forum_moderation/views.py:309
 msgid "Would you want to change this topic to a sticky topic?"
-msgstr "¿Quieres convertir este hilo en hilo fijado?"
+msgstr ""
 
 #: apps/forum_moderation/views.py:320
 msgid "Would you want to change this topic to an announce?"
-msgstr "¿Quieres convertir este hilo en anuncio?"
+msgstr ""
 
 #: apps/forum_moderation/views.py:401
 msgid "This post has been approved successfully."
-msgstr "Este mensaje ha sido aprobado correctamente."
+msgstr ""
 
 #: apps/forum_moderation/views.py:443
 msgid "This post has been disapproved successfully."
-msgstr "Se ha rechazado este mensaje correctamente."
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:33
 msgid "Permission codename"
-msgstr "Clave del permiso"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:39
 #: apps/forum_permission/abstract_models.py:57
 msgid "Forum permission"
-msgstr "Permiso de foro"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:59
 msgid "Has perm"
-msgstr "Tiene permiso"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:79
 msgid "Target anonymous user"
-msgstr "Usuario anónimo como objetivo"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:82
 msgid "Target any logged in user"
@@ -684,11 +683,11 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
-msgstr "Permiso para el foro de usuarios"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
-msgstr "Permisos para el foro de usuarios"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:107
 msgid ""
@@ -698,253 +697,253 @@ msgstr ""
 
 #: apps/forum_permission/abstract_models.py:116
 msgid "Group"
-msgstr "Grupo"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:122
 msgid "Group forum permission"
-msgstr "Permiso del foro de grupos"
+msgstr ""
 
 #: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
-msgstr "Permisos del foro de grupos"
+msgstr ""
 
 #: apps/forum_permission/apps.py:17
 msgid "Machina: Forum permissions"
-msgstr "Machina: Permisos del foro"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:27
 msgid "Can see forum"
-msgstr "Puede ver el foro"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:32
 msgid "Can read forum"
-msgstr "Puede leer el foro"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:39
 msgid "Can start new topics"
-msgstr "Puede comenzar nuevos hilos"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:44
 msgid "Can reply to topics"
-msgstr "Puede contestar a los hilos"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:49
 msgid "Can post announcements"
-msgstr "Puede  publicar anuncios"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:54
 msgid "Can post stickies"
-msgstr "Puede publicar hilos fijados"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:59
 msgid "Can delete own posts"
-msgstr "Puede borrar sus propios mensajes"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:64
 msgid "Can edit own posts"
-msgstr "Puede editar sus propios mensajes"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:69
 msgid "Can post without approval"
-msgstr "Puede publicar sin necesidad de aprobación"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:76
 msgid "Can create polls"
-msgstr "Puede crear encuestas"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:81
 msgid "Can vote in polls"
-msgstr "Puede votar en encuestas"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:88
 msgid "Can attach file"
-msgstr "Puede adjuntar ficheros"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:93
 msgid "Can download file"
-msgstr "Puede bajarse ficheros"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:100
 msgid "Can lock topics"
-msgstr "Puede bloquear hilos"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:105
 msgid "Can move topics"
-msgstr "Puede mover hilos"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:110
 msgid "Can edit posts"
-msgstr "Puede editar mensajes"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:115
 msgid "Can delete posts"
-msgstr "Puede borrar mensajes"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:120
 msgid "Can approve posts"
-msgstr "Puede aprobar mensajes"
+msgstr ""
 
 #: apps/forum_permission/defaults.py:125
 msgid "Can add posts in locked topics"
-msgstr "Puede añadir mensajes a hilos bloqueados"
+msgstr ""
 
 #: apps/forum_search/apps.py:17
 msgid "Machina: Forum searches"
-msgstr "Machina: Búsquedas en foros"
+msgstr ""
 
 #: apps/forum_search/forms.py:26
 msgid "Search only in topic subjects"
-msgstr "Buscar solo en los asuntos de los hilos"
+msgstr ""
 
 #: apps/forum_search/forms.py:29
 msgid "Search for poster"
-msgstr "Búsqueda de participante"
+msgstr ""
 
 #: apps/forum_search/forms.py:30
 msgid "Enter a user name to limit the search to a specific user."
-msgstr "Introduce un nombre de usuario para limitar la búsqueda a un usuario concreto."
+msgstr ""
 
 #: apps/forum_search/forms.py:35
 msgid "Search in specific forums"
-msgstr "Buscar en foros concretos"
+msgstr ""
 
 #: apps/forum_search/forms.py:36
 msgid "Select the forums you wish to search in."
-msgstr "Selecciona los foros en los que quieres buscar."
+msgstr ""
 
 #: apps/forum_search/forms.py:46
 msgid "Search for keywords"
-msgstr "Buscar por palabras clave"
+msgstr ""
 
 #: apps/forum_search/forms.py:47
 msgid "Keywords or phrase"
-msgstr "Palabras clave o frase"
+msgstr ""
 
 #: apps/forum_search/forms.py:48
 msgid "Poster name"
-msgstr "Nombre de participante"
+msgstr ""
 
 #: apps/forum_tracking/abstract_models.py:37
 msgid "Forum track"
-msgstr "Registro del foro"
+msgstr ""
 
 #: apps/forum_tracking/abstract_models.py:38
 msgid "Forum tracks"
-msgstr "Registros del foro"
+msgstr ""
 
 #: apps/forum_tracking/abstract_models.py:61
 msgid "Topic track"
-msgstr "Registro del hilo"
+msgstr ""
 
 #: apps/forum_tracking/abstract_models.py:62
 msgid "Topic tracks"
-msgstr "Registro de los hilos"
+msgstr ""
 
 #: apps/forum_tracking/apps.py:17
 msgid "Machina: Forum tracking"
-msgstr "Machina: Registros del foro"
+msgstr ""
 
 #: apps/forum_tracking/views.py:38
 msgid "Forums have been marked read."
-msgstr "Los foros se han marcado como leídos."
+msgstr ""
 
 #: apps/forum_tracking/views.py:95
 msgid "Topics have been marked read."
-msgstr "Los hilos se han marcado como leídos."
+msgstr ""
 
 #: core/compat.py:16
 msgid "Neither Pillow nor PIL could be imported: {}"
-msgstr "No se puede importar ni Pillow ni PIL: {}"
+msgstr ""
 
 #: models/abstract_models.py:13
 msgid "Creation date"
-msgstr "Fecha de creación"
+msgstr ""
 
 #: models/abstract_models.py:14
 msgid "Update date"
-msgstr "Fecha de actualización"
+msgstr ""
 
 #: models/fields.py:31
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
-msgstr "No se puede importar MACHINA_MARKUP_WIDGET {}: {}"
+msgstr ""
 
 #: models/fields.py:57
 msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
-msgstr "No se puede importar MACHINA_MARKUP_LANGUAGE {}: {}"
+msgstr ""
 
 #: models/fields.py:62
 msgid "MACHINA_MARKUP_LANGUAGE setting is required"
-msgstr "Se requiere el parámetro MACHINA_MARKUP_LANGUAGE"
+msgstr ""
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr "No se permiten ficheros mayores de {}. Tu fichero tiene {}"
+msgstr ""
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr "No se permiten imágenes menores de {}px o mayores de {}px de ahcho. El ancho de tu imagen es {}px"
+msgstr ""
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr "No se permiten imágenes menores de {}px o mayores de {}px de alto. Tu imagen tiene {}px de alto"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
-msgstr "Listado de foros"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:10
 msgid "Quick actions"
-msgstr "Acciones rápidas"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:11
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:12
 msgid "Details"
-msgstr "Detalles"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:28
 msgid "Move up"
-msgstr "Mover arriba"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:33
 msgid "Move down"
-msgstr "Mover abajo"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:38
 msgid "Add a sub-forum"
-msgstr "Añadir al subforo"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:42
 #: templates/machina/forum_conversation/topic_detail.html:38
 msgid "Delete"
-msgstr "Borrar"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:51
 msgid "Topics:"
-msgstr "Hilos:"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:51
 #: templates/machina/forum_conversation/topic_detail.html:95
 #: templates/machina/forum_member/user_posts_list.html:67
 #: templates/machina/forum_moderation/moderation_queue/detail.html:117
 msgid "Posts:"
-msgstr "Mensajes:"
+msgstr ""
 
 #: templates/admin/forum/forum/change_list_table.html:53
 msgid "Link:"
-msgstr "Enlace:"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
-msgstr "Editar permisos de usuario"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
 msgid "Edit authenticated user permissions"
@@ -953,55 +952,55 @@ msgstr ""
 #: templates/admin/forum/forum/editpermissions_form.html:21
 #: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
-msgstr "Inicio"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
-msgstr "Permiso"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
-msgstr "Guardar"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
 #: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
-msgstr "Editar permisos de grupo"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
-msgstr "Por favor corrige el siguiente error."
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
-msgstr "Por favor corrige los siguientes errores."
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
-msgstr "Por favor, selecciona un usuario para modificar sus permisos"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:54
 #: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
-msgstr "Seleccionar"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
-msgstr "Por favor, selecciona un grupo para modificar sus permisos"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
-msgstr "Copiar los permisos de otro foro"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
-msgstr "Por favor, selecciona un foro para copiar la configuración de sus permisos a este foro"
+msgstr ""
 
 #: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
-msgstr "Copiar"
+msgstr ""
 
 #: templates/machina/board_base.html:25
 #: templates/machina/forum_search/search.html:5
@@ -1009,19 +1008,19 @@ msgstr "Copiar"
 #: templates/machina/forum_search/search.html:32
 #: templates/machina/forum_search/search.html:42
 msgid "Search"
-msgstr "Buscar"
+msgstr ""
 
 #: templates/machina/board_base.html:28
 msgid "Advanced search"
-msgstr "Búsqueda avanzada"
+msgstr ""
 
 #: templates/machina/board_base.html:41
 msgid "Subscriptions"
-msgstr "Suscripciones"
+msgstr ""
 
 #: templates/machina/board_base.html:42
 msgid "View my posts"
-msgstr "Ver mis mensajes"
+msgstr ""
 
 #: templates/machina/board_base.html:46
 #: templates/machina/forum_moderation/moderation_queue/detail.html:5
@@ -1030,148 +1029,148 @@ msgstr "Ver mis mensajes"
 #: templates/machina/forum_moderation/moderation_queue/list.html:10
 #: templates/machina/forum_moderation/moderation_queue/list.html:33
 msgid "Moderation queue"
-msgstr "Cola de moderación"
+msgstr ""
 
 #: templates/machina/forum/forum_detail.html:22
 msgid "Mark subforums read"
-msgstr "Marcar subforos como leídos"
+msgstr ""
 
 #: templates/machina/forum/forum_detail.html:34
 #: templates/machina/forum/forum_detail.html:59
 #: templates/machina/forum_moderation/moderation_queue/detail.html:19
 #: templates/machina/forum_moderation/moderation_queue/list.html:67
 msgid "New topic"
-msgstr "Nuevo hilo"
+msgstr ""
 
 #: templates/machina/forum/forum_detail.html:40
 #: templates/machina/forum/forum_detail.html:65
 #: templates/machina/forum_tracking/mark_topics_read.html:5
 #: templates/machina/forum_tracking/mark_topics_read.html:11
 msgid "Mark topics read"
-msgstr "Marcar hilo como leído"
+msgstr ""
 
 #: templates/machina/forum/forum_detail.html:48
 msgid "Announcements"
-msgstr "Anuncios"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:70
 #: templates/machina/forum/forum_list.html:143
 msgid "RSS feed"
-msgstr "Feed RSS"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:77
 #: templates/machina/forum/forum_list.html:150
 #: templates/machina/forum_conversation/topic_list.html:54
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
-msgstr "Por: <a href=\"%(poster_url)s\">%(username)s</a>"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:81
 #: templates/machina/forum/forum_list.html:154
 #: templates/machina/forum_conversation/topic_list.html:58
 #, python-format
 msgid "By: %(poster_username)s"
-msgstr "Por: %(poster_username)s"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:89
 #: templates/machina/forum/forum_list.html:162
 msgid "No posts"
-msgstr "Sin mensajes"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:108
 #: templates/machina/forum/forum_list.html:181
 msgid "Total redirects:"
-msgstr "Total redirecciones:"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:188
 #: templates/machina/forum/forum_list.html:194
 msgid "Subforums:"
-msgstr "Subforos:"
+msgstr ""
 
 #: templates/machina/forum/forum_list.html:213
 msgid "No forums."
-msgstr "Sin foros."
+msgstr ""
 
 #: templates/machina/forum/index.html:6
 msgid "Index"
-msgstr "Índice"
+msgstr ""
 
 #: templates/machina/forum/index.html:13
 #: templates/machina/forum_tracking/mark_forums_read.html:5
 #: templates/machina/forum_tracking/mark_forums_read.html:11
 msgid "Mark forums read"
-msgstr "Marcar foros como leídos"
+msgstr ""
 
 #: templates/machina/forum/index.html:15
 #: templates/machina/forum_tracking/unread_topic_list.html:4
 #: templates/machina/forum_tracking/unread_topic_list.html:8
 msgid "View unread topics"
-msgstr "Mostrar hilos no leídos"
+msgstr ""
 
 #: templates/machina/forum/index.html:22
 #: templates/machina/forum_member/forum_profile_detail.html:34
 msgid "Statistics"
-msgstr "Estadísticas"
+msgstr ""
 
 #: templates/machina/forum/index.html:23
 msgid "Total posts:"
-msgstr "Mesajes totales:"
+msgstr ""
 
 #: templates/machina/forum/index.html:23
 msgid "Total topics:"
-msgstr "Hilos totales:"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:28
 #: templates/machina/forum_member/forum_profile_update.html:19
 #: templates/machina/partials/form_field.html:6
 msgid "(optional)"
-msgstr "(opcional)"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_attachments/attachment_formset.html:41
 msgid "Add another file"
-msgstr "Añadir otro fichero"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:17
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:13
 msgid "You may select <b>1</b> option"
-msgstr "Debes seleccionar <b>1</b> opción"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:21
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:17
 #, python-format
 msgid "You may select up to <b>%(max_options)s</b> options"
-msgstr "Debes seleccionar un máximo de <b>%(max_options)s</b> opciones"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:40
 msgid "Vote"
-msgstr "Votar"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_detail.html:45
 msgid "Change your vote"
-msgstr "Cambiar tu voto"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:3
 msgid "Poll options"
-msgstr "Opciones de la encuesta"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:26
 msgid "Add a poll option"
-msgstr "Añadir opción a la encuesta"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_option_formset.html:30
 msgid ""
 "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
 "associated votes."
-msgstr "Nota:</b>&nbsp;Borrar las opciones de una encuestra existente borrará los votos asociados."
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_preview.html:9
 #: templates/machina/forum_conversation/post_preview.html:10
 msgid "Preview:"
-msgstr "Previsualización:"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_results.html:19
 msgid "Total votes:"
-msgstr "Votos totales:"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:35
 #: templates/machina/forum_conversation/partials/topic_form.html:100
@@ -1179,77 +1178,77 @@ msgstr "Votos totales:"
 #: templates/machina/forum_conversation/post_update.html:27
 #: templates/machina/forum_member/forum_profile_update.html:35
 msgid "Submit"
-msgstr "Enviar"
+msgstr ""
 
 #: templates/machina/forum_conversation/forum_polls/poll_vote_form.html:36
 msgid "View results"
-msgstr "Ver resultados"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/post_form.html:21
 #: templates/machina/forum_conversation/partials/topic_form.html:22
 msgid "Options"
-msgstr "Opciones"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:15
 msgid "Post reply"
-msgstr "Enviar respuesta"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:18
 msgid "Subscribe"
-msgstr "Suscribirse"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:20
 msgid "Unsubscribe"
-msgstr "Darse de baja"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:27
 #: templates/machina/forum_moderation/topic_unlock.html:5
 #: templates/machina/forum_moderation/topic_unlock.html:12
 msgid "Unlock topic"
-msgstr "Desbloquear hilo"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:28
 #: templates/machina/forum_moderation/topic_delete.html:5
 #: templates/machina/forum_moderation/topic_delete.html:12
 msgid "Delete topic"
-msgstr "Borrar hilo"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:29
 #: templates/machina/forum_moderation/topic_move.html:5
 #: templates/machina/forum_moderation/topic_move.html:12
 msgid "Move topic"
-msgstr "Mover hilo"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:31
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:38
 msgid "Change to sticky topic"
-msgstr "Convertir en hilo fijado"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:32
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:35
 msgid "Change to announce"
-msgstr "Convertir en anuncio"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:34
 #: templates/machina/forum_conversation/partials/topic_detail_actions.html:37
 msgid "Change to standard topic"
-msgstr "Convertir en hilo normal"
+msgstr ""
 
 #: templates/machina/forum_conversation/partials/topic_form.html:99
 #: templates/machina/forum_conversation/post_create.html:27
 #: templates/machina/forum_conversation/post_update.html:26
 msgid "Preview"
-msgstr "Previsualizar"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_create.html:6
 #: templates/machina/forum_conversation/post_create.html:21
 msgid "Post a reply"
-msgstr "Enviar una respuesta"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_create.html:39
 #: templates/machina/forum_moderation/moderation_queue/detail.html:133
 msgid "Topic review"
-msgstr "Revisar un hilo"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_create.html:51
 #: templates/machina/forum_conversation/topic_detail.html:53
@@ -1261,7 +1260,7 @@ msgstr "Revisar un hilo"
 #: templates/machina/forum_search/search.html:83
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr "Por: <a href=\"%(poster_url)s\">%(username)s</a> el %(creation_date)s"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_create.html:55
 #: templates/machina/forum_conversation/topic_detail.html:57
@@ -1272,16 +1271,16 @@ msgstr "Por: <a href=\"%(poster_url)s\">%(username)s</a> el %(creation_date)s"
 #: templates/machina/forum_search/search.html:87
 #, python-format
 msgid "By: %(poster_username)s on %(creation_date)s"
-msgstr "Por: %(poster_username)s el %(creation_date)s"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_delete.html:5
 #: templates/machina/forum_conversation/post_delete.html:12
 msgid "Delete post"
-msgstr "Eliminar mensaje"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_delete.html:15
 msgid "Are you sure you want to delete this post?"
-msgstr "¿Seguro que quieres eliminar este mensaje?"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_delete.html:18
 #: templates/machina/forum_member/topic_subscribe.html:18
@@ -1296,7 +1295,7 @@ msgstr "¿Seguro que quieres eliminar este mensaje?"
 #: templates/machina/forum_tracking/mark_forums_read.html:16
 #: templates/machina/forum_tracking/mark_topics_read.html:16
 msgid "Yes, I'm sure"
-msgstr "Sí, seguro"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_delete.html:19
 #: templates/machina/forum_member/topic_subscribe.html:19
@@ -1311,80 +1310,80 @@ msgstr "Sí, seguro"
 #: templates/machina/forum_tracking/mark_forums_read.html:17
 #: templates/machina/forum_tracking/mark_topics_read.html:17
 msgid "No, take me back"
-msgstr "No, volver atrás"
+msgstr ""
 
 #: templates/machina/forum_conversation/post_update.html:5
 #: templates/machina/forum_conversation/post_update.html:20
 #: templates/machina/forum_conversation/topic_update.html:5
 #: templates/machina/forum_conversation/topic_update.html:23
 msgid "Edit post"
-msgstr "Editar post"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_create.html:5
 #: templates/machina/forum_conversation/topic_create.html:23
 msgid "Post a new topic"
-msgstr "Enviar un nuevo hilo"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_detail.html:34
 msgid "Edit"
-msgstr "Editar"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Last edited by:"
-msgstr "Última edición por:"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "Updated"
-msgstr "Modificado"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 msgid "on"
-msgstr "el"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_detail.html:76
 #, python-format
 msgid "edited %(counter)s time in total."
 msgid_plural "edited %(counter)s times in total."
-msgstr[0] "editado %(counter)s vez en total."
-msgstr[1] "editado %(counter)s veces en total"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_conversation/topic_detail.html:81
 msgid "Reason:"
-msgstr "Motivo:"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_list.html:13
 msgid "Replies"
-msgstr "Respuestas"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_list.html:14
 msgid "Views"
-msgstr "Vistas"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_list.html:29
 msgid "This topic is locked"
-msgstr "Este hilo está bloqueado"
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_list.html:74
 msgid "There are no topics in this forum."
-msgstr "No hay hilos en este foro."
+msgstr ""
 
 #: templates/machina/forum_conversation/topic_pages_inline_list.html:5
 msgid "Go to the page:"
-msgstr "Ir a la página:"
+msgstr ""
 
 #: templates/machina/forum_feeds/topics_description.html:6
 msgid "Posted by"
-msgstr "Escrito por"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:5
 #: templates/machina/forum_member/forum_profile_detail.html:10
 #, python-format
 msgid "%(username)s profile"
-msgstr "Perfil de %(username)s"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:26
 msgid "Edit profile"
-msgstr "Editar perfil"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
 #, python-format
@@ -1394,8 +1393,8 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                      <p><small>Mensaje</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                      <p class=\"mb-1\"><small>Mensajes</small></p>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
 #, python-format
@@ -1405,195 +1404,195 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n                      <p><small>Hilo</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n                      <p class=\"mb-1\"><small>Hilos</small></p>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
-msgstr "Mensajes recientes"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "View all"
-msgstr "Ver todos"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_detail.html:70
 #, python-format
 msgid "On %(creation_date)s"
-msgstr "El %(creation_date)s"
+msgstr ""
 
 #: templates/machina/forum_member/forum_profile_update.html:4
 #: templates/machina/forum_member/forum_profile_update.html:11
 msgid "Edit forum profile"
-msgstr "Editar perfil del foro"
+msgstr ""
 
 #: templates/machina/forum_member/subscription_topic_list.html:4
 #: templates/machina/forum_member/subscription_topic_list.html:10
 msgid "Topics that you are subscribed to"
-msgstr "Hilos a los que estás suscrito"
+msgstr ""
 
 #: templates/machina/forum_member/subscription_topic_list.html:17
 #, python-format
 msgid "%(counter)s topic found"
 msgid_plural "%(counter)s topics found"
-msgstr[0] "%(counter)s hilo encontrado"
-msgstr[1] "%(counter)s hilos encontrados"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_member/subscription_topic_list.html:31
 msgid "Not topics found."
-msgstr "No se han encontrado hilos."
+msgstr ""
 
 #: templates/machina/forum_member/topic_subscribe.html:5
 #: templates/machina/forum_member/topic_subscribe.html:12
 msgid "Subscribe to topic"
-msgstr "Suscribirse al hilo"
+msgstr ""
 
 #: templates/machina/forum_member/topic_subscribe.html:15
 msgid "Would you like to subscribe to this topic?"
-msgstr "¿Quieres suscribirte al hilo?"
+msgstr ""
 
 #: templates/machina/forum_member/topic_unsubscribe.html:5
 #: templates/machina/forum_member/topic_unsubscribe.html:12
 msgid "Unsubscribe from topic"
-msgstr "Darse de baja del hilo"
+msgstr ""
 
 #: templates/machina/forum_member/topic_unsubscribe.html:15
 msgid "Would you like to unsubscribe from this topic?"
-msgstr "¿Quieres darte de baja de este hilo?"
+msgstr ""
 
 #: templates/machina/forum_member/user_posts_list.html:5
 #: templates/machina/forum_member/user_posts_list.html:10
 msgid "My messages"
-msgstr "Mis mensajes"
+msgstr ""
 
 #: templates/machina/forum_member/user_posts_list.html:5
 #: templates/machina/forum_member/user_posts_list.html:10
 #, python-format
 msgid "%(username)s's posts"
-msgstr "Mensajes de %(username)s"
+msgstr ""
 
 #: templates/machina/forum_member/user_posts_list.html:17
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] "%(counter)s mensaje encontrado"
-msgstr[1] "%(counter)s mensajes encontrados"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_member/user_posts_list.html:24
 msgid "No posts found"
-msgstr "Ningún mensaje encontrado"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:15
 msgid "Disapprove"
-msgstr "Rechazar"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:16
 msgid "Approve"
-msgstr "Aprobar"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:19
 msgid "New post"
-msgstr "Nuevo mensaje"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:32
 msgid "<b>1</b> option may be selected"
-msgstr "Se debe seleccionar <b>1</b> opción"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/detail.html:36
 #, python-format
 msgid "Up to <b>%(max_options)s</b> options may be selected"
-msgstr "Se deben seleccionar como mucho <b>%(max_options)s</b> opciones"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:17
 #, python-format
 msgid "%(topic_length)s posts found"
-msgstr "%(topic_length)s mensajes encontrados"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/list.html:79
 msgid "No posts awaiting approval."
-msgstr "Ningún mensaje esperando ser aprobado."
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:12
 msgid "Approve post"
-msgstr "Aprobar mensaje"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/post_approve.html:15
 msgid "Are you sure you want to approve this post?"
-msgstr "¿Estás seguro de que quieres aprobar este mensaje?"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:5
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:12
 msgid "Disapprove post"
-msgstr "Rechazar mensaje"
+msgstr ""
 
 #: templates/machina/forum_moderation/moderation_queue/post_disapprove.html:15
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr "¿Seguro que quieres rechazar este mensaje? El mensaje se borrará."
+msgstr ""
 
 #: templates/machina/forum_moderation/topic_delete.html:15
 msgid "Are you sure you want to delete this topic?"
-msgstr "¿Seguro que quieres borrar este hilo?"
+msgstr ""
 
 #: templates/machina/forum_moderation/topic_lock.html:15
 msgid "Are you sure you want to lock this topic?"
-msgstr "¿Seguro que quieres bloquear este hilo?"
+msgstr ""
 
 #: templates/machina/forum_moderation/topic_unlock.html:15
 msgid "Are you sure you want to unlock this topic?"
-msgstr "¿Seguro que quieres desbloquear este hilo?"
+msgstr ""
 
 #: templates/machina/forum_moderation/topic_update_type.html:5
 #: templates/machina/forum_moderation/topic_update_type.html:12
 msgid "Change topic type"
-msgstr "Modificar el tipo de hilo"
+msgstr ""
 
 #: templates/machina/forum_search/search.html:18
 msgid "Search forums"
-msgstr "Buscar en los foros"
+msgstr ""
 
 #: templates/machina/forum_search/search.html:44
 msgid "New search"
-msgstr "Nueva búsqueda"
+msgstr ""
 
 #: templates/machina/forum_search/search.html:50
 #, python-format
 msgid "Your search has returned <b>%(number_of_results)s</b> result"
 msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] "Tu búsqueda ha devuelto <b>%(number_of_results)s</b> resultado"
-msgstr[1] "Tu búsqueda ha devuelto <b>%(number_of_results)s</b> resultados"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_search/search.html:70
 msgid "Results"
-msgstr "Resultados"
+msgstr ""
 
 #: templates/machina/forum_search/search.html:101
 msgid "No results."
-msgstr "Sin resultados."
+msgstr ""
 
 #: templates/machina/forum_tracking/mark_forums_read.html:13
 msgid "Are you sure you want to mark forums read?"
-msgstr "¿Seguro que quieres marcar los foros como leídos?"
+msgstr ""
 
 #: templates/machina/forum_tracking/mark_topics_read.html:13
 msgid "Are you sure you want to mark topics read?"
-msgstr "¿Seguro que quieres marcar los hilos como leídos?"
+msgstr ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
 #, python-format
 msgid ""
-""
+"\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "     encontrado %(topic_length)s hilo sin leer"
-msgstr[1] "Encontrados %(topic_length)s hilos sin leer\n      "
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
-msgstr "No hay hilos sin leer."
+msgstr ""
 
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
-msgstr "Índice del foro"
+msgstr ""

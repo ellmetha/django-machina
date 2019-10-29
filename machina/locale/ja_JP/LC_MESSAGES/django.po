@@ -8,15 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2019-03-11 00:25+0000\n"
-"Last-Translator: I K <ki.foobar@gmail.com>\n"
-"Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-"
-"team/django-machina/language/ja_JP/)\n"
-"Language: ja_JP\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
+"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-team/django-machina/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja_JP\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -97,7 +96,8 @@ msgid "Display in parent-forums legend"
 msgstr "親フォーラムに表示する"
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "親フォーラムにこのフォーラムを表示します（サブフォーラムリスト）"
 
 #: apps/forum/abstract_models.py:103
@@ -107,7 +107,8 @@ msgstr "親フォーラムにこのフォーラムを表示します（サブフ
 msgid "Forum"
 msgstr "フォーラム"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "フォーラム"
@@ -118,8 +119,7 @@ msgstr "リンクフォーラムを親として持つことはできません"
 
 #: apps/forum/abstract_models.py:142
 msgid "A category can not have another category as parent"
-msgstr ""
-"カテゴリーフォーラムは別のカテゴリーフォーラムを親として持つことはできません"
+msgstr "カテゴリーフォーラムは別のカテゴリーフォーラムを親として持つことはできません"
 
 #: apps/forum/abstract_models.py:145
 msgid "A link forum must have a link associated with it"
@@ -133,37 +133,44 @@ msgstr "フォーラムの設定"
 msgid "Link forum settings"
 msgstr "リンクフォーラムの設定"
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "フォーラム '{}' を移動しました"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "フォーラム権限"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "グローバルフォーラム権限"
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "権限をコピーしました"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "ユーザーID、グループID、匿名ユーザーのいずれかを選択してください"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
+msgstr ""
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "匿名ユーザー"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr "権限を適用しました"
 
@@ -181,22 +188,34 @@ msgid ""
 "anonymous user"
 msgstr "匿名ユーザーの権限を編集する場合はこのオプションを選んでください"
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
-msgstr "ユーザーIDか匿名ユーザーを選択してください"
+#: apps/forum/forms.py:38
+msgid "Authenticated"
+msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
+
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "未指定"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr "可"
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr "不可"
 
@@ -285,8 +304,7 @@ msgstr "トピック"
 
 #: apps/forum_conversation/abstract_models.py:144
 msgid "A topic can not be associated with a category or a link forum"
-msgstr ""
-"トピックはカテゴリーフォーラムやリンクフォーラムと関連づけることはできません"
+msgstr "トピックはカテゴリーフォーラムやリンクフォーラムと関連づけることはできません"
 
 #: apps/forum_conversation/abstract_models.py:213
 #: apps/forum_conversation/forum_polls/abstract_models.py:96
@@ -336,9 +354,7 @@ msgstr "投稿にはユーザーIDまたは匿名キーを指定する必要が�
 #: apps/forum_conversation/abstract_models.py:301
 msgid ""
 "A user id or an anonymous key must be associated with a post, but not both."
-msgstr ""
-"投稿にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定するこ"
-"とはできません"
+msgstr "投稿にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定することはできません"
 
 #: apps/forum_conversation/abstract_models.py:305
 msgid "A username must be specified if the poster is anonymous"
@@ -380,9 +396,7 @@ msgstr "投票の質問"
 msgid ""
 "Enter a question to associate a poll with the topic or leave blank to not "
 "create a poll."
-msgstr ""
-"投票を設置する場合は質問を入力してください。何も入力しなければ投票は作られま"
-"せん"
+msgstr "投票を設置する場合は質問を入力してください。何も入力しなければ投票は作られません"
 
 #: apps/forum_conversation/forms.py:157
 #: apps/forum_conversation/forum_polls/abstract_models.py:37
@@ -498,9 +512,7 @@ msgstr "投票にはユーザーIDまたは匿名キーを指定する必要が�
 
 #: apps/forum_conversation/forum_polls/abstract_models.py:123
 msgid "A user id or an anonymous key must be used, but not both."
-msgstr ""
-"投票にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定するこ"
-"とはできません"
+msgstr "投票にはユーザーIDまたは匿名キーを指定する必要がありますが、両方を指定することはできません"
 
 #: apps/forum_conversation/forum_polls/apps.py:17
 msgid "Machina: Forum polls"
@@ -666,27 +678,33 @@ msgstr "権限を持つかどうか"
 msgid "Target anonymous user"
 msgstr "匿名ユーザーを対象とする"
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
 msgstr "ユーザーフォーラム権限"
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
 msgstr "ユーザーフォーラム権限"
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
-msgstr "権限は特定のユーザーか匿名ユーザーを対象とする必要があります"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
+msgstr ""
 
-#: apps/forum_permission/abstract_models.py:109
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group"
 msgstr "グループ"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:122
 msgid "Group forum permission"
 msgstr "グループフォーラム権限"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
 msgstr "グループフォーラム権限"
 
@@ -860,24 +878,19 @@ msgstr "MACHINA_MARKUP_LANGUAGEの設定は必須です"
 
 #: models/fields.py:221
 msgid "Files of size greater than {} are not allowed. Your file is {}"
-msgstr ""
-"{} を超えるサイズのファイルは認められていません。このファイルは {} です"
+msgstr "{} を超えるサイズのファイルは認められていません。このファイルは {} です"
 
 #: models/fields.py:232
 msgid ""
 "Images of width lesser than {}px or greater than {}px or are not allowed. "
 "The width of your image is {}px"
-msgstr ""
-"横幅が {}px より小さい画像、{}px より大きい画像は認められていません。この画像"
-"の横幅は {}px です"
+msgstr "横幅が {}px より小さい画像、{}px より大きい画像は認められていません。この画像の横幅は {}px です"
 
 #: models/fields.py:240
 msgid ""
 "Images of height lesser than {}px or greater than {}px or are not allowed. "
 "The height of your image is {}px"
-msgstr ""
-"縦の高さが {}px より小さい画像、{}px より大きい画像は認められていません。この"
-"画像の縦の高さは {}px です"
+msgstr "縦の高さが {}px より小さい画像、{}px より大きい画像は認められていません。この画像の縦の高さは {}px です"
 
 #: templates/admin/forum/forum/change_list.html:7
 msgid "List of forums"
@@ -928,61 +941,65 @@ msgid "Link:"
 msgstr "リンク:"
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
 msgstr "ユーザーの権限を編集"
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr "ホーム"
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr "権限"
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "保存"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr "グループの権限を編集"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
 msgstr "以下のエラーを修正してください"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
 msgstr "以下のエラーを修正してください"
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
 msgstr "権限を更新するにはユーザーを選んでください"
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "選択"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
 msgstr "権限を更新するにはグループを選んでください"
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
 msgstr "権限を別のフォーラムからコピー"
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
 msgstr "権限の設定を現在のフォーラムにコピーするにはフォーラムを選んでください"
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "コピー"
 
@@ -1557,20 +1574,14 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "本当にトピックを既読にしますか？"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "      %(topic_length)s unread topic found"
-#| msgid_plural ""
-#| "%(topic_length)s unread topics found\n"
-#| "      "
+#, python-format
 msgid ""
-"\n"
+""
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] ""
-"%(topic_length)s件の未読のトピック\n"
-"      "
+msgstr[0] "%(topic_length)s件の未読のトピック\n      "
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1579,22 +1590,3 @@ msgstr "未読のトピックはありません"
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "フォーラムトップ"
-
-#~ msgid "Global permission"
-#~ msgstr "グローバル権限"
-
-#~ msgid "This permission can be granted globally to all the forums"
-#~ msgstr "この権限はすべてのフォーラムに適用されます"
-
-#~ msgid "Local permission"
-#~ msgstr "ローカル権限"
-
-#~ msgid "This permission can be granted individually for each forum"
-#~ msgstr "この権限はそれぞれのフォーラムごとに適用されます"
-
-#~ msgid "A forum permission should be at least either global or local"
-#~ msgstr ""
-#~ "フォーラム権限は最低でもグローバルかローカルのどちらかである必要があります"
-
-#~ msgid "The following permission cannot be granted globally: {}"
-#~ msgstr "以下の権限はグローバルに適用することはできません: {}"

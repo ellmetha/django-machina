@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # yanceyy <20135224@stu.neu.edu.cn>, 2016
 # Neo Chang <me@neoto.xin>, 2017
@@ -10,15 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 22:34-0400\n"
-"PO-Revision-Date: 2018-07-02 20:29+0000\n"
+"POT-Creation-Date: 2019-10-28 21:35-0400\n"
+"PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/"
-"django-machina/language/zh_CN/)\n"
-"Language: zh_CN\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/django-machina/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -99,7 +98,8 @@ msgid "Display in parent-forums legend"
 msgstr "在父论坛图例中显示"
 
 #: apps/forum/abstract_models.py:96
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 
 #: apps/forum/abstract_models.py:103
@@ -109,7 +109,8 @@ msgstr "在论坛的父论坛或子论坛图利中显示这个论坛"
 msgid "Forum"
 msgstr "论坛"
 
-#: apps/forum/abstract_models.py:104 templates/machina/forum/forum_list.html:36
+#: apps/forum/abstract_models.py:104
+#: templates/machina/forum/forum_list.html:36
 #: templates/machina/forum/forum_list.html:204
 msgid "Forums"
 msgstr "论坛"
@@ -134,37 +135,44 @@ msgstr "论坛设置"
 msgid "Link forum settings"
 msgstr "链接论坛设置"
 
-#: apps/forum/admin.py:154
+#: apps/forum/admin.py:167
 msgid "'{}' forum successfully moved"
 msgstr "成功移动 '{}' 论坛"
 
-#: apps/forum/admin.py:170 apps/forum/admin.py:256 apps/forum/admin.py:275
-#: apps/forum/admin.py:295 apps/forum_permission/abstract_models.py:40
+#: apps/forum/admin.py:183 apps/forum/admin.py:286 apps/forum/admin.py:305
+#: apps/forum/admin.py:324 apps/forum/admin.py:344
+#: apps/forum_permission/abstract_models.py:40
 #: templates/admin/forum/forum/change_form.html:5
-#: templates/admin/forum/forum/editpermissions_form.html:20
-#: templates/admin/forum/forum/editpermissions_index.html:15
+#: templates/admin/forum/forum/editpermissions_form.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:18
 msgid "Forum permissions"
 msgstr "论坛许可文件"
 
-#: apps/forum/admin.py:170 templates/admin/forum/forum/change_list.html:15
+#: apps/forum/admin.py:183 templates/admin/forum/forum/change_list.html:15
 msgid "Global forum permissions"
 msgstr "全局论坛许可文件"
 
-#: apps/forum/admin.py:178
+#: apps/forum/admin.py:191
 msgid "Permissions successfully copied"
 msgstr "许可文件复制成功"
 
-#: apps/forum/admin.py:202
-msgid "Choose either a user ID, a group ID or the anonymous user"
-msgstr "选择一个用户ID或群组ID或匿名用户"
+#: apps/forum/admin.py:220
+msgid ""
+"Choose either a user ID, a group ID, the anonymous user or the authenticated"
+" user"
+msgstr ""
 
-#: apps/forum/admin.py:275
+#: apps/forum/admin.py:305
 #: templates/machina/forum_conversation/topic_detail.html:98
 #: templates/machina/forum_moderation/moderation_queue/detail.html:120
 msgid "Anonymous user"
 msgstr "匿名用户"
 
-#: apps/forum/admin.py:352
+#: apps/forum/admin.py:324
+msgid "Authenticated user"
+msgstr ""
+
+#: apps/forum/admin.py:401
 msgid "Permissions successfully applied"
 msgstr "许可文件应用成功"
 
@@ -182,22 +190,34 @@ msgid ""
 "anonymous user"
 msgstr "请选择一个选项如果你想要编辑匿名用户许可文件"
 
-#: apps/forum/forms.py:55
-msgid "Choose either a user ID or select the anonymous user"
-msgstr "选择一个用户ID或匿名用户"
+#: apps/forum/forms.py:38
+msgid "Authenticated"
+msgstr ""
 
-#: apps/forum/forms.py:94
-#: templates/admin/forum/forum/editpermissions_form.html:35
+#: apps/forum/forms.py:41
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr ""
+
+#: apps/forum/forms.py:66
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr ""
+
+#: apps/forum/forms.py:107
+#: templates/admin/forum/forum/editpermissions_form.html:40
 msgid "Not set"
 msgstr "未设置"
 
-#: apps/forum/forms.py:95
-#: templates/admin/forum/forum/editpermissions_form.html:36
+#: apps/forum/forms.py:108
+#: templates/admin/forum/forum/editpermissions_form.html:41
 msgid "Granted"
 msgstr "已准许"
 
-#: apps/forum/forms.py:96
-#: templates/admin/forum/forum/editpermissions_form.html:37
+#: apps/forum/forms.py:109
+#: templates/admin/forum/forum/editpermissions_form.html:42
 msgid "Not granted"
 msgstr "未被准许"
 
@@ -660,27 +680,33 @@ msgstr "组合"
 msgid "Target anonymous user"
 msgstr "针对匿名用户"
 
-#: apps/forum_permission/abstract_models.py:86
+#: apps/forum_permission/abstract_models.py:82
+msgid "Target any logged in user"
+msgstr ""
+
+#: apps/forum_permission/abstract_models.py:89
 msgid "User forum permission"
 msgstr "用户论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:87
+#: apps/forum_permission/abstract_models.py:90
 msgid "User forum permissions"
 msgstr "用户论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:102
-msgid "A permission should target either a user or an anonymous user"
-msgstr "许可文件应当针对用户及匿名用户"
+#: apps/forum_permission/abstract_models.py:107
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
+msgstr ""
 
-#: apps/forum_permission/abstract_models.py:109
+#: apps/forum_permission/abstract_models.py:116
 msgid "Group"
 msgstr "群组"
 
-#: apps/forum_permission/abstract_models.py:115
+#: apps/forum_permission/abstract_models.py:122
 msgid "Group forum permission"
 msgstr "群组论坛许可文件"
 
-#: apps/forum_permission/abstract_models.py:116
+#: apps/forum_permission/abstract_models.py:123
 msgid "Group forum permissions"
 msgstr "群组论坛许可文件"
 
@@ -917,61 +943,65 @@ msgid "Link:"
 msgstr "链接："
 
 #: templates/admin/forum/forum/editpermissions_anonymous_user.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:30
+#: templates/admin/forum/forum/editpermissions_index.html:33
 #: templates/admin/forum/forum/editpermissions_user.html:4
 msgid "Edit user permissions"
 msgstr "编辑使用者许可文件"
 
-#: templates/admin/forum/forum/editpermissions_form.html:16
-#: templates/admin/forum/forum/editpermissions_index.html:11
+#: templates/admin/forum/forum/editpermissions_authenticated_user.html:4
+msgid "Edit authenticated user permissions"
+msgstr ""
+
+#: templates/admin/forum/forum/editpermissions_form.html:21
+#: templates/admin/forum/forum/editpermissions_index.html:14
 msgid "Home"
 msgstr "主页"
 
-#: templates/admin/forum/forum/editpermissions_form.html:34
+#: templates/admin/forum/forum/editpermissions_form.html:39
 msgid "Permission"
 msgstr "许可文件"
 
-#: templates/admin/forum/forum/editpermissions_form.html:63
+#: templates/admin/forum/forum/editpermissions_form.html:68
 msgid "Save"
 msgstr "保存"
 
 #: templates/admin/forum/forum/editpermissions_group.html:4
-#: templates/admin/forum/forum/editpermissions_index.html:57
+#: templates/admin/forum/forum/editpermissions_index.html:60
 msgid "Edit group permissions"
 msgstr "编辑群组许可文件"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the error below."
 msgstr "请修改以下错误"
 
-#: templates/admin/forum/forum/editpermissions_index.html:25
+#: templates/admin/forum/forum/editpermissions_index.html:28
 msgid "Please correct the errors below."
 msgstr "请更改以下错误"
 
-#: templates/admin/forum/forum/editpermissions_index.html:31
+#: templates/admin/forum/forum/editpermissions_index.html:34
 msgid "Please select a user in order to update its permissions"
 msgstr "请选择一个用户更新许可文件"
 
-#: templates/admin/forum/forum/editpermissions_index.html:51
-#: templates/admin/forum/forum/editpermissions_index.html:78
+#: templates/admin/forum/forum/editpermissions_index.html:54
+#: templates/admin/forum/forum/editpermissions_index.html:81
 msgid "Select"
 msgstr "选择"
 
-#: templates/admin/forum/forum/editpermissions_index.html:58
+#: templates/admin/forum/forum/editpermissions_index.html:61
 msgid "Please select a group in order to update its permissions"
 msgstr "请选择一个群组更新许可文件"
 
-#: templates/admin/forum/forum/editpermissions_index.html:85
+#: templates/admin/forum/forum/editpermissions_index.html:88
 msgid "Copy permissions from another forum"
 msgstr "从另一个论坛复制许可文件"
 
-#: templates/admin/forum/forum/editpermissions_index.html:86
+#: templates/admin/forum/forum/editpermissions_index.html:89
 msgid ""
 "Please select a forum in order to copy its permissions configuration to the "
 "current forum"
 msgstr "请选择一个论坛复制它的许可结构为当前论坛"
 
-#: templates/admin/forum/forum/editpermissions_index.html:106
+#: templates/admin/forum/forum/editpermissions_index.html:109
 msgid "Copy"
 msgstr "复制"
 
@@ -1358,13 +1388,7 @@ msgid "Edit profile"
 msgstr "编辑资料"
 
 #: templates/machina/forum_member/forum_profile_detail.html:40
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Post</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Posts</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Post</small></p>"
@@ -1372,17 +1396,9 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>帖子</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:45
-#, fuzzy, python-format
-#| msgid ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topic</small></p>"
-#| msgid_plural ""
-#| "<h2><strong>%(counter)s</strong></h2>\n"
-#| "                    <p><small>Topics</small></p>"
+#, python-format
 msgid ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p><small>Topic</small></p>"
@@ -1390,8 +1406,6 @@ msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
 msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>话题</small></p>"
 
 #: templates/machina/forum_member/forum_profile_detail.html:60
 msgid "Recent posts"
@@ -1562,15 +1576,14 @@ msgid "Are you sure you want to mark topics read?"
 msgstr "你确定你要标记这些话题为已读取？"
 
 #: templates/machina/forum_tracking/unread_topic_list.html:13
-#, fuzzy, python-format
-#| msgid "%(topic_length)s unread topics found"
+#, python-format
 msgid ""
 "\n"
 "      %(topic_length)s unread topic found"
 msgid_plural ""
 "%(topic_length)s unread topics found\n"
 "      "
-msgstr[0] "找到了%(topic_length)s条未读话题"
+msgstr[0] ""
 
 #: templates/machina/forum_tracking/unread_topic_list.html:25
 msgid "There are no unread topics."
@@ -1579,174 +1592,3 @@ msgstr "没有未读话题了"
 #: templates/machina/partials/breadcrumb.html:5
 msgid "Forum index"
 msgstr "论坛主页"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "forum/<str:slug>-<int:pk>/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "Attachment"
-#~ msgid "attachment/<int:pk>/"
-#~ msgstr "附件"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/update/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:topic_slug>-<int:topic_pk>/post/create/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topics/$"
-#~ msgid "topics/"
-#~ msgstr "主题"
-
-#, fuzzy
-#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/"
-#~ msgstr "标记论坛话题"
-
-#, fuzzy
-#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-#~ msgid "forum/<str:forum_slug>-<int:forum_pk>/topics/all/"
-#~ msgstr "标记论坛话题"
-
-#, fuzzy
-#~| msgid "Subscriptions"
-#~ msgid "subscriptions/"
-#~ msgstr "订阅"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/lock/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/unlock/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/delete/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/move/$"
-#~ msgid "topic/<str:slug>-<int:pk>/move/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/移动/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/topic/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/topic/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/话题/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/sticky/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/sticky/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/置顶/$"
-
-#, fuzzy
-#~| msgid "^topic/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/change/announce/$"
-#~ msgid "topic/<str:slug>-<int:pk>/change/announce/"
-#~ msgstr "^话题/(?P<slug>[\\w-]+)-(?P<pk>\\d+)/变更/通告/$"
-
-#, fuzzy
-#~| msgid "^queue/$"
-#~ msgid "queue/"
-#~ msgstr "^队列/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/$"
-#~ msgid "queue/<int:pk>/"
-#~ msgstr "^队列/(?P<pk>\\d+)/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/approve/$"
-#~ msgid "queue/<int:pk>/approve/"
-#~ msgstr "^队列/(?P<pk>\\d+)/已通过/$"
-
-#, fuzzy
-#~| msgid "^queue/(?P<pk>\\d+)/disapprove/$"
-#~ msgid "queue/<int:pk>/disapprove/"
-#~ msgstr "^队列/(?P<pk>\\d+)/未通过/$"
-
-#, fuzzy
-#~| msgid "^mark/forums/$"
-#~ msgid "mark/forums/"
-#~ msgstr "标记论坛"
-
-#, fuzzy
-#~| msgid "^mark/forums/(?P<pk>\\d+)/$"
-#~ msgid "mark/forums/<int:pk>/"
-#~ msgstr "标记论坛"
-
-#, fuzzy
-#~| msgid "^mark/forum/(?P<pk>\\d+)/topics/$"
-#~ msgid "mark/forum/<int:pk>/topics/"
-#~ msgstr "标记论坛话题"
-
-#, fuzzy
-#~| msgid "^unread-topics/$"
-#~ msgid "unread-topics/"
-#~ msgstr "未读话题"
-
-#~ msgid "^feeds/"
-#~ msgstr "^订阅列表/"
-
-#~ msgid "^member/"
-#~ msgstr "成员"
-
-#~ msgid "^moderation/"
-#~ msgstr "^审核/"
-
-#~ msgid "^search/"
-#~ msgstr "搜索"
-
-#~ msgid "^tracking/"
-#~ msgstr "追踪"
-
-#~ msgid "Global permission"
-#~ msgstr "全局许可文件"
-
-#~ msgid "This permission can be granted globally to all the forums"
-#~ msgstr "这个许可文件能被所有论坛全局准许"
-
-#~ msgid "Local permission"
-#~ msgstr "局部许可文件"
-
-#~ msgid "This permission can be granted individually for each forum"
-#~ msgstr "这个许可文件能被各论坛分别准许"
-
-#~ msgid "A forum permission should be at least either global or local"
-#~ msgstr "一个论坛许可文件应当至少是全局的或局部的"
-
-#~ msgid "The following permission cannot be granted globally: {}"
-#~ msgstr "以下许可文件不能被全局准许"
-
-#~ msgid "Poster IP address"
-#~ msgstr "发布者IP地址"
-
-#~ msgid "Search..."
-#~ msgstr "搜索"
-
-#~ msgid "Yes"
-#~ msgstr "确认"
-
-#~ msgid "No"
-#~ msgstr "取消"
-
-#~ msgid "Move"
-#~ msgstr "移动"
-
-#~ msgid "Cancel"
-#~ msgstr "取消"
