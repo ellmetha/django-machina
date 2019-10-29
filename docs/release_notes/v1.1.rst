@@ -7,6 +7,13 @@ Requirements and compatibility
 
 Python 3.5, 3.6, 3.7 and 3.8. Django 2.1, 2.2 and 3.0.
 
+Major changes
+-------------
+
+* It is now possible to configure permissions targetting all logged in users from the forums section
+  of the Django admin
+  (`#170 <https://github.com/ellmetha/django-machina/pull/170>`_)
+
 Minor changes
 -------------
 
