@@ -23,6 +23,9 @@ Minor changes
 * Fix user / group precedence issue related to forum permissions: now user permissions always have
   precedence over group permissions
   (`#163 <https://github.com/ellmetha/django-machina/issues/163>`_)
+* Fix user forum permissions and group forum permissions panels being displayed in the admin
+  regardless of the fact that the user has the necessary permission to edit those models
+  (`#172 <https://github.com/ellmetha/django-machina/pull/172>`_)
 
 Backwards incompatible changes
 ------------------------------
