@@ -3,7 +3,7 @@ TEST_PACKAGE := tests
 
 
 init:
-	pipenv install --three --dev
+	pipenv install --dev --python `which python3`
 
 
 # DEVELOPMENT
