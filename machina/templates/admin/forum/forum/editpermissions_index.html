@@ -51,6 +51,20 @@
           {% endfor %}
         </fieldset>
       </div>
+      <div>
+        {% if users_with_perms %}
+          <h3>
+            {% blocktrans %}
+            Users (name and id) that already have permissions for forum '{{forum.name}}'
+            {% endblocktrans %}
+          </h3>
+          <ul>
+          {% for u in users_with_perms %}
+            <li>{{u.user__first_name}} {{u.user__last_name}} ({{ u.user__id}})</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
       <div class="submit-row">
         <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
       </div>
@@ -85,6 +99,20 @@
           </div>
           {% endfor %}
         </fieldset>
+      </div>
+      <div>
+        {% if groups_with_perms %}
+        <h3>
+          {% blocktrans %}
+          Groups (name and id) that already have permissions for forum '{{forum.name}}'
+          {% endblocktrans %}
+        </h3>
+          <ul>
+          {% for g in groups_with_perms %}
+            <li>{{g.group__name}} ({{ g.group__id}})</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
       </div>
       <div class="submit-row">
         <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />

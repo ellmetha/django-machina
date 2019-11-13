@@ -284,8 +284,24 @@ class ForumAdmin(admin.ModelAdmin):
         else:
             if can_change_user_perms:
                 user_form = PickUserForm(admin_site=self.admin_site)
+                user_perms = (
+                    UserForumPermission.objects.filter(
+                        forum=forum
+                    )
+                    .values('user__first_name', 'user__last_name', 'user__id')
+                    .distinct()
+                )
+                context['users_with_perms'] = user_perms
             if can_change_group_perms:
                 group_form = PickGroupForm(admin_site=self.admin_site)
+                group_perms = (
+                    GroupForumPermission.objects.filter(
+                        forum=forum
+                    )
+                    .values('group__name', 'group__id')
+                    .distinct()
+                )
+                context['groups_with_perms'] = group_perms
 
         context['user_form'] = user_form
         context['group_form'] = group_form
