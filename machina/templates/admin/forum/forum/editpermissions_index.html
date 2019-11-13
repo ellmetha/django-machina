@@ -54,9 +54,13 @@
       <div>
         {% if users_with_perms %}
           <h3>
-            {% blocktrans %}
-            Users (name and id) that already have permissions for forum '{{forum.name}}'
-            {% endblocktrans %}
+            {% if forum.name %}
+              {% blocktrans %}
+              Users (name and id) that already have permissions for forum '{{forum.name}}'
+              {% endblocktrans %}
+            {% else %}
+              {%trans 'Users (name and id) that already have global permissions' %}
+            {% endif %}
           </h3>
           <ul>
           {% for u in users_with_perms %}
@@ -103,9 +107,13 @@
       <div>
         {% if groups_with_perms %}
         <h3>
-          {% blocktrans %}
-          Groups (name and id) that already have permissions for forum '{{forum.name}}'
-          {% endblocktrans %}
+          {% if forum.name %}
+            {% blocktrans %}
+            Groups (name and id) that already have permissions for forum '{{forum.name}}'
+            {% endblocktrans %}
+          {% else %}
+            {%trans 'Groups (name and id) that already have global permissions' %}
+          {% endif %}
         </h3>
           <ul>
           {% for g in groups_with_perms %}
