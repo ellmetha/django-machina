@@ -61,8 +61,8 @@ def decrease_posts_count_after_post_unaproval(sender, instance, **kwargs):
     This receiver handles the unaproval of a forum post: the posts count associated with the post's
     author is decreased.
     """
-    if not instance.pk:
-        # Do not consider posts being created.
+    if not instance.pk or not instance.poster:
+        # Do not consider posts being created or posts of anonymous users
         return
 
     profile, dummy = ForumProfile.objects.get_or_create(user=instance.poster)
