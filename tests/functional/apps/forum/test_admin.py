@@ -85,6 +85,28 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         model = self.model
         raw_url = 'admin:{}_{}_editpermission_index'.format(
             model._meta.app_label, self._get_module_name(model._meta))
+
+        # These permissions are not explicitely tested or checked but should result
+        # in a list of users and groups that already have permissions, so they affect the view
+        # that we are testing here.
+        group = GroupFactory.create()
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_see_forum'),
+            forum=self.top_level_cat,
+            user=self.user, has_perm=True)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_read_forum'),
+            forum=self.top_level_cat,
+            anonymous_user=True, has_perm=True)
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.top_level_cat,
+            authenticated_user=True, has_perm=True)
+        GroupForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.sub_forum_1,
+            group=group, has_perm=False)
+
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.get(url)
