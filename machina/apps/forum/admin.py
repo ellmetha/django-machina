@@ -285,13 +285,24 @@ class ForumAdmin(admin.ModelAdmin):
             if can_change_user_perms:
                 user_form = PickUserForm(admin_site=self.admin_site)
                 user_perms = (
-                    UserForumPermission.objects.filter(
-                        forum=forum
-                    )
-                    .values('user__first_name', 'user__last_name', 'user__id')
-                    .distinct()
+                    UserForumPermission.objects.filter(forum=forum)
+                    .select_related('user')
                 )
-                context['users_with_perms'] = user_perms
+                userlist = []  # List with display strings for users
+                checked_users = set()  # Set to quickly check if we already added a user to userlist
+                for up in user_perms:
+                    if up.user:
+                        if up.user.id not in checked_users:
+                            userlist.append(up.user.get_full_name() + ' (' + str(up.user.id) + ')')
+                            checked_users.add(up.user.id)
+                        continue
+                    if up.anonymous_user and 'anonymous' not in checked_users:
+                        userlist.append(_('Anonymous'))
+                        checked_users.add('anonymous')
+                    if up.authenticated_user and 'authenticated' not in checked_users:
+                        userlist.append(_('Authenticated'))
+                        checked_users.add('authenticated')
+                context['users_with_perms'] = userlist
             if can_change_group_perms:
                 group_form = PickGroupForm(admin_site=self.admin_site)
                 group_perms = (

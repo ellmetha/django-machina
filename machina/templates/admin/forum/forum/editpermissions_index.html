@@ -64,7 +64,7 @@
           </h3>
           <ul>
           {% for u in users_with_perms %}
-            <li>{{u.user__first_name}} {{u.user__last_name}} ({{ u.user__id}})</li>
+            <li>{{u}}</li>
           {% endfor %}
           </ul>
         {% endif %}
