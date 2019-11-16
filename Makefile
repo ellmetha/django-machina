@@ -25,7 +25,7 @@ staticfiles:
 
 ## Generate the project's .po files.
 messages:
-	cd machina && pipenv run python -m django makemessages -a
+	cd machina && pipenv run python -m django makemessages --no-wrap --no-location -a
 
 ## Compiles the project's .po files.
 compiledmessages:
