@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.sites.models import Site
+from django.test import Client
 from django.urls import reverse
 
 from machina.apps.forum.admin import PickUserForm
@@ -243,6 +244,93 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         assert GroupForumPermission.objects.filter(
             permission__codename='can_start_new_topics', forum=self.top_level_cat,
             group=group, has_perm=False).exists()
+
+    def test_editpermission_index_view_do_not_allow_users_to_copy_permissions_if_they_do_not_have_the_required_permissions(self):  # noqa: E501
+        group = GroupFactory.create()
+        model = self.model
+
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_see_forum'),
+            forum=self.sub_forum_1,
+            user=self.user,
+            has_perm=False
+        )
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_read_forum'),
+            forum=self.sub_forum_1,
+            user=self.user,
+            has_perm=True
+        )
+        UserForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.sub_forum_1,
+            user=self.user,
+            has_perm=False
+        )
+        GroupForumPermissionFactory.create(
+            permission=ForumPermission.objects.get(codename='can_start_new_topics'),
+            forum=self.sub_forum_1,
+            group=group,
+            has_perm=False
+        )
+
+        raw_url = 'admin:{}_{}_editpermission_index'.format(
+            model._meta.app_label,
+            self._get_module_name(model._meta)
+        )
+
+        user = self.create_user(username='admin2', is_staff=True, is_superuser=False)
+        client = Client()
+        client.force_login(user)
+
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = client.post(url, {'forum': self.sub_forum_1.id})
+
+        assert response.status_code == 200
+        assert not (
+            UserForumPermission
+            .objects
+            .filter(
+                permission__codename='can_see_forum',
+                forum=self.top_level_cat,
+                user=self.user,
+                has_perm=False
+            )
+            .exists()
+        )
+        assert not (
+            UserForumPermission
+            .objects
+            .filter(
+                permission__codename='can_read_forum',
+                forum=self.top_level_cat,
+                user=self.user,
+                has_perm=True
+            )
+            .exists()
+        )
+        assert not (
+            UserForumPermission
+            .objects
+            .filter(
+                permission__codename='can_start_new_topics',
+                forum=self.top_level_cat,
+                user=self.user,
+                has_perm=False
+            )
+            .exists()
+        )
+        assert not (
+            GroupForumPermission
+            .objects
+            .filter(
+                permission__codename='can_start_new_topics',
+                forum=self.top_level_cat,
+                group=group,
+                has_perm=False
+            )
+            .exists()
+        )
 
     def test_editpermission_form_can_update_user_permissions(self):
         # Setup

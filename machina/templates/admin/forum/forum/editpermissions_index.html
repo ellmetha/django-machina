@@ -91,7 +91,7 @@
       </div>
     </form>
   {% endif %}
-{% if forum %}
+{% if forum and forum_form %}
 <form action="." method="post" id="{{ opts.model_name }}_pick_forum_form" novalidate>{% csrf_token %}
   <div>
     <fieldset class="module aligned {{ fieldset.classes }}">

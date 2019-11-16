@@ -182,30 +182,36 @@ class ForumAdmin(admin.ModelAdmin):
         context['forum'] = forum
         context['title'] = _('Forum permissions') if forum else _('Global forum permissions')
 
+        can_change_user_perms = (
+            request.user.has_perm('forum_permission.add_userforumpermission') or
+            request.user.has_perm('forum_permission.change_userforumpermission')
+        )
+        can_change_group_perms = (
+            request.user.has_perm('forum_permission.add_groupforumpermission') or
+            request.user.has_perm('forum_permission.change_groupforumpermission')
+        )
+
         # Handles "copy permission from" form
         permissions_copied = False
-        if forum and request.method == 'POST':
-            forum_form = PickForumForm(request.POST)
-            if forum_form.is_valid() and forum_form.cleaned_data['forum']:
-                self._copy_forum_permissions(forum_form.cleaned_data['forum'], forum)
-                self.message_user(request, _('Permissions successfully copied'))
-                permissions_copied = True
-            context['forum_form'] = forum_form
-        elif forum:
-            context['forum_form'] = PickForumForm()
+        if can_change_user_perms and can_change_group_perms:
+            if forum and request.method == 'POST':
+                forum_form = PickForumForm(request.POST)
+                if forum_form.is_valid() and forum_form.cleaned_data['forum']:
+                    self._copy_forum_permissions(forum_form.cleaned_data['forum'], forum)
+                    self.message_user(request, _('Permissions successfully copied'))
+                    permissions_copied = True
+                context['forum_form'] = forum_form
+            elif forum:
+                context['forum_form'] = PickForumForm()
 
-        show_user_perm_form = (request.user.has_perm('forum_permission.add_userforumpermission') or
-                               request.user.has_perm('forum_permission.change_userforumpermission'))
-        show_grp_perm_form = (request.user.has_perm('forum_permission.add_groupforumpermission') or
-                              request.user.has_perm('forum_permission.change_groupforumpermission'))
         user_form, user = None, None
         group_form, group = None, None
 
         # Handles user or group selection
         if request.method == 'POST' and not permissions_copied:
-            if show_user_perm_form:
+            if can_change_user_perms:
                 user_form = PickUserForm(request.POST, admin_site=self.admin_site)
-            if show_grp_perm_form:
+            if can_change_group_perms:
                 group_form = PickGroupForm(request.POST, admin_site=self.admin_site)
 
             # Check if the form was drawn, was valid and was submitted (presence of submitbutton)
@@ -274,11 +280,11 @@ class ForumAdmin(admin.ModelAdmin):
                         reverse('admin:forum_forum_editpermission_group', kwargs=url_kwargs),
                     )
 
-            context['group_errors'] = helpers.AdminErrorList(group_form, [])
+                context['group_errors'] = helpers.AdminErrorList(group_form, [])
         else:
-            if show_user_perm_form:
+            if can_change_user_perms:
                 user_form = PickUserForm(admin_site=self.admin_site)
-            if show_grp_perm_form:
+            if can_change_group_perms:
                 group_form = PickGroupForm(admin_site=self.admin_site)
 
         context['user_form'] = user_form
