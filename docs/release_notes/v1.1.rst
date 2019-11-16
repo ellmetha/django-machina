@@ -26,6 +26,9 @@ Minor changes
 * Fix user forum permissions and group forum permissions panels being displayed in the admin
   regardless of the fact that the user has the necessary permission to edit those models
   (`#172 <https://github.com/ellmetha/django-machina/pull/172>`_)
+* Prevent users from copying forum permissions in the admin if they don't have the necessary
+  permissions to do so (_add_ and _change_ permissions for user forum permissions and group forum
+  permissions)
 
 Backwards incompatible changes
 ------------------------------
