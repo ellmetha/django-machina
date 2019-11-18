@@ -709,6 +709,9 @@ class TestPostApproveView(BaseClientTestCase):
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
 
+        self.anonymous_post = (
+            PostFactory.create(topic=self.topic, anonymous_key='1234', poster=None, approved=False)
+        )
         # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
@@ -731,10 +734,20 @@ class TestPostApproveView(BaseClientTestCase):
             'forum_moderation:approve_queued_post',
             kwargs={'pk': self.post.pk})
         # Run
-        self.client.post(correct_url, follow=True)
+        response_normal_post = self.client.post(correct_url, follow=True)
+
+        anonymous_url = reverse(
+            'forum_moderation:approve_queued_post',
+            kwargs={'pk': self.anonymous_post.pk})
+        response_anonymous_post = self.client.post(anonymous_url, follow=True)
         # Check
         self.post.refresh_from_db()
         assert self.post.approved
+        assert response_normal_post.status_code == 200
+
+        self.anonymous_post.refresh_from_db()
+        assert self.anonymous_post.approved
+        assert response_anonymous_post.status_code == 200
 
     def test_redirects_to_the_moderation_queue(self):
         # Setup
@@ -777,6 +790,9 @@ class TestPostDisapproveView(BaseClientTestCase):
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user, approved=False)
 
+        self.anonymous_post = (
+            PostFactory.create(topic=self.topic, anonymous_key='1234', poster=None, approved=False)
+        )
         # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
 
@@ -801,9 +817,18 @@ class TestPostDisapproveView(BaseClientTestCase):
             kwargs={'pk': self.post.pk})
         # Run
         self.client.post(correct_url, follow=True)
+
+        old_anom_post_pk = self.anonymous_post.pk
+        anonymous_url = reverse(
+            'forum_moderation:disapprove_queued_post',
+            kwargs={'pk': self.anonymous_post.pk})
+        self.client.post(anonymous_url, follow=True)
+
         # Check
         with pytest.raises(ObjectDoesNotExist):
             Post.objects.get(pk=old_post_pk)
+        with pytest.raises(ObjectDoesNotExist):
+            Post.objects.get(pk=old_anom_post_pk)
 
     def test_redirects_to_the_moderation_queue(self):
         # Setup
