@@ -80,6 +80,20 @@ class TestDecreasePostsCountAfterPostUnaprovalReceiver(object):
         profile.refresh_from_db()
         assert profile.posts_count == 1
 
+    def test_do_nothing_if_the_post_has_been_created_by_an_anonymous_user(self):
+        u1 = UserFactory.create()
+        top_level_forum = create_forum()
+        topic = create_topic(forum=top_level_forum, poster=u1)
+        PostFactory.create(topic=topic, poster=u1)
+        profile = ForumProfile.objects.get(user=u1)
+        post = PostFactory.create(topic=topic, poster=None, approved=True)
+
+        post.approved = False
+        post.save()
+
+        profile.refresh_from_db()
+        assert profile.posts_count == 1
+
 
 @pytest.mark.django_db
 class TestDecreasePostsCountAfterPostDeletionReceiver(object):
