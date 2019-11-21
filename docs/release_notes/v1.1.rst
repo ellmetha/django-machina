@@ -29,6 +29,8 @@ Minor changes
 * Prevent users from copying forum permissions in the admin if they don't have the necessary
   permissions to do so (_add_ and _change_ permissions for user forum permissions and group forum
   permissions)
+* Fix database error happening when rejecting a post of an anonymous user
+  (`#176 <https://github.com/ellmetha/django-machina/pull/176>`_)
 
 Backwards incompatible changes
 ------------------------------
