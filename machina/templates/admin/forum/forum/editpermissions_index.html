@@ -52,7 +52,7 @@
         </fieldset>
       </div>
       <div>
-        <a class="custom-popup" href="{% url 'admin:forum_forum_view_permission_holders' forum.id %}">{% trans 'See users with permissions' %}</a>
+        <a class="custom-popup" href="{{ linkurl }}">{% trans 'See users with permissions' %}</a>
       </div>
       <div class="submit-row">
         <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_user" />
@@ -90,7 +90,7 @@
         </fieldset>
       </div>
       <div>
-        <a class="custom-popup" href="{% url 'admin:forum_forum_view_permission_holders' forum.id %}">{% trans 'See groups with permissions' %}</a>
+        <a class="custom-popup" href="{{ linkurl }}">{% trans 'See groups with permissions' %}</a>
       </div>
       <div class="submit-row">
         <input type="submit" value="{% trans 'Select' %}" class="default" name="_select_group" />

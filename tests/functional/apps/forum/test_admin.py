@@ -86,6 +86,21 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         raw_url = 'admin:{}_{}_editpermission_index'.format(
             model._meta.app_label, self._get_module_name(model._meta))
 
+        # Run
+        url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
+        response = self.client.get(url)
+        global_url = reverse(raw_url)  # Working on global rights
+        global_response = self.client.get(global_url)
+        # Check
+        assert response.status_code == 200
+        assert global_response.status_code == 200
+
+    def test_permission_holders_view(self):
+        # Setup
+        model = self.model
+        raw_url = 'admin:{}_{}_view_permission_holders'.format(
+            model._meta.app_label, self._get_module_name(model._meta))
+
         # These permissions are not explicitely tested or checked but should result
         # in a list of users and groups that already have permissions, so they affect the view
         # that we are testing here.
@@ -110,8 +125,11 @@ class TestForumAdmin(AdminClientTestCase, AdminBaseViewTestMixin):
         # Run
         url = reverse(raw_url, kwargs={'forum_id': self.top_level_cat.id})
         response = self.client.get(url)
+        global_url = reverse(raw_url)  # Working on global rights
+        global_response = self.client.get(global_url)
         # Check
         assert response.status_code == 200
+        assert global_response.status_code == 200
 
     def test_editpermission_index_view_submission_cannot_work_without_data(self):
         # Setup

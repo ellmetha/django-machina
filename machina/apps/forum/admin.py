@@ -127,6 +127,11 @@ class ForumAdmin(admin.ModelAdmin):
                 name='forum_forum_editpermission_group',
             ),
             url(
+                r'^view-permission-holders/$',
+                self.admin_site.admin_view(self.view_permission_holders_view),
+                name='forum_forum_view_permission_holders',
+            ),
+            url(
                 r'^(?P<forum_id>[0-9]+)/view-permission-holders/$',
                 self.admin_site.admin_view(self.view_permission_holders_view),
                 name='forum_forum_view_permission_holders',
@@ -186,7 +191,13 @@ class ForumAdmin(admin.ModelAdmin):
         # Set up the context
         context = self.get_forum_perms_base_context(request, forum)
         context['forum'] = forum
-        context['title'] = _('Forum permissions') if forum else _('Global forum permissions')
+        if forum:
+            context['title'] = _('Forum permissions')
+            context['linkurl'] = reverse('admin:forum_forum_view_permission_holders',
+                                         kwargs={'forum_id': forum.id})
+        else:
+            context['title'] = _('Global forum permissions')
+            context['linkurl'] = reverse('admin:forum_forum_view_permission_holders')
 
         can_change_user_perms = (
             request.user.has_perm('forum_permission.add_userforumpermission') or
