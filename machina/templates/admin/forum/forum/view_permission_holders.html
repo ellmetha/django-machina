@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load admin_modify %}
+{% load admin_urls %}
+{% load i18n%}
+{% load static %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block content %}
+    {% if users_with_perms %}
+      <h3>
+        {% if forum.name %}
+          {% blocktrans with forum.name as forumname %}
+          Users (name and id) that already have permissions for forum '{{forumname}}'
+          {% endblocktrans %}
+        {% else %}
+          {%trans 'Users (name and id) that already have global permissions' %}
+        {% endif %}
+      </h3>
+      <ul>
+      {% for u in users_with_perms %}
+        <li>{{u}}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if groups_with_perms %}
+    <h3>
+      {% if forum.name %}
+        {% blocktrans with forum.name as forumname %}
+        Groups (name and id) that already have permissions for forum '{{forumname}}'
+        {% endblocktrans %}
+      {% else %}
+        {%trans 'Groups (name and id) that already have global permissions' %}
+      {% endif %}
+    </h3>
+      <ul>
+      {% for g in groups_with_perms %}
+        <li>{{g.group__name}} ({{ g.group__id}})</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+{% endblock content %}

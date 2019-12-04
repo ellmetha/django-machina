@@ -65,6 +65,7 @@ class ForumAdmin(admin.ModelAdmin):
         'admin/forum/forum/editpermissions_authenticated_user.html'
     )
     editpermissions_group_view_template_name = 'admin/forum/forum/editpermissions_group.html'
+    view_permission_holders_view_template_name = 'admin/forum/forum/view_permission_holders.html'
 
     def get_urls(self):
         """ Returns the URLs associated with the admin abstraction. """
@@ -124,6 +125,11 @@ class ForumAdmin(admin.ModelAdmin):
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
                 name='forum_forum_editpermission_group',
+            ),
+            url(
+                r'^(?P<forum_id>[0-9]+)/view-permission-holders/$',
+                self.admin_site.admin_view(self.view_permission_holders_view),
+                name='forum_forum_view_permission_holders',
             ),
         ]
         return forum_admin_urls + urls
@@ -284,40 +290,66 @@ class ForumAdmin(admin.ModelAdmin):
         else:
             if can_change_user_perms:
                 user_form = PickUserForm(admin_site=self.admin_site)
-                user_perms = (
-                    UserForumPermission.objects.filter(forum=forum)
-                    .select_related('user')
-                )
-                userlist = []  # List with display strings for users
-                checked_users = set()  # Set to quickly check if we already added a user to userlist
-                for up in user_perms:
-                    if up.user:
-                        if up.user.id not in checked_users:
-                            userlist.append(up.user.get_full_name() + ' (' + str(up.user.id) + ')')
-                            checked_users.add(up.user.id)
-                        continue
-                    if up.anonymous_user and 'anonymous' not in checked_users:
-                        userlist.append(_('Anonymous'))
-                        checked_users.add('anonymous')
-                    if up.authenticated_user and 'authenticated' not in checked_users:
-                        userlist.append(_('Authenticated'))
-                        checked_users.add('authenticated')
-                context['users_with_perms'] = userlist
             if can_change_group_perms:
                 group_form = PickGroupForm(admin_site=self.admin_site)
-                group_perms = (
-                    GroupForumPermission.objects.filter(
-                        forum=forum
-                    )
-                    .values('group__name', 'group__id')
-                    .distinct()
-                )
-                context['groups_with_perms'] = group_perms
 
         context['user_form'] = user_form
         context['group_form'] = group_form
 
         return render(request, self.editpermissions_index_view_template_name, context)
+
+    def view_permission_holders_view(self, request, forum_id=None):
+        """ Shows groups and users that already have permissions on the given forum. """
+        forum = get_object_or_404(Forum, pk=forum_id) if forum_id \
+            else None
+
+        # Set up the context
+        context = self.get_forum_perms_base_context(request, forum)
+        context['forum'] = forum
+        if forum:
+            context['title'] = _("Holders of permissions for '{}'").format(forum.name)
+        else:
+            context['title'] = _('Holders of global forum permissions')
+
+        can_change_user_perms = (
+            request.user.has_perm('forum_permission.add_userforumpermission') or
+            request.user.has_perm('forum_permission.change_userforumpermission')
+        )
+        can_change_group_perms = (
+            request.user.has_perm('forum_permission.add_groupforumpermission') or
+            request.user.has_perm('forum_permission.change_groupforumpermission')
+        )
+
+        if can_change_user_perms:
+            user_perms = (
+                UserForumPermission.objects.filter(forum=forum)
+                .select_related('user')
+            )
+            userlist = []  # List with display strings for users
+            checked_users = set()  # Set to quickly check if we already added a user to userlist
+            for up in user_perms:
+                if up.user:
+                    if up.user.id not in checked_users:
+                        userlist.append(up.user.get_full_name() + ' (' + str(up.user.id) + ')')
+                        checked_users.add(up.user.id)
+                    continue
+                if up.anonymous_user and 'anonymous' not in checked_users:
+                    userlist.append(_('Anonymous'))
+                    checked_users.add('anonymous')
+                if up.authenticated_user and 'authenticated' not in checked_users:
+                    userlist.append(_('Authenticated'))
+                    checked_users.add('authenticated')
+            context['users_with_perms'] = userlist
+        if can_change_group_perms:
+            group_perms = (
+                GroupForumPermission.objects.filter(
+                    forum=forum
+                )
+                .values('group__name', 'group__id')
+                .distinct()
+            )
+            context['groups_with_perms'] = group_perms
+        return render(request, self.view_permission_holders_view_template_name, context)
 
     def editpermissions_user_view(self, request, user_id, forum_id=None):
         """ Allows to edit user permissions for the considered forum.
