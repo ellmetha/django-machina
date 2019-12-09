@@ -3,4 +3,8 @@
 
 {{ obj.last_post.content.rendered|safe }}
 <br /><br />
-<i>{% trans "Posted by" %} {{ obj.poster|forum_member_display_name }} - {{ obj.created }}</i>
+{% if obj.poster %}
+	<i>{% trans "Posted by" %} {{ obj.poster|forum_member_display_name }} - {{ obj.created }}</i>
+{% else %}
+	<i>{% trans "Posted by" %} {{ obj.first_post.username }} - {{ obj.created }}</i>
+{% endif %}
