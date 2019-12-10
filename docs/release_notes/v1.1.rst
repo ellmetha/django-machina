@@ -31,6 +31,8 @@ Minor changes
   permissions)
 * Fix database error happening when rejecting a post of an anonymous user
   (`#176 <https://github.com/ellmetha/django-machina/pull/176>`_)
+* Fix error occuring with RSS feeds containing topics authored by anonymous users
+  (`#180 <https://github.com/ellmetha/django-machina/pull/180>`_)
 
 Backwards incompatible changes
 ------------------------------
