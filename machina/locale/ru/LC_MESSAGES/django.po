@@ -52,7 +52,7 @@ msgid "Category forum"
 msgstr "Форум по категориям"
 
 msgid "Link forum"
-msgstr "Форум ссылок"
+msgstr "Форум-ссылка"
 
 msgid "Forum type"
 msgstr "Тип форума"
@@ -82,19 +82,19 @@ msgid "Forums"
 msgstr "Форумы"
 
 msgid "A forum can not have a link forum as parent"
-msgstr "У форума не может быть указан родителем форум ссылок"
+msgstr "У форума не может быть указан родителем форум-ссылка"
 
 msgid "A category can not have another category as parent"
 msgstr "Категория не может иметь другую категорию в качестве родителя"
 
 msgid "A link forum must have a link associated with it"
-msgstr "Форум ссылок должен иметь ссылку"
+msgstr "Форум-ссылка должен иметь ссылку"
 
 msgid "Forum settings"
 msgstr "Настройки форума"
 
 msgid "Link forum settings"
-msgstr "Настройки форума ссылок"
+msgstr "Настройки форума-ссылки"
 
 msgid "'{}' forum successfully moved"
 msgstr "Форум '{}' успешно перемещён"
@@ -205,7 +205,7 @@ msgid "Topics"
 msgstr "Темы"
 
 msgid "A topic can not be associated with a category or a link forum"
-msgstr "Тема не может быть связана с категорией или форумом ссылок"
+msgstr "Тема не может быть связана с категорией или форумом-ссылкой"
 
 msgid "Anonymous user forum key"
 msgstr "Форумный ключ анонимного пользователя"
