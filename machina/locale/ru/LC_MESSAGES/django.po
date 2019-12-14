@@ -58,16 +58,16 @@ msgid "Forum type"
 msgstr "Тип форума"
 
 msgid "Direct number of posts"
-msgstr "Кол-во постов"
+msgstr "Кол-во ответов"
 
 msgid "Direct number of topics"
 msgstr "Кол-во тем"
 
 msgid "Last post"
-msgstr "Последнее сообщение"
+msgstr "Последний ответ"
 
 msgid "Last post added on"
-msgstr "Последнее сообщение добавлено в"
+msgstr "Последний ответ добавлен в"
 
 msgid "Display in parent-forums legend"
 msgstr "Отображать в легенде родительских форумов"
@@ -187,13 +187,13 @@ msgid "Approved"
 msgstr "Подтверждено"
 
 msgid "Posts count"
-msgstr "Количество сообщений"
+msgstr "Количество ответов"
 
 msgid "Views count"
 msgstr "Количество просмотров"
 
 msgid "First post"
-msgstr "Первое сообщение"
+msgstr "Первый ответ"
 
 msgid "Subscribers"
 msgstr "Подписчики"
@@ -229,16 +229,16 @@ msgid "Updates count"
 msgstr "Количество изменений"
 
 msgid "Post"
-msgstr "Сообщение"
+msgstr "Ответ"
 
 msgid "Posts"
-msgstr "Сообщения"
+msgstr "Ответы"
 
 msgid "A user id or an anonymous key must be associated with a post."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с ответом"
 
 msgid "A user id or an anonymous key must be associated with a post, but not both."
-msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с сообщением, но не оба одновременно"
+msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с ответом, но не оба одновременно"
 
 msgid "A username must be specified if the poster is anonymous"
 msgstr "Имя пользователя должно быть указано, если автор - анонимный пользователь"
@@ -400,7 +400,7 @@ msgid "Signature"
 msgstr "Подпись"
 
 msgid "Total posts"
-msgstr "Сообщений всего"
+msgstr "Всего ответов"
 
 msgid "Forum profile"
 msgstr "Форумный профиль"
@@ -451,10 +451,10 @@ msgid "Would you want to change this topic to an announce?"
 msgstr "Хотите изменить эту тему на объявление?"
 
 msgid "This post has been approved successfully."
-msgstr "Сообщение было одобрено."
+msgstr "Ответ был одобрен."
 
 msgid "This post has been disapproved successfully."
-msgstr "Сообщение не было одобрено."
+msgstr "Ответ не был одобрен."
 
 msgid "Permission codename"
 msgstr "Кодовое название разрешения"
@@ -508,7 +508,7 @@ msgid "Can post announcements"
 msgstr "Может писать объявления"
 
 msgid "Can post stickies"
-msgstr "Может отправлять закрепленные сообщения"
+msgstr "Может писать закрепленные темы"
 
 msgid "Can delete own posts"
 msgstr "Может удалять свои ответы"
@@ -652,7 +652,7 @@ msgid "Topics:"
 msgstr "Темы:"
 
 msgid "Posts:"
-msgstr "Сообщения:"
+msgstr "Ответы:"
 
 msgid "Link:"
 msgstr "Ссылки:"
@@ -738,7 +738,7 @@ msgid "By: %(poster_username)s"
 msgstr "От: %(poster_username)s"
 
 msgid "No posts"
-msgstr "Сообщений нет"
+msgstr "Ответов нет"
 
 msgid "Total redirects:"
 msgstr "Общее количество перенаправлений:"
@@ -762,7 +762,7 @@ msgid "Statistics"
 msgstr "Статистика"
 
 msgid "Total posts:"
-msgstr "Всего сообщений:"
+msgstr "Всего ответов:"
 
 msgid "Total topics:"
 msgstr "Всего тем:"
@@ -814,7 +814,7 @@ msgid "Post reply"
 msgstr "Ответить"
 
 msgid "Subscribe"
-msgstr "Подписатсья"
+msgstr "Подписаться"
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
@@ -855,10 +855,10 @@ msgid "By: %(poster_username)s on %(creation_date)s"
 msgstr "От: %(poster_username)s %(creation_date)s "
 
 msgid "Delete post"
-msgstr "Удалить сообщение"
+msgstr "Удалить ответ"
 
 msgid "Are you sure you want to delete this post?"
-msgstr "Вы уверены, что хотите удалить сообщение?"
+msgstr "Вы уверены, что хотите удалить ответ?"
 
 msgid "Yes, I'm sure"
 msgstr ""
@@ -867,7 +867,7 @@ msgid "No, take me back"
 msgstr ""
 
 msgid "Edit post"
-msgstr "Редактировать сообщение"
+msgstr "Редактировать ответ"
 
 msgid "Post a new topic"
 msgstr "Добавить новую тему"
@@ -945,7 +945,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Recent posts"
-msgstr "Последние сообщения"
+msgstr "Последние ответы"
 
 msgid "View all"
 msgstr "Просмотреть все"
@@ -988,18 +988,18 @@ msgstr "Мои сообщения"
 
 #, python-format
 msgid "%(username)s's posts"
-msgstr "Сообщения пользователя %(username)s"
+msgstr "Ответы пользователя %(username)s"
 
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] "%(counter)s сообщение найдено"
-msgstr[1] "%(counter)s сообщений найдено"
-msgstr[2] "%(counter)s сообщений найдено"
-msgstr[3] "%(counter)s сообщений найдено"
+msgstr[0] "%(counter)s ответов найдено"
+msgstr[1] "%(counter)s ответ найден"
+msgstr[2] "%(counter)s ответа найдено"
+msgstr[3] "%(counter)s ответов найдено"
 
 msgid "No posts found"
-msgstr "Сообщений не найдено"
+msgstr "Ответы не найдены"
 
 msgid "Disapprove"
 msgstr "Отвергнуть"
@@ -1008,7 +1008,7 @@ msgid "Approve"
 msgstr "Одобрить"
 
 msgid "New post"
-msgstr "Новое сообщение"
+msgstr "Новый ответ"
 
 msgid "<b>1</b> option may be selected"
 msgstr "<b>1</b> вариант может быть выбран"
@@ -1019,22 +1019,22 @@ msgstr " Может быть выбрано до <b>%(max_options)s</b> опци
 
 #, python-format
 msgid "%(topic_length)s posts found"
-msgstr "%(topic_length)s сообщений найдено"
+msgstr "%(topic_length)s ответов найдено"
 
 msgid "No posts awaiting approval."
-msgstr "Нет сообщений, ожидающих одобрения"
+msgstr "Нет ответов, ожидающих одобрения"
 
 msgid "Approve post"
-msgstr "Одобрить сообщение"
+msgstr "Одобрить ответ"
 
 msgid "Are you sure you want to approve this post?"
-msgstr "Вы уверены, что хотите одобрить это сообщение?"
+msgstr "Вы уверены, что хотите одобрить этот ответ?"
 
 msgid "Disapprove post"
-msgstr "Отклонить сообщение"
+msgstr "Отклонить ответ"
 
 msgid "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr "Вы уверены. что хотите отклонить это сообщение?"
+msgstr "Вы уверены. что хотите отклонить этот ответ?"
 
 msgid "Are you sure you want to delete this topic?"
 msgstr "Вы уверены, что хотите удалить эту тему?"
@@ -1078,10 +1078,10 @@ msgstr "Вы уверены, что хотите отметить темы пр�
 #| msgid "%(topic_length)s posts found"
 msgid "%(topic_length)s unread topic found"
 msgid_plural "%(topic_length)s unread topics found"
-msgstr[0] "%(topic_length)s сообщений найдено"
-msgstr[1] "%(topic_length)s сообщений найдено"
-msgstr[2] "%(topic_length)s сообщений найдено"
-msgstr[3] "%(topic_length)s сообщений найдено"
+msgstr[0] "%(topic_length)s ответов найдено"
+msgstr[1] "%(topic_length)s ответ найден"
+msgstr[2] "%(topic_length)s ответа найдено"
+msgstr[3] "%(topic_length)s ответов найдено"
 
 msgid "There are no unread topics."
 msgstr "Непрочитанных тем не найдено."
