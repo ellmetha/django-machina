@@ -21,7 +21,7 @@
   {% elif page.number > paginator.num_pages|add:"-2" and number >= paginator.num_pages|add:"-4" %}
   <li class="page-item{% if page.number == number %} active{% endif %}"><a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
   {% elif number >= page.previous_page_number|add:"-1" and number <= page.next_page_number|add:"1" %}
-  <li class="page-item{% if page.number == number %} active{% endif %}"<a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
+  <li class="page-item{% if page.number == number %} active{% endif %}"><a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
   {% endif %}
   {% endif %}
   {% endfor %}
