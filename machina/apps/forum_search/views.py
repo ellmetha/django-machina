@@ -24,7 +24,7 @@ class FacetedSearchView(views.FacetedSearchView):
         return form
 
 class PostgresSearchView(View):
-	""" Allows to search using postgres search. """
+    """ Allows to search using postgres search. """
 
     form_class = PostgresSearchForm
     template = 'forum_search/postgres_search.html'
