@@ -48,7 +48,7 @@ class PostgresSearchView(View):
         else:
             context = { 
                         'form': form,
-                        'query': form.cleaned_data.get('q'), 
+                        'query': False, 
                        } 
         
         return render(request, self.template, context)
