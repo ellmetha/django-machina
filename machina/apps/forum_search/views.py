@@ -33,7 +33,7 @@ class PostgresSearchView(View):
 
         form = self.form_class(request)
         
-        if form.cleaned_data.get('q'):
+        if request.GET['q']:
             result = form.search() 
             paginator = Paginator(result, settings.TOPIC_POSTS_NUMBER_PER_PAGE)
             page_num = request.GET['page'] if 'page' in request.GET else 1
