@@ -30,21 +30,28 @@ class PostgresSearchView(View):
     template = 'forum_search/postgres_search.html'
 
     def get(self, request, *args, **kwargs):
+
         form = self.form_class(request)
-        result = form.search() 
-        paginator = Paginator(result, settings.TOPIC_POSTS_NUMBER_PER_PAGE)
-        page_num = request.GET['page'] if 'page' in request.GET else 1
-        page = paginator.page(page_num)
-        return render(request, 
-                      self.template, 
-                      { 
+        
+        if form.cleaned_data.get('q'):
+            result = form.search() 
+            paginator = Paginator(result, settings.TOPIC_POSTS_NUMBER_PER_PAGE)
+            page_num = request.GET['page'] if 'page' in request.GET else 1
+            page = paginator.page(page_num)
+            context = { 
                         'form': form,
                         'result_count': len(result),
                         'query': form.cleaned_data.get('q'), 
                         'page': page, 
                         'paginator': paginator, 
                        }
-                    )
+        else:
+            context = { 
+                        'form': form,
+                        'query': form.cleaned_data.get('q'), 
+                       } 
+        
+        return render(request, self.template, context)
 
     def post(self, request, *args, **kwargs):
         self.get(request, *args, **kwargs)
