@@ -24,7 +24,7 @@ class ForumSearchURLPatternsFactory(URLPatternsFactory):
         search_form = get_class('forum_search.forms', 'SearchForm')
         search_path = path(
                 '',
-                search_view_factory(view_class=self.search_view, form_class=self.search_form),
+                search_view_factory(view_class=search_view, form_class=search_form),
                 name='search',
             )
     elif settings.SEARCH_ENGINE == 'postgres':
