@@ -16,7 +16,7 @@ from machina.core.loading import get_class
 from machina.conf import settings
 
 if settings.SEARCH_ENGINE == 'postgres':
-    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+    from django.contrib.postgres.search import SearchQuery, SearchRank
     from django.db.models import F
 
 Forum = get_model('forum', 'Forum')
@@ -85,6 +85,7 @@ class SearchForm(FacetedSearchForm):
 
         return sqs
 
+
 class PostgresSearchForm(forms.Form):
     q = forms.CharField(required=False, label=_('Search'),
                         widget=forms.TextInput(attrs={'type': 'search'}))
@@ -125,7 +126,7 @@ class PostgresSearchForm(forms.Form):
     def no_query_found(self):
         return None
 
-    def search(self):   
+    def search(self):
 
         if not self.is_valid():
             return self.no_query_found()
@@ -136,9 +137,11 @@ class PostgresSearchForm(forms.Form):
         query = SearchQuery(self.cleaned_data['q'])
 
         if self.cleaned_data['search_topics']:
-            sqs = Post.objects.annotate(rank=SearchRank(F('search_vector_subject'), query)).filter(search_vector_subject=query)
+            sqs = Post.objects.annotate(rank=SearchRank(F('search_vector_subject'), query))
+            sqs = sqs.filter(search_vector_subject=query)
         else:
-            sqs = Post.objects.annotate(rank=SearchRank(F('search_vector_all'), query)).filter(search_vector_all=query)
+            sqs = Post.objects.annotate(rank=SearchRank(F('search_vector_all'), query))
+            sqs = sqs.filter(search_vector_all=query)
 
         sqs = sqs.order_by('-rank')
 
@@ -149,11 +152,10 @@ class PostgresSearchForm(forms.Form):
             sqs = sqs.filter(topic__forum__in=self.cleaned_data['search_forums'])
         else:
             forum_ids = self.allowed_forums.values_list('id', flat=True)
-            
+
             if self.allowed_forums.values_list('id', flat=True):
                 sqs = sqs.filter(topic__forum__in=forum_ids)
             else:
                 sqs = None
 
         return sqs
-        

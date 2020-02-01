@@ -23,18 +23,17 @@ class ForumSearchURLPatternsFactory(URLPatternsFactory):
         search_view = get_class('forum_search.views', 'FacetedSearchView')
         search_form = get_class('forum_search.forms', 'SearchForm')
         search_path = path(
-                '',
-                search_view_factory(view_class=search_view, form_class=search_form),
-                name='search',
-            )
+            '',
+            search_view_factory(view_class=search_view, form_class=search_form),
+            name='search',
+        )
     elif settings.SEARCH_ENGINE == 'postgres':
         search_view = get_class('forum_search.views', 'PostgresSearchView')
         search_path = path('', search_view.as_view(), name='search')
 
-
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
-        return [ self.search_path, ]
+        return [self.search_path, ]
 
 
 urlpatterns_factory = ForumSearchURLPatternsFactory()

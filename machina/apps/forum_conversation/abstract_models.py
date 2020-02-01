@@ -257,7 +257,7 @@ class AbstractPost(DatedModel):
     objects = models.Manager()
     approved_objects = ApprovedManager()
 
-    if machina_settings.SEARCH_ENGINE == 'postgres': # this fields are only for postgres search
+    if machina_settings.SEARCH_ENGINE == 'postgres':     # this fields are only for postgres search
         search_vector_all = SearchVectorField(null=True)
         search_vector_subject = SearchVectorField(null=True)
 
@@ -269,8 +269,13 @@ class AbstractPost(DatedModel):
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
 
-        if machina_settings.SEARCH_ENGINE == 'postgres': # let's get index for our search_vector fields
-            indexes = [ GinIndex( fields=['search_vector_all']), GinIndex( fields=['search_vector_subject']), ]
+        # let's get index for our search_vector fields
+
+        if machina_settings.SEARCH_ENGINE == 'postgres':
+            indexes = [
+                GinIndex(fields=['search_vector_all']),
+                GinIndex(fields=['search_vector_subject']),
+            ]
 
     def __str__(self):
         return self.subject
