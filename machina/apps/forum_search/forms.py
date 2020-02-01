@@ -158,4 +158,4 @@ class PostgresSearchForm(forms.Form):
             else:
                 sqs = None
 
-        return sqs[:20000]  # without this split we can get 502 on some requests 
+        return sqs[:20000]  # without this split we can get 502 on some requests
