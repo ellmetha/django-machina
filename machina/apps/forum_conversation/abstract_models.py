@@ -19,6 +19,8 @@ from machina.core import validators
 from machina.core.loading import get_class
 from machina.models.abstract_models import DatedModel
 from machina.models.fields import MarkupTextField
+
+
 if machina_settings.SEARCH_ENGINE == 'postgres':
     from django.contrib.postgres.indexes import GinIndex
     from django.contrib.postgres.search import SearchVectorField

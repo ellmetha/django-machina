@@ -9,9 +9,10 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views import View
+from haystack import views
+
 from machina.apps.forum_search.forms import PostgresSearchForm
 from machina.conf import settings
-from haystack import views
 
 
 class FacetedSearchView(views.FacetedSearchView):

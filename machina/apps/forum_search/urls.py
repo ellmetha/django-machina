@@ -9,6 +9,7 @@
 
 from django.urls import path
 from haystack.views import search_view_factory
+
 from machina.conf import settings
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory

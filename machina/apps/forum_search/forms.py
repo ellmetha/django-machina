@@ -11,9 +11,10 @@ from django.utils.translation import ugettext_lazy as _
 from haystack.forms import FacetedSearchForm
 from haystack.inputs import AutoQuery
 
+from machina.conf import settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.conf import settings
+
 
 if settings.SEARCH_ENGINE == 'postgres':
     from django.contrib.postgres.search import SearchQuery, SearchRank
