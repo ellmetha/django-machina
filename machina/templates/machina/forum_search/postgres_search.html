@@ -95,7 +95,7 @@
             </td>
             <td class="post-content">
             
-              {{ result.content.rendered|slice:":800" }}
+              {{ result.content.rendered|truncatechars_html:160 }}
             
             </td>
           </tr>
