@@ -153,10 +153,6 @@ class PostgresSearchForm(forms.Form):
             sqs = sqs.filter(topic__forum__in=self.cleaned_data['search_forums'])
         else:
             forum_ids = self.allowed_forums.values_list('id', flat=True)
-
-            if self.allowed_forums.values_list('id', flat=True):
-                sqs = sqs.filter(topic__forum__in=forum_ids)
-            else:
-                sqs = None
+            sqs = sqs.filter(topic__forum__in=forum_ids) if forum_ids else None
 
         return sqs[:20000]  # without this split we can get 502 on some requests
