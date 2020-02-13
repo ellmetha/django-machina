@@ -109,7 +109,7 @@ class TestFacetedSearchView(BaseClientTestCase):
         assert response.context['page'].object_list[0].object == self.post_1
 
 
-@override_settings(MACHINA_SEARCH_ENGINE = 'postgres')
+@override_settings(MACHINA_SEARCH_ENGINE='postgres')
 class TestPostgresSearchView(BaseClientTestCase):
     @pytest.yield_fixture(autouse=True)
     def setup(self):

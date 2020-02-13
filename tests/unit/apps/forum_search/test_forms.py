@@ -228,7 +228,8 @@ class TestSearchForm(object):
         assert form.is_valid()
         assert [r.object for r in results] == [self.post_1, self.post_2, ]
 
-@override_settings(MACHINA_SEARCH_ENGINE = 'postgres')
+
+@override_settings(MACHINA_SEARCH_ENGINE='postgres')
 class TestPostgresSearchForm(object):
     @pytest.yield_fixture(autouse=True)
     def setup(self):
@@ -381,7 +382,7 @@ class TestPostgresSearchForm(object):
         self.request.GET = {
             'q': 'newsubject',
             'search_poster_name': 'newtest',
-       }
+        }
         form = PostgresSearchForm(request=self.request)
         # Run
         results = form.search()
