@@ -109,8 +109,8 @@ class TestFacetedSearchView(BaseClientTestCase):
         assert response.context['page'].object_list[0].object == self.post_1
 
 
-@override_settings(MACHINA_SEARCH_ENGINE='postgres')
 class TestPostgresSearchView(BaseClientTestCase):
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     @pytest.yield_fixture(autouse=True)
     def setup(self):
         management.call_command('migrate')
@@ -171,6 +171,7 @@ class TestPostgresSearchView(BaseClientTestCase):
 
         yield
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts(self):
         # Setup
         correct_url = reverse('forum_search:search')

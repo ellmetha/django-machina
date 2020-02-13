@@ -229,8 +229,8 @@ class TestSearchForm(object):
         assert [r.object for r in results] == [self.post_1, self.post_2, ]
 
 
-@override_settings(MACHINA_SEARCH_ENGINE='postgres')
 class TestPostgresSearchForm(object):
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     @pytest.yield_fixture(autouse=True)
     def setup(self):
         management.call_command('migrate')
@@ -296,6 +296,7 @@ class TestPostgresSearchForm(object):
 
         yield
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts(self):
         # Setup
         self.request.user = self.user
@@ -307,6 +308,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results[0].forum.pk == self.topic_1.forum.pk
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_cannot_search_forum_posts_if_the_user_has_not_the_required_permissions(self):
         # Setup
         u1 = UserFactory.create()
@@ -319,6 +321,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert not len(results)
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_cannot_search_forum_posts_if_the_form_is_not_valid(self):
         # Setup
         self.request.user = self.user
@@ -332,6 +335,7 @@ class TestPostgresSearchForm(object):
         # Check
         assert not len(results)
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts_by_using_only_topic_subjects(self):
         # Setup
         self.request.user = self.user
@@ -346,6 +350,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results[0].forum.pk == self.topic_1.forum.pk
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts_by_using_the_registered_poster_name(self):
         # Setup
         self.topic_1.first_post.subject = 'newsubject'
@@ -367,6 +372,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results == [self.post_1, self.post_2, self.post_3, ]
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts_by_using_the_anonymous_poster_name(self):
         # Setup
         self.topic_1.first_post.subject = 'newsubject'
@@ -390,6 +396,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results == [post_4, ]
 
+    @override_settings(MACHINA_SEARCH_ENGINE='postgres')
     def test_can_search_forum_posts_by_using_a_set_of_forums(self):
         # Setup
         self.topic_2.first_post.subject = self.topic_1.subject
