@@ -3,13 +3,13 @@ import shutil
 import pytest
 from django.conf import settings
 from django.core import management
+from django.test import override_settings
 from django.urls import reverse
 from faker import Faker
 from haystack.query import SearchQuerySet
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from machina.test import override_settings
 from machina.test.factories import PostFactory, create_category_forum, create_forum, create_topic
 from machina.test.testcases import BaseClientTestCase
 
