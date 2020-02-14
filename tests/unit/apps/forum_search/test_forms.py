@@ -228,6 +228,7 @@ class TestSearchForm(object):
         assert form.is_valid()
         assert [r.object for r in results] == [self.post_1, self.post_2, ]
 
+
 @pytest.mark.django_db
 class TestPostgresSearchForm(object):
     @override_settings(MACHINA_SEARCH_ENGINE='postgres')
