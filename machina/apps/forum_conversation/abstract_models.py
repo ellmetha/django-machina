@@ -153,7 +153,7 @@ class AbstractTopic(DatedModel):
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
         # Update the slug field
-        self.slug = slugify(force_text(self.subject), allow_unicode=True)
+        self.slug = slugify(force_text(self.subject), allow_unicode=True) or 'topic'
 
         # Do the save
         super().save(*args, **kwargs)

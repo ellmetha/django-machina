@@ -165,6 +165,10 @@ class TestTopic(object):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1, subject='你好')
         assert topic.slug == '你好'
 
+    def test_fallback_the_slug_to_a_hardcoded_value_if_the_generated_slug_is_empty(self):
+        topic = create_topic(forum=self.top_level_forum, poster=self.u1, subject='&&')
+        assert topic.slug == 'topic'
+
 
 @pytest.mark.django_db
 class TestPost(object):
