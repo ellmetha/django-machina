@@ -4,7 +4,7 @@ language: python
 
 addons:
   mariadb: "10.3"
-  postgresql: "9.4"
+  postgresql: "9.5"
   apt:
     sources:
       - travis-ci/sqlite3
