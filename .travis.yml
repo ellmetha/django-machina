@@ -28,9 +28,9 @@ env:
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi
   - if [[ $DB == "postgres" ]]; then pip install psycopg2; fi
-  - pip install pip pipenv -U
-  - pipenv install "$DJANGO_ENV" --skip-lock
-  - pipenv install --dev --skip-lock
+  - pip install pip poetry -U
+  - poetry install
+  - poetry run pip install -U "$DJANGO_ENV"
 before_script:
   - mysql -u root -e 'create database machina_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
   - psql -c 'create database machina_test;' -U postgres

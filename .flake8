@@ -1,0 +1,4 @@
+[flake8]
+exclude = migrations,node_modules,example_projects,build,docs,.tox,.venv
+ignore = E731, W504
+max-line-length = 100

@@ -3,7 +3,7 @@ TEST_PACKAGE := tests
 
 
 init:
-	pipenv install --dev --python `which python3`
+	poetry install
 
 
 # DEVELOPMENT
@@ -17,7 +17,7 @@ init:
 c: console
 ## Launch a development console.
 console:
-	pipenv run ipython
+	poetry run ipython
 
 ## Generates assets packaged with django-machina.
 staticfiles:
@@ -25,16 +25,16 @@ staticfiles:
 
 ## Generate the project's .po files.
 messages:
-	cd machina && pipenv run python -m django makemessages --no-wrap --no-location -a
+	cd machina && poetry run python -m django makemessages --no-wrap --no-location -a
 
 ## Compiles the project's .po files.
 compiledmessages:
-	cd machina && pipenv run python -m django compilemessages
+	cd machina && poetry run python -m django compilemessages
 
 .PHONY: docs
 ## Builds the documentation.
 docs:
-	cd docs && rm -rf _build && pipenv run make html
+	cd docs && rm -rf _build && poetry run make html
 
 
 # QUALITY ASSURANCE
@@ -49,12 +49,12 @@ qa: lint isort
 .PHONY: lint
 ## Trigger Python code quality checks (flake8).
 lint:
-	pipenv run flake8
+	poetry run flake8
 
 .PHONY: isort
 ## Check Python imports sorting.
 isort:
-	pipenv run isort --check-only --recursive --diff $(PROJECT_PACKAGE) $(TEST_PACKAGE)
+	poetry run isort --check-only --recursive --diff $(PROJECT_PACKAGE) $(TEST_PACKAGE)
 
 
 # TESTING
@@ -65,17 +65,17 @@ isort:
 .PHONY: tests
 ## Run the Python test suite.
 tests:
-	pipenv run py.test
+	poetry run py.test
 
 .PHONY: coverage
 ## Collects code coverage data.
 coverage:
-	pipenv run py.test --cov-report term-missing --cov $(PROJECT_PACKAGE)
+	poetry run py.test --cov-report term-missing --cov $(PROJECT_PACKAGE)
 
 .PHONY: spec
 ## Run the tests in "spec" mode.
 spec:
-	pipenv run py.test --spec -p no:sugar
+	poetry run py.test --spec -p no:sugar
 
 
 # MAKEFILE HELPERS
