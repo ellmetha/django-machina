@@ -18,12 +18,21 @@ python:
   - "3.8"
 
 env:
-  - DJANGO_ENV="django>=2.1,<2.2" DB=sqlite
-  - DJANGO_ENV="django>=2.1,<2.2" DB=postgres
-  - DJANGO_ENV="django>=2.1,<2.2" DB=mysql
   - DJANGO_ENV="django>=2.2,<3.0" DB=sqlite
   - DJANGO_ENV="django>=2.2,<3.0" DB=postgres
   - DJANGO_ENV="django>=2.2,<3.0" DB=mysql
+  - DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=sqlite
+  - DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=postgres
+  - DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=mysql
+
+matrix:
+  exclude:
+    - python: "3.5"
+      env: DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=sqlite
+    - python: "3.5"
+      env: DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=postgres
+    - python: "3.5"
+      env: DJANGO_ENV="django>=3.0,<3.1 django-haystack>=3.0b1" DB=mysql
 
 install:
   - if [[ $DB == "mysql" ]]; then sudo apt-get install -qq libmysqlclient-dev && pip install mysqlclient; fi

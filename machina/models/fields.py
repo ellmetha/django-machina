@@ -1,3 +1,5 @@
+from io import BytesIO
+from functools import partial
 from os import path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -7,9 +9,7 @@ from django.db.models import signals
 from django.forms import Textarea, ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.encoding import smart_str
-from django.utils.functional import curry
 from django.utils.safestring import SafeData, mark_safe
-from django.utils.six import BytesIO
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings as machina_settings
@@ -43,7 +43,7 @@ def _get_render_function(dotted_path, kwargs):
     module, func = dotted_path.rsplit('.', 1)
     module, func = smart_str(module), smart_str(func)
     func = getattr(__import__(module, {}, {}, [func]), func)
-    return curry(func, **kwargs)
+    return partial(func, **kwargs)
 
 
 try:

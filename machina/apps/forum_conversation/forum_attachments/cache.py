@@ -7,12 +7,13 @@
 
 """
 
+from io import BytesIO
+
 from django.conf import settings
 from django.core.cache import InvalidCacheBackendError, caches
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.utils.datastructures import MultiValueDict
-from django.utils.six import BytesIO
 
 from machina.conf import settings as machina_settings
 

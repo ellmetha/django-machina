@@ -15,7 +15,6 @@ from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import resolve_url
 from django.utils.http import urlquote
-from django.utils.six import string_types
 
 
 class PermissionRequiredMixin:
@@ -55,7 +54,7 @@ class PermissionRequiredMixin:
         if not self.permission_required:
             return perms
 
-        if isinstance(self.permission_required, string_types):
+        if isinstance(self.permission_required, str):
             perms = [self.permission_required, ]
         elif isinstance(self.permission_required, Iterable):
             perms = [perm for perm in self.permission_required]

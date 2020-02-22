@@ -1,10 +1,11 @@
+from io import BytesIO
+
 import pytest
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.core.files import File
 from django.utils.encoding import force_text
-from django.utils.six import BytesIO
 from tests.models import RESIZED_IMAGE_HEIGHT, RESIZED_IMAGE_WIDTH, DummyModel
 
 from machina.conf import settings as machina_settings
