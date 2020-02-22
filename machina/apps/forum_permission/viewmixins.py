@@ -8,13 +8,13 @@
 """
 
 from collections.abc import Iterable
+from urllib.parse import quote
 
 from django.conf import settings
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import resolve_url
-from django.utils.http import urlquote
 
 
 class PermissionRequiredMixin:
@@ -98,7 +98,7 @@ class PermissionRequiredMixin:
             return HttpResponseRedirect('{}?{}={}'.format(
                 resolve_url(self.login_url),
                 self.redirect_field_name,
-                urlquote(request.get_full_path())
+                quote(request.get_full_path())
             ))
         elif not has_permissions:
             raise PermissionDenied

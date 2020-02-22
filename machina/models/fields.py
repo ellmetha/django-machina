@@ -10,7 +10,7 @@ from django.forms import Textarea, ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.encoding import smart_str
 from django.utils.safestring import SafeData, mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from machina.conf import settings as machina_settings
 
