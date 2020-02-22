@@ -1,5 +1,5 @@
-from io import BytesIO
 from functools import partial
+from io import BytesIO
 from os import path
 
 from django.core.exceptions import ImproperlyConfigured
