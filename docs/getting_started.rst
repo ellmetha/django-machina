@@ -4,13 +4,13 @@ Getting started
 Requirements
 ------------
 
-* `Python`_ 3.4, 3.5, 3.6 and 3.7
+* `Python`_ 3.5, 3.6, 3.7 and 3.8
 * `Django`_ 2.2x and 3.0.x
-* `Pillow`_ 2.2. or higher
-* `Django-mptt`_ 0.8. or higher
-* `Django-haystack`_ 2.1. or higher
-* `Markdown2`_ 2.3. or higher
-* `Django-widget-tweaks`_ 1.4. or higher
+* `Pillow`_
+* `Django-haystack`_
+* `Django-mptt`_
+* `Django-widget-tweaks`_
+* `Markdown2`_
 
 .. note::
 
