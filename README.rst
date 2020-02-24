@@ -15,7 +15,7 @@
         </a>
         <a href="https://pypi.python.org/pypi/django-machina" rel="nofollow"><img src="https://img.shields.io/pypi/pyversions/django-machina.svg" style="max-width:100%;"></a>
         <a href="https://pypi.python.org/pypi/django-machina/" rel="nofollow"><img alt="Latest Version" src="https://img.shields.io/pypi/v/django-machina.svg" style="max-width:100%;"></a>
-        <a href="https://github.com/ellmetha/django-js-routes/actions" rel="nofollow"><img alt="Build status" src="https://github.com/ellmetha/django-js-routes/workflows/CI/badge.svg" style="max-width:100%;"></a>
+        <a href="https://github.com/ellmetha/django-machina/actions" rel="nofollow"><img alt="Build status" src="https://github.com/ellmetha/django-machina/workflows/CI/badge.svg" style="max-width:100%;"></a>
         <a href="https://codecov.io/github/ellmetha/django-machina" rel="nofollow"><img alt="Codecov status" src="https://codecov.io/gh/ellmetha/django-machina/branch/master/graph/badge.svg" style="max-width:100%;"></a>
     </p>
 
