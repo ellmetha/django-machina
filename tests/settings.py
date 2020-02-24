@@ -49,7 +49,6 @@ elif DB_CONFIG == 'mysql':
             'NAME': 'machina_test',
             'USER': 'root',
             'PASSWORD': '',
-            'HOST': 'localhost',
             'TEST': {
                 'CHARSET': 'utf8mb4',
                 'COLLATION': 'utf8mb4_general_ci',
