@@ -38,6 +38,7 @@ elif DB_CONFIG == 'postgres':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'machina_test',
             'USER': 'postgres',
+            'HOST': 'localhost',
         }
     }
 elif DB_CONFIG == 'mysql':
@@ -46,6 +47,7 @@ elif DB_CONFIG == 'mysql':
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'machina_test',
             'USER': 'root',
+            'HOST': 'localhost',
             'TEST': {
                 'CHARSET': 'utf8mb4',
                 'COLLATION': 'utf8mb4_general_ci',
