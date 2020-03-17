@@ -60,12 +60,12 @@ class TestForumPermissionChecker(object):
         assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, None, has_perm=True)
         assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
         # Test globally False but forum level True
-        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, None, has_perm=False)
-        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
+        assign_perm('can_edit_own_posts', ALL_AUTHENTICATED_USERS, None, has_perm=False)
+        assign_perm('can_edit_own_posts', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
-        assert checker.has_perm('can_see_forum', self.forum)
+        assert checker.has_perm('can_edit_own_posts', self.forum)
 
     def test_knows_that_user_permissions_take_precedence_over_user_global_permissions(self):
         # Setup
