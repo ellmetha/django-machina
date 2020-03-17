@@ -99,6 +99,14 @@ class TestForumPermissionChecker(object):
         # Run & check
         assert checker.has_perm('can_read_forum', self.forum)
 
+    def test_knows_that_alluser_permissions_take_precedence_over_default_authenticated_permissions(self):  # noqa: E501
+        user = UserFactory.create()
+        # Negate DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
+        checker = ForumPermissionChecker(user)
+        # Run & check
+        assert not checker.has_perm('can_see_forum', self.forum)
+
     def test_knows_that_user_permissions_take_precedence_over_group_permissions(self):
         # Setup
         machina_settings.DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = []

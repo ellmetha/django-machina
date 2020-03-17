@@ -151,20 +151,6 @@ class ForumPermissionChecker:
             per_forum_nongranted_user_permcodes = [
                 p.permission.codename for p in per_forum_nongranted_user_perms
             ]
-            # Finally computes the list of permission codenames that are
-            # granted to the user for the considered forum.
-            # We can not do this earlier because
-            # globally_granted_user_perms can be from the setting
-            # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS in which case
-            # it only contains permission codes and not actual permission
-            # objects that we can loop over and check against.
-            granted_user_permcodes = [
-                c for c in globally_granted_user_permcodes if
-                c not in per_forum_nongranted_user_permcodes
-            ]
-            permcodes = set(granted_user_permcodes +
-                            per_forum_granted_user_permcodes)
-
 
             per_forum_granted_group_perms = []
             per_forum_nongranted_group_perms = []
@@ -285,6 +271,20 @@ class ForumPermissionChecker:
                 granted_all_users_permcodes = set(globally_granted_all_users_permcodes +
                                                   per_forum_granted_all_users_permcodes)
 
+            # Finally computes the list of permission codenames that are
+            # granted to the user for the considered forum.
+            # We can not do this earlier because
+            # globally_granted_user_perms can be from the setting
+            # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS in which case
+            # it only contains permission codes and not actual permission
+            # objects that we can loop over and check against.
+            granted_user_permcodes = [
+                c for c in globally_granted_user_permcodes if
+                c not in per_forum_nongranted_user_permcodes and
+                c not in per_forum_nongranted_all_users_permcodes
+            ]
+            permcodes = set(granted_user_permcodes +
+                            per_forum_granted_user_permcodes)
             # Includes the permissions granted for the user's groups and for all logged
             # in users (that were not overruled by more specific targets) in the initial
             # set of permission codenames.
