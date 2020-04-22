@@ -41,7 +41,9 @@ class AbstractForumProfile(models.Model):
     signature = MarkupTextField(
         verbose_name=_('Signature'), blank=True, null=True,
         validators=[
-            validators.NullableMaxLengthValidator(machina_settings.PROFILE_SIGNATURE_MAX_LENGTH),
+            validators.MarkupMaxLengthValidator(
+                machina_settings.PROFILE_SIGNATURE_MAX_LENGTH
+            ),
         ],
     )
 

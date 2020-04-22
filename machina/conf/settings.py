@@ -21,6 +21,12 @@ MARKUP_WIDGET = getattr(
     settings, 'MACHINA_MARKUP_WIDGET', 'machina.forms.widgets.MarkdownTextareaWidget'
 )
 MARKUP_WIDGET_KWARGS = getattr(settings, 'MACHINA_MARKUP_WIDGET_KWARGS', {})
+
+MARKUP_MAX_LENGTH_VALIDATOR = getattr(
+    settings, 'MACHINA_MARKUP_MAX_LENGTH_VALIDATOR',
+    'machina.core.validators.NullableMaxLengthValidator'
+)
+
 BASE_TEMPLATE_NAME = getattr(settings, 'MACHINA_BASE_TEMPLATE_NAME', '_base.html')
 USER_DISPLAY_NAME_METHOD = getattr(
     settings,
