@@ -1,10 +1,10 @@
 {% extends 'board_base.html' %}
 {% load i18n %}
+{% load highlight %}
 
 {% block sub_title %}{% trans "Search" %}{% endblock sub_title %}
 
 {% block content %}
-
 {% if not query %}
 <div class="row">
   <div class="col-12">
@@ -47,14 +47,13 @@
 <div class="mb-3 row">
   <div class="col-6 col-md-4 forum-actions-block">
     <p class="mt-1 mb-0 text-muted">
-      {% blocktrans trimmed count number_of_results=result_count %}
+      {% blocktrans trimmed count number_of_results=page.paginator.count %}
       Your search has returned <b>{{ number_of_results }}</b> result
       {% plural %}
       Your search has returned <b>{{ number_of_results }}</b> results
       {% endblocktrans %}
     </p>
   </div>
- 	
   <div class="col-12 col-md-8 pagination-block">
     {% if page.has_previous or page.has_next %}
     {% with pagination_size="pagination-sm justify-content-end" %}
@@ -62,7 +61,6 @@
     {% endwith %}
     {% endif %}
   </div>
- 
 </div>
 <div class="row">
   <div class="col-12">
@@ -74,10 +72,10 @@
       </div>
       <div class="p-0 card-body">
         <table class="table">
-        {% result in page.object_list %}
+          {% for result in page.object_list %}
           <tr>
             <td class="post-name">
-              <a href="{% url 'forum_conversation:topic' result.topic.forum.slug result.topic.forum.pk result.topic.slug result.topic.pk %}?post={{ result.pk }}#{{ result.pk }}" class="topic-name-link">{{ result.subject }}</a>
+              <a href="{% url 'forum_conversation:topic' result.forum_slug result.forum result.topic_slug result.topic %}" class="topic-name-link">{{ result.topic_subject }}</a>
               <div>
                 <div class="post-created">
                   {% if result.poster %}
@@ -94,9 +92,7 @@
               </div>
             </td>
             <td class="post-content">
-            
-              {{ result.content.rendered|truncatechars_html:160 }}
-            
+              {% highlight result.text with request.GET.q max_lenght 800 %}
             </td>
           </tr>
           {% empty %}

@@ -49,7 +49,7 @@ TOPIC_POSTS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_TOPIC_POSTS_NUMBER_PER_
 TOPIC_REVIEW_POSTS_NUMBER = getattr(settings, 'MACHINA_TOPIC_REVIEW_POSTS_NUMBER', 10)
 
 # Search
-SEARCH_ENGINE = getattr(settings, 'MACHINA_SEARCH_ENGINE', 'haystack')
+SEARCH_ENGINE = getattr(settings, 'MACHINA_SEARCH_ENGINE', 'default')
 SEARCH_LANGUAGE = getattr(settings, 'MACHINA_SEARCH_LANGUAGE', 'english')
 
 # Polls
