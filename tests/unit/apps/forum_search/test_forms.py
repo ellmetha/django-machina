@@ -107,7 +107,7 @@ class TestPostgresSearchForm(object):
         u1 = UserFactory.create()
         self.request.user = u1
         self.request.GET = {'q': self.topic_1.first_post.content}
-        form = SearchForm(self.request)
+        form = PostgresSearchForm(self.request)
         # Run
         results = form.search()
         # Check
