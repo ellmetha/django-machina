@@ -10,9 +10,6 @@
 import os
 
 
-__version__ = '1.0.3.dev0'
-
-
 # Main Machina static directory.
 MACHINA_MAIN_STATIC_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'static/machina/build',

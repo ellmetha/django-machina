@@ -15,12 +15,12 @@ To run this project locally, you can follow these instructions:
   $ cd django-machina
   $ make
   $ cd example_project/
-  $ pipenv run python manage.py migrate
-  $ pipenv run python manage.py createsuperuser
-  $ pipenv run python manage.py loaddata project/fixtures/*
-  $ pipenv run python manage.py runserver
+  $ make migrate
+  $ make superuser
+  $ poetry run python manage.py loaddata project/fixtures/*
+  $ make server
 
 .. note::
 
-    The previous steps assumes you have `Pipenv <https://docs.pipenv.org/>`_ installed on your
+    The previous steps assumes you have `Poetry <https://python-poetry.org/>`_ installed on your
     system.

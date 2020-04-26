@@ -12,9 +12,9 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
 from machina.apps.forum import signals
@@ -161,7 +161,7 @@ class AbstractForum(MPTTModel, DatedModel):
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
         # Update the slug field
-        self.slug = slugify(force_text(self.name), allow_unicode=True)
+        self.slug = slugify(force_str(self.name), allow_unicode=True)
 
         # Do the save
         super().save(*args, **kwargs)

@@ -7,7 +7,7 @@
 """
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from machina.core.db.models import get_model
 from machina.core.loading import get_class

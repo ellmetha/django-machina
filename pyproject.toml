@@ -1,0 +1,71 @@
+[tool.poetry]
+name = "django-machina"
+version = "1.1.1.dev0"
+description = "A Django forum engine for building powerful community driven websites."
+authors = ["Morgan Aubert <me@morganaubert.name>"]
+license = "BSD-3-Clause"
+readme = "README.rst"
+homepage = "https://github.com/ellmetha/django-machina"
+repository = "https://github.com/ellmetha/django-machina"
+keywords = ["django", "forum", "board", "messages"]
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Environment :: Web Environment',
+    'Framework :: Django',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: BSD License',
+    'Natural Language :: English',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards',
+]
+packages = [
+    { include = "machina" },
+]
+include = [
+    "AUTHORS",
+    "CHANGELOG.rst",
+    "LICENSE",
+    "*.rst",
+    "machina/locale/*",
+    "machina/static/machina/build/*",
+    "machina/templates/*",
+]
+exclude = ["tests"]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+
+django = "^2.2 || >=3.0"
+django-haystack = ">=2.1"
+django-mptt = ">=0.10.0"
+django-widget-tweaks = ">=1.4"
+markdown2 = ">=2.3"
+pillow = ">=2.2"
+
+[tool.poetry.dev-dependencies]
+codecov = "*"
+django-debug-toolbar = "*"
+factory-boy = "*"
+faker = "*"
+flake8 = "*"
+ipython = "*"
+isort = "*"
+mock = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-pythonpath = "*"
+pytest-spec = "*"
+pytest-xdist = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+whoosh = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
