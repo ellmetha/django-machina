@@ -102,7 +102,17 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results[0].topic.forum.pk == self.topic_1.forum.pk
 
-
+    def test_cannot_search_forum_posts_if_the_user_has_not_the_required_permissions(self):
+        # Setup
+        u1 = UserFactory.create()
+        self.request.user = u1
+        self.request.GET = {'q': self.topic_1.first_post.content}
+        form = SearchForm(self.request)
+        # Run
+        results = form.search()
+        # Check
+        assert form.is_valid()
+        assert not len(results)
 '''
 @pytest.mark.django_db
 class TestSearchForm(object):
