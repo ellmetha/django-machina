@@ -90,10 +90,10 @@ class TestPostgresSearchForm(object):
 
     def test_can_search_forum_posts(self):
         # Setup
-        form = PostgresSearchForm(
-            {'q': self.topic_1.first_post.subject},
-            user=self.user,
-        )
+        request = object
+        request.user = self.user
+        request.GET = {'q': self.topic_1.first_post.subject}
+        form = PostgresSearchForm(request)
         # Run
         results = form.search()
         # Check
