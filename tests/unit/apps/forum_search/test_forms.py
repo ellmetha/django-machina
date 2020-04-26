@@ -3,7 +3,7 @@
 import pytest
 # from django.conf import settings
 # from django.core import management
-# from django.http import HttpRequest
+from django.http import HttpRequest
 # from django.test import override_settings
 from faker import Faker
 
@@ -87,7 +87,7 @@ class TestPostgresSearchForm(object):
         assign_perm('can_read_forum', self.user, self.top_level_forum_1)
 
         self.request = HttpRequest
-        
+
         yield
 
     def test_can_search_forum_posts(self):
@@ -95,7 +95,7 @@ class TestPostgresSearchForm(object):
         self.request = object
         self.request.user = self.user
         self.request.GET = {'q': self.topic_1.first_post.subject}
-        form = PostgresSearchForm(request)
+        form = PostgresSearchForm(self.request)
         # Run
         results = form.search()
         # Check
