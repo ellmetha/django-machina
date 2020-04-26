@@ -15,11 +15,7 @@ from machina.test.factories import (
 
 # from django.test import override_settings
 # from faker import Faker
-
-
-
 # faker = Faker()
-
 # Post = get_model('forum_conversation', 'Post')
 # Topic = get_model('forum_conversation', 'Topic')
 
