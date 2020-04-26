@@ -86,8 +86,10 @@ class PostgresSearchForm(forms.Form):
             sqs = sqs.order_by('-rank')
 
         else:
-            sqs = Post.objects.filter(Q(subject__icontains=self.cleaned_data['q']) | \
-            Q(content__icontains=self.cleaned_data['q']))
+            sqs = Post.objects.filter(
+                Q(subject__icontains=self.cleaned_data['q']) |
+                Q(content__icontains=self.cleaned_data['q'])
+            )
 
         if self.cleaned_data['search_poster_name']:
             sqs = sqs.filter(poster__username__icontains=self.cleaned_data['search_poster_name'])
