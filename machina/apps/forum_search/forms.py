@@ -7,13 +7,13 @@
 """
 
 from django import forms
-
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from machina.conf import settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
-from django.db.models import Q
+
 
 if settings.SEARCH_ENGINE == 'postgres':
     from django.contrib.postgres.search import SearchQuery, SearchRank
