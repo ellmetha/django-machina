@@ -141,6 +141,7 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results[0].topic.forum.pk == self.topic_1.forum.pk
 
+
 '''
 @pytest.mark.django_db
 class TestSearchForm(object):
