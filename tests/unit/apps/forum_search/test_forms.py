@@ -86,13 +86,15 @@ class TestPostgresSearchForm(object):
         assign_perm('can_read_forum', self.user, self.forum_2_child_1)
         assign_perm('can_read_forum', self.user, self.top_level_forum_1)
 
+        self.request = HttpRequest
+        
         yield
 
     def test_can_search_forum_posts(self):
         # Setup
-        request = object
-        request.user = self.user
-        request.GET = {'q': self.topic_1.first_post.subject}
+        self.request = object
+        self.request.user = self.user
+        self.request.GET = {'q': self.topic_1.first_post.subject}
         form = PostgresSearchForm(request)
         # Run
         results = form.search()
