@@ -97,9 +97,10 @@ class TestPostgresSearchForm(object):
         form = PostgresSearchForm(self.request)
         # Run
         results = form.search()
+        print(results)
         # Check
         assert form.is_valid()
-        assert results[0].topic.forum == self.topic_1.forum.pk
+        assert results[0].topic.forum.pk == self.topic_1.forum.pk
 
 
 '''
