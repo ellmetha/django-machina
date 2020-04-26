@@ -1,5 +1,4 @@
 import pytest
-
 from django.urls import reverse
 
 from machina.core.loading import get_class
