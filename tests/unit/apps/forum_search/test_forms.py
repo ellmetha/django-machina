@@ -183,6 +183,22 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert [r for r in results] == [post_4, ]
 
+    def test_can_search_forum_posts_by_using_a_set_of_forums(self):
+        # Setup
+        self.topic_2.first_post.subject = self.topic_1.subject
+        self.topic_2.first_post.save()
+        self.request.user = self.user
+        self.request.GET = {
+            'q': self.topic_1.subject,
+            'search_forums': [self.forum_1.pk, self.forum_2.pk, ],
+        }
+        form = PostgresSearchForm(self.request)
+        # Run
+        results = form.search()
+        # Check
+        assert form.is_valid()
+        assert [r for r in results] == [self.post_1, self.post_2, ]
+
 
 '''
 @pytest.mark.django_db
