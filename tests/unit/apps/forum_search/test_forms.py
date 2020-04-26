@@ -8,7 +8,7 @@ from django.http import HttpRequest
 # from faker import Faker
 
 from machina.apps.forum_search.forms import PostgresSearchForm
-from machina.core.db.models import get_model
+# from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import (
     PostFactory, UserFactory, create_category_forum, create_forum, create_topic
