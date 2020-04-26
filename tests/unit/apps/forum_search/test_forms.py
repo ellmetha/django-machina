@@ -121,7 +121,7 @@ class TestPostgresSearchForm(object):
             'q': self.topic_1.first_post.content,
             'search_forums': [1000, ],
         }
-        form = SearchForm(self.request)
+        form = PostgresSearchForm(self.request)
         # Run
         results = form.search()
         # Check
