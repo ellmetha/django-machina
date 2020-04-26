@@ -9,7 +9,7 @@
 from django import forms
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 from django.forms.forms import NON_FIELD_ERRORS
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from mptt.forms import TreeNodeChoiceField
 
 from machina.core.db.models import get_model

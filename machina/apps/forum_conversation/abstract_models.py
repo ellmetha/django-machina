@@ -10,9 +10,9 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from machina.conf import settings as machina_settings
 from machina.core import validators
@@ -158,7 +158,7 @@ class AbstractTopic(DatedModel):
             old_instance = self.__class__._default_manager.get(pk=self.pk)
 
         # Update the slug field
-        self.slug = slugify(force_text(self.subject), allow_unicode=True)
+        self.slug = slugify(force_str(self.subject), allow_unicode=True) or 'topic'
 
         # Do the save
         super().save(*args, **kwargs)
