@@ -100,4 +100,4 @@ class PostgresSearchForm(forms.Form):
             forum_ids = self.allowed_forums.values_list('id', flat=True)
             sqs = sqs.filter(topic__forum__in=forum_ids) if forum_ids else None
 
-        return sqs[:20000]  # without this split we can get 502 on some requests
+        return sqs[:20000] if sqs else None # without this split we can get 502 on some requests
