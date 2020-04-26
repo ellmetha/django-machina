@@ -1,10 +1,10 @@
-import shutil
+# import shutil
 
 import pytest
-from django.conf import settings
-from django.core import management
-from django.test import override_settings
-from django.urls import reverse
+# from django.conf import settings
+# from django.core import management
+# from django.test import override_settings
+# from django.urls import reverse
 from faker import Faker
 
 from machina.core.db.models import get_model
@@ -79,7 +79,6 @@ class TestPostgresSearchView(BaseClientTestCase):
         assign_perm('can_read_forum', self.user, self.forum_2)
         assign_perm('can_read_forum', self.user, self.forum_2_child_1)
         assign_perm('can_read_forum', self.user, self.top_level_forum_1)
-
 
         yield
 
