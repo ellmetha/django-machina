@@ -113,6 +113,8 @@ class TestPostgresSearchForm(object):
         # Check
         assert form.is_valid()
         assert not len(results)
+
+
 '''
 @pytest.mark.django_db
 class TestSearchForm(object):
