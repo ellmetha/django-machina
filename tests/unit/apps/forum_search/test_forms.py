@@ -1,23 +1,12 @@
-# import shutil
-
 import pytest
-# from django.conf import settings
-# from django.core import management
 from django.http import HttpRequest
 
 from machina.apps.forum_search.forms import PostgresSearchForm
-# from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import (
     PostFactory, UserFactory, create_category_forum, create_forum, create_topic
 )
 
-
-# from django.test import override_settings
-# from faker import Faker
-# faker = Faker()
-# Post = get_model('forum_conversation', 'Post')
-# Topic = get_model('forum_conversation', 'Topic')
 
 PermissionHandler = get_class('forum_permission.handler', 'PermissionHandler')
 assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
@@ -197,7 +186,3 @@ class TestPostgresSearchForm(object):
         # Check
         assert form.is_valid()
         assert [r for r in results] == [self.post_1, self.post_2, ]
-
-
-#  @override_settings(MACHINA_SEARCH_ENGINE='postgres')
-#  management.call_command('migrate')
