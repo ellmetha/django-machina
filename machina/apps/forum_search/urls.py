@@ -9,7 +9,6 @@
 
 from django.urls import path
 
-from machina.conf import settings
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
 
