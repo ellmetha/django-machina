@@ -2,7 +2,6 @@ import pytest
 
 from django.urls import reverse
 
-from machina.core.db.models import get_model
 from machina.core.loading import get_class
 from machina.test.factories import PostFactory, create_category_forum, create_forum, create_topic
 from machina.test.testcases import BaseClientTestCase
