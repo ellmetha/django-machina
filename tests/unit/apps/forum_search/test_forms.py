@@ -114,6 +114,19 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert results is None
 
+    def test_cannot_search_forum_posts_if_the_form_is_not_valid(self):
+        # Setup
+        self.request.user = self.user
+        self.request.GET = {
+            'q': self.topic_1.first_post.content,
+            'search_forums': [1000, ],
+        }
+        form = SearchForm(self.request)
+        # Run
+        results = form.search()
+        # Check
+        assert results is None
+
 
 '''
 @pytest.mark.django_db
