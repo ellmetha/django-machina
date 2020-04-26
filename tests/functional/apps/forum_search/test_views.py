@@ -4,7 +4,7 @@ import pytest
 # from django.conf import settings
 # from django.core import management
 # from django.test import override_settings
-# from django.urls import reverse
+from django.urls import reverse
 from faker import Faker
 
 from machina.core.db.models import get_model
@@ -81,6 +81,17 @@ class TestPostgresSearchView(BaseClientTestCase):
         assign_perm('can_read_forum', self.user, self.top_level_forum_1)
 
         yield
+
+    def test_can_search_forum_posts(self):
+        # Setup
+        correct_url = reverse('forum_search:search')
+        get_data = {'q': self.topic_1.subject}
+        # Run
+        response = self.client.get(correct_url, data=get_data)
+        # Check
+        assert response.status_code == 200
+        assert len(response.context['page'].object_list) == 1
+        assert response.context['page'].object_list[0] == self.post_1
 
 
 '''
