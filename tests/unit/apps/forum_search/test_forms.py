@@ -1,10 +1,10 @@
-import shutil
+#import shutil
 
 import pytest
-from django.conf import settings
-from django.core import management
-from django.http import HttpRequest
-from django.test import override_settings
+#from django.conf import settings
+#from django.core import management
+#from django.http import HttpRequest
+#from django.test import override_settings
 from faker import Faker
 
 from machina.apps.forum_search.forms import PostgresSearchForm
@@ -99,6 +99,8 @@ class TestPostgresSearchForm(object):
         # Check
         assert form.is_valid()
         assert results[0].topic.forum == self.topic_1.forum.pk
+
+
 '''
 @pytest.mark.django_db
 class TestSearchForm(object):
