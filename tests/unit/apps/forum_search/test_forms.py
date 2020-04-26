@@ -127,6 +127,19 @@ class TestPostgresSearchForm(object):
         # Check
         assert results is None
 
+    def test_can_search_forum_posts_by_using_only_topic_subjects(self):
+        # Setup
+        self.request.user = self.user
+        self.request.GET = {
+            'q': self.topic_1.subject,
+            'search_topics': True,
+        }
+        form = PostgresSearchForm(self.request)
+        # Run
+        results = form.search()
+        # Check
+        assert form.is_valid()
+        assert results[0].topic.forum.pk == self.topic_1.forum.pk
 
 '''
 @pytest.mark.django_db
