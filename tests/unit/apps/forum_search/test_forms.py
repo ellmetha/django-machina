@@ -112,7 +112,7 @@ class TestPostgresSearchForm(object):
         results = form.search()
         # Check
         assert form.is_valid()
-        assert not len(results)
+        assert results is None 
 
 
 '''
