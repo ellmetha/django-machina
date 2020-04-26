@@ -161,6 +161,28 @@ class TestPostgresSearchForm(object):
         assert form.is_valid()
         assert [r for r in results] == [self.post_1, self.post_2, self.post_3, ]
 
+    def test_can_search_forum_posts_by_using_the_anonymous_poster_name(self):
+        # Setup
+        self.topic_1.first_post.subject = 'newsubject'
+        self.topic_1.first_post.save()
+        self.topic_2.first_post.subject = 'newsubject'
+        self.topic_2.first_post.save()
+        self.topic_3.first_post.subject = 'newsubject'
+        self.topic_3.first_post.save()
+        post_4 = PostFactory.create(
+            subject='newsubject', topic=self.topic_3, poster=None, username='newtest')
+        self.request.user = self.user
+        self.request.GET = {
+            'q': 'newsubject',
+            'search_poster_name': 'newtest',
+        }
+        form = PostgresSearchForm(self.request)
+        # Run
+        results = form.search()
+        # Check
+        assert form.is_valid()
+        assert [r for r in results] == [post_4, ]
+
 
 '''
 @pytest.mark.django_db
