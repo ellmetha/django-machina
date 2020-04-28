@@ -220,7 +220,7 @@ class AbstractPost(DatedModel):
     # Content
     content = MarkupTextField(
         validators=[
-            validators.NullableMaxLengthValidator(machina_settings.POST_CONTENT_MAX_LENGTH),
+            validators.MarkupMaxLengthValidator(machina_settings.POST_CONTENT_MAX_LENGTH),
         ],
         verbose_name=_('Content'),
     )
