@@ -1,0 +1,15 @@
+####################################################
+Django-machina 1.2 release notes (UNDER DEVELOPMENT)
+####################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.5, 3.6, 3.7 and 3.8. Django 2.2 and 3.0.
+
+Major changes
+-------------
+
+* A new ``MACHINA_MARKUP_MAX_LENGTH_VALIDATOR`` setting is introduced. The setting allows to
+  define the Python path to a validator used to validate the maximum length of posts or forum member
+  signatures

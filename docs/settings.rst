@@ -45,6 +45,14 @@ Default: ``{}``
 This setting defines the keyword arguments that will be used when instanciating the widgets
 associated with the ``MACHINA_MARKUP_WIDGET`` setting.
 
+``MACHINA_MARKUP_MAX_LENGTH_VALIDATOR``
+---------------------------------------
+
+Default: ``'machina.core.validators.NullableMaxLengthValidator'``
+
+The settings defines the Python path to a validator that is used to validate the maximum length of
+posts or forum member signatures.
+
 ``MACHINA_BASE_TEMPLATE_NAME``
 ------------------------------
 
