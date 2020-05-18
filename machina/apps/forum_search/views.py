@@ -31,7 +31,7 @@ class PostgresSearchView(View):
             page_num = request.GET['page'] if 'page' in request.GET else 1
             try:
                 page = paginator.page(page_num)
-            except Exception as e:
+            except Exception:
                 page = None
             context = {
                 'form': form,
