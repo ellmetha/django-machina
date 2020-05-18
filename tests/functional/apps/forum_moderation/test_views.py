@@ -255,6 +255,7 @@ class TestTopicMoveView(BaseClientTestCase):
         self.other_forum = create_forum()
 
         # Set up a topic and some posts
+        self.previous_topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.topic = create_topic(forum=self.top_level_forum, poster=self.user)
         self.first_post = PostFactory.create(topic=self.topic, poster=self.user)
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
@@ -293,6 +294,8 @@ class TestTopicMoveView(BaseClientTestCase):
         # Check
         self.topic.refresh_from_db()
         assert self.topic.forum == self.other_forum
+        self.top_level_forum.refresh_from_db()
+        assert self.top_level_forum.last_post == self.previous_topic.last_post
 
     def test_can_move_and_lock_topics(self):
         # Setup

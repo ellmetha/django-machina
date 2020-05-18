@@ -202,7 +202,6 @@ class TopicMoveView(
         """ Handles a valid form. """
         # Move the topic
         topic = self.object
-        old_forum = topic.forum
         new_forum = form.cleaned_data['forum']
         topic.forum = new_forum
 
@@ -213,7 +212,6 @@ class TopicMoveView(
             topic.status = Topic.TOPIC_MOVED
 
         topic.save()
-        old_forum.save()
 
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.get_success_url())
