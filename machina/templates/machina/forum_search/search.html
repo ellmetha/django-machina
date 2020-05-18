@@ -74,6 +74,7 @@
       </div>
       <div class="p-0 card-body">
         <table class="table">
+        {% if page %}
         {% for result in page.object_list %}
           <tr>
             <td class="post-name">
@@ -99,13 +100,14 @@
             
             </td>
           </tr>
-        {% empty %}
+        {% endfor %}
+        {% else %}
           <tr>
             <td>
               {% trans "No results." %}
             </td>
           </tr>
-        {% endfor %}
+        {% endif %}
         </table>
       </div>
     </div>

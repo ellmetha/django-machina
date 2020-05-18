@@ -20,7 +20,6 @@ User = get_user_model()
 Post = get_model('forum_conversation', 'Post')
 ForumProfile = get_model('forum_member', 'ForumProfile')
 
-
 @receiver(pre_save, sender=Post)
 def increase_posts_count(sender, instance, **kwargs):
     """ Increases the member's post count after a post save.
@@ -28,7 +27,7 @@ def increase_posts_count(sender, instance, **kwargs):
     This receiver handles the update of the profile related to the user who is the poster of the
     forum post being created or updated.
     """
-
+    
     if instance.poster is None:
         # An anonymous post is considered. No profile can be updated in
         # that case.
