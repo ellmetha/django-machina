@@ -1,25 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # anthony laquerre <anthony.laquerre@ccsr.qc.ca>, 2016
 # a270031086f2a0d3514bc0cb507b48f6, 2019
 # Matthieu Payet <matthieu.payet4@gmail.com>, 2017
 # Morgan Aubert <morgan@aubert.email>, 2017
 # Morgan Aubert <morgan@aubert.email>, 2016
+# Tutur L <arthur.lerou@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-16 17:35-0500\n"
-"PO-Revision-Date: 2019-10-29 01:36+0000\n"
-"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"PO-Revision-Date: 2020-04-26 20:18+0000\n"
+"Last-Translator: Tutur L <arthur.lerou@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/django-machina-team/django-machina/language/fr/)\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -74,7 +75,8 @@ msgstr "Dernier post ajouté"
 msgid "Display in parent-forums legend"
 msgstr " Affichage dans la légende des forums-parents"
 
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr " Affiche ce forum dans la légende de son forum-parent (dans la liste des forums)"
 
 msgid "Forum"
@@ -111,16 +113,16 @@ msgid "Permissions successfully copied"
 msgstr " Permissions copiées avec succès"
 
 msgid "Choose either a user ID, the anonymous user or the authenticated user"
-msgstr ""
+msgstr "Choisir un ID d'utilisateur, un utilisateur anonyme ou un utilisateur authentifié"
 
 msgid "Choose a group ID"
-msgstr ""
+msgstr "Choisir un ID de groupe"
 
 msgid "Anonymous user"
 msgstr "Utilisateur anonyme"
 
 msgid "Authenticated user"
-msgstr ""
+msgstr "Utilisateur authentifié"
 
 msgid "Permissions successfully applied"
 msgstr " Permissions appliquées avec succès"
@@ -131,17 +133,23 @@ msgstr "Machina: Forum"
 msgid "Anonymous"
 msgstr "Anonyme"
 
-msgid "Please select this option if you want to edit the permissions of the anonymous user"
+msgid ""
+"Please select this option if you want to edit the permissions of the "
+"anonymous user"
 msgstr "Veuillez sélectionner cette option si vous souhaitez éditer les permissions de l'utilisateur anonyme"
 
 msgid "Authenticated"
-msgstr ""
+msgstr "Authentifié"
 
-msgid "Please select this option if you want to edit the permissions of every (non-specific) logged in user"
-msgstr ""
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
+msgstr "Sélectionnez cette option si vous voulez modifier les permissions de tous les utilisateurs (non déterminés) authentifiés"
 
-msgid "Choose either a user ID or check either the anonymous or authenticated user checkbox"
-msgstr ""
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
+msgstr "Choisir un ID d'utilisateur ou cocher soit la case anonyme ou la case utilisateur authentifié"
 
 msgid "Not set"
 msgstr "Non définie"
@@ -239,7 +247,8 @@ msgstr "Messages"
 msgid "A user id or an anonymous key must be associated with a post."
 msgstr "Un utilisateur ou une clé d'utilisateur anonyme doit être associé à un message."
 
-msgid "A user id or an anonymous key must be associated with a post, but not both."
+msgid ""
+"A user id or an anonymous key must be associated with a post, but not both."
 msgstr "Un utilisateur ou une clé d'utilisateur anonyme doit être associé à un message, mais pas les deux."
 
 msgid "A username must be specified if the poster is anonymous"
@@ -266,7 +275,9 @@ msgstr "Publier le sujet en tant que"
 msgid "Poll question"
 msgstr "Question du sondage"
 
-msgid "Enter a question to associate a poll with the topic or leave blank to not create a poll."
+msgid ""
+"Enter a question to associate a poll with the topic or leave blank to not "
+"create a poll."
 msgstr "Entrez une question pour associer un sondage avec le sujet sinon laissez vide si vous ne voulez pas créer de sondage."
 
 msgid "Maximum number of poll options per user"
@@ -287,7 +298,8 @@ msgstr "Autoriser la modification des votes?"
 msgid "If enabled users are able to change their vote."
 msgstr "Si activé, les utilisateurs peuvent changer leurs votes."
 
-msgid "You must set the maximum number of poll options per user when creating polls"
+msgid ""
+"You must set the maximum number of poll options per user when creating polls"
 msgstr "Vous devez indiquer le nombre maximum de choix par utilisateur pour le sondage"
 
 msgid "File"
@@ -471,7 +483,7 @@ msgid "Target anonymous user"
 msgstr "Cibler un utilisateur anonyme"
 
 msgid "Target any logged in user"
-msgstr ""
+msgstr "Cibler tous les utilisateurs authentifiés"
 
 msgid "User forum permission"
 msgstr "Permission de l'utilisateur pour le forum"
@@ -479,8 +491,10 @@ msgstr "Permission de l'utilisateur pour le forum"
 msgid "User forum permissions"
 msgstr "Permissions de l'utilisateur du forum"
 
-msgid "A permission should target either a specific user, an anonymous user or any authenticated user"
-msgstr ""
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
+msgstr "Une permission devrait cibler soit un utilisateur spécifique, un utilisateur anonyme ou n’importe quel utilisateur authentifié"
 
 msgid "Group"
 msgstr "Groupe"
@@ -620,15 +634,15 @@ msgstr "Les paramètres de MACHINA_MARKUP_LANGUAGE sont requis"
 msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr "Les fichiers qui dépasse la taille de {} ne sont pas autorisés. Votre fichier est {}."
 
-msgid "Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px"
-msgstr ""
-"Les images de largeur inférieur à {} px ou supérieur à {} px ne sont pas autorisées.\n"
-"La largeur de votre image est de {} px."
+msgid ""
+"Images of width lesser than {}px or greater than {}px or are not allowed. "
+"The width of your image is {}px"
+msgstr "Les images de largeur inférieur à {} px ou supérieur à {} px ne sont pas autorisées.\nLa largeur de votre image est de {} px."
 
-msgid "Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px"
-msgstr ""
-"Les images de hauteur inférieur à {} px ou supérieur à {} px ne sont pas autorisées.\n"
-"La hauteur de votre image est de {} px."
+msgid ""
+"Images of height lesser than {}px or greater than {}px or are not allowed. "
+"The height of your image is {}px"
+msgstr "Les images de hauteur inférieur à {} px ou supérieur à {} px ne sont pas autorisées.\nLa hauteur de votre image est de {} px."
 
 msgid "List of forums"
 msgstr "Liste des forums"
@@ -667,7 +681,7 @@ msgid "Edit user permissions"
 msgstr "Modifier les permissions de l'utilisateur"
 
 msgid "Edit authenticated user permissions"
-msgstr ""
+msgstr "Modifier les permissions des utilisateurs authentifiés"
 
 msgid "Home"
 msgstr "Accueil"
@@ -699,7 +713,9 @@ msgstr "Merci de sélectionner un groupe afin de mettre à jour ses permissions"
 msgid "Copy permissions from another forum"
 msgstr "Copier les permissions à partir d'un autre forum"
 
-msgid "Please select a forum in order to copy its permissions configuration to the current forum"
+msgid ""
+"Please select a forum in order to copy its permissions configuration to the "
+"current forum"
 msgstr "Merci de sélectionner un forum afin de copier la configuration de ses permissions vers le forum actuel."
 
 msgid "Copy"
@@ -798,7 +814,9 @@ msgstr "Options de sondage"
 msgid "Add a poll option"
 msgstr "Ajouter une option de sondage"
 
-msgid "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes."
+msgid ""
+"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
+"associated votes."
 msgstr "<b>Note:</b>&nbsp;Supprimer les options de sondage d'un sondage existant supprimera les votes associés."
 
 msgid "Preview:"
@@ -931,12 +949,8 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
-msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Post</small></p>"
-msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p class=\"mb-1\"><small>Posts</small></p>"
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Post</small></p>"
+msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Posts</small></p>"
 
 #, python-format
 msgid ""
@@ -945,12 +959,8 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
-msgstr[0] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p><small>Sujet</small></p>"
-msgstr[1] ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"<p class=\"mb-1\"><small>Sujets</small></p>"
+msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Sujet</small></p>"
+msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Sujets</small></p>"
 
 msgid "Recent posts"
 msgstr "Posts récents"
@@ -1037,7 +1047,8 @@ msgstr "Êtes-vous sûr de vouloir approuver ce post ?"
 msgid "Disapprove post"
 msgstr "Désapprouver ce post"
 
-msgid "Are you sure you want to disapprove this post? This post will be deleted."
+msgid ""
+"Are you sure you want to disapprove this post? This post will be deleted."
 msgstr "Êtes-vous sûr de vouloir désapprouver ce post ? Celui-ci sera donc supprimé."
 
 msgid "Are you sure you want to delete this topic?"
@@ -1076,15 +1087,11 @@ msgstr "Êtes-vous sûr de vouloir marquer ces forums comme 'lu' ?"
 msgid "Are you sure you want to mark topics read?"
 msgstr "Êtes-vous sûr de vouloir marquer ces thèmes comme 'lu' ?"
 
-#, fuzzy, python-format
-#| msgid "      %(topic_length)s unread topic found"
-#| msgid_plural ""
-#| "%(topic_length)s unread topics found\n"
-#| "      "
+#, python-format
 msgid "%(topic_length)s unread topic found"
 msgid_plural "%(topic_length)s unread topics found"
-msgstr[0] "%(topic_length)ssujet non lu trouvé"
-msgstr[1] "%(topic_length)ssujets non lus trouvés"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "There are no unread topics."
 msgstr "Il n'y a aucun thème non lu."

@@ -1,22 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Marcel Lambert <marcel.lambert@wesualize.com>, 2017
+# m.g <markus.gellrich@gmx.net>, 2020
 # Robert Gutschale <r.gutschale@blueshoe.de>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-16 17:35-0500\n"
-"PO-Revision-Date: 2019-10-29 01:36+0000\n"
-"Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
+"PO-Revision-Date: 2020-04-02 17:18+0000\n"
+"Last-Translator: m.g <markus.gellrich@gmx.net>\n"
 "Language-Team: German (http://www.transifex.com/django-machina-team/django-machina/language/de/)\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -27,7 +28,7 @@ msgid "Name"
 msgstr "Name"
 
 msgid "Slug"
-msgstr ""
+msgstr "Stichwort"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -71,7 +72,8 @@ msgstr "Letzter Beitrag hinzugefügt am"
 msgid "Display in parent-forums legend"
 msgstr "In Legende des übergeordneten Forum anzeigen"
 
-msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid ""
+"Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Zeigt dieses Forum in der Legende seines übergeordneten Forums an (Subforen-Liste)"
 
 msgid "Forum"
@@ -128,16 +130,22 @@ msgstr ""
 msgid "Anonymous"
 msgstr "Anonym"
 
-msgid "Please select this option if you want to edit the permissions of the anonymous user"
+msgid ""
+"Please select this option if you want to edit the permissions of the "
+"anonymous user"
 msgstr "Bitte wähle diese Option, um die Berechtigungen anonymer Nutzer zu bearbeiten"
 
 msgid "Authenticated"
 msgstr ""
 
-msgid "Please select this option if you want to edit the permissions of every (non-specific) logged in user"
+msgid ""
+"Please select this option if you want to edit the permissions of every (non-"
+"specific) logged in user"
 msgstr ""
 
-msgid "Choose either a user ID or check either the anonymous or authenticated user checkbox"
+msgid ""
+"Choose either a user ID or check either the anonymous or authenticated user "
+"checkbox"
 msgstr ""
 
 msgid "Not set"
@@ -156,7 +164,7 @@ msgid "Poster"
 msgstr "Verfasser"
 
 msgid "Subject"
-msgstr "Thema"
+msgstr "Betreff"
 
 msgid "Default topic"
 msgstr "Standardthema"
@@ -236,7 +244,8 @@ msgstr "Beiträge"
 msgid "A user id or an anonymous key must be associated with a post."
 msgstr ""
 
-msgid "A user id or an anonymous key must be associated with a post, but not both."
+msgid ""
+"A user id or an anonymous key must be associated with a post, but not both."
 msgstr ""
 
 msgid "A username must be specified if the poster is anonymous"
@@ -263,7 +272,9 @@ msgstr "Thema veröffentlichen als"
 msgid "Poll question"
 msgstr "Abstimmungsfrage"
 
-msgid "Enter a question to associate a poll with the topic or leave blank to not create a poll."
+msgid ""
+"Enter a question to associate a poll with the topic or leave blank to not "
+"create a poll."
 msgstr "Hier kannst du eine Frage zu deiner Abstimmung eingeben."
 
 msgid "Maximum number of poll options per user"
@@ -284,7 +295,8 @@ msgstr "Ändern der Abstimmung erlauben?"
 msgid "If enabled users are able to change their vote."
 msgstr "Ist diese Option ausgewählt, können Nutzer ihre Abstimmung nachträglich ändern"
 
-msgid "You must set the maximum number of poll options per user when creating polls"
+msgid ""
+"You must set the maximum number of poll options per user when creating polls"
 msgstr "Es muss eine maximale Stimmenzahl pro Nutzer angegeben werden"
 
 msgid "File"
@@ -476,7 +488,9 @@ msgstr ""
 msgid "User forum permissions"
 msgstr ""
 
-msgid "A permission should target either a specific user, an anonymous user or any authenticated user"
+msgid ""
+"A permission should target either a specific user, an anonymous user or any "
+"authenticated user"
 msgstr ""
 
 msgid "Group"
@@ -552,7 +566,7 @@ msgid "Machina: Forum searches"
 msgstr "Machina: Forum Suchen"
 
 msgid "Search only in topic subjects"
-msgstr ""
+msgstr "Nur Betreff von Themen durchsuchen"
 
 msgid "Search for poster"
 msgstr ""
@@ -561,10 +575,10 @@ msgid "Enter a user name to limit the search to a specific user."
 msgstr ""
 
 msgid "Search in specific forums"
-msgstr ""
+msgstr "Bestimmte Foren durchsuchen"
 
 msgid "Select the forums you wish to search in."
-msgstr ""
+msgstr "Foren für die Suche auswählen."
 
 msgid "Search for keywords"
 msgstr ""
@@ -617,17 +631,21 @@ msgstr ""
 msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr "Dateien mit mehr als {} sind nicht zulässig. Datei ist {} groß."
 
-msgid "Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px"
+msgid ""
+"Images of width lesser than {}px or greater than {}px or are not allowed. "
+"The width of your image is {}px"
 msgstr "Bilder mit einer Breite von weniger als {}px oder mehr als {}px sind nicht zulässig. Dein Bild hat eine Breite von {}px."
 
-msgid "Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px"
+msgid ""
+"Images of height lesser than {}px or greater than {}px or are not allowed. "
+"The height of your image is {}px"
 msgstr "Bilder mit einer Höhe von weniger als {}px oder mehr als {}px sind nicht zulässig. Dein Bild hat eine Höhe von {}px."
 
 msgid "List of forums"
 msgstr "Forenliste"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Schnellzugriff"
 
 msgid "Type"
 msgstr "Art"
@@ -663,16 +681,16 @@ msgid "Edit authenticated user permissions"
 msgstr ""
 
 msgid "Home"
-msgstr ""
+msgstr "Start"
 
 msgid "Permission"
-msgstr ""
+msgstr "Berechtigung"
 
 msgid "Save"
 msgstr "Speichern"
 
 msgid "Edit group permissions"
-msgstr ""
+msgstr "Gruppenberechtigungen bearbeiten"
 
 msgid "Please correct the error below."
 msgstr "Bitte den untenstehenden Fehler korrigieren."
@@ -687,13 +705,15 @@ msgid "Select"
 msgstr "Auswählen"
 
 msgid "Please select a group in order to update its permissions"
-msgstr ""
+msgstr "Bitte eine Gruppe auswählen für die die Berechtigungen geändert werden sollen"
 
 msgid "Copy permissions from another forum"
-msgstr ""
+msgstr "Berechtigungen eines anderen Forums übernehmen"
 
-msgid "Please select a forum in order to copy its permissions configuration to the current forum"
-msgstr ""
+msgid ""
+"Please select a forum in order to copy its permissions configuration to the "
+"current forum"
+msgstr "Bitte ein Forum auswählen um dessen Berechtigungseinstellungen für das aktuelle Forum zu übernehmen"
 
 msgid "Copy"
 msgstr "Kopieren"
@@ -791,7 +811,9 @@ msgstr "Abstimmungsoptionen"
 msgid "Add a poll option"
 msgstr "Abstimmungsoption hinzufügen"
 
-msgid "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes."
+msgid ""
+"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
+"associated votes."
 msgstr "<b>Hinweis:</b>&nbsp;Beim Löschen von Abstimmungsoptionen in bestehenden Umfragen werden die zugehörigen Stimmen gelöscht."
 
 msgid "Preview:"
@@ -860,10 +882,10 @@ msgid "Are you sure you want to delete this post?"
 msgstr "Bist du sicher, dass du diesen Beitrag löschen möchtest?"
 
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Ja, ich bin sicher"
 
 msgid "No, take me back"
-msgstr ""
+msgstr "Nein, abbrechen"
 
 msgid "Edit post"
 msgstr "Beitrag bearbeiten"
@@ -1022,7 +1044,8 @@ msgstr "Bist du sicher, dass du diesen Beitrag zulassen möchtest?"
 msgid "Disapprove post"
 msgstr "Beitrag ablehnen"
 
-msgid "Are you sure you want to disapprove this post? This post will be deleted."
+msgid ""
+"Are you sure you want to disapprove this post? This post will be deleted."
 msgstr "Bist du sicher, dass du diesen Beitrag ablehnen möchtest? Der Beitrag wird damit gelöscht."
 
 msgid "Are you sure you want to delete this topic?"
@@ -1061,12 +1084,11 @@ msgstr "Bist du sicher, dass du alle Foren als gelesen markieren möchtest?"
 msgid "Are you sure you want to mark topics read?"
 msgstr "Bist du sicher, dass du alle Themen als gelesen markieren möchtest?"
 
-#, fuzzy, python-format
-#| msgid "%(topic_length)s posts found"
+#, python-format
 msgid "%(topic_length)s unread topic found"
 msgid_plural "%(topic_length)s unread topics found"
-msgstr[0] "%(topic_length)s Beiträge gefunden"
-msgstr[1] "%(topic_length)s Beiträge gefunden"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "There are no unread topics."
 msgstr "Es gibt keine ungelesenen Themen."
