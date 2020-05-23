@@ -62,7 +62,9 @@ isort:
 # The following rules can be used to trigger tests execution and produce coverage reports.
 # --------------------------------------------------------------------------------------------------
 
-.PHONY: tests
+.PHONY: t tests
+## Alias of "tests".
+t: tests
 ## Run the Python test suite.
 tests:
 	poetry run py.test
