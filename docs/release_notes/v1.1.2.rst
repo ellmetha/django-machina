@@ -1,0 +1,8 @@
+######################################################
+Django-machina 1.1.2 release notes (UNDER DEVELOPMENT)
+######################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.5, 3.6, 3.7 and 3.8. Django 2.2, 3.0 and 3.1
