@@ -6,3 +6,9 @@ Requirements and compatibility
 ------------------------------
 
 Python 3.5, 3.6, 3.7 and 3.8. Django 2.2, 3.0 and 3.1
+
+Minor changes
+-------------
+
+* Fix possible inconsistency in permissions handling for permissions targetting all authenticated
+  users (`#194 <https://github.com/ellmetha/django-machina/pull/194>`_)
