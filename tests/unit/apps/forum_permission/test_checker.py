@@ -60,12 +60,12 @@ class TestForumPermissionChecker(object):
         assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, None, has_perm=True)
         assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
         # Test globally False but forum level True
-        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, None, has_perm=False)
-        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
+        assign_perm('can_edit_own_posts', ALL_AUTHENTICATED_USERS, None, has_perm=False)
+        assign_perm('can_edit_own_posts', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
-        assert checker.has_perm('can_see_forum', self.forum)
+        assert checker.has_perm('can_edit_own_posts', self.forum)
 
     def test_knows_that_user_permissions_take_precedence_over_user_global_permissions(self):
         # Setup
@@ -86,6 +86,26 @@ class TestForumPermissionChecker(object):
         checker = ForumPermissionChecker(user)
         # Run & check
         assert not checker.has_perm('can_read_forum', self.forum)
+
+    def test_permissions_returned_for_alluser_when_not_in_group_for_given_forum(self):
+        """
+        When all_users permission is set, a user that has no own permissions and is not
+        in a group that has permissions on the given forum, still has a permission (via all_users)
+        on the given forum
+        """
+        user = UserFactory.create()
+        assign_perm('can_read_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=True)
+        checker = ForumPermissionChecker(user)
+        # Run & check
+        assert checker.has_perm('can_read_forum', self.forum)
+
+    def test_knows_that_alluser_permissions_take_precedence_over_default_authenticated_permissions(self):  # noqa: E501
+        user = UserFactory.create()
+        # Negate DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS
+        assign_perm('can_see_forum', ALL_AUTHENTICATED_USERS, self.forum, has_perm=False)
+        checker = ForumPermissionChecker(user)
+        # Run & check
+        assert not checker.has_perm('can_see_forum', self.forum)
 
     def test_knows_that_user_permissions_take_precedence_over_group_permissions(self):
         # Setup

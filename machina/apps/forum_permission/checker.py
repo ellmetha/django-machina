@@ -151,78 +151,69 @@ class ForumPermissionChecker:
             per_forum_nongranted_user_permcodes = [
                 p.permission.codename for p in per_forum_nongranted_user_perms
             ]
-            # Finally computes the list of permission codenames that are
-            # granted to the user for the considered forum.
-            # We can not do this earlier because
-            # globally_granted_user_perms can be from the setting
-            # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS in which case
-            # it only contains permission codes and not actual permission
-            # objects that we can loop over and check against.
-            granted_user_permcodes = [
-                c for c in globally_granted_user_permcodes if
-                c not in per_forum_nongranted_user_permcodes
-            ]
-            permcodes = set(granted_user_permcodes +
-                            per_forum_granted_user_permcodes)
 
+            per_forum_granted_group_perms = []
+            per_forum_nongranted_group_perms = []
+            per_forum_nongranted_all_users_permcodes = []
             # ########## BLOCK FOR PERMS SPECIFIC TO GROUPS OF LOGGED IN USER ###########
             # If the user is a registered user, we have to check the permissions of its groups
             # in order to determine the additional permissions they could have.
-            if not self.user.is_anonymous and group_perms:
-                # A permission can be non-granted on user-forum level, and that takes
-                # precedence over granted group permissions so we do not add those to the list.
-                per_forum_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and f and p.forum_id == f.id and
-                           p.permission_id not in
-                           [q.permission_id for q in per_forum_nongranted_user_perms],
-                           group_perms)
-                )
-                per_forum_granted_group_permcodes = [
-                    p.permission.codename for p in per_forum_granted_group_perms
-                ]
-                # A permission can be granted on user-forum level, and that takes precedence
-                # over nongranted group permissions so we do not add those to the list.
-                per_forum_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and f and p.forum_id == f.id and
-                           p.permission_id not in
-                           [q.permission_id for q in per_forum_granted_user_perms],
-                           group_perms)
-                )
+            if not self.user.is_anonymous:
+                if group_perms:
+                    # A permission can be non-granted on user-forum level, and that takes
+                    # precedence over granted group permissions so we do not add those to the list.
+                    per_forum_granted_group_perms = list(
+                        filter(lambda p: p.has_perm and f and p.forum_id == f.id and
+                               p.permission_id not in
+                               [q.permission_id for q in per_forum_nongranted_user_perms],
+                               group_perms)
+                    )
+                    per_forum_granted_group_permcodes = [
+                        p.permission.codename for p in per_forum_granted_group_perms
+                    ]
+                    # A permission can be granted on user-forum level, and that takes precedence
+                    # over nongranted group permissions so we do not add those to the list.
+                    per_forum_nongranted_group_perms = list(
+                        filter(lambda p: not p.has_perm and f and p.forum_id == f.id and
+                               p.permission_id not in
+                               [q.permission_id for q in per_forum_granted_user_perms],
+                               group_perms)
+                    )
 
-                # Filter the globally granted group perms to those that were:
-                # - not set to non-granted on global-user level
-                # - and not set to non-granted on forum-group level
-                # - and not set to non-granted on forum-user level
-                globally_granted_group_perms = list(
-                    filter(lambda p: p.has_perm and p.forum_id is None and
-                           p.permission_id not in
-                           [q.permission_id for q in globally_nongranted_user_perms] and
-                           p.permission_id not in
-                           [y.permission_id for y in per_forum_nongranted_group_perms] and
-                           p.permission_id not in
-                           [z.permission_id for z in per_forum_nongranted_user_perms],
-                           globally_granted_group_perms)
-                )
-                globally_granted_group_permcodes = [
-                    p.permission.codename for p in globally_granted_group_perms
-                ]
+                    # Filter the globally granted group perms to those that were:
+                    # - not set to non-granted on global-user level
+                    # - and not set to non-granted on forum-group level
+                    # - and not set to non-granted on forum-user level
+                    globally_granted_group_perms = list(
+                        filter(lambda p: p.has_perm and p.forum_id is None and
+                               p.permission_id not in
+                               [q.permission_id for q in globally_nongranted_user_perms] and
+                               p.permission_id not in
+                               [y.permission_id for y in per_forum_nongranted_group_perms] and
+                               p.permission_id not in
+                               [z.permission_id for z in per_forum_nongranted_user_perms],
+                               globally_granted_group_perms)
+                    )
+                    globally_granted_group_permcodes = [
+                        p.permission.codename for p in globally_granted_group_perms
+                    ]
 
-                # Filter the globally non granted group perms to those that were:
-                # - not set to granted on global- user level
-                # - and not set to granted on forum-group level
-                # - and not set to granted on forum-user level
-                globally_nongranted_group_perms = list(
-                    filter(lambda p: not p.has_perm and p.forum_id is None and
-                           p.permission_id not in
-                           [q.permission_id for q in globally_granted_user_perms] and
-                           p.permission_id not in
-                           [y.permission_id for y in per_forum_granted_group_perms] and
-                           p.permission_id not in
-                           [z.permission_id for z in per_forum_granted_user_perms],
-                           globally_nongranted_group_perms)
-                )
-                granted_group_permcodes = set(globally_granted_group_permcodes +
-                                              per_forum_granted_group_permcodes)
+                    # Filter the globally non granted group perms to those that were:
+                    # - not set to granted on global- user level
+                    # - and not set to granted on forum-group level
+                    # - and not set to granted on forum-user level
+                    globally_nongranted_group_perms = list(
+                        filter(lambda p: not p.has_perm and p.forum_id is None and
+                               p.permission_id not in
+                               [q.permission_id for q in globally_granted_user_perms] and
+                               p.permission_id not in
+                               [y.permission_id for y in per_forum_granted_group_perms] and
+                               p.permission_id not in
+                               [z.permission_id for z in per_forum_granted_user_perms],
+                               globally_nongranted_group_perms)
+                    )
+                    granted_group_permcodes = set(globally_granted_group_permcodes +
+                                                  per_forum_granted_group_permcodes)
 
                 # ######### BLOCK FOR PERMS FOR EVERY LOGGED IN USER ##########
                 # A permission can be non-granted on user-forum or group-forum level, and
@@ -251,7 +242,9 @@ class ForumPermissionChecker:
                            [z.permission_id for z in per_forum_granted_group_perms],
                            all_users_perms)
                 )
-
+                per_forum_nongranted_all_users_permcodes = [
+                    p.permission.codename for p in per_forum_nongranted_all_users_perms
+                ]
                 # Filter the globally granted all users perms to those that were:
                 # - not set to non-granted on forum-all_user level
                 # - and not set to non-granted on global-user level
@@ -278,6 +271,20 @@ class ForumPermissionChecker:
                 granted_all_users_permcodes = set(globally_granted_all_users_permcodes +
                                                   per_forum_granted_all_users_permcodes)
 
+            # Finally computes the list of permission codenames that are
+            # granted to the user for the considered forum.
+            # We can not do this earlier because
+            # globally_granted_user_perms can be from the setting
+            # DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS in which case
+            # it only contains permission codes and not actual permission
+            # objects that we can loop over and check against.
+            granted_user_permcodes = [
+                c for c in globally_granted_user_permcodes if
+                c not in per_forum_nongranted_user_permcodes and
+                c not in per_forum_nongranted_all_users_permcodes
+            ]
+            permcodes = set(granted_user_permcodes +
+                            per_forum_granted_user_permcodes)
             # Includes the permissions granted for the user's groups and for all logged
             # in users (that were not overruled by more specific targets) in the initial
             # set of permission codenames.
