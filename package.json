@@ -6,7 +6,7 @@
     "@babel/polyfill": "^7.0.0",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
-    "bootstrap": ">=4.3.1",
+    "bootstrap": ">=4.5.2",
     "easymde": "^2.8.0",
     "jquery": ">=3.5.0",
     "lodash": ">=4.17.19",
