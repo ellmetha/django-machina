@@ -12,3 +12,4 @@ Minor changes
 
 * Fix possible inconsistency in permissions handling for permissions targetting all authenticated
   users (`#194 <https://github.com/ellmetha/django-machina/pull/194>`_)
+* Bootstrap version is upgraded to 4.5.2
