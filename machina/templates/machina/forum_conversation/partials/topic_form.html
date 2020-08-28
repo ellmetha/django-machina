@@ -20,8 +20,8 @@
   {% if poll_option_formset or attachment_formset %}
   <ul class="nav nav-tabs nav-justified">
     <li class="nav-item"><a href="#options" class="nav-link active" data-toggle="tab">{% trans "Options" %}</a></li>
-    <li class="nav-item"><a href="#poll" class="nav-link" data-toggle="tab">{% trans "Poll" %}</a></li>
-    <li class="nav-item"><a href="#attachments" class="nav-link" data-toggle="tab">{% trans "Attachments" %}</a></li>
+    {% if poll_option_formset %}<li class="nav-item"><a href="#poll" class="nav-link" data-toggle="tab">{% trans "Poll" %}</a></li>{% endif %}
+    {% if attachment_formset %}<li class="nav-item"><a href="#attachments" class="nav-link" data-toggle="tab">{% trans "Attachments" %}</a></li>{% endif %}
   </ul>
   {% endif %}
 
