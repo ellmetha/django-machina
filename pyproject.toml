@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-machina"
-version = "1.1.3.dev0"
+version = "1.1.3"
 description = "A Django forum engine for building powerful community driven websites."
 authors = ["Morgan Aubert <me@morganaubert.name>"]
 license = "BSD-3-Clause"
