@@ -4,7 +4,7 @@ Getting started
 Requirements
 ------------
 
-* `Python`_ 3.5, 3.6, 3.7 and 3.8
+* `Python`_ 3.5, 3.6, 3.7, 3.8 and 3.9
 * `Django`_ 2.2x, 3.0.x and 3.1.x
 * `Pillow`_
 * `Django-haystack`_
