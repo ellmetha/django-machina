@@ -24,7 +24,7 @@ from machina.models.fields import MarkupTextField
 ApprovedManager = get_class('forum_conversation.managers', 'ApprovedManager')
 
 
-class AbstractTopic(DatedModel):
+class AbstractTopic(models.Model):
     """ Represents a forum topic. """
 
     forum = models.ForeignKey(
@@ -77,7 +77,12 @@ class AbstractTopic(DatedModel):
     )
 
     # The date of the latest post.
-    last_post_on = models.DateTimeField(blank=True, null=True, verbose_name=_('Last post added on'))
+    last_post_on = models.DateTimeField(
+        blank=True,
+        null=True,
+        db_index=True,
+        verbose_name=_('Last post added on')
+    )
 
     # The first post and the last post of the topic. The first post can be unnaproved. The last post
     # must be approved.
@@ -96,12 +101,24 @@ class AbstractTopic(DatedModel):
         verbose_name=_('Subscribers'),
     )
 
+    created = models.DateTimeField(
+        auto_now_add=True,
+        db_index=True,
+        verbose_name=_('Creation date')
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+        db_index=True,
+        verbose_name=_('Update date')
+    )
+
     objects = models.Manager()
     approved_objects = ApprovedManager()
 
     class Meta:
         abstract = True
         app_label = 'forum_conversation'
+        indexes = [models.Index(fields=['type', 'last_post_on']), ]
         ordering = ['-type', '-last_post_on', ]
         get_latest_by = 'last_post_on'
         verbose_name = _('Topic')
