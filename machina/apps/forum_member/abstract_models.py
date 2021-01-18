@@ -57,7 +57,7 @@ class AbstractForumProfile(models.Model):
         verbose_name_plural = _('Forum profiles')
 
     def __str__(self):
-        return self.user.username
+        return str(self.user.username)
 
     def get_avatar_upload_to(self, filename):
         """ Returns the path to upload the associated avatar to. """
