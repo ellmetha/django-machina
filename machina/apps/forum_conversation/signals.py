@@ -8,5 +8,6 @@
 
 import django.dispatch
 
-# Arguments: "topic",  "user", "request", "response"
+
+# "topic", "user", "request", "response"
 topic_viewed = django.dispatch.Signal()

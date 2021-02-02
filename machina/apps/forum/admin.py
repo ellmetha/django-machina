@@ -8,7 +8,7 @@
 
 from collections import OrderedDict
 
-from django.conf.urls import url
+from django.conf.urls import re_path
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.auth import get_user_model
@@ -70,57 +70,57 @@ class ForumAdmin(admin.ModelAdmin):
         """ Returns the URLs associated with the admin abstraction. """
         urls = super().get_urls()
         forum_admin_urls = [
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/move-forum/(?P<direction>up|down)/$',
                 self.admin_site.admin_view(self.moveforum_view),
                 name='forum_forum_move',
             ),
-            url(
+            re_path(
                 r'^edit-global-permissions/$',
                 self.admin_site.admin_view(self.editpermissions_index_view),
                 name='forum_forum_editpermission_index',
             ),
-            url(
+            re_path(
                 r'^edit-global-permissions/user/(?P<user_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_user_view),
                 name='forum_forum_editpermission_user',
             ),
-            url(
+            re_path(
                 r'^edit-global-permissions/user/anonymous/$',
                 self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
                 name='forum_forum_editpermission_anonymous_user',
             ),
-            url(
+            re_path(
                 r'^edit-global-permissions/user/authenticated/$',
                 self.admin_site.admin_view(self.editpermissions_authenticated_user_view),
                 name='forum_forum_editpermission_authenticated_user',
             ),
-            url(
+            re_path(
                 r'^edit-global-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
                 name='forum_forum_editpermission_group',
             ),
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/$',
                 self.admin_site.admin_view(self.editpermissions_index_view),
                 name='forum_forum_editpermission_index',
             ),
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/user/(?P<user_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_user_view),
                 name='forum_forum_editpermission_user',
             ),
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/user/anonymous/$',
                 self.admin_site.admin_view(self.editpermissions_anonymous_user_view),
                 name='forum_forum_editpermission_anonymous_user',
             ),
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/user/authenticated/$',
                 self.admin_site.admin_view(self.editpermissions_authenticated_user_view),
                 name='forum_forum_editpermission_authenticated_user',
             ),
-            url(
+            re_path(
                 r'^(?P<forum_id>[0-9]+)/edit-permissions/group/(?P<group_id>[0-9]+)/$',
                 self.admin_site.admin_view(self.editpermissions_group_view),
                 name='forum_forum_editpermission_group',

@@ -6,7 +6,7 @@
 
 """
 
-from django.conf.urls import include, url
+from django.conf.urls import include, re_path
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
@@ -26,13 +26,13 @@ class BoardURLPatternsFactory(URLPatternsFactory):
     def get_urlpatterns(self):
         """ Returns the URL patterns managed by the considered factory / application. """
         return [
-            url(r'', include(self.forum_urlpatterns_factory.urlpatterns)),
-            url(r'', include(self.conversation_urlpatterns_factory.urlpatterns)),
-            url(r'^feeds/', include(self.feeds_urlpatterns_factory.urlpatterns)),
-            url(r'^member/', include(self.member_urlpatterns_factory.urlpatterns)),
-            url(r'^moderation/', include(self.moderation_urlpatterns_factory.urlpatterns)),
-            url(r'^search/', include(self.search_urlpatterns_factory.urlpatterns)),
-            url(r'^tracking/', include(self.tracking_urlpatterns_factory.urlpatterns)),
+            re_path(r'', include(self.forum_urlpatterns_factory.urlpatterns)),
+            re_path(r'', include(self.conversation_urlpatterns_factory.urlpatterns)),
+            re_path(r'^feeds/', include(self.feeds_urlpatterns_factory.urlpatterns)),
+            re_path(r'^member/', include(self.member_urlpatterns_factory.urlpatterns)),
+            re_path(r'^moderation/', include(self.moderation_urlpatterns_factory.urlpatterns)),
+            re_path(r'^search/', include(self.search_urlpatterns_factory.urlpatterns)),
+            re_path(r'^tracking/', include(self.tracking_urlpatterns_factory.urlpatterns)),
         ]
 
 
