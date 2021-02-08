@@ -1,0 +1,33 @@
+{% load forum_member_tags %}
+{% load i18n %}
+
+{% if poster %}
+    {% url 'forum_member:profile' poster.id as profil_url %}
+    {% if no_trans %}
+        <a href="{{profil_url }}">{% if username_highlighted %}<b>{% endif %}{{ poster|forum_member_display_name  }}{% if username_highlighted %}</b>{% endif %}</a>
+    {% else %}
+        {% if creation_date %}
+            {% blocktrans trimmed with username=poster|forum_member_display_name %}
+                By: <a href="{{ profil_url }}">{{ username }}</a> on {{ creation_date }}
+            {% endblocktrans %}
+        {% else %}    
+            {% blocktrans trimmed with username=poster|forum_member_display_name %}
+                    By: <a href="{{ profil_url }}">{{ username }}</a>
+            {% endblocktrans %}
+        {% endif %}
+    {% endif %}    
+{% else %}
+    {% if no_trans %}
+        {% if username_highlighted %}<b>{% endif %}{{ username }}{% if username_highlighted %}</b>{% endif %}
+    {% else %}
+        {% if creation_date %}
+            {% blocktrans trimmed %}
+                By: {{ username }} on {{ creation_date }}
+            {% endblocktrans %}
+        {% else %}    
+            {% blocktrans trimmed %}
+                By: {{ username }}
+            {% endblocktrans %}
+        {% endif %}
+    {% endif %}
+{% endif %}

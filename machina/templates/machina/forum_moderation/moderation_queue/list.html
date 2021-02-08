@@ -46,16 +46,9 @@
                   <a href="{% url 'forum_moderation:queued_post' post.pk %}" class="post-name-link">{{ post.subject }}</a>
                   <div>
                     <div class="post-created">
-                      {% if post.poster %}
-                      {% url 'forum_member:profile' post.poster_id as poster_url %}
-                      {% blocktrans trimmed with poster_url=poster_url username=post.poster|forum_member_display_name creation_date=post.created %}
-                      By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
-                      {% endblocktrans %}
-                      {% else %}
-                      {% blocktrans trimmed with poster_username=post.username creation_date=post.created %}
-                      By: {{ poster_username }} on {{ creation_date }}
-                      {% endblocktrans %}
-                      {% endif %}
+                    {% block written_by %}
+                      {% include "partials/posted_by.html" with poster=post.poster creation_date=post.created username=post.username %}
+                    {% endblock %}
                     </div>
                   </div>
                 </td>
