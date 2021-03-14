@@ -192,7 +192,7 @@ class TopicForm(PostForm):
                 _('You must set the maximum number of poll options per user when creating polls'),
             )
 
-        super().clean()
+        return super().clean()
 
     def save(self, commit=True):
         """ Saves the instance. """

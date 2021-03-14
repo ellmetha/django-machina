@@ -160,6 +160,7 @@ class AbstractTopic(models.Model):
             raise ValidationError(
                 _('A topic can not be associated with a category or a link forum')
             )
+        return self.cleaned_data
 
     def save(self, *args, **kwargs):
         """ Saves the topic instance. """
@@ -320,6 +321,8 @@ class AbstractPost(DatedModel):
 
         if self.anonymous_key and not self.username:
             raise ValidationError(_('A username must be specified if the poster is anonymous'))
+
+        return self.cleaned_data
 
     def save(self, *args, **kwargs):
         """ Saves the post instance. """
