@@ -1,4 +1,5 @@
 import factory
+import factory.django
 from django.utils.text import slugify
 from factory import fuzzy
 from faker import Faker
@@ -14,7 +15,7 @@ Post = get_model('forum_conversation', 'Post')
 Topic = get_model('forum_conversation', 'Topic')
 
 
-class TopicFactory(factory.DjangoModelFactory):
+class TopicFactory(factory.django.DjangoModelFactory):
     forum = factory.SubFactory(ForumFactory)
     poster = factory.SubFactory(UserFactory)
     status = Topic.TOPIC_UNLOCKED
@@ -25,7 +26,7 @@ class TopicFactory(factory.DjangoModelFactory):
         model = Topic
 
 
-class PostFactory(factory.DjangoModelFactory):
+class PostFactory(factory.django.DjangoModelFactory):
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
     subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))

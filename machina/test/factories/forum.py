@@ -1,4 +1,5 @@
 import factory
+import factory.django
 from django.utils.text import slugify
 from faker import Faker
 
@@ -11,7 +12,7 @@ Forum = get_model('forum', 'Forum')
 NAMES = [faker.name() for i in range(10)]
 
 
-class ForumFactory(factory.DjangoModelFactory):
+class ForumFactory(factory.django.DjangoModelFactory):
     name = factory.LazyAttribute(lambda obj: factory.fuzzy.FuzzyChoice(NAMES).fuzz())
     slug = factory.LazyAttribute(lambda t: slugify(t.name))
 
