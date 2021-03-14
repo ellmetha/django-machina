@@ -121,5 +121,3 @@ class AbstractTopicPollVote(models.Model):
             raise ValidationError(_('A user id or an anonymous key must be used.'))
         if self.voter and self.anonymous_key:
             raise ValidationError(_('A user id or an anonymous key must be used, but not both.'))
-
-        return self.cleaned_data

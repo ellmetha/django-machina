@@ -144,8 +144,6 @@ class AbstractForum(MPTTModel, DatedModel):
         if self.is_link and not self.link:
             raise ValidationError(_('A link forum must have a link associated with it'))
 
-        return self.cleaned_data
-
     def get_image_upload_to(self, filename):
         """ Returns the path to upload a new associated image to. """
         dummy, ext = os.path.splitext(filename)

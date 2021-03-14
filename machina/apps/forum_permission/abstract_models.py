@@ -109,7 +109,6 @@ class AbstractUserForumPermission(BaseAuthForumPermission):
                 ),
             )
 
-        return self.cleaned_data
 
 class AbstractGroupForumPermission(BaseAuthForumPermission):
     """ Represents a per-group forum object permission. """
