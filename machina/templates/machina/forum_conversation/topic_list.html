@@ -29,7 +29,7 @@
                 <a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}" class="topic-name-link">{{ topic.subject }}</a>{% if topic.is_locked %}&nbsp;<i class="fas fa-times-circle locked-indicator" title="{% trans 'This topic is locked' %}"></i>{% endif %}
                 <div>
                   <div class="topic-created">
-                  {% include "partials/posted_by.html" with poster=topic.poster creation_date=topic.created username=topic.first_post.username %}
+                  {% include "partials/posted_by.html" with item=topic is_topic=True show_creation_date=True %}
                   </div>
                 </div>
               </td>
@@ -40,7 +40,7 @@
         <div class="py-2 col-md-1 d-none d-md-block text-center topic-count">{{ topic.views_count }}</div>
         <div class="py-2 col-md-2 col-sm-3 d-none d-sm-block topic-last-post">
         {% with last_post=topic.last_post %}
-          {% include "partials/posted_by.html" with poster=last_post.poster username=last_post.username %}
+          {% include "partials/posted_by.html" with item=last_post %}
           &nbsp;<a href="{% url 'forum_conversation:topic' topic.forum.slug topic.forum.pk topic.slug topic.pk %}?post={{ last_post.pk }}#{{ last_post.pk }}"><i class="fas fa-arrow-circle-right "></i></a>
           <br />
           <small>{{ last_post.created }}</small>

@@ -72,7 +72,7 @@
       <div class="py-2 col-md-1 d-none d-md-block text-center forum-count">{{ node.posts_count }}</div>
       <div class="py-2 col-md-2 col-sm-3 d-none d-sm-block forum-last-post">
         {% if node.last_post %}
-        {% include "partials/posted_by.html" with poster=node.last_post.poster username=node.last_post.username %}
+        {% include "partials/posted_by.html" with item=node.last_post %}
         &nbsp;<a href="{% url 'forum_conversation:topic' node.obj.slug node.obj.pk node.last_post.topic.slug node.last_post.topic.pk %}?post={{ node.last_post.pk }}#{{ node.last_post.pk }}"><i class="fas fa-arrow-circle-right "></i></a>
         <br />
         <small>{{ node.last_post.created }}</small>
@@ -136,7 +136,7 @@
       <div class="py-2 col-md-1 d-none d-md-block text-center forum-count">{{ node.posts_count }}</div>
       <div class="py-2 col-md-2 col-sm-3 d-none d-sm-block forum-last-post">
         {% if node.last_post %}
-        {% include "partials/posted_by.html" with poster=node.last_post.poster username=node.last_post.username %}
+        {% include "partials/posted_by.html" with item=node.last_post %}
         &nbsp;<a href="{% url 'forum_conversation:topic' node.obj.slug node.obj.pk node.last_post.topic.slug node.last_post.topic.pk %}?post={{ node.last_post.pk }}#{{ node.last_post.pk }}"><i class="fas fa-arrow-circle-right "></i></a>
         <br />
         <small>{{ node.last_post.created }}</small>

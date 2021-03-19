@@ -46,7 +46,7 @@
             <p><small class="text-muted">
             {% spaceless %}
               <i class="fa fa-clock-o"></i>&nbsp;
-              {% include "partials/posted_by.html" with poster=post.poster creation_date=post.created username=post.username %}
+              {% include "partials/posted_by.html" with item=post show_creation_date=True%}
             {% endspaceless %}
             </small></p>
             <div class="post-content">
@@ -56,7 +56,7 @@
           </div>
           <div class="col-md-2 post-sidebar">
             <div class="username">
-              {% include "partials/posted_by.html" with poster=post.poster username=post.username username_highlighted=True no_trans=True %}
+              {% include "partials/posted_by.html" with item=post highlight_username=True show_by_prefix=True %}
             </div>
           </div>
         </div>

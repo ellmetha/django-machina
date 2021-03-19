@@ -46,7 +46,7 @@
                 <small class="text-muted">
                 {% spaceless %}
                 <i class="fas fa-clock"></i>&nbsp;
-                {% include "partials/posted_by.html" with poster=post.poster creation_date=post.created %}
+                {% include "partials/posted_by.html" with item=post show_creation_date=True %}
                 {% endspaceless %}
                 </small>
               </p>
@@ -60,7 +60,7 @@
                 {% include "partials/avatar.html" with profile=post.poster placeholder=False %}
               </a>
             </div>
-            <div class="username">{% include "partials/posted_by.html" with poster=post.poster username_highlighted=True no_trans=True %}</div>
+            <div class="username">{% include "partials/posted_by.html" with item=post highlight_username=True show_by_prefix=True %}</div>
             <div class="posts-count text-muted"><b>{% trans "Posts:" %}</b>&nbsp;{{ post.poster.forum_profile.posts_count }}</div>
           </div>
         </div>
