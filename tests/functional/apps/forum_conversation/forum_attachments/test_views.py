@@ -1,8 +1,6 @@
 import os
 
 import pytest
-from django.conf import settings
-from django.core.files import File
 from django.urls import reverse
 from faker import Faker
 
@@ -41,10 +39,7 @@ class TestAttachmentView(BaseClientTestCase):
         self.post = PostFactory.create(topic=self.topic, poster=self.user)
 
         # Set up an attachment
-        f = open(settings.MEDIA_ROOT + '/attachment.jpg', 'rb')
-        self.attachment_file = File(f)
-        self.attachment = AttachmentFactory.create(
-            post=self.post, file=self.attachment_file)
+        self.attachment = AttachmentFactory.create(post=self.post)
 
         # Mark the forum as read
         ForumReadTrackFactory.create(forum=self.top_level_forum, user=self.user)
@@ -58,7 +53,6 @@ class TestAttachmentView(BaseClientTestCase):
         # teardown
         # --
 
-        self.attachment_file.close()
         attachments = Attachment.objects.all()
         for attachment in attachments:
             try:
@@ -91,20 +85,17 @@ class TestAttachmentView(BaseClientTestCase):
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
-        assert response['Content-Type'] == 'image/jpeg'
+        assert response['Content-Type'] == 'text/plain'
         assert response['Content-Disposition'] == 'attachment; filename={}'.format(filename)
 
     def test_is_able_to_handle_unknown_file_content_types(self):
         # Setup
-        f = open(settings.MEDIA_ROOT + '/attachment.kyz', 'rb')
-        attachment_file = File(f)
         attachment = AttachmentFactory.create(
-            post=self.post, file=attachment_file)
+            post=self.post, file__data='data')
         correct_url = reverse('forum_conversation:attachment', kwargs={'pk': attachment.id})
         # Run
         response = self.client.get(correct_url, follow=True)
         # Check
         assert response.status_code == 200
         assert response['Content-Type'] == 'text/plain'
-        attachment_file.close()
         attachment.file.delete()
