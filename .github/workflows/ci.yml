@@ -40,7 +40,8 @@ jobs:
         django-version: [
           "django>=2.2,<3.0",
           "django>=3.0,<3.1",
-          "django>=3.1,<3.2"
+          "django>=3.1,<3.2",
+          "django>=3.2,<4.0"
         ]
         db: [
           'mysql',
@@ -52,6 +53,8 @@ jobs:
             django-version: "django>=3.0,<3.1"
           - python-version: 3.5
             django-version: "django>=3.1,<3.2"
+          - python-version: 3.5
+            django-version: "django>=3.2,<4.0"
 
     steps:
     - uses: actions/checkout@v2
