@@ -9,7 +9,7 @@
     "bootstrap": ">=4.5.2",
     "easymde": "^2.8.0",
     "jquery": ">=3.5.0",
-    "lodash": ">=4.17.19",
+    "lodash": ">=4.17.21",
     "lodash.template": ">=4.5.0",
     "popper.js": "^1.14.4"
   },
