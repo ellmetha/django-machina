@@ -86,13 +86,13 @@ msgid "Forums"
 msgstr "Forums"
 
 msgid "A forum can not have a link forum as parent"
-msgstr " Un forum ne peut pas avoir un lien comme parent"
+msgstr "Un forum ne peut pas avoir un lien comme parent"
 
 msgid "A category can not have another category as parent"
-msgstr " Une catégorie ne peut pas avoir une autre catégorie comme parent"
+msgstr "Une catégorie ne peut pas avoir une autre catégorie comme parent"
 
 msgid "A link forum must have a link associated with it"
-msgstr " Un forum lien doit être associé à une URL"
+msgstr "Un forum lien doit être associé à une URL"
 
 msgid "Forum settings"
 msgstr "Paramètres du forum"
@@ -110,7 +110,7 @@ msgid "Global forum permissions"
 msgstr "Permissions globales du forum"
 
 msgid "Permissions successfully copied"
-msgstr " Permissions copiées avec succès"
+msgstr "Permissions copiées avec succès"
 
 msgid "Choose either a user ID, the anonymous user or the authenticated user"
 msgstr "Choisir un ID d'utilisateur, un utilisateur anonyme ou un utilisateur authentifié"
@@ -524,7 +524,7 @@ msgid "Can post announcements"
 msgstr "Peut poster des annonces"
 
 msgid "Can post stickies"
-msgstr "Peut poster des stickies"
+msgstr "Peut poster des thèmes épinglé"
 
 msgid "Can delete own posts"
 msgstr "Peut supprimer ses propres messages"
@@ -554,7 +554,7 @@ msgid "Can move topics"
 msgstr "Peut déplacer des thèmes"
 
 msgid "Can edit posts"
-msgstr "Peut éditer des posts"
+msgstr "Peut éditer des messages"
 
 msgid "Can delete posts"
 msgstr "Peut supprimer des messages"
@@ -569,10 +569,10 @@ msgid "Machina: Forum searches"
 msgstr "Machina : recherches dans le forum"
 
 msgid "Search only in topic subjects"
-msgstr "Rechercher seulement dans les thèmes des thèmes"
+msgstr "Rechercher seulement dans les sujets des thèmes"
 
 msgid "Search for poster"
-msgstr "Rechercher un auteur de post"
+msgstr "Rechercher un auteur de message"
 
 msgid "Enter a user name to limit the search to a specific user."
 msgstr "Entrer un nom d'utilisateur pour limiter les recherches à un utilisateur spécifique."
@@ -590,7 +590,7 @@ msgid "Keywords or phrase"
 msgstr "Mots clés ou phrase"
 
 msgid "Poster name"
-msgstr "Nom d'auteur de post"
+msgstr "Nom d'auteur du message"
 
 msgid "Forum track"
 msgstr "Traces du forum"
@@ -608,7 +608,7 @@ msgid "Machina: Forum tracking"
 msgstr "Machina : traces des forums"
 
 msgid "Forums have been marked read."
-msgstr "Les forums ont été marqués comme prêts."
+msgstr "Les forums ont été marqués comme lus."
 
 msgid "Topics have been marked read."
 msgstr "Les thèmes ont été marqués comme lus."
@@ -672,7 +672,7 @@ msgid "Topics:"
 msgstr "Thèmes :"
 
 msgid "Posts:"
-msgstr "Posts :"
+msgstr "Messages :"
 
 msgid "Link:"
 msgstr "Liens :"
@@ -728,7 +728,7 @@ msgid "Advanced search"
 msgstr "Recherche avancée"
 
 msgid "Subscriptions"
-msgstr "Souscriptions"
+msgstr "Abonnements"
 
 msgid "View my posts"
 msgstr "Voir mes posts"
@@ -756,14 +756,14 @@ msgstr "Flux RSS"
 
 #, python-format
 msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
-msgstr "By: <a href=\"%(poster_url)s\">%(username)s</a>"
+msgstr "Par: <a href=\"%(poster_url)s\">%(username)s</a>"
 
 #, python-format
 msgid "By: %(poster_username)s"
-msgstr "By: %(poster_username)s"
+msgstr "Par : %(poster_username)s"
 
 msgid "No posts"
-msgstr "Aucun post"
+msgstr "Aucun message"
 
 msgid "Total redirects:"
 msgstr "Nombre total de redirections :"
@@ -787,7 +787,7 @@ msgid "Statistics"
 msgstr "Statistiques"
 
 msgid "Total posts:"
-msgstr "Nombre total de posts :"
+msgstr "Nombre total de messages :"
 
 msgid "Total topics:"
 msgstr "Nombre total de thèmes :"
@@ -799,11 +799,11 @@ msgid "Add another file"
 msgstr "Ajouter un nouveau fichier"
 
 msgid "You may select <b>1</b> option"
-msgstr "Vous pourriez sectionner l'option <b>1</b>"
+msgstr "Vous pourriez sélectionner l'option <b>1</b>"
 
 #, python-format
 msgid "You may select up to <b>%(max_options)s</b> options"
-msgstr "Vous pourriez selectionner jusqu'à <b>%(max_options)s</b> options"
+msgstr "Vous pourriez sélectionner jusqu'à <b>%(max_options)s</b> options"
 
 msgid "Vote"
 msgstr "Voter"
@@ -882,10 +882,10 @@ msgid "By: %(poster_username)s on %(creation_date)s"
 msgstr "Par : %(poster_username)s le %(creation_date)s"
 
 msgid "Delete post"
-msgstr "Supprimer le post"
+msgstr "Supprimer le message"
 
 msgid "Are you sure you want to delete this post?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce post ?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce message ?"
 
 msgid "Yes, I'm sure"
 msgstr "Oui, je suis sûr"
@@ -894,7 +894,7 @@ msgid "No, take me back"
 msgstr "Non, ramène moi"
 
 msgid "Edit post"
-msgstr "Éditer le post"
+msgstr "Éditer le message"
 
 msgid "Post a new topic"
 msgstr "Poster un nouveau thème"
@@ -966,7 +966,7 @@ msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Thèmes</small></p>"
 msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>thèmes</small></p>"
 
 msgid "Recent posts"
-msgstr "Posts récents"
+msgstr "Messages récents"
 
 msgid "View all"
 msgstr "Voir tout"
@@ -979,7 +979,7 @@ msgid "Edit forum profile"
 msgstr "Modifier le profile"
 
 msgid "Topics that you are subscribed to"
-msgstr "Thèmes auxquels vous avez souscrits"
+msgstr "Thèmes auxquels vous êtes abonnés"
 
 #, python-format
 msgid "%(counter)s topic found"
@@ -991,16 +991,16 @@ msgid "Not topics found."
 msgstr "Aucun thème trouvé."
 
 msgid "Subscribe to topic"
-msgstr "Souscrire au thème"
+msgstr "S'abonner au thème"
 
 msgid "Would you like to subscribe to this topic?"
-msgstr "Voudriez-vous sourscrire à ce thème ?"
+msgstr "Voudriez-vous vous abonné à ce thème ?"
 
 msgid "Unsubscribe from topic"
-msgstr "Supprimer la souscription au thème."
+msgstr "Se désabonner de ce thème."
 
 msgid "Would you like to unsubscribe from this topic?"
-msgstr "Voudriez-vous supprimer la souscription à ce thème ?"
+msgstr "Voudriez-vous vous désabonner de ce thème ?"
 
 msgid "My messages"
 msgstr "Mes messages"
@@ -1012,11 +1012,11 @@ msgstr "%(username)s's posts "
 #, python-format
 msgid "%(counter)s post found"
 msgid_plural "%(counter)s posts found"
-msgstr[0] "%(counter)s post trouvé"
-msgstr[1] "%(counter)s posts trouvés"
+msgstr[0] "%(counter)s message trouvé"
+msgstr[1] "%(counter)s messages trouvés"
 
 msgid "No posts found"
-msgstr "Aucun post trouvé"
+msgstr "Aucun message trouvé"
 
 msgid "Disapprove"
 msgstr "Désapprouver"
@@ -1039,20 +1039,20 @@ msgid "%(topic_length)s posts found"
 msgstr "%(topic_length)s posts trouvés"
 
 msgid "No posts awaiting approval."
-msgstr "Aucun post en attente d'approbation"
+msgstr "Aucun message en attente d'approbation"
 
 msgid "Approve post"
-msgstr "Approuver le post"
+msgstr "Approuver le message"
 
 msgid "Are you sure you want to approve this post?"
-msgstr "Êtes-vous sûr de vouloir approuver ce post ?"
+msgstr "Êtes-vous sûr de vouloir approuver ce message ?"
 
 msgid "Disapprove post"
-msgstr "Désapprouver ce post"
+msgstr "Désapprouver ce message"
 
 msgid ""
 "Are you sure you want to disapprove this post? This post will be deleted."
-msgstr "Êtes-vous sûr de vouloir désapprouver ce post ? Celui-ci sera donc supprimé."
+msgstr "Êtes-vous sûr de vouloir désapprouver ce message ? Celui-ci sera donc supprimé."
 
 msgid "Are you sure you want to delete this topic?"
 msgstr "Êtes-vous sûr de vouloir supprimer ce thème ?"
@@ -1061,7 +1061,7 @@ msgid "Are you sure you want to lock this topic?"
 msgstr "Êtes-vous sûr de vouloir verrouiller ce thème ?"
 
 msgid "Are you sure you want to unlock this topic?"
-msgstr "Êtes-vous certain de vouloir déverouiller ce thème ?"
+msgstr "Êtes-vous certain de vouloir déverrouiller ce thème ?"
 
 msgid "Change topic type"
 msgstr "Changer le type du thème"
