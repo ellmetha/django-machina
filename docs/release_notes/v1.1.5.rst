@@ -10,5 +10,5 @@ Python 3.5, 3.6, 3.7, 3.8 and 3.9. Django 2.2, 3.0, 3.1 and 3.2
 Minor changes
 -------------
 
-* Fix a possible `AttributeError` occuring when trying to create topics with poll options but
+* Fix a possible ``AttributeError`` occuring when trying to create topics with poll options but
   without a poll question
