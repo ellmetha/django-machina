@@ -492,11 +492,17 @@ class BaseTopicFormView(BasePostFormView):
 
     def form_valid(self, post_form, attachment_formset, poll_option_formset, **kwargs):
         """ Processes valid forms. """
-        save_poll_option_formset = poll_option_formset is not None \
-            and not self.preview
+        save_poll_option_formset = (
+            poll_option_formset is not None and
+            not self.preview and
+            kwargs['poll_options_validated']
+        )
 
         valid = super().form_valid(
-            post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
+            post_form,
+            attachment_formset,
+            poll_option_formset=poll_option_formset, **kwargs
+        )
 
         if save_poll_option_formset:
             poll_option_formset.topic = self.forum_post.topic
