@@ -59,12 +59,6 @@ list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/stable/getting_started.html#requirements
 
-Demo site
-=========
-
-A demo site can be tested at https://demo.machina-forum.io. It contains a standard installation
-of django-machina without any customizations.
-
 Authors
 =======
 
