@@ -12,6 +12,7 @@ Django-machina 1.1
 .. toctree::
     :maxdepth: 1
 
+    v1.1.6
     v1.1.5
     v1.1.4
     v1.1.3
