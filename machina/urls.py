@@ -6,7 +6,7 @@
 
 """
 
-from django.conf.urls import include, re_path
+from django.urls import include, re_path
 
 from machina.core.loading import get_class
 from machina.core.urls import URLPatternsFactory
