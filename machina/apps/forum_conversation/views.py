@@ -498,7 +498,7 @@ class BaseTopicFormView(BasePostFormView):
         valid = super().form_valid(
             post_form, attachment_formset, poll_option_formset=poll_option_formset, **kwargs)
 
-        if save_poll_option_formset and poll_option_formset.is_valid():
+        if save_poll_option_formset:
             poll_option_formset.topic = self.forum_post.topic
             poll_option_formset.save(
                 poll_question=post_form.cleaned_data.pop('poll_question', None),
