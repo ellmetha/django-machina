@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <ul class="m-0 pagination {{ pagination_size|default:"" }}">
-  <li class="page-item {% if not page.has_previous %}disabled{% endif %}">
+  <li class="page-item{% if not page.has_previous %} disabled{% endif %}">
     <a href="{% if page.has_previous %}?q={{ query }}&amp;page={{ page.previous_page_number }}{% endif %}" class="page-link">&laquo;</a>
   </li>
   {% for number in paginator.page_range %}
@@ -21,11 +21,11 @@
   {% elif page.number > paginator.num_pages|add:"-2" and number >= paginator.num_pages|add:"-4" %}
   <li class="page-item{% if page.number == number %} active{% endif %}"><a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
   {% elif number >= page.previous_page_number|add:"-1" and number <= page.next_page_number|add:"1" %}
-  <li class="page-item{% if page.number == number %} active{% endif %}"<a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
+  <li class="page-item{% if page.number == number %} active{% endif %}"><a href="?q={{ query }}&amp;page={{ number }}" class="page-link">{{ number }}</a></li>
   {% endif %}
   {% endif %}
   {% endfor %}
-  <li class="page-item {% if not page.has_next %}disabled{% endif %}">
+  <li class="page-item{% if not page.has_next %} disabled{% endif %}">
     <a href="{% if page.has_next %}?q={{ query }}&amp;page={{ page.next_page_number }}{% endif %}" class="page-link">&raquo;</a>
   </li>
 </ul>
