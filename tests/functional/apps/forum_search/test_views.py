@@ -155,4 +155,4 @@ class TestFacetedSearchView(BaseClientTestCase):
                 f'<li class="page-item"><a href="?q={expected_string:s}&amp;page={page}" '
                 f'class="page-link">{page}</a></li>'
             ) in content
-        assert f'page=4' not in content
+        assert 'page=4' not in content
