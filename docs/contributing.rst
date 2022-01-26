@@ -90,5 +90,5 @@ Security
 ========
 
 If you've found a security issue please **do not open a Github issue**. Instead, send an email at
-``security@machina-forum.io``. We'll then investigate together to resolve the problem so we can make
+``security@ellmetha.dev``. We'll then investigate together to resolve the problem so we can make
 an announcement about a solution along with the vulnerability.

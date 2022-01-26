@@ -449,6 +449,32 @@ class TestTopicCreateView(BaseClientTestCase):
         assert len(messages_2) >= 1
         assert all(m.level == MSG.ERROR for m in messages_2)
 
+    def test_does_not_create_polls_when_questions_are_not_specified(self):
+        assign_perm('can_create_polls', self.user, self.top_level_forum)
+        correct_url = reverse('forum_conversation:topic_create', kwargs={
+            'forum_slug': self.top_level_forum.slug, 'forum_pk': self.top_level_forum.pk})
+        post_data = {
+            'subject': faker.text(max_nb_chars=200),
+            'content': '[b]{}[/b]'.format(faker.text()),
+            'topic_type': Topic.TOPIC_POST,
+            'poll_question': '',
+            'poll_max_options': 1,
+            'poll_duration': 0,
+            'poll-0-id': '',
+            'poll-0-text': faker.text(max_nb_chars=100),
+            'poll-1-id': '',
+            'poll-1-text': faker.text(max_nb_chars=100),
+            'poll-INITIAL_FORMS': 0,
+            'poll-TOTAL_FORMS': 2,
+            'poll-MAX_NUM_FORMS': 1000,
+        }
+
+        response = self.client.post(correct_url, post_data, follow=True)
+
+        topic = Topic.objects.get(pk=response.context_data['topic'].pk)
+        with pytest.raises(Topic.poll.RelatedObjectDoesNotExist):
+            topic.poll
+
     def test_embed_an_attachment_formset_in_the_context_if_the_user_can_create_attachments(self):
         # Setup
         assign_perm('can_attach_file', self.user, self.top_level_forum)

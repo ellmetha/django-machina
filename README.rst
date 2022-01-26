@@ -54,16 +54,10 @@ it to suit your needs.
 Requirements
 ============
 
-Python 3.5+, Django 2.2+. Please refer to the requirements_ section of the documentation for a full
+Python 3.6+, Django 2.2+. Please refer to the requirements_ section of the documentation for a full
 list of dependencies.
 
 .. _requirements: https://django-machina.readthedocs.org/en/stable/getting_started.html#requirements
-
-Demo site
-=========
-
-A demo site can be tested at https://demo.machina-forum.io. It contains a standard installation
-of django-machina without any customizations.
 
 Authors
 =======

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-machina"
-version = "1.1.5.dev0"
+version = "1.1.7.dev0"
 description = "A Django forum engine for building powerful community driven websites."
 authors = ["Morgan Aubert <me@morganaubert.name>"]
 license = "BSD-3-Clause"
@@ -17,11 +17,11 @@ classifiers = [
     'Natural Language :: English',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards',
 ]
 packages = [
@@ -39,7 +39,7 @@ include = [
 exclude = ["tests"]
 
 [tool.poetry.dependencies]
-python = "^3.5"
+python = "^3.6"
 
 django = "^2.2 || >=3.0"
 django-haystack = ">=2.1"
@@ -57,7 +57,7 @@ flake8 = "*"
 ipython = "*"
 isort = "*"
 mock = "*"
-pytest = "*"
+pytest = ">=6.2.5"
 pytest-cov = "*"
 pytest-django = "*"
 pytest-pythonpath = "*"

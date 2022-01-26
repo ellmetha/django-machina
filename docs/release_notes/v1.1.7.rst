@@ -1,0 +1,13 @@
+######################################################
+Django-machina 1.1.6 release notes (UNDER DEVELOPMENT)
+######################################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.6, 3.7, 3.8, 3.9 and 3.10. Django 2.2, 3.0, 3.1 and 3.2
+
+Minor changes
+-------------
+
+* Fix missing angle bracket in search result pagination links (`#260 <https://github.com/ellmetha/django-machina/pull/260>`_)
