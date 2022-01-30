@@ -11,3 +11,4 @@ Minor changes
 -------------
 
 * Fix missing angle bracket in search result pagination links (`#260 <https://github.com/ellmetha/django-machina/pull/260>`_)
+* Fix possible unique violation error with PostgreSQL when loading data (`#262 <https://github.com/ellmetha/django-machina/pull/262>`_)
