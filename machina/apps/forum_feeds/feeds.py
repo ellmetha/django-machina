@@ -53,7 +53,7 @@ class LastTopicsFeed(Feed):
 
     def items(self):
         """ Returns the items to include into the feed. """
-        return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-last_post_on')
+        return Topic.objects.filter(forum__in=self.forums).exclude(approved=False).order_by('-last_post_on')
 
     def item_link(self, item):
         """ Generates a link for a specific item of the feed. """

@@ -112,7 +112,7 @@ class TestTopic(object):
     def test_saves_only_its_number_of_approved_posts(self):
         # Run & check
         post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
-        initial_count = self.topic.posts.filter(approved=True).count()
+        initial_count = self.topic.posts.exclude(approved=False).count()
         assert initial_count == self.topic.posts_count
         post.delete()
         assert initial_count == self.topic.posts_count

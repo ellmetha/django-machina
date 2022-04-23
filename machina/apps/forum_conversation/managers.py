@@ -7,11 +7,12 @@
 """
 
 from django.db import models
+from machina.conf import settings as machina_settings
 
 
 class ApprovedManager(models.Manager):
     def get_queryset(self):
         """ Returns all the approved topics or posts. """
         qs = super().get_queryset()
-        qs = qs.filter(approved=True)
+        qs = qs.filter(approved=machina_settings.DEFAULT_APPROVAL_STATUS)
         return qs

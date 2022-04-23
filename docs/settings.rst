@@ -290,6 +290,19 @@ Default: ``15``
 
 The number of posts displayed inside one page of a forum member's posts list.
 
+``MACHINA_DEFAULT_APPROVAL_STATUS``
+-----------------------------------------
+
+Default: ``True``
+
+The default status of `approved` field of `Post`. If set to `True` (the default), the posts will be public
+by default until it is set to `False` during moderation. `Post.delete()` will remove posts regardless of
+their approval status. If set to `None`, the topics and posts will have three status `True` (approved),
+`False` (disapproved), and `None` (pending) and deletion of posts becomes soft. More specifically, deletion
+of a post with `approved is not False` will first set its status to `False`. The disapproved posts will only
+be viewable by their posters, before they are revised or perminantly deleted.
+
+
 Permission
 **********
 

@@ -92,7 +92,7 @@ class ForumProfileDetailView(DetailView):
 
         # Computes the number of topics added by the considered member
         context['topics_count'] = (
-            Topic.objects.filter(approved=True, poster=self.object.user).count()
+            Topic.objects.filter(poster=self.object.user).exclude(approved=False).count()
         )
 
         # Fetches the recent posts added by the considered user

@@ -372,7 +372,7 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
             # Add the topic review
             previous_posts = (
                 topic.posts
-                .filter(approved=True, created__lte=post.created)
+                .filter(approved=None, created__lte=post.created)
                 .select_related('poster', 'updated_by')
                 .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')

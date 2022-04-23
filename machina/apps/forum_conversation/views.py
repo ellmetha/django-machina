@@ -8,6 +8,7 @@
 
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -80,11 +81,16 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         """ Returns the list of items for this view. """
+        if machina_settings.DEFAULT_APPROVAL_STATUS is None and self.request.user.is_authenticated:
+            cond = Q(approved=False) & ~Q(poster=self.request.user)
+        else:
+            cond = Q(approved=False)
+
         self.topic = self.get_topic()
         qs = (
             self.topic.posts
             .all()
-            .exclude(approved=False)
+            .exclude(cond)
             .select_related('poster', 'updated_by')
             .prefetch_related('attachments', 'poster__forum_profile')
         )
