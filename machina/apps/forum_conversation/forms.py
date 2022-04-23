@@ -32,12 +32,13 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['subject', 'content', 'username', 'update_reason', 'enable_signature', ]
+        fields = ['subject', 'content', 'username', 'update_reason', 'enable_signature', 'parent']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         self.forum = kwargs.pop('forum', None)
         self.topic = kwargs.pop('topic', None)
+        self.parent = kwargs.pop('parent', None)
 
         self.perm_handler = PermissionHandler()
 
@@ -47,6 +48,7 @@ class PostForm(forms.ModelForm):
         self.fields['subject'].widget.attrs['placeholder'] = _('Enter your subject')
         self.fields['content'].label = _('Message')
         self.fields['content'].widget.attrs['placeholder'] = _('Enter your message')
+        self.fields['parent'].initial = self.parent
 
         # Handles anonymous users
         if self.user and self.user.is_anonymous:
@@ -99,6 +101,7 @@ class PostForm(forms.ModelForm):
                 subject=self.cleaned_data['subject'],
                 approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
                 content=self.cleaned_data['content'],
+                parent=self.cleaned_data['parent'],
                 enable_signature=self.cleaned_data['enable_signature'])
             if not self.user.is_anonymous:
                 post.poster = self.user

@@ -12,6 +12,7 @@
 {% if post_form.username %}
     {% include "partials/form_field.html" with field=post_form.username %}
 {% endif %}
+{{ post_form.parent.as_hidden }}
 {% if post_form.update_reason %}
     {% include "partials/form_field.html" with field=post_form.update_reason %}
 {% endif %}

@@ -229,7 +229,9 @@ class AbstractPost(DatedModel):
     anonymous_key = models.CharField(
         max_length=100, blank=True, null=True, verbose_name=_('Anonymous user forum key'),
     )
-
+    parent = models.ForeignKey(
+        'self', related_name='children', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Reply to post',
+    )
     # Each post can have its own subject. The subject of the thread corresponds to the
     # one associated with the first post
     subject = models.CharField(verbose_name=_('Subject'), max_length=255)

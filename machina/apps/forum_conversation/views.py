@@ -212,6 +212,7 @@ class BasePostFormView(FormView):
             'user': self.request.user,
             'forum': self.get_forum(),
             'topic': self.get_topic(),
+            'parent': self.get_parent_post(),
         }
 
         post = self.get_post()
@@ -310,6 +311,15 @@ class BasePostFormView(FormView):
         if not hasattr(self, '_topic'):
             self._topic = get_object_or_404(Topic, pk=pk)
         return self._topic
+
+    def get_parent_post(self):
+        if 'parent' in self.request.GET:
+            try:
+                return Post.objects.get(
+                    pk=self.request.GET['parent'])
+            except Post.DoesNotExist:
+                return None
+        return None
 
     def get_post(self):
         """ Returns the considered post if applicable. """
