@@ -7,11 +7,11 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.core.files import File
 from django.utils.encoding import force_str
-from tests.models import RESIZED_IMAGE_HEIGHT, RESIZED_IMAGE_WIDTH, DummyModel
 
 from machina.conf import settings as machina_settings
 from machina.core.compat import PILImage as Image
 from machina.models import fields
+from tests.models import RESIZED_IMAGE_HEIGHT, RESIZED_IMAGE_WIDTH, DummyModel
 
 
 @pytest.mark.django_db

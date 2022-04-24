@@ -83,7 +83,6 @@ class TestFacetedSearchView(BaseClientTestCase):
         self.sqs = SearchQuerySet()
 
         management.call_command('clear_index', verbosity=0, interactive=False)
-        management.call_command('update_index', verbosity=0)
 
         yield
 
@@ -98,6 +97,7 @@ class TestFacetedSearchView(BaseClientTestCase):
 
     def test_can_search_forum_posts(self):
         # Setup
+        management.call_command('update_index', verbosity=0)
         correct_url = reverse('forum_search:search')
         get_data = {'q': self.topic_1.subject}
         # Run
@@ -106,3 +106,53 @@ class TestFacetedSearchView(BaseClientTestCase):
         assert response.status_code == 200
         assert len(response.context['page'].object_list) == 1
         assert response.context['page'].object_list[0].object == self.post_1
+
+    def test_can_search_with_pagination(self):
+        """
+        Check that pagination has well formed links
+        """
+        # Setup
+        # Index 40 more posts in Elasticsearch (101 in total)
+        PostFactory.create_batch(
+            40,
+            topic=self.topic_1,
+            poster=self.user,
+            content=self.post_1.content
+        )
+
+        management.call_command('rebuild_index', interactive=False)
+
+        correct_url = reverse('forum_search:search')
+        expected_string = str(self.post_1.content)
+        get_data = {'q': expected_string}
+
+        # Run
+        response = self.client.get(correct_url, data=get_data)
+
+        # Check
+        content = response.content.decode()
+        assert response.status_code == 200
+        assert 'Your search has returned <b>41</b> results' in content
+        # The post content is truncated in results
+        assert content.count(f'{expected_string[:200]:s}...') == 20
+
+        # 20 results per page and 2 panels of pagination (top and bottom)
+        # check all li tags are well closed
+        assert content.count(expected_string) == (3 + 1) * 2
+        assert content.count('<li class="page-item">') == 3 * 2
+        assert content.count('<li class="page-item active">') == 1 * 2
+        assert content.count('<li class="page-item disabled">') == 1 * 2
+
+        # check all links are well formed
+        assert (
+            '<li class="page-item active">'
+            f'<a href="?q={expected_string:s}&amp;page=1" class="page-link">1</a>'
+            '</li>'
+        ) in content
+        for page in range(2, 3):
+            assert f'?q={expected_string:s}&amp;page={page}' in content
+            assert (
+                f'<li class="page-item"><a href="?q={expected_string:s}&amp;page={page}" '
+                f'class="page-link">{page}</a></li>'
+            ) in content
+        assert 'page=4' not in content

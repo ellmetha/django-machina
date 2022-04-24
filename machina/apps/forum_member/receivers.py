@@ -29,6 +29,10 @@ def increase_posts_count(sender, instance, **kwargs):
     forum post being created or updated.
     """
 
+    if kwargs.get('raw'):
+        # do nothing, when loading data (fixtures)
+        return
+
     if instance.poster is None:
         # An anonymous post is considered. No profile can be updated in
         # that case.
@@ -61,6 +65,11 @@ def decrease_posts_count_after_post_unaproval(sender, instance, **kwargs):
     This receiver handles the unaproval of a forum post: the posts count associated with the post's
     author is decreased.
     """
+
+    if kwargs.get('raw'):
+        # do nothing, when loading data (fixtures)
+        return
+
     if not instance.pk or not instance.poster:
         # Do not consider posts being created or posts of anonymous users
         return
