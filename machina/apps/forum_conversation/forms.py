@@ -100,13 +100,16 @@ class PostForm(forms.ModelForm):
             post.anonymous_key = get_anonymous_user_forum_key(self.user)
         return post
 
+    def update_post(self, post):
+        post.updated_by = self.user
+        post.updates_count = F('updates_count') + 1
+
     def save(self, commit=True):
         """ Saves the instance. """
         if self.instance.pk:
             # First handle updates
             post = super().save(commit=False)
-            post.updated_by = self.user
-            post.updates_count = F('updates_count') + 1
+            self.update_post(post)
         else:
             post = self.create_post()
 
@@ -214,6 +217,12 @@ class TopicForm(PostForm):
             topic.poster = self.user
         return topic
 
+    def update_topic(self, topic):
+        if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
+            if topic.type != self.cleaned_data['topic_type']:
+                topic.type = self.cleaned_data['topic_type']
+                topic._simple_save()
+
     def save(self, commit=True):
         """ Saves the instance. """
         if not self.instance.pk:
@@ -222,9 +231,6 @@ class TopicForm(PostForm):
             if commit:
                 self.topic.save()
         else:
-            if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
-                if self.instance.topic.type != self.cleaned_data['topic_type']:
-                    self.instance.topic.type = self.cleaned_data['topic_type']
-                    self.instance.topic._simple_save()
+            self.update_topic(self.instance.topic)
 
         return super().save(commit)
