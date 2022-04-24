@@ -29,6 +29,7 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     strategy:
+      fail-fast: false
       matrix:
         python-version: [
           3.6,
@@ -40,13 +41,17 @@ jobs:
         django-version: [
           "django>=3.2,<4.0",
           "django>=4.0,<4.1"
-
         ]
         db: [
           'mysql',
           'postgres',
           'sqlite',
         ]
+        exclude:
+          - python-version: 3.6
+            django-version: "django>=4.0,<4.1"
+          - python-version: 3.7
+            django-version: "django>=4.0,<4.1"
 
     steps:
     - uses: actions/checkout@v2
