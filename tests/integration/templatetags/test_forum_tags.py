@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.http import HttpResponse
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
@@ -40,12 +41,12 @@ class TestForumListTag(object):
         forums = Forum.objects.all()
 
         request = self.request_factory.get('/')
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware(lambda r: HttpResponse("Response"))
         middleware.process_request(request)
         request.session.save()
 
         request.user = self.user
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         t = Template(self.loadstatement + '{% forum_list forums %}')
         c = Context({'forums': ForumVisibilityContentTree.from_forums(forums), 'request': request})
         expected_out = render_to_string(

@@ -6,7 +6,7 @@ import pytest
 from . import settings
 
 
-@pytest.yield_fixture(scope='session', autouse=True)
+@pytest.fixture(scope='session', autouse=True)
 def empty_media():
     """ Removes the directories inside the MEDIA_ROOT that could have been filled during tests. """
     yield

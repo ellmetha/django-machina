@@ -41,7 +41,7 @@ exclude = ["tests"]
 [tool.poetry.dependencies]
 python = "^3.6"
 
-django = "^2.2 || >=3.0"
+django = "^3.2 || >=4.0"
 django-haystack = ">=2.1"
 django-mptt = ">=0.10.0"
 django-widget-tweaks = ">=1.4"

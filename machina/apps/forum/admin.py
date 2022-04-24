@@ -8,7 +8,6 @@
 
 from collections import OrderedDict
 
-from django.conf.urls import re_path
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.auth import get_user_model
@@ -16,7 +15,7 @@ from django.contrib.auth.models import Group
 from django.forms.forms import NON_FIELD_ERRORS
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.urls import re_path, reverse
 from django.utils.translation import gettext_lazy as _
 from mptt.exceptions import InvalidMove
 

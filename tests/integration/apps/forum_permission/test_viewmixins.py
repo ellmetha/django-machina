@@ -2,6 +2,7 @@ import pytest
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
+from django.http import HttpResponse
 from django.test import RequestFactory
 from django.views.generic import DetailView
 
@@ -39,7 +40,7 @@ class TestPermissionRequiredMixin(object):
 
     def get_request(self, url='/'):
         request = self.factory.get('/')
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware(lambda r: HttpResponse("Response"))
         middleware.process_request(request)
         request.session.save()
         return request
@@ -50,7 +51,7 @@ class TestPermissionRequiredMixin(object):
         self.mixin.permission_required = 10
         request = self.get_request()
         request.user = self.user
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         # Run & check
         with pytest.raises(ImproperlyConfigured):
             self.mixin.check_permissions(request)
@@ -61,7 +62,7 @@ class TestPermissionRequiredMixin(object):
         self.mixin.permission_required = 'can_read_forum'
         request = self.get_request()
         request.user = AnonymousUser()
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         # Run
         response = self.mixin.dispatch(request)
         # Check
@@ -73,7 +74,7 @@ class TestPermissionRequiredMixin(object):
         self.mixin.permission_required = ['can_read_forum', ]
         request = self.get_request()
         request.user = self.user
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         # Run & check
         with pytest.raises(PermissionDenied):
             self.mixin.dispatch(request)
@@ -89,7 +90,7 @@ class TestPermissionRequiredMixin(object):
         forum_view = ForumTestView()
         request = self.get_request()
         request.user = self.user
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         # Run
         response = forum_view.dispatch(request, pk=self.forum.pk)
         # Check
@@ -111,7 +112,7 @@ class TestPermissionRequiredMixin(object):
         user_view = UserTestView()
         request = self.get_request()
         request.user = self.user
-        ForumPermissionMiddleware().process_request(request)
+        ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
         # Run
         response = user_view.dispatch(request, pk=self.user.pk)
         # Check

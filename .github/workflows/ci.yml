@@ -38,10 +38,9 @@ jobs:
           '3.10',
         ]
         django-version: [
-          "django>=2.2,<3.0",
-          "django>=3.0,<3.1",
-          "django>=3.1,<3.2",
-          "django>=3.2,<4.0"
+          "django>=3.2,<4.0",
+          "django>=4.0,<4.1"
+
         ]
         db: [
           'mysql',
@@ -65,7 +64,7 @@ jobs:
         pip install -U pip poetry
         poetry install
         poetry run pip install psycopg2 mysqlclient
-        poetry run pip install --pre -U "${{ matrix.django-version }}" "django-haystack>=3.0b1"
+        poetry run pip install --pre -U "${{ matrix.django-version }}" "django-haystack>=3.2.dev0"
     - name: Run QA checks
       run: make qa
     - name: Run tests suite
@@ -73,7 +72,7 @@ jobs:
       env:
         DB: ${{ matrix.db }}
     - name: Upload coverage to Codecov
-      if: matrix.python-version == 3.9 && matrix.django-version == 'django>=3.1,<3.2' && matrix.db == 'sqlite'
+      if: matrix.python-version == 3.9 && matrix.django-version == 'django>=3.2,<4.0' && matrix.db == 'sqlite'
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}

@@ -179,6 +179,8 @@ SILENCED_SYSTEM_CHECKS = ['1_6.W001']
 
 SECRET_KEY = 'key'
 
+USE_TZ = False
+
 try:
     from .settings_local import *  # noqa
 except ImportError:
