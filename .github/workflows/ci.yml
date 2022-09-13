@@ -74,7 +74,7 @@ jobs:
         pip install -U pip poetry
         poetry install
         poetry run pip install psycopg2 mysqlclient
-        poetry run pip install --pre -U "${{ matrix.django-version }}" "django-haystack>=3.2.dev0"
+        poetry run pip install --pre -U "${{ matrix.django-version }}" "git+https://github.com/django-haystack/django-haystack.git"
     - name: Run QA checks
       run: make qa
     - name: Run tests suite
