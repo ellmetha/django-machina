@@ -1,7 +1,7 @@
+import pytest
 from django import forms
 from django.contrib.auth.models import AnonymousUser
 from faker import Faker
-import pytest
 
 from machina.apps.forum_conversation.forms import PostForm, TopicForm
 from machina.conf import settings as machina_settings
