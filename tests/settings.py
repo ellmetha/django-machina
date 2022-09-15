@@ -38,7 +38,7 @@ elif DB_CONFIG == 'postgres':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'machina_test',
             'USER': 'postgres',
-            'PASSWORD': '',
+            'PASSWORD': 'postgres',
             'HOST': 'localhost',
         }
     }
