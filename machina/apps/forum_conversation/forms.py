@@ -176,7 +176,11 @@ class TopicForm(PostForm):
                 help_text=_('If enabled users are able to change their vote.'),
                 initial=False,
             )
-
+            self.fields['poll_hide_results'] = forms.BooleanField(
+                label=_('Hide results?'), required=False,
+                help_text=_('If enabled results are hidden to everyone except topic creator.'),
+                initial=False,
+            )
         # Set the initial values
         try:
             if hasattr(self.instance, 'topic'):
@@ -187,6 +191,7 @@ class TopicForm(PostForm):
                     self.fields['poll_max_options'].initial = self.instance.topic.poll.max_options
                     self.fields['poll_duration'].initial = self.instance.topic.poll.duration
                     self.fields['poll_user_changes'].initial = self.instance.topic.poll.user_changes
+                    self.fields['poll_hide_results'].initial = self.instance.topic.poll.hide_results
         except ObjectDoesNotExist:
             pass
 
