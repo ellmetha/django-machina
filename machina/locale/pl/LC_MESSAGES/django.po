@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Polish (http://www.transifex.com/django-machina-team/django-machina/language/pl/)\n"
@@ -195,6 +195,12 @@ msgstr "Pierwszy post"
 msgid "Subscribers"
 msgstr "Subskrybenci"
 
+msgid "Creation date"
+msgstr "Data utworzenia"
+
+msgid "Update date"
+msgstr "Data edycji"
+
 msgid "Topic"
 msgstr "Temat"
 
@@ -282,6 +288,14 @@ msgstr "Pozwalaj na zmianę odpowiedzi?"
 msgid "If enabled users are able to change their vote."
 msgstr "Określa czy użytkownik może zmienić odpowiedź."
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Zobacz wyniki"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "Musisz ustalić maksymalną liczbę odpowiedzi na użytkownika w czasie tworzenia ankiety"
 
@@ -305,6 +319,11 @@ msgstr "Czas trwania ankiety w dniach"
 
 msgid "Allow vote changes"
 msgstr "Pozwól zmieniać odpowiedzi"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Zobacz wyniki"
 
 msgid "Topic poll"
 msgstr "Temat z ankietą"
@@ -597,11 +616,15 @@ msgstr "Tematy oznaczono jako przeczytane."
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Nie można zaimportować Pillow ani PIL: {}"
 
-msgid "Creation date"
-msgstr "Data utworzenia"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "Nie można zaimportować MACHINA_MARKUP_LANGUAGE {}: {}"
 
-msgid "Update date"
-msgstr "Data edycji"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "Ustawienie MACHINA_MARKUP_LANGUAGE jest wymagane"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "Nie można zaimportować MACHINA_MARKUP_WIDGET {}: {}"
@@ -794,6 +817,9 @@ msgstr "<b>Ostrzeżenie:</b>&nbsp;Usunięcie opcji w istniejącej ankiecie usuni
 
 msgid "Preview:"
 msgstr "Podgląd:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Łącznie głosów:"

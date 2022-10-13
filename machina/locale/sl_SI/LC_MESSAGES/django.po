@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/django-machina-team/django-machina/language/sl_SI/)\n"
@@ -198,6 +198,12 @@ msgstr "Prva objava"
 msgid "Subscribers"
 msgstr "Naročniki"
 
+msgid "Creation date"
+msgstr "Datum nastanka"
+
+msgid "Update date"
+msgstr "Datum spremembe"
+
 msgid "Topic"
 msgstr "Tema"
 
@@ -285,6 +291,14 @@ msgstr "Dovolote ponovno glasovanje"
 msgid "If enabled users are able to change their vote."
 msgstr ""
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Poglej rezultate"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr ""
 
@@ -308,6 +322,11 @@ msgstr "Trajanje ankete, v dnevih"
 
 msgid "Allow vote changes"
 msgstr "Dovoli spremembe glasov"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Poglej rezultate"
 
 msgid "Topic poll"
 msgstr ""
@@ -600,11 +619,11 @@ msgstr "Objave označene kot prebrane"
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr ""
 
-msgid "Creation date"
-msgstr "Datum nastanka"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr ""
 
-msgid "Update date"
-msgstr "Datum spremembe"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr ""
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr ""
@@ -797,6 +816,9 @@ msgstr ""
 
 msgid "Preview:"
 msgstr "Predogled:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Število glasov:"

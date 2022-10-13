@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/django-machina-team/django-machina/language/ja_JP/)\n"
@@ -196,6 +196,12 @@ msgstr "最初の投稿"
 msgid "Subscribers"
 msgstr "購読者"
 
+msgid "Creation date"
+msgstr "作成日"
+
+msgid "Update date"
+msgstr "更新日"
+
 msgid "Topic"
 msgstr "トピック"
 
@@ -283,6 +289,14 @@ msgstr "再投票を認めるか"
 msgid "If enabled users are able to change their vote."
 msgstr "有効にした場合は、票を後から変更することができます"
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "結果を見る"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "投票を設置するときは、一人当たりの最大投票数を設定する必要があります"
 
@@ -306,6 +320,11 @@ msgstr "投票受付時間 (単位: 日)"
 
 msgid "Allow vote changes"
 msgstr "票の変更を認める"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "結果を見る"
 
 msgid "Topic poll"
 msgstr "トピックの投票"
@@ -598,11 +617,15 @@ msgstr "トピックを既読にしました"
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Pillow、PILのどちらもimportできませんでした: {}"
 
-msgid "Creation date"
-msgstr "作成日"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "MACHINA_MARKUP_LANGUAGE {} をimportできません: {}"
 
-msgid "Update date"
-msgstr "更新日"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "MACHINA_MARKUP_LANGUAGEの設定は必須です"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "MACHINA_MARKUP_WIDGET {} をimportできません: {}"
@@ -795,6 +818,9 @@ msgstr "<b>注意:</b>&nbsp;選択肢を削除するとそれに投票した票�
 
 msgid "Preview:"
 msgstr "プレビュー:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "合計投票数:"
