@@ -247,7 +247,7 @@ class AbstractPost(DatedModel):
 
     # A post can be approved before publishing ; defaults to True
     approved = models.BooleanField(default=machina_settings.DEFAULT_APPROVAL_STATUS, null=True,
-        db_index=True, verbose_name=_('Approved'))
+                                   db_index=True, verbose_name=_('Approved'))
 
     # The user can choose if they want to display their signature with the content of the post
     enable_signature = models.BooleanField(

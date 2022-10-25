@@ -90,8 +90,8 @@ class PostForm(forms.ModelForm):
         post = Post(
             topic=self.topic,
             subject=self.cleaned_data['subject'],
-            approved=self.perm_handler.can_post_without_approval(self.forum, self.user) or \
-                machina_settings.DEFAULT_APPROVAL_STATUS,
+            approved=self.perm_handler.can_post_without_approval(self.forum, self.user) or
+            machina_settings.DEFAULT_APPROVAL_STATUS,
             content=self.cleaned_data['content'],
             enable_signature=self.cleaned_data['enable_signature'])
         if not self.user.is_anonymous:
@@ -217,8 +217,8 @@ class TopicForm(PostForm):
             subject=self.cleaned_data['subject'],  # The topic's name is the post's name
             type=topic_type,
             status=Topic.TOPIC_UNLOCKED,
-            approved=self.perm_handler.can_post_without_approval(self.forum, self.user) or \
-                machina_settings.DEFAULT_APPROVAL_STATUS,
+            approved=self.perm_handler.can_post_without_approval(self.forum, self.user) or
+            machina_settings.DEFAULT_APPROVAL_STATUS,
         )
         if not self.user.is_anonymous:
             topic.poster = self.user

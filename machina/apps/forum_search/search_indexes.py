@@ -62,4 +62,4 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
 
     def read_queryset(self, using=None):
         return Post.objects.all().filter(machina_settings.APPROVED_FILTER).select_related('topic',
-            'poster')
+                                                                                          'poster')

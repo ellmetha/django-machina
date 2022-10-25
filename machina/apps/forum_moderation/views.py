@@ -338,7 +338,7 @@ class ModerationQueueListView(PermissionRequiredMixin, ListView):
         )
         qs = super().get_queryset()
         qs = qs.filter(topic__forum__in=forums, approved=None if
-            machina_settings.TRIPLE_APPROVAL_STATUS else False)
+                       machina_settings.TRIPLE_APPROVAL_STATUS else False)
         return qs.order_by('-created')
 
     def perform_permissions_check(self, user, obj, perms):
