@@ -9,6 +9,7 @@
 
 from django.db.models import F, Q
 
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
@@ -151,7 +152,9 @@ class TrackingHandler:
                 not unread_topics.exists() and
                 (
                     forum_track is not None or
-                    forum_topic_tracks.count() == forum.topics.exclude(approved=False).count()
+                    forum_topic_tracks.count() ==
+                    (forum.topics.exclude(approved=False).count() if machina_settings.PENDING_POSTS_AS_APPROVED
+                        else forum.topics.filter(approved=True).count())
                 )
             ):
                 # The topics that are marked as read inside the forum for the given user will be

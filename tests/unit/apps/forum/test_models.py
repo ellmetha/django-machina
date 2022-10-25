@@ -2,6 +2,7 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from machina.apps.forum.signals import forum_moved
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import (
@@ -57,15 +58,24 @@ class TestForum(object):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
-        assert self.top_level_forum.direct_posts_count == topic.posts.exclude(approved=False).count()
+        if machina_settings.PENDING_POSTS_AS_APPROVED:
+            assert self.top_level_forum.direct_posts_count == topic.posts.exclude(approved=False).count()
+        else:
+            assert self.top_level_forum.direct_posts_count == topic.posts.filter(approved=True).count()
         assert self.top_level_forum.direct_topics_count == self.top_level_forum.topics.count()
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
-        assert self.top_level_forum.direct_posts_count == \
-            topic.posts.exclude(approved=False).count() + topic2.posts.exclude(approved=False).count()
-        assert self.top_level_forum.direct_topics_count == \
-            self.top_level_forum.topics.exclude(approved=False).count()
+        if machina_settings.PENDING_POSTS_AS_APPROVED:
+            assert self.top_level_forum.direct_posts_count == \
+                topic.posts.exclude(approved=False).count() + topic2.posts.exclude(approved=False).count()
+            assert self.top_level_forum.direct_topics_count == \
+                self.top_level_forum.topics.exclude(approved=False).count()
+        else:
+            assert self.top_level_forum.direct_posts_count == \
+                topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
+            assert self.top_level_forum.direct_topics_count == \
+                self.top_level_forum.topics.filter(approved=True).count()
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
         # Run & check

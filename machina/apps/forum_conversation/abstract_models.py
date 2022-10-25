@@ -204,9 +204,13 @@ class AbstractTopic(models.Model):
 
     def update_trackers(self):
         """ Updates the denormalized trackers associated with the topic instance. """
-        self.posts_count = self.posts.exclude(approved=False).count()
+        if machina_settings.PENDING_POSTS_AS_APPROVED:
+            self.posts_count = self.posts.exclude(approved=False).count()
+            last_post = self.posts.exclude(approved=False).order_by('-created').first()
+        else:
+            self.posts_count = self.posts.filter(approved=True).count()
+            last_post = self.posts.filter(approved=True).order_by('-created').first()
         first_post = self.posts.all().order_by('created').first()
-        last_post = self.posts.exclude(approved=False).order_by('-created').first()
         self.first_post = first_post
         self.last_post = last_post
         self.last_post_on = last_post.created if last_post else None
@@ -246,7 +250,8 @@ class AbstractPost(DatedModel):
     username = models.CharField(max_length=155, blank=True, null=True, verbose_name=_('Username'))
 
     # A post can be approved before publishing ; defaults to True
-    approved = models.BooleanField(default=machina_settings.DEFAULT_APPROVAL_STATUS, db_index=True, verbose_name=_('Approved'))
+    approved = models.BooleanField(machina_settings.DEFAULT_APPROVAL_STATUS,
+        null=True, db_index=True, verbose_name=_('Approved'))
 
     # The user can choose if they want to display their signature with the content of the post
     enable_signature = models.BooleanField(
@@ -303,6 +308,19 @@ class AbstractPost(DatedModel):
         position = self.topic.posts.filter(Q(created__lt=self.created) | Q(id=self.id)).count()
         return position
 
+    def approve(self):
+        self.approved = True
+        self.save(update_fields=['approved'])
+        self.topic.update_trackers()
+
+    def disapprove(self):
+        if machina_settings.TRIPLE_APPROVAL_STATUS:
+            self.approved = False
+            self.save(update_fields=['approved'])
+            self.topic.update_trackers()
+        else:
+            self.delete()
+
     def clean(self):
         """ Validates the post instance. """
         super().clean()
@@ -338,7 +356,7 @@ class AbstractPost(DatedModel):
 
     def delete(self, using=None):
         """ Deletes the post instance. """
-        if machina_settings.DEFAULT_APPROVAL_STATUS is None and self.approved is not False:
+        if machina_settings.TRIPLE_APPROVAL_STATUS is None and self.approved is not False:
             self.approved = False
             self.save(update_fields=['approved'])
             self.topic.update_trackers()

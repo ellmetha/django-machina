@@ -14,5 +14,5 @@ class ApprovedManager(models.Manager):
     def get_queryset(self):
         """ Returns all the approved topics or posts. """
         qs = super().get_queryset()
-        qs = qs.filter(approved=machina_settings.DEFAULT_APPROVAL_STATUS)
+        qs = qs.filter(approved=None if machina_settings.TRIPLE_APPROVAL_STATUS else False)
         return qs

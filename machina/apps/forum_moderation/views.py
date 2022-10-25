@@ -370,10 +370,12 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
 
         if not post.is_topic_head:
             # Add the topic review
+            if machina_settings.PENDING_POSTS_AS_APPROVED:
+                approved_posts = topic.posts.exclude(approved=False).filter(created__lte=post.created)
+            else:
+                approved_posts = topic.posts.filter(approved=None, created__lte=post.created)
             previous_posts = (
-                topic.posts
-                .filter(approved=None, created__lte=post.created)
-                .select_related('poster', 'updated_by')
+                approved_posts.select_related('poster', 'updated_by')
                 .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')
             )
@@ -403,8 +405,7 @@ class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         """ Approves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.approved = True
-        self.object.save()
+        self.object.approve()
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
@@ -445,7 +446,7 @@ class PostDisapproveView(
         """ Disapproves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.delete()
+        self.object.disapprove()
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
