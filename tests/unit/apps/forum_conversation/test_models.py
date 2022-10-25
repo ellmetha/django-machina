@@ -2,7 +2,6 @@ import pytest
 from django.core.exceptions import ValidationError
 from faker import Faker
 
-from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.test.factories import (
     PostFactory, UserFactory, build_topic, create_category_forum, create_forum, create_link_forum,
@@ -113,7 +112,7 @@ class TestTopic(object):
     def test_saves_only_its_number_of_approved_posts(self):
         # Run & check
         post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
-        initial_count = self.topic.posts.filter(machina_settings.APPROVED_FILTER).count()
+        initial_count = self.topic.posts.filter(approved=True).count()
         assert initial_count == self.topic.posts_count
         post.delete()
         assert initial_count == self.topic.posts_count

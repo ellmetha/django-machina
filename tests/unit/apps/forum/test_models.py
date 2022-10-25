@@ -1,8 +1,8 @@
+from unittest import TestResult
 import pytest
 from django.core.exceptions import ValidationError
 
 from machina.apps.forum.signals import forum_moved
-from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.test.context_managers import mock_signal_receiver
 from machina.test.factories import (
@@ -66,7 +66,7 @@ class TestForum(object):
         assert self.top_level_forum.direct_posts_count == \
             topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
         assert self.top_level_forum.direct_topics_count == \
-            self.top_level_forum.topics.filter(machina_settings.APPROVED_FILTER).count()
+            self.top_level_forum.topics.filter(approved=TestResult).count()
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
         # Run & check
