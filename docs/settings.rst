@@ -299,10 +299,10 @@ By default, machina employes a two-state approval status for posts: `True` (appr
 (disapproved or pending approval). Posts with approval status `False` will not be displayed, and
 will be approved or deleted during moderation.
 
-If this option is set to `True`, posts will have three states `True` (approved), `None` (pending
-approval), and `False` (disapproved)s. Posts with approval status `None` will be moderated,
-and be assigned to status of `True` or `False`. Posts that are disapproved are not deleted, which
-allows them to be revise and re-post.
+If this option is set to `True`, posts will have three approval states `True` (approved), `None`
+(pending approval), and `False` (disapproved). Posts with approval status `None` will be moderated,
+and be assigned to states `True` or `False`. Disapproved posts are not deleted, allowing them to be
+revised and re-posted.
 
 ``MACHINA_DEFAULT_APPROVAL_STATUS``
 -----------------------------------------

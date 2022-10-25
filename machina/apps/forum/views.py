@@ -83,7 +83,7 @@ class ForumView(PermissionRequiredMixin, ListView):
         qs = (
             self.forum.topics
             .exclude(type=Topic.TOPIC_ANNOUNCE)
-            .exclude(approved=False)
+            .filter(machina_settings.APPROVED_FILTER)
             .select_related('poster', 'last_post', 'last_post__poster')
         )
         return qs

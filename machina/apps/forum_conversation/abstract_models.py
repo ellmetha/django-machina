@@ -204,13 +204,9 @@ class AbstractTopic(models.Model):
 
     def update_trackers(self):
         """ Updates the denormalized trackers associated with the topic instance. """
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            self.posts_count = self.posts.exclude(approved=False).count()
-            last_post = self.posts.exclude(approved=False).order_by('-created').first()
-        else:
-            self.posts_count = self.posts.filter(approved=True).count()
-            last_post = self.posts.filter(approved=True).order_by('-created').first()
+        self.posts_count = self.posts.filter(machina_settings.APPROVED_FILTER).count()
         first_post = self.posts.all().order_by('created').first()
+        last_post = self.posts.filter(machina_settings.APPROVED_FILTER).order_by('-created').first()
         self.first_post = first_post
         self.last_post = last_post
         self.last_post_on = last_post.created if last_post else None

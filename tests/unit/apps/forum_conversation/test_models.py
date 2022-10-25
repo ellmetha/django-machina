@@ -114,10 +114,7 @@ class TestTopic(object):
         # Run & check
         post = PostFactory.create(topic=self.topic, poster=self.u1, approved=False)
 
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            initial_count = self.topic.posts.exclude(approved=False).count()
-        else:
-            initial_count = self.topic.posts.filter(approved=True).count()
+        initial_count = self.topic.posts.filter(machina_settings.APPROVED_FILTER).count()
         assert initial_count == self.topic.posts_count
         post.delete()
         assert initial_count == self.topic.posts_count

@@ -153,8 +153,7 @@ class TrackingHandler:
                 (
                     forum_track is not None or
                     forum_topic_tracks.count() ==
-                    (forum.topics.exclude(approved=False).count() if machina_settings.PENDING_POSTS_AS_APPROVED
-                        else forum.topics.filter(approved=True).count())
+                    forum.topics.filter(machina_settings.APPROVED_FILTER).count()
                 )
             ):
                 # The topics that are marked as read inside the forum for the given user will be

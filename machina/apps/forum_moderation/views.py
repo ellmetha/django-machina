@@ -370,12 +370,9 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
 
         if not post.is_topic_head:
             # Add the topic review
-            if machina_settings.PENDING_POSTS_AS_APPROVED:
-                approved_posts = topic.posts.exclude(approved=False).filter(created__lte=post.created)
-            else:
-                approved_posts = topic.posts.filter(approved=None, created__lte=post.created)
             previous_posts = (
-                approved_posts.select_related('poster', 'updated_by')
+                topic.posts.filter(machina_settings.APPROVED_FILTER).filter(created__lte=post.created)
+                .select_related('poster', 'updated_by')
                 .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')
             )

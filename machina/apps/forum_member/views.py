@@ -92,14 +92,9 @@ class ForumProfileDetailView(DetailView):
 
         # Computes the number of topics added by the considered member
 
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            context['topics_count'] = (
-                Topic.objects.filter(poster=self.object.user).exclude(approved=False).count()
-            )
-        else:
-            context['topics_count'] = (
-                Topic.objects.filter(poster=self.object.user).filter(approved=True).count()
-            )
+        context['topics_count'] = (
+            Topic.objects.filter(poster=self.object.user).filter(machina_settings.APPROVED_FILTER).count()
+        )
 
         # Fetches the recent posts added by the considered user
         forums = self.request.forum_permission_handler.get_readable_forums(

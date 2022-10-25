@@ -9,7 +9,7 @@
 """
 
 from django.conf import settings
-
+from django.db.models import Q
 
 # General
 FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
@@ -99,6 +99,10 @@ TRIPLE_APPROVAL_STATUS = getattr(settings, 'MACHINA_TRIPLE_APPROVAL_STATUS', Fal
 DEFAULT_APPROVAL_STATUS = getattr(settings, 'MACHINA_DEFAULT_APPROVAL_STATUS',
     None if TRIPLE_APPROVAL_STATUS else True)
 PENDING_POSTS_AS_APPROVED = getattr(settings, 'MACHINA_PENDING_POSTS_AS_APPROVED', True)
+
+APPROVED_FILTER = Q(approved=True)
+if TRIPLE_APPROVAL_STATUS and PENDING_POSTS_AS_APPROVED:
+    APPROVED_FILTER |= Q(approved=None)
 
 # Permission
 DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(

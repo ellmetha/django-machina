@@ -81,9 +81,7 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         """ Returns the list of items for this view. """
-        cond = Q(approved=True)
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            cond |= Q(approved=None)
+        cond = machina_settings.APPROVED_FILTER
         if self.request.user.is_authenticated and machina_settings.TRIPLE_APPROVAL_STATUS:
             # in triple approval status, disapproved posts can be viewed by their posters
             cond |= Q(poster=self.request.user)

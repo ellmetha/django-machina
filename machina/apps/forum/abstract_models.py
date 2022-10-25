@@ -174,10 +174,7 @@ class AbstractForum(MPTTModel, DatedModel):
 
     def update_trackers(self):
         """ Updates the denormalized trackers associated with the forum instance. """
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            direct_approved_topics = self.topics.exclude(approved=False).order_by('-last_post_on')
-        else:
-            direct_approved_topics = self.topics.filter(approved=True).order_by('-last_post_on')
+        direct_approved_topics = self.topics.filter(machina_settings.APPROVED_FILTER).order_by('-last_post_on')
 
         # Compute the direct topics count and the direct posts count.
         self.direct_topics_count = direct_approved_topics.count()

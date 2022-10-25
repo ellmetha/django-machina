@@ -54,10 +54,7 @@ class LastTopicsFeed(Feed):
 
     def items(self):
         """ Returns the items to include into the feed. """
-        if machina_settings.PENDING_POSTS_AS_APPROVED:
-            return Topic.objects.filter(forum__in=self.forums).exclude(approved=False).order_by('-last_post_on')
-        else:
-            return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-last_post_on')
+        return Topic.objects.filter(forum__in=self.forums).filter(machina_settings.APPROVED_FILTER).order_by('-last_post_on')
 
     def item_link(self, item):
         """ Generates a link for a specific item of the feed. """
