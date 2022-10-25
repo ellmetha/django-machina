@@ -664,7 +664,7 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
 
         # Add the previous posts to the context
         previous_posts = (
-            topic.posts.filter(approved=True)
+            topic.posts.filter(machina_settings.APPROVED_FILTER)
             .select_related('poster', 'updated_by')
             .prefetch_related('attachments', 'poster__forum_profile')
             .order_by('-created')

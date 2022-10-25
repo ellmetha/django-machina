@@ -152,8 +152,7 @@ class TrackingHandler:
                 not unread_topics.exists() and
                 (
                     forum_track is not None or
-                    forum_topic_tracks.count() ==
-                    forum.topics.filter(machina_settings.APPROVED_FILTER).count()
+                    forum_topic_tracks.count() == forum.topics.filter(machina_settings.APPROVED_FILTER).count()
                 )
             ):
                 # The topics that are marked as read inside the forum for the given user will be
