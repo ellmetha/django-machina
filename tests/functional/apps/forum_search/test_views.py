@@ -23,7 +23,7 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 
 class TestFacetedSearchView(BaseClientTestCase):
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()

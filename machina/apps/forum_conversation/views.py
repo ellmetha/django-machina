@@ -517,6 +517,7 @@ class BaseTopicFormView(BasePostFormView):
                 poll_max_options=post_form.cleaned_data.pop('poll_max_options', None),
                 poll_duration=post_form.cleaned_data.pop('poll_duration', None),
                 poll_user_changes=post_form.cleaned_data.pop('poll_user_changes', None),
+                poll_hide_results=post_form.cleaned_data.pop('poll_hide_results', None),
             )
 
         return valid

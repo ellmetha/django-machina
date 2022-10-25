@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/django-machina-team/django-machina/language/fr_CA/)\n"
@@ -197,6 +197,12 @@ msgstr ""
 msgid "Subscribers"
 msgstr "Abonnés"
 
+msgid "Creation date"
+msgstr "Date de création"
+
+msgid "Update date"
+msgstr "Date de mise à jour"
+
 msgid "Topic"
 msgstr "Sujet"
 
@@ -284,6 +290,14 @@ msgstr "Autoriser la modification des votes?"
 msgid "If enabled users are able to change their vote."
 msgstr "Si activé, les utilisateurs peuvent changer leurs votes."
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Voir les résultats"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "Vous devez indiquer le nombre maximum de choix par utilisateur pour le sondage"
 
@@ -307,6 +321,11 @@ msgstr "Durée du sondage, en jours"
 
 msgid "Allow vote changes"
 msgstr "Permettre les changements de votes"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Voir les résultats"
 
 msgid "Topic poll"
 msgstr "Sondage"
@@ -599,11 +618,15 @@ msgstr "Les sujets ont été marqués comme lus."
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Neither Pillow nor PIL could be imported: {}"
 
-msgid "Creation date"
-msgstr "Date de création"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
 
-msgid "Update date"
-msgstr "Date de mise à jour"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "MACHINA_MARKUP_LANGUAGE setting is required"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "Could not import MACHINA_MARKUP_WIDGET {}: {}"
@@ -796,6 +819,9 @@ msgstr "<b>Note :</b>&nbsp;La suppression des options d'un sondage existant entr
 
 msgid "Preview:"
 msgstr "Aperçu :"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Nombre de votes :"

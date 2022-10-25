@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.http import HttpResponse
 from django.template import Context
 from django.template.base import Template
 from django.template.loader import render_to_string
@@ -71,7 +72,7 @@ class BaseConversationTagsTestCase(object):
 
     def get_request(self, url='/'):
         request = self.request_factory.get('/')
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware(lambda r: HttpResponse("Response"))
         middleware.process_request(request)
         request.session.save()
         return request

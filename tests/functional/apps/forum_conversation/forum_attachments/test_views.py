@@ -26,7 +26,7 @@ remove_perm = get_class('forum_permission.shortcuts', 'remove_perm')
 
 
 class TestAttachmentView(BaseClientTestCase):
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()

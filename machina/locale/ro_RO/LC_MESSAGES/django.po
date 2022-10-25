@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/django-machina-team/django-machina/language/ro_RO/)\n"
@@ -195,6 +195,12 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
+msgid "Creation date"
+msgstr ""
+
+msgid "Update date"
+msgstr ""
+
 msgid "Topic"
 msgstr ""
 
@@ -282,6 +288,12 @@ msgstr ""
 msgid "If enabled users are able to change their vote."
 msgstr ""
 
+msgid "Hide results?"
+msgstr ""
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr ""
 
@@ -304,6 +316,9 @@ msgid "Poll duration, in days"
 msgstr ""
 
 msgid "Allow vote changes"
+msgstr ""
+
+msgid "Hide results"
 msgstr ""
 
 msgid "Topic poll"
@@ -597,10 +612,10 @@ msgstr ""
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr ""
 
-msgid "Creation date"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
 msgstr ""
 
-msgid "Update date"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
 msgstr ""
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
@@ -793,6 +808,9 @@ msgid "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete t
 msgstr ""
 
 msgid "Preview:"
+msgstr ""
+
+msgid "Results are currently hidden."
 msgstr ""
 
 msgid "Total votes:"

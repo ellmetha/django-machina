@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.http import HttpResponse
 from django.template import Context
 from django.template.base import Template
 from django.test.client import RequestFactory
@@ -59,7 +60,7 @@ class BaseTrackingTagsTestCase(object):
 
     def get_request(self, url='/'):
         request = self.request_factory.get('/')
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware(lambda r: HttpResponse("Response"))
         middleware.process_request(request)
         request.session.save()
         return request
@@ -71,7 +72,7 @@ class TestUnreadTopicsTag(BaseTrackingTagsTestCase):
         def get_rendered(topics, user):
             request = self.get_request()
             request.user = user
-            ForumPermissionMiddleware().process_request(request)
+            ForumPermissionMiddleware(lambda r: HttpResponse("Response")).process_request(request)
             t = Template(
                 self.loadstatement + '{% get_unread_topics topics request.user as unread_topics %}')
             c = Context({'topics': topics, 'request': request})

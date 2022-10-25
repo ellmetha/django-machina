@@ -25,7 +25,7 @@ assign_perm = get_class('forum_permission.shortcuts', 'assign_perm')
 
 @pytest.mark.django_db
 class TestSearchForm(object):
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         # Permission handler
         self.perm_handler = PermissionHandler()

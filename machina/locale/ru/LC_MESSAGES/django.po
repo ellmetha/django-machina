@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # alexander fedorov <elf607@gmail.com>, 2017
 # georgekpg <konstantinpopov@inbox.ru>, 2018
@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-12-16 08:00+0000\n"
 "Last-Translator: Emelyan Marakhovsky <savelmtr@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/django-machina-team/django-machina/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 1.8.4\n"
 
@@ -73,8 +73,7 @@ msgstr "Последний ответ добавлен в"
 msgid "Display in parent-forums legend"
 msgstr "Отображать в легенде родительских форумов"
 
-msgid ""
-"Displays this forum on the legend of its parent-forum (sub forums list)"
+msgid "Displays this forum on the legend of its parent-forum (sub forums list)"
 msgstr "Показывать этот форум в легенде родительского форума (списке подфорумов)"
 
 msgid "Forum"
@@ -131,22 +130,16 @@ msgstr "Machina: Форум"
 msgid "Anonymous"
 msgstr "Аноним"
 
-msgid ""
-"Please select this option if you want to edit the permissions of the "
-"anonymous user"
+msgid "Please select this option if you want to edit the permissions of the anonymous user"
 msgstr "Выберите этот вариант, если вы хотите отредактировать разрешения анонимного пользоватея"
 
 msgid "Authenticated"
 msgstr "Зарегистрированный"
 
-msgid ""
-"Please select this option if you want to edit the permissions of every (non-"
-"specific) logged in user"
+msgid "Please select this option if you want to edit the permissions of every (non-specific) logged in user"
 msgstr "Выберите этот вариант, если вы хотите отредактировать разрешения для всех зарегистрированных пользователей "
 
-msgid ""
-"Choose either a user ID or check either the anonymous or authenticated user "
-"checkbox"
+msgid "Choose either a user ID or check either the anonymous or authenticated user checkbox"
 msgstr "Выберите ID конкретного пользователя или поставьте галочку в соответствующем чекбоксе, чтобы настроить разрешения для анонимных или зарегистрированных пользователей"
 
 msgid "Not set"
@@ -206,6 +199,12 @@ msgstr "Первый ответ"
 msgid "Subscribers"
 msgstr "Подписчики"
 
+msgid "Creation date"
+msgstr "Дата создания"
+
+msgid "Update date"
+msgstr "Дата обновления"
+
 msgid "Topic"
 msgstr "Тема"
 
@@ -245,8 +244,7 @@ msgstr "Ответы"
 msgid "A user id or an anonymous key must be associated with a post."
 msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с ответом"
 
-msgid ""
-"A user id or an anonymous key must be associated with a post, but not both."
+msgid "A user id or an anonymous key must be associated with a post, but not both."
 msgstr "Пользовательский ID или ключ анонимного пользователя должен быть связан с ответом, но не оба одновременно"
 
 msgid "A username must be specified if the poster is anonymous"
@@ -273,9 +271,7 @@ msgstr "Создать тему под"
 msgid "Poll question"
 msgstr "Добавить вариант опроса"
 
-msgid ""
-"Enter a question to associate a poll with the topic or leave blank to not "
-"create a poll."
+msgid "Enter a question to associate a poll with the topic or leave blank to not create a poll."
 msgstr "Введите вариант, чтобы создать опрос в теме, или оставьте пустым, чтобы не создавать опрос"
 
 msgid "Maximum number of poll options per user"
@@ -296,8 +292,15 @@ msgstr "Позволить голосовать заново?"
 msgid "If enabled users are able to change their vote."
 msgstr "Если отмечено, пользователи будут иметь возможность изменить своё выбор."
 
-msgid ""
-"You must set the maximum number of poll options per user when creating polls"
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Посмотреть результаты"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
+msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "Вы должны установить максимальное количество вариантов, которые может выбрать пользователь, когда создаёте опрос"
 
 msgid "File"
@@ -320,6 +323,11 @@ msgstr "Продолжительность опроса в днях"
 
 msgid "Allow vote changes"
 msgstr "Позволить изменение выбора"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Посмотреть результаты"
 
 msgid "Topic poll"
 msgstr "Опрос темы"
@@ -489,9 +497,7 @@ msgstr "Разрешение пользователя форума"
 msgid "User forum permissions"
 msgstr "Разрешения пользователя форума"
 
-msgid ""
-"A permission should target either a specific user, an anonymous user or any "
-"authenticated user"
+msgid "A permission should target either a specific user, an anonymous user or any authenticated user"
 msgstr "Для разрешения следует указать цель - конкретный пользователь, анонимный пользователь или все зарегистрированные пользователи"
 
 msgid "Group"
@@ -614,11 +620,15 @@ msgstr "Темы были отмечены как прочитанные."
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Ни Pillow, ни PIL не могут быть импортированы: {}"
 
-msgid "Creation date"
-msgstr "Дата создания"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "Невозможно импортировать MACHINA_MARKUP_LANGUAGE {}: {}"
 
-msgid "Update date"
-msgstr "Дата обновления"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "Настройка MACHINA_MARKUP_LANGUAGE обязательна "
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "Невозможно импортировать MACHINA_MARKUP_WIDGET {}: {}"
@@ -632,14 +642,10 @@ msgstr "Настройка MACHINA_MARKUP_LANGUAGE обязательна "
 msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr "Файлы размера больше чем {} не доступны для загрузки. Ваш файл {}"
 
-msgid ""
-"Images of width lesser than {}px or greater than {}px or are not allowed. "
-"The width of your image is {}px"
+msgid "Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px"
 msgstr "Изображения имеют ширину меньше {}px, больше {}px или не разрешены. Ширина вашего изображения: {}px"
 
-msgid ""
-"Images of height lesser than {}px or greater than {}px or are not allowed. "
-"The height of your image is {}px"
+msgid "Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px"
 msgstr "Изображения имеют высоту меньше {}px, больше {}px или не разрешены. Высота вашего изображения: {}px"
 
 msgid "List of forums"
@@ -711,9 +717,7 @@ msgstr "Выберите группу, чтобы обновить ее разр
 msgid "Copy permissions from another forum"
 msgstr "Скопировать разрешения из другого форума"
 
-msgid ""
-"Please select a forum in order to copy its permissions configuration to the "
-"current forum"
+msgid "Please select a forum in order to copy its permissions configuration to the current forum"
 msgstr "Выберите форум, чтобы скопировать его параметры разрешений в текущий форум "
 
 msgid "Copy"
@@ -812,13 +816,14 @@ msgstr "Варианты опроса"
 msgid "Add a poll option"
 msgstr "Добавить вариант опроса"
 
-msgid ""
-"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
-"associated votes."
+msgid "<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the associated votes."
 msgstr "<b>Внимание:</b>&nbsp;Удаление варианта из существующего опроса удалит и связанные с ним голоса. "
 
 msgid "Preview:"
 msgstr "Предпросмотр:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Всего голосов:"
@@ -949,10 +954,18 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Posts</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Ответ</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Ответа</small></p>"
-msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Ответов</small></p>"
-msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Ответов</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p><small>Ответ</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p><small>Ответа</small></p>"
+msgstr[2] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p><small>Ответов</small></p>"
+msgstr[3] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p class=\"mb-1\"><small>Ответов</small></p>"
 
 #, python-format
 msgid ""
@@ -961,10 +974,18 @@ msgid ""
 msgid_plural ""
 "<h2><strong>%(counter)s</strong></h2>\n"
 "                      <p class=\"mb-1\"><small>Topics</small></p>"
-msgstr[0] "<h2><strong>%(counter)s</strong></h2>\n<p><small>Тема</small></p>"
-msgstr[1] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Темы</small></p>"
-msgstr[2] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Тем</small></p>"
-msgstr[3] "<h2><strong>%(counter)s</strong></h2>\n<p class=\"mb-1\"><small>Тем</small></p>"
+msgstr[0] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p><small>Тема</small></p>"
+msgstr[1] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p class=\"mb-1\"><small>Темы</small></p>"
+msgstr[2] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p class=\"mb-1\"><small>Тем</small></p>"
+msgstr[3] ""
+"<h2><strong>%(counter)s</strong></h2>\n"
+"<p class=\"mb-1\"><small>Тем</small></p>"
 
 msgid "Recent posts"
 msgstr "Последние ответы"
@@ -1055,8 +1076,7 @@ msgstr "Вы уверены, что хотите одобрить этот от�
 msgid "Disapprove post"
 msgstr "Отклонить ответ"
 
-msgid ""
-"Are you sure you want to disapprove this post? This post will be deleted."
+msgid "Are you sure you want to disapprove this post? This post will be deleted."
 msgstr "Вы уверены. что хотите отклонить этот ответ?"
 
 msgid "Are you sure you want to delete this topic?"

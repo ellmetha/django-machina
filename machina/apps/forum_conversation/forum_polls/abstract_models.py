@@ -41,6 +41,9 @@ class AbstractTopicPoll(DatedModel):
     # Are users allowed to change their votes ?
     user_changes = models.BooleanField(verbose_name=_('Allow vote changes'), default=False)
 
+    # Hide results to everyone except topic creator ?
+    hide_results = models.BooleanField(verbose_name=_('Hide results'), default=False)
+
     class Meta:
         abstract = True
         app_label = 'forum_polls'

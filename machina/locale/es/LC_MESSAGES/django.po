@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Spanish (http://www.transifex.com/django-machina-team/django-machina/language/es/)\n"
@@ -196,6 +196,12 @@ msgstr "Primer mensaje"
 msgid "Subscribers"
 msgstr "Suscriptores"
 
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+msgid "Update date"
+msgstr "Fecha de actualización"
+
 msgid "Topic"
 msgstr "Hilo"
 
@@ -283,6 +289,14 @@ msgstr "¿Permitir volver a votar?"
 msgid "If enabled users are able to change their vote."
 msgstr "Si está activo, los usuarios pueden cambiar su voto."
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Ver resultados"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "Debes seleccionar el número máximo de opciones por usuario cuando creas una encuesta"
 
@@ -306,6 +320,11 @@ msgstr "Duración de la encuesta, en días"
 
 msgid "Allow vote changes"
 msgstr "Permitir cambiar el voto"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Ver resultados"
 
 msgid "Topic poll"
 msgstr "Encuesta sobre el hilo"
@@ -598,11 +617,15 @@ msgstr "Los hilos se han marcado como leídos."
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "No se puede importar ni Pillow ni PIL: {}"
 
-msgid "Creation date"
-msgstr "Fecha de creación"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "No se puede importar MACHINA_MARKUP_LANGUAGE {}: {}"
 
-msgid "Update date"
-msgstr "Fecha de actualización"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "Se requiere el parámetro MACHINA_MARKUP_LANGUAGE"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "No se puede importar MACHINA_MARKUP_WIDGET {}: {}"
@@ -795,6 +818,9 @@ msgstr "Nota:</b>&nbsp;Borrar las opciones de una encuestra existente borrará l
 
 msgid "Preview:"
 msgstr "Previsualización:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Votos totales:"

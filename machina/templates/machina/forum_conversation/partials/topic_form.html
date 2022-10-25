@@ -73,6 +73,14 @@
                 </label>
               </div>
             </div>
+            <div{% if post_form.poll_hide_results.errors %} class="has-error"{% endif %}>
+              <div class="checkbox">
+                <label for="{{ post_form.poll_hide_results.auto_id }}">
+                  {{ post_form.poll_hide_results }}
+                  {{ post_form.poll_hide_results.label }}
+                </label>
+              </div>
+            </div>
           </div>
           <div id="poll_formset" class="col-md-6">
             {% include "forum_conversation/forum_polls/poll_option_formset.html" %}
