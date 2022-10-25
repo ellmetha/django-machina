@@ -58,13 +58,13 @@ class TestForum(object):
         topic = create_topic(forum=self.top_level_forum, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
         PostFactory.create(topic=topic, poster=self.u1)
-        assert self.top_level_forum.direct_posts_count == topic.posts.filter(machina_settings.APPROVED_FILTER).count()
+        assert self.top_level_forum.direct_posts_count == topic.posts.filter(approved=True).count()
         assert self.top_level_forum.direct_topics_count == self.top_level_forum.topics.count()
 
         topic2 = create_topic(forum=self.top_level_forum, poster=self.u1, approved=False)
         PostFactory.create(topic=topic2, poster=self.u1, approved=False)
         assert self.top_level_forum.direct_posts_count == \
-            topic.posts.filter(machina_settings.APPROVED_FILTER).count() + topic2.posts.filter(approved=True).count()
+            topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
         assert self.top_level_forum.direct_topics_count == \
             self.top_level_forum.topics.filter(machina_settings.APPROVED_FILTER).count()
 

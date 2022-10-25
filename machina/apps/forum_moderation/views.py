@@ -337,7 +337,8 @@ class ModerationQueueListView(PermissionRequiredMixin, ListView):
             self.request.user,
         )
         qs = super().get_queryset()
-        qs = qs.filter(topic__forum__in=forums, approved=None if machina_settings.TRIPLE_APPROVAL_STATUS else False)
+        qs = qs.filter(topic__forum__in=forums, approved=None if
+            machina_settings.TRIPLE_APPROVAL_STATUS else False)
         return qs.order_by('-created')
 
     def perform_permissions_check(self, user, obj, perms):
@@ -371,7 +372,8 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
         if not post.is_topic_head:
             # Add the topic review
             previous_posts = (
-                topic.posts.filter(machina_settings.APPROVED_FILTER).filter(created__lte=post.created)
+                topic.posts.filter(machina_settings.APPROVED_FILTER)
+                .filter(created__lte=post.created)
                 .select_related('poster', 'updated_by')
                 .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')
