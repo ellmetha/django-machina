@@ -66,7 +66,7 @@ class TestForum(object):
         assert self.top_level_forum.direct_posts_count == \
             topic.posts.filter(approved=True).count() + topic2.posts.filter(approved=True).count()
         assert self.top_level_forum.direct_topics_count == \
-            self.top_level_forum.topics.filter(approved=TestResult).count()
+            self.top_level_forum.topics.filter(approved=True).count()
 
     def test_can_indicate_its_appartenance_to_a_forum_type(self):
         # Run & check
