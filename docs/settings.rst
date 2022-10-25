@@ -309,9 +309,10 @@ revised and re-posted.
 
 Default: ``True`` if `MACHINA_TRIPLE_APPROVAL_STATUS` is `False`, `None` otherwise
 
-The default approval state for posts, which can be `True` (default) or `False` if
-`MACHINA_TRIPLE_APPROVAL_STATUS` is `False` (default). Otherwise it can be `True`, `None` (default),
-or `False`.
+The default approval state for posts when it is not explicitly specified during the creation of posts.
+It can be `True` (default) or `False` if `MACHINA_TRIPLE_APPROVAL_STATUS` is `False` (default).
+Otherwise it can be `True`, `None` (default), or `False`.
+
 
 ``MACHINA_PENDING_POSTS_AS_APPROVED``
 -----------------------------------------

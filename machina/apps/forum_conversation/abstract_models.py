@@ -246,7 +246,7 @@ class AbstractPost(DatedModel):
     username = models.CharField(max_length=155, blank=True, null=True, verbose_name=_('Username'))
 
     # A post can be approved before publishing ; defaults to True
-    approved = models.BooleanField(machina_settings.DEFAULT_APPROVAL_STATUS,
+    approved = models.BooleanField(default=machina_settings.DEFAULT_APPROVAL_STATUS,
         null=True, db_index=True, verbose_name=_('Approved'))
 
     # The user can choose if they want to display their signature with the content of the post
@@ -305,12 +305,16 @@ class AbstractPost(DatedModel):
         return position
 
     def approve(self):
+        if self.approved:
+            return
         self.approved = True
         self.save(update_fields=['approved'])
         self.topic.update_trackers()
 
     def disapprove(self):
         if machina_settings.TRIPLE_APPROVAL_STATUS:
+            if self.approved is False:
+                return
             self.approved = False
             self.save(update_fields=['approved'])
             self.topic.update_trackers()
@@ -352,15 +356,10 @@ class AbstractPost(DatedModel):
 
     def delete(self, using=None):
         """ Deletes the post instance. """
-        if machina_settings.TRIPLE_APPROVAL_STATUS is None and self.approved is not False:
-            self.approved = False
-            self.save(update_fields=['approved'])
-            self.topic.update_trackers()
+        if self.is_alone:
+            # The default way of operating is to trigger the deletion of the associated topic
+            # only if the considered post is the only post embedded in the topic
+            self.topic.delete()
         else:
-            if self.is_alone:
-                # The default way of operating is to trigger the deletion of the associated topic
-                # only if the considered post is the only post embedded in the topic
-                self.topic.delete()
-            else:
-                super(AbstractPost, self).delete(using)
-                self.topic.update_trackers()
+            super(AbstractPost, self).delete(using)
+            self.topic.update_trackers()
