@@ -81,6 +81,7 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
         poll_max_options = kwargs.pop('poll_max_options', None)
         poll_duration = kwargs.pop('poll_duration', None)
         poll_user_changes = kwargs.pop('poll_user_changes', False)
+        poll_hide_results = kwargs.pop('poll_hide_results', False)
 
         if self.poll is None:
             poll, _ = TopicPoll.objects.get_or_create(topic=self.topic)
@@ -89,6 +90,7 @@ class BaseTopicPollOptionFormset(BaseModelFormSet):
             poll.duration = poll_duration
             poll.max_options = poll_max_options
             poll.user_changes = poll_user_changes
+            poll.hide_results = poll_hide_results
             poll.save()
 
             for form in self.forms:

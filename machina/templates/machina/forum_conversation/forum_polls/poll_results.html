@@ -1,5 +1,13 @@
 {% load i18n %}
+{% load forum_permission_tags %}
 
+{% get_permission 'can_edit_post' poll.topic.first_post request.user as user_can_edit_first_post %}
+
+{% if poll.hide_results %}
+    {% trans "Results are currently hidden." %}<br><br>
+{% endif %}
+
+{% if not poll.hide_results or user_can_edit_first_post %}
 {% for option in poll.options.all %}
 {% if forloop.first or not forloop.counter|divisibleby:2 %}
 <div class="mb-3 row">
@@ -16,4 +24,6 @@
 </div>
 {% endif %}
 {% endfor %}
+{% endif %}
+
 {% trans "Total votes:" %}&nbsp;{{ poll.votes|length }}
