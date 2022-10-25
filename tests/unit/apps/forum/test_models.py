@@ -1,4 +1,3 @@
-from unittest import TestResult
 import pytest
 from django.core.exceptions import ValidationError
 
