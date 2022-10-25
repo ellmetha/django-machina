@@ -11,6 +11,7 @@
 from django.conf import settings
 from django.db.models import Q
 
+
 # General
 FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MARKUP_LANGUAGE = getattr(
