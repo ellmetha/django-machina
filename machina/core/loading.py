@@ -106,4 +106,7 @@ def _get_app_module_path(module_label):
     for app in settings.INSTALLED_APPS:
         if app.endswith('.' + app_name) or app == app_name:
             return app
+        path = app.split('.')
+        if len(path) >= 3 and path[-2] == 'apps' and path[-3] == app_name:
+            return app
     return None
