@@ -30,7 +30,8 @@ class TestClassLoadingFunctions(object):
 
     def test_get_class_with_app_config(self):
         apps = list(settings.INSTALLED_APPS)
-        apps[apps.index('tests._testsite.apps.forum_conversation')] = 'tests._testsite.apps.forum_conversation.apps.ForumConversationAppConfig'
+        idx = apps.index('tests._testsite.apps.forum_conversation')
+        apps[idx] += '.apps.ForumConversationAppConfig'
         with override_settings(INSTALLED_APPS=apps):
             get_class('forum_conversation.models', 'Post')
 
