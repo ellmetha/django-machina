@@ -130,7 +130,7 @@ class TestMarkupTextField(object):
 
 @pytest.mark.django_db
 class TestExtendedImageField(object):
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         # Set up some images used for doing image tests
         images_dict = {}

@@ -111,14 +111,8 @@ Define the application AppConfig
 Most of django-machina's applications define sublclasses of Django's ``AppConfig`` which can perform
 initialization operations. Django-machina ``AppConfig`` instances are defined inside sub-modules
 called ``apps``. You need to define an ``AppConfig`` subclass for your custom application by
-subclassing the overridden application ``AppConfig``. So your application's ``__init__.py``
-should report the custom application ``AppConfig``:
-
-.. code-block:: python
-
-    default_app_config = 'apps.forum_conversation.apps.ForumConversationAppConfig'
-
-And in ``apps.py`` in you application you have something like:
+subclassing the overridden application ``AppConfig``. So your application's ``apps.py`` should
+specify something like:
 
 .. code-block:: python
 
@@ -126,6 +120,7 @@ And in ``apps.py`` in you application you have something like:
 
     class ForumConversationAppConfig(BaseForumConversationAppConfig):
         name = 'apps.forum_conversation'
+        default = True
 
 
 Add the local application to your INSTALLED_APPS

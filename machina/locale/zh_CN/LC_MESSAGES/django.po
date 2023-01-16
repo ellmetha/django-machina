@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/django-machina-team/django-machina/language/zh_CN/)\n"
@@ -198,6 +198,12 @@ msgstr "首帖"
 msgid "Subscribers"
 msgstr "订阅者"
 
+msgid "Creation date"
+msgstr "创建日期"
+
+msgid "Update date"
+msgstr "更新日期"
+
 msgid "Topic"
 msgstr "话题"
 
@@ -285,6 +291,14 @@ msgstr "允许重新投票？"
 msgid "If enabled users are able to change their vote."
 msgstr "是否授权给用户更改他们的投票"
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "显示结果"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "创建投票时，你必须设置每个用户可选择的最大投票选项数"
 
@@ -308,6 +322,11 @@ msgstr "投票持续时间"
 
 msgid "Allow vote changes"
 msgstr "允许更改投票"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "显示结果"
 
 msgid "Topic poll"
 msgstr "话题投票"
@@ -600,11 +619,15 @@ msgstr "话题已标记已读"
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "缺乏相关变量"
 
-msgid "Creation date"
-msgstr "创建日期"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "不能输入 MACHINA_MARKUP_LANGUAGE"
 
-msgid "Update date"
-msgstr "更新日期"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "MACHINA_MARKUP_LANGUAGE符合设定要求"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "不能输入 MACHINA_MARKUP_WIDGET"
@@ -797,6 +820,9 @@ msgstr "删除已存在的投票选项将会一并删除相关投票数"
 
 msgid "Preview:"
 msgstr "概要："
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "总投票数："

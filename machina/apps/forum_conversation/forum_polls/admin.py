@@ -32,7 +32,7 @@ class TopicPollAdmin(admin.ModelAdmin):
     """ The Topic Poll model admin. """
 
     inlines = (TopicPollOptionInline,)
-    list_display = ('topic', 'duration', 'max_options', 'user_changes',)
+    list_display = ('topic', 'duration', 'max_options', 'user_changes', 'hide_results')
     list_filter = ('created', 'updated',)
     search_fields = ('topic__subject',)
 

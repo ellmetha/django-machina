@@ -38,7 +38,7 @@ elif DB_CONFIG == 'postgres':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'machina_test',
             'USER': 'postgres',
-            'PASSWORD': '',
+            'PASSWORD': 'postgres',
             'HOST': 'localhost',
         }
     }
@@ -178,6 +178,8 @@ CACHES = {
 SILENCED_SYSTEM_CHECKS = ['1_6.W001']
 
 SECRET_KEY = 'key'
+
+USE_TZ = False
 
 try:
     from .settings_local import *  # noqa

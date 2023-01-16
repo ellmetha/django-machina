@@ -86,25 +86,32 @@ class PostForm(forms.ModelForm):
                 self.instance.anonymous_key = get_anonymous_user_forum_key(self.user)
         return super().clean()
 
+    def create_post(self):
+        post = Post(
+            topic=self.topic,
+            subject=self.cleaned_data['subject'],
+            approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
+            content=self.cleaned_data['content'],
+            enable_signature=self.cleaned_data['enable_signature'])
+        if not self.user.is_anonymous:
+            post.poster = self.user
+        else:
+            post.username = self.cleaned_data['username']
+            post.anonymous_key = get_anonymous_user_forum_key(self.user)
+        return post
+
+    def update_post(self, post):
+        post.updated_by = self.user
+        post.updates_count = F('updates_count') + 1
+
     def save(self, commit=True):
         """ Saves the instance. """
         if self.instance.pk:
             # First handle updates
             post = super().save(commit=False)
-            post.updated_by = self.user
-            post.updates_count = F('updates_count') + 1
+            self.update_post(post)
         else:
-            post = Post(
-                topic=self.topic,
-                subject=self.cleaned_data['subject'],
-                approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
-                content=self.cleaned_data['content'],
-                enable_signature=self.cleaned_data['enable_signature'])
-            if not self.user.is_anonymous:
-                post.poster = self.user
-            else:
-                post.username = self.cleaned_data['username']
-                post.anonymous_key = get_anonymous_user_forum_key(self.user)
+            post = self.create_post()
 
         # Locks the topic if appropriate.
         lock_topic = self.cleaned_data.get('lock_topic', False)
@@ -169,7 +176,11 @@ class TopicForm(PostForm):
                 help_text=_('If enabled users are able to change their vote.'),
                 initial=False,
             )
-
+            self.fields['poll_hide_results'] = forms.BooleanField(
+                label=_('Hide results?'), required=False,
+                help_text=_('If enabled results are hidden to everyone except topic creator.'),
+                initial=False,
+            )
         # Set the initial values
         try:
             if hasattr(self.instance, 'topic'):
@@ -180,6 +191,7 @@ class TopicForm(PostForm):
                     self.fields['poll_max_options'].initial = self.instance.topic.poll.max_options
                     self.fields['poll_duration'].initial = self.instance.topic.poll.duration
                     self.fields['poll_user_changes'].initial = self.instance.topic.poll.user_changes
+                    self.fields['poll_hide_results'].initial = self.instance.topic.poll.hide_results
         except ObjectDoesNotExist:
             pass
 
@@ -194,31 +206,36 @@ class TopicForm(PostForm):
 
         return super().clean()
 
+    def create_topic(self):
+        if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
+            topic_type = self.cleaned_data['topic_type']
+        else:
+            topic_type = Topic.TOPIC_POST
+        topic = Topic(
+            forum=self.forum,
+            subject=self.cleaned_data['subject'],  # The topic's name is the post's name
+            type=topic_type,
+            status=Topic.TOPIC_UNLOCKED,
+            approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
+        )
+        if not self.user.is_anonymous:
+            topic.poster = self.user
+        return topic
+
+    def update_topic(self, topic):
+        if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
+            if topic.type != self.cleaned_data['topic_type']:
+                topic.type = self.cleaned_data['topic_type']
+                topic._simple_save()
+
     def save(self, commit=True):
         """ Saves the instance. """
         if not self.instance.pk:
             # First, handle topic creation
-            if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
-                topic_type = self.cleaned_data['topic_type']
-            else:
-                topic_type = Topic.TOPIC_POST
-
-            topic = Topic(
-                forum=self.forum,
-                subject=self.cleaned_data['subject'],  # The topic's name is the post's name
-                type=topic_type,
-                status=Topic.TOPIC_UNLOCKED,
-                approved=self.perm_handler.can_post_without_approval(self.forum, self.user),
-            )
-            if not self.user.is_anonymous:
-                topic.poster = self.user
-            self.topic = topic
+            self.topic = self.create_topic()
             if commit:
-                topic.save()
+                self.topic.save()
         else:
-            if 'topic_type' in self.cleaned_data and len(self.cleaned_data['topic_type']):
-                if self.instance.topic.type != self.cleaned_data['topic_type']:
-                    self.instance.topic.type = self.cleaned_data['topic_type']
-                    self.instance.topic._simple_save()
+            self.update_topic(self.instance.topic)
 
         return super().save(commit)

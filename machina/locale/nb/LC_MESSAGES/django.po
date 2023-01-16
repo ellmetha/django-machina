@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-machina\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 17:35-0500\n"
+"POT-Creation-Date: 2022-10-13 08:56-1000\n"
 "PO-Revision-Date: 2019-10-29 01:36+0000\n"
 "Last-Translator: Morgan Aubert <morgan@aubert.email>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/django-machina-team/django-machina/language/nb/)\n"
@@ -197,6 +197,12 @@ msgstr "Første innlegg"
 msgid "Subscribers"
 msgstr "Abonnenter"
 
+msgid "Creation date"
+msgstr "Opprettelsesdato"
+
+msgid "Update date"
+msgstr "Oppdateringsdato"
+
 msgid "Topic"
 msgstr "Tråd"
 
@@ -284,6 +290,14 @@ msgstr "Tillat omvalg?"
 msgid "If enabled users are able to change their vote."
 msgstr "Hvis på, så vil brukere kunne endre sine stemmer."
 
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results?"
+msgstr "Vis resultater"
+
+msgid "If enabled results are hidden to everyone except topic creator."
+msgstr ""
+
 msgid "You must set the maximum number of poll options per user when creating polls"
 msgstr "Du må angi et maksimalt antall avstemningsvalg per bruker når du lager avstemninger"
 
@@ -307,6 +321,11 @@ msgstr "Varighet på avstemningen, i dager"
 
 msgid "Allow vote changes"
 msgstr "Tillat endring av stemmer"
+
+#, fuzzy
+#| msgid "View results"
+msgid "Hide results"
+msgstr "Vis resultater"
 
 msgid "Topic poll"
 msgstr "Trådavstemning"
@@ -599,11 +618,15 @@ msgstr "Tråder har blitt markert som lest."
 msgid "Neither Pillow nor PIL could be imported: {}"
 msgstr "Hverken Pillow eller PIL kunne importeres: {}"
 
-msgid "Creation date"
-msgstr "Opprettelsesdato"
+#, fuzzy
+#| msgid "Could not import MACHINA_MARKUP_LANGUAGE {}: {}"
+msgid "Could not import MACHINA MARKUP_MAX_LENGTH_VALIDATOR {}: {}"
+msgstr "Kunne ikke importere MACHINA_MARKUP_LANGUAGE {}: {}"
 
-msgid "Update date"
-msgstr "Oppdateringsdato"
+#, fuzzy
+#| msgid "MACHINA_MARKUP_LANGUAGE setting is required"
+msgid "MACHINA_MARKUP_MAX_LENGTH_VALIDATOR setting is required"
+msgstr "Innstillingen MACHINA_MARKUP_LANGUAGE er påkrevd"
 
 msgid "Could not import MACHINA_MARKUP_WIDGET {}: {}"
 msgstr "Kunne ikke importere MACHINA_MARKUP_WIDGET {}: {}"
@@ -796,6 +819,9 @@ msgstr "<b>Merk:</b>&nbsp;Sletting av et avstemningsvalg på en eksisterende avs
 
 msgid "Preview:"
 msgstr "Forhåndsvisning:"
+
+msgid "Results are currently hidden."
+msgstr ""
 
 msgid "Total votes:"
 msgstr "Antall stemmer totalt:"
