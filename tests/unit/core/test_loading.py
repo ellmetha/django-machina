@@ -28,6 +28,12 @@ class TestClassLoadingFunctions(object):
         with pytest.raises(ClassNotFoundError):
             get_class('forum.models', 'Foo')
 
+    def test_get_class_with_app_config(self):
+        apps = list(settings.INSTALLED_APPS)
+        apps[apps.index('tests._testsite.apps.forum_conversation')] = 'tests._testsite.apps.forum_conversation.apps.ForumConversationAppConfig'
+        with override_settings(INSTALLED_APPS=apps):
+            get_class('forum_conversation.models', 'Post')
+
     def test_raise_importerror_if_app_raises_importerror(self):
         # Setup
         apps = list(settings.INSTALLED_APPS)
