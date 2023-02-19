@@ -1,9 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[django-machina.machina]
+[o:django-machina-team:p:django-machina:r:machina]
 file_filter = machina/locale/<lang>/LC_MESSAGES/django.po
 source_file = machina/locale/en/LC_MESSAGES/django.po
 source_lang = en
-type = PO
+type        = PO
 
