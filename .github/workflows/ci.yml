@@ -80,12 +80,3 @@ jobs:
       run: poetry run pytest --cov-report xml --cov machina
       env:
         DB: ${{ matrix.db }}
-    - name: Upload coverage to Codecov
-      if: matrix.python-version == 3.9 && matrix.django-version == 'django>=3.2,<4.0' && matrix.db == 'sqlite'
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true

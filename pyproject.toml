@@ -49,7 +49,6 @@ markdown2 = ">=2.3"
 pillow = ">=2.2"
 
 [tool.poetry.dev-dependencies]
-codecov = "*"
 django-debug-toolbar = "*"
 factory-boy = "*"
 faker = "*"
