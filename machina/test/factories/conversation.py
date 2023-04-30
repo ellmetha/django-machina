@@ -29,7 +29,7 @@ class TopicFactory(factory.django.DjangoModelFactory):
 class PostFactory(factory.django.DjangoModelFactory):
     topic = factory.SubFactory(TopicFactory)
     poster = factory.SubFactory(UserFactory)
-    subject = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=200))
+    subject = factory.LazyAttribute(lambda t: faker.sentence()[:200])
     content = fuzzy.FuzzyText(length=255)
 
     class Meta:
