@@ -81,6 +81,6 @@ jobs:
     - name: Run QA checks
       run: make qa
     - name: Run tests suite
-      run: poetry run pytest --cov-report xml --cov machina
+      run: poetry run pytest
       env:
         DB: ${{ matrix.db }}
