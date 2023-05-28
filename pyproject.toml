@@ -62,7 +62,7 @@ pytest-django = "*"
 pytest-pythonpath = "*"
 pytest-spec = "*"
 pytest-xdist = "*"
-sphinx = "*"
+sphinx = ">= 4.2"
 sphinx-rtd-theme = "*"
 whoosh = "*"
 
