@@ -263,7 +263,7 @@ class ExtendedImageField(models.ImageField):
         image = Image.open(BytesIO(data))
 
         # Resize!
-        image.thumbnail(size, Image.ANTIALIAS)
+        image.thumbnail(size, Image.LANCZOS)
 
         string = BytesIO()
         image.save(string, format='PNG')
