@@ -194,7 +194,7 @@ html_static_path = ['_static']
 htmlhelp_basename = 'django-machinadoc'
 
 def setup(app):
-    app.add_stylesheet('custom_theme.css')
+    app.add_css_file('custom_theme.css')
 
 
 # -- Options for LaTeX output ---------------------------------------------
