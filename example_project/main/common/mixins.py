@@ -9,7 +9,7 @@ class MenuItemMixin(object):
     """
     def get_context_data(self, **kwargs):
         context = super(MenuItemMixin, self).get_context_data(**kwargs)
-        vattrs = inspect.getmembers(self, lambda a: not(inspect.isroutine(a)))
+        vattrs = inspect.getmembers(self, lambda a: not (inspect.isroutine(a)))
         menu_kwargs = dict(a for a in vattrs if a[0].startswith('menu_'))
         context.update(menu_kwargs)
         return context

@@ -91,7 +91,7 @@ class TestMarkupTextField(object):
         form = TestableForm()
 
         # Check
-        assert type(form.fields['content'].widget) == forms.Textarea
+        assert type(form.fields['content'].widget) is forms.Textarea
 
     def test_sets_the_markup_widget_to_a_textarea_if_it_is_none(self):
         # Setup
