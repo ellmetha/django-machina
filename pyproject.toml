@@ -40,7 +40,7 @@ include = [
 exclude = ["tests"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.9"
 
 django = "^3.2 || >=4.0"
 django-haystack = ">=2.1"
