@@ -40,7 +40,7 @@ include = [
 exclude = ["tests"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.11"
 
 django = "^3.2 || >=4.0"
 django-haystack = ">=2.1"
@@ -63,7 +63,7 @@ pytest-django = "*"
 pytest-pythonpath = "*"
 pytest-spec = "*"
 pytest-xdist = "*"
-sphinx = ">= 4.2"
+sphinx = ">=7.1"
 sphinx-rtd-theme = "*"
 whoosh = "*"
 
