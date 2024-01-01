@@ -9,6 +9,7 @@
 """
 
 from django.conf import settings
+from django.db.models import Q
 
 
 # General
@@ -95,7 +96,14 @@ PROFILE_SIGNATURE_MAX_LENGTH = getattr(settings, 'MACHINA_PROFILE_SIGNATURE_MAX_
 
 PROFILE_RECENT_POSTS_NUMBER = getattr(settings, 'MACHINA_PROFILE_RECENT_POSTS_NUMBER', 15)
 PROFILE_POSTS_NUMBER_PER_PAGE = getattr(settings, 'MACHINA_PROFILE_POSTS_NUMBER_PER_PAGE', 15)
+TRIPLE_APPROVAL_STATUS = getattr(settings, 'MACHINA_TRIPLE_APPROVAL_STATUS', False)
+DEFAULT_APPROVAL_STATUS = getattr(settings, 'MACHINA_DEFAULT_APPROVAL_STATUS', None if
+                                            TRIPLE_APPROVAL_STATUS else True)
+PENDING_POSTS_AS_APPROVED = getattr(settings, 'MACHINA_PENDING_POSTS_AS_APPROVED', True)
 
+APPROVED_FILTER = Q(approved=True)
+if TRIPLE_APPROVAL_STATUS and PENDING_POSTS_AS_APPROVED:
+    APPROVED_FILTER |= Q(approved=None)
 
 # Permission
 DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = getattr(

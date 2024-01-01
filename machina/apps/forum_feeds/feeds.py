@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 
 
@@ -53,7 +54,8 @@ class LastTopicsFeed(Feed):
 
     def items(self):
         """ Returns the items to include into the feed. """
-        return Topic.objects.filter(forum__in=self.forums, approved=True).order_by('-last_post_on')
+        return Topic.objects.filter(forum__in=self.forums).filter(
+            machina_settings.APPROVED_FILTER).order_by('-last_post_on')
 
     def item_link(self, item):
         """ Generates a link for a specific item of the feed. """

@@ -337,7 +337,8 @@ class ModerationQueueListView(PermissionRequiredMixin, ListView):
             self.request.user,
         )
         qs = super().get_queryset()
-        qs = qs.filter(topic__forum__in=forums, approved=False)
+        qs = qs.filter(topic__forum__in=forums, approved=None if
+                       machina_settings.TRIPLE_APPROVAL_STATUS else False)
         return qs.order_by('-created')
 
     def perform_permissions_check(self, user, obj, perms):
@@ -371,8 +372,8 @@ class ModerationQueueDetailView(PermissionRequiredMixin, DetailView):
         if not post.is_topic_head:
             # Add the topic review
             previous_posts = (
-                topic.posts
-                .filter(approved=True, created__lte=post.created)
+                topic.posts.filter(machina_settings.APPROVED_FILTER)
+                .filter(created__lte=post.created)
                 .select_related('poster', 'updated_by')
                 .prefetch_related('attachments', 'poster__forum_profile')
                 .order_by('-created')
@@ -403,8 +404,7 @@ class PostApproveView(PermissionRequiredMixin, SingleObjectTemplateResponseMixin
         """ Approves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.approved = True
-        self.object.save()
+        self.object.approve()
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 
@@ -445,7 +445,7 @@ class PostDisapproveView(
         """ Disapproves the considered post and retirects the user to the success URL. """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        self.object.delete()
+        self.object.disapprove()
         messages.success(self.request, self.success_message)
         return HttpResponseRedirect(success_url)
 

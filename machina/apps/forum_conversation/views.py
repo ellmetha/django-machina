@@ -8,6 +8,7 @@
 
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -80,11 +81,16 @@ class TopicView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         """ Returns the list of items for this view. """
+        cond = machina_settings.APPROVED_FILTER
+        if self.request.user.is_authenticated and machina_settings.TRIPLE_APPROVAL_STATUS:
+            # in triple approval status, disapproved posts can be viewed by their posters
+            cond |= Q(poster=self.request.user)
+
         self.topic = self.get_topic()
         qs = (
             self.topic.posts
             .all()
-            .exclude(approved=False)
+            .filter(cond)
             .select_related('poster', 'updated_by')
             .prefetch_related('attachments', 'poster__forum_profile')
         )
@@ -658,7 +664,7 @@ class PostCreateView(PermissionRequiredMixin, PostFormView):
 
         # Add the previous posts to the context
         previous_posts = (
-            topic.posts.filter(approved=True)
+            topic.posts.filter(machina_settings.APPROVED_FILTER)
             .select_related('poster', 'updated_by')
             .prefetch_related('attachments', 'poster__forum_profile')
             .order_by('-created')

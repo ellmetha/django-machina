@@ -290,6 +290,43 @@ Default: ``15``
 
 The number of posts displayed inside one page of a forum member's posts list.
 
+``MACHINA_TRIPLE_APPROVAL_STATUS``
+-----------------------------------------
+
+Default: ``False``
+
+By default, machina employes a two-state approval status for posts: `True` (approved) or `False`
+(disapproved or pending approval). Posts with approval status `False` will not be displayed, and
+will be approved or deleted during moderation.
+
+If this option is set to `True`, posts will have three approval states `True` (approved), `None`
+(pending approval), and `False` (disapproved). Posts with approval status `None` will be moderated,
+and be assigned to states `True` or `False`. Disapproved posts are not deleted, allowing them to be
+revised and re-posted.
+
+``MACHINA_DEFAULT_APPROVAL_STATUS``
+-----------------------------------------
+
+Default: ``True`` if `MACHINA_TRIPLE_APPROVAL_STATUS` is `False`, `None` otherwise
+
+The default approval state for posts when it is not explicitly specified during the creation of posts.
+It can be `True` (default) or `False` if `MACHINA_TRIPLE_APPROVAL_STATUS` is `False` (default).
+Otherwise it can be `True`, `None` (default), or `False`.
+
+
+``MACHINA_PENDING_POSTS_AS_APPROVED``
+-----------------------------------------
+
+Default: ``True``
+
+If pending posts (`approved=None`) will be treated as approved or disapproved when
+`MACHINA_TRIPLE_APPROVAL_STATUS` is set to `True`. If this option is set to `True`, pending posts will
+be counted towards `posts_count` and be displayed. Otherwise, pending posts will not be displayed until
+they are approved.
+
+This option is only valid when `MACHINA_TRIPLE_APPROVAL_STATUS` is set to `True`.
+
+
 Permission
 **********
 

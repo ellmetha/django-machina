@@ -8,6 +8,7 @@
 
 from haystack import indexes
 
+from machina.conf import settings as machina_settings
 from machina.core.db.models import get_model
 from machina.core.loading import get_class
 
@@ -57,7 +58,8 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return obj.topic.subject
 
     def index_queryset(self, using=None):
-        return Post.objects.all().exclude(approved=False)
+        return Post.objects.all().filter(machina_settings.APPROVED_FILTER)
 
     def read_queryset(self, using=None):
-        return Post.objects.all().exclude(approved=False).select_related('topic', 'poster')
+        return Post.objects.all().filter(machina_settings.APPROVED_FILTER).select_related('topic',
+                                                                                          'poster')
