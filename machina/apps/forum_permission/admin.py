@@ -7,36 +7,37 @@
 """
 
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from machina.core.db.models import get_model
-
 
 ForumPermission = get_model('forum_permission', 'ForumPermission')
 GroupForumPermission = get_model('forum_permission', 'GroupForumPermission')
 UserForumPermission = get_model('forum_permission', 'UserForumPermission')
+USERNAME_FIELD = get_user_model().USERNAME_FIELD
 
 
 class ForumPermissionAdmin(admin.ModelAdmin):
     """ The Forum Permission model admin. """
 
-    search_fields = ('codename', )
-    list_display = ('name', 'codename', )
+    search_fields = ('codename',)
+    list_display = ('name', 'codename',)
 
 
 class GroupForumPermissionAdmin(admin.ModelAdmin):
     """ The Group Forum Permission model admin. """
 
-    search_fields = ('permission__codename', 'group__name', )
-    list_display = ('group', 'forum', 'permission', 'has_perm', )
-    list_editables = ('has_perm', )
-    raw_id_fields = ('group', )
+    search_fields = ('permission__codename', 'group__name',)
+    list_display = ('group', 'forum', 'permission', 'has_perm',)
+    list_editables = ('has_perm',)
+    raw_id_fields = ('group',)
     list_filter = ['forum', 'group']
 
 
 class UserForumPermissionAdmin(admin.ModelAdmin):
     """ The User Forum Permission model admin. """
 
-    search_fields = ('permission__codename', 'user__username', )
+    search_fields = ('permission__codename', 'user__%s' % USERNAME_FIELD,)
     list_display = (
         'user',
         'anonymous_user',
@@ -45,8 +46,8 @@ class UserForumPermissionAdmin(admin.ModelAdmin):
         'permission',
         'has_perm',
     )
-    list_editables = ('has_perm', )
-    raw_id_fields = ('user', )
+    list_editables = ('has_perm',)
+    raw_id_fields = ('user',)
     list_filter = ['forum']
 
 
