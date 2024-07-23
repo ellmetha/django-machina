@@ -60,7 +60,7 @@
           <div class="col-md-2 post-sidebar">
             <div class="avatar">
               <a href="{% url 'forum_member:profile' post.poster_id %}">
-                {% include "partials/avatar.html" with profile=post.poster placeholder=False %}
+                {% include "partials/avatar.html" with profile=post.poster.forum_profile placeholder=False %}
               </a>
             </div>
             <div class="username"><a href="{% url 'forum_member:profile' post.poster_id %}"><b>{{ post.poster|forum_member_display_name }}</b></a></div>
