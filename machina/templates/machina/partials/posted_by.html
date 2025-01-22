@@ -1,0 +1,59 @@
+{% load forum_member_tags %}
+{% load i18n %}
+
+{% if is_search %}
+    {% if item.poster %}
+        {% url 'forum_member:profile' item.poster as poster_url %}
+        {% blocktrans trimmed with username=item.poster_name creation_date=item.created %}
+            By: <a href="{{ poster_url }}">{{ username }}</a> on {{ creation_date }}
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed with poster_username=item.poster_name creation_date=item.created %}
+        By: {{ poster_username }} on {{ creation_date }}
+        {% endblocktrans %}
+    {% endif %}
+{% else %}
+    {% if item.poster %}
+        {% url 'forum_member:profile' item.poster_id as profil_url %}
+        {% if show_by_prefix %}
+            <a href="{{profil_url }}">{% if highlight_username %}<b>{% endif %}{{ item.poster|forum_member_display_name  }}{% if highlight_username %}</b>{% endif %}</a>
+        {% else %}
+            {% if show_creation_date %}
+                {% blocktrans trimmed with username=item.poster|forum_member_display_name creation_date=item.created %}
+                    By: <a href="{{ profil_url }}">{{ username }}</a> on {{ creation_date }}
+                {% endblocktrans %}
+            {% else %}    
+                {% blocktrans trimmed with username=item.poster|forum_member_display_name %}
+                        By: <a href="{{ profil_url }}">{{ username }}</a>
+                {% endblocktrans %}
+            {% endif %}
+        {% endif %}    
+    {% else %}
+        {% if show_by_prefix %}
+            {% if highlight_username %}<b>{% endif %}{{ username }}{% if highlight_username %}</b>{% endif %}
+        {% else %}
+            {% if show_creation_date %}
+                {% if is_topic %}
+                    {% blocktrans trimmed with username=topic.first_post.username creation_date=item.created %}
+                        By: {{ username }} on {{ creation_date }}
+                    {% endblocktrans %}
+                {% else %}
+                    {% blocktrans trimmed with username=item.username creation_date=item.created %}
+                        By: {{ username }} on {{ creation_date }}
+                    {% endblocktrans %}
+                {% endif %}
+            {% else %}    
+                {% if is_topic %}
+                    {% blocktrans trimmed with username=topic.first_post.username %}
+                        By: {{ username }}
+                    {% endblocktrans %}
+                {% else %}
+                    {% blocktrans trimmed with username=item.username %}
+                        By: {{ username }}
+                    {% endblocktrans %}
+                 {% endif %}    
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
