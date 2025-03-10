@@ -184,7 +184,7 @@ class ForumPermissionChecker:
                     # - not set to non-granted on global-user level
                     # - and not set to non-granted on forum-group level
                     # - and not set to non-granted on forum-user level
-                    globally_granted_group_perms = list(
+                    forum_globally_granted_group_perms = list(
                         filter(lambda p: p.has_perm and p.forum_id is None and
                                p.permission_id not in
                                [q.permission_id for q in globally_nongranted_user_perms] and
@@ -195,14 +195,14 @@ class ForumPermissionChecker:
                                globally_granted_group_perms)
                     )
                     globally_granted_group_permcodes = [
-                        p.permission.codename for p in globally_granted_group_perms
+                        p.permission.codename for p in forum_globally_granted_group_perms
                     ]
 
                     # Filter the globally non granted group perms to those that were:
                     # - not set to granted on global- user level
                     # - and not set to granted on forum-group level
                     # - and not set to granted on forum-user level
-                    globally_nongranted_group_perms = list(
+                    forum_globally_nongranted_group_perms = list(
                         filter(lambda p: not p.has_perm and p.forum_id is None and
                                p.permission_id not in
                                [q.permission_id for q in globally_granted_user_perms] and
@@ -251,14 +251,14 @@ class ForumPermissionChecker:
                 # - and not set to non-granted on global-group level
                 # - and not set to non-granted on forum-group level
                 # - and not set to non-granted on forum-user level
-                globally_granted_all_users_perms = list(
+                forum_globally_granted_all_users_perms = list(
                     filter(lambda p: p.has_perm and p.forum_id is None and
                            p.permission_id not in
                            [y.permission_id for y in per_forum_nongranted_all_users_perms] and
                            p.permission_id not in
                            [q.permission_id for q in globally_nongranted_user_perms] and
                            p.permission_id not in
-                           [a.permission_id for a in globally_nongranted_group_perms] and
+                           [a.permission_id for a in forum_globally_nongranted_group_perms] and
                            p.permission_id not in
                            [x.permission_id for x in per_forum_nongranted_group_perms] and
                            p.permission_id not in
@@ -266,7 +266,7 @@ class ForumPermissionChecker:
                            globally_granted_all_users_perms)
                 )
                 globally_granted_all_users_permcodes = [
-                    p.permission.codename for p in globally_granted_all_users_perms
+                    p.permission.codename for p in forum_globally_granted_all_users_perms
                 ]
                 granted_all_users_permcodes = set(globally_granted_all_users_permcodes +
                                                   per_forum_granted_all_users_permcodes)
