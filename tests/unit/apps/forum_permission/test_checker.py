@@ -216,3 +216,31 @@ class TestForumPermissionChecker(object):
         checker = ForumPermissionChecker(user)
         # Run & check
         assert checker.has_perm('can_read_forum', self.forum)
+
+    def test_readable_forums_order_independent(self):
+        PERM = 'can_read_forum'
+        # Setup
+        user = UserFactory.create()
+        group = GroupFactory.create()
+        user.groups.add(group)
+
+        # All forums are visible to everyone, except one is hidden from this group
+        public1 = create_forum(name="Public 1")
+        public2 = create_forum(name="Public 2")
+        private = create_forum(name="Private")
+        assign_perm(PERM, ALL_AUTHENTICATED_USERS, None, has_perm=True)
+        assign_perm(PERM, group, private, has_perm=False)
+
+        checker = ForumPermissionChecker(user)
+
+        # Test with public forum in the end
+        perms = checker.get_perms_for_forumlist([public1, public2, private], [PERM, ])
+        assert PERM in perms[public1]
+        assert PERM in perms[public2]
+        assert PERM not in perms[private]
+
+        # Test with private forum in the middle
+        perms = checker.get_perms_for_forumlist([public1, private, public2], [PERM, ])
+        assert PERM in perms[public1]
+        assert PERM in perms[public2]
+        assert PERM not in perms[private]
